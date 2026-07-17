@@ -1,0 +1,45 @@
+# Machine-readable settings. The agent file (CLAUDE.md / AGENTS.md) carries
+# policy only -- see WORKLOG-SPEC section 4. Scripts read THIS file.
+version: 1
+
+project:
+  key: PROJ
+  name: "Acme Platform"
+
+ticketing:
+  system: jira                 # jira | ado | github | none
+  adapter: ticket-jira         # resolved via $PATH; missing adapter = local-only
+  project: PROJ
+  options:
+    site: acme.atlassian.net
+    epic_link_field: customfield_10014
+
+wiki:
+  system: confluence           # confluence | github-wiki | ado-wiki | none
+  adapter: wiki-confluence
+  root_url: https://acme.atlassian.net/wiki/spaces/ENG
+  options:
+    space: ENG
+    root_page_id: "12345"
+
+paths:
+  plans: docs/plans
+  status: docs/status
+  roadmap: docs/roadmap.md
+
+status:
+  default_kind: daily
+  week_starts: monday
+  timecard:
+    include_hours: false       # see WORKLOG-SPEC section 17, open question 4
+    actor: rick
+  publish: true
+
+sync:
+  active_window_days: 14
+  conflict_policy: report      # report | local-wins | remote-wins
+  push_on_capture: true
+
+# NOT configurable: the body-size cap (section 8.3) is derived from PIPE_BUF,
+# not chosen. It lives in code as a constant. A knob whose only valid value is
+# the default is a trap.

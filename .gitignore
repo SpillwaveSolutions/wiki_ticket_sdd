@@ -1,0 +1,5 @@
+.work/sync-state.json
+.work/changeset.json
+.work/results/
+__pycache__/
+*.pyc

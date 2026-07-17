@@ -1,0 +1,2 @@
+{"actor":"richardhightower","ev":"01KXS7W15S2NQ0VJT9TDR7B7CX","item":"01KXS7W15SHYS5PSGGWHYMFKYM","op":"create","set":{"priority":"P3","status":"todo","title":"Smoke test item","type":"task"},"ts":"2026-07-17T23:51:29Z"}
+{"actor":"richardhightower","ev":"01KXS7W1DWX8G9KBJ1N20JFQQC","item":"01KXS7W15SHYS5PSGGWHYMFKYM","op":"close","set":{"status":"cancelled"},"ts":"2026-07-17T23:51:29Z"}

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# WORKLOG-SPEC section 8.2 + section 14.
+# Install: git config core.hooksPath hooks
+set -euo pipefail
+
+fail() { echo "worklog: $*" >&2; exit 1; }
+
+for f in .work/todo.jsonl .work/done.jsonl; do
+  [ -f "$f" ] || continue
+
+  # The trailing-newline invariant. Without it, union merge fuses the last line
+  # of one side with the first line of the other and you lose two events to one
+  # unparseable line. This check is the whole reason this hook exists.
+  [ -z "$(tail -c1 "$f")" ] || fail "$f has no trailing newline (invariant 15.1)"
+
+  python3 - "$f" <<'PY' || fail "schema validation failed"
+import json, sys
+ok = True
+for n, line in enumerate(open(sys.argv[1]), 1):
+    if not line.strip():
+        continue
+    try:
+        ev = json.loads(line)
+    except json.JSONDecodeError as e:
+        print(f"  {sys.argv[1]}:{n}: unparseable: {e}"); ok = False; continue
+    for field in ("ev", "ts", "actor", "op"):
+        if field not in ev:
+            print(f"  {sys.argv[1]}:{n}: missing {field}"); ok = False
+    if ev.get("op") != "compact" and "item" not in ev:
+        print(f"  {sys.argv[1]}:{n}: missing item"); ok = False
+sys.exit(0 if ok else 1)
+PY
+done
+
+# Invariant 15.7: the roadmap is generated. Regenerate and diff.
+if [ -f bin/render_roadmap.py ] && [ -f docs/roadmap.md ]; then
+  python3 bin/render_roadmap.py > /tmp/roadmap.check
+  diff -q /tmp/roadmap.check docs/roadmap.md >/dev/null \
+    || fail "docs/roadmap.md is stale or hand-edited. Run: worklog roadmap-render"
+fi
+
+python3 tests/test_fold.py -q >/dev/null 2>&1 || fail "fold tests failing"
