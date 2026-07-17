@@ -2,8 +2,8 @@
 """
 worklog -- CLI entry point. WORKLOG-SPEC section 12.
 
-Implemented: add, update, close, show, list, fold.
-Stubbed:     plan-capture, sync, status, roadmap-render, compact.
+Implemented: add, update, close, show, list, fold, plan-capture, roadmap-render.
+Stubbed:     sync, status, compact.
 
 Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
 """
@@ -107,6 +107,46 @@ def cmd_roadmap_render(a):
     print("docs/roadmap.md")
 
 
+def cmd_plan_capture(a):
+    import plan_capture
+    draft = open(a.file, encoding="utf-8").read() if a.file else sys.stdin.read()
+    tasks = plan_capture.parse_tasks(draft)
+    if not tasks:
+        sys.exit("worklog: no '- [ ]' tasks found under a '## Tasks' heading")
+    date = time.strftime("%Y-%m-%d", time.gmtime())
+    path = f"docs/plans/{date}-{a.slug}.md"
+    if os.path.exists(path):
+        sys.exit(f"worklog: {path} exists; plans are never rewritten "
+                 "(invariant 15.8) — pick a new slug to supersede")
+
+    epic_id = ulid.new()
+    ev = base(epic_id, "create", a.actor)
+    ev["set"] = {"type": "epic", "title": a.title, "status": "todo",
+                 "priority": a.priority, "plan": path}
+    append(ev)
+
+    item_ids, last_task = [], epic_id
+    for t in tasks:
+        iid = ulid.new()
+        ev = base(iid, "create", a.actor)
+        ev["set"] = {"type": "subtask" if t["subtask"] else "task",
+                     "title": t["title"], "status": "todo",
+                     "priority": t["priority"],
+                     "parent": last_task if t["subtask"] else epic_id,
+                     "plan": path}
+        append(ev)
+        item_ids.append(iid)
+        if not t["subtask"]:
+            last_task = iid
+
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write(plan_capture.front_matter(date, a.slug, a.title, epic_id, item_ids))
+        fh.write(draft)
+    print(path)
+    print(epic_id)
+
+
 def stub(name):
     def f(a):
         sys.exit(f"worklog: `{name}` not implemented yet (see WORKLOG-SPEC section 18)")
@@ -143,8 +183,14 @@ l = sub.add_parser("list"); l.set_defaults(fn=cmd_list); l.add_argument("--all",
 s = sub.add_parser("show"); s.set_defaults(fn=cmd_show); s.add_argument("item")
 sub.add_parser("fold").set_defaults(fn=cmd_fold)
 
+pc = sub.add_parser("plan-capture"); pc.set_defaults(fn=cmd_plan_capture)
+pc.add_argument("--slug", required=True)
+pc.add_argument("--title", required=True)
+pc.add_argument("--file")
+pc.add_argument("--priority", default="P1", choices=["P0", "P1", "P2", "P3"])
+
 sub.add_parser("roadmap-render").set_defaults(fn=cmd_roadmap_render)
-for name in ("plan-capture", "sync", "status", "compact"):
+for name in ("sync", "status", "compact"):
     sub.add_parser(name).set_defaults(fn=stub(name))
 
 if __name__ == "__main__":
