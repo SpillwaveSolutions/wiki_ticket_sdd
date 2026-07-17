@@ -98,6 +98,15 @@ def cmd_fold(a):
     print(json.dumps(sorted(r.items.values(), key=lambda i: i["id"]), indent=2))
 
 
+def cmd_roadmap_render(a):
+    import render_roadmap
+    md = render_roadmap.render()
+    os.makedirs("docs", exist_ok=True)
+    with open("docs/roadmap.md", "w", encoding="utf-8") as fh:
+        fh.write(md)
+    print("docs/roadmap.md")
+
+
 def stub(name):
     def f(a):
         sys.exit(f"worklog: `{name}` not implemented yet (see WORKLOG-SPEC section 18)")
@@ -134,7 +143,8 @@ l = sub.add_parser("list"); l.set_defaults(fn=cmd_list); l.add_argument("--all",
 s = sub.add_parser("show"); s.set_defaults(fn=cmd_show); s.add_argument("item")
 sub.add_parser("fold").set_defaults(fn=cmd_fold)
 
-for name in ("plan-capture", "sync", "status", "roadmap-render", "compact"):
+sub.add_parser("roadmap-render").set_defaults(fn=cmd_roadmap_render)
+for name in ("plan-capture", "sync", "status", "compact"):
     sub.add_parser(name).set_defaults(fn=stub(name))
 
 if __name__ == "__main__":
