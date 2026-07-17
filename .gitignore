@@ -3,3 +3,6 @@
 .work/results/
 __pycache__/
 *.pyc
+
+# re-include agent skills (user global gitignores .claude/)
+!.claude/
