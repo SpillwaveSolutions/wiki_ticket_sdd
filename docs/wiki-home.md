@@ -17,6 +17,7 @@ work is fishbowled, not hidden.
 
 ## Plans
 
+- [[Plan-typed-adapter-contract]]
 - [[Plan-ticket-sync-and-init-detection]]
 
 ## Status reports
