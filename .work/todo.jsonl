@@ -85,3 +85,5 @@
 {"actor":"claude","ev":"01KXSP27BARAAM2RWDP9BP0G7D","item":"01KXSNNSWJZMQQH7H68XVB654Y","op":"close","set":{"resolution":"7 future epics/stories seeded","status":"done"},"ts":"2026-07-18T03:59:32Z"}
 {"actor":"claude","ev":"01KXSP27FD2AYZJ5X49XJP2AH5","item":"01KXSNNSWKC64M1XX0Y7WVT67Z","op":"update","set":{"status":"in_progress"},"ts":"2026-07-18T03:59:32Z"}
 {"actor":"claude","ev":"01KXSP27VVXH1GHSG44ZW8W9S7","item":"01KXSNNSWKC64M1XX0Y7WVT67Z","op":"close","set":{"resolution":"docs/roadmap/2026-07-18_v0.2-roadmap.md frozen","status":"done"},"ts":"2026-07-18T03:59:32Z"}
+{"actor":"claude","ev":"01KXSP2J2B3T2PTRN62SW1SCG0","item":"01KXSNNSWK0HC96WQ3HV98DHT8","op":"update","set":{"status":"in_progress"},"ts":"2026-07-18T03:59:43Z"}
+{"actor":"claude","ev":"01KXSP374PRGR4KX0M3689KVV3","item":"01KXSNNSWK0HC96WQ3HV98DHT8","op":"update","set":{"status":"blocked"},"ts":"2026-07-18T04:00:04Z"}
