@@ -7,12 +7,9 @@ project:
   name: "Acme Platform"
 
 ticketing:
-  system: jira                 # jira | ado | github | none
-  adapter: ticket-jira         # resolved via $PATH; missing adapter = local-only
-  project: PROJ
-  options:
-    site: acme.atlassian.net
-    epic_link_field: customfield_10014
+  system: github               # jira | ado | github | none
+  # sync is skill-based (ticket-sync); no adapter binary
+  project: SpillwaveSolutions/wiki_ticket_sdd
 
 wiki:
   system: github-wiki          # confluence | github-wiki | ado-wiki | none

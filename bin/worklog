@@ -2,8 +2,8 @@
 """
 worklog -- CLI entry point. WORKLOG-SPEC section 12.
 
-Implemented: add, update, close, show, list, fold, plan-capture, roadmap-render,
-             roadmap-snapshot.
+Implemented: add, update, close, link, show, list, fold, plan-capture,
+             roadmap-render, roadmap-snapshot, wiki-add.
 Stubbed:     sync, status, compact.
 
 Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
@@ -86,6 +86,41 @@ def cmd_close(a):
     if a.resolution:
         ev["set"]["resolution"] = a.resolution
     append(ev)
+
+
+def cmd_link(a):
+    ev = base(a.item, "link", a.actor)
+    ev["set"] = {"external": {k: v for k, v in {
+        "system": a.system, "key": a.key, "url": a.url, "rev": a.rev,
+        "hash": a.hash,
+        "synced_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    }.items() if v is not None}}
+    append(ev)
+
+
+PUBLISHED = ".work/published.json"
+
+
+def cmd_wiki_add(a):
+    """Register a file in the wiki publish set. published.json is a plain JSON
+    map (spec 9.2), not an event log, so direct load/dump is allowed here."""
+    if not os.path.exists(a.file):
+        sys.exit(f"worklog: {a.file} not found")
+    published = {}
+    if os.path.exists(PUBLISHED):
+        with open(PUBLISHED, encoding="utf-8") as fh:
+            published = json.load(fh)
+    # Preserve url/rev/source_hash on re-register: wiping them would make the
+    # next publish create a duplicate page (spec 9.2).
+    entry = published.setdefault(a.key, {"url": None, "rev": None,
+                                         "source_hash": None})
+    entry["source"] = a.file
+    entry["title"] = a.title
+    os.makedirs(os.path.dirname(PUBLISHED), exist_ok=True)
+    with open(PUBLISHED, "w", encoding="utf-8") as fh:
+        json.dump(published, fh, indent=2, sort_keys=True)
+        fh.write("\n")
+    print(a.key)
 
 
 def cmd_list(a):
@@ -209,6 +244,17 @@ c = sub.add_parser("close"); c.set_defaults(fn=cmd_close)
 c.add_argument("item")
 c.add_argument("--status", default="done", choices=["done", "cancelled"])
 c.add_argument("--resolution")
+
+lk = sub.add_parser("link"); lk.set_defaults(fn=cmd_link)
+lk.add_argument("item")
+lk.add_argument("--system", required=True)
+lk.add_argument("--key", required=True)
+lk.add_argument("--url"); lk.add_argument("--rev"); lk.add_argument("--hash")
+
+wa = sub.add_parser("wiki-add"); wa.set_defaults(fn=cmd_wiki_add)
+wa.add_argument("file")
+wa.add_argument("--key", required=True)
+wa.add_argument("--title", required=True)
 
 l = sub.add_parser("list"); l.set_defaults(fn=cmd_list); l.add_argument("--all", action="store_true")
 s = sub.add_parser("show"); s.set_defaults(fn=cmd_show); s.add_argument("item")

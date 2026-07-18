@@ -31,6 +31,16 @@ the plugin, everything data-shaped is left alone. It records the installed
 plugin version in `.work/config.yml` and **never touches existing
 `.work/*.jsonl` logs**. Commit the scaffolding in one commit.
 
+On first install it also detects which systems the repo uses — from `git
+remote -v` hostnames, installed CLIs (`gh`, `glab`, `az`, `jira`), and any
+Jira/Confluence/Notion MCPs in the session. A confident read (say, a single
+GitHub origin with `gh` authenticated) gets one yes/no confirmation;
+anything less asks per area with multi-select, so teams can pick and mix —
+GitHub PRs + Jira tickets + Confluence wiki is a legal combination. Answers
+land in `.work/config.yml`'s `ticketing:`/`wiki:` blocks and go into the
+same commit. Upgrade re-runs on an already-configured repo skip detection
+entirely.
+
 ### /worklog:uninstall
 
 Remove exactly what init added — the tooling, not the data. It asks for
