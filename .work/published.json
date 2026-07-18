@@ -41,6 +41,12 @@
     "source_hash": "a524da1552f6",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-18_v0.2-roadmap"
   },
+  "roadmap/2026-07-18_v0.5.0-release": {
+    "rev": "138586177da0c916dc8e244b5f61c8c1dfb1dbd9",
+    "source": "docs/roadmap/2026-07-18_v0.5.0-release.md",
+    "source_hash": "74f7be9f4225",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-18_v0.5.0-release"
+  },
   "spec": {
     "rev": "4a189d1c401d203ce23d3b7dc3a4f3c815a0ac95",
     "source": "docs/worklog-spec.md",
