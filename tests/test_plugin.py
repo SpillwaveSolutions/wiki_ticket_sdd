@@ -90,6 +90,18 @@ class TestVersionSync(unittest.TestCase):
             self.assertEqual(versions, [v], f"{path} version != plugin.json")
 
 
+class TestPackaging(unittest.TestCase):
+    def test_no_repo_docs_inside_plugin(self):
+        banned = ("user_guide", "worklog-spec", "docs/")
+        for base, _dirs, files in os.walk(PLUGIN):
+            for name in files:
+                rel = os.path.relpath(os.path.join(base, name), PLUGIN)
+                for b in banned:
+                    self.assertNotIn(
+                        b, rel,
+                        f"{rel}: repo docs must not ship inside the plugin")
+
+
 class TestInit(unittest.TestCase):
     def test_scaffolds_a_usable_repo(self):
         d = init_repo(self)
