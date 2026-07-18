@@ -2,6 +2,8 @@
 
 ## 0.6.0 — unreleased
 
+- Green-gates merge policy: /worklog:merge + merge-green skill + merge-when-green.sh
+  poll loop (5-min default) — PRs merge only when every check passes; never bypass.
 - Typed adapter contract (plan 2026-07-18): bin/sync_dispatch.py owns every sync
   invariant (capabilities gate, scope, create-vs-update, marker idempotency, echo
   suppression, §3.6 exit-code handling, conflicts, drift report); adapters are dumb
