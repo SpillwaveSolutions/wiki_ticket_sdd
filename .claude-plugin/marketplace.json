@@ -1,0 +1,13 @@
+{
+  "name": "worklog-marketplace",
+  "owner": {
+    "name": "Rick Hightower"
+  },
+  "plugins": [
+    {
+      "name": "worklog",
+      "source": "./plugin",
+      "description": "Local-first, git-native visible-WIP work tracking: plans become tickets, roadmaps stay generated, unplanned work gets recorded. Skills, /worklog:* commands, and an ExitPlanMode capture hook."
+    }
+  ]
+}

@@ -18,4 +18,6 @@ jobs:
           python3 tests/test_plan_capture.py
       # PR simulations: real git repos, branches, union merges, hook gates
       - name: integration tests
-        run: python3 tests/test_integration.py
+        run: |
+          python3 tests/test_integration.py
+          python3 tests/test_plugin.py
