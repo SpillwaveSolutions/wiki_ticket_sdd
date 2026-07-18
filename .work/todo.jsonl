@@ -21,3 +21,11 @@
 {"actor":"claude","ev":"01KXSH8YJMQB0K26BFZG0G27SP","item":"01KXSFEWND18ATDAPCWJXKV8C1","op":"close","set":{"resolution":"plugin/skills canonical copies, repo .claude/skills kept as dogfood install","status":"done"},"ts":"2026-07-18T02:35:49Z"}
 {"actor":"claude","ev":"01KXSH8YPWB0J4WHDDTY5H48JC","item":"01KXSFEWND595MAFB1GMB9KECF","op":"close","set":{"resolution":"hooks.json + guarded exit-plan-capture.sh, silent outside worklog repos","status":"done"},"ts":"2026-07-18T02:35:49Z"}
 {"actor":"claude","ev":"01KXSH9ZP5NQMZV0VSRKG7GV8Z","item":"01KXSFEWND3DGDF12DSWJEKVDF","op":"close","set":{"resolution":"root marketplace.json + README (install docs, layout, testing)","status":"done"},"ts":"2026-07-18T02:36:23Z"}
+{"actor":"claude","ev":"01KXSHA0FNW8TMDEK43DR26C8Z","item":"01KXSFEWNDZ55K8AQJBCN9MRD6","op":"update","set":{"status":"in_progress"},"ts":"2026-07-18T02:36:24Z"}
+{"actor":"claude","ev":"01KXSHA0KX3DPEMRRCM5JZFBPY","item":"01KXSFEWNDR0ZDTHHGQVN3PG9Z","op":"update","set":{"status":"in_progress"},"ts":"2026-07-18T02:36:24Z"}
+{"actor":"claude","ev":"01KXSHA0QZ6M57QPHYRMEP69XH","item":"01KXSFEWNDM44B8A8RV30PF6X1","op":"update","set":{"status":"in_progress"},"ts":"2026-07-18T02:36:24Z"}
+{"actor":"claude","ev":"01KXSHA0W6YNZPM7507T9RJ5G6","item":"01KXSFEWND2PG3PQW8GMZ9B319","op":"update","set":{"status":"in_progress"},"ts":"2026-07-18T02:36:24Z"}
+{"actor":"claude","ev":"01KXSHNSJPBHZF63BATX59P3S0","item":"01KXSFEWNDZ55K8AQJBCN9MRD6","op":"close","set":{"resolution":"init.sh + init.md: idempotent scaffold/upgrade, verified in sandbox","status":"done"},"ts":"2026-07-18T02:42:50Z"}
+{"actor":"claude","ev":"01KXSHNSPXG0N9FFR0QQZBNZXS","item":"01KXSFEWNDR0ZDTHHGQVN3PG9Z","op":"close","set":{"resolution":"installed: <version> line managed in .work/config.yml","status":"done"},"ts":"2026-07-18T02:42:50Z"}
+{"actor":"claude","ev":"01KXSHNSV4W9NZGRJJ15HPF3A8","item":"01KXSFEWNDM44B8A8RV30PF6X1","op":"close","set":{"resolution":"uninstall.sh: removes tooling only, .work and docs preserved, idempotent","status":"done"},"ts":"2026-07-18T02:42:50Z"}
+{"actor":"claude","ev":"01KXSHNSZ6DM54WCWWAFFTSPTA","item":"01KXSFEWND2PG3PQW8GMZ9B319","op":"close","set":{"resolution":"doctor.sh: version skew, file staleness vs canon, invariant checks, read-only","status":"done"},"ts":"2026-07-18T02:42:50Z"}

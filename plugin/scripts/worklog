@@ -1,0 +1,213 @@
+#!/usr/bin/env python3
+"""
+worklog -- CLI entry point. WORKLOG-SPEC section 12.
+
+Implemented: add, update, close, show, list, fold, plan-capture, roadmap-render.
+Stubbed:     sync, status, compact.
+
+Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
+"""
+import argparse, json, os, sys, time
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import ulid
+from fold import fold, OPEN_STATUSES
+
+LOG = ".work/todo.jsonl"
+MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
+VERSION = "0.1.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+
+
+def append(event):
+    """The only writer. Single O_APPEND write, always newline-terminated.
+
+    Also self-heals a missing trailing newline on the existing file (a hand
+    edit the hook hasn't caught yet): appending without the repair would fuse
+    two events into one unparseable line and lose both (section 8.2).
+    """
+    if len(event.get("set", {}).get("body", "")) > MAX_BODY:
+        sys.exit(f"worklog: body exceeds {MAX_BODY}B; put prose in the plan doc")
+    line = json.dumps(event, separators=(",", ":"), sort_keys=True) + "\n"
+    fd = os.open(LOG, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o644)
+    try:
+        if os.fstat(fd).st_size:
+            rfd = os.open(LOG, os.O_RDONLY)
+            try:
+                os.lseek(rfd, -1, os.SEEK_END)
+                if os.read(rfd, 1) != b"\n":
+                    line = "\n" + line
+            finally:
+                os.close(rfd)
+        os.write(fd, line.encode())   # atomic under PIPE_BUF
+    finally:
+        os.close(fd)
+    return event
+
+
+def base(item, op, actor):
+    return {"ev": ulid.new(), "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "actor": actor, "item": item, "op": op}
+
+
+def cmd_add(a):
+    if a.unplanned and not a.discovered_during:
+        sys.exit("worklog: --unplanned requires --discovered-during (section 5.4)")
+    item = ulid.new()
+    ev = base(item, "create", a.actor)
+    ev["set"] = {k: v for k, v in {
+        "type": a.type, "title": a.title, "status": "todo", "priority": a.priority,
+        "parent": a.parent, "plan": a.plan,
+        "unplanned": True if a.unplanned else None,
+        "discovered_during": a.discovered_during,
+    }.items() if v is not None}
+    if a.labels:
+        ev["set"]["labels"] = a.labels.split(",")
+    append(ev)
+    print(item)
+
+
+def cmd_update(a):
+    ev = base(a.item, "update", a.actor)
+    ev["set"] = {k: v for k, v in
+                 {"status": a.status, "priority": a.priority, "title": a.title}.items()
+                 if v is not None}
+    if a.add_label:
+        ev["add"] = {"labels": a.add_label.split(",")}
+    if a.del_label:
+        ev["del"] = {"labels": a.del_label.split(",")}
+    if not (ev.get("set") or ev.get("add") or ev.get("del")):
+        sys.exit("worklog: nothing to update")
+    append(ev)
+
+
+def cmd_close(a):
+    ev = base(a.item, "close", a.actor)
+    ev["set"] = {"status": a.status}
+    if a.resolution:
+        ev["set"]["resolution"] = a.resolution
+    append(ev)
+
+
+def cmd_list(a):
+    r = fold([LOG, ".work/done.jsonl"])
+    items = r.open_items() if not a.all else list(r.items.values())
+    for i in sorted(items, key=lambda x: (x.get("priority", "P9"), x["id"])):
+        ext = i.get("external", {}).get("key", "-")
+        print(f"{i['id'][:8]}  {i.get('priority','--'):3}  {i.get('status','?'):12} "
+              f"{ext:10} {i.get('title','')}")
+    if r.conflicts():
+        print(f"\n{len(r.conflicts())} conflict(s) need attention: worklog show <id>",
+              file=sys.stderr)
+
+
+def cmd_show(a):
+    r = fold([LOG, ".work/done.jsonl"])
+    match = [i for k, i in r.items.items() if k.startswith(a.item)]
+    if not match:
+        sys.exit(f"worklog: no item matching {a.item}")
+    print(json.dumps(match[0], indent=2))
+
+
+def cmd_fold(a):
+    r = fold([LOG, ".work/done.jsonl"])
+    print(json.dumps(sorted(r.items.values(), key=lambda i: i["id"]), indent=2))
+
+
+def cmd_roadmap_render(a):
+    import render_roadmap
+    md = render_roadmap.render()
+    os.makedirs("docs", exist_ok=True)
+    with open("docs/roadmap.md", "w", encoding="utf-8") as fh:
+        fh.write(md)
+    print("docs/roadmap.md")
+
+
+def cmd_plan_capture(a):
+    import plan_capture
+    draft = open(a.file, encoding="utf-8").read() if a.file else sys.stdin.read()
+    tasks = plan_capture.parse_tasks(draft)
+    if not tasks:
+        sys.exit("worklog: no '- [ ]' tasks found under a '## Tasks' heading")
+    date = time.strftime("%Y-%m-%d", time.gmtime())
+    path = f"docs/plans/{date}-{a.slug}.md"
+    if os.path.exists(path):
+        sys.exit(f"worklog: {path} exists; plans are never rewritten "
+                 "(invariant 15.8) — pick a new slug to supersede")
+
+    epic_id = ulid.new()
+    ev = base(epic_id, "create", a.actor)
+    ev["set"] = {"type": "epic", "title": a.title, "status": "todo",
+                 "priority": a.priority, "plan": path}
+    append(ev)
+
+    item_ids, last_task = [], epic_id
+    for t in tasks:
+        iid = ulid.new()
+        ev = base(iid, "create", a.actor)
+        ev["set"] = {"type": "subtask" if t["subtask"] else "task",
+                     "title": t["title"], "status": "todo",
+                     "priority": t["priority"],
+                     "parent": last_task if t["subtask"] else epic_id,
+                     "plan": path}
+        append(ev)
+        item_ids.append(iid)
+        if not t["subtask"]:
+            last_task = iid
+
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write(plan_capture.front_matter(date, a.slug, a.title, epic_id, item_ids))
+        fh.write(draft)
+    print(path)
+    print(epic_id)
+
+
+def stub(name):
+    def f(a):
+        sys.exit(f"worklog: `{name}` not implemented yet (see WORKLOG-SPEC section 18)")
+    return f
+
+
+p = argparse.ArgumentParser(prog="worklog")
+p.add_argument("--actor", default=os.environ.get("USER", "unknown"))
+p.add_argument("--version", action="version", version=f"worklog {VERSION}")
+sub = p.add_subparsers(dest="cmd", required=True)
+
+a = sub.add_parser("add"); a.set_defaults(fn=cmd_add)
+a.add_argument("title")
+a.add_argument("--type", default="task",
+               choices=["epic", "story", "task", "subtask", "bug"])
+a.add_argument("--priority", default="P2", choices=["P0", "P1", "P2", "P3"])
+a.add_argument("--parent"); a.add_argument("--plan"); a.add_argument("--labels")
+a.add_argument("--unplanned", action="store_true")
+a.add_argument("--discovered-during", dest="discovered_during")
+
+u = sub.add_parser("update"); u.set_defaults(fn=cmd_update)
+u.add_argument("item")
+u.add_argument("--status", choices=["todo", "in_progress", "blocked"])
+u.add_argument("--priority", choices=["P0", "P1", "P2", "P3"])
+u.add_argument("--title")
+u.add_argument("--add-label", dest="add_label")
+u.add_argument("--del-label", dest="del_label")
+
+c = sub.add_parser("close"); c.set_defaults(fn=cmd_close)
+c.add_argument("item")
+c.add_argument("--status", default="done", choices=["done", "cancelled"])
+c.add_argument("--resolution")
+
+l = sub.add_parser("list"); l.set_defaults(fn=cmd_list); l.add_argument("--all", action="store_true")
+s = sub.add_parser("show"); s.set_defaults(fn=cmd_show); s.add_argument("item")
+sub.add_parser("fold").set_defaults(fn=cmd_fold)
+
+pc = sub.add_parser("plan-capture"); pc.set_defaults(fn=cmd_plan_capture)
+pc.add_argument("--slug", required=True)
+pc.add_argument("--title", required=True)
+pc.add_argument("--file")
+pc.add_argument("--priority", default="P1", choices=["P0", "P1", "P2", "P3"])
+
+sub.add_parser("roadmap-render").set_defaults(fn=cmd_roadmap_render)
+for name in ("sync", "status", "compact"):
+    sub.add_parser(name).set_defaults(fn=stub(name))
+
+if __name__ == "__main__":
+    args = p.parse_args()
+    args.fn(args)
