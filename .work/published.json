@@ -6,9 +6,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/CLI-Reference"
   },
   "home": {
-    "rev": "3b2030e7cdcf12623fd60f1431a962ebf76956c4",
+    "rev": "456ff1649bc8aa2b584ae57f1cb2436e37cf5673",
     "source": "docs/wiki-home.md",
-    "source_hash": "0147ed0907cb",
+    "source_hash": "838bf5db4866",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Home"
   },
   "plan/ticket-sync-and-init-detection": {
@@ -24,9 +24,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plugin-Guide"
   },
   "roadmap": {
-    "rev": "3b2030e7cdcf12623fd60f1431a962ebf76956c4",
+    "rev": "456ff1649bc8aa2b584ae57f1cb2436e37cf5673",
     "source": "docs/roadmap.md",
-    "source_hash": "dcd8d44343f8",
+    "source_hash": "a493a00fd666",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap"
   },
   "roadmap/2026-07-18_v0.2-roadmap": {
@@ -34,6 +34,20 @@
     "source": "docs/roadmap/2026-07-18_v0.2-roadmap.md",
     "source_hash": "a524da1552f6",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-18_v0.2-roadmap"
+  },
+  "spec": {
+    "rev": "456ff1649bc8aa2b584ae57f1cb2436e37cf5673",
+    "source": "docs/worklog-spec.md",
+    "source_hash": "0eda7f65a6bd",
+    "title": "Worklog-Spec",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Worklog-Spec"
+  },
+  "status/2026-07-18-weekly": {
+    "rev": "456ff1649bc8aa2b584ae57f1cb2436e37cf5673",
+    "source": "docs/status/2026-07-18-weekly.md",
+    "source_hash": "ec2e71d197f8",
+    "title": "Status-2026-07-18-weekly",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-18-weekly"
   },
   "user-guide": {
     "rev": "969055dd7d8af5876956c25dca564e4bbe8749f1",

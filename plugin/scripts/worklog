@@ -3,19 +3,22 @@
 worklog -- CLI entry point. WORKLOG-SPEC section 12.
 
 Implemented: add, update, close, link, show, list, fold, plan-capture,
-             roadmap-render, roadmap-snapshot, wiki-add, compact.
-Stubbed:     sync, status.
+             roadmap-render, roadmap-snapshot, wiki-add, compact,
+             status (daily|weekly).
+Stubbed:     sync; status --kind timecard (spec section 17, open question 4).
 
 Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
 """
 import argparse, json, os, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ulid
-from fold import fold, OPEN_STATUSES
+from fold import (fold, FoldResult, read_lines, dedupe_and_sort,
+                  OPEN_STATUSES, CLOSED_STATUSES)
 
 LOG = ".work/todo.jsonl"
+PATHS = (".work/todo.jsonl", ".work/done.jsonl")
 MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
-VERSION = "0.3.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+VERSION = "0.4.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
 def append(event):
@@ -221,6 +224,145 @@ def cmd_compact(a):
     print(f"compacted through {wm}" if wm else "nothing to compact")
 
 
+def _rfc3339(ms):
+    return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(ms / 1000))
+
+
+def _status_window(kind, now_ms):
+    """Window edges in ms (WORKLOG-SPEC 13.3). daily: since the last daily
+    report, else the 24h before the newest event; weekly: 7 days ending now."""
+    import calendar, glob, re
+    import render_roadmap
+    if kind == "weekly":
+        return now_ms - 7 * 86400000, now_ms
+    dates = [m.group(1) for f in glob.glob("docs/status/*-daily.md")
+             if (m := re.match(r"(\d{4}-\d{2}-\d{2})-daily\.md$",
+                               os.path.basename(f)))]
+    if dates:
+        # ponytail: the filename carries only a date, so the window opens at
+        # that midnight UTC; parse the report's front matter if that's ever
+        # too coarse.
+        return calendar.timegm(time.strptime(max(dates), "%Y-%m-%d")) * 1000, now_ms
+    top = render_roadmap.max_ev(PATHS)
+    start = ulid.timestamp_ms(top) if top else now_ms
+    return start - 86400000, now_ms
+
+
+def _status_facts(kind, now_ms):
+    """Deterministic facts for a status report: a fold plus a raw-event pass
+    to decide what happened inside the window (an event is in-window when its
+    `ev` ULID timestamp is). The prose is the skill's job, not ours."""
+    import render_roadmap
+    lo, hi = _status_window(kind, now_ms)
+    r = fold(PATHS)
+    items = r.items
+    raw = dedupe_and_sort(read_lines(list(PATHS), FoldResult()), FoldResult())
+    per = {}
+    for e in raw:
+        if e["op"] != "compact":
+            per.setdefault(e["item"], []).append(e)
+
+    def in_window(e):
+        return lo <= ulid.timestamp_ms(e["ev"]) <= hi
+
+    def title(iid):
+        return items.get(iid, {}).get("title", iid[:8])
+
+    def epic_title(iid):
+        eid = render_roadmap.root_epic_id(iid, items)
+        return items[eid].get("title") if eid else None
+
+    closed, opened, unplanned = [], [], []
+    for iid, evs in per.items():
+        it = items.get(iid, {})
+        if (it.get("status") in CLOSED_STATUSES
+                and any(e["op"] == "close" and in_window(e) for e in evs)):
+            closed.append({"id": iid, "title": it.get("title", ""),
+                           "status": it.get("status"),
+                           "resolution": it.get("resolution"),
+                           "unplanned": bool(it.get("unplanned")),
+                           "epic": epic_title(iid)})
+        if any(e["op"] == "create" and in_window(e) for e in evs):
+            opened.append({"id": iid, "title": it.get("title", ""),
+                           "type": it.get("type"), "epic": epic_title(iid)})
+            if it.get("unplanned"):
+                dd = it.get("discovered_during")
+                unplanned.append({"id": iid, "title": it.get("title", ""),
+                                  "discovered_during": title(dd) if dd else None})
+
+    in_prog, blocked = [], []
+    for iid, it in items.items():
+        if it.get("status") == "in_progress":
+            evs = per.get(iid, [])
+            started = next((e for e in evs
+                            if (e.get("set") or {}).get("status") == "in_progress"),
+                           evs[0] if evs else None)
+            age = (round((now_ms - ulid.timestamp_ms(started["ev"])) / 86400000, 1)
+                   if started else None)
+            in_prog.append({"id": iid, "title": it.get("title", ""),
+                            "age_days": age, "epic": epic_title(iid)})
+        if it.get("status") in OPEN_STATUSES:
+            blockers = [title(d) for d in it.get("depends_on") or []
+                        if items.get(d, {}).get("status") not in CLOSED_STATUSES]
+            if it.get("status") == "blocked" or blockers:
+                blocked.append({"id": iid, "title": it.get("title", ""),
+                                "blocked_by": blockers})
+
+    conflicts = [{"id": iid, "title": title(iid), "conflict": c}
+                 for iid, c in r.conflicts()]
+    facts = {
+        "kind": kind,
+        "window": {"from": _rfc3339(lo), "to": _rfc3339(hi)},
+        "through": render_roadmap.max_ev(PATHS),
+        "closed_in_window": sorted(closed, key=lambda x: x["id"]),
+        "opened_in_window": sorted(opened, key=lambda x: x["id"]),
+        "in_progress": sorted(in_prog, key=lambda x: x["id"]),
+        "blocked": sorted(blocked, key=lambda x: x["id"]),
+        "unplanned_in_window": sorted(unplanned, key=lambda x: x["id"]),
+        "conflicts": conflicts,
+    }
+    facts["counts"] = {k: len(facts[k]) for k in
+                       ("closed_in_window", "opened_in_window", "in_progress",
+                        "blocked", "unplanned_in_window", "conflicts")}
+    return facts
+
+
+def cmd_status(a):
+    if a.kind == "timecard":
+        sys.exit("worklog: timecard needs spec §17 open question 4 decided "
+                 "(hours vs narrative)")
+    now_ms = int(time.time() * 1000)
+    facts = _status_facts(a.kind, now_ms)
+    if a.emit_facts:
+        print(json.dumps(facts, indent=2, sort_keys=True))
+        return
+    if not (a.write or a.dry_run):
+        sys.exit("worklog: pass --emit-facts (facts as JSON) "
+                 "or --write (prose on stdin)")
+    prose = sys.stdin.read()
+    date = time.strftime("%Y-%m-%d", time.gmtime(now_ms / 1000))
+    path = f"docs/status/{date}-{a.kind}.md"
+    doc = ("---\n"
+           f"kind: {a.kind}\n"
+           f"date: {date}\n"
+           f"window: {{from: {facts['window']['from']}, "
+           f"to: {facts['window']['to']}}}\n"
+           f"through: {facts['through'] or 'null'}\n"
+           f"generated_at: {_rfc3339(now_ms)}\n"
+           "---\n\n" + prose.rstrip("\n") + "\n")
+    if a.dry_run:
+        sys.stdout.write(doc)
+        return
+    if os.path.exists(path) and not a.force:
+        sys.exit(f"worklog: {path} exists; status reports are frozen "
+                 "(invariant 15.9) — corrections go in the next report "
+                 "(--force to overwrite)")
+    os.makedirs("docs/status", exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write(doc)
+    print(path)
+
+
 def stub(name):
     def f(a):
         sys.exit(f"worklog: `{name}` not implemented yet (see WORKLOG-SPEC section 18)")
@@ -281,8 +423,14 @@ rs.add_argument("--name")
 co = sub.add_parser("compact"); co.set_defaults(fn=cmd_compact)
 co.add_argument("--yes", action="store_true")
 
-for name in ("sync", "status"):
-    sub.add_parser(name).set_defaults(fn=stub(name))
+st = sub.add_parser("status"); st.set_defaults(fn=cmd_status)
+st.add_argument("--kind", required=True, choices=["daily", "weekly", "timecard"])
+st.add_argument("--emit-facts", dest="emit_facts", action="store_true")
+st.add_argument("--write", action="store_true")
+st.add_argument("--dry-run", dest="dry_run", action="store_true")
+st.add_argument("--force", action="store_true")
+
+sub.add_parser("sync").set_defaults(fn=stub("sync"))
 
 if __name__ == "__main__":
     args = p.parse_args()

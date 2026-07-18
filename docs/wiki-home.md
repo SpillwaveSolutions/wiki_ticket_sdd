@@ -18,3 +18,11 @@ work is fishbowled, not hidden.
 ## Plans
 
 - [[Plan-ticket-sync-and-init-detection]]
+
+## Status reports
+
+- [[Status-2026-07-18-weekly]]
+
+## Reference
+
+- [[Worklog-Spec]]
