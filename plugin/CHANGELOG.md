@@ -1,7 +1,9 @@
 # Changelog
 
-## 0.5.0 — unreleased
+## 0.5.0 — 2026-07-18
 
+- release skill: cutting a release is a wiki-ticket capability (stamp,
+  snapshot, tag, platform release, publish, sync).
 - Pull sync: `worklog ingest` (deterministic ev per spec §10.2 — identical polls
   dedupe across clones), `worklog conflict`, `worklog resolve --take local|remote`;
   fold clears conflicts when a later event writes the field. ticket-sync is now
