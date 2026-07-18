@@ -5,6 +5,10 @@ description: Track work items — use when creating, updating, closing, or listi
 
 # Work tracking
 
+Every request that produces work gets worklog items FIRST — add them before
+starting, move them `in_progress` → `done` as the work happens (the
+UserPromptSubmit and Stop hooks enforce this). Unrecorded work is invisible work.
+
 All state changes go through `bin/worklog`. Never edit `.work/*.jsonl` by
 hand or with shell redirects (invariant 15.4) — the CLI's `append()` is the
 only writer.

@@ -2,7 +2,8 @@
 """
 worklog -- CLI entry point. WORKLOG-SPEC section 12.
 
-Implemented: add, update, close, show, list, fold, plan-capture, roadmap-render.
+Implemented: add, update, close, show, list, fold, plan-capture, roadmap-render,
+             roadmap-snapshot.
 Stubbed:     sync, status, compact.
 
 Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
@@ -121,6 +122,21 @@ def cmd_roadmap_render(a):
     print("docs/roadmap.md")
 
 
+def cmd_roadmap_snapshot(a):
+    import shutil
+    if not os.path.exists("docs/roadmap.md"):
+        sys.exit("worklog: docs/roadmap.md not found; run roadmap-render first")
+    date = time.strftime("%Y-%m-%d", time.gmtime())
+    name = f"{date}_{a.name}" if a.name else date
+    path = f"docs/roadmap/{name}.md"
+    if os.path.exists(path):
+        sys.exit(f"worklog: {path} exists; snapshots are frozen "
+                 "— pick a new --name")
+    os.makedirs("docs/roadmap", exist_ok=True)
+    shutil.copyfile("docs/roadmap.md", path)
+    print(path)
+
+
 def cmd_plan_capture(a):
     import plan_capture
     draft = open(a.file, encoding="utf-8").read() if a.file else sys.stdin.read()
@@ -205,6 +221,8 @@ pc.add_argument("--file")
 pc.add_argument("--priority", default="P1", choices=["P0", "P1", "P2", "P3"])
 
 sub.add_parser("roadmap-render").set_defaults(fn=cmd_roadmap_render)
+rs = sub.add_parser("roadmap-snapshot"); rs.set_defaults(fn=cmd_roadmap_snapshot)
+rs.add_argument("--name")
 for name in ("sync", "status", "compact"):
     sub.add_parser(name).set_defaults(fn=stub(name))
 
