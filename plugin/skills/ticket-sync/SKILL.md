@@ -1,7 +1,7 @@
 ---
 name: ticket-sync
 description: Push work items to the team's configured ticketing system (GitHub Issues, Jira, Azure DevOps, GitLab...). Use when asked to sync tickets, after closing out a plan, or when items should be visible in the tracker. Push-only for now.
-version: 0.2.0
+version: 0.3.0
 ---
 
 # Ticket sync
