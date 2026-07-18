@@ -6,5 +6,26 @@
         {"type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/scripts/exit-plan-capture.sh"}
       ]
     }
+  ],
+  "UserPromptSubmit": [
+    {
+      "hooks": [
+        {"type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/scripts/prompt-reminder.sh"}
+      ]
+    }
+  ],
+  "Stop": [
+    {
+      "hooks": [
+        {"type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/scripts/stop-worklog-check.sh"}
+      ]
+    }
+  ],
+  "SessionStart": [
+    {
+      "hooks": [
+        {"type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/scripts/session-doctor.sh"}
+      ]
+    }
   ]
 }

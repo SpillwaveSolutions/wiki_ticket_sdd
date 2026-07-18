@@ -15,12 +15,9 @@ ticketing:
     epic_link_field: customfield_10014
 
 wiki:
-  system: confluence           # confluence | github-wiki | ado-wiki | none
-  adapter: wiki-confluence
-  root_url: https://acme.atlassian.net/wiki/spaces/ENG
-  options:
-    space: ENG
-    root_page_id: "12345"
+  system: github-wiki          # confluence | github-wiki | ado-wiki | none
+  # publishing is skill-based (wiki-publish); no adapter binary
+  root_url: https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki
 
 paths:
   plans: docs/plans

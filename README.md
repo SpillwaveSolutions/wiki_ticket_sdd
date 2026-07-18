@@ -1,17 +1,42 @@
-# worklog
+# WikiTicket SDD
 
-Local-first, git-native work tracking for agentic coding. Three properties
-drive everything:
+**Wiki ticket** — pronounced *"wicked ticket"*. WikiTicket Spec-Driven
+Development.
 
-1. **Visible WIP** — everything in flight lives in the repo, as an
-   append-only event log (`.work/todo.jsonl`) that merges cleanly across
-   branches.
-2. **Plans produce tickets** — exiting plan mode captures the plan to
-   `docs/plans/` and emits tracked items; planning never evaporates.
-3. **Generated artifacts** — `docs/roadmap.md` is rendered from the log and
-   read-only for humans. No parser, no round-trip, no drift.
+## Why
 
-Full spec: [docs/worklog-spec.md](docs/worklog-spec.md).
+Teams want spec-driven development that works across multiple teams and is
+visible to everyone — **fishbowl** AI-assisted development. You can use AI
+heavily, but the work is never hidden: every plan becomes tracked tickets,
+the history of what was done is readily available, and roadmaps and status
+reports are generated artifacts anyone can read. No "the agent did a bunch
+of stuff last week and nobody knows what."
+
+## What it does
+
+- **Append-only, git-native work log.** Epics, stories, tasks, subtasks, and
+  bugs live in `.work/todo.jsonl` — an event log that multiple people (and
+  agents) can work against concurrently. Union merge, event fold: branches
+  merge cleanly, state is derived by folding events.
+- **Plans are the permanent design record.** Exiting plan mode captures the
+  plan to `docs/plans/` and emits tracked items. Planning never evaporates;
+  when you need the *why*, read the plan.
+- **Generated roadmap and status reports.** `docs/roadmap.md` is rendered
+  from the log — no hand-editing, no drift.
+- **Syncs to the team's OWN systems** — wiki *and* tickets. Your work log
+  publishes to whatever your team already uses.
+
+## System-agnostic edges, deliberately
+
+Works equally with GitHub, GitLab, Azure DevOps (wiki + work items), Jira,
+Confluence — and whatever the equivalent is elsewhere. The team picks.
+
+The core never contains per-system code. Publishing and sync are done by
+*skills* that instruct the AI to use whatever CLI, MCP server, or skill is
+available for the chosen system, researching missing tooling at runtime.
+LLMs already know these systems well; shipping a repository of per-system
+integrations would be dead weight. You could even run two trackers at once
+(GitHub + Jira) — the workflow stays identical.
 
 ## Quick start (no plugin)
 
@@ -60,14 +85,17 @@ Two install levels, deliberately distinct:
   check. The copies are committed, so hooks and CI work for teammates who
   don't have the plugin.
 
-Also:
+Also: `/worklog:uninstall` removes the tooling but never touches `.work/`
+data, `docs/plans/`, `docs/status/`, or `docs/roadmap.md` — the data
+outlives the tooling. `/worklog:doctor` reports version drift and invariant
+violations without changing anything.
 
-- `/worklog:uninstall` removes the tooling that init added, but never
-  touches `.work/` data, `docs/plans/`, `docs/status/`, or
-  `docs/roadmap.md` — the data outlives the tooling.
-- `/worklog:doctor` compares the repo's scaffold version against the plugin
-  version and runs the invariant checks, reporting drift without changing
-  anything.
+## How it works
+
+The full design — event schema, fold semantics, merge behavior, sync model —
+is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
+(concepts, CLI reference, plugin guide) live in
+[docs/user_guide/](docs/user_guide/).
 
 ## Layout
 
@@ -88,8 +116,6 @@ Also:
 for t in tests/test_*.py; do python3 "$t"; done
 ```
 
-Stdlib `unittest` only — no pytest, no dependencies.
-
-Four unit suites — `test_fold.py`, `test_ulid.py`, `test_render_roadmap.py`,
-`test_plan_capture.py` — plus `tests/test_integration.py`, which simulates
-full PR flows (branch, track, merge, fold) in throwaway git repos.
+Stdlib `unittest` only — no pytest, no dependencies. Unit suites cover the
+fold, ULIDs, roadmap rendering, and plan capture; `tests/test_integration.py`
+simulates full PR flows (branch, track, merge, fold) in throwaway git repos.

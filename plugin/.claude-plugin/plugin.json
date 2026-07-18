@@ -1,6 +1,6 @@
 {
   "name": "worklog",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Local-first, git-native visible-WIP work tracking: plans become tickets, roadmaps stay generated, unplanned work gets recorded. Skills, /worklog:* commands, and an ExitPlanMode capture hook.",
   "author": {
     "name": "Rick Hightower"

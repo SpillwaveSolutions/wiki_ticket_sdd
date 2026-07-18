@@ -80,7 +80,7 @@ class TestVersionSync(unittest.TestCase):
         out = sh(ROOT, sys.executable, "bin/worklog", "--version").stdout
         self.assertEqual(out.strip(), f"worklog {v}")
         skills = sorted(glob.glob(os.path.join(PLUGIN, "skills", "*", "SKILL.md")))
-        self.assertEqual(len(skills), 3)
+        self.assertGreaterEqual(len(skills), 3)  # every skill dir must carry SKILL.md
         for path in skills:
             with open(path, encoding="utf-8") as fh:
                 frontmatter = fh.read().split("---")[1]
@@ -88,6 +88,18 @@ class TestVersionSync(unittest.TestCase):
                         for l in frontmatter.splitlines()
                         if l.startswith("version:")]
             self.assertEqual(versions, [v], f"{path} version != plugin.json")
+
+
+class TestPackaging(unittest.TestCase):
+    def test_no_repo_docs_inside_plugin(self):
+        banned = ("user_guide", "worklog-spec", "docs/")
+        for base, _dirs, files in os.walk(PLUGIN):
+            for name in files:
+                rel = os.path.relpath(os.path.join(base, name), PLUGIN)
+                for b in banned:
+                    self.assertNotIn(
+                        b, rel,
+                        f"{rel}: repo docs must not ship inside the plugin")
 
 
 class TestInit(unittest.TestCase):

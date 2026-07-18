@@ -1,6 +1,7 @@
 .work/sync-state.json
 .work/changeset.json
 .work/results/
+.work/wiki-checkout/
 __pycache__/
 *.pyc
 
