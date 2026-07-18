@@ -17,8 +17,12 @@ absent, say so and stop — there is nothing to push to.
 
 ## 2. Scope
 
-Open items only: status `todo`, `in_progress`, or `blocked`, taken from
-`bin/worklog fold`. Closed items never reconcile — skip them entirely.
+Open items (status `todo`, `in_progress`, or `blocked`, taken from
+`bin/worklog fold`) PLUS any item carrying `external` identity whose
+canonical hash differs from its `last_pushed_hash` — spec §10.5's
+`external.dirty`. A closed item with external identity stays in scope
+exactly until its closure is pushed; once hashes match it is inert and
+never rescanned.
 
 ## 3. Skip unchanged items
 
@@ -63,7 +67,14 @@ After each successful push:
 This appends the link event — the ONLY way external identity enters the log.
 Then update the item's `last_pushed_hash` in `.work/sync-state.json`.
 
+**Closing:** when a scoped item's status is `done` or `cancelled`, close the
+remote ticket with a short comment naming the resolution (GitHub:
+`gh issue close <n> -c "<resolution or status>"`), then update
+`last_pushed_hash` in `.work/sync-state.json`. Do NOT run `bin/worklog link`
+again — the item already has external identity. After that push the item is
+inert: hashes match, so it is never rescanned.
+
 ## 7. Report
 
-Finish with counts: pushed / updated / skipped, and anything deferred or
-needing human action.
+Finish with counts: pushed / updated / closed / skipped, and anything
+deferred or needing human action.

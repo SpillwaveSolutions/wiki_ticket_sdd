@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.0 — unreleased
+
+- Compaction (`bin/compact.py`, `worklog compact --yes`) per spec §7 with fold-equality
+  verification; nightly CI job commits `chore(worklog): compact through <watermark>`.
+- `worklog status --kind daily|weekly` (`--emit-facts` / `--write`, frozen reports) +
+  status-report skill. Timecard deferred on spec §17 open question 4.
+- ticket-sync closes remote tickets when local items close (external.dirty scope).
+- plan-capture publishes tickets + wiki via a background subagent — never blocks.
+- Spec v1.4: §9 rewritten to skill-based edges.
+
 ## 0.3.0 — unreleased
 
 - `worklog link`: attach external identities to work items via §5.3 link events.

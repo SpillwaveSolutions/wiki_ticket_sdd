@@ -1,7 +1,9 @@
 # Worklog: Visible-WIP Work Tracking Spec
 
-**Version:** 1.3
-**Status:** Implemented through §18 step 4 (this repo)
+**Version:** 1.4
+**Status:** Implemented through §18 step 7; wiki publish (step 9) done for github-wiki; steps 8 and 10 outstanding (this repo)
+
+**Changes since 1.3:** §9 rewritten from an executable adapter contract to skill-based edges — per-system integration is model work using the team's existing CLIs/MCPs (`gh`, `glab`, `az`, `jira`, or an MCP server); no adapter binaries ship. §12's skills table updated to the shipped set (plan-capture, work-track, plan-next, wiki-publish, ticket-sync, plus the UserPromptSubmit/Stop/SessionStart hooks added in 0.2.0). §18 progress updated: step 6 superseded by skills, steps 7 and 9 (github-wiki) done.
 
 **Changes since 1.2:** §8.2 corrected by measurement — git's `ort` union driver *repairs* a missing final newline at merge time; the real fusion risk is the local append path, and `append()` now self-heals it. Added `hooks/pre-merge-commit` (merge auto-commits bypass `pre-commit`), mktemp in the freshness check, and a PR-simulation integration suite (`tests/test_integration.py`).
 
@@ -363,75 +365,42 @@ Single `write()` of a line under `O_APPEND` is atomic for lines under `PIPE_BUF`
 
 ---
 
-## 9. Adapter contract
+## 9. Edge integration: skills, not adapters
 
-The boundary is a **CLI**, not prose. An adapter is any executable that satisfies this contract. It can be a shell script, a Python file, or a skill wrapping either. The core shells out and parses stdout.
+*(Rewritten in 1.4. The 1.2 design specified per-system CLI adapter executables — `ticket-<system> push`, a `capabilities` handshake, an exit-code table. None of that shipped, and none of it will.)*
 
-### 9.1 Ticket adapter
+The implementation went a different way, for a reason worth recording: **the model already knows these systems.** GitHub Issues, Jira, Azure DevOps, GitLab, Confluence — an LLM has absorbed their docs, their CLIs, and years of answers about both. Shipping per-system adapter binaries means writing, testing, and maintaining executables whose whole job is to re-encode knowledge the model already has, then chasing remote API drift forever. That's dead weight. Instead, each edge is a **skill**: prose that tells the model to read the config, use whatever tooling the team already has — `gh`, `glab`, `az boards`, `jira`, or an MCP server — and research gaps (docs/web) rather than guess. Per-system integration is model work, not shipped code. If tooling is missing, the skill tells the human what to install; the core is untouched and local-only keeps working.
 
-```
-ticket-<system> capabilities
-ticket-<system> push   --item <file.json> [--dry-run]
-ticket-<system> pull   --since <rfc3339> [--keys k1,k2,...]
-ticket-<system> close  --key <K> --resolution <string>
-ticket-<system> comment --key <K> --body-file <f.md>
-```
+What survives from 1.2 is the shape of the boundary, not the mechanism:
 
-**`capabilities`** → stdout JSON. Lets the core degrade gracefully instead of guessing.
+### 9.1 Config names systems; the core never branches on them
 
-```json
-{
-  "system": "jira",
-  "supports": ["push", "pull", "close", "comment"],
-  "types": {"epic":"Epic","story":"Story","task":"Task","subtask":"Sub-task","bug":"Bug"},
-  "supports_parent": true,
-  "supports_depends_on": true,
-  "max_title": 255
-}
-```
+`.work/config.yml`'s `ticketing.system` and `wiki.system` name the edge (`github`, `jira`, `github-wiki`, `confluence`, …). The skills read those names; `bin/worklog` never branches on them beyond checking for `none` (invariant §15.6). Swapping trackers is a config edit, not a code change.
 
-If `supports_depends_on` is false, the core stops trying to sync dependencies and notes it in the drift report. It does not error.
+### 9.2 The `ticket-sync` skill (push-only)
 
-**`push`** takes canonical item JSON on a file path (not argv — bodies contain newlines). Returns:
+Local items become tickets; nothing is pulled back (pull is §18 step 8, still open).
 
-```json
-{"key":"PROJ-412","url":"https://...","rev":"2026-07-16T15:39:58Z","hash":"a3f1..."}
-```
+- **Scope** — every open item (`todo` / `in_progress` / `blocked`), **plus** any closed item still carrying dirty external identity — canonical hash ≠ `last_pushed_hash` — which stays in scope exactly until its closure is pushed. Once hashes match, the item is inert and never rescanned (§10.5).
+- **Skip unchanged** — §10.3's canonical hash, compared against `items.<ulid>.last_pushed_hash` in the gitignored, per-clone `.work/sync-state.json`. Equal → skip.
+- **Idempotency** — the rule that moved here intact from the adapter contract, because it was always the single most important one: **push must be idempotent, keyed by item ULID** (invariant §15.5). Every ticket body embeds a marker line, `<!-- worklog:<ULID> -->`; before creating, the skill searches the tracker for that marker and updates the hit instead of creating. A retried push must find, never duplicate — without this, a retried subagent opens duplicate tickets.
+- **Recording** — after a successful push, `worklog link <ulid> --system <s> --key <k> --url <u> --hash <h>` appends the §5.3 `link` event. This is **the only way external identity enters the log.** Then `last_pushed_hash` is updated in sync-state.
+- **Close** — a locally closed item (`done` / `cancelled`) closes the remote ticket with a short comment naming the resolution, then updates `last_pushed_hash`. No second `link` — identity is already recorded.
 
-`push` **must be idempotent.** The item ULID is passed in the payload; the adapter uses it as the external idempotency key (a Jira label, an ADO tag, a GH issue marker line). A retried push finds the existing ticket and updates it. **This is the single most important adapter requirement** — without it, a retried subagent opens duplicate tickets.
+### 9.3 The `wiki-publish` skill
 
-**`pull`** emits NDJSON of canonical items on stdout, one per line, each with `external.key` and `external.rev` populated.
+- **Ledger** — `.work/published.json`, committed, because page identity is shared across the team; without it every republish creates duplicate pages. Entries map a stable logical key to `{source, title, url, rev, source_hash}` — `source` (the repo path) makes the publish set self-describing.
+- **Default publish set** — the live roadmap, every plan in `docs/plans/`, every roadmap snapshot in `docs/roadmap/`, plus anything registered via `worklog wiki-add <file> --key K --title T`.
+- **Frozen rules** (§13's semantics applied at the edge) — plans, snapshots, and status reports publish once and are never re-published. The live roadmap is the exception: republish when `source_hash` changes; matching hash → skip.
+- **One-time init is surfaced to the human**, never silently worked around — e.g. a GitHub wiki's `.wiki.git` does not exist until someone clicks "Create the first page"; on a not-found failure, ask the human to do that once, then retry.
 
-**Exit codes:**
+### 9.4 What stays deterministic core
 
-| Code | Meaning | Core behavior |
-|---|---|---|
-| 0 | Success | Continue |
-| 2 | Auth failure | Abort sync, tell the human to re-auth |
-| 3 | Not found | Clear `external`, mark for re-push |
-| 4 | Rate limited / transient | Retry with backoff (3 attempts), then defer |
-| 5 | Remote conflict | Emit `op:"conflict"` event |
-| 1 | Other | Report, continue with next item |
+- `worklog link` — the only writer of external identity into the log.
+- `worklog wiki-add` — registers a file in the ledger (`{source, title, url: null, rev: null, source_hash: null}`; the next publish fills the nulls).
+- The file formats — the `published.json` ledger shape above and `sync-state.json` (§10.3) — are fixed by this spec, whatever tooling the skill happens to drive.
 
-Field mapping is entirely the adapter's problem. Canonical item in, adapter maps `type: subtask` to whatever Jira calls it this week.
-
-### 9.2 Wiki adapter
-
-```
-wiki-<system> capabilities
-wiki-<system> publish --file <path> --key <logical-key> --title <string> [--parent <id>]
-```
-
-`--key` is a stable logical identity (`roadmap`, `plan/2026-07-16-auth-refactor`, `status/2026-07-16`). Returns `{"page_id":"...","url":"...","rev":"..."}`.
-
-The core maintains `.work/published.json`:
-
-```json
-{"roadmap": {"page_id": "88213", "url": "https://...", "rev": "12", "source_hash": "a3f1..."},
- "plan/2026-07-16-auth-refactor": {"page_id": "88219", "url": "https://...", "rev": "1", "source_hash": "b7c2..."}}
-```
-
-**Without this map you create duplicate Confluence pages on every republish.** It is committed, because page identity is shared across the team. If `source_hash` is unchanged, skip the publish.
+The old §9.1 exit-code table is gone: there is no executable whose exit codes could be specified. What did *not* move: the sync semantics. §10's canonical hash, echo suppression, field directions, and conflict rules still govern — the skill is the *how*; §10 remains the *what*.
 
 ---
 
@@ -498,7 +467,7 @@ Canonical JSON = sorted keys, no whitespace, arrays sorted for set-valued fields
 |---|---|---|---|
 | `title`, `body` | yes | yes | LWW |
 | `type` | yes | on create only | Type changes remotely are ignored; noted in drift |
-| `status` | yes | yes | Mapped by adapter |
+| `status` | yes | yes | Mapped by the skill (§9.2) |
 | `priority` | yes | yes | LWW — the PM re-prioritizing in Jira is a feature |
 | `parent` | yes | yes | If `supports_parent` |
 | `labels` | yes | yes | Union, not LWW |
@@ -523,6 +492,8 @@ worklog sync --dry-run             # print the events that WOULD be appended
 ```
 
 **Closed and archived items never reconcile.** That's what keeps the scope bounded. If someone reopens a ticket in Jira, `pull` catches it only while it's inside `active_window_days`; past that, it's a manual `--keys` sync. Documented limitation, not a bug.
+
+One push-side exception (`external.dirty`): a **closed** item whose external identity is dirty — canonical hash ≠ `last_pushed_hash` — stays in scope exactly until its closure is pushed to the remote (§9.2). Once hashes match, it is inert and never rescanned.
 
 ### 10.6 Conflicts
 
@@ -568,8 +539,8 @@ Three subagents, all **reading** `changeset.json`, none writing the log:
 
 | Subagent | Does | Writes to |
 |---|---|---|
-| `ticket-sync` | push/close/comment via adapter | `results/ticket.json` |
-| `wiki-publish` | publish roadmap, plans, status | `results/wiki.json` |
+| `ticket-sync` | push/close/comment via the tracker's CLI/MCP (the §9.2 skill) | `results/ticket.json` |
+| `wiki-publish` | publish roadmap, plans, status via the wiki's tooling (the §9.3 skill) | `results/wiki.json` |
 | `roadmap-render` | regenerate `docs/roadmap.md` | the doc |
 
 Every phase-2 action is idempotent and keyed by item ULID. A retried subagent must be a no-op, not a duplicate. Phase 2 may fail partially — that's what best-effort means.
@@ -590,19 +561,19 @@ Updates `.work/published.json` and `.work/sync-state.json`. Prints a summary: pu
 
 ## 12. Skills
 
-Each is a thin skill wrapping a deterministic script. The model decides *when*; the script decides *what*.
+Core skills are thin wrappers over deterministic scripts — the model decides *when*, the script decides *what*. Edge skills (§9) are the exception: the skill *is* the integration, model work over the team's own tooling.
+
+The shipped set:
 
 | Skill | Trigger | Behavior |
 |---|---|---|
-| `plan-capture` | Plan mode exits; user says "capture this plan" | Writes `docs/plans/<date>-<slug>.md`. Parses plan steps → items with `plan` set. Appends `create` events. Optionally pushes (per `sync.push_on_capture`). |
-| `work-add` | "we need to also…", mid-flight discovery | Appends a `create`. Flags `--unplanned --discovered-during <id>`. |
-| `work-update` | "mark that in progress", "bump priority" | Appends `update`. |
-| `work-close` | Task finished | Appends `close`. Does **not** touch `done.jsonl`. |
+| `plan-capture` | Plan mode exits; user says "capture this plan" | Writes `docs/plans/<date>-<slug>.md`, parses the `## Tasks` checkboxes → items with `plan` set, appends `create` events, regenerates the roadmap. |
+| `work-track` | Any request that produces work; "mark that in progress"; mid-flight discovery | add / update / close via `bin/worklog`. Discoveries get `--unplanned --discovered-during <id>`. (Replaces 1.3's `work-add` / `work-update` / `work-close` trio — one skill, three subcommands.) |
 | `plan-next` | "what should we do next?" | Folds log. Filters open, unblocked (`depends_on` all closed), sorts by priority then epic order. Presents top N with rationale. **Read-only.** |
-| `roadmap-render` | Called by sync; manual | Regenerates `docs/roadmap.md`. |
-| `status-report` | "status report", "what did I do this week", "timecard for last week" | Picks `--kind` from the ask (default `status.default_kind`). Calls `worklog status --emit-facts`, writes the prose, calls `worklog status --write`. Commits and publishes. Refuses to overwrite a frozen report without `--force`. See §13.3. |
-| `roadmap-sync` | Plan complete; "sync everything" | The three-phase orchestrator (§11). |
-| `worklog-compact` | CI only | §7. |
+| `ticket-sync` | "sync tickets"; a plan closes out | Push-only sync per §9.2 — model work over the tracker's CLI/MCP. |
+| `wiki-publish` | "publish to the wiki"; after a roadmap snapshot | Publish per §9.3 — ledger-driven, frozen rules enforced. |
+
+Still specified, not yet shipped: `status-report` (§13.3) and `worklog-compact` (§7, CI only). `roadmap-render` shipped as a `worklog` subcommand rather than a skill — the callers above invoke it directly.
 
 ### Hooks, not hope
 
@@ -611,7 +582,9 @@ Each is a thin skill wrapping a deterministic script. The model decides *when*; 
 | Hook | Action |
 |---|---|
 | `PostToolUse` on `ExitPlanMode` | Invoke `plan-capture` non-optionally. |
-| `Stop` | If `todo.jsonl` has open `in_progress` items with no matching git activity, warn. |
+| `UserPromptSubmit` (0.2.0) | One-line policy reminder: if this request produces work, record it first. |
+| `Stop` (0.2.0) | If `todo.jsonl` has open `in_progress` items with no matching git activity, warn. |
+| `SessionStart` (0.2.0) | doctor-lite: read-only health check; reports failures only, never blocks. |
 | `PreCommit` (git) | Trailing-newline check; schema validation; `roadmap.md` freshness. |
 | `PreMergeCommit` (git) | Same script as PreCommit — merge auto-commits bypass `pre-commit`. |
 
@@ -936,10 +909,10 @@ Concurrent edits from two branches, zero conflicts, nothing lost — and the one
 3. `roadmap-render` + the CI freshness check.
 4. `plan-capture` + the `ExitPlanMode` hook.
 5. Compaction + its CI job.
-6. Adapter contract + one adapter (`ticket-github` is the cheapest to build and test).
-7. Push-only sync. Ship it. Live with it for two weeks.
+6. ~~Adapter contract + one adapter.~~ **Superseded by skills (§9, 1.4)** — no adapter binaries ship; the `ticket-sync` and `wiki-publish` skills replaced this step.
+7. ~~Push-only sync. Ship it. Live with it for two weeks.~~ **Done** — `ticket-sync` skill + `worklog link`, dogfooded against GitHub Issues.
 8. Pull + echo suppression + conflicts.
-9. Wiki adapter + publish.
+9. ~~Wiki adapter + publish.~~ **Done for github-wiki** — `wiki-publish` skill + `worklog wiki-add` + the `published.json` ledger; other wiki systems are config away, not code away.
 10. `status-report` — `daily` and `weekly` first; `timecard` only once open question 4 is settled. `plan-next`.
 
 Steps 1–4 are a genuinely useful tool with no adapters at all. If the project stalls there, it still paid for itself. **Do not build sync before you've lived with the log.**

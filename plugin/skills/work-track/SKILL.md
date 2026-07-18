@@ -1,7 +1,7 @@
 ---
 name: work-track
 description: Track work items — use when creating, updating, closing, or listing work items, or when discovering unplanned work mid-flight ("we also need to…", a bug found while doing something else).
-version: 0.3.0
+version: 0.4.0
 ---
 
 # Work tracking
@@ -33,6 +33,9 @@ something else) MUST be recorded BEFORE doing the work:
     bin/worklog update <ulid> [--status todo|in_progress|blocked] \
         [--priority P0-P3] [--add-label a] [--del-label b]
     bin/worklog close <ulid> --status done|cancelled [--resolution "..."]
+
+After closing items, run the ticket-sync skill so linked tickets close
+remotely too.
 
 ## Inspect
 

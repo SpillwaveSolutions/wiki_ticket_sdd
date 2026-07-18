@@ -22,7 +22,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PLUGIN = os.path.join(ROOT, "plugin")
 
 CANON = ["bin/worklog", "bin/fold.py", "bin/ulid.py", "bin/render_roadmap.py",
-         "bin/plan_capture.py", "hooks/pre-commit", "hooks/pre-merge-commit"]
+         "bin/plan_capture.py", "bin/compact.py",
+         "hooks/pre-commit", "hooks/pre-merge-commit"]
 
 
 def sh(cwd, *cmd, check=True):
