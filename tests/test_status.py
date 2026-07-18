@@ -74,17 +74,26 @@ class TestStatus(unittest.TestCase):
                              r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
         self.assertEqual(f["counts"]["closed_in_window"], 1)
 
-    def test_old_event_outside_both_windows(self):
-        fresh = self.ok("add", "Fresh task").strip()
-        # A create from 10 days ago: outside daily (24h) AND weekly (7d).
-        # Hand-written line, sandbox only -- the ev ULID carries the age.
-        old = self.old_ulid(10)
+    def old_create(self, days, title="Old task"):
+        """Append a create event `days` old. Hand-written line, sandbox only
+        -- the ev ULID carries the age. Returns the item id."""
+        old = self.old_ulid(days)
         line = {"ev": old, "ts": "2026-07-08T00:00:00Z", "actor": "t",
                 "item": old, "op": "create",
-                "set": {"type": "task", "title": "Old task", "status": "todo"}}
+                "set": {"type": "task", "title": title, "status": "todo"}}
         with open(os.path.join(self.dir, ".work", "todo.jsonl"), "a",
                   encoding="utf-8") as fh:
             fh.write(json.dumps(line) + "\n")
+        return old
+
+    def tc_facts(self, *extra):
+        return json.loads(self.ok("status", "--kind", "timecard",
+                                  "--emit-facts", *extra))
+
+    def test_old_event_outside_both_windows(self):
+        fresh = self.ok("add", "Fresh task").strip()
+        # A create from 10 days ago: outside daily (24h) AND weekly (7d).
+        old = self.old_create(10)
 
         for kind in ("daily", "weekly"):
             opened = [i["id"] for i in self.facts(kind)["opened_in_window"]]
@@ -114,10 +123,72 @@ class TestStatus(unittest.TestCase):
         with open(os.path.join(self.dir, path), encoding="utf-8") as fh:
             self.assertIn("v2", fh.read())
 
-    def test_timecard_is_stubbed(self):
-        p = self.run_wl("status", "--kind", "timecard", "--emit-facts")
+    def test_timecard_groups_by_day_and_omits_empty_days(self):
+        a = self.ok("add", "Fresh task").strip()
+        self.ok("add", "Quick fix", "--unplanned", "--discovered-during", a)
+
+        f = self.tc_facts()
+        today = time.strftime("%Y-%m-%d", time.gmtime())
+        self.assertEqual(f["kind"], "timecard")
+        # only today saw activity: the other 7 window days are absent
+        self.assertEqual([d["date"] for d in f["days"]], [today])
+        day = f["days"][0]
+        self.assertEqual([o["title"] for o in day["opened"]],
+                         ["Fresh task", "Quick fix"])
+        quick = day["opened"][1]
+        self.assertTrue(quick["unplanned"])
+        self.assertEqual(quick["discovered_during_title"], "Fresh task")
+        self.assertNotIn("id", quick)          # no ticket IDs in the facts
+        self.assertEqual(day["commits"], [])   # sandbox is not a git repo
+
+    def test_timecard_since_until_bound_the_window(self):
+        self.ok("add", "Fresh task")
+        self.old_create(10)
+        old_date = time.strftime("%Y-%m-%d", time.gmtime(time.time() - 10 * 86400))
+
+        # default window (last 7 days): the 10-day-old create is excluded
+        self.assertNotIn(old_date, [d["date"] for d in self.tc_facts()["days"]])
+
+        # explicit window around the old event: it appears; today does not
+        since = time.strftime("%Y-%m-%d", time.gmtime(time.time() - 12 * 86400))
+        f = self.tc_facts("--since", since, "--until", old_date)
+        self.assertEqual([d["date"] for d in f["days"]], [old_date])
+        self.assertEqual([o["title"] for o in f["days"][0]["opened"]],
+                         ["Old task"])
+
+    def test_timecard_write_is_frozen(self):
+        self.ok("add", "Something")
+        prose = "## Monday, 14 July\nWrote the thing.\n"
+        today = time.strftime("%Y-%m-%d", time.gmtime())
+        out = self.ok("status", "--kind", "timecard", "--write", stdin=prose)
+        path = f"docs/status/{today}-timecard.md"
+        self.assertEqual(out.strip(), path)
+
+        with open(os.path.join(self.dir, path), encoding="utf-8") as fh:
+            doc = fh.read()
+        for key in ("kind: timecard", f"date: {today}", "window: {from: ",
+                    "through: ", "generated_at: "):
+            self.assertIn(key, doc)
+        self.assertTrue(doc.endswith(prose))
+
+        p = self.run_wl("status", "--kind", "timecard", "--write", stdin="v2\n")
         self.assertNotEqual(p.returncode, 0)
-        self.assertIn("open question", p.stdout + p.stderr)
+        self.assertIn("frozen", p.stdout + p.stderr)
+
+        # an explicit --until names the file, not the day it was run
+        y = time.strftime("%Y-%m-%d", time.gmtime(time.time() - 86400))
+        out = self.ok("status", "--kind", "timecard", "--write",
+                      "--until", y, stdin=prose)
+        self.assertEqual(out.strip(), f"docs/status/{y}-timecard.md")
+
+    def test_timecard_closed_item_lands_on_its_close_day(self):
+        a = self.ok("add", "Ship it").strip()
+        self.ok("close", a, "--resolution", "shipped")
+        today = time.strftime("%Y-%m-%d", time.gmtime())
+        day = {d["date"]: d for d in self.tc_facts()["days"]}[today]
+        self.assertEqual(day["closed"],
+                         [{"title": "Ship it", "resolution": "shipped",
+                           "unplanned": False}])
 
     def test_dry_run_prints_and_writes_nothing(self):
         self.ok("add", "Something")

@@ -22,6 +22,7 @@ work is fishbowled, not hidden.
 ## Status reports
 
 - [[Status-2026-07-18-weekly]]
+- [[Status-2026-07-18-timecard]]
 
 ## Reference
 
