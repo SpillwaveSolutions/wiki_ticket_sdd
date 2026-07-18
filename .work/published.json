@@ -30,9 +30,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plugin-Guide"
   },
   "roadmap": {
-    "rev": "5fe1d949ff93c1153f18f679394b0287e050acde",
+    "rev": "a134415b3de045789cbb711e47c1af4d6485207e",
     "source": "docs/roadmap.md",
-    "source_hash": "3d0fead9997b",
+    "source_hash": "5fe4d22bab3b",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap"
   },
   "roadmap/2026-07-18_v0.2-roadmap": {
@@ -48,9 +48,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-18_v0.5.0-release"
   },
   "spec": {
-    "rev": "4a189d1c401d203ce23d3b7dc3a4f3c815a0ac95",
+    "rev": "a134415b3de045789cbb711e47c1af4d6485207e",
     "source": "docs/worklog-spec.md",
-    "source_hash": "a529b9262564",
+    "source_hash": "7a187f3f8d5b",
     "title": "Worklog-Spec",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Worklog-Spec"
   },

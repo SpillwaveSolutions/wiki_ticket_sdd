@@ -1,0 +1,58 @@
+{
+  "description": "Adapter push/pull payload shapes (typed-adapter-contract spec sections 3.2-3.3). Validate an instance against the sub-schema under properties.<name> (push_request, push_response, pull_line). Restricted to the subset {type, required, properties, enum, items, additionalProperties}.",
+  "type": "object",
+  "properties": {
+    "push_request": {
+      "type": "object",
+      "required": ["op", "key", "marker", "item"],
+      "properties": {
+        "op": {"enum": ["create", "update"]},
+        "key": {"type": ["string", "null"]},
+        "marker": {"type": "string"},
+        "item": {
+          "type": "object",
+          "required": ["id", "type", "title", "status"],
+          "properties": {
+            "id": {"type": "string"},
+            "type": {"type": "string"},
+            "title": {"type": "string"},
+            "status": {"type": "string"},
+            "priority": {"type": "string"},
+            "labels": {"type": "array", "items": {"type": "string"}}
+          }
+        }
+      }
+    },
+    "push_response": {
+      "type": "object",
+      "required": ["key", "url", "rev", "hash"],
+      "properties": {
+        "key": {"type": "string"},
+        "url": {"type": "string"},
+        "rev": {"type": "string"},
+        "hash": {"type": ["string", "null"]}
+      }
+    },
+    "pull_line": {
+      "type": "object",
+      "required": ["external", "id"],
+      "properties": {
+        "external": {
+          "type": "object",
+          "required": ["key", "rev"],
+          "properties": {
+            "key": {"type": "string"},
+            "rev": {"type": "string"}
+          }
+        },
+        "id": {
+          "type": ["string", "null"],
+          "description": "Worklog ULID extracted from the marker in the ticket body; null for remote-origin tickets with no marker."
+        },
+        "title": {"type": "string"},
+        "status": {"type": "string"},
+        "priority": {"type": "string"}
+      }
+    }
+  }
+}
