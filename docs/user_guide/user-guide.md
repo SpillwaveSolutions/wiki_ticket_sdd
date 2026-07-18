@@ -227,7 +227,10 @@ If the tooling isn't installed, the agent researches it at runtime and, when
 a step needs a human (e.g. creating a GitHub wiki's first page in the web
 UI), it says so. The wiki-publish skill keeps a ledger in
 `.work/published.json` so republishing updates pages instead of duplicating
-them. Missing tooling degrades to local-only; it never fails a command.
+them. Per-system guidance (GitHub, GitLab, ADO, Confluence) lives in the
+wiki-publish skill itself; the ledger shape is identical everywhere — only
+how each system fills `url`/`rev`/`page_id` differs. Missing tooling
+degrades to local-only; it never fails a command.
 
 ## Where to next
 

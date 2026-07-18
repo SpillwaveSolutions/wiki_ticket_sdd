@@ -89,8 +89,10 @@ the plugin doesn't nag in repos that don't use it.
 
 The Claude plugin format works with **Claude Code and Grok build today** —
 all real settings live in `.work/config.yml` (never in the agent file), and
-`AGENTS.md` is a symlink to `CLAUDE.md`, so one policy file serves both.
-**OpenCode and Codex ports are on the roadmap.** Because `/worklog:init`
+`/worklog:init` scaffolds `AGENTS.md` as a symlink to `CLAUDE.md`, so one
+policy file serves every harness that reads either name. **Codex and
+OpenCode therefore work today with no port**: because `/worklog:init`
 commits everything a repo needs, teammates on any harness — or none — can
 still run `bin/worklog` and get the hooks; the plugin only adds the
-skills-and-hooks convenience layer on top.
+skills-and-hooks convenience layer on top. The support matrix and porting
+guide live in [plugin/PORTS.md](../../plugin/PORTS.md).

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.5.0 — unreleased
+
+- Pull sync: `worklog ingest` (deterministic ev per spec §10.2 — identical polls
+  dedupe across clones), `worklog conflict`, `worklog resolve --take local|remote`;
+  fold clears conflicts when a later event writes the field. ticket-sync is now
+  push AND pull with §10.3 echo suppression.
+- Spec v1.5: adapter strays purged; pull CLI documented; §18 step 8 done.
+- wiki-publish: per-system guidance (GitHub/GitLab/ADO/Confluence) + ledger field
+  semantics across systems.
+- Harness ports: /worklog:init scaffolds the AGENTS.md symlink; plugin/PORTS.md
+  matrix — Codex/OpenCode work today with zero port.
+
 ## 0.4.0 — unreleased
 
 - Compaction (`bin/compact.py`, `worklog compact --yes`) per spec §7 with fold-equality

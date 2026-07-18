@@ -117,6 +117,10 @@ class TestInit(unittest.TestCase):
         self.assertIn(f"installed: {plugin_version()}", read(d, ".work/config.yml"))
         hookspath = sh(d, "git", "config", "core.hooksPath").stdout.strip()
         self.assertEqual(hookspath, "hooks")
+        agents = os.path.join(d, "AGENTS.md")
+        self.assertTrue(os.path.exists(agents))
+        self.assertTrue(os.path.islink(agents))
+        self.assertEqual(os.readlink(agents), "CLAUDE.md")
 
     def test_idempotent_and_lossless(self):
         d = init_repo(self)
@@ -131,6 +135,9 @@ class TestInit(unittest.TestCase):
         installed = [l for l in read(d, ".work/config.yml").splitlines()
                      if l.startswith("installed:")]
         self.assertEqual(installed, [f"installed: {plugin_version()}"])
+        agents = os.path.join(d, "AGENTS.md")
+        self.assertTrue(os.path.islink(agents))  # still the one symlink
+        self.assertEqual(os.readlink(agents), "CLAUDE.md")
 
 
 class TestDoctor(unittest.TestCase):
@@ -172,6 +179,9 @@ class TestUninstall(unittest.TestCase):
         self.assertNotEqual(p.returncode, 0, "core.hooksPath still set")
         self.assertFalse(
             os.path.exists(os.path.join(d, ".github/workflows/worklog.yml")))
+        self.assertFalse(
+            os.path.lexists(os.path.join(d, "AGENTS.md")),
+            "uninstall must remove the AGENTS.md -> CLAUDE.md symlink")
 
         events = [json.loads(l) for l in read(d, ".work/todo.jsonl").splitlines() if l]
         self.assertTrue(any(e.get("set", {}).get("title") == "Keep me"

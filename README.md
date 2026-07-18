@@ -90,6 +90,14 @@ data, `docs/plans/`, `docs/status/`, or `docs/roadmap.md` — the data
 outlives the tooling. `/worklog:doctor` reports version drift and invariant
 violations without changing anything.
 
+### Other harnesses (Codex, OpenCode, Grok build)
+
+The repo scaffold is harness-independent: `bin/worklog`, the git hooks, and
+CI are committed and work from any shell. The `AGENTS.md` symlink (created
+by `/worklog:init`, pointing at `CLAUDE.md`) carries the full worklog policy
+to any harness that reads `AGENTS.md`. See
+[plugin/PORTS.md](plugin/PORTS.md) for the support matrix and porting guide.
+
 ## How it works
 
 The full design — event schema, fold semantics, merge behavior, sync model —

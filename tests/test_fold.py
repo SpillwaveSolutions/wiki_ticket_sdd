@@ -261,6 +261,25 @@ class TestRobustness(unittest.TestCase):
         self.assertEqual(r.items["A"]["priority"], "P1")  # unchanged
         self.assertEqual(len(r.conflicts()), 1)
 
+    def test_later_write_clears_conflict_earlier_write_does_not(self):
+        """Section 10.6: a write to the field clears an EARLIER conflict; a
+        conflict recorded after the write stays open."""
+        create = {"ev": "01A", "ts": "t", "actor": "r", "item": "A", "op": "create",
+                  "set": {"type": "task", "title": "x", "status": "todo",
+                          "priority": "P1"}}
+        conflict = {"ev": "01B", "ts": "t", "actor": "sync", "item": "A",
+                    "op": "conflict",
+                    "set": {"field": "priority", "local": "P1", "remote": "P0"}}
+        update = {"ev": "01C", "ts": "t", "actor": "r", "item": "A", "op": "update",
+                  "set": {"priority": "P2"}}
+        cleared = fold([write_log([create, conflict, update])])
+        self.assertEqual(len(cleared.conflicts()), 0)
+        self.assertEqual(cleared.items["A"]["priority"], "P2")
+        # Same lines, conflict outsorts the update -> it stays open.
+        late = dict(conflict, ev="01D")
+        kept = fold([write_log([create, update, late])])
+        self.assertEqual(len(kept.conflicts()), 1)
+
     def test_link_sets_external_not_ticket(self):
         path = write_log([
             {"ev": "01A", "ts": "t", "actor": "r", "item": "A", "op": "create",
