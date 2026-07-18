@@ -18,6 +18,7 @@ work is fishbowled, not hidden.
 
 ## Plans
 
+- [[Plan-work-taxonomy]]
 - [[Plan-typed-adapter-contract]]
 - [[Plan-ticket-sync-and-init-detection]]
 
