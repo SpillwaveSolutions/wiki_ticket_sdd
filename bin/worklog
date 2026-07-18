@@ -14,6 +14,7 @@ from fold import fold, OPEN_STATUSES
 
 LOG = ".work/todo.jsonl"
 MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
+VERSION = "0.1.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
 def append(event):
@@ -168,6 +169,7 @@ def stub(name):
 
 p = argparse.ArgumentParser(prog="worklog")
 p.add_argument("--actor", default=os.environ.get("USER", "unknown"))
+p.add_argument("--version", action="version", version=f"worklog {VERSION}")
 sub = p.add_subparsers(dest="cmd", required=True)
 
 a = sub.add_parser("add"); a.set_defaults(fn=cmd_add)
