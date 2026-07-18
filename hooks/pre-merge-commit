@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# git runs THIS hook (not pre-commit) when a merge auto-commits. Without it,
+# merging two PRs that each carried a fresh roadmap lands a stale one on main
+# and only CI notices. Same checks, same script.
+exec "$(dirname "$0")/pre-commit"

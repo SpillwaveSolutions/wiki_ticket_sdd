@@ -33,10 +33,16 @@ PY
 done
 
 # Invariant 15.7: the roadmap is generated. Regenerate and diff.
+# mktemp, not a fixed path: two checkouts running this concurrently must not
+# race on the same scratch file.
 if [ -f bin/render_roadmap.py ] && [ -f docs/roadmap.md ]; then
-  python3 bin/render_roadmap.py > /tmp/roadmap.check
-  diff -q /tmp/roadmap.check docs/roadmap.md >/dev/null \
-    || fail "docs/roadmap.md is stale or hand-edited. Run: worklog roadmap-render"
+  tmp=$(mktemp)
+  python3 bin/render_roadmap.py > "$tmp"
+  if ! diff -q "$tmp" docs/roadmap.md >/dev/null; then
+    rm -f "$tmp"
+    fail "docs/roadmap.md is stale or hand-edited. Run: worklog roadmap-render"
+  fi
+  rm -f "$tmp"
 fi
 
 python3 tests/test_fold.py -q >/dev/null 2>&1 || fail "fold tests failing"

@@ -40,3 +40,10 @@ something else) MUST be recorded BEFORE doing the work:
 Run `bin/worklog roadmap-render` and commit the log and roadmap together
 (`.work/todo.jsonl` + `docs/roadmap.md`) — the pre-commit hook rejects a
 stale roadmap.
+
+## After merging branches
+
+The logs union-merge without conflict, but `docs/roadmap.md` may conflict or
+go stale (both sides regenerated it). Recovery is always the same: run
+`bin/worklog roadmap-render`, `git add -A`, and finish the merge commit. The
+pre-merge-commit hook blocks any merge that would land a stale roadmap.

@@ -17,12 +17,25 @@ MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
 
 
 def append(event):
-    """The only writer. Single O_APPEND write, always newline-terminated."""
+    """The only writer. Single O_APPEND write, always newline-terminated.
+
+    Also self-heals a missing trailing newline on the existing file (a hand
+    edit the hook hasn't caught yet): appending without the repair would fuse
+    two events into one unparseable line and lose both (section 8.2).
+    """
     if len(event.get("set", {}).get("body", "")) > MAX_BODY:
         sys.exit(f"worklog: body exceeds {MAX_BODY}B; put prose in the plan doc")
     line = json.dumps(event, separators=(",", ":"), sort_keys=True) + "\n"
     fd = os.open(LOG, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o644)
     try:
+        if os.fstat(fd).st_size:
+            rfd = os.open(LOG, os.O_RDONLY)
+            try:
+                os.lseek(rfd, -1, os.SEEK_END)
+                if os.read(rfd, 1) != b"\n":
+                    line = "\n" + line
+            finally:
+                os.close(rfd)
         os.write(fd, line.encode())   # atomic under PIPE_BUF
     finally:
         os.close(fd)
