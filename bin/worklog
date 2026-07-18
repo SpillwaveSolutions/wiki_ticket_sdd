@@ -4,8 +4,8 @@ worklog -- CLI entry point. WORKLOG-SPEC section 12.
 
 Implemented: add, update, close, link, show, list, fold, plan-capture,
              roadmap-render, roadmap-snapshot, wiki-add, compact,
-             status (daily|weekly).
-Stubbed:     sync; status --kind timecard (spec section 17, open question 4).
+             status (daily|weekly|timecard).
+Stubbed:     sync.
 
 Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
 """
@@ -228,11 +228,41 @@ def _rfc3339(ms):
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(ms / 1000))
 
 
-def _status_window(kind, now_ms):
+def _date_ms(s):
+    import calendar
+    try:
+        return calendar.timegm(time.strptime(s, "%Y-%m-%d")) * 1000
+    except ValueError:
+        sys.exit(f"worklog: bad date {s!r}; want YYYY-MM-DD")
+
+
+def _git_commits(date):
+    """Commit subjects for one day. Best-effort fact (spec 13.3): outside a
+    git repo, or on any git failure, the answer is simply []."""
+    import subprocess
+    try:
+        p = subprocess.run(
+            ["git", "log", f"--since={date}T00:00:00",
+             f"--until={date}T23:59:59", "--format=%s"],
+            capture_output=True, text=True)
+    except OSError:
+        return []
+    return [l for l in p.stdout.splitlines() if l.strip()] \
+        if p.returncode == 0 else []
+
+
+def _status_window(kind, now_ms, since=None, until=None):
     """Window edges in ms (WORKLOG-SPEC 13.3). daily: since the last daily
-    report, else the 24h before the newest event; weekly: 7 days ending now."""
+    report, else the 24h before the newest event; weekly: 7 days ending now;
+    timecard: --since/--until UTC dates inclusive (default: last 7 days)."""
     import calendar, glob, re
     import render_roadmap
+    if kind == "timecard":
+        today = time.strftime("%Y-%m-%d", time.gmtime(now_ms / 1000))
+        week_ago = time.strftime("%Y-%m-%d",
+                                 time.gmtime(now_ms / 1000 - 7 * 86400))
+        return (_date_ms(since or week_ago),
+                _date_ms(until or today) + 86400000 - 1)
     if kind == "weekly":
         return now_ms - 7 * 86400000, now_ms
     dates = [m.group(1) for f in glob.glob("docs/status/*-daily.md")
@@ -248,12 +278,12 @@ def _status_window(kind, now_ms):
     return start - 86400000, now_ms
 
 
-def _status_facts(kind, now_ms):
+def _status_facts(kind, now_ms, since=None, until=None):
     """Deterministic facts for a status report: a fold plus a raw-event pass
     to decide what happened inside the window (an event is in-window when its
     `ev` ULID timestamp is). The prose is the skill's job, not ours."""
     import render_roadmap
-    lo, hi = _status_window(kind, now_ms)
+    lo, hi = _status_window(kind, now_ms, since, until)
     r = fold(PATHS)
     items = r.items
     raw = dedupe_and_sort(read_lines(list(PATHS), FoldResult()), FoldResult())
@@ -271,6 +301,50 @@ def _status_facts(kind, now_ms):
     def epic_title(iid):
         eid = render_roadmap.root_epic_id(iid, items)
         return items[eid].get("title") if eid else None
+
+    if kind == "timecard":
+        # One bucket per UTC day (by event `ev` timestamp), days with no
+        # activity omitted, no item IDs — spec 13.3, narrative only.
+        days = {}
+
+        def bucket(d):
+            return days.setdefault(d, {"date": d, "closed": [], "opened": [],
+                                       "commits": []})
+
+        def day_of(e):
+            return time.strftime("%Y-%m-%d",
+                                 time.gmtime(ulid.timestamp_ms(e["ev"]) / 1000))
+
+        for iid, evs in per.items():
+            it = items.get(iid, {})
+            for e in evs:
+                if not in_window(e):
+                    continue
+                if e["op"] == "close" and it.get("status") in CLOSED_STATUSES:
+                    bucket(day_of(e))["closed"].append(
+                        {"title": it.get("title", ""),
+                         "resolution": it.get("resolution"),
+                         "unplanned": bool(it.get("unplanned"))})
+                elif e["op"] == "create":
+                    dd = it.get("discovered_during")
+                    bucket(day_of(e))["opened"].append(
+                        {"title": it.get("title", ""),
+                         "unplanned": bool(it.get("unplanned")),
+                         "discovered_during_title": title(dd) if dd else None})
+        d_ms = lo   # midnight UTC of --since; stepping a day stays midnight
+        while d_ms <= hi:
+            date = time.strftime("%Y-%m-%d", time.gmtime(d_ms / 1000))
+            subjects = _git_commits(date)
+            if subjects:
+                bucket(date)["commits"] = subjects
+            d_ms += 86400000
+        for v in days.values():
+            v["closed"].sort(key=lambda x: x["title"])
+            v["opened"].sort(key=lambda x: x["title"])
+        return {"kind": kind,
+                "window": {"from": _rfc3339(lo), "to": _rfc3339(hi)},
+                "through": render_roadmap.max_ev(PATHS),
+                "days": [days[k] for k in sorted(days)]}
 
     closed, opened, unplanned = [], [], []
     for iid, evs in per.items():
@@ -328,11 +402,8 @@ def _status_facts(kind, now_ms):
 
 
 def cmd_status(a):
-    if a.kind == "timecard":
-        sys.exit("worklog: timecard needs spec §17 open question 4 decided "
-                 "(hours vs narrative)")
     now_ms = int(time.time() * 1000)
-    facts = _status_facts(a.kind, now_ms)
+    facts = _status_facts(a.kind, now_ms, a.since, a.until)
     if a.emit_facts:
         print(json.dumps(facts, indent=2, sort_keys=True))
         return
@@ -340,7 +411,9 @@ def cmd_status(a):
         sys.exit("worklog: pass --emit-facts (facts as JSON) "
                  "or --write (prose on stdin)")
     prose = sys.stdin.read()
-    date = time.strftime("%Y-%m-%d", time.gmtime(now_ms / 1000))
+    # A timecard is named for the end of its window, not the day it was run.
+    date = (facts["window"]["to"][:10] if a.kind == "timecard"
+            else time.strftime("%Y-%m-%d", time.gmtime(now_ms / 1000)))
     path = f"docs/status/{date}-{a.kind}.md"
     doc = ("---\n"
            f"kind: {a.kind}\n"
@@ -426,6 +499,8 @@ co.add_argument("--yes", action="store_true")
 st = sub.add_parser("status"); st.set_defaults(fn=cmd_status)
 st.add_argument("--kind", required=True, choices=["daily", "weekly", "timecard"])
 st.add_argument("--emit-facts", dest="emit_facts", action="store_true")
+st.add_argument("--since", metavar="YYYY-MM-DD")   # timecard window start
+st.add_argument("--until", metavar="YYYY-MM-DD")   # timecard window end
 st.add_argument("--write", action="store_true")
 st.add_argument("--dry-run", dest="dry_run", action="store_true")
 st.add_argument("--force", action="store_true")
