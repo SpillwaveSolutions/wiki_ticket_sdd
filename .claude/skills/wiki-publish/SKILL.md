@@ -35,7 +35,15 @@ knowledge plus live exploration, not shipped integration code.
 
 `.work/published.json` maps logical keys to what was published:
 
-    {"<logical-key>": {"url": ..., "rev": ..., "source_hash": "sha256[:12] of source file"}}
+    {"<logical-key>": {"source": "repo/path.md", "url": ..., "rev": ..., "source_hash": "sha256[:12] of source file"}}
+
+Entries carry a `source` field (the repo path of the file) so the publish
+set is self-describing. The DEFAULT publish set is always: the live roadmap
+(`docs/roadmap.md`), every plan in `docs/plans/`, every roadmap snapshot in
+`docs/roadmap/`, plus anything registered via `worklog wiki-add`. Plans and
+snapshots publish once (frozen); the roadmap re-publishes on hash change.
+To opt an arbitrary file in, register it:
+`worklog wiki-add <file> --key K --title T`.
 
 Before publishing a file, hash it (`sha256`, first 12 hex chars). If the
 ledger entry's `source_hash` matches, skip it — already published. After

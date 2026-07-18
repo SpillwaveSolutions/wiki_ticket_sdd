@@ -14,3 +14,7 @@ work is fishbowled, not hidden.
 ## Roadmap snapshots
 
 - [[Roadmap-2026-07-18_v0.2-roadmap]]
+
+## Plans
+
+- [[Plan-ticket-sync-and-init-detection]]
