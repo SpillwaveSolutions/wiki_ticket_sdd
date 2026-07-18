@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0 — unreleased
+
+- Typed adapter contract (plan 2026-07-18): bin/sync_dispatch.py owns every sync
+  invariant (capabilities gate, scope, create-vs-update, marker idempotency, echo
+  suppression, §3.6 exit-code handling, conflicts, drift report); adapters are dumb
+  translators — shipped fake (CI double) + github worked example; worklog adapter
+  init|check; worklog sync is real — no stubs remain.
+- Spec v1.6: §8.1 hosted-platform merge caveat + recovery; §9.5 typed contract layer.
+- CI coverage gate: >=80% enforced on bin/*.py, target 95% (CLAUDE.md policy).
+- ticket-sync skill delegates invariants to the dispatcher; per-system notes moved
+  to adapters/README.md.
+
 ## 0.5.0 — 2026-07-18
 
 - release skill: cutting a release is a wiki-ticket capability (stamp,

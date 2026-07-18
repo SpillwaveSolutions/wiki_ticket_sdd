@@ -7,3 +7,5 @@ __pycache__/
 
 # re-include agent skills (user global gitignores .claude/)
 !.claude/
+.coverage
+.coverage.*

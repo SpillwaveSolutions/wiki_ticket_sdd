@@ -1,0 +1,186 @@
+#!/usr/bin/env python3
+"""Fake tracker adapter — the reference double for the contract tests.
+
+Backed by a local JSON file ($WORKLOG_FAKE_STATE, default ./.fake-tracker.json)
+instead of a real tracker. It translates and stores, nothing more: every sync
+invariant (hashing, create-vs-update decisions, scope, echo suppression) lives
+in the dispatcher, never here. See adapters/README.md rule 1.
+
+Test-only subcommands (underscore-prefixed, not part of the contract):
+  _count             print number of stored tickets
+  _counters          print the counters object
+  _fail_next <code>  make the next push exit with <code>
+"""
+import datetime
+import json
+import os
+import sys
+
+STATE_PATH = os.environ.get("WORKLOG_FAKE_STATE", ".fake-tracker.json")
+
+CAPABILITIES = {
+    "system": "fake",
+    "supports": ["push", "pull", "get", "close"],
+    # "epic": None on purpose — keeps the dispatcher's degrade path testable.
+    "types": {"epic": None, "story": "ticket", "task": "ticket",
+              "subtask": "ticket", "bug": "ticket"},
+    "marker": {"style": "html_comment", "template": "<!-- worklog:{ulid} -->"},
+    "fields": {"parent": "task-list", "depends_on": "unsupported",
+               "assignee": "assignee"},
+    "max_title": 256,
+}
+
+
+def load_state():
+    try:
+        with open(STATE_PATH, encoding="utf-8") as fh:
+            return json.load(fh)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {"tickets": {},
+                "counters": {"creates": 0, "updates": 0, "pulls": 0, "closes": 0},
+                "fail_next": None}
+
+
+def save_state(state):
+    with open(STATE_PATH, "w", encoding="utf-8") as fh:
+        json.dump(state, fh, indent=2)
+
+
+def now():
+    return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+
+
+def marker_ulid(marker):
+    """'<!-- worklog:01ABC -->' -> '01ABC'; no marker -> None (remote-origin)."""
+    if marker and "worklog:" in marker:
+        return marker.split("worklog:", 1)[1].strip().split()[0] or None
+    return None
+
+
+def ticket_line(key, t):
+    line = {"external": {"key": key, "rev": t["rev"]},
+            "id": marker_ulid(t.get("marker"))}
+    for field, value in (t.get("item") or {}).items():
+        if field != "id":
+            line[field] = value
+    if t.get("closed"):
+        line["status"] = "done"  # platform "closed" translated, nothing more
+    return line
+
+
+def cmd_push():
+    state = load_state()
+    if state.get("fail_next"):
+        code = int(state["fail_next"])
+        state["fail_next"] = None
+        save_state(state)
+        print("fake: injected failure %d" % code, file=sys.stderr)
+        return code
+    req = json.load(sys.stdin)
+    op = req.get("op")
+    if op == "create":
+        n = state["counters"]["creates"] + 1
+        key = "FAKE#%d" % n
+        state["tickets"][key] = {"item": req.get("item") or {},
+                                 "marker": req.get("marker"),
+                                 "closed": False, "rev": now()}
+        state["counters"]["creates"] = n
+    elif op == "update":
+        key = req.get("key")
+        if key not in state["tickets"]:
+            print("fake: no such ticket: %s" % key, file=sys.stderr)
+            return 3
+        t = state["tickets"][key]
+        t["item"] = req.get("item") or {}
+        if req.get("marker"):
+            t["marker"] = req["marker"]
+        t["rev"] = now()
+        state["counters"]["updates"] += 1
+    else:
+        print("fake: bad op: %r" % op, file=sys.stderr)
+        return 1
+    save_state(state)
+    t = state["tickets"][key]
+    print(json.dumps({"key": key, "url": "fake://" + key,
+                      "rev": t["rev"], "hash": None}))
+    return 0
+
+
+def cmd_pull(argv):
+    since, keys = None, None
+    args = iter(argv)
+    for a in args:
+        if a == "--since":
+            since = next(args, None)
+        elif a == "--keys":
+            keys = (next(args, "") or "").split(",")
+    state = load_state()
+    state["counters"]["pulls"] += 1
+    save_state(state)
+    for key in sorted(state["tickets"]):
+        t = state["tickets"][key]
+        if keys is not None and key not in keys:
+            continue
+        if since and t["rev"] <= since:
+            continue
+        print(json.dumps(ticket_line(key, t)))
+    return 0
+
+
+def cmd_get(key):
+    state = load_state()
+    if key not in state["tickets"]:
+        print("fake: no such ticket: %s" % key, file=sys.stderr)
+        return 3
+    print(json.dumps(ticket_line(key, state["tickets"][key])))
+    return 0
+
+
+def cmd_close(key, resolution):
+    state = load_state()
+    if key not in state["tickets"]:
+        print("fake: no such ticket: %s" % key, file=sys.stderr)
+        return 3
+    t = state["tickets"][key]
+    t["closed"] = True
+    t["resolution"] = resolution
+    t["rev"] = now()
+    state["counters"]["closes"] += 1
+    save_state(state)
+    print(json.dumps({"key": key, "rev": t["rev"]}))
+    return 0
+
+
+def main(argv):
+    if not argv:
+        print("usage: adapter <capabilities|push|pull|get|close>", file=sys.stderr)
+        return 1
+    verb, rest = argv[0], argv[1:]
+    if verb == "capabilities":
+        print(json.dumps(CAPABILITIES))
+        return 0
+    if verb == "push":
+        return cmd_push()
+    if verb == "pull":
+        return cmd_pull(rest)
+    if verb == "get" and rest:
+        return cmd_get(rest[0])
+    if verb == "close" and rest:
+        return cmd_close(rest[0], rest[1] if len(rest) > 1 else "")
+    if verb == "_count":
+        print(len(load_state()["tickets"]))
+        return 0
+    if verb == "_counters":
+        print(json.dumps(load_state()["counters"]))
+        return 0
+    if verb == "_fail_next" and rest:
+        state = load_state()
+        state["fail_next"] = int(rest[0])
+        save_state(state)
+        return 0
+    print("fake: unknown or incomplete verb: %r" % (argv,), file=sys.stderr)
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

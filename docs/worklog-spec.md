@@ -1,7 +1,9 @@
 # Worklog: Visible-WIP Work Tracking Spec
 
-**Version:** 1.5
-**Status:** Implemented through §18 step 8; wiki publish (step 9) done for github-wiki; step 10 outstanding (this repo)
+**Version:** 1.6
+**Status:** Implemented through §18 step 8; wiki publish (step 9) done for github-wiki; step 10 outstanding; step 11 (typed adapter contract) in progress on this branch
+
+**Changes since 1.5:** §8.1 gains a hosted-platform caveat — GitHub's server-side merge does not run `.gitattributes` merge drivers (even built-in `union`), so concurrent PRs conflict in the web UI; documented recovery (found merging PR #24, issue #25). §9 gains §9.5: the typed adapter contract layer (docs/plans/2026-07-18-typed-adapter-contract.md) now shipping — the dispatcher owns the sync invariants in code, adapters are generated dumb translators validated by `worklog adapter check`, and a fake adapter makes the invariants CI-testable with no network. Skills orchestrate; the dispatcher enforces. §18 gains step 11.
 
 **Changes since 1.4:** remaining adapter references purged (§4.2 config examples, §5.3, §13.3, §15) — the 1.4 §9 rewrite left strays behind. §10 now documents the shipped pull CLI: ingest via `worklog ingest` (deterministic `ev` per §10.2), conflicts via `worklog conflict`, resolution via `worklog resolve <item> --field F --take local|remote`. §18 step 8 done.
 
@@ -348,6 +350,8 @@ Union merge takes both sides of a conflict, always. No merge conflicts on the lo
 | Duplicate lines appear | The fold dedupes by `ev`. |
 | **A missing trailing newline fuses two lines into one corrupt line** | Enforced by writer invariant + pre-commit hook. See below. |
 
+**Hosted-platform caveat (added 1.6):** GitHub — and most hosting platforms — do **not** run merge drivers server-side, not even the built-in `union`. The no-conflict guarantee above holds for *local* merges only; two PRs touching `.work/todo.jsonl` will conflict in the web UI even though a local merge sails through (issue #25, found merging PR #24). Mitigations, in order: keep PR branches rebased/merged-up locally before merging in the UI; and when the UI does report conflicts, recover locally — merge the base branch on the PR branch (union applies), `worklog roadmap-render`, union `published.json` by key, push, then merge the PR. Costs one paragraph here; saves the next person an afternoon.
+
 ### 8.2 The trailing-newline invariant
 
 **Every write to a `.jsonl` file must terminate with `\n`.**
@@ -403,6 +407,12 @@ Local items become tickets. The pull side ships too (§18 step 8): remote change
 - The file formats — the `published.json` ledger shape above and `sync-state.json` (§10.3) — are fixed by this spec, whatever tooling the skill happens to drive.
 
 The old §9.1 exit-code table is gone: there is no executable whose exit codes could be specified. What did *not* move: the sync semantics. §10's canonical hash, echo suppression, field directions, and conflict rules still govern — the skill is the *how*; §10 remains the *what*.
+
+### 9.5 The typed contract layer (1.6)
+
+The 1.4 move to skills won portability but demoted three invariants from code-enforced to prose-enforced: **idempotency** (search-before-create), **pull parsing** (the fields that seed the deterministic `ev`), and **capability degradation** (what happens when a tracker has no epic type). The typed contract layer restores them as code without recreating the per-system maintenance burden this spec escaped: adapters stay generated and dumb — pure translators between canonical JSON and the platform, validated by `worklog adapter check` — while the dispatcher owns every invariant: hash, marker, scope, echo suppression, conflicts, and the capabilities gate that rejects a subtly wrong adapter at a typed boundary instead of three steps later. A shipped fake adapter, backed by a local JSON file, makes all three invariants CI-testable with no network. Full spec: `docs/plans/2026-07-18-typed-adapter-contract.md`.
+
+**This supersedes §9.2's "the skill performs these steps" wording:** the skill now runs `worklog adapter check`, then `worklog sync`, and reads the drift report. Skills orchestrate; the dispatcher enforces.
 
 ---
 
@@ -920,5 +930,6 @@ Concurrent edits from two branches, zero conflicts, nothing lost — and the one
 8. ~~Pull + echo suppression + conflicts.~~ **Done** — `worklog ingest` (deterministic `ev`, §10.2), `worklog conflict`, `worklog resolve <item> --field F --take local|remote` (§10.6).
 9. ~~Wiki adapter + publish.~~ **Done for github-wiki** — `wiki-publish` skill + `worklog wiki-add` + the `published.json` ledger; other wiki systems are config away, not code away.
 10. `status-report` — `daily` and `weekly` first; `timecard` only once open question 4 is settled. `plan-next`.
+11. Typed adapter contract (§9.5) — dispatcher + fake adapter + generated adapters. **In progress on this branch** (`feature/typed-adapter-contract`).
 
 Steps 1–4 are a genuinely useful tool with no edge integration at all. If the project stalls there, it still paid for itself. **Do not build sync before you've lived with the log.**

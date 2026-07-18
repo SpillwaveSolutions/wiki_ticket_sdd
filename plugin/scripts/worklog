@@ -5,8 +5,9 @@ worklog -- CLI entry point. WORKLOG-SPEC section 12.
 Implemented: add, update, close, link, show, list, fold, plan-capture,
              roadmap-render, roadmap-snapshot, wiki-add, compact,
              status (daily|weekly|timecard),
-             ingest, conflict, resolve (pull side, sections 10.2 and 10.6).
-Stubbed:     sync.
+             ingest, conflict, resolve (pull side, sections 10.2 and 10.6),
+             sync (dispatcher: bin/sync_dispatch.py), adapter init|check.
+No stubs remain.
 
 Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
 """
@@ -19,7 +20,7 @@ from fold import (fold, FoldResult, read_lines, dedupe_and_sort,
 LOG = ".work/todo.jsonl"
 PATHS = (".work/todo.jsonl", ".work/done.jsonl")
 MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
-VERSION = "0.5.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+VERSION = "0.6.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
 def append(event):
@@ -503,10 +504,124 @@ def cmd_status(a):
     print(path)
 
 
-def stub(name):
-    def f(a):
-        sys.exit(f"worklog: `{name}` not implemented yet (see WORKLOG-SPEC section 18)")
-    return f
+def cmd_sync(a):
+    """The dispatcher owns every sync invariant; this just runs it in-process."""
+    import sync_dispatch
+    argv = []
+    if a.dry_run:
+        argv.append("--dry-run")
+    if a.keys:
+        argv += ["--keys", a.keys]
+    if a.push_only:
+        argv.append("--push-only")
+    if a.pull_only:
+        argv.append("--pull-only")
+    argv += ["--retry-base-delay", str(a.retry_base_delay)]
+    sys.exit(sync_dispatch.main(argv))
+
+
+def _config_system():
+    """ticketing.system from .work/config.yml; None if absent or 'none'."""
+    try:
+        with open(".work/config.yml", encoding="utf-8") as fh:
+            lines = fh.read().splitlines()
+    except OSError:
+        return None
+    in_block = False
+    for line in lines:
+        if line.startswith("ticketing:"):
+            in_block = True
+            continue
+        if in_block:
+            if line and not line[0].isspace():
+                break
+            s = line.strip()
+            if s.startswith("system:"):
+                v = s.split(":", 1)[1].split("#", 1)[0].strip().strip("\"'")
+                return v if v and v != "none" else None
+    return None
+
+
+def _fake_round_trip(sync_dispatch, path, caps):
+    """Push/pull round-trip against the FAKE's semantics, in a throwaway
+    state file. Only ever run when the target IS the fake."""
+    import subprocess, tempfile
+    with tempfile.TemporaryDirectory(prefix="adapter-check-") as td:
+        env = dict(os.environ, WORKLOG_FAKE_STATE=os.path.join(td, "state.json"))
+        iid = ulid.new()
+        payload = json.dumps({
+            "op": "create", "key": None,
+            "marker": caps["marker"]["template"].replace("{ulid}", iid),
+            "item": {"id": iid, "type": "task", "title": "adapter check",
+                     "status": "todo"}})
+        p = subprocess.run([path, "push"], input=payload, env=env,
+                           capture_output=True, text=True)
+        if p.returncode != 0:
+            raise sync_dispatch.ContractError(
+                "push exited %d: %s" % (p.returncode, p.stderr.strip()))
+        resp = json.loads(p.stdout)
+        for field in ("key", "url", "rev"):
+            if not resp.get(field):
+                raise sync_dispatch.ContractError(
+                    "push_response.%s: missing or empty" % field)
+        p = subprocess.run([path, "pull"], env=env,
+                           capture_output=True, text=True)
+        if p.returncode != 0:
+            raise sync_dispatch.ContractError("pull exited %d" % p.returncode)
+        lines = [json.loads(l) for l in p.stdout.splitlines() if l.strip()]
+        if not any(l.get("id") == iid for l in lines):
+            raise sync_dispatch.ContractError(
+                "pull_line.id: pushed marker did not round-trip")
+
+
+ADAPTER_INIT_GUIDANCE = """\
+worklog adapter init: adapters are adapted from the worked example, never
+written from a blank file.
+  1. Read adapters/README.md (authoring rules and the verb table).
+  2. Adapt adapters/github/adapter to your tracker's CLI — this is the
+     model's job: ask it to generate an adapter for ticketing.system,
+     starting from the github example.
+  3. Validate it: bin/worklog adapter check adapters/<system>/adapter
+Nothing activates until `adapter check` is green."""
+
+
+def cmd_adapter(a):
+    import sync_dispatch
+    if a.action == "init":
+        print(ADAPTER_INIT_GUIDANCE)
+        return
+    # check
+    path = a.path or os.environ.get("WORKLOG_TICKET_ADAPTER")
+    if not path:
+        system = _config_system() or "fake"
+        path = os.path.join("adapters", system, "adapter")
+        if not os.path.exists(path):
+            path = os.path.join("adapters", "fake", "adapter")
+    if not os.path.exists(path):
+        sys.exit(f"worklog: adapter not found: {path}")
+    path = os.path.abspath(path)
+    d = sync_dispatch.Dispatcher(path, retry_base_delay=0, dry_run=True)
+    try:
+        caps = d.capabilities()
+        if os.path.basename(os.path.dirname(path)) == "fake":
+            _fake_round_trip(sync_dispatch, path, caps)
+        else:
+            print("live verbs not exercised (--dry-run shape check only)")
+    except sync_dispatch.ContractError as e:
+        sys.exit(f"worklog: adapter contract violation: {e}")
+    state = {}
+    try:
+        with open(".work/sync-state.json", encoding="utf-8") as fh:
+            state = json.load(fh)
+    except (FileNotFoundError, json.JSONDecodeError):
+        pass
+    state["adapter_path"] = path
+    os.makedirs(".work", exist_ok=True)
+    with open(".work/sync-state.json", "w", encoding="utf-8") as fh:
+        json.dump(state, fh, indent=2, sort_keys=True)
+        fh.write("\n")
+    print(f"adapter ok: {caps['system']} ({path})")
+    print(f"export WORKLOG_TICKET_ADAPTER={path}")
 
 
 p = argparse.ArgumentParser(prog="worklog")
@@ -594,7 +709,18 @@ st.add_argument("--write", action="store_true")
 st.add_argument("--dry-run", dest="dry_run", action="store_true")
 st.add_argument("--force", action="store_true")
 
-sub.add_parser("sync").set_defaults(fn=stub("sync"))
+sy = sub.add_parser("sync"); sy.set_defaults(fn=cmd_sync)
+sy.add_argument("--dry-run", dest="dry_run", action="store_true")
+sy.add_argument("--keys")
+syg = sy.add_mutually_exclusive_group()
+syg.add_argument("--push-only", dest="push_only", action="store_true")
+syg.add_argument("--pull-only", dest="pull_only", action="store_true")
+sy.add_argument("--retry-base-delay", dest="retry_base_delay", type=float,
+                default=0.5, metavar="SECONDS")
+
+ap_ = sub.add_parser("adapter"); ap_.set_defaults(fn=cmd_adapter)
+ap_.add_argument("action", choices=["init", "check"])
+ap_.add_argument("path", nargs="?")
 
 if __name__ == "__main__":
     args = p.parse_args()

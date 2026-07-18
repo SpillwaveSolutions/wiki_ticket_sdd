@@ -1,0 +1,11 @@
+# Subprocess-aware coverage: suites exercise bin/ via `python3 bin/worklog ...`
+# in sandbox copies. COVERAGE_PROCESS_START + a site .pth start coverage in
+# every subprocess; [paths] maps sandbox copies back onto bin/ at combine time.
+[run]
+parallel = True
+source = bin
+
+[paths]
+bin =
+    bin
+    */bin

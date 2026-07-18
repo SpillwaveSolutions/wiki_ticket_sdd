@@ -1,0 +1,219 @@
+#!/usr/bin/env python3
+"""GitHub adapter for worklog ticket-sync.
+
+Dumb translator only (plan 2026-07-18-typed-adapter-contract §6): maps
+canonical items to `gh` calls and back. All sync invariants — hashing,
+dedupe, scope, conflicts, create-vs-update — live in the dispatcher.
+Stdout is data; everything else goes to stderr. Exit codes per §3.6.
+"""
+import json
+import os
+import re
+import subprocess
+import sys
+
+MARKER = re.compile(r"worklog:([0-9A-Z]{26})")
+
+CAPABILITIES = {
+    "system": "github",
+    "supports": ["push", "pull", "get", "close"],
+    "types": {"epic": None, "story": "Issue", "task": "Issue",
+              "subtask": "Issue", "bug": "Issue"},
+    "marker": {"style": "html_comment", "template": "<!-- worklog:{ulid} -->"},
+    "fields": {"parent": "body-line", "depends_on": "unsupported",
+               "assignee": "assignee"},
+    "max_title": 256,
+}
+
+
+def log(msg):
+    print(msg, file=sys.stderr)
+
+
+def die(code, msg):
+    log(msg)
+    sys.exit(code)
+
+
+def classify(stderr):
+    """Map gh failure text to contract exit codes (§3.6)."""
+    e = (stderr or "").lower()
+    if any(s in e for s in ("bad credentials", "gh auth login", "authentication",
+                            "unauthorized", "401")):
+        return 2
+    if any(s in e for s in ("not found", "404", "could not resolve")):
+        return 3
+    if any(s in e for s in ("rate limit", "abuse", "timed out", "timeout",
+                            "try again later")):
+        return 4
+    return 1
+
+
+def gh(args):
+    p = subprocess.run(["gh", *args], capture_output=True, text=True)
+    if p.stderr:
+        sys.stderr.write(p.stderr)
+    if p.returncode != 0:
+        sys.exit(classify(p.stderr))
+    return p.stdout
+
+
+def target_repo():
+    r = os.environ.get("WORKLOG_TICKET_PROJECT")
+    if r:
+        return r
+    return gh(["repo", "view", "--json", "nameWithOwner",
+               "-q", ".nameWithOwner"]).strip()
+
+
+def ensure_label(repo, name):
+    # ponytail: best-effort `gh label create || true`; existing label is fine
+    p = subprocess.run(["gh", "label", "create", name, "-R", repo],
+                       capture_output=True, text=True)
+    if p.returncode != 0:
+        log(f"label {name}: {p.stderr.strip()}")
+
+
+def issue_rev(repo, key):
+    out = gh(["issue", "view", str(key), "-R", repo, "--json", "updatedAt"])
+    return json.loads(out)["updatedAt"]
+
+
+def item_labels(item):
+    labels = ["worklog"]
+    if item.get("type"):
+        labels.append(f"type:{item['type']}")
+    if item.get("priority"):
+        labels.append(item["priority"])
+    return labels
+
+
+def build_body(marker, item):
+    parts = []
+    if marker:
+        parts.append(marker)
+    if item.get("body"):
+        parts.append(item["body"].rstrip())
+    if item.get("id"):
+        parts.append(f"worklog id `{item['id']}`")
+    return "\n\n".join(parts)
+
+
+def to_line(issue):
+    body = issue.get("body") or ""
+    ids = MARKER.findall(body)
+    line = {
+        "external": {"key": str(issue["number"]), "rev": issue["updatedAt"]},
+        "id": ids[0] if ids else None,
+        "title": issue.get("title"),
+    }
+    if (issue.get("state") or "").upper() == "CLOSED":
+        line["status"] = "done"
+    for lab in issue.get("labels") or []:
+        name = lab.get("name") if isinstance(lab, dict) else lab
+        if name in ("P0", "P1", "P2", "P3"):
+            line["priority"] = name
+    return line
+
+
+ISSUE_JSON = "number,title,body,labels,state,updatedAt"
+
+
+def fetch_issue(repo, key):
+    out = gh(["issue", "view", str(key), "-R", repo, "--json", ISSUE_JSON])
+    return json.loads(out)
+
+
+def cmd_capabilities():
+    print(json.dumps(CAPABILITIES))
+
+
+def cmd_push():
+    repo = target_repo()
+    req = json.load(sys.stdin)
+    op, key, marker = req.get("op"), req.get("key"), req.get("marker")
+    item = req.get("item") or {}
+    labels = item_labels(item)
+    for lab in labels:
+        ensure_label(repo, lab)
+
+    if op == "create":
+        args = ["issue", "create", "-R", repo,
+                "--title", item.get("title") or "(untitled)",
+                "--body", build_body(marker, item)]
+        for lab in labels:
+            args += ["--label", lab]
+        url = gh(args).strip().splitlines()[-1]
+        key = url.rstrip("/").rsplit("/", 1)[-1]
+    elif op == "update":
+        if key is None:
+            die(1, "push op=update with null key: dispatcher bug")
+        args = ["issue", "edit", str(key), "-R", repo]
+        if item.get("title"):
+            args += ["--title", item["title"]]
+        for lab in labels:
+            args += ["--add-label", lab]
+        gh(args)
+        url = f"https://github.com/{repo}/issues/{key}"
+    else:
+        die(1, f"unknown push op: {op!r}")
+
+    print(json.dumps({"key": str(key), "url": url,
+                      "rev": issue_rev(repo, key), "hash": None}))
+
+
+def cmd_pull(argv):
+    repo = target_repo()
+    since = keys = None
+    it = iter(argv)
+    for a in it:
+        if a == "--since":
+            since = next(it, None)
+        elif a == "--keys":
+            keys = next(it, None)
+    if keys:
+        for k in keys.split(","):
+            print(json.dumps(to_line(fetch_issue(repo, k.strip()))))
+        return
+    if not since:
+        die(1, "pull requires --since <iso> or --keys")
+    out = gh(["issue", "list", "-R", repo, "--state", "all",
+              "--json", ISSUE_JSON,
+              "-S", f"worklog: in:body updated:>{since}"])
+    for issue in json.loads(out):
+        print(json.dumps(to_line(issue)))
+
+
+def cmd_get(key):
+    print(json.dumps(to_line(fetch_issue(target_repo(), key))))
+
+
+def cmd_close(key, resolution):
+    repo = target_repo()
+    gh(["issue", "close", str(key), "-R", repo, "-c", resolution])
+    print(json.dumps({"key": str(key), "rev": issue_rev(repo, key)}))
+
+
+def main(argv):
+    system = os.environ.get("WORKLOG_TICKET_SYSTEM")
+    if system and system != "github":
+        log(f"warning: WORKLOG_TICKET_SYSTEM={system!r}, this adapter is github")
+    if not argv:
+        die(1, "usage: adapter capabilities|push|pull|get|close")
+    verb, rest = argv[0], argv[1:]
+    if verb == "capabilities":
+        cmd_capabilities()
+    elif verb == "push":
+        cmd_push()
+    elif verb == "pull":
+        cmd_pull(rest)
+    elif verb == "get" and rest:
+        cmd_get(rest[0])
+    elif verb == "close" and len(rest) >= 2:
+        cmd_close(rest[0], rest[1])
+    else:
+        die(1, f"bad invocation: {argv}")
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

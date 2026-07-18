@@ -1,0 +1,32 @@
+{
+  "description": "Adapter `capabilities` output (typed-adapter-contract spec section 3.1). Restricted to the subset {type, required, properties, enum, items, additionalProperties} so a stdlib mini-validator can enforce it.",
+  "type": "object",
+  "required": ["system", "supports", "types", "marker", "fields", "max_title"],
+  "properties": {
+    "system": {"type": "string"},
+    "supports": {
+      "type": "array",
+      "items": {"enum": ["push", "pull", "get", "close"]}
+    },
+    "types": {
+      "description": "Canonical type -> platform type name, or null if the platform has no equivalent (triggers the documented degrade path).",
+      "type": "object"
+    },
+    "marker": {
+      "type": "object",
+      "required": ["style", "template"],
+      "properties": {
+        "style": {"type": "string"},
+        "template": {
+          "type": "string",
+          "description": "MUST contain the literal substring {ulid}. The mini-validator subset cannot express substring containment; the dispatcher checks it explicitly."
+        }
+      }
+    },
+    "fields": {
+      "description": "Canonical field -> platform mapping, or the string \"unsupported\" (dispatcher reports drift, never errors).",
+      "type": "object"
+    },
+    "max_title": {"type": "integer"}
+  }
+}

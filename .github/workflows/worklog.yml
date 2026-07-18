@@ -21,3 +21,25 @@ jobs:
         run: |
           python3 tests/test_integration.py
           python3 tests/test_plugin.py
+          python3 tests/test_adapter_contract.py
+          python3 tests/test_dispatch.py
+
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Subprocess-aware: a site .pth starts coverage in every python child
+      # (the suites exercise bin/ via sandboxed `python3 bin/worklog ...`);
+      # COVERAGE_FILE keeps data files out of sandbox dirs the tests delete;
+      # .coveragerc's [paths] maps sandbox copies back onto bin/ at combine.
+      - name: install coverage + subprocess hook
+        run: |
+          pip install coverage
+          python3 -c "import coverage, os; open(os.path.join(os.path.dirname(os.path.dirname(coverage.__file__)), 'worklog_cov.pth'), 'w').write('import coverage; coverage.process_startup()\n')"
+      - name: coverage gate (>=80%, target 95%)
+        run: |
+          export COVERAGE_PROCESS_START="$PWD/.coveragerc" COVERAGE_FILE="$PWD/.coverage"
+          for t in tests/test_*.py; do python3 -m coverage run "$t"; done
+          unset COVERAGE_PROCESS_START
+          python3 -m coverage combine -q
+          python3 -m coverage report --include='*/bin/*.py' --fail-under=80 -m
