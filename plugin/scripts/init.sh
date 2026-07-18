@@ -152,6 +152,17 @@ EOF
   wrote+=("CLAUDE.md policy block")
 fi
 
+# --- AGENTS.md: symlink to CLAUDE.md so Codex/OpenCode read the same policy ---
+if [ -L AGENTS.md ]; then
+  skipped+=("AGENTS.md (existing symlink)")
+elif [ -e AGENTS.md ]; then
+  skipped+=("AGENTS.md (regular file left alone)")
+  echo "note: AGENTS.md exists; add the worklog policy manually or symlink to CLAUDE.md"
+else
+  ln -s CLAUDE.md AGENTS.md
+  wrote+=("AGENTS.md -> CLAUDE.md")
+fi
+
 # --- summary ---
 echo "worklog $PLUGIN_VERSION installed."
 if [ -n "$prev" ] && [ "$prev" != "$PLUGIN_VERSION" ]; then

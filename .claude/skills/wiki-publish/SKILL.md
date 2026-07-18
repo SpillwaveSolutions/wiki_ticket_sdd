@@ -19,13 +19,41 @@ Read the `wiki:` block in `.work/config.yml`. `system` names the wiki:
 Use whatever is available for the configured system, in order of preference:
 a CLI already installed, an MCP server, or an installed skill.
 
-- **github-wiki** — `gh`/`git`: clone `<origin>.wiki.git` into the gitignored
-  `.work/wiki-checkout/`, copy page files in, commit, push. Page namespace is
-  flat: the filename IS the page name (`User-Guide.md` → "User Guide").
-- **gitlab-wiki** — `glab` or `git` against the project's `.wiki.git`.
-- **ado-wiki** — `az devops` / `az repos` wiki commands.
-- **confluence** — an MCP server or Confluence skill if installed; otherwise
-  the REST API.
+### github-wiki
+
+`gh`/`git`: clone `<origin>.wiki.git` into the gitignored
+`.work/wiki-checkout/`, copy page files in, commit, push. Page namespace is
+flat — no directories: the filename IS the page name (`User-Guide.md` →
+"User Guide"). The wiki repo's default branch is `master`. Cross-page links
+use `[[Page-Name]]` syntax. Pull before pushing — the checkout is a cache;
+pages may have been edited in the web UI.
+
+### gitlab-wiki
+
+Also a git repo: clone `<project>.wiki.git`, then copy/commit/push exactly
+as for github-wiki. Or use REST via `glab api projects/:id/wikis`. The page
+slug is the filename (minus `.md`). Unlike GitHub, GitLab wikis support
+directories, so nested paths work.
+
+### ado-wiki
+
+Two kinds. A **project wiki** is backed by a hidden git repo — clone it via
+the wiki's git URL and push like any git-backed wiki. A **code wiki**
+publishes a folder on a branch — if the team uses one over `docs/`,
+committing docs IS publishing; still record ledger entries. For the REST
+path: `az devops wiki page create/update --wiki --path --content`. Page
+paths are hierarchical (`/Parent/Child`).
+
+### confluence
+
+Needs a space key and parent page id — read them from `wiki.options` in the
+config. Prefer an Atlassian MCP server or an installed Confluence skill;
+otherwise use REST (`/wiki/rest/api/content`), which takes storage format —
+convert the markdown, or use a converter the team already has. If no
+conversion tooling exists, say so and ask rather than publishing mangled
+markup. Page identity is the content id — store it as `page_id` in the
+ledger entry. The version number increments on every update — store it as
+`rev`.
 
 If tooling is missing, RESEARCH it (docs/web) and tell the human what to
 install — do not guess blindly. These are mainstream systems; rely on model
@@ -51,19 +79,30 @@ publishing, update the entry with the page url, the wiki revision (e.g. wiki
 commit sha), and the new hash. Commit `published.json` together with the
 docs it describes.
 
-## 4. Page naming
+## 4. Ledger fields across systems
+
+The ledger shape is fixed by spec §9.3; systems just fill it differently.
+`url` is always the page's browse URL.
+
+- **git-backed wikis** (github-wiki, gitlab-wiki, ADO project wiki) —
+  `rev` = wiki commit sha, `page_id` = filename stem (`User-Guide`).
+- **confluence** — `rev` = page version number, `page_id` = content id.
+- **ado-wiki via REST** — `rev` = the ETag/version from the response,
+  `page_id` = the page path.
+
+## 5. Page naming
 
 Derive the wiki page name from the doc title. Keep the title stable per
 logical key — renaming a page breaks inbound links.
 
-## 5. One-time init
+## 6. One-time init
 
 Surface one-time setup steps to the human; never work around them silently.
 Example: a GitHub wiki's `.wiki.git` does not exist until someone clicks
 "Create the first page" in the repo's wiki tab — if the clone/push fails
 with not-found, ask the human to do that once, then retry.
 
-## 6. Frozen rules
+## 7. Frozen rules
 
 Snapshots, plans, and status reports publish once and are never re-published.
 The live Roadmap page is the exception: re-publish it whenever its source

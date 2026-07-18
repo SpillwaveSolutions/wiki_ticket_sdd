@@ -11,6 +11,8 @@ Read section 6 before changing anything in here. In particular:
   - Order is by `ev`, never by file position and never by `ts`.
   - A corrupt line is skipped, never fatal.
   - `close` takes its status from `set`, it does not assume "done".
+  - A later write to a field clears earlier recorded conflicts on that field
+    (section 10.6); a conflict recorded after the write stays open.
 """
 
 import hashlib
@@ -141,6 +143,16 @@ def _apply_mutations(item: Dict[str, Any], ev: Dict[str, Any]) -> None:
         item[field] = current
     for field, value in (ev.get("set") or {}).items():
         item[field] = value
+    # Section 10.6: writing a field resolves any earlier recorded conflict on
+    # it. Events apply in `ev` order, so a conflict recorded AFTER this write
+    # stays open. Snapshots start from a fresh dict, which drops conflicts too.
+    if item.get("_conflicts"):
+        written = {f for k in ("set", "add", "del") for f in (ev.get(k) or {})}
+        remaining = [c for c in item["_conflicts"] if c.get("field") not in written]
+        if remaining:
+            item["_conflicts"] = remaining
+        else:
+            del item["_conflicts"]
 
 
 def fold(paths: Iterable[str] = ("todo.jsonl", "done.jsonl")) -> FoldResult:

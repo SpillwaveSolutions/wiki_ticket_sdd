@@ -4,7 +4,8 @@ worklog -- CLI entry point. WORKLOG-SPEC section 12.
 
 Implemented: add, update, close, link, show, list, fold, plan-capture,
              roadmap-render, roadmap-snapshot, wiki-add, compact,
-             status (daily|weekly|timecard).
+             status (daily|weekly|timecard),
+             ingest, conflict, resolve (pull side, sections 10.2 and 10.6).
 Stubbed:     sync.
 
 Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
@@ -18,7 +19,7 @@ from fold import (fold, FoldResult, read_lines, dedupe_and_sort,
 LOG = ".work/todo.jsonl"
 PATHS = (".work/todo.jsonl", ".work/done.jsonl")
 MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
-VERSION = "0.4.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+VERSION = "0.5.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
 def append(event):
@@ -99,6 +100,72 @@ def cmd_link(a):
         "synced_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }.items() if v is not None}}
     append(ev)
+
+
+INGEST_FIELDS = ("title", "body", "status", "priority", "assignee", "type")
+STATUSES = OPEN_STATUSES + CLOSED_STATUSES
+PRIORITIES = ("P0", "P1", "P2", "P3")
+
+
+def cmd_ingest(a):
+    """Ingest a remote change (section 10.2). `ev` is deterministic and `ts`
+    is the REMOTE clock, so two devs polling the same change append
+    byte-identical lines and the fold dedupes them to one."""
+    ev = {"ev": ulid.deterministic(a.system, a.key, a.rev, a.rev_ts_ms),
+          "ts": _rfc3339(a.rev_ts_ms), "actor": a.system, "item": a.item,
+          "op": "update",
+          "src": {"system": a.system, "key": a.key, "rev": a.rev}}
+    sets = {}
+    for pair in a.set or []:
+        field, eq, value = pair.partition("=")
+        if not eq:
+            sys.exit(f"worklog: bad --set {pair!r}; want field=value")
+        if field not in INGEST_FIELDS:
+            sys.exit(f"worklog: ingest cannot set {field!r} "
+                     f"(allowed: {', '.join(INGEST_FIELDS)})")
+        if field == "status" and value not in STATUSES:
+            sys.exit(f"worklog: bad status {value!r}")
+        if field == "priority" and value not in PRIORITIES:
+            sys.exit(f"worklog: bad priority {value!r}")
+        sets[field] = value
+    if sets:
+        ev["set"] = sets
+    if a.add_label:
+        ev["add"] = {"labels": sorted(a.add_label.split(","))}
+    if a.del_label:
+        ev["del"] = {"labels": sorted(a.del_label.split(","))}
+    if not (sets or a.add_label or a.del_label):
+        sys.exit("worklog: nothing to ingest")
+    append(ev)
+    print(ev["ev"])
+
+
+def cmd_conflict(a):
+    """Record a both-sides-changed field (section 10.6). State never changes;
+    the fold files it under _conflicts until a later write clears it."""
+    ev = base(a.item, "conflict", "sync")
+    ev["set"] = {"field": a.field, "local": a.local, "remote": a.remote,
+                 "remote_rev": a.remote_rev}
+    append(ev)
+
+
+def cmd_resolve(a):
+    """Resolve the last open conflict on a field with a normal update event.
+    The update outsorts the conflict, so the fold clears it (section 10.6)."""
+    r = fold([LOG, ".work/done.jsonl"])
+    match = [i for k, i in r.items.items() if k.startswith(a.item)]
+    if not match:
+        sys.exit(f"worklog: no item matching {a.item}")
+    item = match[0]
+    open_c = [c for c in item.get("_conflicts", []) if c.get("field") == a.field]
+    if not open_c:
+        sys.exit(f"worklog: no open conflict on {a.field} for {a.item}")
+    old = item.get(a.field)
+    new = old if a.take == "local" else open_c[-1].get("remote")
+    ev = base(item["id"], "update", a.actor)
+    ev["set"] = {a.field: new}
+    append(ev)
+    print(f"{a.field}: {old} -> {new} (took {a.take})")
 
 
 PUBLISHED = ".work/published.json"
@@ -474,6 +541,28 @@ lk.add_argument("item")
 lk.add_argument("--system", required=True)
 lk.add_argument("--key", required=True)
 lk.add_argument("--url"); lk.add_argument("--rev"); lk.add_argument("--hash")
+
+ig = sub.add_parser("ingest"); ig.set_defaults(fn=cmd_ingest)
+ig.add_argument("item")
+ig.add_argument("--system", required=True)
+ig.add_argument("--key", required=True)
+ig.add_argument("--rev", required=True)
+ig.add_argument("--rev-ts-ms", dest="rev_ts_ms", type=int, required=True)
+ig.add_argument("--set", action="append", metavar="FIELD=VALUE")
+ig.add_argument("--add-label", dest="add_label")
+ig.add_argument("--del-label", dest="del_label")
+
+cf = sub.add_parser("conflict"); cf.set_defaults(fn=cmd_conflict)
+cf.add_argument("item")
+cf.add_argument("--field", required=True)
+cf.add_argument("--local", required=True)
+cf.add_argument("--remote", required=True)
+cf.add_argument("--remote-rev", dest="remote_rev", required=True)
+
+rv = sub.add_parser("resolve"); rv.set_defaults(fn=cmd_resolve)
+rv.add_argument("item")
+rv.add_argument("--field", required=True)
+rv.add_argument("--take", required=True, choices=["local", "remote"])
 
 wa = sub.add_parser("wiki-add"); wa.set_defaults(fn=cmd_wiki_add)
 wa.add_argument("file")

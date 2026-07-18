@@ -50,6 +50,12 @@ PY
   fi
 fi
 
+# AGENTS.md: remove only the symlink init created; a real file is not ours.
+if [ -L AGENTS.md ] && [ "$(readlink AGENTS.md)" = "CLAUDE.md" ]; then
+  rm AGENTS.md
+  removed+=("AGENTS.md (symlink to CLAUDE.md)")
+fi
+
 # CLAUDE.md: strip the marker block; delete the file if effectively empty after.
 if [ -f CLAUDE.md ] && grep -qF '<!-- worklog:policy:start -->' CLAUDE.md; then
   python3 - CLAUDE.md <<'PY'

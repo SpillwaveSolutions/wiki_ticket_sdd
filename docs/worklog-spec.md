@@ -1,7 +1,9 @@
 # Worklog: Visible-WIP Work Tracking Spec
 
-**Version:** 1.4
-**Status:** Implemented through §18 step 7; wiki publish (step 9) done for github-wiki; steps 8 and 10 outstanding (this repo)
+**Version:** 1.5
+**Status:** Implemented through §18 step 8; wiki publish (step 9) done for github-wiki; step 10 outstanding (this repo)
+
+**Changes since 1.4:** remaining adapter references purged (§4.2 config examples, §5.3, §13.3, §15) — the 1.4 §9 rewrite left strays behind. §10 now documents the shipped pull CLI: ingest via `worklog ingest` (deterministic `ev` per §10.2), conflicts via `worklog conflict`, resolution via `worklog resolve <item> --field F --take local|remote`. §18 step 8 done.
 
 **Changes since 1.3:** §9 rewritten from an executable adapter contract to skill-based edges — per-system integration is model work using the team's existing CLIs/MCPs (`gh`, `glab`, `az`, `jira`, or an MCP server); no adapter binaries ship. §12's skills table updated to the shipped set (plan-capture, work-track, plan-next, wiki-publish, ticket-sync, plus the UserPromptSubmit/Stop/SessionStart hooks added in 0.2.0). §18 progress updated: step 6 superseded by skills, steps 7 and 9 (github-wiki) done.
 
@@ -22,7 +24,7 @@ Three properties drive every decision:
 
 1. **Visible WIP.** Everything in flight is in the repo, in the ticketing system, and on the wiki. No hidden work.
 2. **Plans produce tickets.** Planning that doesn't emit tracked items is planning that evaporates.
-3. **Generic core, pluggable edges.** The core never knows the word "Jira." Ticketing and wiki specifics live in separate, swappable adapter skills.
+3. **Generic core, pluggable edges.** The core never knows the word "Jira." Ticketing and wiki specifics live in separate, swappable edge skills (§9).
 
 ---
 
@@ -137,16 +139,16 @@ project:
 
 ticketing:
   system: jira                 # jira | ado | github | none
-  adapter: ticket-jira         # skill/binary name; resolved via $PATH or .claude/skills
+  # sync is skill-based (ticket-sync); no adapter binary
   project: PROJ
-  # everything below here is adapter-specific and passed through untouched
+  # everything below here is system-specific; the skill reads it, the core does not
   options:
     site: acme.atlassian.net
     epic_link_field: customfield_10014
 
 wiki:
   system: confluence           # confluence | github-wiki | ado-wiki | none
-  adapter: wiki-confluence
+  # publishing is skill-based (wiki-publish); no adapter binary
   root_url: https://acme.atlassian.net/wiki/spaces/ENG
   options:
     space: ENG
@@ -173,7 +175,7 @@ sync:
 
 **Not configurable, deliberately:** the body-size cap (§8.3) is derived from `PIPE_BUF`, not chosen. It lives in the code as a constant with a comment. Exposing it as `max_body_kb` invites someone setting it to 64 and silently losing atomic appends — a knob whose only valid value is the default is a trap, not a feature.
 
-**Resolution rule:** the core reads `ticketing.adapter`, resolves that name to an executable, and shells out. It never branches on `ticketing.system` beyond `none`. If the adapter is missing, the core degrades to local-only and emits a warning — it does not fail.
+**Resolution rule:** there is no executable to resolve. The skills read `ticketing.system` and `wiki.system`; the core never branches on either beyond checking for `none` (§9.1). If the tooling a skill needs is missing, everything degrades to local-only with a warning — it never fails a command.
 
 ---
 
@@ -211,7 +213,7 @@ Each line of `todo.jsonl` is one immutable event. State is a **fold** over event
 | `update` | Field changes. |
 | `close` | Sets `status` to `done` or `cancelled`; requires `set.status` and optional `set.resolution`. |
 | `reopen` | Moves a closed item back. The compactor pulls it from `done.jsonl` on next run. |
-| `link` | Records external identity: `set.external`. Emitted after a successful adapter push. |
+| `link` | Records external identity: `set.external`. Appended by `worklog link` after a successful push (§9.2). |
 | `conflict` | Records an unresolved both-sides-changed field. Never changes state; surfaced in reports. |
 | `snapshot` | Compactor output only. Full item state; supersedes all events with `ev` ≤ watermark. |
 | `compact` | Compactor watermark marker. `{"op":"compact","through":"<ulid>"}` |
@@ -377,9 +379,9 @@ What survives from 1.2 is the shape of the boundary, not the mechanism:
 
 `.work/config.yml`'s `ticketing.system` and `wiki.system` name the edge (`github`, `jira`, `github-wiki`, `confluence`, …). The skills read those names; `bin/worklog` never branches on them beyond checking for `none` (invariant §15.6). Swapping trackers is a config edit, not a code change.
 
-### 9.2 The `ticket-sync` skill (push-only)
+### 9.2 The `ticket-sync` skill — push side
 
-Local items become tickets; nothing is pulled back (pull is §18 step 8, still open).
+Local items become tickets. The pull side ships too (§18 step 8): remote changes are ingested per §10 via `worklog ingest`.
 
 - **Scope** — every open item (`todo` / `in_progress` / `blocked`), **plus** any closed item still carrying dirty external identity — canonical hash ≠ `last_pushed_hash` — which stays in scope exactly until its closure is pushed. Once hashes match, the item is inert and never rescanned (§10.5).
 - **Skip unchanged** — §10.3's canonical hash, compared against `items.<ulid>.last_pushed_hash` in the gitignored, per-clone `.work/sync-state.json`. Equal → skip.
@@ -417,6 +419,8 @@ ev = ULID(time = remote.rev_timestamp, entropy = sha256(system | key | remote.re
 ```
 
 Two devs polling Jira independently produce the **identical line**. Union merge takes both, the fold dedupes by `ev`, one survives. Ingest is therefore idempotent across clones — which means there's no need for a single blessed syncer, and any dev running `sync` is safe.
+
+This is what ships as `worklog ingest`: it computes the deterministic `ev` above and appends the ingested event — the `ev` is derived, never random.
 
 **`ts` on an ingested event is `remote.rev`, not `now()`.** Otherwise two devs polling the same change produce lines that share an `ev` but differ in `ts` — dedupe still works, but §5.2's claim that duplicates are "identical by construction" becomes false, and a byte-comparison in a test or a CI check would flag a phantom difference. Ingested events carry the remote's clock, not the poller's.
 
@@ -499,7 +503,7 @@ One push-side exception (`external.dirty`): a **closed** item whose external ide
 
 A conflict is: the same field changed on both sides since `last_pushed_hash`, to different values.
 
-Under `conflict_policy: report` (the default):
+Under `conflict_policy: report` (the default), `worklog conflict` appends:
 
 ```json
 {"ev":"01J8X9...","ts":"...","actor":"sync","item":"01J8X0M2QQ","op":"conflict",
@@ -511,7 +515,9 @@ State does not change. The conflict appears in:
 - the next generated status report, under **Needs attention**
 - `worklog show <item>`
 
-**Best-effort with visible drift beats eventual consistency with silent loss.** Resolve with `worklog resolve <item> --field priority --take local|remote`, which appends a normal `update` event and clears the conflict.
+**Best-effort with visible drift beats eventual consistency with silent loss.** Resolve with `worklog resolve <item> --field F --take local|remote`, which appends a normal `update` event and clears the conflict.
+
+Fold rule: a conflict clears whenever a later event writes the conflicted field — `resolve` is just the explicit way to produce that write; a fresh `update` or a subsequent ingest of that field clears it the same way.
 
 `local-wins` / `remote-wins` policies skip the conflict event and just apply. Available, not recommended.
 
@@ -570,7 +576,7 @@ The shipped set:
 | `plan-capture` | Plan mode exits; user says "capture this plan" | Writes `docs/plans/<date>-<slug>.md`, parses the `## Tasks` checkboxes → items with `plan` set, appends `create` events, regenerates the roadmap. |
 | `work-track` | Any request that produces work; "mark that in progress"; mid-flight discovery | add / update / close via `bin/worklog`. Discoveries get `--unplanned --discovered-during <id>`. (Replaces 1.3's `work-add` / `work-update` / `work-close` trio — one skill, three subcommands.) |
 | `plan-next` | "what should we do next?" | Folds log. Filters open, unblocked (`depends_on` all closed), sorts by priority then epic order. Presents top N with rationale. **Read-only.** |
-| `ticket-sync` | "sync tickets"; a plan closes out | Push-only sync per §9.2 — model work over the tracker's CLI/MCP. |
+| `ticket-sync` | "sync tickets"; a plan closes out | Push per §9.2 and pull per §10 — model work over the tracker's CLI/MCP; ingests via `worklog ingest`/`worklog conflict`. |
 | `wiki-publish` | "publish to the wiki"; after a roadmap snapshot | Publish per §9.3 — ledger-driven, frozen rules enforced. |
 
 Still specified, not yet shipped: `status-report` (§13.3) and `worklog-compact` (§7, CI only). `roadmap-render` shipped as a `worklog` subcommand rather than a skill — the callers above invoke it directly.
@@ -667,7 +673,7 @@ Front matter fields: `date`, `slug`, `items[]`, `epic`, `wiki`, optional `supers
 
 ### 13.3 Status reports
 
-`docs/status/<YYYY-MM-DD>-<kind>.md`. Generated on demand, committed, and published to the wiki — same adapter, same `published.json`, key `status/<date>-<kind>`.
+`docs/status/<YYYY-MM-DD>-<kind>.md`. Generated on demand, committed, and published to the wiki — same `wiki-publish` skill, same `published.json`, key `status/<date>-<kind>`.
 
 ```
 worklog status --kind daily                    # default window: since last daily
@@ -744,7 +750,7 @@ This is also *why* status reports can't be CI-hash-checked: step 2 isn't reprodu
 - **In flight** — `in_progress`, with age (age is the useful column; a 9-day-old "in progress" is the whole story)
 - **Blocked** — plus what blocks them
 - **Unplanned work** — items with `unplanned: true`, and what they interrupted
-- **Needs attention** — open conflicts (§10.6), deferred syncs, adapter failures
+- **Needs attention** — open conflicts (§10.6), deferred syncs, failed pushes or publishes
 
 **The unplanned section is the point.** "38% of last week's closed items were unplanned, mostly interrupting PROJ-412" is the most useful number a team can have and almost nobody tracks it. It falls out of this schema for free — which is why `discovered_during` is required, not optional. `timecard` gets it as prose, not a percentage.
 
@@ -772,12 +778,12 @@ Violating any of these is a bug, not a tradeoff:
 2. Nothing but the compactor rewrites a `.jsonl` file.
 3. The compactor runs on main, in CI, in a commit of its own, and verifies `fold(new) == fold(old)`.
 4. Nothing but `worklog` writes `.jsonl` — no editors, no `echo >>`.
-5. Adapter `push` is idempotent, keyed by item ULID.
+5. Ticket push is idempotent, keyed by item ULID (the marker rule, §9.2).
 6. The core never branches on `ticketing.system` beyond checking for `none`.
 7. `docs/roadmap.md` is never hand-edited.
 8. A plan in `docs/plans/` is never edited or regenerated. Designs change by superseding.
 9. A published status report is never regenerated. Corrections go in the next one.
-10. A missing adapter degrades to local-only; it never fails a command.
+10. Missing edge tooling degrades to local-only; it never fails a command.
 11. Sync never silently discards a local change.
 
 ---
@@ -904,15 +910,15 @@ Concurrent edits from two branches, zero conflicts, nothing lost — and the one
 
 ## 18. Implementation order
 
-1. ~~Schema + `fold` + `worklog add/update/close/show/list`.~~ **Done** — see Appendix A/B. No sync, no adapters, useful on day one.
+1. ~~Schema + `fold` + `worklog add/update/close/show/list`.~~ **Done** — see Appendix A/B. No sync, no edge integration, useful on day one.
 2. ~~`.gitattributes`, newline invariant, pre-commit hook.~~ **Done.** CI schema check still outstanding (the hook is local-only; CI must re-run it).
 3. `roadmap-render` + the CI freshness check.
 4. `plan-capture` + the `ExitPlanMode` hook.
 5. Compaction + its CI job.
 6. ~~Adapter contract + one adapter.~~ **Superseded by skills (§9, 1.4)** — no adapter binaries ship; the `ticket-sync` and `wiki-publish` skills replaced this step.
 7. ~~Push-only sync. Ship it. Live with it for two weeks.~~ **Done** — `ticket-sync` skill + `worklog link`, dogfooded against GitHub Issues.
-8. Pull + echo suppression + conflicts.
+8. ~~Pull + echo suppression + conflicts.~~ **Done** — `worklog ingest` (deterministic `ev`, §10.2), `worklog conflict`, `worklog resolve <item> --field F --take local|remote` (§10.6).
 9. ~~Wiki adapter + publish.~~ **Done for github-wiki** — `wiki-publish` skill + `worklog wiki-add` + the `published.json` ledger; other wiki systems are config away, not code away.
 10. `status-report` — `daily` and `weekly` first; `timecard` only once open question 4 is settled. `plan-next`.
 
-Steps 1–4 are a genuinely useful tool with no adapters at all. If the project stalls there, it still paid for itself. **Do not build sync before you've lived with the log.**
+Steps 1–4 are a genuinely useful tool with no edge integration at all. If the project stalls there, it still paid for itself. **Do not build sync before you've lived with the log.**
