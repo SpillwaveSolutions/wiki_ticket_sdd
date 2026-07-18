@@ -33,6 +33,9 @@ something else) MUST be recorded BEFORE doing the work:
         [--priority P0-P3] [--add-label a] [--del-label b]
     bin/worklog close <ulid> --status done|cancelled [--resolution "..."]
 
+After closing items, run the ticket-sync skill so linked tickets close
+remotely too.
+
 ## Inspect
 
     bin/worklog list          # open items

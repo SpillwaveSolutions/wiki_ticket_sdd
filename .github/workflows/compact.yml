@@ -1,0 +1,31 @@
+name: worklog-compact
+# WORKLOG-SPEC section 7: compaction runs in CI, on main, in its own commit.
+
+on:
+  schedule:
+    - cron: '17 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  compact:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: compact
+        run: python3 bin/compact.py
+
+      - name: commit and push
+        run: |
+          if [ -n "$(git status --porcelain .work)" ]; then
+            wm=$(python3 -c "import json; print([e.get('through') for e in map(json.loads, open('.work/todo.jsonl')) if e.get('op') == 'compact'][-1])")
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add .work/todo.jsonl .work/done.jsonl
+            git commit -m "chore(worklog): compact through $wm"
+            git push
+          fi
