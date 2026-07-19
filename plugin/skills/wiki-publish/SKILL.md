@@ -111,7 +111,9 @@ with not-found, ask the human to do that once, then retry.
 
 ## 7. Frozen rules
 
-Snapshots, plans, and status reports publish once and are never re-published.
-The live Roadmap page and ADRs are the exceptions: re-publish whenever the
-source hash changes — for an ADR, a status flip (proposed→accepted,
-accepted→superseded) is exactly the change that must reach the wiki.
+Snapshots, plans, status reports, and dated design docs/code walkthroughs
+publish once and are never re-published. The live Roadmap page, ADRs, and
+`current_design_doc` / `current_code_walkthrough` are the exceptions:
+re-publish whenever the source hash changes — for an ADR, a status flip
+(proposed→accepted, accepted→superseded) is exactly the change that must
+reach the wiki.

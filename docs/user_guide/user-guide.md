@@ -269,6 +269,19 @@ stays as the record of why. ADRs are in the wiki-publish default set as
 `ADR-NNNN-slug` pages, republished on change so a status flip reaches the
 wiki.
 
+## Design docs and code walkthroughs
+
+Releases generate four artifacts under `docs/designs/`: a frozen dated pair —
+`<date>_<name>_design_doc.md` plus `<date>_<name>_code_walkthrough.md`, front
+matter tying them to the release's git tag and roadmap snapshot, published
+once and never regenerated (same rule as roadmap snapshots) — and a live pair,
+`current_design_doc.md` plus `current_code_walkthrough.md`, rewritten in place
+at every release; besides `docs/roadmap.md` they are the only docs that are.
+The design-docs skill generates them from the actual code; at tag time the
+release skill spawns background agents to regenerate them and refresh the user
+guide and README. The `release.sync_docs` list in `.work/config.yml` is the
+opt-in/out: what's listed gets synced at release, what isn't doesn't.
+
 ## System-agnostic edges: your tracker, your wiki
 
 `.work/config.yml` names your team's systems:

@@ -41,14 +41,35 @@ release tags the commit that carries the dated changelog.
   GitLab — `glab release create`; other systems — their CLI or MCP, or
   tag-only when the platform has no release object. Research, don't guess.
 
-## 5. Publish and sync
+## 5. Doc sync — background agents
+
+The moment the tag exists, spawn background subagents — the release NEVER
+waits on prose. Read `release.sync_docs` in `.work/config.yml`; each listed
+target gets regenerated and republished. Doc commits land on the default
+branch AFTER the tag: docs describe the release, the tag does not wait for
+them.
+
+- **Agent A — design-docs skill, release mode**: regenerates
+  `docs/designs/current_design_doc.md` + `current_code_walkthrough.md`
+  against the tagged commit, freezes the dated pair
+  (`<DATE>_<vX.Y.Z-release>_*.md`), publishes all four via wiki-publish.
+- **Agent B — user-docs refresh**: diffs `vPREV..vX.Y.Z`, updates
+  `docs/user_guide/*.md` and `README.md` wherever that diff made them stale
+  (only targets named in `release.sync_docs`), then republishes changed wiki
+  pages through the ledger.
+
+Agents report when done; their commits reference the release work item.
+Removing an entry from `release.sync_docs` opts that doc out — the list is
+the contract, not this prose.
+
+## 6. Publish and sync
 
 - wiki-publish: the updated Roadmap and the release snapshot page; link the
   snapshot from Home.
 - ticket-sync: close the release work item(s); anything shipped-and-closed
   reconciles with the tracker.
 
-## 6. After
+## 7. After
 
 The next feature wave opens a new `## X.Y.Z — unreleased` section and bumps
 the version lockstep in the same commit that adds the first feature.

@@ -32,6 +32,12 @@
     "source_hash": "f54a3ef2454b",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Home"
   },
+  "plan/design-docs-release-sync": {
+    "rev": "34881bc61e47b2e7788251bb6b1ac8bb739f3bda",
+    "source": "docs/plans/2026-07-19-design-docs-release-sync.md",
+    "source_hash": "c0756a150c1a",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-design-docs-release-sync"
+  },
   "plan/grok-compat-and-mermaid-viz": {
     "rev": "d08da9fbe9c0e14552c5d53dec0d78b8b13415c6",
     "source": "docs/plans/2026-07-19-grok-compat-and-mermaid-viz.md",

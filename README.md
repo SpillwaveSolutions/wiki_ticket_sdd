@@ -28,6 +28,9 @@ of stuff last week and nobody knows what."
   silent guess.
 - **Generated roadmap and status reports.** `docs/roadmap.md` is rendered
   from the log — no hand-editing, no drift.
+- **Design docs and code walkthroughs, generated from the actual code** at
+  every release: frozen per-release copies plus always-current versions in
+  `docs/designs/`, published to the wiki.
 - **Syncs to the team's OWN systems** — wiki *and* tickets. Your work log
   publishes to whatever your team already uses.
 
