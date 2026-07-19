@@ -78,7 +78,10 @@ Policy that holds because tooling holds it, not because people remember:
 
 - **PRs merge only when every gate is green.** The merge-green skill (or
   `/worklog:merge`) polls checks every 5 minutes via `merge-when-green.sh`;
-  never `--admin`, never bypass.
+  never `--admin`, never bypass. Auto-merge on green is on by default;
+  teams that want a human on the trigger set
+  `features.auto_merge_on_green: false` in `.work/config.yml` (advisory
+  mode: report green, human merges).
 - **Coverage floor.** CI enforces >=80% line coverage on `bin/*.py`; the
   target is 95%.
 - **Frozen artifacts.** Plans, roadmap snapshots, and published status

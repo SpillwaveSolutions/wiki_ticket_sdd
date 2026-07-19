@@ -199,6 +199,19 @@ class TestPromote(Sandbox):
         self.assertIn("suggestions.jsonl not found", p.stdout + p.stderr)
 
 
+class TestEmptyItemId(Sandbox):
+    def test_update_empty_item_rejected_and_log_untouched(self):
+        self.wl("add", "Real thing")
+        log = os.path.join(self.dir, ".work", "todo.jsonl")
+        with open(log, encoding="utf-8") as fh:
+            before = len(fh.readlines())
+        p = self.run_wl("update", "", "--status", "in_progress")
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn("empty item id", p.stdout + p.stderr)
+        with open(log, encoding="utf-8") as fh:
+            self.assertEqual(len(fh.readlines()), before)
+
+
 class TestCanonicalHash(unittest.TestCase):
     def test_hash_includes_kind(self):
         a = {"title": "x", "level": "task", "kind": "feature", "status": "todo"}

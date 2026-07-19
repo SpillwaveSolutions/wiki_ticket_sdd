@@ -34,6 +34,9 @@ sync:
   conflict_policy: report      # report | local-wins | remote-wins
   push_on_capture: true
 
+features:
+  auto_merge_on_green: true   # false = advisory: poll, report green, human merges
+
 classifier:
   enabled: false             # OFF by default. Inline CLAUDE.md path handles the common case.
   min_confidence: 0.7        # below this, propose kind:triage + open question, never a confident kind

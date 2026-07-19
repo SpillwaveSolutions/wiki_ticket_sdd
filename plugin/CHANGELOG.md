@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.0 — unreleased
+
+- features.auto_merge_on_green flag (default ON): advisory mode polls, reports
+  green, and leaves the merge to a human; --auto/--advisory and
+  WORKLOG_AUTO_MERGE override per run; doctor reports it.
+- CLI rejects empty item ids (update/close/link/ingest/conflict/resolve/show).
+
 ## 0.8.0 — 2026-07-19
 
 - Architecture Decision Records: schema-validated docs/adr/ (worklog adr

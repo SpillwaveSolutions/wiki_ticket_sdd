@@ -30,6 +30,11 @@ else
   bad "version skew: repo has $installed, plugin is $PLUGIN_VERSION — run /worklog:init to upgrade"
 fi
 
+# features (read-only report; same naive scan as merge-when-green.sh)
+am=$(awk '/^features:/{f=1;next} f&&/^[^[:space:]]/{exit} f&&/auto_merge_on_green:/{print $2; exit}' \
+     .work/config.yml 2>/dev/null || true)
+echo "features.auto_merge_on_green: ${am:-true}"
+
 # files: present + executable; bin files byte-identical to canonical copies
 for f in worklog fold.py ulid.py render_roadmap.py plan_capture.py; do
   if [ ! -f "bin/$f" ]; then

@@ -336,6 +336,10 @@ with `--no-verify` only defers the failure.
 
 ## Invariants worth knowing
 
+- **Merging is gated by `merge-when-green.sh`**, and auto-merge on green is
+  on by default; teams that want a human on the trigger set
+  `features.auto_merge_on_green: false` in `.work/config.yml` (advisory
+  mode: the script reports green, a human merges).
 - **Never hand-edit `.work/*.jsonl`** — no editors, no `echo >>`. The CLI's
   `append()` is the only writer; it does a single atomic newline-terminated
   write and self-heals a missing trailing newline left by a hand edit.
