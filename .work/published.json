@@ -130,6 +130,12 @@
     "title": "Status-2026-07-18-weekly",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-18-weekly"
   },
+  "status/2026-07-19-daily": {
+    "rev": "10c60b5",
+    "source": "docs/status/2026-07-19-daily.md",
+    "source_hash": "9ee42dc99960",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-19-daily"
+  },
   "user-guide": {
     "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
     "source": "docs/user_guide/user-guide.md",
