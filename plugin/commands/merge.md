@@ -21,6 +21,16 @@ the house rule.
 4. On failure or timeout: report the failing checks; fixing them is the path
    to merging — never `--admin`, never bypass.
 
+## Auto-merge flag
+
+`features.auto_merge_on_green` in `.work/config.yml` (default **true**)
+decides what happens when gates go green: true merges; false is advisory
+mode — the script reports green, does NOT merge, and waits for a human to
+run `gh pr merge <pr> --merge`. Overrides, strongest first: `--auto` /
+`--advisory` as first argument to the script (one run only), then
+`WORKLOG_AUTO_MERGE=1|0` in the environment, then the config value.
+Red/pending/timeout behavior is identical in both modes.
+
 Non-GitHub platforms: same rule, their CLI (`glab mr merge --when-pipeline-succeeds`,
 `az repos pr update --auto-complete`) — prefer the platform's native
 merge-when-green if it has one.

@@ -105,7 +105,14 @@ def cmd_add(a):
     print(item)
 
 
+def _require_item(item):
+    """Reject empty/whitespace item ids before any log write (worklog 01KXXMCG41)."""
+    if not item or not item.strip():
+        sys.exit("worklog: empty item id")
+
+
 def cmd_update(a):
+    _require_item(a.item)
     if a.kind is not None or a.milestone is not None:
         # §2 rules hold on update too, against the item's current level.
         cur = fold([LOG, ".work/done.jsonl"]).items.get(a.item, {})
@@ -125,6 +132,7 @@ def cmd_update(a):
 
 
 def cmd_close(a):
+    _require_item(a.item)
     ev = base(a.item, "close", a.actor)
     ev["set"] = {"status": a.status}
     if a.resolution:
@@ -133,6 +141,7 @@ def cmd_close(a):
 
 
 def cmd_link(a):
+    _require_item(a.item)
     ev = base(a.item, "link", a.actor)
     ev["set"] = {"external": {k: v for k, v in {
         "system": a.system, "key": a.key, "url": a.url, "rev": a.rev,
@@ -152,6 +161,7 @@ def cmd_ingest(a):
     """Ingest a remote change (section 10.2). `ev` is deterministic and `ts`
     is the REMOTE clock, so two devs polling the same change append
     byte-identical lines and the fold dedupes them to one."""
+    _require_item(a.item)
     ev = {"ev": ulid.deterministic(a.system, a.key, a.rev, a.rev_ts_ms),
           "ts": _rfc3339(a.rev_ts_ms), "actor": a.system, "item": a.item,
           "op": "update",
@@ -188,6 +198,7 @@ def cmd_ingest(a):
 def cmd_conflict(a):
     """Record a both-sides-changed field (section 10.6). State never changes;
     the fold files it under _conflicts until a later write clears it."""
+    _require_item(a.item)
     ev = base(a.item, "conflict", "sync")
     ev["set"] = {"field": a.field, "local": a.local, "remote": a.remote,
                  "remote_rev": a.remote_rev}
@@ -197,6 +208,7 @@ def cmd_conflict(a):
 def cmd_resolve(a):
     """Resolve the last open conflict on a field with a normal update event.
     The update outsorts the conflict, so the fold clears it (section 10.6)."""
+    _require_item(a.item)
     r = fold([LOG, ".work/done.jsonl"])
     match = [i for k, i in r.items.items() if k.startswith(a.item)]
     if not match:
@@ -255,6 +267,7 @@ def cmd_list(a):
 
 
 def cmd_show(a):
+    _require_item(a.item)
     r = fold([LOG, ".work/done.jsonl"])
     match = [i for k, i in r.items.items() if k.startswith(a.item)]
     if not match:

@@ -32,7 +32,7 @@ esac
 
 
 class Sandbox:
-    def __init__(self, tc, buckets, prstate="OPEN"):
+    def __init__(self, tc, buckets, prstate="OPEN", config=None):
         self.dir = tempfile.mkdtemp(prefix="mwg-")
         tc.addCleanup(lambda: subprocess.run(["rm", "-rf", self.dir]))
         gh = os.path.join(self.dir, "gh")
@@ -43,12 +43,20 @@ class Sandbox:
             fh.write("\n".join(buckets) + "\n")
         with open(os.path.join(self.dir, "prstate"), "w") as fh:
             fh.write(prstate)
+        if config is not None:
+            os.makedirs(os.path.join(self.dir, ".work"))
+            with open(os.path.join(self.dir, ".work", "config.yml"), "w") as fh:
+                fh.write(config)
 
-    def run(self, max_attempts=5):
+    def run(self, max_attempts=5, args=(), env_extra=None):
         env = dict(os.environ, PATH=f"{self.dir}:{os.environ['PATH']}",
                    FAKE_DIR=self.dir)
-        return subprocess.run(["bash", SCRIPT, "7", "0", str(max_attempts)],
-                              capture_output=True, text=True, env=env)
+        if env_extra:
+            env.update(env_extra)
+        # cwd=self.dir: the script reads ./.work/config.yml relative to cwd
+        return subprocess.run(
+            ["bash", SCRIPT, *args, "7", "0", str(max_attempts)],
+            capture_output=True, text=True, env=env, cwd=self.dir)
 
     def merged(self):
         return os.path.exists(os.path.join(self.dir, "merged"))
@@ -87,6 +95,28 @@ class TestMergeWhenGreen(unittest.TestCase):
         self.assertEqual(r.returncode, 4)
         self.assertFalse(sb.merged())
         self.assertIn("timed out", r.stderr)
+
+    def test_advisory_config_green_reports_but_does_not_merge(self):
+        sb = Sandbox(self, ["pass,pass"],
+                     config="features:\n  auto_merge_on_green: false\n")
+        r = sb.run()
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertFalse(sb.merged())
+        self.assertIn("advisory mode", r.stdout)
+
+    def test_auto_flag_overrides_advisory_config(self):
+        sb = Sandbox(self, ["pass"],
+                     config="features:\n  auto_merge_on_green: false\n")
+        r = sb.run(args=["--auto"])
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertTrue(sb.merged())
+
+    def test_env_override_forces_advisory(self):
+        sb = Sandbox(self, ["pass"])   # no config -> default true; env wins
+        r = sb.run(env_extra={"WORKLOG_AUTO_MERGE": "0"})
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertFalse(sb.merged())
+        self.assertIn("advisory mode", r.stdout)
 
     def test_no_checks_reported_waits_not_merges(self):
         sb = Sandbox(self, ["", "", ""])

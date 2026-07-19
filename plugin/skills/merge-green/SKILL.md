@@ -20,3 +20,9 @@ means wait; failing means fix. There is no third option.
 4. On red gates: report which checks failed and fix them. Never merge with
    `--admin`, never skip a gate, never retry-until-flaky-passes without
    understanding the failure.
+5. Auto-merge flag: `features.auto_merge_on_green` in `.work/config.yml`
+   (default **true**). False = advisory mode: the script polls, reports
+   green, does NOT merge — a human runs `gh pr merge <pr> --merge`.
+   Overrides, strongest first: `--auto`/`--advisory` as the script's first
+   argument (one run), then `WORKLOG_AUTO_MERGE=1|0`, then the config.
+   Red/pending/timeout behavior is unchanged either way.
