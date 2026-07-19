@@ -27,9 +27,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/CLI-Reference"
   },
   "home": {
-    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
+    "rev": "7fe94407593cf9ab8633c2df74337a437427dc24",
     "source": "docs/wiki-home.md",
-    "source_hash": "ed412190e4b9",
+    "source_hash": "370ff4b50101",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Home"
   },
   "plan/ticket-sync-and-init-detection": {
@@ -57,9 +57,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plugin-Guide"
   },
   "roadmap": {
-    "rev": "02b055bca6847af89530d918df6cd1fdeec725cf",
+    "rev": "7fe94407593cf9ab8633c2df74337a437427dc24",
     "source": "docs/roadmap.md",
-    "source_hash": "a40a12b18663",
+    "source_hash": "188b40764587",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap"
   },
   "roadmap/2026-07-18_v0.2-roadmap": {
@@ -85,6 +85,12 @@
     "source": "docs/roadmap/2026-07-19_v0.7.0-release.md",
     "source_hash": "f0faa33fa9da",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.7.0-release"
+  },
+  "roadmap/2026-07-19_v0.8.0-release": {
+    "rev": "7fe94407593cf9ab8633c2df74337a437427dc24",
+    "source": "docs/roadmap/2026-07-19_v0.8.0-release.md",
+    "source_hash": "79a3ec287ce7",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.8.0-release"
   },
   "spec": {
     "rev": "9891e58d916cd6f582d06f0839b436da42143b58",

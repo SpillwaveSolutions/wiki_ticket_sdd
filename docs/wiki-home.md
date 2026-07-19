@@ -13,6 +13,7 @@ work is fishbowled, not hidden.
 
 ## Roadmap snapshots
 
+- [[Roadmap-2026-07-19_v0.8.0-release]]
 - [[Roadmap-2026-07-19_v0.7.0-release]]
 - [[Roadmap-2026-07-19_v0.6.0-release]]
 - [[Roadmap-2026-07-18_v0.5.0-release]]
