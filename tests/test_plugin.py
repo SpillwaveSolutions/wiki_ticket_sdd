@@ -95,14 +95,17 @@ class TestVersionSync(unittest.TestCase):
 
 class TestPackaging(unittest.TestCase):
     def test_no_repo_docs_inside_plugin(self):
-        banned = ("user_guide", "worklog-spec", "docs/")
+        # match whole path segments: skills/design-docs/ is fine, docs/ is not
+        banned_dirs = {"user_guide", "docs"}
         for base, _dirs, files in os.walk(PLUGIN):
             for name in files:
                 rel = os.path.relpath(os.path.join(base, name), PLUGIN)
-                for b in banned:
-                    self.assertNotIn(
-                        b, rel,
-                        f"{rel}: repo docs must not ship inside the plugin")
+                segs = rel.split(os.sep)
+                self.assertFalse(
+                    banned_dirs & set(segs[:-1]),
+                    f"{rel}: repo docs must not ship inside the plugin")
+                self.assertNotIn("worklog-spec", segs[-1],
+                                 f"{rel}: spec must not ship inside the plugin")
 
 
 class TestInit(unittest.TestCase):

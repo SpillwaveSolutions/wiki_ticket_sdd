@@ -91,6 +91,7 @@ Skills are the judgment layer: the model decides *when*, the deterministic
 | `wiki-publish` | Publishes the configured docs to the team's wiki with the `.work/published.json` ledger, whatever the system (GitHub/GitLab/ADO/Confluence) |
 | `status-report` | Generates and publishes frozen daily/weekly/timecard reports via `worklog status` |
 | `release` | Cuts a versioned release: stamp the changelog, snapshot the roadmap, tag, platform release, publish, sync |
+| `design-docs` | Generates/syncs the design doc + code walkthrough pair under `docs/designs/`: frozen dated copies per release, live `current` copies; runs in background agents at release time |
 | `merge-green` | Merges PRs only when every quality gate is green — polls every 5 minutes via `merge-when-green.sh`, never bypasses |
 | `classify` | Flag-gated classifier: sweeps a conversation for untracked work, propose-only into `.work/suggestions.jsonl` — never the event log |
 
