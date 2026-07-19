@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.11.0 — 2026-07-19
+
+- System enums widened and documented as advisory (spec v1.8): ticketing
+  `github | gitlab | jira | ado | linear | codecatalyst | other | none`, wiki
+  gains `gitlab-wiki` and `other`. `bin/worklog` branches only on `none`;
+  every other value is a name the edge skills resolve to available tooling,
+  and `other` is the sanctioned value for unlisted systems (real name in
+  `options:`).
+- Caveats ride with the names in ticket-sync: AWS CodeCatalyst (ADO's AWS
+  equivalent) closed to new customers 2025-11-07; Linear detected via
+  CLI/MCP, not git remotes; GCP has no native tracker — no `gcp` value.
+- Azure DevOps field-tested caveats in ticket-sync + adapters/README: tag
+  markers (ADO strips HTML comments), merge-never-overwrite updates,
+  link-first migration with the `sync --dry-run` 0-creates gate.
+- /worklog:init: detection knows codecatalyst.aws and CLI/MCP-only trackers;
+  pick-and-mix lists gain Linear, CodeCatalyst, and `other`.
+
 ## 0.10.0 — 2026-07-19
 
 - Stop hook: untracked files no longer count as unrecorded work (-uno) — the
