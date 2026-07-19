@@ -24,6 +24,12 @@ work is fishbowled, not hidden.
 - [[Plan-typed-adapter-contract]]
 - [[Plan-ticket-sync-and-init-detection]]
 
+## Architecture decisions
+
+- [[ADR-0001-event-log-fold-union-merge]]
+- [[ADR-0002-skill-based-edges-typed-contract]]
+- [[ADR-0003-green-gates-merge]]
+
 ## Status reports
 
 - [[Status-2026-07-18-weekly]]

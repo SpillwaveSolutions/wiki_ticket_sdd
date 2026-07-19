@@ -81,7 +81,7 @@ skipped=()
 
 # --- bin/ and hooks/: always re-copied (init on an installed repo IS the upgrade path) ---
 mkdir -p bin hooks
-for f in worklog fold.py ulid.py render_roadmap.py plan_capture.py compact.py; do
+for f in worklog fold.py ulid.py render_roadmap.py plan_capture.py compact.py adr.py; do
   cp -p "$PLUGIN_ROOT/scripts/$f" "bin/$f"
   chmod +x "bin/$f"
   wrote+=("bin/$f")

@@ -1,14 +1,35 @@
 {
+  "adr/0001-event-log-fold-union-merge": {
+    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
+    "source": "docs/adr/0001-event-log-fold-union-merge.md",
+    "source_hash": "021701a74deb",
+    "title": "ADR-0001-event-log-fold-union-merge",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0001-event-log-fold-union-merge"
+  },
+  "adr/0002-skill-based-edges-typed-contract": {
+    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
+    "source": "docs/adr/0002-skill-based-edges-typed-contract.md",
+    "source_hash": "8bf56915f65e",
+    "title": "ADR-0002-skill-based-edges-typed-contract",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0002-skill-based-edges-typed-contract"
+  },
+  "adr/0003-green-gates-merge": {
+    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
+    "source": "docs/adr/0003-green-gates-merge.md",
+    "source_hash": "3b90e1fdfacf",
+    "title": "ADR-0003-green-gates-merge",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0003-green-gates-merge"
+  },
   "cli-reference": {
-    "rev": "9891e58d916cd6f582d06f0839b436da42143b58",
+    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
     "source": "docs/user_guide/cli-reference.md",
-    "source_hash": "011e059b5ff6",
+    "source_hash": "08563ca1fac3",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/CLI-Reference"
   },
   "home": {
-    "rev": "02b055bca6847af89530d918df6cd1fdeec725cf",
+    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
     "source": "docs/wiki-home.md",
-    "source_hash": "85bc07825d5b",
+    "source_hash": "ed412190e4b9",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Home"
   },
   "plan/ticket-sync-and-init-detection": {
@@ -86,9 +107,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-18-weekly"
   },
   "user-guide": {
-    "rev": "9891e58d916cd6f582d06f0839b436da42143b58",
+    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
     "source": "docs/user_guide/user-guide.md",
-    "source_hash": "389a504addce",
+    "source_hash": "f0d32b0857ba",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/User-Guide"
   }
 }

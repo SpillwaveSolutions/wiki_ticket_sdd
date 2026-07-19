@@ -1,0 +1,16 @@
+{
+  "description": "ADR front matter (docs/plans/2026-07-19-adr.md). Restricted to the subset {type, required, properties, enum, items} so the stdlib mini-validator can enforce it. bin/adr.py carries an embedded copy (same deliberate duplication as CAPABILITIES_SCHEMA).",
+  "type": "object",
+  "required": ["id", "slug", "title", "date", "status"],
+  "properties": {
+    "id": {"type": "integer"},
+    "slug": {"type": "string"},
+    "title": {"type": "string"},
+    "date": {"type": "string"},
+    "status": {"enum": ["proposed", "accepted", "deprecated", "superseded"]},
+    "deciders": {"type": "array", "items": {"type": "string"}},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "supersedes": {"type": ["integer", "null"]},
+    "superseded_by": {"type": ["integer", "null"]}
+  }
+}

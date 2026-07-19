@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0 — unreleased
+
+- Architecture Decision Records: schema-validated docs/adr/ (worklog adr
+  new|list|check, pre-commit/CI guard), write-once bodies with sanctioned
+  status/superseded_by mutation, wiki-synced with republish-on-change.
+  Seeded with ADR-0001..0003 from the project's real decisions.
+- Dispatcher: orphan/untitled items are drift-reported, never pushed.
+
 ## 0.7.0 — 2026-07-19
 
 - Work taxonomy (plan 2026-07-18): four orthogonal axes — level (epic/story/task/

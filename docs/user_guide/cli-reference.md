@@ -267,6 +267,29 @@ throwaway sandbox; nothing activates until `adapter check` is green. With
 no path it checks the adapter for the configured system, falling back to
 the shipped fake (the CI test double).
 
+### adr
+
+Architecture Decision Records in `docs/adr/NNNN-slug.md`, schema-validated
+front matter (`schema/adr.schema.json`).
+
+```bash
+bin/worklog adr new "Green-gates merge policy" --status proposed \
+  --deciders rick,claude --tags ci,process --supersedes 2
+bin/worklog adr list
+bin/worklog adr check
+```
+
+`adr new <title>` picks the next 4-digit number, scaffolds the file
+(front matter plus Context / Decision / Consequences sections), registers it
+in the wiki-publish ledger (key `adr/NNNN-slug`, page `ADR-NNNN-slug`,
+republish-on-change), and prints the path. Flags: `--status` (default
+`proposed`), `--deciders a,b`, `--tags x,y`, `--supersedes N`. `adr list`
+prints an id / status / title table. `adr check` validates every ADR —
+schema, unique ids, filename↔front-matter agreement, consistent
+`supersedes`/`superseded_by` pairs, required body sections — and exits
+nonzero naming each problem; the pre-commit hook runs it whenever
+`docs/adr/` exists.
+
 ### status
 
 Generate a status report from the log.

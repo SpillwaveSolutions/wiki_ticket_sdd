@@ -22,7 +22,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PLUGIN = os.path.join(ROOT, "plugin")
 
 CANON = ["bin/worklog", "bin/fold.py", "bin/ulid.py", "bin/render_roadmap.py",
-         "bin/plan_capture.py", "bin/compact.py",
+         "bin/plan_capture.py", "bin/compact.py", "bin/adr.py",
          "bin/sync_dispatch.py", "bin/canonical.py",
          "hooks/pre-commit", "hooks/pre-merge-commit"]
 

@@ -249,3 +249,6 @@
 {"actor":"claude","ev":"01KXXJYKNZWAKAXZWA0G9FRQ9E","item":"01KXXJYK5KS3MQWRPGZ3WNA790","op":"update","set":{"status":"in_progress"},"ts":"2026-07-19T16:22:05Z"}
 {"actor":"claude","ev":"01KXXJYKV9HGCZJ5RCX154S5E9","item":"01KXXJYKB1B12WEXTS6FZZ7QH2","op":"update","set":{"status":"in_progress"},"ts":"2026-07-19T16:22:05Z"}
 {"actor":"claude","ev":"01KXXJYM0YVTJPBRWGV21BFM9X","item":"01KXXJYKGPV41JK02KX0X67Q0G","op":"update","set":{"status":"in_progress"},"ts":"2026-07-19T16:22:06Z"}
+{"actor":"claude","ev":"01KXXK6C0P9BX1GVE4X078Q9CQ","item":"01KXXJYKGPV41JK02KX0X67Q0G","op":"close","set":{"resolution":"ADRs 0001-0003 seeded from real decisions; wiki-publish set + Home + guides updated","status":"done"},"ts":"2026-07-19T16:26:20Z"}
+{"actor":"claude","ev":"01KXXKABJNXXWEHG3PZVHBPZHZ","item":"01KXXJYKB1B12WEXTS6FZZ7QH2","op":"close","set":{"resolution":"adr new|list|check + schema + pre-commit guard; 9 tests","status":"done"},"ts":"2026-07-19T16:28:30Z"}
+{"actor":"claude","ev":"01KXXKABQV2XA4GP25HMHZ5TRA","item":"01KXXJYK5KS3MQWRPGZ3WNA790","op":"close","set":{"resolution":"story complete: ADRs live, seeded with 3 real decisions, wiki-synced","status":"done"},"ts":"2026-07-19T16:28:30Z"}
