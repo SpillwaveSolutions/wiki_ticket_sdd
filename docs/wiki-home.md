@@ -21,6 +21,7 @@ work is fishbowled, not hidden.
 
 ## Plans
 
+- [[Plan-grok-compat-and-mermaid-viz]]
 - [[Plan-work-taxonomy]]
 - [[Plan-typed-adapter-contract]]
 - [[Plan-ticket-sync-and-init-detection]]
