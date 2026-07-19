@@ -266,3 +266,5 @@
 {"actor":"claude","ev":"01KXXMMBJMT3EBMH1PNG66ZKJP","item":"01KXXMCG418TSDDKCEZ61ZSFMH","op":"close","set":{"resolution":"_require_item guard on 7 subcommands; test proves no event appended","status":"done"},"ts":"2026-07-19T16:51:26Z"}
 {"actor":"claude","ev":"01KXXNAWCNZY29RTP5DK3GMEQ6","item":"01KXXM1Z13NPYK1XBJ1EQFEKGT","op":"update","set":{"status":"in_progress"},"ts":"2026-07-19T17:03:45Z"}
 {"actor":"claude","ev":"01KXXNQXJGE73X8MA1B5J3YVX6","item":"01KXXM1Z13NPYK1XBJ1EQFEKGT","op":"close","set":{"resolution":"viz shipped: deps/hierarchy default + event-dated gantt, /worklog:viz, Grok compat documented (verification pending); 11 tests","status":"done"},"ts":"2026-07-19T17:10:52Z"}
+{"actor":"rick","ev":"01KXXP6PBPQT0CK7KFKMAS10KA","item":"01KXXP6PBPXCNHAQF6Z774VAHR","op":"create","set":{"kind":"ops","labels":["release"],"level":"task","milestone":"v0.9.0","priority":"P1","status":"todo","title":"Cut v0.9.0"},"ts":"2026-07-19T17:18:56Z"}
+{"actor":"claude","ev":"01KXXP6VJY2D40WG8S52BYQQ07","item":"01KXXP6PBPXCNHAQF6Z774VAHR","op":"close","set":{"resolution":"prep on PR; tag + release post-merge","status":"done"},"ts":"2026-07-19T17:19:01Z"}
