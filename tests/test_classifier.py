@@ -103,7 +103,8 @@ class TestStopHookClassifierGate(unittest.TestCase):
     def test_clean_tree_stays_silent_in_both_modes(self):
         for cfg in (CLASSIFIER_ON, CLASSIFIER_OFF):
             d = make_repo(self)
-            os.remove(os.path.join(d, "src.txt"))  # clean tree
+            # clean tree: restore the tracked file to its committed content
+        open(os.path.join(d, "base.txt"), "w").write("base\n")
             with open(os.path.join(d, ".work", "config.yml"), "w") as fh:
                 fh.write(cfg)
             r = run_hook(d)
