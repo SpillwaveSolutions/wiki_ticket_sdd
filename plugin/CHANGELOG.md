@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.10.0 — unreleased
+
+- Stop hook: settle-and-recheck + branch-stability guard — no more false blocks
+  when a background merge chain flips branches mid-invocation (observed 3x).
+
 ## 0.9.0 — 2026-07-19
 
 - Mermaid visual roadmap: `roadmap-render --viz=deps,hierarchy,gantt|all|none`
