@@ -295,6 +295,12 @@ class Dispatcher:
         for item in items:
             iid = item["id"]
             ext = item.get("external") or {}
+            # Orphans (events for an unknown item, e.g. a typo'd id) and
+            # titleless items are fold debris, not work — report, never push.
+            # Pushing one files an "(untitled)" ticket remotely.
+            if item.get("_orphan") or not item.get("title"):
+                self.drift.append(f"{iid[:8]}: orphan/untitled item skipped — not pushed")
+                continue
             closed = item.get("status") in CLOSED_STATUSES
             payload_item = self.outbound(item, caps)
             h = canonical_hash(payload_item)
