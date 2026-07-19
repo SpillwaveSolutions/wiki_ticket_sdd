@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.6.0 — unreleased
+## 0.6.0 — 2026-07-19
 
 - Green-gates merge policy: /worklog:merge + merge-green skill + merge-when-green.sh
   poll loop (5-min default) — PRs merge only when every check passes; never bypass.
