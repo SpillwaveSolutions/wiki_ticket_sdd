@@ -282,7 +282,9 @@ def cmd_fold(a):
 
 def cmd_roadmap_render(a):
     import render_roadmap
-    md = render_roadmap.render()
+    # --viz default matches render()'s default: the pre-commit hook diffs the
+    # bare-script output against the file this writes.
+    md = render_roadmap.render(viz="none" if a.no_viz else a.viz)
     os.makedirs("docs", exist_ok=True)
     with open("docs/roadmap.md", "w", encoding="utf-8") as fh:
         fh.write(md)
@@ -881,7 +883,11 @@ pc.add_argument("--title", required=True)
 pc.add_argument("--file")
 pc.add_argument("--priority", default="P1", choices=["P0", "P1", "P2", "P3"])
 
-sub.add_parser("roadmap-render").set_defaults(fn=cmd_roadmap_render)
+rr = sub.add_parser("roadmap-render"); rr.set_defaults(fn=cmd_roadmap_render)
+rr.add_argument("--viz", default="deps,hierarchy",
+                metavar="deps,hierarchy,gantt|all|none")
+rr.add_argument("--no-viz", dest="no_viz", action="store_true",
+                help="alias for --viz=none")
 rs = sub.add_parser("roadmap-snapshot"); rs.set_defaults(fn=cmd_roadmap_snapshot)
 rs.add_argument("--name")
 co = sub.add_parser("compact"); co.set_defaults(fn=cmd_compact)

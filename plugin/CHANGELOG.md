@@ -2,6 +2,16 @@
 
 ## 0.9.0 — unreleased
 
+- Mermaid visual roadmap: `roadmap-render --viz=deps,hierarchy,gantt|all|none`
+  (default deps,hierarchy; `--no-viz` alias) appends a generated
+  "## Visual roadmap" section — dependency graph, hierarchy, and an
+  event-dated gantt whose bars come from create/first-in_progress/close ULID
+  timestamps (historical fact, no invented dates; "now" = max event, never
+  wall clock). `/worklog:viz` regenerates with `--viz=all` in a background
+  subagent and republishes the roadmap.
+- Grok Build: PORTS.md/README/plugin-guide upgraded to full native
+  compatibility, zero configuration, per the xAI docs (verification under
+  Grok Build pending).
 - features.auto_merge_on_green flag (default ON): advisory mode polls, reports
   green, and leaves the merge to a human; --auto/--advisory and
   WORKLOG_AUTO_MERGE override per run; doctor reports it.
