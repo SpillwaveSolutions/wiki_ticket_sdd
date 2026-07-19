@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.8.0 — unreleased
+## 0.8.0 — 2026-07-19
 
 - Architecture Decision Records: schema-validated docs/adr/ (worklog adr
   new|list|check, pre-commit/CI guard), write-once bodies with sanctioned
