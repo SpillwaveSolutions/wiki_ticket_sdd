@@ -9,11 +9,12 @@ import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-WORKLOG = os.path.join(ROOT, "bin", "worklog")
 
 
 def run(cwd, *args):
-    return subprocess.run([sys.executable, WORKLOG, *args],
+    # sandbox convention: run the sandbox's own bin/ copy so subprocess
+    # coverage (relative source=bin) attributes lines correctly
+    return subprocess.run([sys.executable, os.path.join(cwd, "bin", "worklog"), *args],
                           cwd=cwd, capture_output=True, text=True)
 
 
@@ -21,6 +22,8 @@ class TestAdr(unittest.TestCase):
     def setUp(self):
         self.dir = tempfile.mkdtemp(prefix="worklog-adr-")
         self.addCleanup(shutil.rmtree, self.dir, ignore_errors=True)
+        shutil.copytree(os.path.join(ROOT, "bin"), os.path.join(self.dir, "bin"))
+        shutil.copytree(os.path.join(ROOT, "schema"), os.path.join(self.dir, "schema"))
 
     def path(self, rel):
         return os.path.join(self.dir, rel)
