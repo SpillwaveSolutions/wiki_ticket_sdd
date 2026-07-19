@@ -1,7 +1,7 @@
 ---
 name: plan-capture
 description: Capture an approved plan as tracked work items. Use when exiting plan mode, when the user approves a plan, or says "capture this plan". Writes docs/plans/<date>-<slug>.md and appends the plan's tasks to .work/todo.jsonl via bin/worklog.
-version: 0.9.0
+version: 0.10.0
 ---
 
 # Plan capture
