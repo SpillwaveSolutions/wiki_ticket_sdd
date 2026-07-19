@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.10.0 — unreleased
+## 0.10.0 — 2026-07-19
 
 - Stop hook: untracked files no longer count as unrecorded work (-uno) — the
   actual root cause of the false blocks; #46's settle guard kept as hardening.
