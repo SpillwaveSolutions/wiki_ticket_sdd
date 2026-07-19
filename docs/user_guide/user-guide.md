@@ -275,9 +275,9 @@ wiki.
 
 ```yaml
 ticketing:
-  system: github               # jira | ado | github | none
+  system: github               # github | gitlab | jira | ado | linear | codecatalyst | other | none
 wiki:
-  system: github-wiki          # confluence | github-wiki | ado-wiki | none
+  system: github-wiki          # github-wiki | gitlab-wiki | ado-wiki | confluence | other | none
 ```
 
 The core never branches on these names. Publishing and syncing are done by

@@ -1,6 +1,6 @@
 ---
 name: ticket-sync
-description: Push work items to the team's configured ticketing system (GitHub Issues, Jira, Azure DevOps, GitLab...). Use when asked to sync tickets, after closing out a plan, or when items should be visible in the tracker. Push and pull.
+description: Push work items to the team's configured ticketing system (GitHub Issues, Jira, Azure DevOps, GitLab, Linear...). Use when asked to sync tickets, after closing out a plan, or when items should be visible in the tracker. Push and pull.
 ---
 
 # Ticket sync
@@ -14,8 +14,23 @@ to re-implement the rules. Contract:
 ## 1. Read the config
 
 Read the `ticketing:` block in `.work/config.yml`. `system` names the
-tracker: `github`, `jira`, `ado`, `gitlab`, or `none`. If it is `none` or
-absent, say so and stop — there is nothing to push to.
+tracker: `github`, `gitlab`, `jira`, `ado`, `linear`, `codecatalyst`,
+`other`, or `none`. If it is `none` or absent, say so and stop — there is
+nothing to push to.
+
+The enum is advisory, not a capability list. `bin/worklog` only ever
+branches on `none`; every other value is a name this skill resolves to
+whatever tooling exists (CLI, MCP server, REST). Named values carry known
+caveats; `other` is any tracker not listed — set it, note the real system
+in `options:`, and the skill researches the tooling at runtime.
+
+- **linear** — no git remote to detect; reach it via the Linear MCP server
+  or CLI. Markers go in the issue description (markdown survives).
+- **codecatalyst** — AWS's ADO equivalent (issues per project). Closed to
+  NEW customers since 2025-11-07; existing spaces keep working. Reach via
+  `aws codecatalyst` CLI.
+- **GCP** has no native work tracker — GCP-hosted teams pick one of the
+  above (or `other`); there is no `gcp` value to configure.
 
 ## 2. Scope
 

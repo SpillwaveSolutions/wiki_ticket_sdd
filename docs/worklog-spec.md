@@ -1,7 +1,9 @@
 # Worklog: Visible-WIP Work Tracking Spec
 
-**Version:** 1.7
+**Version:** 1.8
 **Status:** Implemented through §18 step 8; wiki publish (step 9) done for github-wiki; step 10 outstanding; step 11 (typed adapter contract) shipping; step 12 (work taxonomy) in progress on this branch
+
+**Changes since 1.7:** §4.2's `ticketing.system` / `wiki.system` enums widened to name what the skill path already reached — `github | gitlab | jira | ado | linear | codecatalyst | other | none` and `github-wiki | gitlab-wiki | ado-wiki | confluence | other | none`. The enum is explicitly **advisory**: `bin/worklog` branches only on `none` (invariant §15.6); every other value is a name the edge skills resolve to available tooling, and `other` is the sanctioned value for unlisted systems (real system named in `options:`). Known caveats ride with the names in the skills: AWS CodeCatalyst is closed to new customers since 2025-11-07 (existing spaces work); Linear has no git remote to detect (CLI/MCP evidence only); GCP has no native tracker, so no `gcp` value exists.
 
 **Changes since 1.6:** the work-taxonomy fields land (docs/plans/2026-07-18-work-taxonomy.md). §5.4 splits `type` into two orthogonal axes — `level` (epic|story|task|subtask) and `kind` (feature|bug|ops|triage) — and adds `milestone` (the release axis); `type` survives as a deprecated alias the fold normalizes on load (`epic→epic/feature`, `story→story/feature`, `task→task/feature`, `subtask→subtask/feature`, `bug→task/bug`) and the next compaction migrates physically. §10.3's canonical-hash field list becomes `{title, body, level, kind, milestone, status, priority, parent, labels, assignee}` — a one-time hash churn: the first sync after upgrading re-pushes every in-scope item once (idempotent by marker, so no duplicates). §12 gains the flag-gated, propose-only `classify` skill row and taxonomy pointers. §18 gains step 12. Migration note: `docs/migrations/0001-type-split.md`.
 
@@ -142,7 +144,7 @@ project:
   name: "Acme Platform"
 
 ticketing:
-  system: jira                 # jira | ado | github | none
+  system: jira                 # github | gitlab | jira | ado | linear | codecatalyst | other | none
   # sync is skill-based (ticket-sync); no adapter binary
   project: PROJ
   # everything below here is system-specific; the skill reads it, the core does not
@@ -151,7 +153,7 @@ ticketing:
     epic_link_field: customfield_10014
 
 wiki:
-  system: confluence           # confluence | github-wiki | ado-wiki | none
+  system: confluence           # github-wiki | gitlab-wiki | ado-wiki | confluence | other | none
   # publishing is skill-based (wiki-publish); no adapter binary
   root_url: https://acme.atlassian.net/wiki/spaces/ENG
   options:
