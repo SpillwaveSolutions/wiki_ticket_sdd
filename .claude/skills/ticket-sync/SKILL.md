@@ -70,3 +70,21 @@ Conflicts surface in `worklog list` (stderr), `worklog show`, and the
 status report's Needs-attention section. Resolve with:
 
     bin/worklog resolve <item> --field <f> --take local|remote
+
+## Azure DevOps: field-tested caveats (no adapter ships yet — hints for building/driving one)
+
+- **Marker must be a TAG, not an HTML comment.** ADO silently strips HTML
+  comments from a work item's Description, so `<!-- worklog:<ulid> -->`
+  vanishes. Store the marker as a work-item tag (`worklog:<ulid>` — ADO
+  preserves colons and case exactly) and search by tag. An ADO adapter's
+  `capabilities.marker` should be `{"style": "tag", "template": "worklog:{ulid}"}`.
+- **Updates merge, never overwrite.** When updating an existing work item:
+  merge tags, and write title/state only when they actually changed. Existing
+  Description/content in Azure Boards is never replaced — teams adopt worklog
+  onto boards full of real content.
+- **Migrating existing tickets (any system):** create-vs-update is decided
+  purely by whether the local item carries `external`. Pre-seed it with
+  `worklog link <ulid> --system ado --key <AB#id>` for every imported item so
+  the first sync treats all of them as updates — never duplicates. Pilot one
+  epic first; the acceptance gate is `worklog sync --dry-run` reporting
+  **0 creates**. Nothing irreversible happens before the first real push.
