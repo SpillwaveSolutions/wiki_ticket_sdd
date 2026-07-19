@@ -38,7 +38,7 @@ All work items live in `.work/todo.jsonl` — an append-only log where each
 line is one immutable event:
 
 ```jsonl
-{"ev":"01J8X2K4A0","ts":"2026-07-16T14:02:11Z","actor":"rick","item":"01J8X0M2QQ","op":"create","set":{"type":"task","title":"Extract auth middleware","status":"todo","priority":"P1"}}
+{"ev":"01J8X2K4A0","ts":"2026-07-16T14:02:11Z","actor":"rick","item":"01J8X0M2QQ","op":"create","set":{"level":"task","kind":"feature","title":"Extract auth middleware","status":"todo","priority":"P1"}}
 {"ev":"01J8X2M900","ts":"2026-07-16T14:09:03Z","actor":"rick","item":"01J8X0M2QQ","op":"update","set":{"status":"in_progress"}}
 ```
 
@@ -76,23 +76,56 @@ The one thing that would break this — a missing trailing newline fusing two
 events into one corrupt line — is enforced away by the CLI's writer and by
 the git hooks (see [CLI Reference](cli-reference.md)).
 
-## Item types and fields
+## The work taxonomy
 
-| Type | Use for |
-|---|---|
-| `epic` | A body of work; the roadmap groups by it |
-| `story` | A user-facing chunk of an epic |
-| `task` | A unit of work (the default) |
-| `subtask` | A child of a task |
-| `bug` | A defect |
+Every work item sits on four independent axes (this replaces the single
+`type` enum of v0.5 — see
+[the migration note](../migrations/0001-type-split.md); `--type` survives as
+a deprecated alias):
 
-Hierarchy is the `parent` chain — an epic is just an item with `type: epic`.
+| Axis | Field | Values | Answers |
+|---|---|---|---|
+| Level | `level` | epic / story / task / subtask | size & place in the parent tree |
+| Kind | `kind` | feature / bug / ops / triage | nature of the work |
+| Milestone | `milestone` | free string (e.g. v0.6.0) or null | what ships together |
+| Planned | `unplanned` + `discovered_during` | bool + ULID | deliberate vs discovered |
+
+Level is pure decomposition — hierarchy is the `parent` chain, and an epic
+is just an item with `level: epic`. Kind is the nature of the work,
+independent of size: a bug is not a size, which is why it is no longer a
+peer of `epic` in one enum.
+
+Six rules (the validator enforces these):
+
+1. Kind is free at story/task/subtask.
+2. Epics are `feature` or `ops` only — a bug is never epic-sized.
+3. `kind` defaults to `triage` when omitted — never silently default to
+   feature.
+4. `bug.parent` is optional; bugs may float free of any epic.
+5. `milestone` lives on leaves (story and below); an epic's milestone
+   derives from its children.
+6. `triage` and `ops` both trend down: triage shrinks by classifying, ops
+   by automating.
+
+Two of these deserve a sentence. **Triage is the honest default:** an item
+created without a deliberate kind *looks* unclassified — it lands in the
+roadmap's Needs-classification queue instead of masquerading as a feature.
+When unsure of the kind, `triage` plus a stated open question beats a
+confident guess. **A milestone is a query, not an object:** a release is
+simply the set of items where `milestone == v0.6.0` — GitHub milestone or
+Jira fixVersion on the tracker side — and release-engineering work is
+`kind:ops` tasks carrying that milestone. The roadmap surfaces all of this:
+a Needs-classification section, the kind mix per epic, and milestone
+grouping.
 
 Fields you'll use daily:
 
 | Field | Values | Notes |
 |---|---|---|
 | `status` | `todo`, `in_progress`, `blocked`, `done`, `cancelled` | `done`/`cancelled` are set by `close` |
+| `level` | `epic`, `story`, `task`, `subtask` | Default `task` |
+| `kind` | `feature`, `bug`, `ops`, `triage` | Omitted → folds to `triage` |
+| `milestone` | free string or null | Leaves only; epics derive theirs |
 | `priority` | `P0` (drop everything) … `P3` (someday) | Default `P2` |
 | `depends_on` | list of item ULIDs | Blocks scheduling; distinct from `parent` |
 | `labels` | free strings | Set-valued: adds from two branches merge, they don't clobber |
@@ -157,7 +190,7 @@ You're mid-task and discover a bug, a missing migration, a "we also need
 to…". Do not silently absorb it. Record it first, then do it:
 
 ```bash
-bin/worklog add "Session table missing index" --type bug \
+bin/worklog add "Session table missing index" --kind bug \
     --unplanned --discovered-during <current-item-ulid>
 ```
 
@@ -246,6 +279,33 @@ them. Per-system guidance (GitHub, GitLab, ADO, Confluence) lives in the
 wiki-publish skill itself; the ledger shape is identical everywhere — only
 how each system fills `url`/`rev`/`page_id` differs. Missing tooling
 degrades to local-only; it never fails a command.
+
+## Sync in depth
+
+Ticket sync (`bin/worklog sync`) runs through a typed adapter contract. The
+dispatcher (`bin/sync_dispatch.py`) owns every invariant — scope, canonical
+hash-skip, create-vs-update, idempotency markers, echo suppression on pull,
+conflict detection — and a per-system adapter is a generated dumb
+translator that just maps canonical JSON to the platform's API and back.
+`worklog adapter check` gates any adapter: nothing activates until it
+validates green against the contract, and a missing adapter means the
+dispatcher runs local-only (a mode, not an error). Every run ends with the
+drift report — counts plus anything a human should see (conflicts,
+unsupported fields, deferred items). That report is the sync's voice; read
+it. Conflicts it detects are resolved with
+`bin/worklog resolve <item> --field <f> --take local|remote`.
+
+## The classifier (off by default)
+
+The default path for keeping work tracked is inline: when trackable work
+surfaces in conversation, the agent proposes an item as part of its normal
+response and creates it only on your assent — with `kind:triage` and the
+open question stated when unsure. For teams where work keeps escaping the
+log anyway, a flag-gated classifier (`classifier:` in `.work/config.yml`)
+can sweep conversations: it is propose-only, staging suggestions to
+`.work/suggestions.jsonl` (gitignored, never the event log). A suggestion
+becomes real only when promoted — `bin/worklog promote <suggestion-id>`
+creates exactly one item and marks the suggestion consumed.
 
 ## Where to next
 

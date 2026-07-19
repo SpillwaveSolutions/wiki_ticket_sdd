@@ -1,8 +1,8 @@
 {
   "cli-reference": {
-    "rev": "969055dd7d8af5876956c25dca564e4bbe8749f1",
+    "rev": "9891e58d916cd6f582d06f0839b436da42143b58",
     "source": "docs/user_guide/cli-reference.md",
-    "source_hash": "3150af4ce3c7",
+    "source_hash": "011e059b5ff6",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/CLI-Reference"
   },
   "home": {
@@ -30,15 +30,15 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-work-taxonomy"
   },
   "plugin-guide": {
-    "rev": "969055dd7d8af5876956c25dca564e4bbe8749f1",
+    "rev": "9891e58d916cd6f582d06f0839b436da42143b58",
     "source": "docs/user_guide/plugin-guide.md",
-    "source_hash": "a990b28dd88c",
+    "source_hash": "7966cfea80ee",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plugin-Guide"
   },
   "roadmap": {
-    "rev": "63a11e1399454a596cca3c93ed79b61af919dcba",
+    "rev": "9891e58d916cd6f582d06f0839b436da42143b58",
     "source": "docs/roadmap.md",
-    "source_hash": "f79c56d723fb",
+    "source_hash": "47460afeaf5a",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap"
   },
   "roadmap/2026-07-18_v0.2-roadmap": {
@@ -60,9 +60,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.6.0-release"
   },
   "spec": {
-    "rev": "a134415b3de045789cbb711e47c1af4d6485207e",
+    "rev": "9891e58d916cd6f582d06f0839b436da42143b58",
     "source": "docs/worklog-spec.md",
-    "source_hash": "7a187f3f8d5b",
+    "source_hash": "c6600715dc31",
     "title": "Worklog-Spec",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Worklog-Spec"
   },
@@ -80,9 +80,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-18-weekly"
   },
   "user-guide": {
-    "rev": "969055dd7d8af5876956c25dca564e4bbe8749f1",
+    "rev": "9891e58d916cd6f582d06f0839b436da42143b58",
     "source": "docs/user_guide/user-guide.md",
-    "source_hash": "9d9550ec5b9c",
+    "source_hash": "389a504addce",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/User-Guide"
   }
 }

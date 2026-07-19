@@ -31,6 +31,17 @@ class TestDeterminism(unittest.TestCase):
         ev(3, "T2", "create", set={"type": "task", "title": "Session migration",
                                    "status": "todo", "priority": "P1",
                                    "parent": "E1", "depends_on": ["T1"]}),
+        # Taxonomy variety: kind mix, milestones, and a kindless create (triage)
+        # must all render byte-identically regardless of file order.
+        ev(4, "B1", "create", set={"level": "task", "kind": "bug",
+                                   "title": "Fix login", "status": "todo",
+                                   "priority": "P1", "parent": "E1",
+                                   "milestone": "v0.7.0"}),
+        ev(5, "U1", "create", set={"title": "Untagged idea",
+                                   "status": "todo", "priority": "P2"}),
+        ev(6, "O1", "create", set={"level": "task", "kind": "ops",
+                                   "title": "Rotate keys", "status": "todo",
+                                   "priority": "P2", "milestone": "v0.8.0"}),
     ]
 
     def test_identical_output_regardless_of_file_order(self):
@@ -126,6 +137,132 @@ class TestNeedsAttention(unittest.TestCase):
         ])])
         self.assertIn("## Needs attention", out)
         self.assertIn("worklog resolve A1 --field priority", out)
+
+
+class TestNeedsClassification(unittest.TestCase):
+    def test_triage_item_listed_and_counted(self):
+        out = render([write_log([
+            ev(1, "T1", "create", set={"level": "task", "kind": "triage",
+                                       "title": "Sort me", "status": "todo",
+                                       "priority": "P2"}),
+        ])])
+        self.assertIn("## Needs classification", out)
+        self.assertIn("- T1 Sort me (task)", out)
+        self.assertIn("1 unclassified._", out)
+
+    def test_kindless_create_folds_to_triage_and_lands_here(self):
+        # Spec section 2.3: no kind on create => triage, never a silent feature.
+        out = render([write_log([
+            ev(1, "T1", "create", set={"title": "Mystery", "status": "todo",
+                                       "priority": "P2"}),
+        ])])
+        self.assertIn("## Needs classification", out)
+        self.assertIn("- T1 Mystery (task)", out)
+        self.assertIn("1 unclassified._", out)
+
+    def test_section_omitted_when_all_classified(self):
+        out = render([write_log([
+            ev(1, "T1", "create", set={"level": "task", "kind": "feature",
+                                       "title": "Classified", "status": "todo",
+                                       "priority": "P2"}),
+        ])])
+        self.assertNotIn("## Needs classification", out)
+        self.assertIn("0 unclassified._", out)  # always shown; zero is good news
+
+
+class TestKindMix(unittest.TestCase):
+    def test_mixed_kind_epic_shows_mix_segment(self):
+        out = render([write_log([
+            ev(1, "E1", "create", set={"level": "epic", "kind": "feature",
+                                       "title": "Mixed", "status": "todo",
+                                       "priority": "P1"}),
+            ev(2, "T1", "create", set={"level": "task", "kind": "feature",
+                                       "title": "F", "status": "todo",
+                                       "priority": "P1", "parent": "E1"}),
+            ev(3, "T2", "create", set={"level": "task", "kind": "bug",
+                                       "title": "B", "status": "todo",
+                                       "priority": "P1", "parent": "E1"}),
+            ev(4, "T3", "create", set={"level": "task", "kind": "ops",
+                                       "title": "O", "status": "done",
+                                       "priority": "P1", "parent": "E1"}),
+        ])])
+        # counts the whole subtree, open+closed; zero-count kinds omitted
+        self.assertIn("### Mixed  ·  P1  ·  1 of 3 done  ·  feature 1 / bug 1 / ops 1", out)
+
+    def test_all_feature_epic_shows_no_mix_segment(self):
+        out = render([write_log([
+            ev(1, "E1", "create", set={"level": "epic", "kind": "feature",
+                                       "title": "Plain", "status": "todo",
+                                       "priority": "P1"}),
+            ev(2, "T1", "create", set={"level": "task", "kind": "feature",
+                                       "title": "F1", "status": "todo",
+                                       "priority": "P1", "parent": "E1"}),
+            ev(3, "T2", "create", set={"level": "task", "kind": "feature",
+                                       "title": "F2", "status": "todo",
+                                       "priority": "P1", "parent": "E1"}),
+        ])])
+        self.assertIn("### Plain  ·  P1  ·  0 of 2 done", out)
+        self.assertNotIn("feature 2", out)
+
+
+class TestMilestones(unittest.TestCase):
+    def test_grouping_and_unanimous_derived_epic_milestone(self):
+        out = render([write_log([
+            ev(1, "E1", "create", set={"level": "epic", "kind": "feature",
+                                       "title": "Uni", "status": "todo",
+                                       "priority": "P1"}),
+            ev(2, "T1", "create", set={"level": "task", "kind": "feature",
+                                       "title": "A", "status": "todo",
+                                       "priority": "P1", "parent": "E1",
+                                       "milestone": "v0.7.0"}),
+            ev(3, "T2", "create", set={"level": "task", "kind": "feature",
+                                       "title": "B", "status": "todo",
+                                       "priority": "P1", "parent": "E1",
+                                       "milestone": "v0.7.0"}),
+        ])])
+        self.assertIn("## Milestones", out)
+        milestones = out.split("## Milestones")[1]
+        self.assertIn("### v0.7.0", milestones)
+        self.assertIn("| T1 | A |", milestones)
+        self.assertIn("| T2 | B |", milestones)
+        self.assertIn("### Uni  ·  P1  ·  0 of 2 done  ·  → v0.7.0", out)
+
+    def test_mixed_child_milestones_show_mixed_and_sorted_headings(self):
+        out = render([write_log([
+            ev(1, "E1", "create", set={"level": "epic", "kind": "feature",
+                                       "title": "Split", "status": "todo",
+                                       "priority": "P1"}),
+            ev(2, "T1", "create", set={"level": "task", "kind": "feature",
+                                       "title": "A", "status": "todo",
+                                       "priority": "P1", "parent": "E1",
+                                       "milestone": "v0.8.0"}),
+            ev(3, "T2", "create", set={"level": "task", "kind": "feature",
+                                       "title": "B", "status": "todo",
+                                       "priority": "P1", "parent": "E1",
+                                       "milestone": "v0.7.0"}),
+        ])])
+        self.assertIn("·  → mixed", out)
+        milestones = out.split("## Milestones")[1]
+        self.assertLess(milestones.index("### v0.7.0"), milestones.index("### v0.8.0"))
+
+    def test_section_omitted_when_nothing_carries_a_milestone(self):
+        out = render([write_log([
+            ev(1, "T1", "create", set={"level": "task", "kind": "feature",
+                                       "title": "Loose", "status": "todo",
+                                       "priority": "P2"}),
+        ])])
+        self.assertNotIn("## Milestones", out)
+
+
+class TestEmptyLog(unittest.TestCase):
+    def test_empty_log_renders_all_empty_states(self):
+        out = render([write_log([])])
+        self.assertIn("0 epic(s) in flight, 0 open item(s), 0 blocked, "
+                      "0 unclassified._", out)
+        self.assertIn("_Nothing here._", out)
+        self.assertNotIn("## Needs classification", out)
+        self.assertNotIn("## Milestones", out)
+        self.assertIn("generated-at: never", out)
 
 
 if __name__ == "__main__":

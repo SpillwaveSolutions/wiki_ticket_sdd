@@ -28,6 +28,21 @@ for n, line in enumerate(open(sys.argv[1]), 1):
             print(f"  {sys.argv[1]}:{n}: missing {field}"); ok = False
     if ev.get("op") != "compact" and "item" not in ev:
         print(f"  {sys.argv[1]}:{n}: missing item"); ok = False
+    # Taxonomy rules (spec §3.3 / taxonomy §2) on new-style create events.
+    # Legacy `type` events predate the split and are normalized by the fold.
+    if ev.get("op") in ("create", "snapshot"):
+        s = ev.get("set") or {}
+        lvl, knd = s.get("level"), s.get("kind")
+        if lvl is not None and lvl not in ("epic", "story", "task", "subtask"):
+            print(f"  {sys.argv[1]}:{n}: unknown level {lvl!r}"); ok = False
+        if knd is not None and knd not in ("feature", "bug", "ops", "triage"):
+            print(f"  {sys.argv[1]}:{n}: unknown kind {knd!r}"); ok = False
+        if lvl == "epic" and knd in ("bug", "triage"):
+            print(f"  {sys.argv[1]}:{n}: level:epic with kind:{knd} — "
+                  "epics are feature or ops (taxonomy 2.2)"); ok = False
+        if lvl == "epic" and s.get("milestone"):
+            print(f"  {sys.argv[1]}:{n}: milestone on an epic — "
+                  "milestone lives on leaves (taxonomy 2.5)"); ok = False
 sys.exit(0 if ok else 1)
 PY
 done

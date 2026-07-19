@@ -21,6 +21,11 @@ of stuff last week and nobody knows what."
 - **Plans are the permanent design record.** Exiting plan mode captures the
   plan to `docs/plans/` and emits tracked items. Planning never evaporates;
   when you need the *why*, read the plan.
+- **A four-axis work taxonomy.** Every item sits on `level`
+  (epic/story/task/subtask), `kind` (feature/bug/ops/triage), `milestone`
+  (what ships together), and planned-vs-discovered. The unclassified default
+  is `triage` — visible in the roadmap's needs-classification queue, never a
+  silent guess.
 - **Generated roadmap and status reports.** `docs/roadmap.md` is rendered
   from the log — no hand-editing, no drift.
 - **Syncs to the team's OWN systems** — wiki *and* tickets. Your work log
@@ -49,8 +54,9 @@ git config core.hooksPath hooks
 Track work with the CLI:
 
 ```sh
-bin/worklog add "Extract auth middleware" --type task --priority P0
-bin/worklog add "Fix flaky retry" --unplanned --discovered-during <id>
+bin/worklog add "Extract auth middleware" --level task --kind feature \
+    --milestone v0.7.0 --priority P0
+bin/worklog add "Fix flaky retry" --kind bug --unplanned --discovered-during <id>
 bin/worklog update <id> --status in_progress
 bin/worklog close <id>
 bin/worklog list
@@ -66,10 +72,26 @@ bin/worklog roadmap-render
 The pre-commit and pre-merge-commit hooks enforce the invariants: trailing
 newline on the log, event schema validation, and `roadmap.md` freshness.
 
+## House rules, enforced
+
+Policy that holds because tooling holds it, not because people remember:
+
+- **PRs merge only when every gate is green.** The merge-green skill (or
+  `/worklog:merge`) polls checks every 5 minutes via `merge-when-green.sh`;
+  never `--admin`, never bypass.
+- **Coverage floor.** CI enforces >=80% line coverage on `bin/*.py`; the
+  target is 95%.
+- **Frozen artifacts.** Plans, roadmap snapshots, and published status
+  reports are written once and never regenerated — corrections go in new
+  documents.
+- **The roadmap is generated.** Never hand-edited; to change it, change the
+  work items and re-render.
+
 ## Claude Code plugin
 
 The plugin (in [plugin/](plugin/)) packages the skills, `/worklog:*`
-commands, and the ExitPlanMode capture hook. Install from this repo:
+commands (including `/worklog:merge`, the green-gates merge loop), and the
+ExitPlanMode capture hook. Install from this repo's marketplace:
 
 ```sh
 claude plugin marketplace add <this-repo-url-or-path>
@@ -88,7 +110,9 @@ Two install levels, deliberately distinct:
 Also: `/worklog:uninstall` removes the tooling but never touches `.work/`
 data, `docs/plans/`, `docs/status/`, or `docs/roadmap.md` — the data
 outlives the tooling. `/worklog:doctor` reports version drift and invariant
-violations without changing anything.
+violations without changing anything. Ticket sync runs through a typed
+adapter contract: `worklog adapter check` validates an adapter against the
+contract before anything activates.
 
 ### Other harnesses (Codex, OpenCode, Grok build)
 
@@ -110,7 +134,9 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | Path | What |
 |---|---|
 | `.work/` | Append-only event log (`todo.jsonl`, `done.jsonl`) and `config.yml` |
-| `bin/` | `worklog` CLI plus its Python modules (`fold.py`, `render_roadmap.py`, `plan_capture.py`, `ulid.py`) |
+| `adapters/` | Ticket-sync adapters: shipped `fake` (CI double) and `github` (worked example), plus authoring rules |
+| `schema/` | JSON Schemas for the adapter contract (capabilities, adapter I/O) |
+| `bin/` | `worklog` CLI plus its Python modules (`fold.py`, `sync_dispatch.py`, `render_roadmap.py`, `plan_capture.py`, `ulid.py`) |
 | `docs/plans/` | Captured plan documents (frontmatter links plans to items) |
 | `docs/status/` | Generated status reports |
 | `docs/roadmap.md` | Generated roadmap — do not edit |
