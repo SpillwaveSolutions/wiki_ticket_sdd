@@ -15,8 +15,16 @@ only writer.
 
 ## Add an item
 
-    bin/worklog add "<title>" [--type epic|story|task|subtask|bug] \
+    bin/worklog add "<title>" [--level epic|story|task|subtask] \
+        [--kind feature|bug|ops|triage] [--milestone v0.6.0] \
         [--priority P0-P3] [--parent <ulid>] [--labels a,b]
+
+Taxonomy rules (spec 5.4): epics are `feature` or `ops` only — kind is free
+at story/task/subtask; bugs may float free of any epic (`--parent` optional).
+`--milestone` goes on leaves (story and below); an epic's milestone derives
+from its children. Unclassified work defaults to `kind:triage` — classify
+deliberately, don't guess. `--type` is a deprecated alias (`bug` →
+`task`/`bug`); prefer `--level`/`--kind`.
 
 ## Unplanned discoveries
 
@@ -30,6 +38,7 @@ something else) MUST be recorded BEFORE doing the work:
 ## Update / close
 
     bin/worklog update <ulid> [--status todo|in_progress|blocked] \
+        [--kind feature|bug|ops|triage] [--milestone v0.6.0] \
         [--priority P0-P3] [--add-label a] [--del-label b]
     bin/worklog close <ulid> --status done|cancelled [--resolution "..."]
 

@@ -1,5 +1,6 @@
 .work/sync-state.json
 .work/changeset.json
+.work/suggestions.jsonl
 .work/results/
 .work/wiki-checkout/
 __pycache__/

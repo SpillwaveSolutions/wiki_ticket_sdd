@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.7.0 — unreleased
+
+- Work taxonomy (plan 2026-07-18): four orthogonal axes — level (epic/story/task/
+  subtask), kind (feature/bug/ops/triage, triage is the visible default), milestone
+  (the release axis), planned/unplanned. Legacy `type` is a deprecated alias the
+  fold normalizes and compaction migrates physically. Canonical hash gains the new
+  fields (one-time sync churn).
+- CLAUDE.md taxonomy block (marker-idempotent, consented at /worklog:init; AGENTS.md
+  symlink carries it to every harness). Inline item proposals are the default path.
+- Flag-gated classifier (off by default): Stop hook gains a propose-only mode, the
+  classify skill stages suggestions in .work/suggestions.jsonl, `worklog promote`
+  is the only path from suggestion to log.
+- Roadmap: Needs-classification queue, kind mix per epic, milestone grouping with
+  derived epic milestones. Adapters map kind→labels and milestone→GitHub milestones.
+- Spec v1.7; migration doc; pre-commit/CI enforce taxonomy rules; README + user
+  guide fully refreshed (no stub-era language remains).
+
 ## 0.6.0 — 2026-07-19
 
 - Green-gates merge policy: /worklog:merge + merge-green skill + merge-when-green.sh

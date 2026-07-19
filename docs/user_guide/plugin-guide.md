@@ -41,6 +41,14 @@ land in `.work/config.yml`'s `ticketing:`/`wiki:` blocks and go into the
 same commit. Upgrade re-runs on an already-configured repo skip detection
 entirely.
 
+Init also offers the **work-taxonomy block** for `CLAUDE.md` — with
+consent, never silently. It shows the block (the four axes, the six rules,
+the inline-proposal policy), asks yes/no, and on yes writes it between
+`<!-- worklog:taxonomy:start/end -->` markers, idempotently: re-running
+updates the block in place, never duplicates it, and plain init never
+touches `CLAUDE.md` at all. Because `AGENTS.md` symlinks to `CLAUDE.md`,
+other harnesses inherit the taxonomy for free.
+
 ### /worklog:uninstall
 
 Remove exactly what init added — the tooling, not the data. It asks for
@@ -58,17 +66,33 @@ present, executable, and byte-identical to the plugin's copies, hooks
 present and `core.hooksPath` wired, and the invariant checks (newline,
 schema, roadmap freshness) passing. Exit 0 healthy, 1 with problems.
 
+### /worklog:merge
+
+Merge a PR the house-rules way: runs `merge-when-green.sh <pr>` in the
+background, polling the PR's checks every 5 minutes (up to 2 h) and merging
+only when every gate is green. Pending means wait; failing means fix; there
+is no `--admin`, no bypass. After the merge it pulls the base branch,
+deletes the local feature branch, syncs tickets if items closed, and
+re-renders the roadmap if the log changed. These are the same house rules
+CI enforces on this repo: green gates on every PR, plus a >=80% line
+coverage floor on `bin/*.py` (target 95).
+
 ## The skills
 
 Skills are the judgment layer: the model decides *when*, the deterministic
 `bin/worklog` scripts decide *what*.
 
-| Skill | Trigger | What it does |
-|---|---|---|
-| `plan-capture` | exiting plan mode, "capture this plan" | Writes the plan doc and creates the epic + items via `worklog plan-capture`, renders the roadmap, commits together |
-| `work-track` | creating/updating/closing items, mid-flight discoveries | Runs the right `worklog` command; enforces "record unplanned work BEFORE doing it" |
-| `plan-next` | "what should we do next?" | Read-only: folds the log, filters open unblocked items, ranks by priority and epic, presents top candidates |
-| `wiki-publish` | "publish the docs", plan completion | Reads the `wiki:` block in `.work/config.yml` and publishes the named docs to that system using whatever tooling is available (`gh`/git for GitHub wiki, MCP/CLI for Confluence, ADO, GitLab — researching missing tooling at runtime). Keeps the `.work/published.json` ledger so pages update instead of duplicating, skips unchanged files, and surfaces one-time setup steps (like creating a GitHub wiki's first page) to the human |
+| Skill | What it does |
+|---|---|
+| `plan-capture` | Turns an approved plan into a frozen plan doc plus tracked items (epic + tasks), renders the roadmap, commits together |
+| `work-track` | Runs the right `worklog` command for create/update/close; enforces "record unplanned work BEFORE doing it" and sets `level`/`kind`/`milestone` |
+| `plan-next` | Read-only "what should we do next?": folds the log, filters open unblocked items, ranks by priority and epic |
+| `ticket-sync` | Runs `worklog adapter check` + `worklog sync` (dispatcher owns the invariants) and reads back the drift report |
+| `wiki-publish` | Publishes the configured docs to the team's wiki with the `.work/published.json` ledger, whatever the system (GitHub/GitLab/ADO/Confluence) |
+| `status-report` | Generates and publishes frozen daily/weekly/timecard reports via `worklog status` |
+| `release` | Cuts a versioned release: stamp the changelog, snapshot the roadmap, tag, platform release, publish, sync |
+| `merge-green` | Merges PRs only when every quality gate is green — polls every 5 minutes via `merge-when-green.sh`, never bypasses |
+| `classify` | Flag-gated classifier: sweeps a conversation for untracked work, propose-only into `.work/suggestions.jsonl` — never the event log |
 
 ## The hooks
 
@@ -79,7 +103,7 @@ ships hooks for the invariants:
 |---|---|---|
 | `ExitPlanMode` (PostToolUse) | a plan is approved | Invokes plan-capture non-optionally — every plan becomes tracked items |
 | `UserPromptSubmit` | each prompt | One-line reminder: requests that produce work get worklog items first; keep statuses moving |
-| `Stop` | Claude finishes responding | If the working tree changed but `.work/todo.jsonl` didn't, block once: record the work items or explain |
+| `Stop` | Claude finishes responding | If the working tree changed but `.work/todo.jsonl` didn't, block once: record the work items or explain. With `classifier.enabled: true` in `.work/config.yml` (**off by default**) it also triggers the classify skill — propose-only suggestions to `.work/suggestions.jsonl`, promoted into real items only via `worklog promote` |
 | `SessionStart` | session opens | Doctor-lite: checks the CLAUDE.md policy block, hook wiring, and version skew; points at `/worklog:init` or `/worklog:doctor` if something's off |
 
 All hooks are silent outside worklog repos (no `bin/worklog`, no output), so

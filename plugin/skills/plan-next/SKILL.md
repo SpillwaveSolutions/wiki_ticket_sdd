@@ -1,7 +1,7 @@
 ---
 name: plan-next
 description: Decide what to work on next — use when asked "what should we do next", "what's most important", or when planning a new work session.
-version: 0.6.0
+version: 0.7.0
 ---
 
 # Plan next

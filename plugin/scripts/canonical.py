@@ -10,7 +10,12 @@ clone. Don't.
 import hashlib
 import json
 
-HASH_FIELDS = ("title", "body", "type", "status", "priority", "parent", "labels", "assignee")
+# Changed in the taxonomy migration (2026-07-18-work-taxonomy): `type` is
+# replaced by level/kind/milestone. The one-time sync churn (every item's hash
+# changes, so the next sync re-pushes everything once) is deliberate; spec
+# section 10.3 is updated by the edges agent.
+HASH_FIELDS = ("title", "body", "level", "kind", "milestone", "status",
+               "priority", "parent", "labels", "assignee")
 
 
 def canonical_json(fields: dict) -> str:

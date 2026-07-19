@@ -1,7 +1,7 @@
 ---
 name: plan-capture
 description: Capture an approved plan as tracked work items. Use when exiting plan mode, when the user approves a plan, or says "capture this plan". Writes docs/plans/<date>-<slug>.md and appends the plan's tasks to .work/todo.jsonl via bin/worklog.
-version: 0.6.0
+version: 0.7.0
 ---
 
 # Plan capture
@@ -15,6 +15,10 @@ version: 0.6.0
 
    Priority token `(P0)`–`(P3)` optional, default P2. Prose (the *why*) goes
    in other sections and is preserved verbatim in the plan doc.
+
+   Captured items are `kind:feature` by design — a plan's tasks deliver
+   planned value. If a captured task is really a defect, retag it after
+   capture: `bin/worklog update <ulid> --kind bug`.
 
 2. Save it to a temp file and run:
 

@@ -375,10 +375,10 @@ class TestPlanCapturePR(unittest.TestCase):
         self.assertTrue(os.path.exists(os.path.join(sb.dir, plan_path)))
         items = sb.fold()
         self.assertEqual(len(items), 4)  # epic + 2 tasks + 1 subtask
-        kinds = sorted(i["type"] for i in items.values())
-        self.assertEqual(kinds, ["epic", "subtask", "task", "task"])
+        levels = sorted(i["level"] for i in items.values())
+        self.assertEqual(levels, ["epic", "subtask", "task", "task"])
         self.assertIn("### Demo plan", sb.read("docs/roadmap.md"))
-        self.assertEqual(items[epic]["type"], "epic")
+        self.assertEqual(items[epic]["level"], "epic")
 
     def test_two_plan_prs_merge_cleanly(self):
         sb = make_sandbox(self)

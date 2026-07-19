@@ -13,7 +13,7 @@ Install (or upgrade) worklog in the current repo:
 
 2. Show the user the script's output (version installed, what was written vs skipped, upgraded-from if applicable).
 
-3. **Detect the repo's systems** — but first check `.work/config.yml`: if its `ticketing:` and `wiki:` blocks already name real systems (not the template defaults), this is an upgrade re-run — SKIP detection entirely, do not re-ask, go to step 7. Otherwise gather evidence:
+3. **Detect the repo's systems** — but first check `.work/config.yml`: if its `ticketing:` and `wiki:` blocks already name real systems (not the template defaults), this is an upgrade re-run — SKIP detection entirely, do not re-ask, go to step 8. Otherwise gather evidence:
 
    - `git remote -v` — map hostnames to platforms: `github.com` → GitHub (Issues, PRs, wiki); `gitlab` → GitLab; `dev.azure.com` / `visualstudio.com` → Azure DevOps; `bitbucket` → Bitbucket.
    - `command -v gh glab az jira acli` — which platform CLIs are installed. For the remote's platform CLI, check auth (e.g. `gh auth status`).
@@ -30,6 +30,14 @@ Install (or upgrade) worklog in the current repo:
 
 6. **Write the answers** into `.work/config.yml` by editing the existing `ticketing:` and `wiki:` blocks in place — set `system`, and fill `project` / `root_url` from what's known (remote URL, org/repo). Keep the file's comments intact.
 
-7. Run `git status`, review the scaffolding it added or updated, and commit it all — scaffold plus config — in ONE commit (e.g. `worklog: scaffold repo (plugin v0.1.0)`). The copies are committed deliberately so git hooks and CI work for teammates who do not have the plugin.
+7. **Offer the work-taxonomy block.** Show the user the taxonomy block (the canonical text is the heredoc in `scripts/init.sh` — four axes, six rules, inline-proposal policy), then AskUserQuestion yes/no: "Teach the work taxonomy in CLAUDE.md?" On yes, run:
+
+   ```
+   bash "${CLAUDE_PLUGIN_ROOT}/scripts/init.sh" taxonomy
+   ```
+
+   This writes ONLY the block, between `<!-- worklog:taxonomy:start/end -->` markers, idempotently — re-running updates in place, never duplicates. Plain `init.sh` never touches it: CLAUDE.md is not silently rewritten. Because `AGENTS.md` symlinks to `CLAUDE.md`, Codex/Grok/OpenCode inherit the block for free.
+
+8. Run `git status`, review the scaffolding it added or updated, and commit it all — scaffold plus config — in ONE commit (e.g. `worklog: scaffold repo (plugin v0.1.0)`). The copies are committed deliberately so git hooks and CI work for teammates who do not have the plugin.
 
 The script is idempotent: re-running on an installed repo is the upgrade path. It never touches existing `.work/*.jsonl` logs.
