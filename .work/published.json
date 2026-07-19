@@ -21,9 +21,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0003-green-gates-merge"
   },
   "cli-reference": {
-    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
+    "rev": "330dbf1",
     "source": "docs/user_guide/cli-reference.md",
-    "source_hash": "08563ca1fac3",
+    "source_hash": "63b9051712be",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/CLI-Reference"
   },
   "home": {
@@ -57,15 +57,15 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-work-taxonomy"
   },
   "plugin-guide": {
-    "rev": "9891e58d916cd6f582d06f0839b436da42143b58",
+    "rev": "330dbf1",
     "source": "docs/user_guide/plugin-guide.md",
-    "source_hash": "7966cfea80ee",
+    "source_hash": "ea9932c577ee",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plugin-Guide"
   },
   "roadmap": {
-    "rev": "4eb34bd89093c26cd272a88b33d85a379a9c65c3",
+    "rev": "330dbf1",
     "source": "docs/roadmap.md",
-    "source_hash": "0766b190509b",
+    "source_hash": "e243d9332cbc",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap"
   },
   "roadmap/2026-07-18_v0.2-roadmap": {
@@ -111,9 +111,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.9.0-release"
   },
   "spec": {
-    "rev": "9891e58d916cd6f582d06f0839b436da42143b58",
+    "rev": "330dbf1",
     "source": "docs/worklog-spec.md",
-    "source_hash": "c6600715dc31",
+    "source_hash": "acc9a5a5a359",
     "title": "Worklog-Spec",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Worklog-Spec"
   },
@@ -137,9 +137,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-19-daily"
   },
   "user-guide": {
-    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
+    "rev": "330dbf1",
     "source": "docs/user_guide/user-guide.md",
-    "source_hash": "f0d32b0857ba",
+    "source_hash": "d84e6dfd15b2",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/User-Guide"
   }
 }
