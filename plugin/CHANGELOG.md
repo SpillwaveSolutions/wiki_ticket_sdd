@@ -2,6 +2,8 @@
 
 ## 0.10.0 — unreleased
 
+- Stop hook: untracked files no longer count as unrecorded work (-uno) — the
+  actual root cause of the false blocks; #46's settle guard kept as hardening.
 - Stop hook: settle-and-recheck + branch-stability guard — no more false blocks
   when a background merge chain flips branches mid-invocation (observed 3x).
 
