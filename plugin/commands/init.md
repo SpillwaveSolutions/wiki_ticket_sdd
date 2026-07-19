@@ -15,9 +15,9 @@ Install (or upgrade) worklog in the current repo:
 
 3. **Detect the repo's systems** — but first check `.work/config.yml`: if its `ticketing:` and `wiki:` blocks already name real systems (not the template defaults), this is an upgrade re-run — SKIP detection entirely, do not re-ask, go to step 8. Otherwise gather evidence:
 
-   - `git remote -v` — map hostnames to platforms: `github.com` → GitHub (Issues, PRs, wiki); `gitlab` → GitLab; `dev.azure.com` / `visualstudio.com` → Azure DevOps; `bitbucket` → Bitbucket.
-   - `command -v gh glab az jira acli` — which platform CLIs are installed. For the remote's platform CLI, check auth (e.g. `gh auth status`).
-   - MCP tools available in this session — a Jira/Confluence/Notion MCP is evidence the team uses that system.
+   - `git remote -v` — map hostnames to platforms: `github.com` → GitHub (Issues, PRs, wiki); `gitlab` → GitLab; `dev.azure.com` / `visualstudio.com` → Azure DevOps; `codecatalyst.aws` → AWS CodeCatalyst; `bitbucket` → Bitbucket. Trackers with no git hosting (Linear, Jira) never show in remotes — CLI/MCP evidence is how they surface.
+   - `command -v gh glab az jira acli aws linear` — which platform CLIs are installed. For the remote's platform CLI, check auth (e.g. `gh auth status`).
+   - MCP tools available in this session — a Jira/Confluence/Linear/Notion MCP is evidence the team uses that system.
 
 4. **Confident case.** If tickets, PRs, and wiki are all confidently determined (e.g. a single `github.com` origin and `gh` is authenticated), present ONE short summary and ask a single yes/no via AskUserQuestion:
 
@@ -25,8 +25,13 @@ Install (or upgrade) worklog in the current repo:
 
 5. **Unsure case** (mixed signals, no remote, or the user said no): AskUserQuestion per area, multiSelect on, so teams can pick and mix (GitHub PRs + Jira tickets + Confluence wiki is a legal combination):
 
-   - **Tickets**: GitHub Issues, GitLab, Azure DevOps, Jira
-   - **Wiki**: GitHub wiki, GitLab wiki, ADO wiki, Confluence, none
+   - **Tickets**: GitHub Issues, GitLab, Azure DevOps, Jira, Linear, AWS CodeCatalyst, other
+   - **Wiki**: GitHub wiki, GitLab wiki, ADO wiki, Confluence, other, none
+
+   `other` is a real answer, not a shrug: write `system: other` plus the actual
+   system name in `options:`, and the sync/publish skills resolve tooling at
+   runtime. (GCP has no native tracker — GCP-hosted teams land on one of the
+   above.)
 
 6. **Write the answers** into `.work/config.yml` by editing the existing `ticketing:` and `wiki:` blocks in place — set `system`, and fill `project` / `root_url` from what's known (remote URL, org/repo). Keep the file's comments intact.
 

@@ -7,12 +7,12 @@ project:
   name: "Acme Platform"
 
 ticketing:
-  system: github               # jira | ado | github | none
+  system: github               # github | gitlab | jira | ado | linear | codecatalyst | other | none
   # sync is skill-based (ticket-sync); no adapter binary
   project: SpillwaveSolutions/wiki_ticket_sdd
 
 wiki:
-  system: github-wiki          # confluence | github-wiki | ado-wiki | none
+  system: github-wiki          # github-wiki | gitlab-wiki | ado-wiki | confluence | other | none
   # publishing is skill-based (wiki-publish); no adapter binary
   root_url: https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki
 

@@ -127,10 +127,10 @@ project:
   name: "My Project"
 
 ticketing:
-  system: none                 # jira | ado | github | none
+  system: none                 # github | gitlab | jira | ado | linear | codecatalyst | other | none
 
 wiki:
-  system: none                 # confluence | github-wiki | ado-wiki | none
+  system: none                 # github-wiki | gitlab-wiki | ado-wiki | confluence | other | none
 
 paths:
   plans: docs/plans

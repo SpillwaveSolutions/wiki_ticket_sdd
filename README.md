@@ -34,7 +34,9 @@ of stuff last week and nobody knows what."
 ## System-agnostic edges, deliberately
 
 Works equally with GitHub, GitLab, Azure DevOps (wiki + work items), Jira,
-Confluence — and whatever the equivalent is elsewhere. The team picks.
+Linear, AWS CodeCatalyst, Confluence — and `other` is a first-class config
+value for anything else. The team picks. (GCP ships no native tracker;
+GCP-hosted teams pick from the list like everyone else.)
 
 The core never contains per-system code. Publishing and sync are done by
 *skills* that instruct the AI to use whatever CLI, MCP server, or skill is

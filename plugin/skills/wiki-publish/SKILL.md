@@ -12,8 +12,11 @@ tooling exists for that system — you already know these platforms.
 ## 1. Read the config
 
 Read the `wiki:` block in `.work/config.yml`. `system` names the wiki:
-`github-wiki`, `gitlab-wiki`, `ado-wiki`, `confluence`, or `none`. If it is
-`none` or absent, say so and stop — there is nothing to publish to.
+`github-wiki`, `gitlab-wiki`, `ado-wiki`, `confluence`, `other`, or `none`.
+If it is `none` or absent, say so and stop — there is nothing to publish to.
+The enum is advisory — `other` is any wiki not listed (Notion, MediaWiki,
+a docs site): set it, name the real system in `options:`, and resolve the
+tooling at runtime like any other system below.
 
 ## 2. Pick the tooling
 
