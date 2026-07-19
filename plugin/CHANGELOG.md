@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.7.0 — unreleased
+## 0.7.0 — 2026-07-19
 
 - Work taxonomy (plan 2026-07-18): four orthogonal axes — level (epic/story/task/
   subtask), kind (feature/bug/ops/triage, triage is the visible default), milestone
