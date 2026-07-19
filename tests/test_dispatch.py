@@ -168,5 +168,15 @@ class TestSchemaMirror(unittest.TestCase):
                              "mirror schema/capabilities.schema.json")
 
 
+class TestOrphanNeverPushed(Sandbox):
+    def test_orphan_and_titleless_items_are_drift_not_tickets(self):
+        # a typo'd update creates a fold orphan: an event whose item has no create
+        self.wl("update", "01ZZZZZZZZZZZZZZZZZZZZZZZZ", "--add-label", "oops")
+        out = self.sync("--push-only")
+        self.assertEqual(self.fake("_count"), "0", out)
+        self.assertIn("orphan/untitled item skipped", out)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
