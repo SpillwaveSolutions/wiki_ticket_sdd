@@ -51,7 +51,8 @@ def make_repo(tc):
     subprocess.run(["git", "-C", d, "add", "-A"], check=True)
     subprocess.run(["git", "-C", d, "commit", "-qm", "base"], check=True)
     # Dirty the tree outside .work so the hook's gate fires.
-    open(os.path.join(d, "src.txt"), "w").write("work happened\n")
+    # tracked-file modification: -uno means untracked files never count as work
+    open(os.path.join(d, "base.txt"), "a").write("work happened\n")
     return d
 
 
@@ -102,7 +103,8 @@ class TestStopHookClassifierGate(unittest.TestCase):
     def test_clean_tree_stays_silent_in_both_modes(self):
         for cfg in (CLASSIFIER_ON, CLASSIFIER_OFF):
             d = make_repo(self)
-            os.remove(os.path.join(d, "src.txt"))  # clean tree
+            # clean tree: restore the tracked file to its committed content
+            open(os.path.join(d, "base.txt"), "w").write("base\n")
             with open(os.path.join(d, ".work", "config.yml"), "w") as fh:
                 fh.write(cfg)
             r = run_hook(d)

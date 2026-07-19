@@ -10,14 +10,14 @@ fi
 
 # Any git failure (not a repo, etc.) → allow stop silently.
 branch_before=$(git -C "$PWD" rev-parse --abbrev-ref HEAD 2>/dev/null) || exit 0
-dirty=$(git -C "$PWD" status --porcelain -- . ':!.work' ':!docs/roadmap.md' 2>/dev/null) || exit 0
+dirty=$(git -C "$PWD" status --porcelain -uno -- . ':!.work' ':!docs/roadmap.md' 2>/dev/null) || exit 0
 [ -n "$dirty" ] || exit 0
 # Settle-and-recheck: background merge chains flip branches mid-invocation and
 # the first status read can see transient checkout state (observed 3x on
 # 2026-07-19: false blocks with a clean tree). Re-read after a pause; if the
 # tree settled clean or the branch moved under us, allow stop.
 sleep "${WORKLOG_STOP_SETTLE:-2}"
-dirty=$(git -C "$PWD" status --porcelain -- . ':!.work' ':!docs/roadmap.md' 2>/dev/null) || exit 0
+dirty=$(git -C "$PWD" status --porcelain -uno -- . ':!.work' ':!docs/roadmap.md' 2>/dev/null) || exit 0
 [ -n "$dirty" ] || exit 0
 branch_after=$(git -C "$PWD" rev-parse --abbrev-ref HEAD 2>/dev/null) || exit 0
 [ "$branch_before" = "$branch_after" ] || exit 0
