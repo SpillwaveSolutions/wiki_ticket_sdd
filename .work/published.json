@@ -27,9 +27,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/CLI-Reference"
   },
   "home": {
-    "rev": "d08da9fbe9c0e14552c5d53dec0d78b8b13415c6",
+    "rev": "a79ff95a43ec714e8d49dc5605f0fc6fae64e4c9",
     "source": "docs/wiki-home.md",
-    "source_hash": "c01f700c28d4",
+    "source_hash": "150c7e0aecd9",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Home"
   },
   "plan/grok-compat-and-mermaid-viz": {
@@ -63,9 +63,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plugin-Guide"
   },
   "roadmap": {
-    "rev": "d08da9fbe9c0e14552c5d53dec0d78b8b13415c6",
+    "rev": "a79ff95a43ec714e8d49dc5605f0fc6fae64e4c9",
     "source": "docs/roadmap.md",
-    "source_hash": "633a2dc1a236",
+    "source_hash": "27dedc835686",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap"
   },
   "roadmap/2026-07-18_v0.2-roadmap": {
@@ -97,6 +97,12 @@
     "source": "docs/roadmap/2026-07-19_v0.8.0-release.md",
     "source_hash": "79a3ec287ce7",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.8.0-release"
+  },
+  "roadmap/2026-07-19_v0.9.0-release": {
+    "rev": "a79ff95a43ec714e8d49dc5605f0fc6fae64e4c9",
+    "source": "docs/roadmap/2026-07-19_v0.9.0-release.md",
+    "source_hash": "b041db8d0571",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.9.0-release"
   },
   "spec": {
     "rev": "9891e58d916cd6f582d06f0839b436da42143b58",

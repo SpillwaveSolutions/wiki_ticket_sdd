@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.9.0 — unreleased
+## 0.9.0 — 2026-07-19
 
 - Mermaid visual roadmap: `roadmap-render --viz=deps,hierarchy,gantt|all|none`
   (default deps,hierarchy; `--no-viz` alias) appends a generated

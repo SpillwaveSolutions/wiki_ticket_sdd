@@ -1,7 +1,7 @@
 ---
 name: release
 description: Cut a versioned release — stamp the changelog, snapshot the roadmap, tag, create the platform release, publish, and sync. Use when asked to "cut a release", "ship vX.Y.Z", "tag a version", or when an unreleased changelog section is ready to go out.
-version: 0.8.0
+version: 0.9.0
 ---
 
 # Release
