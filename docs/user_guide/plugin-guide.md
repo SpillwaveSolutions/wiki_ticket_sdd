@@ -111,7 +111,10 @@ the plugin doesn't nag in repos that don't use it.
 
 ## Harness support
 
-The Claude plugin format works with **Claude Code and Grok build today** —
+The Claude plugin format works with **Claude Code and Grok build today** (per
+the xAI docs, Grok is fully compatible with Claude Code with zero
+configuration, automatically reading Claude Code marketplaces, plugins,
+skills, MCPs, agents, hooks, and instruction files) —
 all real settings live in `.work/config.yml` (never in the agent file), and
 `/worklog:init` scaffolds `AGENTS.md` as a symlink to `CLAUDE.md`, so one
 policy file serves every harness that reads either name. **Codex and

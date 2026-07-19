@@ -122,7 +122,10 @@ contract before anything activates.
 The repo scaffold is harness-independent: `bin/worklog`, the git hooks, and
 CI are committed and work from any shell. The `AGENTS.md` symlink (created
 by `/worklog:init`, pointing at `CLAUDE.md`) carries the full worklog policy
-to any harness that reads `AGENTS.md`. See
+to any harness that reads `AGENTS.md`. Grok Build is fully compatible with
+Claude Code with zero configuration — per the xAI docs it automatically reads
+Claude Code marketplaces, plugins, skills, MCPs, agents, hooks, and
+instruction files. See
 [plugin/PORTS.md](plugin/PORTS.md) for the support matrix and porting guide.
 
 ## How it works

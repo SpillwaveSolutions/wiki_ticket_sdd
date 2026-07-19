@@ -7,9 +7,22 @@ Tracking: GitHub issue #9. The Claude Code plugin format is canonical.
 | Harness | Status | What you get |
 |---|---|---|
 | Claude Code | Canonical | Full experience: auto-invoked skills, `/worklog:*` commands, ExitPlanMode/Stop/SessionStart hooks |
-| Grok build | Canonical (reads the same plugin format) | Same as Claude Code |
+| Grok build | Full native compatibility, zero configuration | Same as Claude Code: marketplaces, plugins, skills, MCPs, agents, hooks, instruction files |
 | Codex | Works today, zero port needed for the core | Policy via `AGENTS.md` (symlinked to `CLAUDE.md` by `/worklog:init`), plus everything the repo scaffold commits: `bin/worklog`, git hooks, CI |
 | OpenCode | Works today, zero port needed for the core | Same as Codex |
+
+### Grok build
+
+Per the xAI docs (Skills, Plugins & Marketplaces): "Grok is fully compatible
+with Claude Code with zero configuration needed. Grok automatically reads
+Claude Code marketplaces, plugins, skills, MCPs, agents, hooks, and
+instruction files (CLAUDE.md, Claude.md, CLAUDE.local.md, and .claude/rules/)
+alongside .grok/." So the worklog plugin — manifest, commands, skills, hooks —
+and the `/worklog:init` scaffold work in Grok Build natively; nothing to port.
+
+Note: this claim is sourced from the xAI docs; a verification task is
+pending — run `/worklog:init` plus one `/worklog:*` command under Grok Build
+and record the result here.
 
 The core is harness-independent by design: ALL real settings live in
 `.work/config.yml`, ALL policy lives in `CLAUDE.md`, and `AGENTS.md` is a

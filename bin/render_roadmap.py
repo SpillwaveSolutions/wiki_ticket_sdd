@@ -115,7 +115,13 @@ def row(i, items):
             f"| {i.get('status', '').replace('_', ' ')} | {blockers} |")
 
 
-def render(paths=PATHS):
+VIZ_ALL = ("deps", "hierarchy", "gantt")
+
+
+def render(paths=PATHS, viz="deps,hierarchy"):
+    # Default MUST match cmd_roadmap_render's --viz default: the pre-commit
+    # freshness gate diffs bare `python3 bin/render_roadmap.py` output against
+    # the file worklog wrote.
     r = fold(paths)
     items = r.items
 
@@ -214,6 +220,14 @@ def render(paths=PATHS):
         attention.append(f"- Orphan events for `{iid[:8]}` — no create/snapshot yet.")
     if attention:
         lines += ["", "## Needs attention", ""] + attention
+
+    which = VIZ_ALL if viz == "all" else \
+        tuple(s.strip() for s in (viz or "").split(",") if s.strip() != "")
+    if viz not in ("none", "", None) and which:
+        import viz_mermaid
+        vsec = viz_mermaid.render_viz(r, paths, which)
+        if vsec:
+            lines += ["", vsec]
 
     return "\n".join(lines) + "\n"
 
