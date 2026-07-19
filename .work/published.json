@@ -63,10 +63,16 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plugin-Guide"
   },
   "roadmap": {
-    "rev": "330dbf1",
+    "rev": "6980b59",
     "source": "docs/roadmap.md",
-    "source_hash": "e243d9332cbc",
+    "source_hash": "35c6393d0480",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap"
+  },
+  "roadmap-snapshot/2026-07-19_v0.11.0-release": {
+    "rev": "6980b59",
+    "source": "docs/roadmap/2026-07-19_v0.11.0-release.md",
+    "source_hash": "e243d9332cbc",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.11.0-release"
   },
   "roadmap/2026-07-18_v0.2-roadmap": {
     "rev": "969055dd7d8af5876956c25dca564e4bbe8749f1",
