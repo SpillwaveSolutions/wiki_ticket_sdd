@@ -13,6 +13,15 @@ Read section 6 before changing anything in here. In particular:
   - `close` takes its status from `set`, it does not assume "done".
   - A later write to a field clears earlier recorded conflicts on that field
     (section 10.6); a conflict recorded after the write stays open.
+
+Taxonomy migration (docs/plans/2026-07-18-work-taxonomy.md section 3.2): the
+legacy single `type` field is a deprecated alias. On create/snapshot the fold
+normalizes it into (`level`, `kind`) and drops `type` from the ITEM (the event
+line is never touched). A create carrying neither type nor kind folds to
+kind:triage -- unclassified must look unclassified (section 2.3). This is
+LENIENT by design: the fold never crashes on a bad pair; hard validation
+lives at write time (CLI) and in the hook/CI check. Compaction snapshots the
+normalized state, so logs migrate physically at the next nightly run.
 """
 
 import hashlib
@@ -23,6 +32,28 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple
 SET_VALUED = ("labels", "depends_on")
 OPEN_STATUSES = ("todo", "in_progress", "blocked")
 CLOSED_STATUSES = ("done", "cancelled")
+
+# Legacy `type` -> (level, kind). Spec 2026-07-18-work-taxonomy section 3.2.
+LEGACY_TYPE_MAP = {
+    "epic": ("epic", "feature"),
+    "story": ("story", "feature"),
+    "task": ("task", "feature"),
+    "subtask": ("subtask", "feature"),
+    "bug": ("task", "bug"),
+}
+
+
+def _normalize_taxonomy(item: Dict[str, Any]) -> None:
+    """Normalize a freshly created/snapshotted item to the (level, kind) model.
+
+    Lenient: unknown legacy types just fall through to the defaults
+    (level:task, kind:triage). Never raises.
+    """
+    t = item.pop("type", None)
+    if t in LEGACY_TYPE_MAP and "level" not in item and "kind" not in item:
+        item["level"], item["kind"] = LEGACY_TYPE_MAP[t]
+    item.setdefault("level", "task")
+    item.setdefault("kind", "triage")
 
 
 class FoldResult:
@@ -168,6 +199,7 @@ def fold(paths: Iterable[str] = ("todo.jsonl", "done.jsonl")) -> FoldResult:
             # watermark. Never merge into what's already there.
             item = {"id": iid}
             _apply_mutations(item, ev)
+            _normalize_taxonomy(item)
             result.items[iid] = item
             continue
 
@@ -178,6 +210,7 @@ def fold(paths: Iterable[str] = ("todo.jsonl", "done.jsonl")) -> FoldResult:
                 continue
             item = {"id": iid}
             _apply_mutations(item, ev)
+            _normalize_taxonomy(item)
             result.items[iid] = item
             continue
 

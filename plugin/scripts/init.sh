@@ -11,6 +11,63 @@ if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
 fi
 cd "$(git rev-parse --show-toplevel)"
 
+# --- work-taxonomy block (spec: docs/plans/2026-07-18-work-taxonomy.md §4) ---
+# Written between markers so re-running updates in place, never duplicates.
+# Only `init.sh taxonomy` touches it — the default flow never writes it; the
+# /worklog:init command asks the user first (CLAUDE.md is not silently rewritten).
+install_taxonomy_block() {
+  # Block text lives in the python heredoc (not $(cat <<EOF)): macOS bash 3.2
+  # mis-parses apostrophes inside heredocs within command substitution.
+  python3 - CLAUDE.md <<'PYEOF'
+import os, re, sys
+p = sys.argv[1]
+block = """<!-- worklog:taxonomy:start -->
+## Work taxonomy
+
+Every work item sits on four independent axes:
+
+| Axis | Field | Values | Answers |
+|---|---|---|---|
+| Level | `level` | epic / story / task / subtask | size & place in the parent tree |
+| Kind | `kind` | feature / bug / ops / triage | nature of the work |
+| Milestone | `milestone` | free string (e.g. v0.6.0) or null | what ships together |
+| Planned | `unplanned` + `discovered_during` | bool + ULID | deliberate vs discovered |
+
+Rules (the validator enforces these; apply them when proposing items):
+1. Kind is free at story/task/subtask.
+2. Epics are `feature` or `ops` only — a bug is never epic-sized.
+3. `kind` defaults to `triage` when omitted — never silently default to feature.
+4. `bug.parent` is optional; bugs may float free of any epic.
+5. `milestone` lives on leaves (story and below); an epic's milestone derives from its children.
+6. `triage` and `ops` both trend down: triage shrinks by classifying, ops by automating.
+
+When trackable work surfaces in conversation, propose an item inline as part of
+the normal response — "want me to file this? `level:story kind:feature
+parent:<ulid> milestone:v0.6.0`" — and create it only on assent, via the
+work-track or plan-capture skill. When unsure of the kind, propose `kind:triage`
+with the open question stated — triage is the honest default, never a confident
+guess. This inline path is the default; the flag-gated classifier (`classifier:`
+in `.work/config.yml`, off by default) is the escape hatch for teams where work
+keeps escaping the log.
+<!-- worklog:taxonomy:end -->"""
+text = open(p).read() if os.path.exists(p) else ""
+pat = re.compile(r"<!-- worklog:taxonomy:start -->.*?<!-- worklog:taxonomy:end -->", re.S)
+if pat.search(text):
+    text = pat.sub(lambda m: block, text, count=1)
+else:
+    if text and not text.endswith("\n"):
+        text += "\n"
+    text += ("\n" if text else "") + block + "\n"
+open(p, "w").write(text)
+PYEOF
+  echo "CLAUDE.md taxonomy block installed (between worklog:taxonomy markers)."
+}
+
+if [ "${1:-}" = "taxonomy" ]; then
+  install_taxonomy_block
+  exit 0
+fi
+
 PLUGIN_VERSION=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["version"])' \
   "$PLUGIN_ROOT/.claude-plugin/plugin.json")
 

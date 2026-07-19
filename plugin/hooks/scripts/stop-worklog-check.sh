@@ -15,10 +15,22 @@ dirty=$(git -C "$PWD" status --porcelain -- . ':!.work' ':!docs/roadmap.md' 2>/d
 git -C "$PWD" rev-parse --verify HEAD >/dev/null 2>&1 || exit 0
 
 # Tree changed outside .work/roadmap, but todo.jsonl is untouched vs HEAD:
-# work happened with no work item recorded. Block once.
+# work happened with no work item recorded.
 if git -C "$PWD" diff --quiet HEAD -- .work/todo.jsonl 2>/dev/null; then
-  cat <<'EOF'
+  # Flag-gated classifier (spec §6.2): naive-yaml read of classifier.enabled.
+  # Absent block, absent file, or anything but "true" → v0.6 behavior unchanged.
+  enabled=$(sed -n '/^classifier:/,/^[a-zA-Z]/s/^[[:space:]]*enabled:[[:space:]]*\([a-z]*\).*/\1/p' .work/config.yml 2>/dev/null | head -1)
+  if [ "$enabled" = "true" ]; then
+    # Cheap no-model gate already passed: tree changed AND no new todo events.
+    # A Stop hook cannot spawn subagents itself — emit context instructing the
+    # main model to run the classify skill (which spawns the background worker).
+    cat <<'EOF'
+{"hookSpecificOutput":{"hookEventName":"Stop","additionalContext":"worklog classifier: this exchange may contain untracked work — run the classify skill: spawn ONE background subagent to propose items into .work/suggestions.jsonl (propose-only; never writes the log), then review its suggestions next turn (worklog promote <id> to accept)."}}
+EOF
+  else
+    cat <<'EOF'
 {"decision":"block","reason":"worklog: the working tree changed but no work items were recorded this session. Record them (bin/worklog add/update/close + roadmap-render) or state why no item applies, then finish."}
 EOF
+  fi
 fi
 exit 0

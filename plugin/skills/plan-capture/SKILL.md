@@ -16,6 +16,10 @@ version: 0.6.0
    Priority token `(P0)`–`(P3)` optional, default P2. Prose (the *why*) goes
    in other sections and is preserved verbatim in the plan doc.
 
+   Captured items are `kind:feature` by design — a plan's tasks deliver
+   planned value. If a captured task is really a defect, retag it after
+   capture: `bin/worklog update <ulid> --kind bug`.
+
 2. Save it to a temp file and run:
 
        bin/worklog plan-capture --slug <kebab-slug> --title "<plan title>" --file <tempfile>

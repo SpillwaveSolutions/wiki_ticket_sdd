@@ -37,6 +37,20 @@ JSON over stdin/stdout, one process call per verb. Full spec:
 | `get <key>` | argv | one canonical item (pull_line shape) | §3.4 |
 | `close <key> <resolution>` | argv | `{"key", "rev"}` | §3.5 |
 
+## Taxonomy mapping (worklog-spec §5.4 v1.7; plan 2026-07-18-work-taxonomy §3.4)
+
+Items carry `level` (epic|story|task|subtask), `kind` (feature|bug|ops|triage),
+and `milestone` (string|null). `capabilities.types` is keyed by **level**;
+`capabilities.kinds` is an optional informational map of kind → platform
+treatment. Legacy `type` is a deprecated alias adapters tolerate on input.
+
+| Field | GitHub | Jira (reference) | Notes |
+|---|---|---|---|
+| `level` | `level:<level>` label; issue vs nothing per `capabilities.types` (`epic: null` → degrade) | issue type (Epic/Story/Task/Sub-task) | keyed by level, never the deprecated `type` |
+| `kind` | `kind:<kind>` label; `kind:bug` also gets the platform `bug` label | label; `bug` → Bug issue type | see `capabilities.kinds` |
+| `milestone` | GitHub milestone — best-effort `gh issue edit --milestone`, milestone created via `gh api` if missing; errors → stderr, never fatal | `fixVersion` | dispatcher reports drift; adapter never fails on it |
+| `type` (deprecated) | pull falls back to `type:*` labels when no `level:*` present (`bug` → `task`/`bug`) | — | pre-1.7 tickets still round-trip; alias dies at next compaction |
+
 ## Environment
 
 Connection details come from env, never argv:

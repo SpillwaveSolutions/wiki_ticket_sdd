@@ -17,13 +17,22 @@ MARKER = re.compile(r"worklog:([0-9A-Z]{26})")
 CAPABILITIES = {
     "system": "github",
     "supports": ["push", "pull", "get", "close"],
+    # Keyed by LEVEL (worklog-spec §5.4 v1.7) — a bug is a kind, not a level.
     "types": {"epic": None, "story": "Issue", "task": "Issue",
-              "subtask": "Issue", "bug": "Issue"},
+              "subtask": "Issue"},
+    # Informational: how each kind lands on the platform.
+    "kinds": {"feature": "default", "bug": "bug label", "ops": "label",
+              "triage": "needs-triage label"},
     "marker": {"style": "html_comment", "template": "<!-- worklog:{ulid} -->"},
     "fields": {"parent": "body-line", "depends_on": "unsupported",
-               "assignee": "assignee"},
+               "assignee": "assignee", "milestone": "milestone"},
     "max_title": 256,
 }
+
+# Deprecated `type` alias -> (level, kind); the fold normalizes, we tolerate.
+LEGACY_TYPE = {"epic": ("epic", "feature"), "story": ("story", "feature"),
+               "task": ("task", "feature"), "subtask": ("subtask", "feature"),
+               "bug": ("task", "bug")}
 
 
 def log(msg):
@@ -79,13 +88,46 @@ def issue_rev(repo, key):
     return json.loads(out)["updatedAt"]
 
 
+def taxonomy(item):
+    """(level, kind) from the item; deprecated `type` alias tolerated."""
+    level, kind = item.get("level"), item.get("kind")
+    if not level and item.get("type"):
+        lv, kd = LEGACY_TYPE.get(item["type"], (item["type"], None))
+        level, kind = lv, kind or kd
+    return level, kind
+
+
 def item_labels(item):
     labels = ["worklog"]
-    if item.get("type"):
-        labels.append(f"type:{item['type']}")
+    level, kind = taxonomy(item)
+    if level:
+        labels.append(f"level:{level}")
+    if kind:
+        labels.append(f"kind:{kind}")
+    if kind == "bug":
+        labels.append("bug")  # the platform's native bug label too
     if item.get("priority"):
         labels.append(item["priority"])
     return labels
+
+
+def set_milestone(repo, key, milestone):
+    # ponytail: best-effort translation — create the milestone if absent,
+    # attach it; every failure goes to stderr, none is fatal.
+    p = subprocess.run(["gh", "api", f"repos/{repo}/milestones",
+                        "--jq", ".[].title"], capture_output=True, text=True)
+    titles = p.stdout.splitlines() if p.returncode == 0 else []
+    if milestone not in titles:
+        c = subprocess.run(["gh", "api", f"repos/{repo}/milestones",
+                            "-f", f"title={milestone}"],
+                           capture_output=True, text=True)
+        if c.returncode != 0:
+            log(f"milestone create {milestone}: {c.stderr.strip()}")
+    e = subprocess.run(["gh", "issue", "edit", str(key), "-R", repo,
+                        "--milestone", milestone],
+                       capture_output=True, text=True)
+    if e.returncode != 0:
+        log(f"milestone {milestone} on #{key}: {e.stderr.strip()}")
 
 
 def build_body(marker, item):
@@ -109,14 +151,30 @@ def to_line(issue):
     }
     if (issue.get("state") or "").upper() == "CLOSED":
         line["status"] = "done"
+    legacy = None
     for lab in issue.get("labels") or []:
         name = lab.get("name") if isinstance(lab, dict) else lab
         if name in ("P0", "P1", "P2", "P3"):
             line["priority"] = name
+        elif name.startswith("level:"):
+            line["level"] = name[len("level:"):]
+        elif name.startswith("kind:"):
+            line["kind"] = name[len("kind:"):]
+        elif name.startswith("type:"):
+            legacy = name[len("type:"):]
+    if legacy and "level" not in line:
+        # Ticket pushed under the pre-1.7 type:* scheme still round-trips.
+        level, kind = LEGACY_TYPE.get(legacy, (legacy, None))
+        line["level"] = level
+        if kind and "kind" not in line:
+            line["kind"] = kind
+    ms = issue.get("milestone")
+    if isinstance(ms, dict) and ms.get("title"):
+        line["milestone"] = ms["title"]
     return line
 
 
-ISSUE_JSON = "number,title,body,labels,state,updatedAt"
+ISSUE_JSON = "number,title,body,labels,state,milestone,updatedAt"
 
 
 def fetch_issue(repo, key):
@@ -157,6 +215,9 @@ def cmd_push():
         url = f"https://github.com/{repo}/issues/{key}"
     else:
         die(1, f"unknown push op: {op!r}")
+
+    if item.get("milestone"):
+        set_milestone(repo, key, item["milestone"])
 
     print(json.dumps({"key": str(key), "url": url,
                       "rev": issue_rev(repo, key), "hash": None}))

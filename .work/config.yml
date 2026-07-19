@@ -34,6 +34,11 @@ sync:
   conflict_policy: report      # report | local-wins | remote-wins
   push_on_capture: true
 
+classifier:
+  enabled: false             # OFF by default. Inline CLAUDE.md path handles the common case.
+  min_confidence: 0.7        # below this, propose kind:triage + open question, never a confident kind
+  debounce: stop             # fire on the Stop hook (end of response), not per user message
+
 # NOT configurable: the body-size cap (section 8.3) is derived from PIPE_BUF,
 # not chosen. It lives in code as a constant. A knob whose only valid value is
 # the default is a trap.

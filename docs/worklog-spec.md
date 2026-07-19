@@ -1,7 +1,9 @@
 # Worklog: Visible-WIP Work Tracking Spec
 
-**Version:** 1.6
-**Status:** Implemented through §18 step 8; wiki publish (step 9) done for github-wiki; step 10 outstanding; step 11 (typed adapter contract) in progress on this branch
+**Version:** 1.7
+**Status:** Implemented through §18 step 8; wiki publish (step 9) done for github-wiki; step 10 outstanding; step 11 (typed adapter contract) shipping; step 12 (work taxonomy) in progress on this branch
+
+**Changes since 1.6:** the work-taxonomy fields land (docs/plans/2026-07-18-work-taxonomy.md). §5.4 splits `type` into two orthogonal axes — `level` (epic|story|task|subtask) and `kind` (feature|bug|ops|triage) — and adds `milestone` (the release axis); `type` survives as a deprecated alias the fold normalizes on load (`epic→epic/feature`, `story→story/feature`, `task→task/feature`, `subtask→subtask/feature`, `bug→task/bug`) and the next compaction migrates physically. §10.3's canonical-hash field list becomes `{title, body, level, kind, milestone, status, priority, parent, labels, assignee}` — a one-time hash churn: the first sync after upgrading re-pushes every in-scope item once (idempotent by marker, so no duplicates). §12 gains the flag-gated, propose-only `classify` skill row and taxonomy pointers. §18 gains step 12. Migration note: `docs/migrations/0001-type-split.md`.
 
 **Changes since 1.5:** §8.1 gains a hosted-platform caveat — GitHub's server-side merge does not run `.gitattributes` merge drivers (even built-in `union`), so concurrent PRs conflict in the web UI; documented recovery (found merging PR #24, issue #25). §9 gains §9.5: the typed adapter contract layer (docs/plans/2026-07-18-typed-adapter-contract.md) now shipping — the dispatcher owns the sync invariants in code, adapters are generated dumb translators validated by `worklog adapter check`, and a fake adapter makes the invariants CI-testable with no network. Skills orchestrate; the dispatcher enforces. §18 gains step 11.
 
@@ -225,7 +227,9 @@ Each line of `todo.jsonl` is one immutable event. State is a **fold** over event
 | Field | Type | Notes |
 |---|---|---|
 | `id` | ULID | Implicit (the `item` field). **The primary key, always.** |
-| `type` | `epic` \| `story` \| `task` \| `subtask` \| `bug` | |
+| `level` | `epic` \| `story` \| `task` \| `subtask` | Size and place in the parent tree. Pure decomposition — a bug is a kind, not a level. |
+| `kind` | `feature` \| `bug` \| `ops` \| `triage` | Nature of the work. Defaults to `triage` when a `create` omits it — an unclassified item must *look* unclassified, never silently `feature`. |
+| `milestone` | string \| null | The release axis: what ships together (`v0.6.0`). Cross-cuts the tree. |
 | `title` | string | ≤ 120 chars. |
 | `body` | markdown | Optional longer description. |
 | `parent` | ULID \| null | Single parent. Hierarchy is the parent chain. |
@@ -241,7 +245,17 @@ Each line of `todo.jsonl` is one immutable event. State is a **fold** over event
 | `resolution` | string | Set on close. |
 | `external` | object | `{system, key, url, synced_at, hash}` |
 
-**On `epic`:** there is no separate `epic` field. An epic is an item with `type: epic`. Ancestry is walked. The roadmap renderer denormalizes to a root epic for grouping; the log does not.
+**Axis rules** (plan 2026-07-18-work-taxonomy §2, condensed — the validator enforces these):
+
+- `kind` is free at `story`/`task`/`subtask`; **epics are `feature` or `ops` only** — `level:epic` with `kind:bug|triage` is rejected.
+- `kind` defaults to `triage` on `create`; classify deliberately, don't guess.
+- `bug.parent` is optional — bugs may float free of any epic; every other level keeps its usual parent expectations.
+- `milestone` lives on leaves (story and below); an epic's target release is *derived* from its children, never set directly.
+- `triage` and `ops` both trend down over time, for different reasons: triage shrinks by classifying, ops by automating. The roadmap surfaces both.
+
+**Deprecated `type` alias (1.7):** pre-1.7 events carry a single `type`. The fold normalizes it on load — `epic→(epic,feature)`, `story→(story,feature)`, `task→(task,feature)`, `subtask→(subtask,feature)`, `bug→(task,bug)` — and the next compaction migrates snapshots physically, after which the alias disappears from the files. The CLI still accepts `--type` with a deprecation warning on stderr. Full rationale and migration mechanics: `docs/plans/2026-07-18-work-taxonomy.md`, `docs/migrations/0001-type-split.md`.
+
+**On `epic`:** there is no separate `epic` field. An epic is an item with `level: epic`. Ancestry is walked. The roadmap renderer denormalizes to a root epic for grouping; the log does not.
 
 **On IDs:** the ULID is the key. Never key on `external.key` — items exist locally before they exist remotely, and remote keys don't survive a system migration.
 
@@ -468,10 +482,12 @@ Without this you get an infinite loop: push → remote `updated_at` bumps → po
 On pull, ingest an item only if `hash(remote_synced_fields) != last_pushed_hash`. The hash covers only the fields we actually sync (§10.4) — a Jira watcher change must not read as drift.
 
 ```
-hash = sha256(canonical_json({title, body, type, status, priority, parent, labels, assignee}))[:16]
+hash = sha256(canonical_json({title, body, level, kind, milestone, status, priority, parent, labels, assignee}))[:16]
 ```
 
 Canonical JSON = sorted keys, no whitespace, arrays sorted for set-valued fields.
+
+*(Changed in 1.7: `type` → `level` + `kind`, plus `milestone`.)* The field-list change is a **one-time hash churn**: after upgrading, every in-scope item's canonical hash differs from its stored `last_pushed_hash`, so the first sync re-pushes everything once. Idempotency by marker (§9.2) means updates, never duplicates; hashes converge on that first run.
 
 **Note the per-clone gap:** a fresh clone has no `sync-state.json`, so its first pull sees everything as remote-changed. Mitigation: on first pull, if `hash(remote) == hash(local)`, write `last_pushed_hash` and ingest nothing. Only genuine differences produce events.
 
@@ -588,6 +604,9 @@ The shipped set:
 | `plan-next` | "what should we do next?" | Folds log. Filters open, unblocked (`depends_on` all closed), sorts by priority then epic order. Presents top N with rationale. **Read-only.** |
 | `ticket-sync` | "sync tickets"; a plan closes out | Push per §9.2 and pull per §10 — model work over the tracker's CLI/MCP; ingests via `worklog ingest`/`worklog conflict`. |
 | `wiki-publish` | "publish to the wiki"; after a roadmap snapshot | Publish per §9.3 — ledger-driven, frozen rules enforced. |
+| `classify` | flag-gated (`classifier.enabled: false` by default), fired from the existing Stop hook | **Propose-only.** Writes suggestions to gitignored `.work/suggestions.jsonl`, never the event log, never blocks on the user. Below `min_confidence` it must propose `kind:triage` plus an open question, never a confident kind. Promotion to a real `create` goes through `work-track`. See docs/plans/2026-07-18-work-taxonomy.md §6. |
+
+Skills that create items set the taxonomy fields (`level`/`kind`/`milestone`, §5.4): `work-track` on `add`, `plan-capture` on captured tasks (`kind:feature` by design — retag bugs after capture). The always-on path is the CLAUDE.md taxonomy block (plan §4); the classifier is the gated escape hatch for teams where work keeps escaping the log.
 
 Still specified, not yet shipped: `status-report` (§13.3) and `worklog-compact` (§7, CI only). `roadmap-render` shipped as a `worklog` subcommand rather than a skill — the callers above invoke it directly.
 
@@ -931,5 +950,6 @@ Concurrent edits from two branches, zero conflicts, nothing lost — and the one
 9. ~~Wiki adapter + publish.~~ **Done for github-wiki** — `wiki-publish` skill + `worklog wiki-add` + the `published.json` ledger; other wiki systems are config away, not code away.
 10. `status-report` — `daily` and `weekly` first; `timecard` only once open question 4 is settled. `plan-next`.
 11. Typed adapter contract (§9.5) — dispatcher + fake adapter + generated adapters. **In progress on this branch** (`feature/typed-adapter-contract`).
+12. Work taxonomy — `type` → `level` + `kind` + `milestone` (§5.4), adapter mapping, flag-gated `classify` skill (§12). **In progress on this branch** (`feature/work-taxonomy`); plan: docs/plans/2026-07-18-work-taxonomy.md.
 
 Steps 1–4 are a genuinely useful tool with no edge integration at all. If the project stalls there, it still paid for itself. **Do not build sync before you've lived with the log.**

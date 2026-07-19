@@ -218,7 +218,11 @@ class Dispatcher:
         for f in HASH_FIELDS:
             if item.get(f) is not None:
                 out[f] = item[f]
-        out.setdefault("type", "task")
+        # Taxonomy compat (handoff to edges agent): folded items carry
+        # level/kind/milestone, not `type`. HASH_FIELDS above already copies
+        # them; the adapter contract still speaks `type`, so derive it from
+        # level (falling back to a raw legacy `type` if one is present).
+        out.setdefault("type", item.get("level", item.get("type")) or "task")
         if caps["types"].get(out["type"]) is None:
             out["type"] = "story" if caps["types"].get("story") is not None else "task"
         return out
@@ -306,10 +310,13 @@ class Dispatcher:
                     self.counts["skipped"] += 1
                 continue
 
-            if payload_item["type"] != (item.get("type") or "task"):
+            # Taxonomy compat (handoff to edges agent): degrade note reads
+            # `level` now that folded items no longer carry `type`.
+            local_type = item.get("level", item.get("type")) or "task"
+            if payload_item["type"] != local_type:
                 self.note("%s: %s mapped to %s (no %s type in %s)"
-                          % (iid[:8], item["type"], payload_item["type"],
-                             item["type"], caps["system"]))
+                          % (iid[:8], local_type, payload_item["type"],
+                             local_type, caps["system"]))
 
             if closed:
                 if self.dry_run:

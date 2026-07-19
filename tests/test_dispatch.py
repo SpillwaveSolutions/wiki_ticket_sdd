@@ -113,7 +113,7 @@ class TestTypeDegrade(Sandbox):
         with open(self.fake_state, encoding="utf-8") as fh:
             (ticket,) = json.load(fh)["tickets"].values()
         self.assertEqual(ticket["item"]["type"], "story")
-        self.assertEqual(self.show(item)["type"], "epic")  # local item untouched
+        self.assertEqual(self.show(item)["level"], "epic")  # local item untouched
 
 
 class TestConflict(Sandbox):

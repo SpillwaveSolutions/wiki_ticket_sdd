@@ -6,8 +6,16 @@ Implemented: add, update, close, link, show, list, fold, plan-capture,
              roadmap-render, roadmap-snapshot, wiki-add, compact,
              status (daily|weekly|timecard),
              ingest, conflict, resolve (pull side, sections 10.2 and 10.6),
-             sync (dispatcher: bin/sync_dispatch.py), adapter init|check.
+             sync (dispatcher: bin/sync_dispatch.py), adapter init|check,
+             promote (classifier suggestion -> create event, taxonomy §6.4).
 No stubs remain.
+
+Taxonomy (docs/plans/2026-07-18-work-taxonomy.md): items carry `level`
+(epic|story|task|subtask), `kind` (feature|bug|ops|triage) and `milestone`
+instead of the old single `type`. `--type` survives as a deprecated alias.
+Write-time rules enforced here (§2): epics are feature/ops only; milestone
+lives on leaves; a create without --kind deliberately omits kind so the fold
+triages it (never silently `feature`).
 
 Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
 """
@@ -15,7 +23,7 @@ import argparse, json, os, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ulid
 from fold import (fold, FoldResult, read_lines, dedupe_and_sort,
-                  OPEN_STATUSES, CLOSED_STATUSES)
+                  OPEN_STATUSES, CLOSED_STATUSES, LEGACY_TYPE_MAP)
 
 LOG = ".work/todo.jsonl"
 PATHS = (".work/todo.jsonl", ".work/done.jsonl")
@@ -54,13 +62,38 @@ def base(item, op, actor):
             "actor": actor, "item": item, "op": op}
 
 
+LEVELS = ("epic", "story", "task", "subtask")
+KINDS = ("feature", "bug", "ops", "triage")
+
+
+def check_taxonomy(level, kind, milestone):
+    """Write-time rules, taxonomy spec §2. The fold is lenient; this is not."""
+    if level == "epic":
+        if kind in ("bug", "triage"):
+            sys.exit(f"worklog: an epic cannot be kind:{kind} — epics are "
+                     "feature or ops (taxonomy §2.2)")
+        if milestone is not None:
+            sys.exit("worklog: milestone lives on leaves; epic milestones are "
+                     "derived (taxonomy §2.5)")
+
+
 def cmd_add(a):
     if a.unplanned and not a.discovered_during:
         sys.exit("worklog: --unplanned requires --discovered-during (section 5.4)")
+    if a.legacy_type is not None:
+        # Faithful legacy alias: same (level, kind) mapping the fold applies
+        # to old `type` events (§3.2) — bug -> task/bug, the rest -> feature.
+        print("worklog: --type is deprecated; use --level/--kind", file=sys.stderr)
+        lvl, knd = LEGACY_TYPE_MAP[a.legacy_type]
+        a.level, a.kind = lvl, a.kind or knd
+    check_taxonomy(a.level, a.kind, a.milestone)
     item = ulid.new()
     ev = base(item, "create", a.actor)
+    # kind is only written when given: an omitted kind folds to triage (§2.3),
+    # never silently to feature.
     ev["set"] = {k: v for k, v in {
-        "type": a.type, "title": a.title, "status": "todo", "priority": a.priority,
+        "level": a.level, "kind": a.kind, "milestone": a.milestone,
+        "title": a.title, "status": "todo", "priority": a.priority,
         "parent": a.parent, "plan": a.plan,
         "unplanned": True if a.unplanned else None,
         "discovered_during": a.discovered_during,
@@ -72,9 +105,14 @@ def cmd_add(a):
 
 
 def cmd_update(a):
+    if a.kind is not None or a.milestone is not None:
+        # §2 rules hold on update too, against the item's current level.
+        cur = fold([LOG, ".work/done.jsonl"]).items.get(a.item, {})
+        check_taxonomy(cur.get("level"), a.kind, a.milestone)
     ev = base(a.item, "update", a.actor)
     ev["set"] = {k: v for k, v in
-                 {"status": a.status, "priority": a.priority, "title": a.title}.items()
+                 {"status": a.status, "priority": a.priority, "title": a.title,
+                  "kind": a.kind, "milestone": a.milestone}.items()
                  if v is not None}
     if a.add_label:
         ev["add"] = {"labels": a.add_label.split(",")}
@@ -103,7 +141,8 @@ def cmd_link(a):
     append(ev)
 
 
-INGEST_FIELDS = ("title", "body", "status", "priority", "assignee", "type")
+INGEST_FIELDS = ("title", "body", "status", "priority", "assignee", "type",
+                 "level", "kind", "milestone")
 STATUSES = OPEN_STATUSES + CLOSED_STATUSES
 PRIORITIES = ("P0", "P1", "P2", "P3")
 
@@ -128,6 +167,10 @@ def cmd_ingest(a):
             sys.exit(f"worklog: bad status {value!r}")
         if field == "priority" and value not in PRIORITIES:
             sys.exit(f"worklog: bad priority {value!r}")
+        if field == "level" and value not in LEVELS:
+            sys.exit(f"worklog: bad level {value!r}")
+        if field == "kind" and value not in KINDS:
+            sys.exit(f"worklog: bad kind {value!r}")
         sets[field] = value
     if sets:
         ev["set"] = sets
@@ -255,17 +298,20 @@ def cmd_plan_capture(a):
         sys.exit(f"worklog: {path} exists; plans are never rewritten "
                  "(invariant 15.8) — pick a new slug to supersede")
 
+    # Captured items get explicit kind:feature — a plan is deliberate feature
+    # work, not a triage candidate (taxonomy §2.3 exemption by intent).
     epic_id = ulid.new()
     ev = base(epic_id, "create", a.actor)
-    ev["set"] = {"type": "epic", "title": a.title, "status": "todo",
-                 "priority": a.priority, "plan": path}
+    ev["set"] = {"level": "epic", "kind": "feature", "title": a.title,
+                 "status": "todo", "priority": a.priority, "plan": path}
     append(ev)
 
     item_ids, last_task = [], epic_id
     for t in tasks:
         iid = ulid.new()
         ev = base(iid, "create", a.actor)
-        ev["set"] = {"type": "subtask" if t["subtask"] else "task",
+        ev["set"] = {"level": "subtask" if t["subtask"] else "task",
+                     "kind": "feature",
                      "title": t["title"], "status": "todo",
                      "priority": t["priority"],
                      "parent": last_task if t["subtask"] else epic_id,
@@ -281,6 +327,56 @@ def cmd_plan_capture(a):
         fh.write(draft)
     print(path)
     print(epic_id)
+
+
+SUGGESTIONS = ".work/suggestions.jsonl"
+
+
+def cmd_promote(a):
+    """Promote a classifier suggestion into exactly ONE create event
+    (taxonomy spec §6.4). The suggestion is then marked consumed in
+    suggestions.jsonl so the classifier gate dedupes against it."""
+    try:
+        fh = open(SUGGESTIONS, encoding="utf-8")
+    except FileNotFoundError:
+        sys.exit(f"worklog: {SUGGESTIONS} not found — no suggestions to "
+                 "promote (the classifier writes it; see taxonomy spec §6)")
+    records, consumed = {}, set()
+    with fh:
+        for line in fh:
+            if not line.strip():
+                continue
+            try:
+                rec = json.loads(line)
+            except json.JSONDecodeError:
+                continue  # staging file is best-effort; skip bad lines
+            sid = rec.get("suggestion_id")
+            if rec.get("consumed"):
+                consumed.add(sid)
+            elif "proposed" in rec:
+                records.setdefault(sid, rec)
+    if a.suggestion_id in consumed:
+        sys.exit(f"worklog: suggestion {a.suggestion_id} already consumed")
+    if a.suggestion_id not in records:
+        sys.exit(f"worklog: no suggestion {a.suggestion_id} in {SUGGESTIONS}")
+    prop = records[a.suggestion_id].get("proposed") or {}
+    level = prop.get("level", "task")
+    kind = prop.get("kind")  # honored as proposed, including triage
+    check_taxonomy(level, kind, prop.get("milestone"))
+    item = ulid.new()
+    ev = base(item, "create", a.actor)
+    ev["set"] = {k: v for k, v in {
+        "level": level, "kind": kind, "milestone": prop.get("milestone"),
+        "title": prop.get("title"), "status": "todo",
+        "parent": prop.get("parent"),
+    }.items() if v is not None}
+    append(ev)
+    with open(SUGGESTIONS, "a", encoding="utf-8") as out:
+        out.write(json.dumps({"consumed": True,
+                              "suggestion_id": a.suggestion_id,
+                              "item": item},
+                             separators=(",", ":"), sort_keys=True) + "\n")
+    print(item)
 
 
 def cmd_compact(a):
@@ -426,7 +522,7 @@ def _status_facts(kind, now_ms, since=None, until=None):
                            "epic": epic_title(iid)})
         if any(e["op"] == "create" and in_window(e) for e in evs):
             opened.append({"id": iid, "title": it.get("title", ""),
-                           "type": it.get("type"), "epic": epic_title(iid)})
+                           "type": it.get("level"), "epic": epic_title(iid)})
             if it.get("unplanned"):
                 dd = it.get("discovered_during")
                 unplanned.append({"id": iid, "title": it.get("title", ""),
@@ -631,8 +727,13 @@ sub = p.add_subparsers(dest="cmd", required=True)
 
 a = sub.add_parser("add"); a.set_defaults(fn=cmd_add)
 a.add_argument("title")
-a.add_argument("--type", default="task",
-               choices=["epic", "story", "task", "subtask", "bug"])
+a.add_argument("--level", default="task", choices=list(LEVELS))
+a.add_argument("--kind", choices=list(KINDS),
+               help="omit to leave the item unclassified (folds to triage)")
+a.add_argument("--milestone")
+a.add_argument("--type", dest="legacy_type",
+               choices=["epic", "story", "task", "subtask", "bug"],
+               help="DEPRECATED alias for --level/--kind (bug -> task/bug)")
 a.add_argument("--priority", default="P2", choices=["P0", "P1", "P2", "P3"])
 a.add_argument("--parent"); a.add_argument("--plan"); a.add_argument("--labels")
 a.add_argument("--unplanned", action="store_true")
@@ -643,6 +744,8 @@ u.add_argument("item")
 u.add_argument("--status", choices=["todo", "in_progress", "blocked"])
 u.add_argument("--priority", choices=["P0", "P1", "P2", "P3"])
 u.add_argument("--title")
+u.add_argument("--kind", choices=list(KINDS))
+u.add_argument("--milestone")
 u.add_argument("--add-label", dest="add_label")
 u.add_argument("--del-label", dest="del_label")
 
@@ -688,7 +791,12 @@ l = sub.add_parser("list"); l.set_defaults(fn=cmd_list); l.add_argument("--all",
 s = sub.add_parser("show"); s.set_defaults(fn=cmd_show); s.add_argument("item")
 sub.add_parser("fold").set_defaults(fn=cmd_fold)
 
-pc = sub.add_parser("plan-capture"); pc.set_defaults(fn=cmd_plan_capture)
+pc = sub.add_parser(
+    "plan-capture",
+    description="Capture a plan draft: one epic + its tasks. Captured items "
+                "get explicit kind:feature — plans are deliberate feature "
+                "work (taxonomy spec §2.3).")
+pc.set_defaults(fn=cmd_plan_capture)
 pc.add_argument("--slug", required=True)
 pc.add_argument("--title", required=True)
 pc.add_argument("--file")
@@ -699,6 +807,13 @@ rs = sub.add_parser("roadmap-snapshot"); rs.set_defaults(fn=cmd_roadmap_snapshot
 rs.add_argument("--name")
 co = sub.add_parser("compact"); co.set_defaults(fn=cmd_compact)
 co.add_argument("--yes", action="store_true")
+
+pm = sub.add_parser(
+    "promote",
+    description="Promote a classifier suggestion from .work/suggestions.jsonl "
+                "into exactly one create event (taxonomy spec §6.4).")
+pm.set_defaults(fn=cmd_promote)
+pm.add_argument("suggestion_id")
 
 st = sub.add_parser("status"); st.set_defaults(fn=cmd_status)
 st.add_argument("--kind", required=True, choices=["daily", "weekly", "timecard"])

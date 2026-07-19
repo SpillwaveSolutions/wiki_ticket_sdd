@@ -11,10 +11,13 @@
         "marker": {"type": "string"},
         "item": {
           "type": "object",
-          "required": ["id", "type", "title", "status"],
+          "required": ["id", "title", "status"],
           "properties": {
             "id": {"type": "string"},
-            "type": {"type": "string"},
+            "type": {"type": "string", "description": "DEPRECATED alias for level+kind (worklog-spec 5.4, v1.7). Tolerated on input; adapters map it via the fixed alias table (bug -> task/bug)."},
+            "level": {"enum": ["epic", "story", "task", "subtask"]},
+            "kind": {"enum": ["feature", "bug", "ops", "triage"]},
+            "milestone": {"type": ["string", "null"]},
             "title": {"type": "string"},
             "status": {"type": "string"},
             "priority": {"type": "string"},
@@ -51,7 +54,10 @@
         },
         "title": {"type": "string"},
         "status": {"type": "string"},
-        "priority": {"type": "string"}
+        "priority": {"type": "string"},
+        "level": {"enum": ["epic", "story", "task", "subtask"]},
+        "kind": {"enum": ["feature", "bug", "ops", "triage"]},
+        "milestone": {"type": "string", "description": "The platform milestone/fixVersion title, when the ticket carries one."}
       }
     }
   }

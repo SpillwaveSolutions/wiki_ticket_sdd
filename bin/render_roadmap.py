@@ -51,7 +51,9 @@ def root_epic_id(item_id, items):
     while cur and cur.get("parent") in items and cur["parent"] not in seen:
         seen.add(cur["parent"])
         cur = items[cur["parent"]]
-    return cur["id"] if cur and cur.get("type") == "epic" else None
+    # Taxonomy migration: fold guarantees `level` on every item; the old
+    # `type` field no longer survives the fold.
+    return cur["id"] if cur and cur.get("level") == "epic" else None
 
 
 def ref(item):
@@ -84,7 +86,7 @@ def section(item, items):
 
 def epic_progress(eid, items):
     members = [i for i in items.values()
-               if i.get("type") != "epic" and root_epic_id(i["id"], items) == eid]
+               if i.get("level") != "epic" and root_epic_id(i["id"], items) == eid]
     done = sum(1 for i in members if i.get("status") == "done")
     total = sum(1 for i in members if i.get("status") != "cancelled")
     return total, done
@@ -102,7 +104,7 @@ def render(paths=PATHS):
                          time.gmtime(ulid.timestamp_ms(top) / 1000))
            if top else "never")
 
-    open_non_epic = [i for i in r.open_items() if i.get("type") != "epic"]
+    open_non_epic = [i for i in r.open_items() if i.get("level") != "epic"]
     blocked = [i for i in open_non_epic
                if i.get("status") == "blocked" or open_blockers(i, items)]
     epics_in_flight = {root_epic_id(i["id"], items) for i in open_non_epic} - {None}
@@ -149,7 +151,7 @@ def render(paths=PATHS):
             for i in sorted(groups[eid], key=lambda x: (x.get("priority", "P9"), x["id"])):
                 blockers = ", ".join(open_blockers(i, items)) or "—"
                 lines.append(
-                    f"| {ref(i)} | {i.get('title', '')} | {i.get('type', '')} "
+                    f"| {ref(i)} | {i.get('title', '')} | {i.get('level', '')} "
                     f"| {i.get('priority', '—')} "
                     f"| {i.get('status', '').replace('_', ' ')} | {blockers} |")
 

@@ -21,12 +21,16 @@ STATE_PATH = os.environ.get("WORKLOG_FAKE_STATE", ".fake-tracker.json")
 CAPABILITIES = {
     "system": "fake",
     "supports": ["push", "pull", "get", "close"],
-    # "epic": None on purpose — keeps the dispatcher's degrade path testable.
+    # Keyed by LEVEL (worklog-spec §5.4 v1.7); "epic": None on purpose —
+    # keeps the dispatcher's degrade path testable.
     "types": {"epic": None, "story": "ticket", "task": "ticket",
-              "subtask": "ticket", "bug": "ticket"},
+              "subtask": "ticket"},
+    # Informational: how each kind lands on the platform.
+    "kinds": {"feature": "default", "bug": "bug label", "ops": "label",
+              "triage": "needs-triage label"},
     "marker": {"style": "html_comment", "template": "<!-- worklog:{ulid} -->"},
     "fields": {"parent": "task-list", "depends_on": "unsupported",
-               "assignee": "assignee"},
+               "assignee": "assignee", "milestone": "milestone"},
     "max_title": 256,
 }
 
