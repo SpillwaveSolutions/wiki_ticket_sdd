@@ -51,7 +51,8 @@ def make_repo(tc):
     subprocess.run(["git", "-C", d, "add", "-A"], check=True)
     subprocess.run(["git", "-C", d, "commit", "-qm", "base"], check=True)
     # Dirty the tree outside .work so the hook's gate fires.
-    open(os.path.join(d, "src.txt"), "w").write("work happened\n")
+    # tracked-file modification: -uno means untracked files never count as work
+    open(os.path.join(d, "base.txt"), "a").write("work happened\n")
     return d
 
 
