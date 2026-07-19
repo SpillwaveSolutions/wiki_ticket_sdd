@@ -7,7 +7,8 @@ Implemented: add, update, close, link, show, list, fold, plan-capture,
              status (daily|weekly|timecard),
              ingest, conflict, resolve (pull side, sections 10.2 and 10.6),
              sync (dispatcher: bin/sync_dispatch.py), adapter init|check,
-             promote (classifier suggestion -> create event, taxonomy §6.4).
+             promote (classifier suggestion -> create event, taxonomy §6.4),
+             adr new|list|check (docs/adr, bin/adr.py, schema/adr.schema.json).
 No stubs remain.
 
 Taxonomy (docs/plans/2026-07-18-work-taxonomy.md): items carry `level`
@@ -28,7 +29,7 @@ from fold import (fold, FoldResult, read_lines, dedupe_and_sort,
 LOG = ".work/todo.jsonl"
 PATHS = (".work/todo.jsonl", ".work/done.jsonl")
 MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
-VERSION = "0.7.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+VERSION = "0.8.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
 def append(event):
@@ -215,25 +216,29 @@ def cmd_resolve(a):
 PUBLISHED = ".work/published.json"
 
 
-def cmd_wiki_add(a):
+def _register_published(key, file, title):
     """Register a file in the wiki publish set. published.json is a plain JSON
     map (spec 9.2), not an event log, so direct load/dump is allowed here."""
-    if not os.path.exists(a.file):
-        sys.exit(f"worklog: {a.file} not found")
     published = {}
     if os.path.exists(PUBLISHED):
         with open(PUBLISHED, encoding="utf-8") as fh:
             published = json.load(fh)
     # Preserve url/rev/source_hash on re-register: wiping them would make the
     # next publish create a duplicate page (spec 9.2).
-    entry = published.setdefault(a.key, {"url": None, "rev": None,
-                                         "source_hash": None})
-    entry["source"] = a.file
-    entry["title"] = a.title
+    entry = published.setdefault(key, {"url": None, "rev": None,
+                                       "source_hash": None})
+    entry["source"] = file
+    entry["title"] = title
     os.makedirs(os.path.dirname(PUBLISHED), exist_ok=True)
     with open(PUBLISHED, "w", encoding="utf-8") as fh:
         json.dump(published, fh, indent=2, sort_keys=True)
         fh.write("\n")
+
+
+def cmd_wiki_add(a):
+    if not os.path.exists(a.file):
+        sys.exit(f"worklog: {a.file} not found")
+    _register_published(a.key, a.file, a.title)
     print(a.key)
 
 
@@ -377,6 +382,67 @@ def cmd_promote(a):
                               "item": item},
                              separators=(",", ":"), sort_keys=True) + "\n")
     print(item)
+
+
+def cmd_adr_new(a):
+    """Scaffold docs/adr/NNNN-slug.md and register it for wiki publish.
+    ADR bodies are written once (Nygard); --supersedes N performs the one
+    sanctioned mutation on ADR N: status + superseded_by only."""
+    import re
+    import adr
+    ids = {}
+    for path in adr.adr_files():
+        m = re.match(r"(\d{4})-", os.path.basename(path))
+        if m:
+            ids[int(m.group(1))] = path
+    nid = max(ids) + 1 if ids else 1
+    slug = re.sub(r"[^a-z0-9]+", "-", a.title.lower()).strip("-")[:40].rstrip("-")
+    if not slug:
+        sys.exit("worklog: title yields an empty slug")
+    date = time.strftime("%Y-%m-%d", time.gmtime())
+    path, content = adr.scaffold(
+        a.title, nid, slug, date, status=a.status,
+        deciders=a.deciders.split(",") if a.deciders else None,
+        tags=a.tags.split(",") if a.tags else None,
+        supersedes=a.supersedes)
+    if os.path.exists(path):
+        sys.exit(f"worklog: {path} exists")
+    if a.supersedes is not None:
+        old = ids.get(a.supersedes)
+        if not old:
+            sys.exit(f"worklog: no ADR {a.supersedes:04d} to supersede")
+        adr.mark_superseded(old, nid)
+    os.makedirs(adr.ADR_DIR, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write(content)
+    key = f"adr/{nid:04d}-{slug}"
+    _register_published(key, path, f"ADR-{nid:04d}-{slug}")
+    print(path)
+
+
+def cmd_adr_list(a):
+    import adr
+    rows = []
+    for path in adr.adr_files():
+        with open(path, encoding="utf-8") as fh:
+            try:
+                meta, _ = adr.parse_front_matter(fh.read())
+            except ValueError:
+                continue  # adr check names it; the listing stays best-effort
+        rows.append(meta)
+    for m in sorted(rows, key=lambda m: m.get("id") or 0):
+        print(f"{m.get('id') or 0:04d}  {m.get('status','?'):10}  "
+              f"{m.get('title','')}")
+
+
+def cmd_adr_check(a):
+    import adr
+    problems = adr.check_all()
+    for pr in problems:
+        print(pr)
+    if problems:
+        sys.exit(1)
+    print(f"adr: {len(adr.adr_files())} records ok")
 
 
 def cmd_compact(a):
@@ -836,6 +902,21 @@ sy.add_argument("--retry-base-delay", dest="retry_base_delay", type=float,
 ap_ = sub.add_parser("adapter"); ap_.set_defaults(fn=cmd_adapter)
 ap_.add_argument("action", choices=["init", "check"])
 ap_.add_argument("path", nargs="?")
+
+ad = sub.add_parser(
+    "adr",
+    description="Architecture Decision Records in docs/adr/ "
+                "(docs/plans/2026-07-19-adr.md).")
+adsub = ad.add_subparsers(dest="adr_cmd", required=True)
+adn = adsub.add_parser("new"); adn.set_defaults(fn=cmd_adr_new)
+adn.add_argument("title")
+adn.add_argument("--status", default="proposed",
+                 choices=["proposed", "accepted", "deprecated", "superseded"])
+adn.add_argument("--deciders", metavar="A,B")
+adn.add_argument("--tags", metavar="X,Y")
+adn.add_argument("--supersedes", type=int, metavar="N")
+adsub.add_parser("list").set_defaults(fn=cmd_adr_list)
+adsub.add_parser("check").set_defaults(fn=cmd_adr_check)
 
 if __name__ == "__main__":
     args = p.parse_args()

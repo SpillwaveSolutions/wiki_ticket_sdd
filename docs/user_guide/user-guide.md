@@ -256,6 +256,19 @@ conflict in the web UI on `docs/roadmap.md`, `.work/published.json`, or even
 | `docs/roadmap/*.md` | Dated snapshots (see `roadmap-snapshot`), frozen the moment they're written |
 | `.work/*.jsonl` | Only `bin/worklog` writes them. No editors, no `echo >>` |
 
+### Architecture decisions
+
+Significant decisions get an ADR in `docs/adr/NNNN-slug.md` (`worklog adr
+new` scaffolds one; `worklog adr check` validates them all). ADRs follow
+Nygard rules: the body (Context / Decision / Consequences / Alternatives) is
+written once and never edited; only the `status` field mutates afterward
+(`proposed` → `accepted` → `deprecated`/`superseded`). If a decision is
+revisited, write a NEW ADR with `--supersedes N` — the tooling pairs
+`supersedes`/`superseded_by` and flips the old ADR's status; the old file
+stays as the record of why. ADRs are in the wiki-publish default set as
+`ADR-NNNN-slug` pages, republished on change so a status flip reaches the
+wiki.
+
 ## System-agnostic edges: your tracker, your wiki
 
 `.work/config.yml` names your team's systems:

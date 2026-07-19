@@ -68,8 +68,11 @@ knowledge plus live exploration, not shipped integration code.
 Entries carry a `source` field (the repo path of the file) so the publish
 set is self-describing. The DEFAULT publish set is always: the live roadmap
 (`docs/roadmap.md`), every plan in `docs/plans/`, every roadmap snapshot in
-`docs/roadmap/`, plus anything registered via `worklog wiki-add`. Plans and
-snapshots publish once (frozen); the roadmap re-publishes on hash change.
+`docs/roadmap/`, every ADR in `docs/adr/` — republish on hash change (status
+flips must reach the wiki), page name `ADR-NNNN-slug`, ledger key
+`adr/NNNN-slug` — plus anything registered via `worklog wiki-add`. Plans and
+snapshots publish once (frozen); the roadmap and ADRs re-publish on hash
+change.
 To opt an arbitrary file in, register it:
 `worklog wiki-add <file> --key K --title T`.
 
@@ -105,5 +108,6 @@ with not-found, ask the human to do that once, then retry.
 ## 7. Frozen rules
 
 Snapshots, plans, and status reports publish once and are never re-published.
-The live Roadmap page is the exception: re-publish it whenever its source
-hash changes.
+The live Roadmap page and ADRs are the exceptions: re-publish whenever the
+source hash changes — for an ADR, a status flip (proposed→accepted,
+accepted→superseded) is exactly the change that must reach the wiki.
