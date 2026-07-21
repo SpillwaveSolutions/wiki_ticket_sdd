@@ -2,7 +2,7 @@
 """
 worklog -- CLI entry point. WORKLOG-SPEC section 12.
 
-Implemented: add, update, close, link, show, list, fold, plan-capture,
+Implemented: add, update, close, reopen, link, show, list, fold, plan-capture,
              roadmap-render, roadmap-snapshot, wiki-add, compact,
              status (daily|weekly|timecard),
              ingest, conflict, resolve (pull side, sections 10.2 and 10.6),
@@ -113,10 +113,13 @@ def _require_item(item):
 
 def cmd_update(a):
     _require_item(a.item)
-    if a.kind is not None or a.milestone is not None:
-        # §2 rules hold on update too, against the item's current level.
+    if a.kind is not None or a.milestone is not None or a.status is not None:
         cur = fold([LOG, ".work/done.jsonl"]).items.get(a.item, {})
+        # §2 rules hold on update too, against the item's current level.
         check_taxonomy(cur.get("level"), a.kind, a.milestone)
+        if a.status is not None and cur.get("status") in CLOSED_STATUSES:
+            sys.exit(f"worklog: {a.item} is closed; use `worklog reopen` — "
+                     "update --status would leave the stale resolution behind")
     ev = base(a.item, "update", a.actor)
     ev["set"] = {k: v for k, v in
                  {"status": a.status, "priority": a.priority, "title": a.title,
@@ -138,6 +141,22 @@ def cmd_close(a):
     if a.resolution:
         ev["set"]["resolution"] = a.resolution
     append(ev)
+
+
+def cmd_reopen(a):
+    """Emit the reopen op (spec §7): fold moves the item back to todo and
+    drops the stale resolution — the pair `update --status todo` leaks."""
+    _require_item(a.item)
+    r = fold([LOG, ".work/done.jsonl"])
+    match = [i for k, i in r.items.items() if k.startswith(a.item)]
+    if not match:
+        sys.exit(f"worklog: no item matching {a.item}")
+    item = match[0]
+    if item.get("status") not in CLOSED_STATUSES:
+        sys.exit(f"worklog: {item['id']} is not closed "
+                 f"(status {item.get('status')!r}); nothing to reopen")
+    append(base(item["id"], "reopen", a.actor))
+    print(item["id"])
 
 
 def cmd_link(a):
@@ -834,6 +853,9 @@ c = sub.add_parser("close"); c.set_defaults(fn=cmd_close)
 c.add_argument("item")
 c.add_argument("--status", default="done", choices=["done", "cancelled"])
 c.add_argument("--resolution")
+
+ro = sub.add_parser("reopen"); ro.set_defaults(fn=cmd_reopen)
+ro.add_argument("item")
 
 lk = sub.add_parser("link"); lk.set_defaults(fn=cmd_link)
 lk.add_argument("item")

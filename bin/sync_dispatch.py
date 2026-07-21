@@ -24,7 +24,8 @@ from canonical import HASH_FIELDS, canonical_hash
 
 BIN = os.path.dirname(os.path.abspath(__file__))
 SYNC_STATE = ".work/sync-state.json"
-INGEST_FIELDS = ("title", "body", "status", "priority", "assignee", "type")
+INGEST_FIELDS = ("title", "body", "status", "priority", "assignee", "type",
+                 "level", "kind", "milestone")
 CLOSED_STATUSES = ("done", "cancelled")
 LOCAL_ONLY = ("worklog sync: no adapter configured — local-only "
               "(set WORKLOG_TICKET_ADAPTER or run worklog adapter check)")

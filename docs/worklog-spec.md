@@ -175,7 +175,7 @@ status:
 
 sync:
   active_window_days: 14       # scope of `sync --scope active`
-  conflict_policy: report      # report | local-wins | remote-wins
+  conflict_policy: report      # the only policy; auto-resolve descoped
   push_on_capture: true
 ```
 
@@ -547,7 +547,7 @@ State does not change. The conflict appears in:
 
 Fold rule: a conflict clears whenever a later event writes the conflicted field — `resolve` is just the explicit way to produce that write; a fresh `update` or a subsequent ingest of that field clears it the same way.
 
-`local-wins` / `remote-wins` policies skip the conflict event and just apply. Available, not recommended.
+`local-wins` / `remote-wins` auto-resolve policies were descoped: the dispatcher never read them, and `report` + `worklog resolve` covers the need without silent overwrites. If auto-resolve ever earns its way back in, it returns as a new plan, not a config comment.
 
 ---
 

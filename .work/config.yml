@@ -31,7 +31,7 @@ status:
 
 sync:
   active_window_days: 14
-  conflict_policy: report      # report | local-wins | remote-wins
+  conflict_policy: report      # only policy; auto-resolve descoped (item 01KXY8V686)
   push_on_capture: true
 
 features:
