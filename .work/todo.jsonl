@@ -371,3 +371,4 @@
 {"actor":"github","ev":"01KY1270H8GTKC88GQD9MEN1Y6","item":"01KXY8V686YPK4ET2XFB2KW2RX","op":"update","set":{"kind":"triage"},"src":{"key":"64","rev":"2026-07-21T00:46:33Z","system":"github"},"ts":"2026-07-21T00:46:33Z"}
 {"actor":"richardhightower","ev":"01KY129SGVR5ND4SHJNT4J4Q9R","item":"01KY129SGV3DEX5NVAP34VV9G2","op":"create","set":{"discovered_during":"01KXY8V686YPK4ET2XFB2KW2RX","kind":"bug","level":"task","priority":"P3","status":"todo","title":"Close verb leaves remote taxonomy labels stale; next pull re-ingests them, reverting local reclassify-then-close (LWW on remote rev)","unplanned":true},"ts":"2026-07-21T00:48:04Z"}
 {"actor":"richardhightower","ev":"01KY129SP6RPHE5R0C4JXQF2WA","item":"01KXY8V686YPK4ET2XFB2KW2RX","op":"update","set":{"kind":"bug"},"ts":"2026-07-21T00:48:04Z"}
+{"actor":"richardhightower","ev":"01KY12A0XB3AB0KTE9NJ5YF8FV","item":"01KY11HDR3A5SR342DHG1BH5AZ","op":"update","set":{"status":"in_progress"},"ts":"2026-07-21T00:48:11Z"}
