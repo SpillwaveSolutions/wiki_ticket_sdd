@@ -146,6 +146,20 @@ class TestPull(Sandbox):
         self.assertEqual(self.ingest_events(), [])
         self.assertEqual([e for e in self.log_events() if e["op"] == "conflict"], [])
 
+    def test_pull_ingests_remote_taxonomy_change(self):
+        # worklog 01KXY8V5WZ: level/kind/milestone missing from the
+        # dispatcher's INGEST_FIELDS silently dropped remote taxonomy edits.
+        item = self.wl("add", "Retagged remotely", "--level", "task",
+                       "--priority", "P1").strip()
+        self.sync("--push-only")
+        self.edit_remote(lambda t: t["item"].update(
+            {"level": "story", "kind": "bug", "milestone": "v9.9.9"}))
+        self.sync("--pull-only")
+        shown = self.show(item)
+        self.assertEqual(shown["level"], "story")
+        self.assertEqual(shown["kind"], "bug")
+        self.assertEqual(shown["milestone"], "v9.9.9")
+
     def test_pull_ingests_remote_change_with_deterministic_ev(self):
         item = self.wl("add", "Renamed remotely", "--priority", "P1").strip()
         self.sync("--push-only")

@@ -145,5 +145,32 @@ class TestResolve(Sandbox):
         self.assertIn("no open conflict", p.stderr)
 
 
+class TestReopen(Sandbox):
+    def _closed(self):
+        item = self.wl("add", "Shipped")
+        self.wl("close", item, "--resolution", "did the thing")
+        return item
+
+    def test_reopen_clears_status_and_stale_resolution(self):
+        item = self._closed()
+        self.wl("reopen", item)
+        shown = self.show(item)
+        self.assertEqual(shown["status"], "todo")
+        self.assertNotIn("resolution", shown)
+
+    def test_update_status_on_closed_item_refused(self):
+        item = self._closed()
+        p = self.run_wl("update", item, "--status", "todo")
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn("reopen", p.stderr)
+        self.assertEqual(self.show(item)["status"], "done")  # nothing appended
+
+    def test_reopen_open_item_refused(self):
+        item = self.wl("add", "Still going")
+        p = self.run_wl("reopen", item)
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn("not closed", p.stderr)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
