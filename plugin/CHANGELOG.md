@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.12.0 — 2026-07-21
+
+- Pull sync ingests taxonomy: the dispatcher's `INGEST_FIELDS` gains
+  `level`/`kind`/`milestone`, so remote taxonomy edits (labels, milestone)
+  land in the local log instead of being silently dropped. The GitHub
+  adapter already round-tripped them; the dispatcher tuple was the gap.
+- `worklog reopen <ulid>`: emits the `reopen` op the fold always supported —
+  moves a closed item back to `todo` and drops the stale `resolution` in one
+  event. `update --status` on a closed item is now refused with a pointer to
+  `reopen` (the old path left the resolution behind).
+- `sync.conflict_policy` descoped to `report` only: `local-wins` /
+  `remote-wins` were documented but never read by the dispatcher, and
+  `report` + `worklog resolve` covers the need without silent overwrites.
+  Config and spec updated; auto-resolve returns only via a new plan.
+- First release exercising the design-docs release-time doc sync
+  (`release.sync_docs`) end to end.
+
 ## 0.11.0 — 2026-07-19
 
 - System enums widened and documented as advisory (spec v1.8): ticketing
