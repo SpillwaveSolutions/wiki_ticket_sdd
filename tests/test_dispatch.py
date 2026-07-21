@@ -171,6 +171,24 @@ class TestPull(Sandbox):
         self.assertEqual(self.show(item)["title"], "Remote title")
 
 
+class TestCloseSyncsFields(Sandbox):
+    def test_reclassify_then_close_survives_pull(self):
+        # worklog 01KY129S: close pushed only key+resolution, leaving remote
+        # taxonomy labels stale; the close echo then re-ingested the stale
+        # kind over the local reclassify. Dirty close now updates first.
+        item = self.wl("add", "Reclass then close", "--level", "task",
+                       "--priority", "P1").strip()
+        self.sync("--push-only")
+        self.wl("update", item, "--kind", "bug")
+        self.wl("close", item, "--resolution", "fixed")
+        self.sync("--push-only")
+        self.sync("--pull-only")
+        shown = self.show(item)
+        self.assertEqual(shown["kind"], "bug")
+        self.assertEqual(shown["status"], "done")
+        self.assertEqual(self.ingest_events(), [])  # echo, not a remote edit
+
+
 class TestSchemaMirror(unittest.TestCase):
     def test_embedded_capabilities_schema_matches_file(self):
         sys.path.insert(0, os.path.join(ROOT, "bin"))
