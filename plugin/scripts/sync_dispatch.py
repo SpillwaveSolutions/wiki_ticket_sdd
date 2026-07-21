@@ -329,6 +329,18 @@ class Dispatcher:
                 if self.dry_run:
                     print("would close %s (%s)" % (ext["key"], item.get("status")))
                     continue
+                if dirty:
+                    # Close alone never syncs fields (adapter close is
+                    # key+resolution only), so reclassify-then-close left
+                    # stale remote labels the next pull re-ingested over the
+                    # local edit (worklog 01KY129S). Push the final shape
+                    # first; the close echo then hash-suppresses.
+                    p = self.call_push({
+                        "op": "update", "key": ext["key"],
+                        "marker": caps["marker"]["template"].replace("{ulid}", iid),
+                        "item": payload_item})
+                    if not self.handle_exit(item, p):
+                        continue
                 p = self.run_adapter("close", str(ext["key"]),
                                      item.get("resolution") or item["status"])
                 if self.handle_exit(item, p):

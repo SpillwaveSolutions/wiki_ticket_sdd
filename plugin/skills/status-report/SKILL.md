@@ -1,7 +1,7 @@
 ---
 name: status-report
 description: Generate a status report. Use when asked for a status report, a standup summary, "what changed this week", or "what did we ship". Writes docs/status/<date>-<kind>.md, commits, and publishes — never paste an unrecorded status into chat.
-version: 0.12.0
+version: 0.12.1
 ---
 
 # Status report

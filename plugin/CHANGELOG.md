@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.12.1 — unreleased
+
+- Dirty close syncs fields first: the dispatcher now pushes an `update`
+  before the `close` verb when a closing item's hash is dirty, so remote
+  labels/milestone/title match the final local state. Previously a
+  reclassify-then-close left stale remote taxonomy labels that the next
+  pull re-ingested over the local edit (#76).
+
 ## 0.12.0 — 2026-07-21
 
 - Pull sync ingests taxonomy: the dispatcher's `INGEST_FIELDS` gains
