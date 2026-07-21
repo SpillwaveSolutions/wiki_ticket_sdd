@@ -73,7 +73,8 @@ bin/worklog update 01J8X0M2QQ --status in_progress --kind bug --add-label urgent
 At least one change flag is required. `--kind`/`--milestone` are validated
 against the item's current level with the same taxonomy rules (and error
 messages) as `add` — you cannot update an epic to `kind:bug` or put a
-milestone on it.
+milestone on it. `--status` on a closed item is refused — it would leave
+the stale resolution behind; use `reopen`.
 
 ### close
 
@@ -85,6 +86,16 @@ bin/worklog close 01J8X0M2QQ --status done --resolution "merged in PR #7"
 
 `--status` is `done` (default) or `cancelled`; `--resolution` is optional
 free text. Closing is just an event — nothing moves files at runtime.
+
+### reopen
+
+Reopen a closed item: moves it back to `todo` and drops the stale
+`resolution` in one event. Accepts a unique id prefix; prints the full
+ULID. Refuses items that aren't closed.
+
+```bash
+bin/worklog reopen 01J8X0M2QQ
+```
 
 ### link
 

@@ -21,9 +21,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0003-green-gates-merge"
   },
   "cli-reference": {
-    "rev": "330dbf1",
+    "rev": "43ea3f3",
     "source": "docs/user_guide/cli-reference.md",
-    "source_hash": "63b9051712be",
+    "source_hash": "d89971958efb",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/CLI-Reference"
   },
   "design/2026-07-19_v0.11.0-release-code-walkthrough": {
