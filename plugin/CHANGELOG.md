@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.12.1 — unreleased
+## 0.12.1 — 2026-07-21
 
 - Dirty close syncs fields first: the dispatcher now pushes an `update`
   before the `close` verb when a closing item's hash is dirty, so remote
