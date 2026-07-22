@@ -36,7 +36,13 @@ class TestRoadmapSnapshot(unittest.TestCase):
         self.assertEqual(p.returncode, 0, p.stderr)
         path = f"docs/roadmap/{date}_pre-v2.md"
         self.assertEqual(p.stdout.strip(), path)
-        self.assertEqual(self.read(path), self.read("docs/roadmap.md"))
+        # the copy is restamped with snapshot identity (plan ia-content-model
+        # §5.4); the roadmap body itself is carried over verbatim
+        text = self.read(path)
+        self.assertIn("# Roadmap\n\ncontent\n", text)
+        self.assertIn(f"wiki_key: roadmap-snapshot/{date}_pre-v2", text)
+        self.assertIn("truth_state: snapshot", text)
+        self.assertIn("doc_type: roadmap-snapshot", text)
 
     def test_no_name_uses_date_only_filename(self):
         date = time.strftime("%Y-%m-%d", time.gmtime())

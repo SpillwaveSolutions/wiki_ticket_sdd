@@ -48,6 +48,9 @@ class Sandbox:
             open(os.path.join(self.dir, ".work", f), "w").close()
         self.write(".gitattributes",
                    ".work/todo.jsonl merge=union\n.work/done.jsonl merge=union\n")
+        # like the real repo: bytecode is never tracked (a committed .pyc on
+        # one branch + the same file untracked on another aborts a merge)
+        self.write(".gitignore", "__pycache__/\n*.pyc\n")
         self.git("init", "-q", "-b", "main")
         self.git("config", "user.email", "it@test.invalid")
         self.git("config", "user.name", "integration-test")

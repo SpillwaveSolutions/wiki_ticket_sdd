@@ -1,3 +1,10 @@
+---
+doc_type: guide
+slug: worklog-spec
+title: Worklog: Visible-WIP Work Tracking Spec
+truth_state: current
+wiki_key: spec
+---
 # Worklog: Visible-WIP Work Tracking Spec
 
 **Version:** 1.9

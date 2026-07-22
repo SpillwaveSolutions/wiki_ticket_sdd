@@ -3,6 +3,12 @@
 # Install: git config core.hooksPath hooks
 set -euo pipefail
 
+# A hook must never dirty the worktree: without this, importing a module the
+# staged tree hasn't imported yet writes bin/__pycache__/*.pyc AFTER `git
+# add`, and the next merge aborts on a tracked-vs-untracked collision in any
+# repo that doesn't gitignore __pycache__ (item 01KY5P9V0C).
+export PYTHONDONTWRITEBYTECODE=1
+
 fail() { echo "worklog: $*" >&2; exit 1; }
 
 for f in .work/todo.jsonl .work/done.jsonl; do
@@ -65,3 +71,18 @@ fi
 
 # ADRs: schema + cross-file invariants. Guarded like the fold tests.
 [ ! -d docs/adr ] || [ ! -x bin/worklog ] || python3 bin/worklog adr check >/dev/null || fail "ADR validation failed — run: worklog adr check"
+
+# IA gates (plan ia-content-model, migration 0002): wiki_key present/unique,
+# schema-valid frontmatter, fresh inventory. WARN-ONLY for one release cycle,
+# then promoted to hard fail. Guarded like the fold tests.
+if [ -f bin/ia.py ] && [ -x bin/worklog ]; then
+  python3 bin/worklog ia-normalize --check >/dev/null 2>&1 || \
+    echo "worklog: WARNING (soon a hard gate) — doc metadata drift; run: worklog ia-normalize" >&2
+  python3 bin/worklog ia-inventory --check >/dev/null 2>&1 || \
+    echo "worklog: WARNING (soon a hard gate) — inventory stale/invalid; run: worklog ia-inventory" >&2
+  [ ! -f bin/ia_render.py ] || python3 bin/worklog ia-render --check >/dev/null 2>&1 || \
+    echo "worklog: WARNING (soon a hard gate) — rendered pages/manifest stale; run: worklog ia-render" >&2
+  # trace-check stays warn-level here forever; --strict runs at release time
+  [ ! -f bin/ia_graph.py ] || python3 bin/worklog trace-check >/dev/null 2>&1 || \
+    echo "worklog: WARNING — unlinked evidence; run: worklog trace-check" >&2
+fi

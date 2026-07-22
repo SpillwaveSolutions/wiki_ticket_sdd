@@ -8,6 +8,8 @@ deciders: [rick, claude]
 tags: [core, git]
 supersedes: null
 superseded_by: null
+wiki_key: adr/0001-event-log-fold-union-merge
+truth_state: current
 ---
 
 ## Context

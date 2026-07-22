@@ -1,0 +1,2914 @@
+{
+ "edges": [
+  {
+   "from": "design/2026-07-19_v0.11.0-release-code-walkthrough",
+   "to": "design/current-code-walkthrough",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-07-19_v0.11.0-release-code-walkthrough",
+   "to": "release/v0.11.0",
+   "type": "targets"
+  },
+  {
+   "from": "design/2026-07-19_v0.11.0-release-design-doc",
+   "to": "design/current-design-doc",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-07-19_v0.11.0-release-design-doc",
+   "to": "release/v0.11.0",
+   "type": "targets"
+  },
+  {
+   "from": "design/2026-07-21_v0.12.0-release-code-walkthrough",
+   "to": "design/current-code-walkthrough",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-07-21_v0.12.0-release-code-walkthrough",
+   "to": "release/v0.12.0",
+   "type": "targets"
+  },
+  {
+   "from": "design/2026-07-21_v0.12.0-release-design-doc",
+   "to": "design/current-design-doc",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-07-21_v0.12.0-release-design-doc",
+   "to": "release/v0.12.0",
+   "type": "targets"
+  },
+  {
+   "from": "design/2026-07-21_v0.12.1-release-code-walkthrough",
+   "to": "design/current-code-walkthrough",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-07-21_v0.12.1-release-code-walkthrough",
+   "to": "release/v0.12.1",
+   "type": "targets"
+  },
+  {
+   "from": "design/2026-07-21_v0.12.1-release-design-doc",
+   "to": "design/current-design-doc",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-07-21_v0.12.1-release-design-doc",
+   "to": "release/v0.12.1",
+   "type": "targets"
+  },
+  {
+   "from": "design/current-code-walkthrough",
+   "to": "release/v0.12.1",
+   "type": "targets"
+  },
+  {
+   "from": "design/current-design-doc",
+   "to": "release/v0.12.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KXSFEWND18ATDAPCWJXKV8C1",
+   "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSFEWND2PG3PQW8GMZ9B319",
+   "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSFEWND3DGDF12DSWJEKVDF",
+   "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSFEWND4TYQ2V26KRPFHW9M",
+   "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSFEWND595MAFB1GMB9KECF",
+   "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSFEWNDBM4RHBFMNYJWR9CE",
+   "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSFEWNDM44B8A8RV30PF6X1",
+   "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSFEWNDR0ZDTHHGQVN3PG9Z",
+   "to": "item/01KXSFEWNDZ55K8AQJBCN9MRD6",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSFEWNDT1B5D0PRK16NX14T",
+   "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSFEWNDZ55K8AQJBCN9MRD6",
+   "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJ0P23QC3SYXRQ01WA",
+   "to": "item/01KXSNNSWJKRR3BF33CBK3E4Q7",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJ3QKFCRBB3A12H5GT",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJ72MM7XHEJBHM6A1Y",
+   "to": "item/01KXSNNSWJDK16TMR50CNR3T3V",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJ8RHP53Z2VQJH4D9J",
+   "to": "item/01KXSNNSWJDK16TMR50CNR3T3V",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJDK16TMR50CNR3T3V",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJEP1V1JMSXH2MQWYV",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJKRR3BF33CBK3E4Q7",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJMS2914A0JJYX3KEZ",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJN9C584RF3NNJK0W9",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJQ91JPN4QRVMJQ296",
+   "to": "item/01KXSNNSWJDK16TMR50CNR3T3V",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJVJW87EPCZXE6QDCA",
+   "to": "item/01KXSNNSWJKRR3BF33CBK3E4Q7",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJWK58BS457Y2NG3JA",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWJZMQQH7H68XVB654Y",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWK0HC96WQ3HV98DHT8",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWK2PPBHVJ21MBT65ER",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWKC64M1XX0Y7WVT67Z",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWKPDG9Q4404RPTWZY9",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSNNSWKTJX2QWW4PYFDEZHS",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSP26ENPKCT4APD4YE93MMV",
+   "to": "ticket/github#4",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXSP26JP91E4508YST2WXPTD",
+   "to": "ticket/github#5",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXSP26PS6A0WDHQ65Y4B1X94",
+   "to": "ticket/github#6",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXSP26V19JX6VTH0EYGDV2Z0",
+   "to": "ticket/github#7",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXSP26Z674RTTB6D8GQCM2A8",
+   "to": "ticket/github#8",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXSP273B1649RGJ841PVSCF3",
+   "to": "ticket/github#9",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXSP277AE68GPTHC1QJV1NX",
+   "to": "ticket/github#34",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXSP277AE68GPTJHC1QJV1NX",
+   "to": "ticket/github#10",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXSQ4JH8SCHQ94DYQ7YJ872P",
+   "to": "ticket/github#11",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXSQJ3SGWWEHDNK83CDNPT4S",
+   "to": "item/01KXSQJ3K19QWBDX482FRT7ETR",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXSQJ3Z40QHSXEN6B4Y238AZ",
+   "to": "item/01KXSQJ3K19QWBDX482FRT7ETR",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXT88MCBB82VT84JT0PB53PG",
+   "to": "item/01KXSP26ENPKCT4APD4YE93MMV",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXT88MGRJB0ARA9CN7QX29GY",
+   "to": "item/01KXSP26ENPKCT4APD4YE93MMV",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXT88MMR65W3CX1C37ECEEXG",
+   "to": "item/01KXSP26ENPKCT4APD4YE93MMV",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXT88MRST1ZZSBFMFCXYEDA1",
+   "to": "item/01KXSP26ENPKCT4APD4YE93MMV",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXT88MRST1ZZSBFMFCXYEDA1",
+   "to": "ticket/github#12",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXT88MWVW63PA5698TFNYZ5E",
+   "to": "item/01KXSP26ENPKCT4APD4YE93MMV",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXT88MWVW63PA5698TFNYZ5E",
+   "to": "ticket/github#13",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXT88N0Z4EHR2HKMHGAM0WB3",
+   "to": "item/01KXSQJ3K19QWBDX482FRT7ETR",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXT88N4W1E78NY17DW65PJPX",
+   "to": "item/01KXSP26ENPKCT4APD4YE93MMV",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXT8JG3RNE2YZVCYEBXW9EX6",
+   "to": "item/01KXSP26ENPKCT4APD4YE93MMV",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXT8JG3RNE2YZVCYEBXW9EX6",
+   "to": "ticket/github#14",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXT9B43GA5B8AAT26W8A1VPJ",
+   "to": "ticket/github#16",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXT9W0Y40SDTZBB93XY5YXNT",
+   "to": "ticket/github#17",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXTZ5TEQV2J99CHPQNHJ1NA1",
+   "to": "item/01KXTZ5TAPZBC06AG50KDJKEYF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXTZ8134TGKGC1YC2PXYRV29",
+   "to": "item/01KXTZ5TAPZBC06AG50KDJKEYF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXV0NQPPPK2K948CK20QJSS1",
+   "to": "ticket/github#23",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXV1B3RY3G25WR0K2ZGYEH73",
+   "to": "ticket/github#25",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXV1HZMTKQGJHX0VSETZJX4Z",
+   "to": "item/01KXV0NQPPPK2K948CK20QJSS1",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXV1HZS08M62Z5EZF4HTVB6G",
+   "to": "item/01KXV0NQPPPK2K948CK20QJSS1",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXV1HZX2B49T1PB0GA4H0YMS",
+   "to": "item/01KXV0NQPPPK2K948CK20QJSS1",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXV1J0179NHDTP9K8FRVZGYP",
+   "to": "item/01KXV0NQPPPK2K948CK20QJSS1",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXV1J05APQR0DBP1840ZPVRM",
+   "to": "item/01KXV0NQPPPK2K948CK20QJSS1",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXV5DQHGQ6EQZDRVR2MV92KZ",
+   "to": "item/01KXV5DQC9M70PN3A4AS0VCBQH",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXV5DQPRDD2W1QKCXRQ02A58",
+   "to": "item/01KXV5DQC9M70PN3A4AS0VCBQH",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXV61H5BDS7TD99H0FF9FE11",
+   "to": "ticket/github#29",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXXFKH6438M5ZV8ZKM0CH9QN",
+   "to": "item/01KXV61H5BDS7TD99H0FF9FE11",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXXFKHBMR218J218RNN7C07N",
+   "to": "item/01KXV61H5BDS7TD99H0FF9FE11",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXXFKHH0VP73C2X6P9EX4616",
+   "to": "item/01KXV61H5BDS7TD99H0FF9FE11",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXXFKHPHDANP7S4GKC20G8EV",
+   "to": "item/01KXV61H5BDS7TD99H0FF9FE11",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXXFKHVTZQZ371DF7Z5HQB8M",
+   "to": "item/01KXV61H5BDS7TD99H0FF9FE11",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXXG2QPCE09N0V2Y1DKZDNSG",
+   "to": "item/01KXV61H5BDS7TD99H0FF9FE11",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXXGET7PTBERR80PHA2XM7RN",
+   "to": "item/01KXV61H5BDS7TD99H0FF9FE11",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXXHXHFY3RV0X4M92PQ3PCBZ",
+   "to": "release/v0.7.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KXXJYKB1B12WEXTS6FZZ7QH2",
+   "to": "item/01KXXJYK5KS3MQWRPGZ3WNA790",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXXJYKGPV41JK02KX0X67Q0G",
+   "to": "item/01KXXJYK5KS3MQWRPGZ3WNA790",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXXKWMV2Y6YGW2GY24YFZ9HY",
+   "to": "release/v0.8.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KXXM7MD5SRRZ19EM2QGWNBHJ",
+   "to": "ticket/github#39",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXXP6PBPXCNHAQF6Z774VAHR",
+   "to": "release/v0.9.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KXXT3XSWDX75JFJJ7DRPMX1Z",
+   "to": "release/v0.10.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KXXY4QBSGEX3HPMPSENYFA5A",
+   "to": "ticket/github#49",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXXY4QH87BAJ0M7XBJH3Y0P7",
+   "to": "item/01KXXY4QBSGEX3HPMPSENYFA5A",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXXY4QPE8RHA7D0TYN3VS0MY",
+   "to": "item/01KXXY4QBSGEX3HPMPSENYFA5A",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXXY4QW2MR804KTV4RQ952DW",
+   "to": "item/01KXXY4QBSGEX3HPMPSENYFA5A",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXY2N7XC0BWB2AFWDD9VAECJ",
+   "to": "release/v0.10.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KXY449A7CEKMJXTQPZRC2WX9",
+   "to": "release/v0.11.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KXY7X0QH47Z6B5QZD5G052FJ",
+   "to": "ticket/github#54",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXY7X0QJ2SBY6KTQ30AKASP7",
+   "to": "item/01KXY7X0QH47Z6B5QZD5G052FJ",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXY7X0QJ2SBY6KTQ30AKASP7",
+   "to": "ticket/github#55",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXY7X0QJ79852RFK5Q8F6FZM",
+   "to": "item/01KXY7X0QH47Z6B5QZD5G052FJ",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXY7X0QJ79852RFK5Q8F6FZM",
+   "to": "ticket/github#56",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXY7X0QJAE0QH2W30JKK39TA",
+   "to": "item/01KXY7X0QH47Z6B5QZD5G052FJ",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXY7X0QJAE0QH2W30JKK39TA",
+   "to": "ticket/github#57",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXY7X0QJCEHRDABCXF6QKXF7",
+   "to": "item/01KXY7X0QH47Z6B5QZD5G052FJ",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXY7X0QJCEHRDABCXF6QKXF7",
+   "to": "ticket/github#58",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXY7X0QJQHZBCSCR438RFFMM",
+   "to": "item/01KXY7X0QH47Z6B5QZD5G052FJ",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXY7X0QJQHZBCSCR438RFFMM",
+   "to": "ticket/github#59",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXY7X0QJY4JZWYYF2CA46B9G",
+   "to": "item/01KXY7X0QH47Z6B5QZD5G052FJ",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KXY7X0QJY4JZWYYF2CA46B9G",
+   "to": "ticket/github#60",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXY8V5WZJ4E76B3D39KW5DCE",
+   "to": "ticket/github#62",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXY8V5WZJ4E76B3D39KW5DCE",
+   "to": "release/v0.12.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KXY8V62QH1H1V70M0Y08ARXX",
+   "to": "ticket/github#63",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXY8V62QH1H1V70M0Y08ARXX",
+   "to": "release/v0.12.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KXY8V686YPK4ET2XFB2KW2RX",
+   "to": "ticket/github#64",
+   "type": "references"
+  },
+  {
+   "from": "item/01KXY8V686YPK4ET2XFB2KW2RX",
+   "to": "release/v0.12.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KY111BC71KJGNH55CB2DWMKN",
+   "to": "item/01KY111BC7PABV8W6SDNVQACSN",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY111BC71KJGNH55CB2DWMKN",
+   "to": "ticket/github#65",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY111BC7B70C7M2RF1E57G17",
+   "to": "item/01KY111BC7PABV8W6SDNVQACSN",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY111BC7B70C7M2RF1E57G17",
+   "to": "ticket/github#66",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY111BC7NJ4BE7JBDK2P6Y56",
+   "to": "item/01KY111BC7PABV8W6SDNVQACSN",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY111BC7NJ4BE7JBDK2P6Y56",
+   "to": "ticket/github#67",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY111BC7PABV8W6SDNVQACSN",
+   "to": "ticket/github#68",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY111BC842N3J7Y7H85NHSEG",
+   "to": "item/01KY111BC7PABV8W6SDNVQACSN",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY111BC842N3J7Y7H85NHSEG",
+   "to": "ticket/github#69",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY111BC88FS6QD49JADZ9CJ5",
+   "to": "item/01KY111BC7PABV8W6SDNVQACSN",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY111BC88FS6QD49JADZ9CJ5",
+   "to": "ticket/github#70",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY111BC8F9BH0T3TERYEFC3C",
+   "to": "item/01KY111BC7PABV8W6SDNVQACSN",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY111BC8F9BH0T3TERYEFC3C",
+   "to": "ticket/github#71",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY111BC8QJAS9KH7N368N6RF",
+   "to": "item/01KY111BC7PABV8W6SDNVQACSN",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY111BC8QJAS9KH7N368N6RF",
+   "to": "ticket/github#72",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY11HDR3A5SR342DHG1BH5AZ",
+   "to": "ticket/github#74",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY11HDR3A5SR342DHG1BH5AZ",
+   "to": "release/v0.12.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KY129SGV3DEX5NVAP34VV9G2",
+   "to": "ticket/github#76",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY129SGV3DEX5NVAP34VV9G2",
+   "to": "release/v0.12.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KY2J9WN6WN6A8TVMR1TNS6ZX",
+   "to": "release/v0.12.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KY2KHHF43KAZ54F57BQW71TD",
+   "to": "ticket/github#79",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "to": "ticket/github#80",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5F6QA32GH5RWA1BH42EVSQ",
+   "to": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5F6QA32GH5RWA1BH42EVSQ",
+   "to": "ticket/github#81",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5F6QA32MWBKTYPVPTBPKQ7",
+   "to": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5F6QA32MWBKTYPVPTBPKQ7",
+   "to": "ticket/github#82",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5F6QA35SKWEN7YGMVR16XS",
+   "to": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5F6QA35SKWEN7YGMVR16XS",
+   "to": "ticket/github#83",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5F6QA3AV0B9NGBBKTMJS7J",
+   "to": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5F6QA3AV0B9NGBBKTMJS7J",
+   "to": "ticket/github#84",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5F6QA3G8VWG73VVD3AWDGE",
+   "to": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5F6QA3G8VWG73VVD3AWDGE",
+   "to": "ticket/github#85",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5F6QA3Y05F7S3ZMWEQ5BB2",
+   "to": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5F6QA3Y05F7S3ZMWEQ5BB2",
+   "to": "ticket/github#86",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5F6QA3YAAWKF4PC5VPM90A",
+   "to": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5F6QA3YAAWKF4PC5VPM90A",
+   "to": "ticket/github#87",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5F6QA43HN4CAMFBBD6MKSA",
+   "to": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5F6QA43HN4CAMFBBD6MKSA",
+   "to": "ticket/github#88",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5F6QA4WWSSZVKE0YJ7YHXZ",
+   "to": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5F6QA4WWSSZVKE0YJ7YHXZ",
+   "to": "ticket/github#89",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5F6QA4YVHE4ESMT3E2KYK9",
+   "to": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5F6QA4YVHE4ESMT3E2KYK9",
+   "to": "ticket/github#90",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5G9ZW025TRGTHFAFSVEXSX",
+   "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW025TRGTHFAFSVEXSX",
+   "to": "ticket/github#91",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5G9ZW0EYQ5T83RP46Z7952",
+   "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW0EYQ5T83RP46Z7952",
+   "to": "ticket/github#92",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "to": "ticket/github#93",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5G9ZW0MQD9335S641DC7ZG",
+   "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW0MQD9335S641DC7ZG",
+   "to": "ticket/github#94",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5G9ZW0PBXTBKRJJ70QHR5P",
+   "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW0PBXTBKRJJ70QHR5P",
+   "to": "ticket/github#95",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5G9ZW0PEZK9PTM3NG0PYX7",
+   "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW0PEZK9PTM3NG0PYX7",
+   "to": "ticket/github#96",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5G9ZW0PNKDDEK5TM8GS2J6",
+   "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW0PNKDDEK5TM8GS2J6",
+   "to": "ticket/github#97",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5G9ZW0RABXWHEMEP1FAV2G",
+   "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW0RABXWHEMEP1FAV2G",
+   "to": "ticket/github#98",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5G9ZW0X5F3K7KHP1SXFM3Q",
+   "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW0X5F3K7KHP1SXFM3Q",
+   "to": "ticket/github#99",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5G9ZW0Z6JFMVTAFC54RM36",
+   "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW0Z6JFMVTAFC54RM36",
+   "to": "ticket/github#100",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5HW7KSBAYS1RE95ZT8BYM4",
+   "to": "ticket/github#101",
+   "type": "references"
+  },
+  {
+   "from": "plan/2026-07-18-claude-plugin",
+   "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-claude-plugin",
+   "to": "item/01KXSFEWND18ATDAPCWJXKV8C1",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-claude-plugin",
+   "to": "item/01KXSFEWND2PG3PQW8GMZ9B319",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-claude-plugin",
+   "to": "item/01KXSFEWND3DGDF12DSWJEKVDF",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-claude-plugin",
+   "to": "item/01KXSFEWND4TYQ2V26KRPFHW9M",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-claude-plugin",
+   "to": "item/01KXSFEWND595MAFB1GMB9KECF",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-claude-plugin",
+   "to": "item/01KXSFEWNDBM4RHBFMNYJWR9CE",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-claude-plugin",
+   "to": "item/01KXSFEWNDM44B8A8RV30PF6X1",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-claude-plugin",
+   "to": "item/01KXSFEWNDR0ZDTHHGQVN3PG9Z",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-claude-plugin",
+   "to": "item/01KXSFEWNDT1B5D0PRK16NX14T",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-claude-plugin",
+   "to": "item/01KXSFEWNDZ55K8AQJBCN9MRD6",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJ0P23QC3SYXRQ01WA",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJ3QKFCRBB3A12H5GT",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJ72MM7XHEJBHM6A1Y",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJ8RHP53Z2VQJH4D9J",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJDK16TMR50CNR3T3V",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJEP1V1JMSXH2MQWYV",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJKRR3BF33CBK3E4Q7",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJMS2914A0JJYX3KEZ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJN9C584RF3NNJK0W9",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJQ91JPN4QRVMJQ296",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJV2H5QS5CSTYASS6M",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJVJW87EPCZXE6QDCA",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJWK58BS457Y2NG3JA",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWJZMQQH7H68XVB654Y",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWK0HC96WQ3HV98DHT8",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWK2PPBHVJ21MBT65ER",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWKC64M1XX0Y7WVT67Z",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWKPDG9Q4404RPTWZY9",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-18-docs-wiki-dogfood",
+   "to": "item/01KXSNNSWKTJX2QWW4PYFDEZHS",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-19-adr",
+   "to": "item/01KXXJYK5KS3MQWRPGZ3WNA790",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-19-adr",
+   "to": "item/01KXXJYKB1B12WEXTS6FZZ7QH2",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-19-adr",
+   "to": "item/01KXXJYKGPV41JK02KX0X67Q0G",
+   "type": "produces"
+  },
+  {
+   "from": "plan/design-docs-release-sync",
+   "to": "item/01KXY7X0QH47Z6B5QZD5G052FJ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/design-docs-release-sync",
+   "to": "item/01KXY7X0QJ2SBY6KTQ30AKASP7",
+   "type": "produces"
+  },
+  {
+   "from": "plan/design-docs-release-sync",
+   "to": "item/01KXY7X0QJ79852RFK5Q8F6FZM",
+   "type": "produces"
+  },
+  {
+   "from": "plan/design-docs-release-sync",
+   "to": "item/01KXY7X0QJAE0QH2W30JKK39TA",
+   "type": "produces"
+  },
+  {
+   "from": "plan/design-docs-release-sync",
+   "to": "item/01KXY7X0QJCEHRDABCXF6QKXF7",
+   "type": "produces"
+  },
+  {
+   "from": "plan/design-docs-release-sync",
+   "to": "item/01KXY7X0QJQHZBCSCR438RFFMM",
+   "type": "produces"
+  },
+  {
+   "from": "plan/design-docs-release-sync",
+   "to": "item/01KXY7X0QJY4JZWYYF2CA46B9G",
+   "type": "produces"
+  },
+  {
+   "from": "plan/grok-compat-and-mermaid-viz",
+   "to": "item/01KXXM1Z13NPYK1XBJ1EQFEKGT",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ia-content-model",
+   "to": "item/01KY5G9ZW025TRGTHFAFSVEXSX",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ia-content-model",
+   "to": "item/01KY5G9ZW0EYQ5T83RP46Z7952",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ia-content-model",
+   "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ia-content-model",
+   "to": "item/01KY5G9ZW0MQD9335S641DC7ZG",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ia-content-model",
+   "to": "item/01KY5G9ZW0PBXTBKRJJ70QHR5P",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ia-content-model",
+   "to": "item/01KY5G9ZW0PEZK9PTM3NG0PYX7",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ia-content-model",
+   "to": "item/01KY5G9ZW0PNKDDEK5TM8GS2J6",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ia-content-model",
+   "to": "item/01KY5G9ZW0RABXWHEMEP1FAV2G",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ia-content-model",
+   "to": "item/01KY5G9ZW0X5F3K7KHP1SXFM3Q",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ia-content-model",
+   "to": "item/01KY5G9ZW0Z6JFMVTAFC54RM36",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ia-content-model",
+   "to": "plan/wiki-information-architecture",
+   "type": "supersedes"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/ ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/(",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/)",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/,",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/-",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item//",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/01KXT88MCBB82VT84JT0PB53PG",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/01KXT88MGRJB0ARA9CN7QX29GY",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/01KXT88MMR65W3CX1C37ECEEXG",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/01KXT88MRST1ZZSBFMFCXYEDA1",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/01KXT88MWVW63PA5698TFNYZ5E",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/01KXT88N0Z4EHR2HKMHGAM0WB3",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/01KXT88N4W1E78NY17DW65PJPX",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/01KXT8JG3RNE2YZVCYEBXW9EX6",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/a",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/b",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/c",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/d",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/e",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/f",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/g",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/h",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/i",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/k",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/l",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/m",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/n",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/o",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/p",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/r",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/s",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/t",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/u",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/w",
+   "type": "produces"
+  },
+  {
+   "from": "plan/ticket-sync-and-init-detection",
+   "to": "item/y",
+   "type": "produces"
+  },
+  {
+   "from": "plan/typed-adapter-contract",
+   "to": "item/01KXV0NQPPPK2K948CK20QJSS1",
+   "type": "produces"
+  },
+  {
+   "from": "plan/typed-adapter-contract",
+   "to": "item/01KXV1HZMTKQGJHX0VSETZJX4Z",
+   "type": "produces"
+  },
+  {
+   "from": "plan/typed-adapter-contract",
+   "to": "item/01KXV1HZS08M62Z5EZF4HTVB6G",
+   "type": "produces"
+  },
+  {
+   "from": "plan/typed-adapter-contract",
+   "to": "item/01KXV1HZX2B49T1PB0GA4H0YMS",
+   "type": "produces"
+  },
+  {
+   "from": "plan/typed-adapter-contract",
+   "to": "item/01KXV1J0179NHDTP9K8FRVZGYP",
+   "type": "produces"
+  },
+  {
+   "from": "plan/typed-adapter-contract",
+   "to": "item/01KXV1J05APQR0DBP1840ZPVRM",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-information-architecture",
+   "to": "item/01KY5F6QA220S0K7RRK2Q80XR8",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-information-architecture",
+   "to": "item/01KY5F6QA32GH5RWA1BH42EVSQ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-information-architecture",
+   "to": "item/01KY5F6QA32MWBKTYPVPTBPKQ7",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-information-architecture",
+   "to": "item/01KY5F6QA35SKWEN7YGMVR16XS",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-information-architecture",
+   "to": "item/01KY5F6QA3AV0B9NGBBKTMJS7J",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-information-architecture",
+   "to": "item/01KY5F6QA3G8VWG73VVD3AWDGE",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-information-architecture",
+   "to": "item/01KY5F6QA3Y05F7S3ZMWEQ5BB2",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-information-architecture",
+   "to": "item/01KY5F6QA3YAAWKF4PC5VPM90A",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-information-architecture",
+   "to": "item/01KY5F6QA43HN4CAMFBBD6MKSA",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-information-architecture",
+   "to": "item/01KY5F6QA4WWSSZVKE0YJ7YHXZ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-information-architecture",
+   "to": "item/01KY5F6QA4YVHE4ESMT3E2KYK9",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-ticket-ui",
+   "to": "item/01KY111BC71KJGNH55CB2DWMKN",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-ticket-ui",
+   "to": "item/01KY111BC7B70C7M2RF1E57G17",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-ticket-ui",
+   "to": "item/01KY111BC7NJ4BE7JBDK2P6Y56",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-ticket-ui",
+   "to": "item/01KY111BC7PABV8W6SDNVQACSN",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-ticket-ui",
+   "to": "item/01KY111BC842N3J7Y7H85NHSEG",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-ticket-ui",
+   "to": "item/01KY111BC88FS6QD49JADZ9CJ5",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-ticket-ui",
+   "to": "item/01KY111BC8F9BH0T3TERYEFC3C",
+   "type": "produces"
+  },
+  {
+   "from": "plan/wiki-ticket-ui",
+   "to": "item/01KY111BC8QJAS9KH7N368N6RF",
+   "type": "produces"
+  },
+  {
+   "from": "plan/work-taxonomy",
+   "to": "item/01KXV61H5BDS7TD99H0FF9FE11",
+   "type": "produces"
+  },
+  {
+   "from": "plan/work-taxonomy",
+   "to": "item/01KXXFKH6438M5ZV8ZKM0CH9QN",
+   "type": "produces"
+  },
+  {
+   "from": "plan/work-taxonomy",
+   "to": "item/01KXXFKHBMR218J218RNN7C07N",
+   "type": "produces"
+  },
+  {
+   "from": "plan/work-taxonomy",
+   "to": "item/01KXXFKHH0VP73C2X6P9EX4616",
+   "type": "produces"
+  },
+  {
+   "from": "plan/work-taxonomy",
+   "to": "item/01KXXFKHPHDANP7S4GKC20G8EV",
+   "type": "produces"
+  },
+  {
+   "from": "plan/work-taxonomy",
+   "to": "item/01KXXFKHVTZQZ371DF7Z5HQB8M",
+   "type": "produces"
+  },
+  {
+   "from": "plan/work-taxonomy",
+   "to": "item/01KXXG2QPCE09N0V2Y1DKZDNSG",
+   "type": "produces"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-19_v0.11.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-19_v0.11.0-release",
+   "to": "roadmap/2026-07-19_v0.10.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-19_v0.11.0-release",
+   "to": "release/v0.11.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-21_v0.12.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-21_v0.12.0-release",
+   "to": "roadmap/2026-07-19_v0.9.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-21_v0.12.0-release",
+   "to": "release/v0.12.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-21_v0.12.1-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-21_v0.12.1-release",
+   "to": "roadmap-snapshot/2026-07-21_v0.12.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-21_v0.12.1-release",
+   "to": "release/v0.12.1",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap/2026-07-18_v0.2-roadmap",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap/2026-07-18_v0.5.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap/2026-07-18_v0.5.0-release",
+   "to": "roadmap/2026-07-18_v0.2-roadmap",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap/2026-07-18_v0.5.0-release",
+   "to": "release/v0.5.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.10.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.10.0-release",
+   "to": "roadmap/2026-07-18_v0.5.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.10.0-release",
+   "to": "release/v0.10.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.6.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.6.0-release",
+   "to": "roadmap-snapshot/2026-07-19_v0.11.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.6.0-release",
+   "to": "release/v0.6.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.7.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.7.0-release",
+   "to": "roadmap/2026-07-19_v0.6.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.7.0-release",
+   "to": "release/v0.7.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.8.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.8.0-release",
+   "to": "roadmap/2026-07-19_v0.7.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.8.0-release",
+   "to": "release/v0.8.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.9.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.9.0-release",
+   "to": "roadmap/2026-07-19_v0.8.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap/2026-07-19_v0.9.0-release",
+   "to": "release/v0.9.0",
+   "type": "targets"
+  }
+ ],
+ "nodes": {
+  "adr/0001-event-log-fold-union-merge": {
+   "doc_type": "adr",
+   "source": "docs/adr/0001-event-log-fold-union-merge.md",
+   "title": "Append-only event log with fold-derived state and git union merge",
+   "truth_state": "current"
+  },
+  "adr/0002-skill-based-edges-typed-contract": {
+   "doc_type": "adr",
+   "source": "docs/adr/0002-skill-based-edges-typed-contract.md",
+   "title": "Edge integration as skills, hardened by a typed adapter contract",
+   "truth_state": "current"
+  },
+  "adr/0003-green-gates-merge": {
+   "doc_type": "adr",
+   "source": "docs/adr/0003-green-gates-merge.md",
+   "title": "PRs merge only when every quality gate is green",
+   "truth_state": "current"
+  },
+  "cli-reference": {
+   "doc_type": "guide",
+   "source": "docs/user_guide/cli-reference.md",
+   "title": "WikiTicket SDD \u2014 CLI Reference",
+   "truth_state": "current"
+  },
+  "design/2026-07-19_v0.11.0-release-code-walkthrough": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-07-19_v0.11.0-release_code_walkthrough.md",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "snapshot"
+  },
+  "design/2026-07-19_v0.11.0-release-design-doc": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-07-19_v0.11.0-release_design_doc.md",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot"
+  },
+  "design/2026-07-21_v0.12.0-release-code-walkthrough": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-07-21_v0.12.0-release_code_walkthrough.md",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "snapshot"
+  },
+  "design/2026-07-21_v0.12.0-release-design-doc": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-07-21_v0.12.0-release_design_doc.md",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot"
+  },
+  "design/2026-07-21_v0.12.1-release-code-walkthrough": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-07-21_v0.12.1-release_code_walkthrough.md",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "snapshot"
+  },
+  "design/2026-07-21_v0.12.1-release-design-doc": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-07-21_v0.12.1-release_design_doc.md",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot"
+  },
+  "design/current-code-walkthrough": {
+   "doc_type": "design",
+   "source": "docs/designs/current_code_walkthrough.md",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "current"
+  },
+  "design/current-design-doc": {
+   "doc_type": "design",
+   "source": "docs/designs/current_design_doc.md",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "current"
+  },
+  "home": {
+   "doc_type": "guide",
+   "source": "docs/wiki-home.md",
+   "title": "WikiTicket SDD",
+   "truth_state": "current"
+  },
+  "item/01KXS7W15SHYS5PSGGWHYMFKYM": {
+   "doc_type": "item",
+   "status": "cancelled",
+   "title": "Smoke test item"
+  },
+  "item/01KXSFEWNCJMXPZDNT7RNYTG8X": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Worklog Claude plugin"
+  },
+  "item/01KXSFEWND18ATDAPCWJXKV8C1": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Move the three skills into plugin/skills, canonical copies"
+  },
+  "item/01KXSFEWND2PG3PQW8GMZ9B319": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "/worklog:doctor \u2014 version skew report + invariant checks"
+  },
+  "item/01KXSFEWND3DGDF12DSWJEKVDF": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Marketplace manifest + README install docs"
+  },
+  "item/01KXSFEWND4TYQ2V26KRPFHW9M": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Integration test: init, track, uninstall in a sandbox repo"
+  },
+  "item/01KXSFEWND595MAFB1GMB9KECF": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Plugin hooks.json ExitPlanMode hook with uninitialized-repo guard"
+  },
+  "item/01KXSFEWNDBM4RHBFMNYJWR9CE": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "bin/worklog --version + plugin CHANGELOG.md"
+  },
+  "item/01KXSFEWNDM44B8A8RV30PF6X1": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "/worklog:uninstall command \u2014 remove scaffolding, always preserve .work data and docs"
+  },
+  "item/01KXSFEWNDR0ZDTHHGQVN3PG9Z": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Record installed plugin version in .work/config.yml"
+  },
+  "item/01KXSFEWNDT1B5D0PRK16NX14T": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Scaffold plugin/ with .claude-plugin/plugin.json manifest v0.1.0"
+  },
+  "item/01KXSFEWNDZ55K8AQJBCN9MRD6": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "/worklog:init command \u2014 scaffold bin, hooks, .work, .gitattributes, CI into the current repo"
+  },
+  "item/01KXSNNSWJ0P23QC3SYXRQ01WA": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "UserPromptSubmit hook \u2014 inject a one-line reminder: requests that produce work get worklog items first (work-track), keep statuses moving"
+  },
+  "item/01KXSNNSWJ3QKFCRBB3A12H5GT": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Rewrite README.md \u2014 what/why: WikiTicket SDD (\"wicked ticket\"), fishbowled AI development, spec-driven (plans are the spec, tickets are the WIP), multi-team, system-agnostic edges (GitHub/GitLab/ADO/Jira/Confluence \u2014 they pick), epics/stories/tasks/bugs/subtasks, event-log history, generated roadmap/status. Keep quick-start + plugin sections, tightened."
+  },
+  "item/01KXSNNSWJ72MM7XHEJBHM6A1Y": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Write docs/user_guide/plugin-guide.md \u2014 plugin vs repo install levels, /worklog:* commands, skills, version/doctor, harness notes (Claude Code + Grok build now; OpenCode/Codex ports on roadmap)"
+  },
+  "item/01KXSNNSWJ8RHP53Z2VQJH4D9J": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Write docs/user_guide/user-guide.md \u2014 concepts (event log, fold, visible WIP), core workflows (plan\u2192capture\u2192work\u2192close\u2192sync, unplanned work, PR flow incl. roadmap merge recovery)"
+  },
+  "item/01KXSNNSWJDK16TMR50CNR3T3V": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Comprehensive user guide under docs/user_guide/ (excluded from plugin by construction; add packaging test)"
+  },
+  "item/01KXSNNSWJEP1V1JMSXH2MQWYV": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "worklog roadmap-snapshot [--name] subcommand \u2014 copy docs/roadmap.md to docs/roadmap/<YYYY-MM-DD>_<name>.md, frozen (refuse overwrite), + tests; re-copy worklog to plugin/scripts (canon sync)"
+  },
+  "item/01KXSNNSWJKRR3BF33CBK3E4Q7": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Enforcement hooks for the dogfood policy (plugin/hooks + repo mirror, silent outside worklog repos)"
+  },
+  "item/01KXSNNSWJMS2914A0JJYX3KEZ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "wiki-publish skill (repo + plugin canonical copy) \u2014 system-vague: read .work/config.yml wiki block, publish named files using available tooling for that system (gh/git for GitHub wiki, MCP/CLI for Confluence/ADO/GitLab), research missing tooling, maintain .work/published.json ledger {key: {url, rev, source_hash}}, skip unchanged hashes, surface one-time init steps (e.g. GitHub wiki first page) to the human"
+  },
+  "item/01KXSNNSWJN9C584RF3NNJK0W9": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Dogfood policy in CLAUDE.md \u2014 every request is broken into worklog items via work-track BEFORE work starts; mirror line in work-track skill"
+  },
+  "item/01KXSNNSWJQ91JPN4QRVMJQ296": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Write docs/user_guide/cli-reference.md \u2014 every worklog subcommand with examples, hooks, invariants"
+  },
+  "item/01KXSNNSWJV2H5QS5CSTYASS6M": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Docs, wiki publishing & dogfood discipline"
+  },
+  "item/01KXSNNSWJVJW87EPCZXE6QDCA": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Stop hook \u2014 if the working tree has non-.work changes but .work/todo.jsonl is unchanged vs HEAD, block once with \"record the work items or explain\" (honor stop_hook_active from stdin JSON to prevent loops)"
+  },
+  "item/01KXSNNSWJWK58BS457Y2NG3JA": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "SessionStart hook \u2014 doctor-lite on session open: verify CLAUDE.md carries the worklog policy block (marker or heading), core.hooksPath=hooks, and installed: version vs plugin version; emit additionalContext naming what's missing and pointing at /worklog:init or /worklog:doctor; silent when repo has no bin/worklog"
+  },
+  "item/01KXSNNSWJZMQQH7H68XVB654Y": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Seed roadmap: future epics via worklog add (ticket-sync skill-based w/ GitHub Issues first P1; spec v1.4 skill-based edges P2; wiki breadth Confluence/ADO/GitLab P2; compaction+nightly CI P2; status reports + plan-next P2; OpenCode/Codex ports P2; multi-tracker simultaneous P3)"
+  },
+  "item/01KXSNNSWK0HC96WQ3HV98DHT8": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Publish wiki: Home, User-Guide, CLI-Reference, Plugin-Guide, Roadmap (current), dated snapshot page; record in .work/published.json; add .work/wiki-checkout/ to .gitignore"
+  },
+  "item/01KXSNNSWK2PPBHVJ21MBT65ER": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Plugin installer/uninstaller at repo root \u2014 install-plugin.sh (claude plugin marketplace add + install, graceful message if claude CLI absent), uninstall-plugin.sh (reverse)"
+  },
+  "item/01KXSNNSWKC64M1XX0Y7WVT67Z": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Render roadmap, snapshot as docs/roadmap/<date>_v0.2-roadmap.md"
+  },
+  "item/01KXSNNSWKPDG9Q4404RPTWZY9": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Packaging guard in tests/test_plugin.py \u2014 plugin/ contains no docs/user_guide content; canon list still passes"
+  },
+  "item/01KXSNNSWKTJX2QWW4PYFDEZHS": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Bump version 0.2.0 (plugin.json, worklog VERSION, skills frontmatter incl. new skill) + CHANGELOG entry"
+  },
+  "item/01KXSP26ENPKCT4APD4YE93MMV": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Ticket sync \u2014 skill-based, GitHub Issues first"
+  },
+  "item/01KXSP26JP91E4508YST2WXPTD": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Spec v1.4 \u2014 revise \u00a79 adapter contract to skill-based edges"
+  },
+  "item/01KXSP26PS6A0WDHQ65Y4B1X94": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Wiki publish breadth \u2014 Confluence, ADO, GitLab via skills"
+  },
+  "item/01KXSP26V19JX6VTH0EYGDV2Z0": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Compaction + nightly CI job (spec \u00a77)"
+  },
+  "item/01KXSP26Z674RTTB6D8GQCM2A8": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Status reports (daily/weekly) + plan-next (spec \u00a713.3)"
+  },
+  "item/01KXSP273B1649RGJ841PVSCF3": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Harness ports \u2014 OpenCode and Codex (Claude plugin format is canonical)"
+  },
+  "item/01KXSP277AE68GPTHC1QJV1NX": {
+   "doc_type": "item",
+   "status": "cancelled",
+   "title": "01KXSP277AE68GPTHC1QJV1NX"
+  },
+  "item/01KXSP277AE68GPTJHC1QJV1NX": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Multi-tracker: sync one worklog to two systems at once (external as array)"
+  },
+  "item/01KXSQ4JH8SCHQ94DYQ7YJ872P": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Background plan-publish: on plan-capture, subagent syncs tickets and publishes plan to wiki, non-blocking"
+  },
+  "item/01KXSQJ3K19QWBDX482FRT7ETR": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "/worklog:init detects ticket/PR/wiki systems from repo; confirm yes/no, else multi-select pick-and-mix per area"
+  },
+  "item/01KXSQJ3SGWWEHDNK83CDNPT4S": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "wiki-publish always includes plans and roadmaps by default"
+  },
+  "item/01KXSQJ3Z40QHSXEN6B4Y238AZ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "worklog wiki-add <file>: register a file in .work/published.json for wiki publishing"
+  },
+  "item/01KXT88MCBB82VT84JT0PB53PG": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "worklog link subcommand: record external identity after successful push (spec 5.3)"
+  },
+  "item/01KXT88MGRJB0ARA9CN7QX29GY": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "ticket-sync skill (push-only): ULID idempotency marker, sync-state hash skip; gh for GitHub, others vague"
+  },
+  "item/01KXT88MMR65W3CX1C37ECEEXG": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Config: ticketing block -> github, project SpillwaveSolutions/wiki_ticket_sdd"
+  },
+  "item/01KXT88MRST1ZZSBFMFCXYEDA1": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Dogfood: push open items to GitHub Issues; roadmap shows issue links"
+  },
+  "item/01KXT88MWVW63PA5698TFNYZ5E": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Pull + echo suppression + conflicts (spec 10.3-10.6), after living with push-only"
+  },
+  "item/01KXT88N0Z4EHR2HKMHGAM0WB3": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Rewrite /worklog:init command: detect systems, yes/no confirm or multi-select pick-and-mix, write config"
+  },
+  "item/01KXT88N4W1E78NY17DW65PJPX": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Version 0.3.0 + CHANGELOG"
+  },
+  "item/01KXT8JG3RNE2YZVCYEBXW9EX6": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Push-only sync: close the linked ticket when a local item closes (skill scope gap)"
+  },
+  "item/01KXT9B43GA5B8AAT26W8A1VPJ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Spec cleanup: purge remaining adapter references (\u00a74.2 config keys, \u00a75.3, \u00a713.3, \u00a715.5, \u00a715.10)"
+  },
+  "item/01KXT9W0Y40SDTZBB93XY5YXNT": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Timecard status kind \u2014 narrative only per Rick: a sentence or two per day (spec \u00a717 Q4 closed)"
+  },
+  "item/01KXTZ5TAPZBC06AG50KDJKEYF": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "release skill: cutting a release is a wiki-ticket capability"
+  },
+  "item/01KXTZ5TEQV2J99CHPQNHJ1NA1": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.5.0: stamp CHANGELOG, snapshot roadmap, tag, GitHub release, publish + sync"
+  },
+  "item/01KXTZ8134TGKGC1YC2PXYRV29": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Fix: plugin release-skill copy missing version frontmatter (silent str.replace miss broke version-sync test)"
+  },
+  "item/01KXV0NQPPPK2K948CK20QJSS1": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Typed adapter contract for ticket-sync: dispatcher owns invariants, generated adapters, fake for CI"
+  },
+  "item/01KXV1B3RY3G25WR0K2ZGYEH73": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "GitHub server-side merges ignore merge=union \u2014 log/roadmap conflicts in PR UI"
+  },
+  "item/01KXV1HZMTKQGJHX0VSETZJX4Z": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "canonical.py + capabilities/adapter-io schemas + fake adapter + contract tests"
+  },
+  "item/01KXV1HZS08M62Z5EZF4HTVB6G": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "spec v1.6: \u00a78.1 GitHub-UI merge caveat + \u00a79 typed-contract reconciliation; user-guide recovery section"
+  },
+  "item/01KXV1HZX2B49T1PB0GA4H0YMS": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "sync_dispatch.py: dispatcher owns \u00a74 invariants; worklog sync/adapter-check wiring (last stub falls); dispatch tests"
+  },
+  "item/01KXV1J0179NHDTP9K8FRVZGYP": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "adapters/github worked example over gh + ticket-sync skill delegates invariants to dispatcher + CI wiring"
+  },
+  "item/01KXV1J05APQR0DBP1840ZPVRM": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "v0.6.0 + dogfood: adapter check green against fake and github example"
+  },
+  "item/01KXV1TTAW8G80DWS7ZMNJX3XE": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "PR gate: test coverage >=80% enforced in CI (bin/ modules), target 95% stated in CLAUDE.md"
+  },
+  "item/01KXV2KQRXZBKE2V6ADNGMZX62": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Coverage gate blind to subprocess-exercised modules: sync_dispatch tanks total to 54%; wire subprocess coverage + path aliasing"
+  },
+  "item/01KXV5DQC9M70PN3A4AS0VCBQH": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Green-gates merge policy: PRs merge only when all checks pass; /worklog:merge polls every 5 min until green"
+  },
+  "item/01KXV5DQHGQ6EQZDRVR2MV92KZ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "plugin/scripts/merge-when-green.sh poll loop + fake-gh test suite"
+  },
+  "item/01KXV5DQPRDD2W1QKCXRQ02A58": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "/worklog:merge command + merge-green skill + CLAUDE.md policy bullet"
+  },
+  "item/01KXV61H5BDS7TD99H0FF9FE11": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Work taxonomy: level/kind/milestone axes + CLAUDE.md block + flag-gated classifier (propose-only)"
+  },
+  "item/01KXXF29E1WHP41QPNX469DVDM": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.6.0: stamp CHANGELOG, snapshot roadmap, tag, GitHub release, publish"
+  },
+  "item/01KXXFKH6438M5ZV8ZKM0CH9QN": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Core: fold/canonical/CLI level+kind+milestone, triage default, type-alias migration, promote subcommand, tests"
+  },
+  "item/01KXXFKHBMR218J218RNN7C07N": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Policy: CLAUDE.md taxonomy block (markers, permissioned init step), classifier graduates Stop hook, classify skill, config block, tests"
+  },
+  "item/01KXXFKHH0VP73C2X6P9EX4616": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Edges+spec: dispatcher/adapters map kind+milestone, spec v1.7 field/hash updates, migration doc, work-track/plan-capture skill updates"
+  },
+  "item/01KXXFKHPHDANP7S4GKC20G8EV": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Roadmap: Needs-classification section, kind-mix per epic, milestone grouping (derived epic milestone), tests"
+  },
+  "item/01KXXFKHVTZQZ371DF7Z5HQB8M": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "v0.7.0 CHANGELOG, full-suite + coverage verification, dogfood sync with new fields"
+  },
+  "item/01KXXG2QPCE09N0V2Y1DKZDNSG": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Docs refresh: README + user guide cover taxonomy, classifier, promote, adapter contract, green-gates merge, coverage gate"
+  },
+  "item/01KXXGET7PTBERR80PHA2XM7RN": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Hook gap: pre-commit schema check does not enforce taxonomy \u00a72 rules (spec \u00a73.3) \u2014 CLI-only enforcement"
+  },
+  "item/01KXXHXHFY3RV0X4M92PQ3PCBZ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.7.0: stamp CHANGELOG, snapshot roadmap, tag, GitHub release, publish"
+  },
+  "item/01KXXJDW8XQ8S5MPST369MJQZT": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Dispatcher pushes orphan/untitled items: scope must skip _orphan and titleless items, drift-report instead"
+  },
+  "item/01KXXJYK5KS3MQWRPGZ3WNA790": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Architecture Decision Records: schema-validated docs/adr/, worklog adr new|list|check, wiki-synced"
+  },
+  "item/01KXXJYKB1B12WEXTS6FZZ7QH2": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "worklog adr subcommands + schema/adr.schema.json + pre-commit check + tests"
+  },
+  "item/01KXXJYKGPV41JK02KX0X67Q0G": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Seed ADRs 0001-0003 from real decisions; wiki-publish default set gains ADRs; docs + Home section"
+  },
+  "item/01KXXKPNAHYJD2143G5VAB843C": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "test_adr ran repo bin/ from sandbox cwd \u2014 invisible to subprocess coverage (caught by the green-gates loop refusing PR #36)"
+  },
+  "item/01KXXKWMV2Y6YGW2GY24YFZ9HY": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.8.0"
+  },
+  "item/01KXXM1Z13NPYK1XBJ1EQFEKGT": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Grok Build native compat statement + Mermaid roadmap viz (deps/hierarchy default, event-dated gantt)"
+  },
+  "item/01KXXM7MD5SRRZ19EM2QGWNBHJ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Feature flag for auto-merge-on-green (default on)"
+  },
+  "item/01KXXMCG418TSDDKCEZ61ZSFMH": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "CLI accepts empty item id: update/close/link/ingest append orphan events for ''"
+  },
+  "item/01KXXP6PBPXCNHAQF6Z774VAHR": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.9.0"
+  },
+  "item/01KXXPCNQDQG9YQSEJGFRHNE12": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Stop hook false-positives during background merge-chain branch handoffs (2x on 2026-07-19): gate reads transient tree state"
+  },
+  "item/01KXXRQVRNAC61JC4RPYRWH6R2": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Stop hook root cause was untracked files (inputs/) counted as dirty \u2014 race diagnosis in #46 was wrong; use status -uno"
+  },
+  "item/01KXXT3XSWDX75JFJJ7DRPMX1Z": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.10.0"
+  },
+  "item/01KXXY4QBSGEX3HPMPSENYFA5A": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "ADO migration feedback: tag markers, update-merge safety, link-first import"
+  },
+  "item/01KXXY4QH87BAJ0M7XBJH3Y0P7": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Marker style per system end-to-end: ADO strips HTML comments from Description \u2014 marker must be a tag (worklog:<ulid>); verify dispatcher honors capabilities.marker.style/template beyond html_comment; document in ticket-sync skill + adapters/README"
+  },
+  "item/01KXXY4QPE8RHA7D0TYN3VS0MY": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Adapter update-merge safety rule: updates merge tags and touch only changed fields \u2014 never overwrite existing remote content; add to adapters/README authoring rules + fake adapter behavior + dumbness-compatible test"
+  },
+  "item/01KXXY4QW2MR804KTV4RQ952DW": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Migration guide: adopting worklog with existing tickets \u2014 pre-seed external via worklog link (create-vs-update keys purely on external presence), pilot one epic, sync --dry-run acceptance gate = 0 creates"
+  },
+  "item/01KXY2N7XC0BWB2AFWDD9VAECJ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Daily status report 2026-07-19"
+  },
+  "item/01KXY3CQY87WFM35ZECK5TMR4S": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Widen system enums: linear, gitlab, codecatalyst (AWS), explicit other; GCP no-native-tracker note; enum-is-advisory semantics"
+  },
+  "item/01KXY449A7CEKMJXTQPZRC2WX9": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.11.0: stamp lockstep versions + CHANGELOG, snapshot roadmap, tag, GitHub release, publish"
+  },
+  "item/01KXY7X0QH47Z6B5QZD5G052FJ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Design docs + code walkthroughs with release-time doc sync"
+  },
+  "item/01KXY7X0QJ2SBY6KTQ30AKASP7": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "docs: user guide + plugin guide + README document design artifacts; CLAUDE.md policy bullet; wiki-publish default set gains designs"
+  },
+  "item/01KXY7X0QJ79852RFK5Q8F6FZM": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "suites green; PR; green-gates merge; item closeout"
+  },
+  "item/01KXY7X0QJAE0QH2W30JKK39TA": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "release skill gains background-agents doc-sync step (both copies); release.sync_docs list in .work/config.yml + init.sh scaffold"
+  },
+  "item/01KXY7X0QJCEHRDABCXF6QKXF7": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "design-docs skill: SKILL.md + references/design-doc-prompt.md (Rick's 35-section prompt, improved) + references/code-walkthrough-prompt.md; plugin mirror with version frontmatter"
+  },
+  "item/01KXY7X0QJQHZBCSCR438RFFMM": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "dogfood generation: current_design_doc + current_code_walkthrough + dated v0.11.0-release pair under docs/designs/ (background agent, grounded in actual repo, frontmatter tag/hash/branch/roadmap)"
+  },
+  "item/01KXY7X0QJY4JZWYYF2CA46B9G": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "wiki: Design-Doc + Code-Walkthrough live pages, frozen dated pages, Home links, published.json ledger keys"
+  },
+  "item/01KXY85EAS6YSEH2EDFW3PXN22": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Packaging guard matches 'docs/' as substring \u2014 skills/design-docs/ false-positive; match path segments"
+  },
+  "item/01KXY8V5WZJ4E76B3D39KW5DCE": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Pull sync drops taxonomy: sync_dispatch INGEST_FIELDS lacks level/kind/milestone \u2014 remote taxonomy edits silently not ingested"
+  },
+  "item/01KXY8V62QH1H1V70M0Y08ARXX": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "No reopen CLI: fold supports reopen but worklog has no subcommand; update --status todo leaks stale resolution"
+  },
+  "item/01KXY8V686YPK4ET2XFB2KW2RX": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "sync.conflict_policy local-wins/remote-wins documented in config but never read by dispatcher \u2014 implement or descope"
+  },
+  "item/01KY111BC71KJGNH55CB2DWMKN": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Server: Hono JSON API over any worklog repo (fold, events, docs, git, gh, wiki ledger, sync state)"
+  },
+  "item/01KY111BC7B70C7M2RF1E57G17": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Web shell: Vite + React + Tailwind dark dashboard chrome with repo picker"
+  },
+  "item/01KY111BC7NJ4BE7JBDK2P6Y56": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI"
+  },
+  "item/01KY111BC7PABV8W6SDNVQACSN": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "WikiTicket UI \u2014 project status dashboard (wiki_ticket_sdd_ui)"
+  },
+  "item/01KY111BC842N3J7Y7H85NHSEG": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Tauri 2 desktop shell wrapping the same frontend"
+  },
+  "item/01KY111BC88FS6QD49JADZ9CJ5": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Panels wave 2: Releases, Docs browser, Wiki drift, Sync health, Charts"
+  },
+  "item/01KY111BC8F9BH0T3TERYEFC3C": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Polish pass to the visually-stunning bar; README screenshots; tag v0.1.0"
+  },
+  "item/01KY111BC8QJAS9KH7N368N6RF": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed"
+  },
+  "item/01KY11HDR3A5SR342DHG1BH5AZ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.12.0: stamp CHANGELOG, snapshot roadmap, tag, GitHub release, publish (first release exercising design-docs doc-sync)"
+  },
+  "item/01KY129SGV3DEX5NVAP34VV9G2": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Close verb leaves remote taxonomy labels stale; next pull re-ingests them, reverting local reclassify-then-close (LWW on remote rev)"
+  },
+  "item/01KY2J9WN6WN6A8TVMR1TNS6ZX": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.12.1: stamp CHANGELOG, snapshot roadmap, tag, GitHub release, publish"
+  },
+  "item/01KY2KHHF43KAZ54F57BQW71TD": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Scrub inputs/ from main history (drop d538d15 + revert f97626a via rebase, force-with-lease) and delete local copies"
+  },
+  "item/01KY5D79CY0DPSDAQ09QZFW694": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Ignore tmp/ scratch dir in .gitignore (onboarding notes live there untracked)"
+  },
+  "item/01KY5F6QA220S0K7RRK2Q80XR8": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Wiki information architecture"
+  },
+  "item/01KY5F6QA32GH5RWA1BH42EVSQ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 1: docs/information-architecture.md + docs/content-model.md"
+  },
+  "item/01KY5F6QA32MWBKTYPVPTBPKQ7": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 1: document templates (plan, adr, status, design) with required frontmatter"
+  },
+  "item/01KY5F6QA35SKWEN7YGMVR16XS": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 0: index pages \u2014 Plans-Index, ADR-Index, Status-Index, Release-History"
+  },
+  "item/01KY5F6QA3AV0B9NGBBKTMJS7J": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 1: docs/navigation.yml + docs/publishing.yml publish manifest"
+  },
+  "item/01KY5F6QA3G8VWG73VVD3AWDGE": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 0: redesign Home as question-oriented orientation hub with current-vs-history zones"
+  },
+  "item/01KY5F6QA3Y05F7S3ZMWEQ5BB2": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 0: current-vs-historical banners + Wiki-Structure conventions page"
+  },
+  "item/01KY5F6QA3YAAWKF4PC5VPM90A": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 0: _Sidebar.md mapped to the 9 target sections"
+  },
+  "item/01KY5F6QA43HN4CAMFBBD6MKSA": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 2 (coarse): frontmatter normalization + generated indexes incl. Traceability Index \u2014 explode via superseding plan"
+  },
+  "item/01KY5F6QA4WWSSZVKE0YJ7YHXZ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 3 (coarse): traceability graph, worklog docs validate/index/health/trace, CI gates \u2014 explode via superseding plan"
+  },
+  "item/01KY5F6QA4YVHE4ESMT3E2KYK9": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 1: content inventory \u2014 classify every existing doc and wiki page into the model"
+  },
+  "item/01KY5G9ZW025TRGTHFAFSVEXSX": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 0: worklog wiki-key + worklog ia-inventory (read-only) + migration record docs/migrations/0002-ia-content-model.md"
+  },
+  "item/01KY5G9ZW0EYQ5T83RP46Z7952": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 1: worklog ia-normalize \u2014 sidecars for frozen docs, in-place for sanctioned-live; backfill wiki_key (ledger-seeded) + truth_state"
+  },
+  "item/01KY5G9ZW0H2YMNWDFJYGRPYE5": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "IA & content model (supersedes wiki-information-architecture)"
+  },
+  "item/01KY5G9ZW0MQD9335S641DC7ZG": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 3: generated indexes \u2014 Decisions, Releases, Status Archive; wire ia-index into release + plan-capture skills"
+  },
+  "item/01KY5G9ZW0PBXTBKRJJ70QHR5P": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 0: schema/doc.schema.json unified frontmatter schema + stdlib validator (adr.schema.json pattern)"
+  },
+  "item/01KY5G9ZW0PEZK9PTM3NG0PYX7": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 2: extend wiki-publish to consume publish-manifest.json; replace hand-maintained wiki-home.md with generated Home"
+  },
+  "item/01KY5G9ZW0PNKDDEK5TM8GS2J6": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 1: CI gates \u2014 wiki_key present/unique, schema-valid frontmatter (warn one cycle, then hard)"
+  },
+  "item/01KY5G9ZW0RABXWHEMEP1FAV2G": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Phase 5: promote gates to hard fail; platform render adapters (GitLab/ADO/Confluence); /worklog:find + glossary"
+  },
+  "item/01KY5G9ZW0X5F3K7KHP1SXFM3Q": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 2: worklog ia-render + ia-manifest \u2014 generated Home, Sidebar, publish-time truth banners in docs/.index/rendered/"
+  },
+  "item/01KY5G9ZW0Z6JFMVTAFC54RM36": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Phase 4: ia-graph typed-edge taxonomy + link-pr + trace-check + Traceability Index; propose-only edge seeding via suggestions.jsonl"
+  },
+  "item/01KY5HGKCBKJA5A3ZJGMPASP3X": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Tickets unreadable: no junior-dev/PM description \u2014 add --body to add/update, plan-capture task descriptions, skill rule, backfill open items"
+  },
+  "item/01KY5HW7KSBAYS1RE95ZT8BYM4": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Compaction aborts on closed orphan item \u2014 snapshot must not inject taxonomy defaults"
+  },
+  "item/01KY5JB9F9XKKD1RNS66J6DXHZ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "GitHub Wiki shows raw YAML frontmatter on published pages \u2014 strip at publish time"
+  },
+  "item/01KY5N447CK55EXFHTQGWA9JZ9": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "PR-description skill: 10-section high-context PR body spec (big picture, runtime context, scope, flow, testing honesty, out-of-scope, ticket glossary)"
+  },
+  "item/01KY5N7DF2YMR9E11G4W3HF6PY": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "issue-description skill + rich ticket bodies in ticket-sync (summary/context/outcome/scope/acceptance/traceability from the item graph)"
+  },
+  "item/01KY5NE0ZYGBWG44N0KPEBFCZ8": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config"
+  },
+  "item/01KY5P9V0CMM86G43HH4Q28ZDD": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "pre-commit hook pollutes worktree with bin/__pycache__ after git add \u2014 merge aborts on tracked-vs-untracked pyc collision"
+  },
+  "plan/2026-07-17_worklog-core_plan": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-17_worklog-core_plan.md",
+   "title": "Worklog Core (Spec \u00a718 Steps 3\u20134 + CI) Implementation Plan",
+   "truth_state": "current"
+  },
+  "plan/2026-07-18-claude-plugin": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-18-claude-plugin.md",
+   "title": "Worklog Claude plugin",
+   "truth_state": "current"
+  },
+  "plan/2026-07-18-docs-wiki-dogfood": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-18-docs-wiki-dogfood.md",
+   "title": "Docs, wiki publishing & dogfood discipline",
+   "truth_state": "current"
+  },
+  "plan/2026-07-19-adr": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-19-adr.md",
+   "title": "Architecture Decision Records \u2014 schema-validated, wiki-synced",
+   "truth_state": "current"
+  },
+  "plan/design-docs-release-sync": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-19-design-docs-release-sync.md",
+   "title": "Design docs + code walkthroughs with release-time doc sync",
+   "truth_state": "current"
+  },
+  "plan/grok-compat-and-mermaid-viz": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-19-grok-compat-and-mermaid-viz.md",
+   "title": "Grok Build compatibility statement + Mermaid roadmap visualization",
+   "truth_state": "current"
+  },
+  "plan/ia-content-model": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-22-ia-content-model.md",
+   "title": "IA & content model (supersedes wiki-information-architecture)",
+   "truth_state": "current"
+  },
+  "plan/ticket-sync-and-init-detection": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-18-ticket-sync-and-init-detection.md",
+   "title": "Ticket sync (push-only, GitHub Issues) + /worklog:init system detection",
+   "truth_state": "current"
+  },
+  "plan/typed-adapter-contract": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-18-typed-adapter-contract.md",
+   "title": "Typed Adapter Contract for ticket-sync",
+   "truth_state": "current"
+  },
+  "plan/wiki-information-architecture": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-22-wiki-information-architecture.md",
+   "title": "Wiki information architecture",
+   "truth_state": "superseded"
+  },
+  "plan/wiki-ticket-ui": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-21-wiki-ticket-ui.md",
+   "title": "WikiTicket UI \u2014 project status dashboard (wiki_ticket_sdd_ui)",
+   "truth_state": "current"
+  },
+  "plan/work-taxonomy": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-18-work-taxonomy.md",
+   "title": "Work Taxonomy + Flag-Gated Classifier",
+   "truth_state": "current"
+  },
+  "plugin-guide": {
+   "doc_type": "guide",
+   "source": "docs/user_guide/plugin-guide.md",
+   "title": "WikiTicket SDD \u2014 Plugin Guide",
+   "truth_state": "current"
+  },
+  "release/v0.10.0": {
+   "doc_type": "release"
+  },
+  "release/v0.11.0": {
+   "doc_type": "release"
+  },
+  "release/v0.12.0": {
+   "doc_type": "release"
+  },
+  "release/v0.12.1": {
+   "doc_type": "release"
+  },
+  "release/v0.5.0": {
+   "doc_type": "release"
+  },
+  "release/v0.6.0": {
+   "doc_type": "release"
+  },
+  "release/v0.7.0": {
+   "doc_type": "release"
+  },
+  "release/v0.8.0": {
+   "doc_type": "release"
+  },
+  "release/v0.9.0": {
+   "doc_type": "release"
+  },
+  "roadmap": {
+   "doc_type": "roadmap",
+   "source": "docs/roadmap.md",
+   "title": "Roadmap",
+   "truth_state": "current"
+  },
+  "roadmap-snapshot/2026-07-19_v0.11.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-19_v0.11.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-21_v0.12.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-21_v0.12.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-21_v0.12.1-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-21_v0.12.1-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap/2026-07-18_v0.2-roadmap": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-18_v0.2-roadmap.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap/2026-07-18_v0.5.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-18_v0.5.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap/2026-07-19_v0.10.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-19_v0.10.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap/2026-07-19_v0.6.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-19_v0.6.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap/2026-07-19_v0.7.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-19_v0.7.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap/2026-07-19_v0.8.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-19_v0.8.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap/2026-07-19_v0.9.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-19_v0.9.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "spec": {
+   "doc_type": "guide",
+   "source": "docs/worklog-spec.md",
+   "title": "Worklog: Visible-WIP Work Tracking Spec",
+   "truth_state": "current"
+  },
+  "status/2026-07-18-timecard": {
+   "doc_type": "status",
+   "source": "docs/status/2026-07-18-timecard.md",
+   "title": "Timecard \u2014 week of 14 July",
+   "truth_state": "current"
+  },
+  "status/2026-07-18-weekly": {
+   "doc_type": "status",
+   "source": "docs/status/2026-07-18-weekly.md",
+   "title": "Weekly \u2014 WikiTicket SDD",
+   "truth_state": "current"
+  },
+  "status/2026-07-19-daily": {
+   "doc_type": "status",
+   "source": "docs/status/2026-07-19-daily.md",
+   "title": "Daily status \u2014 2026-07-19",
+   "truth_state": "current"
+  },
+  "ticket/github#10": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/10"
+  },
+  "ticket/github#100": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/100"
+  },
+  "ticket/github#101": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/101"
+  },
+  "ticket/github#11": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/11"
+  },
+  "ticket/github#12": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/12"
+  },
+  "ticket/github#13": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/13"
+  },
+  "ticket/github#14": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/14"
+  },
+  "ticket/github#16": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/16"
+  },
+  "ticket/github#17": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/17"
+  },
+  "ticket/github#23": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/23"
+  },
+  "ticket/github#25": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/25"
+  },
+  "ticket/github#29": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/29"
+  },
+  "ticket/github#34": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/34"
+  },
+  "ticket/github#39": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/39"
+  },
+  "ticket/github#4": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/4"
+  },
+  "ticket/github#49": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/49"
+  },
+  "ticket/github#5": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/5"
+  },
+  "ticket/github#54": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/54"
+  },
+  "ticket/github#55": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/55"
+  },
+  "ticket/github#56": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/56"
+  },
+  "ticket/github#57": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/57"
+  },
+  "ticket/github#58": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/58"
+  },
+  "ticket/github#59": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/59"
+  },
+  "ticket/github#6": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/6"
+  },
+  "ticket/github#60": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/60"
+  },
+  "ticket/github#62": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/62"
+  },
+  "ticket/github#63": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/63"
+  },
+  "ticket/github#64": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/64"
+  },
+  "ticket/github#65": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/65"
+  },
+  "ticket/github#66": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/66"
+  },
+  "ticket/github#67": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/67"
+  },
+  "ticket/github#68": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/68"
+  },
+  "ticket/github#69": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/69"
+  },
+  "ticket/github#7": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/7"
+  },
+  "ticket/github#70": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/70"
+  },
+  "ticket/github#71": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/71"
+  },
+  "ticket/github#72": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/72"
+  },
+  "ticket/github#74": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/74"
+  },
+  "ticket/github#76": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/76"
+  },
+  "ticket/github#79": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/79"
+  },
+  "ticket/github#8": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/8"
+  },
+  "ticket/github#80": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/80"
+  },
+  "ticket/github#81": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/81"
+  },
+  "ticket/github#82": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/82"
+  },
+  "ticket/github#83": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/83"
+  },
+  "ticket/github#84": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/84"
+  },
+  "ticket/github#85": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/85"
+  },
+  "ticket/github#86": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/86"
+  },
+  "ticket/github#87": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/87"
+  },
+  "ticket/github#88": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/88"
+  },
+  "ticket/github#89": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/89"
+  },
+  "ticket/github#9": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/9"
+  },
+  "ticket/github#90": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/90"
+  },
+  "ticket/github#91": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/91"
+  },
+  "ticket/github#92": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/92"
+  },
+  "ticket/github#93": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/93"
+  },
+  "ticket/github#94": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/94"
+  },
+  "ticket/github#95": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/95"
+  },
+  "ticket/github#96": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/96"
+  },
+  "ticket/github#97": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/97"
+  },
+  "ticket/github#98": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/98"
+  },
+  "ticket/github#99": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/99"
+  },
+  "user-guide": {
+   "doc_type": "guide",
+   "source": "docs/user_guide/user-guide.md",
+   "title": "WikiTicket SDD \u2014 User Guide",
+   "truth_state": "current"
+  }
+ },
+ "version": 1
+}

@@ -1,0 +1,64 @@
+{
+  "$comment": "Unified doc frontmatter/sidecar schema (plan ia-content-model §5). Mirrored in bin/ia.py DOC_SCHEMA — same deliberate duplication as adr.schema.json / bin/adr.py. Per-type required subsets live in x-required-by-type (§5.4); the mini validator applies them to the merged record (frontmatter ∪ sidecar).",
+  "type": "object",
+  "required": ["wiki_key", "doc_type", "truth_state"],
+  "properties": {
+    "wiki_key": {"type": "string"},
+    "canonical_key": {"type": "string"},
+    "aliases": {"type": "array", "items": {"type": "string"}},
+    "doc_type": {"enum": ["plan", "item", "roadmap", "roadmap-snapshot", "status", "design", "adr", "guide"]},
+    "title": {"type": "string"},
+    "slug": {"type": "string"},
+    "truth_state": {"enum": ["current", "snapshot", "superseded", "archived"]},
+    "status": {"type": "string"},
+    "date": {"type": "string"},
+    "generated_at": {"type": "string"},
+    "git_hash": {"type": "string"},
+    "through": {"type": "string"},
+    "epic": {"type": "string"},
+    "items": {"type": "array", "items": {"type": "string"}},
+    "plan": {"type": "string"},
+    "milestone": {"type": "string"},
+    "release": {"type": "string"},
+    "roadmap": {"type": "string"},
+    "roadmap_snapshot": {"type": "string"},
+    "supersedes": {"type": ["string", "integer", "null"]},
+    "superseded_by": {"type": ["string", "integer", "null"]},
+    "relates_to": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "target"],
+        "properties": {
+          "type": {"enum": ["produces", "decides", "implements", "supersedes", "verified-by", "lands-in", "belongs-to", "targets", "snapshot-of", "references"]},
+          "target": {"type": "string"}
+        }
+      }
+    },
+    "owner": {"type": "string"},
+    "actors": {"type": "array", "items": {"type": "string"}},
+    "deciders": {"type": "array", "items": {"type": "string"}},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "kind": {"type": "string"},
+    "window": {"type": ["object", "string"]},
+    "name": {"type": "string"},
+    "branch": {"type": "string"},
+    "tag": {"type": "string"},
+    "id": {"type": "integer"},
+    "external": {"type": ["object", "string"]},
+    "code": {"type": ["object", "array", "string"]},
+    "wiki": {"type": "string"},
+    "source_hash": {"type": "string"},
+    "origin": {"type": "string"}
+  },
+  "x-required-by-type": {
+    "plan": ["wiki_key", "doc_type", "title", "slug", "date", "truth_state", "status", "items"],
+    "item": ["wiki_key", "doc_type", "title", "status", "truth_state"],
+    "roadmap": ["wiki_key", "doc_type", "truth_state", "generated_at"],
+    "roadmap-snapshot": ["wiki_key", "doc_type", "truth_state", "date"],
+    "status": ["wiki_key", "doc_type", "kind", "date", "window", "through", "generated_at", "truth_state"],
+    "design": ["wiki_key", "doc_type", "git_hash", "truth_state"],
+    "adr": ["wiki_key", "doc_type", "id", "slug", "title", "date", "status", "truth_state"],
+    "guide": ["wiki_key", "doc_type", "title", "slug", "truth_state"]
+  }
+}

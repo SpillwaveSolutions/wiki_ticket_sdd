@@ -1,3 +1,10 @@
+---
+doc_type: guide
+slug: user-guide
+title: WikiTicket SDD — User Guide
+truth_state: current
+wiki_key: user-guide
+---
 # WikiTicket SDD — User Guide
 
 WikiTicket SDD (pronounced "wicked ticket") is a local-first, git-native work

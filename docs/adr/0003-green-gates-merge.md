@@ -8,6 +8,8 @@ deciders: [rick, claude]
 tags: [ci, process]
 supersedes: null
 superseded_by: null
+wiki_key: adr/0003-green-gates-merge
+truth_state: current
 ---
 
 ## Context

@@ -64,6 +64,15 @@ to follow — see `docs/plans/2026-07-18-typed-adapter-contract.md`:
   via `worklog ingest` with deterministic event IDs, echo-suppressed and
   conflict-checked — the dispatcher enforces this.
 
+## 4b. Rich ticket bodies
+
+When creating or updating a ticket, compose its body with
+`bin/worklog ticket-body <ulid>` (issue-description skill): summary,
+epic/plan context with the frozen plan's wiki page, milestone, and
+traceability edges, rendered from the log + graph. Never hand-edit richness
+into the remote ticket only — enrich the source (`worklog update --body`,
+`link-pr`, sidecar `relates_to`) and let sync carry it out.
+
 ## 5. Closing
 
 When a scoped item's status is `done` or `cancelled`, the sync closes the
