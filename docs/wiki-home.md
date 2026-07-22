@@ -37,6 +37,7 @@ work is fishbowled, not hidden.
 
 ## Plans
 
+- [[Plan-ia-content-model]]
 - [[Plan-wiki-information-architecture]]
 - [[Plan-wiki-ticket-ui]]
 - [[Plan-design-docs-release-sync]]
