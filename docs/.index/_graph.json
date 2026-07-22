@@ -2455,6 +2455,11 @@
    "status": "todo",
    "title": "Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config"
   },
+  "item/01KY5P9V0CMM86G43HH4Q28ZDD": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "pre-commit hook pollutes worktree with bin/__pycache__ after git add \u2014 merge aborts on tracked-vs-untracked pyc collision"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",

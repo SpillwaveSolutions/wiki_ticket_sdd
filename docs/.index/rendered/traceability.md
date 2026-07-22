@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### pre-commit hook pollutes worktree with bin/__pycache__ after git add — merge aborts on tracked-vs-untracked pyc collision
+`01KY5P9V0CMM86G43HH4Q28ZDD` · status: done
+
 ### Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config
 `01KY5NE0ZYGBWG44N0KPEBFCZ8` · status: todo
 
