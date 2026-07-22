@@ -481,3 +481,5 @@
 {"actor":"richardhightower","ev":"01KY5MWES49WW2RRPWASXCF93D","item":"01KY5G9ZW0X5F3K7KHP1SXFM3Q","op":"close","set":{"status":"done"},"ts":"2026-07-22T19:29:47Z"}
 {"actor":"richardhightower","ev":"01KY5MWEZFNYSNMM12Y991FD4T","item":"01KY5G9ZW0PEZK9PTM3NG0PYX7","op":"close","set":{"status":"done"},"ts":"2026-07-22T19:29:48Z"}
 {"actor":"richardhightower","ev":"01KY5MWF62YPN7PFH2S3VJJ471","item":"01KY5G9ZW0MQD9335S641DC7ZG","op":"update","set":{"status":"in_progress"},"ts":"2026-07-22T19:29:48Z"}
+{"actor":"richardhightower","ev":"01KY5MYDMFABVBZJFCX6G8VKA1","item":"01KY5G9ZW0MQD9335S641DC7ZG","op":"close","set":{"status":"done"},"ts":"2026-07-22T19:30:52Z"}
+{"actor":"richardhightower","ev":"01KY5MYDTYH0YRJNVN56V2RNSH","item":"01KY5G9ZW0Z6JFMVTAFC54RM36","op":"update","set":{"status":"in_progress"},"ts":"2026-07-22T19:30:52Z"}

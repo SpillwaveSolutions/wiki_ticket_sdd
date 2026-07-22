@@ -29,8 +29,10 @@ description: Capture an approved plan as tracked work items. Use when exiting pl
        bin/worklog plan-capture --slug <kebab-slug> --title "<plan title>" \
            --body "<epic description a junior dev/PM can read>" --file <tempfile>
 
-3. Run `bin/worklog roadmap-render`, then commit `docs/plans/`,
-   `docs/roadmap.md`, and `.work/todo.jsonl` together.
+3. Run `bin/worklog roadmap-render`, then `bin/worklog ia-index` (refreshes
+   sidecars, inventory, rendered Home/Sidebar/indexes, and the publish
+   manifest so the new plan is navigable), then commit `docs/plans/`,
+   `docs/roadmap.md`, `docs/.index/`, and `.work/todo.jsonl` together.
 
 4. Publish in the background: spawn ONE background subagent (Agent tool with
    `run_in_background`) whose prompt is: run the ticket-sync skill flow for

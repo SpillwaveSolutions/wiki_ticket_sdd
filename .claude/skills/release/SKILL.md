@@ -26,6 +26,10 @@ skill; use the platform's own release tooling.
 - CHANGELOG: change `— unreleased` to `— YYYY-MM-DD` (UTC, release date).
 - `bin/worklog roadmap-snapshot --name vX.Y.Z-release` — the frozen picture
   of open work at release time. Snapshots are frozen; never regenerate.
+- `bin/worklog ia-index` — sidecars the new snapshot (stamping its
+  `release` and supersede chain), refreshes the inventory, and re-renders
+  Home/Sidebar/Releases-index + publish manifest so the release is
+  navigable. Commit `docs/.index/` with the snapshot.
 
 ## 3. Land it
 
