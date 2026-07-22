@@ -1,0 +1,753 @@
+{
+ "docs": [
+  {
+   "canonical_key": "adr/0001-event-log-fold-union-merge",
+   "date": "2026-07-19",
+   "deciders": [
+    "rick",
+    "claude"
+   ],
+   "doc_type": "adr",
+   "id": 1,
+   "slug": "event-log-fold-union-merge",
+   "source": "docs/adr/0001-event-log-fold-union-merge.md",
+   "status": "accepted",
+   "tags": [
+    "core",
+    "git"
+   ],
+   "title": "Append-only event log with fold-derived state and git union merge",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0001-event-log-fold-union-merge",
+   "wiki_key": "adr/0001-event-log-fold-union-merge"
+  },
+  {
+   "canonical_key": "adr/0002-skill-based-edges-typed-contract",
+   "date": "2026-07-19",
+   "deciders": [
+    "rick",
+    "claude"
+   ],
+   "doc_type": "adr",
+   "id": 2,
+   "slug": "skill-based-edges-typed-contract",
+   "source": "docs/adr/0002-skill-based-edges-typed-contract.md",
+   "status": "accepted",
+   "tags": [
+    "sync",
+    "adapters"
+   ],
+   "title": "Edge integration as skills, hardened by a typed adapter contract",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0002-skill-based-edges-typed-contract",
+   "wiki_key": "adr/0002-skill-based-edges-typed-contract"
+  },
+  {
+   "canonical_key": "adr/0003-green-gates-merge",
+   "date": "2026-07-19",
+   "deciders": [
+    "rick",
+    "claude"
+   ],
+   "doc_type": "adr",
+   "id": 3,
+   "slug": "green-gates-merge",
+   "source": "docs/adr/0003-green-gates-merge.md",
+   "status": "accepted",
+   "tags": [
+    "ci",
+    "process"
+   ],
+   "title": "PRs merge only when every quality gate is green",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0003-green-gates-merge",
+   "wiki_key": "adr/0003-green-gates-merge"
+  },
+  {
+   "aliases": [
+    "cli-reference"
+   ],
+   "canonical_key": "guide/cli-reference",
+   "doc_type": "guide",
+   "slug": "cli-reference",
+   "source": "docs/user_guide/cli-reference.md",
+   "title": "WikiTicket SDD \u2014 CLI Reference",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/CLI-Reference",
+   "wiki_key": "cli-reference"
+  },
+  {
+   "branch": "feature/design-docs",
+   "canonical_key": "design/2026-07-19_v0.11.0-release-code-walkthrough",
+   "date": "2026-07-19",
+   "doc_type": "design",
+   "git_hash": "f6d29aab8a936b9abb93cb039fbb0cd94fff5c93",
+   "name": "v0.11.0-release",
+   "release": "v0.11.0",
+   "roadmap_snapshot": "docs/roadmap/2026-07-19_v0.11.0-release.md",
+   "slug": "2026-07-19_v0.11.0-release_code_walkthrough",
+   "source": "docs/designs/2026-07-19_v0.11.0-release_code_walkthrough.md",
+   "tag": "v0.11.0",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-07-19_v0.11.0-release",
+   "wiki_key": "design/2026-07-19_v0.11.0-release-code-walkthrough"
+  },
+  {
+   "branch": "feature/design-docs",
+   "canonical_key": "design/2026-07-19_v0.11.0-release-design-doc",
+   "date": "2026-07-19",
+   "doc_type": "design",
+   "git_hash": "f6d29aab8a936b9abb93cb039fbb0cd94fff5c93",
+   "name": "v0.11.0-release",
+   "release": "v0.11.0",
+   "roadmap_snapshot": "docs/roadmap/2026-07-19_v0.11.0-release.md",
+   "slug": "2026-07-19_v0.11.0-release_design_doc",
+   "source": "docs/designs/2026-07-19_v0.11.0-release_design_doc.md",
+   "tag": "v0.11.0",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-07-19_v0.11.0-release",
+   "wiki_key": "design/2026-07-19_v0.11.0-release-design-doc"
+  },
+  {
+   "branch": "main",
+   "canonical_key": "design/2026-07-21_v0.12.0-release-code-walkthrough",
+   "date": "2026-07-21",
+   "doc_type": "design",
+   "git_hash": "ee38438fec2f855836e65c9a95979c321efcc3d2",
+   "name": "v0.12.0-release",
+   "release": "v0.12.0",
+   "roadmap_snapshot": "docs/roadmap/2026-07-21_v0.12.0-release.md",
+   "slug": "2026-07-21_v0.12.0-release_code_walkthrough",
+   "source": "docs/designs/2026-07-21_v0.12.0-release_code_walkthrough.md",
+   "tag": "v0.12.0",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-07-21_v0.12.0-release",
+   "wiki_key": "design/2026-07-21_v0.12.0-release-code-walkthrough"
+  },
+  {
+   "branch": "main",
+   "canonical_key": "design/2026-07-21_v0.12.0-release-design-doc",
+   "date": "2026-07-21",
+   "doc_type": "design",
+   "git_hash": "ee38438fec2f855836e65c9a95979c321efcc3d2",
+   "name": "v0.12.0-release",
+   "release": "v0.12.0",
+   "roadmap_snapshot": "docs/roadmap/2026-07-21_v0.12.0-release.md",
+   "slug": "2026-07-21_v0.12.0-release_design_doc",
+   "source": "docs/designs/2026-07-21_v0.12.0-release_design_doc.md",
+   "tag": "v0.12.0",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-07-21_v0.12.0-release",
+   "wiki_key": "design/2026-07-21_v0.12.0-release-design-doc"
+  },
+  {
+   "branch": "main",
+   "canonical_key": "design/2026-07-21_v0.12.1-release-code-walkthrough",
+   "date": "2026-07-21",
+   "doc_type": "design",
+   "git_hash": "04cf8e8111bd0be37f7048f72474baf75e836635",
+   "name": "v0.12.1-release",
+   "release": "v0.12.1",
+   "roadmap_snapshot": "docs/roadmap/2026-07-21_v0.12.1-release.md",
+   "slug": "2026-07-21_v0.12.1-release_code_walkthrough",
+   "source": "docs/designs/2026-07-21_v0.12.1-release_code_walkthrough.md",
+   "tag": "v0.12.1",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-07-21_v0.12.1-release",
+   "wiki_key": "design/2026-07-21_v0.12.1-release-code-walkthrough"
+  },
+  {
+   "branch": "main",
+   "canonical_key": "design/2026-07-21_v0.12.1-release-design-doc",
+   "date": "2026-07-21",
+   "doc_type": "design",
+   "git_hash": "04cf8e8111bd0be37f7048f72474baf75e836635",
+   "name": "v0.12.1-release",
+   "release": "v0.12.1",
+   "roadmap_snapshot": "docs/roadmap/2026-07-21_v0.12.1-release.md",
+   "slug": "2026-07-21_v0.12.1-release_design_doc",
+   "source": "docs/designs/2026-07-21_v0.12.1-release_design_doc.md",
+   "tag": "v0.12.1",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-07-21_v0.12.1-release",
+   "wiki_key": "design/2026-07-21_v0.12.1-release-design-doc"
+  },
+  {
+   "branch": "main",
+   "canonical_key": "design/current-code-walkthrough",
+   "doc_type": "design",
+   "generated_at": "2026-07-21T15:03:44Z",
+   "git_hash": "04cf8e8111bd0be37f7048f72474baf75e836635",
+   "release": "v0.12.1",
+   "roadmap": "docs/roadmap.md",
+   "slug": "current_code_walkthrough",
+   "source": "docs/designs/current_code_walkthrough.md",
+   "tag": "v0.12.1",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough",
+   "wiki_key": "design/current-code-walkthrough"
+  },
+  {
+   "branch": "main",
+   "canonical_key": "design/current-design-doc",
+   "doc_type": "design",
+   "generated_at": "2026-07-21T15:03:44Z",
+   "git_hash": "04cf8e8111bd0be37f7048f72474baf75e836635",
+   "release": "v0.12.1",
+   "roadmap": "docs/roadmap.md",
+   "slug": "current_design_doc",
+   "source": "docs/designs/current_design_doc.md",
+   "tag": "v0.12.1",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc",
+   "wiki_key": "design/current-design-doc"
+  },
+  {
+   "canonical_key": "home",
+   "doc_type": "guide",
+   "slug": "wiki-home",
+   "source": "docs/wiki-home.md",
+   "title": "WikiTicket SDD",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Home",
+   "wiki_key": "home"
+  },
+  {
+   "canonical_key": "plan/2026-07-17_worklog-core_plan",
+   "date": "2026-07-17",
+   "doc_type": "plan",
+   "slug": "2026-07-17_worklog-core_plan",
+   "source": "docs/plans/2026-07-17_worklog-core_plan.md",
+   "status": "planned",
+   "title": "Worklog Core (Spec \u00a718 Steps 3\u20134 + CI) Implementation Plan",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-17_worklog-core_plan"
+  },
+  {
+   "canonical_key": "plan/2026-07-18-claude-plugin",
+   "date": "2026-07-18",
+   "doc_type": "plan",
+   "epic": "01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "items": [
+    "01KXSFEWNDT1B5D0PRK16NX14T",
+    "01KXSFEWND18ATDAPCWJXKV8C1",
+    "01KXSFEWNDZ55K8AQJBCN9MRD6",
+    "01KXSFEWNDR0ZDTHHGQVN3PG9Z",
+    "01KXSFEWNDM44B8A8RV30PF6X1",
+    "01KXSFEWND2PG3PQW8GMZ9B319",
+    "01KXSFEWND595MAFB1GMB9KECF",
+    "01KXSFEWNDBM4RHBFMNYJWR9CE",
+    "01KXSFEWND3DGDF12DSWJEKVDF",
+    "01KXSFEWND4TYQ2V26KRPFHW9M"
+   ],
+   "slug": "claude-plugin",
+   "source": "docs/plans/2026-07-18-claude-plugin.md",
+   "status": "completed",
+   "title": "Worklog Claude plugin",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-18-claude-plugin"
+  },
+  {
+   "canonical_key": "plan/2026-07-18-docs-wiki-dogfood",
+   "date": "2026-07-18",
+   "doc_type": "plan",
+   "epic": "01KXSNNSWJV2H5QS5CSTYASS6M",
+   "items": [
+    "01KXSNNSWJ3QKFCRBB3A12H5GT",
+    "01KXSNNSWJDK16TMR50CNR3T3V",
+    "01KXSNNSWJ8RHP53Z2VQJH4D9J",
+    "01KXSNNSWJQ91JPN4QRVMJQ296",
+    "01KXSNNSWJ72MM7XHEJBHM6A1Y",
+    "01KXSNNSWJEP1V1JMSXH2MQWYV",
+    "01KXSNNSWJMS2914A0JJYX3KEZ",
+    "01KXSNNSWJN9C584RF3NNJK0W9",
+    "01KXSNNSWJKRR3BF33CBK3E4Q7",
+    "01KXSNNSWJ0P23QC3SYXRQ01WA",
+    "01KXSNNSWJVJW87EPCZXE6QDCA",
+    "01KXSNNSWJWK58BS457Y2NG3JA",
+    "01KXSNNSWJZMQQH7H68XVB654Y",
+    "01KXSNNSWKC64M1XX0Y7WVT67Z",
+    "01KXSNNSWK0HC96WQ3HV98DHT8",
+    "01KXSNNSWK2PPBHVJ21MBT65ER",
+    "01KXSNNSWKPDG9Q4404RPTWZY9",
+    "01KXSNNSWKTJX2QWW4PYFDEZHS"
+   ],
+   "slug": "docs-wiki-dogfood",
+   "source": "docs/plans/2026-07-18-docs-wiki-dogfood.md",
+   "status": "completed",
+   "title": "Docs, wiki publishing & dogfood discipline",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-18-docs-wiki-dogfood"
+  },
+  {
+   "canonical_key": "plan/2026-07-19-adr",
+   "date": "2026-07-19",
+   "doc_type": "plan",
+   "items": [
+    "01KXXJYK5KS3MQWRPGZ3WNA790",
+    "01KXXJYKB1B12WEXTS6FZZ7QH2",
+    "01KXXJYKGPV41JK02KX0X67Q0G"
+   ],
+   "slug": "adr",
+   "source": "docs/plans/2026-07-19-adr.md",
+   "status": "completed",
+   "story": "01KXXJYK5KS3MQWRPGZ3WNA790",
+   "title": "Architecture Decision Records \u2014 schema-validated, wiki-synced",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-19-adr"
+  },
+  {
+   "aliases": [
+    "plan/design-docs-release-sync"
+   ],
+   "canonical_key": "plan/2026-07-19-design-docs-release-sync",
+   "date": "2026-07-19",
+   "doc_type": "plan",
+   "epic": "01KXY7X0QH47Z6B5QZD5G052FJ",
+   "items": [
+    "01KXY7X0QJCEHRDABCXF6QKXF7",
+    "01KXY7X0QJAE0QH2W30JKK39TA",
+    "01KXY7X0QJ2SBY6KTQ30AKASP7",
+    "01KXY7X0QJQHZBCSCR438RFFMM",
+    "01KXY7X0QJY4JZWYYF2CA46B9G",
+    "01KXY7X0QJ79852RFK5Q8F6FZM"
+   ],
+   "slug": "design-docs-release-sync",
+   "source": "docs/plans/2026-07-19-design-docs-release-sync.md",
+   "status": "completed",
+   "title": "Design docs + code walkthroughs with release-time doc sync",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-design-docs-release-sync",
+   "wiki_key": "plan/design-docs-release-sync"
+  },
+  {
+   "aliases": [
+    "plan/grok-compat-and-mermaid-viz"
+   ],
+   "canonical_key": "plan/2026-07-19-grok-compat-and-mermaid-viz",
+   "date": "2026-07-19",
+   "doc_type": "plan",
+   "items": [
+    "01KXXM1Z13NPYK1XBJ1EQFEKGT"
+   ],
+   "origin": "authored by Rick with the claude.ai design session; gantt-date model corrected against the actual schema",
+   "slug": "grok-compat-and-mermaid-viz",
+   "source": "docs/plans/2026-07-19-grok-compat-and-mermaid-viz.md",
+   "status": "planned \u2014 not yet scheduled",
+   "title": "Grok Build compatibility statement + Mermaid roadmap visualization",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-grok-compat-and-mermaid-viz",
+   "wiki_key": "plan/grok-compat-and-mermaid-viz"
+  },
+  {
+   "aliases": [
+    "plan/ia-content-model"
+   ],
+   "canonical_key": "plan/2026-07-22-ia-content-model",
+   "date": "2026-07-22",
+   "doc_type": "plan",
+   "epic": "01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "items": [
+    "01KY5G9ZW0PBXTBKRJJ70QHR5P",
+    "01KY5G9ZW025TRGTHFAFSVEXSX",
+    "01KY5G9ZW0EYQ5T83RP46Z7952",
+    "01KY5G9ZW0PNKDDEK5TM8GS2J6",
+    "01KY5G9ZW0X5F3K7KHP1SXFM3Q",
+    "01KY5G9ZW0PEZK9PTM3NG0PYX7",
+    "01KY5G9ZW0MQD9335S641DC7ZG",
+    "01KY5G9ZW0Z6JFMVTAFC54RM36",
+    "01KY5G9ZW0RABXWHEMEP1FAV2G"
+   ],
+   "slug": "ia-content-model",
+   "source": "docs/plans/2026-07-22-ia-content-model.md",
+   "status": "active",
+   "supersedes": "plan/wiki-information-architecture",
+   "title": "IA & content model (supersedes wiki-information-architecture)",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-ia-content-model",
+   "wiki_key": "plan/ia-content-model"
+  },
+  {
+   "aliases": [
+    "plan/ticket-sync-and-init-detection"
+   ],
+   "canonical_key": "plan/2026-07-18-ticket-sync-and-init-detection",
+   "date": "2026-07-18",
+   "doc_type": "plan",
+   "epic": "01KXSP26ENPKCT4APD4YE93MMV",
+   "items": "filled-by-worklog-add (this plan attaches tasks to the pre-seeded epic/story instead of plan-capture, which would duplicate them)",
+   "slug": "ticket-sync-and-init-detection",
+   "source": "docs/plans/2026-07-18-ticket-sync-and-init-detection.md",
+   "status": "planned",
+   "story": "01KXSQJ3K19QWBDX482FRT7ETR",
+   "title": "Ticket sync (push-only, GitHub Issues) + /worklog:init system detection",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-ticket-sync-and-init-detection",
+   "wiki_key": "plan/ticket-sync-and-init-detection"
+  },
+  {
+   "aliases": [
+    "plan/typed-adapter-contract"
+   ],
+   "canonical_key": "plan/2026-07-18-typed-adapter-contract",
+   "date": "2026-07-18",
+   "doc_type": "plan",
+   "epic": "01KXV0NQPPPK2K948CK20QJSS1",
+   "items": [
+    "01KXV0NQPPPK2K948CK20QJSS1"
+   ],
+   "origin": "authored by Rick with the claude.ai design session, stored verbatim",
+   "slug": "typed-adapter-contract",
+   "source": "docs/plans/2026-07-18-typed-adapter-contract.md",
+   "status": "planned \u2014 not yet scheduled; implementation tasks attach to the epic when work starts",
+   "title": "Typed Adapter Contract for ticket-sync",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-typed-adapter-contract",
+   "wiki_key": "plan/typed-adapter-contract"
+  },
+  {
+   "aliases": [
+    "plan/wiki-information-architecture"
+   ],
+   "canonical_key": "plan/2026-07-22-wiki-information-architecture",
+   "date": "2026-07-22",
+   "doc_type": "plan",
+   "epic": "01KY5F6QA220S0K7RRK2Q80XR8",
+   "items": [
+    "01KY5F6QA3YAAWKF4PC5VPM90A",
+    "01KY5F6QA3G8VWG73VVD3AWDGE",
+    "01KY5F6QA35SKWEN7YGMVR16XS",
+    "01KY5F6QA3Y05F7S3ZMWEQ5BB2",
+    "01KY5F6QA32GH5RWA1BH42EVSQ",
+    "01KY5F6QA32MWBKTYPVPTBPKQ7",
+    "01KY5F6QA3AV0B9NGBBKTMJS7J",
+    "01KY5F6QA4YVHE4ESMT3E2KYK9",
+    "01KY5F6QA43HN4CAMFBBD6MKSA",
+    "01KY5F6QA4WWSSZVKE0YJ7YHXZ"
+   ],
+   "slug": "wiki-information-architecture",
+   "source": "docs/plans/2026-07-22-wiki-information-architecture.md",
+   "status": "superseded",
+   "superseded_by": "plan/ia-content-model",
+   "title": "Wiki information architecture",
+   "truth_state": "superseded",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-information-architecture",
+   "wiki_key": "plan/wiki-information-architecture"
+  },
+  {
+   "aliases": [
+    "plan/wiki-ticket-ui"
+   ],
+   "canonical_key": "plan/2026-07-21-wiki-ticket-ui",
+   "date": "2026-07-21",
+   "doc_type": "plan",
+   "epic": "01KY111BC7PABV8W6SDNVQACSN",
+   "items": [
+    "01KY111BC7NJ4BE7JBDK2P6Y56",
+    "01KY111BC71KJGNH55CB2DWMKN",
+    "01KY111BC7B70C7M2RF1E57G17",
+    "01KY111BC8QJAS9KH7N368N6RF",
+    "01KY111BC88FS6QD49JADZ9CJ5",
+    "01KY111BC8F9BH0T3TERYEFC3C",
+    "01KY111BC842N3J7Y7H85NHSEG"
+   ],
+   "slug": "wiki-ticket-ui",
+   "source": "docs/plans/2026-07-21-wiki-ticket-ui.md",
+   "status": "planned",
+   "title": "WikiTicket UI \u2014 project status dashboard (wiki_ticket_sdd_ui)",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-ticket-ui",
+   "wiki_key": "plan/wiki-ticket-ui"
+  },
+  {
+   "aliases": [
+    "plan/work-taxonomy"
+   ],
+   "canonical_key": "plan/2026-07-18-work-taxonomy",
+   "date": "2026-07-18",
+   "doc_type": "plan",
+   "epic": "01KXV61H5BDS7TD99H0FF9FE11",
+   "items": [
+    "01KXV61H5BDS7TD99H0FF9FE11"
+   ],
+   "origin": "authored by Rick with the claude.ai design session, stored verbatim",
+   "slug": "work-taxonomy",
+   "source": "docs/plans/2026-07-18-work-taxonomy.md",
+   "status": "planned \u2014 not yet scheduled; implementation tasks attach to the epic when work starts",
+   "title": "Work Taxonomy + Flag-Gated Classifier",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-work-taxonomy",
+   "wiki_key": "plan/work-taxonomy"
+  },
+  {
+   "aliases": [
+    "plugin-guide"
+   ],
+   "canonical_key": "guide/plugin-guide",
+   "doc_type": "guide",
+   "slug": "plugin-guide",
+   "source": "docs/user_guide/plugin-guide.md",
+   "title": "WikiTicket SDD \u2014 Plugin Guide",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plugin-Guide",
+   "wiki_key": "plugin-guide"
+  },
+  {
+   "canonical_key": "roadmap",
+   "doc_type": "roadmap",
+   "generated_at": "2026-07-22T19:15:36Z",
+   "slug": "roadmap",
+   "source": "docs/roadmap.md",
+   "title": "Roadmap",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
+   "wiki_key": "roadmap"
+  },
+  {
+   "canonical_key": "roadmap-snapshot/2026-07-19_v0.11.0-release",
+   "date": "2026-07-19",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-07-19T21:17:13Z",
+   "name": "v0.11.0-release",
+   "release": "v0.11.0",
+   "slug": "2026-07-19_v0.11.0-release",
+   "source": "docs/roadmap/2026-07-19_v0.11.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.11.0-release",
+   "wiki_key": "roadmap-snapshot/2026-07-19_v0.11.0-release"
+  },
+  {
+   "canonical_key": "roadmap-snapshot/2026-07-21_v0.12.0-release",
+   "date": "2026-07-21",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-07-21T00:48:04Z",
+   "name": "v0.12.0-release",
+   "release": "v0.12.0",
+   "slug": "2026-07-21_v0.12.0-release",
+   "source": "docs/roadmap/2026-07-21_v0.12.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-21_v0.12.0-release",
+   "wiki_key": "roadmap-snapshot/2026-07-21_v0.12.0-release"
+  },
+  {
+   "canonical_key": "roadmap-snapshot/2026-07-21_v0.12.1-release",
+   "date": "2026-07-21",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-07-21T14:55:20Z",
+   "name": "v0.12.1-release",
+   "release": "v0.12.1",
+   "slug": "2026-07-21_v0.12.1-release",
+   "source": "docs/roadmap/2026-07-21_v0.12.1-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-21_v0.12.1-release",
+   "wiki_key": "roadmap-snapshot/2026-07-21_v0.12.1-release"
+  },
+  {
+   "aliases": [
+    "roadmap/2026-07-18_v0.2-roadmap"
+   ],
+   "canonical_key": "roadmap-snapshot/2026-07-18_v0.2-roadmap",
+   "date": "2026-07-18",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-07-18T03:59:32Z",
+   "name": "v0.2-roadmap",
+   "slug": "2026-07-18_v0.2-roadmap",
+   "source": "docs/roadmap/2026-07-18_v0.2-roadmap.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-18_v0.2-roadmap",
+   "wiki_key": "roadmap/2026-07-18_v0.2-roadmap"
+  },
+  {
+   "aliases": [
+    "roadmap/2026-07-18_v0.5.0-release"
+   ],
+   "canonical_key": "roadmap-snapshot/2026-07-18_v0.5.0-release",
+   "date": "2026-07-18",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-07-18T15:58:02Z",
+   "name": "v0.5.0-release",
+   "release": "v0.5.0",
+   "slug": "2026-07-18_v0.5.0-release",
+   "source": "docs/roadmap/2026-07-18_v0.5.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-18_v0.5.0-release",
+   "wiki_key": "roadmap/2026-07-18_v0.5.0-release"
+  },
+  {
+   "aliases": [
+    "roadmap/2026-07-19_v0.10.0-release"
+   ],
+   "canonical_key": "roadmap-snapshot/2026-07-19_v0.10.0-release",
+   "date": "2026-07-19",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-07-19T18:27:19Z",
+   "name": "v0.10.0-release",
+   "release": "v0.10.0",
+   "slug": "2026-07-19_v0.10.0-release",
+   "source": "docs/roadmap/2026-07-19_v0.10.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.10.0-release",
+   "wiki_key": "roadmap/2026-07-19_v0.10.0-release"
+  },
+  {
+   "aliases": [
+    "roadmap/2026-07-19_v0.6.0-release"
+   ],
+   "canonical_key": "roadmap-snapshot/2026-07-19_v0.6.0-release",
+   "date": "2026-07-19",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-07-19T15:14:12Z",
+   "name": "v0.6.0-release",
+   "release": "v0.6.0",
+   "slug": "2026-07-19_v0.6.0-release",
+   "source": "docs/roadmap/2026-07-19_v0.6.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.6.0-release",
+   "wiki_key": "roadmap/2026-07-19_v0.6.0-release"
+  },
+  {
+   "aliases": [
+    "roadmap/2026-07-19_v0.7.0-release"
+   ],
+   "canonical_key": "roadmap-snapshot/2026-07-19_v0.7.0-release",
+   "date": "2026-07-19",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-07-19T16:04:02Z",
+   "name": "v0.7.0-release",
+   "release": "v0.7.0",
+   "slug": "2026-07-19_v0.7.0-release",
+   "source": "docs/roadmap/2026-07-19_v0.7.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.7.0-release",
+   "wiki_key": "roadmap/2026-07-19_v0.7.0-release"
+  },
+  {
+   "aliases": [
+    "roadmap/2026-07-19_v0.8.0-release"
+   ],
+   "canonical_key": "roadmap-snapshot/2026-07-19_v0.8.0-release",
+   "date": "2026-07-19",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-07-19T16:38:29Z",
+   "name": "v0.8.0-release",
+   "release": "v0.8.0",
+   "slug": "2026-07-19_v0.8.0-release",
+   "source": "docs/roadmap/2026-07-19_v0.8.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.8.0-release",
+   "wiki_key": "roadmap/2026-07-19_v0.8.0-release"
+  },
+  {
+   "aliases": [
+    "roadmap/2026-07-19_v0.9.0-release"
+   ],
+   "canonical_key": "roadmap-snapshot/2026-07-19_v0.9.0-release",
+   "date": "2026-07-19",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-07-19T17:18:56Z",
+   "name": "v0.9.0-release",
+   "release": "v0.9.0",
+   "slug": "2026-07-19_v0.9.0-release",
+   "source": "docs/roadmap/2026-07-19_v0.9.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.9.0-release",
+   "wiki_key": "roadmap/2026-07-19_v0.9.0-release"
+  },
+  {
+   "canonical_key": "spec",
+   "doc_type": "guide",
+   "slug": "worklog-spec",
+   "source": "docs/worklog-spec.md",
+   "title": "Worklog: Visible-WIP Work Tracking Spec",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Worklog-Spec",
+   "wiki_key": "spec"
+  },
+  {
+   "canonical_key": "status/2026-07-18-timecard",
+   "date": "2026-07-18",
+   "doc_type": "status",
+   "generated_at": "2026-07-18T10:07:06Z",
+   "kind": "timecard",
+   "slug": "2026-07-18-timecard",
+   "source": "docs/status/2026-07-18-timecard.md",
+   "through": "01KXTAPZ74PCH3180XTAEQ55AA",
+   "title": "Timecard \u2014 week of 14 July",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-18-timecard",
+   "wiki_key": "status/2026-07-18-timecard",
+   "window": {
+    "from": "2026-07-11T00:00:00Z",
+    "to": "2026-07-18T23:59:59Z"
+   }
+  },
+  {
+   "canonical_key": "status/2026-07-18-weekly",
+   "date": "2026-07-18",
+   "doc_type": "status",
+   "generated_at": "2026-07-18T09:47:20Z",
+   "kind": "weekly",
+   "slug": "2026-07-18-weekly",
+   "source": "docs/status/2026-07-18-weekly.md",
+   "through": "01KXT9XNBE9NWAEV0NMK5X5PDE",
+   "title": "Weekly \u2014 WikiTicket SDD",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-18-weekly",
+   "wiki_key": "status/2026-07-18-weekly",
+   "window": {
+    "from": "2026-07-11T09:47:20Z",
+    "to": "2026-07-18T09:47:20Z"
+   }
+  },
+  {
+   "canonical_key": "status/2026-07-19-daily",
+   "date": "2026-07-19",
+   "doc_type": "status",
+   "generated_at": "2026-07-19T20:57:01Z",
+   "kind": "daily",
+   "slug": "2026-07-19-daily",
+   "source": "docs/status/2026-07-19-daily.md",
+   "through": "01KXY2NE0QM99P65DPQFWJA5J6",
+   "title": "Daily status \u2014 2026-07-19",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-19-daily",
+   "wiki_key": "status/2026-07-19-daily",
+   "window": {
+    "from": "2026-07-18T20:56:42Z",
+    "to": "2026-07-19T20:57:01Z"
+   }
+  },
+  {
+   "aliases": [
+    "user-guide"
+   ],
+   "canonical_key": "guide/user-guide",
+   "doc_type": "guide",
+   "slug": "user-guide",
+   "source": "docs/user_guide/user-guide.md",
+   "title": "WikiTicket SDD \u2014 User Guide",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/User-Guide",
+   "wiki_key": "user-guide"
+  }
+ ],
+ "version": 1
+}

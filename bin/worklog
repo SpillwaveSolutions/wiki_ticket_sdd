@@ -485,6 +485,38 @@ def cmd_adr_check(a):
     print(f"adr: {len(adr.adr_files())} records ok")
 
 
+def cmd_wiki_key(a):
+    import ia
+    key, canonical, aliases = ia.resolve_key(a.path, ia.load_ledger())
+    if not key:
+        sys.exit(f"worklog: {a.path} is outside the content model "
+                 "(docs/plans, roadmap, status, designs, adr, user_guide)")
+    print(key)
+    if a.verbose:
+        print(f"canonical: {canonical}")
+        if aliases:
+            print(f"aliases: {', '.join(aliases)}")
+
+
+def cmd_ia_inventory(a):
+    import ia
+    if a.check:
+        problems = ia.check_inventory()
+        for pr in problems:
+            print(pr)
+        if problems:
+            sys.exit(1)
+        print("ia: inventory fresh and valid")
+        return
+    inv = ia.write_inventory()
+    counts = {}
+    for rec in inv["docs"]:
+        counts[rec["doc_type"]] = counts.get(rec["doc_type"], 0) + 1
+    total = len(inv["docs"])
+    mix = ", ".join(f"{k}:{v}" for k, v in sorted(counts.items()))
+    print(f"ia: {total} docs inventoried ({mix}) -> {ia.INVENTORY}")
+
+
 def cmd_compact(a):
     if not a.yes:
         sys.exit("worklog: compaction runs in CI on main (spec §7); "
@@ -971,6 +1003,22 @@ adn.add_argument("--tags", metavar="X,Y")
 adn.add_argument("--supersedes", type=int, metavar="N")
 adsub.add_parser("list").set_defaults(fn=cmd_adr_list)
 adsub.add_parser("check").set_defaults(fn=cmd_adr_check)
+
+wk = sub.add_parser(
+    "wiki-key",
+    description="Print the stable wiki_key for a doc (plan ia-content-model "
+                "§5.5; legacy keys are seeded from the publish ledger).")
+wk.set_defaults(fn=cmd_wiki_key)
+wk.add_argument("path")
+wk.add_argument("-v", "--verbose", action="store_true")
+
+ii = sub.add_parser(
+    "ia-inventory",
+    description="Generate docs/.index/_inventory.json — one metadata record "
+                "per doc (wiki_key, doc_type, truth_state, relationships).")
+ii.set_defaults(fn=cmd_ia_inventory)
+ii.add_argument("--check", action="store_true",
+                help="validate + freshness-check instead of writing")
 
 if __name__ == "__main__":
     args = p.parse_args()

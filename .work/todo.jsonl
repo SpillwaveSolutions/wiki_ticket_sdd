@@ -471,3 +471,7 @@
 {"actor":"richardhightower","ev":"01KY5JKKKMW9M4EWV5ZG98TPNA","item":"01KY5HW7KSBAYS1RE95ZT8BYM4","op":"update","set":{"status":"in_progress"},"ts":"2026-07-22T18:50:00Z"}
 {"actor":"richardhightower","ev":"01KY5JM21FP1FS2AM9WDZ7FC8P","item":"01KY5JB9F9XKKD1RNS66J6DXHZ","op":"close","set":{"status":"done"},"ts":"2026-07-22T18:50:15Z"}
 {"actor":"richardhightower","ev":"01KY5K8X8YGA6HRRXSNFX2HHR4","item":"01KY5HW7KSBAYS1RE95ZT8BYM4","op":"close","set":{"resolution":"fixed in PR #103 \u2014 fold snapshot branch no longer fabricates taxonomy defaults","status":"done"},"ts":"2026-07-22T19:01:38Z"}
+{"actor":"richardhightower","ev":"01KY5KPQ40SMZH7P4BX1E82C6H","item":"01KY5G9ZW0PBXTBKRJJ70QHR5P","op":"update","set":{"status":"in_progress"},"ts":"2026-07-22T19:09:11Z"}
+{"actor":"richardhightower","ev":"01KY5M2EGBHAB9NHA4VF9BC1R0","item":"01KY5G9ZW0PBXTBKRJJ70QHR5P","op":"close","set":{"status":"done"},"ts":"2026-07-22T19:15:35Z"}
+{"actor":"richardhightower","ev":"01KY5M2EQNVDTF76SJC5H0E5KD","item":"01KY5G9ZW025TRGTHFAFSVEXSX","op":"close","set":{"status":"done"},"ts":"2026-07-22T19:15:35Z"}
+{"actor":"richardhightower","ev":"01KY5M2EY64JSHMJ7C1RM7PJJ3","item":"01KY5G9ZW0EYQ5T83RP46Z7952","op":"update","set":{"status":"in_progress"},"ts":"2026-07-22T19:15:36Z"}
