@@ -296,5 +296,96 @@ class TestNormalize(TestInventory):
         self.assertIn("release: v2", text)
 
 
+class TestRender(TestInventory):
+    """Reader plane: Home, Sidebar, indexes, manifest, aliases."""
+
+    def setUp(self):
+        super().setUp()
+        self.write("docs/roadmap.md",
+                   "---\nwiki_key: roadmap\ndoc_type: roadmap\n"
+                   "truth_state: current\nsource_hash: abcd\n"
+                   "generated_at: 2026-07-02T00:00:00Z\n---\n\n# Roadmap\n")
+        os.makedirs(os.path.join(self.dir, "docs/roadmap"))
+        self.write("docs/roadmap/2026-07-01_v1-release.md",
+                   "---\nwiki_key: roadmap-snapshot/2026-07-01_v1-release\n"
+                   "doc_type: roadmap-snapshot\ntruth_state: snapshot\n"
+                   "date: 2026-07-01\nname: v1-release\n---\n# Roadmap\n")
+        run(self.dir, "ia-normalize")
+
+    def test_render_pages_manifest_aliases(self):
+        p = run(self.dir, "ia-render")
+        self.assertEqual(p.returncode, 0, p.stderr)
+        home = self.read("docs/.index/rendered/home.md")
+        self.assertIn("## What are we working on now?", home)
+        self.assertIn("[[Roadmap]]", home)
+        self.assertIn("latest status: [[Status-2026-07-02-daily]]", home)
+        side = self.read("docs/.index/rendered/_Sidebar.md")
+        self.assertIn("### Current truth", side)
+        self.assertIn("### History", side)
+        rel = self.read("docs/.index/rendered/releases.md")
+        self.assertIn("## v1", rel)
+        self.assertIn("Roadmap snapshot: [[Roadmap-2026-07-01_v1-release]]", rel)
+        dec = self.read("docs/.index/rendered/decisions.md")
+        self.assertIn("ADR-0001-x", dec)
+        # alpha is superseded: the decisions row says so, with the successor
+        self.assertIn("superseded by [[Plan-beta]]", dec)
+        man = json.load(open(os.path.join(self.dir, ia.INVENTORY.replace(
+            "_inventory.json", "publish-manifest.json"))))
+        by_key = {p["wiki_key"]: p for p in man["pages"]}
+        self.assertEqual(by_key["home"]["source"],
+                         "docs/.index/rendered/home.md")
+        alpha = by_key["plan/alpha"]
+        self.assertTrue(alpha["frozen"])
+        self.assertIn("Superseded", alpha["banner"])
+        self.assertIn("render_hash", alpha)
+        self.assertIn("sidebar", man)
+        aliases = json.load(open(os.path.join(
+            self.dir, "docs/.index/aliases.json")))
+        self.assertEqual(aliases["plan/alpha"], "plan/2026-07-01-alpha")
+        # deterministic + check mode
+        c = run(self.dir, "ia-render", "--check")
+        self.assertEqual(c.returncode, 0, c.stdout)
+
+    def test_banner_changes_render_hash_not_source(self):
+        """The legacy-banner republish loop: a truth flip changes the
+        manifest render_hash while the frozen source is untouched."""
+        run(self.dir, "ia-render")
+        man1 = json.load(open(os.path.join(
+            self.dir, "docs/.index/publish-manifest.json")))
+        h1 = {p["wiki_key"]: p["render_hash"] for p in man1["pages"]}
+        # a newer daily archives the old one -> its banner flips
+        self.write("docs/status/2026-07-03-daily.md",
+                   "---\nkind: daily\ndate: 2026-07-03\nwindow: {from: c, to: d}\n"
+                   "through: 01AAAA\ngenerated_at: 2026-07-03T00:00:00Z\n---\n# S3\n")
+        run(self.dir, "ia-normalize")
+        run(self.dir, "ia-render")
+        man2 = json.load(open(os.path.join(
+            self.dir, "docs/.index/publish-manifest.json")))
+        h2 = {p["wiki_key"]: p["render_hash"] for p in man2["pages"]}
+        key = "status/2026-07-02-daily"
+        self.assertNotEqual(h1[key], h2[key])
+        self.assertEqual(h1["plan/alpha"], h2["plan/alpha"])  # untouched
+
+    def test_check_flags_stale_render(self):
+        run(self.dir, "ia-render")
+        self.write("docs/plans/2026-07-04-gamma.md",
+                   "---\ndate: 2026-07-04\nslug: gamma\ntitle: Gamma\n"
+                   "epic: null\nitems: []\n---\n# Gamma\n")
+        c = run(self.dir, "ia-render", "--check")
+        self.assertEqual(c.returncode, 1)
+        self.assertIn("stale: ", c.stdout)
+
+    def test_ia_index_wrapper_runs_pipeline(self):
+        p = run(self.dir, "ia-index")
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertTrue(os.path.exists(os.path.join(self.dir, ia.INVENTORY)))
+        self.assertTrue(os.path.exists(os.path.join(
+            self.dir, "docs/.index/rendered/_Sidebar.md")))
+
+    def read(self, rel):
+        with open(os.path.join(self.dir, rel), encoding="utf-8") as fh:
+            return fh.read()
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

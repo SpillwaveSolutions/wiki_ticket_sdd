@@ -520,6 +520,27 @@ def cmd_ia_normalize(a):
         print(f"ia: {len(changes)} normalization(s) applied")
 
 
+def cmd_ia_render(a):
+    import ia_render
+    changed = ia_render.write_all(check=a.check)
+    for path in changed:
+        print(("stale: " if a.check else "wrote: ") + path)
+    if a.check and changed:
+        sys.exit(1)
+    if not changed:
+        print("ia: rendered pages, manifest, aliases all fresh")
+
+
+def cmd_ia_index(a):
+    import ia, ia_render
+    for c in ia.normalize():
+        print("normalize: " + c)
+    ia.write_inventory()
+    print("inventory: " + ia.INVENTORY)
+    for path in ia_render.write_all():
+        print("wrote: " + path)
+
+
 def cmd_ia_inventory(a):
     import ia
     if a.check:
@@ -1042,6 +1063,23 @@ inorm = sub.add_parser(
 inorm.set_defaults(fn=cmd_ia_normalize)
 inorm.add_argument("--check", action="store_true",
                    help="report pending normalizations, write nothing")
+
+ir = sub.add_parser(
+    "ia-render",
+    description="Render the reader plane into docs/.index/rendered/ (Home, "
+                "Sidebar, indexes) plus publish-manifest.json and "
+                "aliases.json. Deterministic. `ia-manifest` is an alias.")
+ir.set_defaults(fn=cmd_ia_render)
+ir.add_argument("--check", action="store_true",
+                help="report stale files instead of writing")
+im = sub.add_parser("ia-manifest")   # alias: manifest and pages are one build
+im.set_defaults(fn=cmd_ia_render, check=False)
+
+ix = sub.add_parser(
+    "ia-index",
+    description="Convenience wrapper: ia-normalize -> ia-inventory -> "
+                "ia-render (plan ia-content-model §12.1).")
+ix.set_defaults(fn=cmd_ia_index)
 
 ii = sub.add_parser(
     "ia-inventory",

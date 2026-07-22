@@ -478,3 +478,6 @@
 {"actor":"richardhightower","ev":"01KY5MJS8HJ4TNW3A45CWED46B","item":"01KY5G9ZW0EYQ5T83RP46Z7952","op":"close","set":{"status":"done"},"ts":"2026-07-22T19:24:30Z"}
 {"actor":"richardhightower","ev":"01KY5MJSEBRWZKPYKXQK6SKF7A","item":"01KY5G9ZW0PNKDDEK5TM8GS2J6","op":"close","set":{"status":"done"},"ts":"2026-07-22T19:24:31Z"}
 {"actor":"richardhightower","ev":"01KY5MJSMAQQG0PWXCNH3DC7Z7","item":"01KY5G9ZW0X5F3K7KHP1SXFM3Q","op":"update","set":{"status":"in_progress"},"ts":"2026-07-22T19:24:31Z"}
+{"actor":"richardhightower","ev":"01KY5MWES49WW2RRPWASXCF93D","item":"01KY5G9ZW0X5F3K7KHP1SXFM3Q","op":"close","set":{"status":"done"},"ts":"2026-07-22T19:29:47Z"}
+{"actor":"richardhightower","ev":"01KY5MWEZFNYSNMM12Y991FD4T","item":"01KY5G9ZW0PEZK9PTM3NG0PYX7","op":"close","set":{"status":"done"},"ts":"2026-07-22T19:29:48Z"}
+{"actor":"richardhightower","ev":"01KY5MWF62YPN7PFH2S3VJJ471","item":"01KY5G9ZW0MQD9335S641DC7ZG","op":"update","set":{"status":"in_progress"},"ts":"2026-07-22T19:29:48Z"}

@@ -74,4 +74,6 @@ if [ -f bin/ia.py ] && [ -x bin/worklog ]; then
     echo "worklog: WARNING (soon a hard gate) — doc metadata drift; run: worklog ia-normalize" >&2
   python3 bin/worklog ia-inventory --check >/dev/null 2>&1 || \
     echo "worklog: WARNING (soon a hard gate) — inventory stale/invalid; run: worklog ia-inventory" >&2
+  [ ! -f bin/ia_render.py ] || python3 bin/worklog ia-render --check >/dev/null 2>&1 || \
+    echo "worklog: WARNING (soon a hard gate) — rendered pages/manifest stale; run: worklog ia-render" >&2
 fi

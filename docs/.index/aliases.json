@@ -1,0 +1,20 @@
+{
+ "cli-reference": "guide/cli-reference",
+ "plan/design-docs-release-sync": "plan/2026-07-19-design-docs-release-sync",
+ "plan/grok-compat-and-mermaid-viz": "plan/2026-07-19-grok-compat-and-mermaid-viz",
+ "plan/ia-content-model": "plan/2026-07-22-ia-content-model",
+ "plan/ticket-sync-and-init-detection": "plan/2026-07-18-ticket-sync-and-init-detection",
+ "plan/typed-adapter-contract": "plan/2026-07-18-typed-adapter-contract",
+ "plan/wiki-information-architecture": "plan/2026-07-22-wiki-information-architecture",
+ "plan/wiki-ticket-ui": "plan/2026-07-21-wiki-ticket-ui",
+ "plan/work-taxonomy": "plan/2026-07-18-work-taxonomy",
+ "plugin-guide": "guide/plugin-guide",
+ "roadmap/2026-07-18_v0.2-roadmap": "roadmap-snapshot/2026-07-18_v0.2-roadmap",
+ "roadmap/2026-07-18_v0.5.0-release": "roadmap-snapshot/2026-07-18_v0.5.0-release",
+ "roadmap/2026-07-19_v0.10.0-release": "roadmap-snapshot/2026-07-19_v0.10.0-release",
+ "roadmap/2026-07-19_v0.6.0-release": "roadmap-snapshot/2026-07-19_v0.6.0-release",
+ "roadmap/2026-07-19_v0.7.0-release": "roadmap-snapshot/2026-07-19_v0.7.0-release",
+ "roadmap/2026-07-19_v0.8.0-release": "roadmap-snapshot/2026-07-19_v0.8.0-release",
+ "roadmap/2026-07-19_v0.9.0-release": "roadmap-snapshot/2026-07-19_v0.9.0-release",
+ "user-guide": "guide/user-guide"
+}
