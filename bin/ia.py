@@ -27,22 +27,25 @@ LEDGER = ".work/published.json"
 INDEX_DIR = "docs/.index"
 INVENTORY = os.path.join(INDEX_DIR, "_inventory.json")
 
-DOC_TYPES = ("plan", "item", "roadmap", "roadmap-snapshot", "status",
+DOC_TYPES = ("plan", "roadmap", "roadmap-snapshot", "status",
              "design", "adr", "guide")
+# Graph/execution entities, not documents (schema/entity.schema.json).
+# Today only "item"; release and code-change join when they need validation.
+ENTITY_TYPES = ("item",)
 TRUTH_STATES = ("current", "snapshot", "superseded", "archived")
 EDGE_TYPES = ("produces", "decides", "implements", "supersedes",
               "verified-by", "lands-in", "belongs-to", "targets",
               "snapshot-of", "references")
 
-# Mirrors schema/doc.schema.json — same deliberate duplication as
-# adr.ADR_SCHEMA, so a scaffolded repo needs only bin/.
+# Mirrors schema/doc.schema.json + schema/entity.schema.json — same
+# deliberate duplication as adr.ADR_SCHEMA, so a scaffolded repo needs
+# only bin/.
 REQUIRED_ALL = ("wiki_key", "doc_type", "truth_state")
 REQUIRED_BY_TYPE = {
     # epic is NOT required: story-level plans float free (epic: null is
     # legitimate — see docs/plans/2026-07-19-adr.md)
     "plan": ("wiki_key", "doc_type", "title", "slug", "date", "truth_state",
              "status", "items"),
-    "item": ("wiki_key", "doc_type", "title", "status", "truth_state"),
     "roadmap": ("wiki_key", "doc_type", "truth_state", "generated_at"),
     "roadmap-snapshot": ("wiki_key", "doc_type", "truth_state", "date"),
     "status": ("wiki_key", "doc_type", "kind", "date", "window", "through",
@@ -51,6 +54,9 @@ REQUIRED_BY_TYPE = {
     "adr": ("wiki_key", "doc_type", "id", "slug", "title", "date", "status",
             "truth_state"),
     "guide": ("wiki_key", "doc_type", "title", "slug", "truth_state"),
+}
+REQUIRED_BY_ENTITY = {
+    "item": ("wiki_key", "doc_type", "title", "status", "truth_state"),
 }
 
 
@@ -419,13 +425,14 @@ def validate_record(rec):
     """Per-type required subset + enum checks -> list of problems."""
     problems = []
     t = rec.get("doc_type")
-    for f in REQUIRED_BY_TYPE.get(t, REQUIRED_ALL):
+    required = REQUIRED_BY_TYPE.get(t, REQUIRED_BY_ENTITY.get(t, REQUIRED_ALL))
+    for f in required:
         if f not in rec:
             problems.append("%s: missing %s" % (rec.get("source", "?"), f))
     if rec.get("truth_state") not in TRUTH_STATES:
         problems.append("%s: bad truth_state %r"
                         % (rec.get("source", "?"), rec.get("truth_state")))
-    if t not in DOC_TYPES:
+    if t not in DOC_TYPES and t not in ENTITY_TYPES:
         problems.append("%s: bad doc_type %r" % (rec.get("source", "?"), t))
     for edge in rec.get("relates_to") or []:
         if not isinstance(edge, dict) or "type" not in edge or "target" not in edge:
