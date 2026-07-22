@@ -10,3 +10,4 @@ __pycache__/
 !.claude/
 .coverage
 .coverage.*
+tmp/
