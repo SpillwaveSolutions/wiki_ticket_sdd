@@ -2,56 +2,62 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### ia.classify treats README.md inside docs/plans|status|adr dirs as a doc of that type — generic repos with folder READMEs fail inventory
+`01KY6037BN94086PR1QP0CM7XC` · status: todo
+
+### init.sh copy list missing IA modules (ia.py, ia_render.py, ia_graph.py, canonical.py, sync_dispatch.py) — fresh repos get worklog with broken ia-* commands
+`01KY5ZY3ZX2Z4F73Y0BT0M0NR5` · status: todo
+
 ### Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed
-`01KY5VY0TEWBMZK5W6YJN5FQ9D` · status: todo
+`01KY5VY0TEWBMZK5W6YJN5FQ9D` · status: cancelled
 - belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
 - references: [github#117](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/117)
 - produced-by: [[Plan-wiki-ticket-ui-ia]]
 
 ### Server: Hono JSON API over any worklog repo — fold, events, docs, index plane, git, gh, ledger, sync state
-`01KY5VY0TEW87KK6AW6FQTYGZ9` · status: todo
+`01KY5VY0TEW87KK6AW6FQTYGZ9` · status: cancelled
 - belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
 - references: [github#115](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/115)
 - produced-by: [[Plan-wiki-ticket-ui-ia]]
 
 ### Panels wave 2: Releases, Docs browser (inventory-driven), Publish plane (3-way drift), Sync health, Charts
-`01KY5VY0TEKXBXK91S9ZFZTJZ5` · status: todo
+`01KY5VY0TEKXBXK91S9ZFZTJZ5` · status: cancelled
 - belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
 - references: [github#118](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/118)
 - produced-by: [[Plan-wiki-ticket-ui-ia]]
 
 ### Web shell: Vite + React + Tailwind dark dashboard chrome with repo picker
-`01KY5VY0TEK8XSGP2SG57GF0KT` · status: todo
+`01KY5VY0TEK8XSGP2SG57GF0KT` · status: cancelled
 - belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
 - references: [github#116](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/116)
 - produced-by: [[Plan-wiki-ticket-ui-ia]]
 
 ### Traceability panel: interactive _graph.json explorer with trace-check integrity checklist
-`01KY5VY0TE8EZPWNZPZWSPTSAR` · status: todo
+`01KY5VY0TE8EZPWNZPZWSPTSAR` · status: cancelled
 - belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
 - references: [github#119](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/119)
 - produced-by: [[Plan-wiki-ticket-ui-ia]]
 
 ### Polish pass to the visually-stunning bar; README screenshots; tag v0.1.0
-`01KY5VY0TE8B6RXVX1MQYJZ0TH` · status: todo
+`01KY5VY0TE8B6RXVX1MQYJZ0TH` · status: cancelled
 - belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
 - references: [github#120](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/120)
 - produced-by: [[Plan-wiki-ticket-ui-ia]]
 
 ### Tauri 2 desktop shell wrapping the same frontend
-`01KY5VY0TE7G7ZC5W20T3KAXJ7` · status: todo
+`01KY5VY0TE7G7ZC5W20T3KAXJ7` · status: cancelled
 - belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
 - references: [github#121](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/121)
 - produced-by: [[Plan-wiki-ticket-ui-ia]]
 
 ### Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI
-`01KY5VY0TDTD7PQDT6EVD5AG9N` · status: in_progress
+`01KY5VY0TDTD7PQDT6EVD5AG9N` · status: cancelled
 - belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
 - references: [github#114](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/114)
 - produced-by: [[Plan-wiki-ticket-ui-ia]]
 
 ### WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
-`01KY5VY0TDSWJE6W80CNCWA8QA` · status: todo
+`01KY5VY0TDSWJE6W80CNCWA8QA` · status: cancelled
 - references: [github#113](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/113)
 - contains: Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI
 - contains: Tauri 2 desktop shell wrapping the same frontend

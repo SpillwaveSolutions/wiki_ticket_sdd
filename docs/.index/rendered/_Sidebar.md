@@ -2,7 +2,6 @@
 
 - [[Roadmap]]
 - [[Design-Doc]] · [[Code-Walkthrough]]
-- Plan: [[Plan-wiki-ticket-ui-ia]]
 - Plan: [[Plan-ia-content-model]]
 - Plan: [[Plan-ticket-sync-and-init-detection]]
 - [[ADR-0001-event-log-fold-union-merge]]

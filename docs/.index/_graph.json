@@ -2662,48 +2662,58 @@
   },
   "item/01KY5VY0TDSWJE6W80CNCWA8QA": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "WikiTicket UI \u2014 IA-aware dashboard (supersedes wiki-ticket-ui)"
   },
   "item/01KY5VY0TDTD7PQDT6EVD5AG9N": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "cancelled",
    "title": "Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI"
   },
   "item/01KY5VY0TE7G7ZC5W20T3KAXJ7": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Tauri 2 desktop shell wrapping the same frontend"
   },
   "item/01KY5VY0TE8B6RXVX1MQYJZ0TH": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Polish pass to the visually-stunning bar; README screenshots; tag v0.1.0"
   },
   "item/01KY5VY0TE8EZPWNZPZWSPTSAR": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Traceability panel: interactive _graph.json explorer with trace-check integrity checklist"
   },
   "item/01KY5VY0TEK8XSGP2SG57GF0KT": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Web shell: Vite + React + Tailwind dark dashboard chrome with repo picker"
   },
   "item/01KY5VY0TEKXBXK91S9ZFZTJZ5": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Panels wave 2: Releases, Docs browser (inventory-driven), Publish plane (3-way drift), Sync health, Charts"
   },
   "item/01KY5VY0TEW87KK6AW6FQTYGZ9": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Server: Hono JSON API over any worklog repo \u2014 fold, events, docs, index plane, git, gh, ledger, sync state"
   },
   "item/01KY5VY0TEWBMZK5W6YJN5FQ9D": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed"
+  },
+  "item/01KY5ZY3ZX2Z4F73Y0BT0M0NR5": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "init.sh copy list missing IA modules (ia.py, ia_render.py, ia_graph.py, canonical.py, sync_dispatch.py) \u2014 fresh repos get worklog with broken ia-* commands"
+  },
+  "item/01KY6037BN94086PR1QP0CM7XC": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "ia.classify treats README.md inside docs/plans|status|adr dirs as a doc of that type \u2014 generic repos with folder READMEs fail inventory"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
