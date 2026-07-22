@@ -1,7 +1,9 @@
 # Worklog: Visible-WIP Work Tracking Spec
 
-**Version:** 1.8
+**Version:** 1.9
 **Status:** Implemented through §18 step 8; wiki publish (step 9) done for github-wiki; step 10 outstanding; step 11 (typed adapter contract) shipping; step 12 (work taxonomy) in progress on this branch
+
+**Changes since 1.8:** New §13.4 — ticket bodies must be readable by a junior dev or a PM (what + why, no ULIDs in the reading path); the `body` field is authored via `worklog add/update --body` and plain description lines under task checkboxes in `## Tasks`, and a marker-only ticket body is a policy violation. The field always existed in the canonical hash (§10.3) and sync path; 1.9 makes authoring it mandatory for skill-created items.
 
 **Changes since 1.7:** §4.2's `ticketing.system` / `wiki.system` enums widened to name what the skill path already reached — `github | gitlab | jira | ado | linear | codecatalyst | other | none` and `github-wiki | gitlab-wiki | ado-wiki | confluence | other | none`. The enum is explicitly **advisory**: `bin/worklog` branches only on `none` (invariant §15.6); every other value is a name the edge skills resolve to available tooling, and `other` is the sanctioned value for unlisted systems (real system named in `options:`). Known caveats ride with the names in the skills: AWS CodeCatalyst is closed to new customers since 2025-11-07 (existing spaces work); Linear has no git remote to detect (CLI/MCP evidence only); GCP has no native tracker, so no `gcp` value exists.
 
@@ -784,6 +786,21 @@ This is also *why* status reports can't be CI-hash-checked: step 2 isn't reprodu
 - **Needs attention** — open conflicts (§10.6), deferred syncs, failed pushes or publishes
 
 **The unplanned section is the point.** "38% of last week's closed items were unplanned, mostly interrupting PROJ-412" is the most useful number a team can have and almost nobody tracks it. It falls out of this schema for free — which is why `discovered_during` is required, not optional. `timecard` gets it as prose, not a percentage.
+
+### 13.4 Ticket bodies — readable by a junior dev or a PM
+
+The same audience rule as §13.1 applies to every synced ticket: the body a
+teammate sees in GitHub/Jira/ADO must say **what** the work is and **why it
+matters**, in one to three sentences of plain prose, with no ULIDs in the
+reading path. A ticket whose body is only a worklog marker is a policy
+violation — the marker is provenance, not a description.
+
+The `body` field carries this. It is set at authoring time (`worklog add
+--body`, `worklog update --body`, or plain lines under a task checkbox in a
+plan's `## Tasks` section), hashes canonically (§10.3), syncs both ways
+(§10.1), and renders below the idempotency marker in the ticket. Items
+created by skills MUST carry a body; the work-track and plan-capture skills
+state this rule to their authors.
 
 ---
 

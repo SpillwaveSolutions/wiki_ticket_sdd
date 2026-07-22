@@ -206,7 +206,11 @@ def cmd_push():
     elif op == "update":
         if key is None:
             die(1, "push op=update with null key: dispatcher bug")
-        args = ["issue", "edit", str(key), "-R", repo]
+        args = ["issue", "edit", str(key), "-R", repo,
+                # body carries the marker + readable description (§13.4);
+                # without it, body edits authored locally never reach the
+                # ticket and update-synced issues stay marker-only.
+                "--body", build_body(marker, item)]
         if item.get("title"):
             args += ["--title", item["title"]]
         for lab in labels:

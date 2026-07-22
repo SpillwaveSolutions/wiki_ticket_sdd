@@ -95,6 +95,7 @@ def cmd_add(a):
     ev["set"] = {k: v for k, v in {
         "level": a.level, "kind": a.kind, "milestone": a.milestone,
         "title": a.title, "status": "todo", "priority": a.priority,
+        "body": a.body,
         "parent": a.parent, "plan": a.plan,
         "unplanned": True if a.unplanned else None,
         "discovered_during": a.discovered_during,
@@ -123,6 +124,7 @@ def cmd_update(a):
     ev = base(a.item, "update", a.actor)
     ev["set"] = {k: v for k, v in
                  {"status": a.status, "priority": a.priority, "title": a.title,
+                  "body": a.body,
                   "kind": a.kind, "milestone": a.milestone}.items()
                  if v is not None}
     if a.add_label:
@@ -343,6 +345,8 @@ def cmd_plan_capture(a):
     ev = base(epic_id, "create", a.actor)
     ev["set"] = {"level": "epic", "kind": "feature", "title": a.title,
                  "status": "todo", "priority": a.priority, "plan": path}
+    if a.body:
+        ev["set"]["body"] = a.body
     append(ev)
 
     item_ids, last_task = [], epic_id
@@ -355,6 +359,8 @@ def cmd_plan_capture(a):
                      "priority": t["priority"],
                      "parent": last_task if t["subtask"] else epic_id,
                      "plan": path}
+        if t.get("body"):
+            ev["set"]["body"] = t["body"]
         append(ev)
         item_ids.append(iid)
         if not t["subtask"]:
@@ -836,6 +842,8 @@ a.add_argument("--type", dest="legacy_type",
                help="DEPRECATED alias for --level/--kind (bug -> task/bug)")
 a.add_argument("--priority", default="P2", choices=["P0", "P1", "P2", "P3"])
 a.add_argument("--parent"); a.add_argument("--plan"); a.add_argument("--labels")
+a.add_argument("--body", help="description readable by a junior dev/PM: what "
+                              "and why, no ULIDs (spec §13.4)")
 a.add_argument("--unplanned", action="store_true")
 a.add_argument("--discovered-during", dest="discovered_during")
 
@@ -846,6 +854,8 @@ u.add_argument("--priority", choices=["P0", "P1", "P2", "P3"])
 u.add_argument("--title")
 u.add_argument("--kind", choices=list(KINDS))
 u.add_argument("--milestone")
+u.add_argument("--body", help="description readable by a junior dev/PM: what "
+                              "and why, no ULIDs (spec §13.4)")
 u.add_argument("--add-label", dest="add_label")
 u.add_argument("--del-label", dest="del_label")
 
@@ -904,6 +914,9 @@ pc.add_argument("--slug", required=True)
 pc.add_argument("--title", required=True)
 pc.add_argument("--file")
 pc.add_argument("--priority", default="P1", choices=["P0", "P1", "P2", "P3"])
+pc.add_argument("--body", help="epic description readable by a junior dev/PM "
+                               "(spec §13.4); task bodies come from plain "
+                               "lines under each task checkbox")
 
 rr = sub.add_parser("roadmap-render"); rr.set_defaults(fn=cmd_roadmap_render)
 rr.add_argument("--viz", default="deps,hierarchy",

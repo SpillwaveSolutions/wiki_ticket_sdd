@@ -15,6 +15,8 @@ Prose about why. Not a task:
 ## Tasks
 
 - [ ] (P0) Extract auth middleware
+  Move the token check into shared middleware so every route is covered.
+  Today each handler re-implements it and two forgot.
   - [ ] Write failing test
 - [x] Session store migration
 
@@ -42,6 +44,22 @@ class TestParseTasks(unittest.TestCase):
 
     def test_no_tasks_section_yields_nothing(self):
         self.assertEqual(parse_tasks("# Plan\n\n- [ ] loose checkbox\n"), [])
+
+    def test_plain_lines_under_a_task_become_its_body(self):
+        # Ticket bodies must be readable by a junior dev / PM (§13.4); the
+        # description travels as `body` on the task it follows.
+        tasks = parse_tasks(DRAFT)
+        self.assertEqual(
+            tasks[0]["body"],
+            "Move the token check into shared middleware so every route is "
+            "covered.\nToday each handler re-implements it and two forgot.")
+        self.assertEqual(tasks[1]["body"], "")  # subtask has no description
+
+    def test_body_lines_before_any_task_are_ignored(self):
+        draft = "## Tasks\n\nstray prose with no task yet\n- [ ] Real task\n"
+        tasks = parse_tasks(draft)
+        self.assertEqual([t["title"] for t in tasks], ["Real task"])
+        self.assertEqual(tasks[0]["body"], "")
 
 
 class TestFrontMatter(unittest.TestCase):
