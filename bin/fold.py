@@ -16,12 +16,15 @@ Read section 6 before changing anything in here. In particular:
 
 Taxonomy migration (docs/plans/2026-07-18-work-taxonomy.md section 3.2): the
 legacy single `type` field is a deprecated alias. On create/snapshot the fold
-normalizes it into (`level`, `kind`) and drops `type` from the ITEM (the event
-line is never touched). A create carrying neither type nor kind folds to
-kind:triage -- unclassified must look unclassified (section 2.3). This is
-LENIENT by design: the fold never crashes on a bad pair; hard validation
-lives at write time (CLI) and in the hook/CI check. Compaction snapshots the
-normalized state, so logs migrate physically at the next nightly run.
+maps it into (`level`, `kind`) and drops `type` from the ITEM (the event line
+is never touched). A create carrying neither type nor kind folds to
+kind:triage -- unclassified must look unclassified (section 2.3); that
+default is applied on `create` only, never on `snapshot` -- a snapshot must
+be a lossless round-trip of the state it was given (WORKLOG-SPEC section 7
+step 7), and defaulting there would fabricate taxonomy for items that were
+never created in the first place (e.g. a closed orphan). This is LENIENT by
+design: the fold never crashes on a bad pair; hard validation lives at write
+time (CLI) and in the hook/CI check.
 """
 
 import hashlib
@@ -43,17 +46,30 @@ LEGACY_TYPE_MAP = {
 }
 
 
-def _normalize_taxonomy(item: Dict[str, Any]) -> None:
+def _normalize_taxonomy(item: Dict[str, Any], defaults: bool = True) -> None:
     """Normalize a freshly created/snapshotted item to the (level, kind) model.
 
-    Lenient: unknown legacy types just fall through to the defaults
-    (level:task, kind:triage). Never raises.
+    Lenient: unknown legacy types just fall through. Never raises.
+
+    `defaults` controls whether a MISSING level/kind gets defaulted to
+    task/triage (spec 2.3: an unclassified create must still fold to
+    something). Only `create` wants that -- it is the one place a genuinely
+    new, never-before-seen item enters the fold. `snapshot` must stay a
+    lossless round-trip of whatever state it was given (compact.py writes
+    the folded state verbatim, WORKLOG-SPEC section 7 step 7): a snapshot of
+    an item that was itself never created (e.g. a closed orphan -- link/close
+    events for an id with no matching create) has no level/kind to begin
+    with, and re-fabricating defaults for it on every re-fold makes
+    compaction a non-idempotent transform and fails its own verify step.
+    Legacy `type` mapping still runs either way; that's real migrated data,
+    not an invented default.
     """
     t = item.pop("type", None)
     if t in LEGACY_TYPE_MAP and "level" not in item and "kind" not in item:
         item["level"], item["kind"] = LEGACY_TYPE_MAP[t]
-    item.setdefault("level", "task")
-    item.setdefault("kind", "triage")
+    if defaults:
+        item.setdefault("level", "task")
+        item.setdefault("kind", "triage")
 
 
 class FoldResult:
@@ -199,7 +215,7 @@ def fold(paths: Iterable[str] = ("todo.jsonl", "done.jsonl")) -> FoldResult:
             # watermark. Never merge into what's already there.
             item = {"id": iid}
             _apply_mutations(item, ev)
-            _normalize_taxonomy(item)
+            _normalize_taxonomy(item, defaults=False)
             result.items[iid] = item
             continue
 
