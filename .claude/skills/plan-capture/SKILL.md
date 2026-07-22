@@ -10,10 +10,15 @@ description: Capture an approved plan as tracked work items. Use when exiting pl
        ## Tasks
 
        - [ ] (P1) Task title
+         One to three plain sentences under the checkbox become the task's
+         ticket body — written for a junior dev or a PM (spec §13.4):
+         what and why, no ULIDs.
          - [ ] Subtask of the task above
 
-   Priority token `(P0)`–`(P3)` optional, default P2. Prose (the *why*) goes
-   in other sections and is preserved verbatim in the plan doc.
+   Priority token `(P0)`–`(P3)` optional, default P2. **Every task gets a
+   description line** — a marker-only ticket body is a policy violation
+   (§13.4). Plan-level prose (the *why*) goes in other sections and is
+   preserved verbatim in the plan doc.
 
    Captured items are `kind:feature` by design — a plan's tasks deliver
    planned value. If a captured task is really a defect, retag it after
@@ -21,7 +26,8 @@ description: Capture an approved plan as tracked work items. Use when exiting pl
 
 2. Save it to a temp file and run:
 
-       bin/worklog plan-capture --slug <kebab-slug> --title "<plan title>" --file <tempfile>
+       bin/worklog plan-capture --slug <kebab-slug> --title "<plan title>" \
+           --body "<epic description a junior dev/PM can read>" --file <tempfile>
 
 3. Run `bin/worklog roadmap-render`, then commit `docs/plans/`,
    `docs/roadmap.md`, and `.work/todo.jsonl` together.

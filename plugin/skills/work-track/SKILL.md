@@ -16,9 +16,16 @@ only writer.
 
 ## Add an item
 
-    bin/worklog add "<title>" [--level epic|story|task|subtask] \
+    bin/worklog add "<title>" --body "<readable description>" \
+        [--level epic|story|task|subtask] \
         [--kind feature|bug|ops|triage] [--milestone v0.6.0] \
         [--priority P0-P3] [--parent <ulid>] [--labels a,b]
+
+**Every item gets a `--body` (spec §13.4).** One to three sentences a junior
+dev or a PM can read in the ticket: what the work is and why it matters. No
+ULIDs, no repo jargon in the reading path — the sync marker carries
+provenance, the body carries meaning. A ticket whose body is only a worklog
+id is a policy violation. Fix gaps with `worklog update <ulid> --body "..."`.
 
 Taxonomy rules (spec 5.4): epics are `feature` or `ops` only — kind is free
 at story/task/subtask; bugs may float free of any epic (`--parent` optional).
