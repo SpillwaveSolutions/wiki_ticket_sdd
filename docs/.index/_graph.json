@@ -2517,7 +2517,7 @@
   },
   "item/01KY5QV5G05V77TKESCJVY62S3": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Schema boundary: split doc.schema.json (documents) from entity schema (items, releases, code-changes) \u2014 defer until a second graph entity needs validation"
   },
   "plan/2026-07-17_worklog-core_plan": {

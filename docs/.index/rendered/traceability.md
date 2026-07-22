@@ -3,7 +3,7 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Schema boundary: split doc.schema.json (documents) from entity schema (items, releases, code-changes) — defer until a second graph entity needs validation
-`01KY5QV5G05V77TKESCJVY62S3` · status: todo
+`01KY5QV5G05V77TKESCJVY62S3` · status: done
 - references: [github#111](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/111)
 
 ### Add schema drift test: schema/doc.schema.json must stay equivalent to bin/ia.py validator constants
