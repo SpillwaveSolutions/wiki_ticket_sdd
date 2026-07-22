@@ -20,6 +20,25 @@ def run(cwd, *args):
                           cwd=cwd, capture_output=True, text=True)
 
 
+class TestSchemaSync(unittest.TestCase):
+    """schema/doc.schema.json and bin/ia.py are deliberate duplicates
+    (dependency-free bin/); this pins them equivalent so they cannot
+    silently diverge before the Phase 5 hard-fail promotion."""
+
+    def test_schema_json_matches_ia_constants(self):
+        with open(os.path.join(ROOT, "schema", "doc.schema.json")) as fh:
+            schema = json.load(fh)
+        props = schema["properties"]
+        self.assertEqual(schema["required"], list(ia.REQUIRED_ALL))
+        self.assertEqual(props["doc_type"]["enum"], list(ia.DOC_TYPES))
+        self.assertEqual(props["truth_state"]["enum"], list(ia.TRUTH_STATES))
+        self.assertEqual(
+            props["relates_to"]["items"]["properties"]["type"]["enum"],
+            list(ia.EDGE_TYPES))
+        self.assertEqual(schema["x-required-by-type"],
+                         {k: list(v) for k, v in ia.REQUIRED_BY_TYPE.items()})
+
+
 class TestParsing(unittest.TestCase):
     def test_front_matter_lists_maps_and_block_lists(self):
         meta, body = ia.parse_front_matter(

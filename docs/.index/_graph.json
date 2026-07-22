@@ -1081,6 +1081,16 @@
    "type": "produces"
   },
   {
+   "from": "plan/2026-07-22-grok-viz-background-execution",
+   "to": "item/01KY5QJARJ0S9QHGRPAV8SFV9H",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-22-grok-viz-background-execution",
+   "to": "plan/grok-compat-and-mermaid-viz",
+   "type": "references"
+  },
+  {
    "from": "plan/design-docs-release-sync",
    "to": "item/01KXY7X0QH47Z6B5QZD5G052FJ",
    "type": "produces"
@@ -2480,6 +2490,21 @@
    "status": "done",
    "title": "pre-commit hook pollutes worktree with bin/__pycache__ after git add \u2014 merge aborts on tracked-vs-untracked pyc collision"
   },
+  "item/01KY5QJARJ0S9QHGRPAV8SFV9H": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Repair frozen-plan drift: restore grok-compat-and-mermaid-viz to published version, move background-subagent rule to amendment doc"
+  },
+  "item/01KY5QJAY8C8G5C4FEBMRFKM51": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Add schema drift test: schema/doc.schema.json must stay equivalent to bin/ia.py validator constants"
+  },
+  "item/01KY5QV5G05V77TKESCJVY62S3": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Schema boundary: split doc.schema.json (documents) from entity schema (items, releases, code-changes) \u2014 defer until a second graph entity needs validation"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -2502,6 +2527,12 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-07-19-adr.md",
    "title": "Architecture Decision Records \u2014 schema-validated, wiki-synced",
+   "truth_state": "current"
+  },
+  "plan/2026-07-22-grok-viz-background-execution": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-22-grok-viz-background-execution.md",
+   "title": "Grok viz \u2014 background-subagent execution rule (amendment record)",
    "truth_state": "current"
   },
   "plan/design-docs-release-sync": {

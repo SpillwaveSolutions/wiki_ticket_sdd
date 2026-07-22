@@ -310,6 +310,27 @@
    "wiki_key": "plan/2026-07-19-adr"
   },
   {
+   "canonical_key": "plan/2026-07-22-grok-viz-background-execution",
+   "date": "2026-07-22",
+   "doc_type": "plan",
+   "items": [
+    "01KY5QJARJ0S9QHGRPAV8SFV9H"
+   ],
+   "relates_to": [
+    {
+     "target": "plan/grok-compat-and-mermaid-viz",
+     "type": "references"
+    }
+   ],
+   "slug": "grok-viz-background-execution",
+   "source": "docs/plans/2026-07-22-grok-viz-background-execution.md",
+   "status": "completed",
+   "title": "Grok viz \u2014 background-subagent execution rule (amendment record)",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-grok-viz-background-execution",
+   "wiki_key": "plan/2026-07-22-grok-viz-background-execution"
+  },
+  {
    "aliases": [
     "plan/design-docs-release-sync"
    ],
@@ -508,10 +529,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-22T20:02:40Z",
+   "generated_at": "2026-07-22T20:21:31Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "b27cfe43",
+   "source_hash": "00d12547",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

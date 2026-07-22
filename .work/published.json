@@ -159,9 +159,9 @@
     "wiki_key": "home"
   },
   "index/decisions": {
-    "render_hash": "716f862d4729",
+    "render_hash": "9b134dcf2e5d",
     "source": "docs/.index/rendered/decisions.md",
-    "source_hash": "716f862d4729",
+    "source_hash": "9b134dcf2e5d",
     "title": "Decisions Index",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Decisions"
   },
@@ -180,9 +180,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Status"
   },
   "index/traceability": {
-    "render_hash": "8f8999984058",
+    "render_hash": "e5ec317fc129",
     "source": "docs/.index/rendered/traceability.md",
-    "source_hash": "8f8999984058",
+    "source_hash": "e5ec317fc129",
     "title": "Traceability Index",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Traceability"
   },
@@ -230,6 +230,17 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-adr",
     "wiki_key": "plan/2026-07-19-adr"
   },
+  "plan/2026-07-22-grok-viz-background-execution": {
+    "canonical_key": "plan/2026-07-22-grok-viz-background-execution",
+    "doc_type": "plan",
+    "render_hash": "f2f0241f7d85",
+    "source": "docs/plans/2026-07-22-grok-viz-background-execution.md",
+    "source_hash": "29bf9ab8292f",
+    "title": "Grok viz \u2014 background-subagent execution rule (amendment record)",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-grok-viz-background-execution",
+    "wiki_key": "plan/2026-07-22-grok-viz-background-execution"
+  },
   "plan/design-docs-release-sync": {
     "aliases": [
       "plan/design-docs-release-sync"
@@ -251,9 +262,11 @@
     ],
     "canonical_key": "plan/2026-07-19-grok-compat-and-mermaid-viz",
     "doc_type": "plan",
+    "render_hash": "b4f3b1d3ebbe",
     "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/plans/2026-07-19-grok-compat-and-mermaid-viz.md",
     "source_hash": "0bfe624745fd",
+    "title": "Grok Build compatibility statement + Mermaid roadmap visualization",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-grok-compat-and-mermaid-viz",
     "wiki_key": "plan/grok-compat-and-mermaid-viz"
@@ -366,10 +379,10 @@
   "roadmap": {
     "canonical_key": "roadmap",
     "doc_type": "roadmap",
-    "render_hash": "b7cf876d7b71",
+    "render_hash": "7933ea7a2e63",
     "rev": "ad14667",
     "source": "docs/roadmap.md",
-    "source_hash": "3ca7d6a8ce7f",
+    "source_hash": "68981659cf44",
     "title": "Roadmap",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

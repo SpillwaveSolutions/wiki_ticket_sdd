@@ -70,15 +70,6 @@ init.sh list, deterministic-output tests (shuffle test extended), renderer
 tests for each diagram, coverage sandbox convention respected.
 `/worklog:viz` plugin command = run roadmap-render --viz=all and show it.
 
-### Execution rule: always a background subagent
-
-Viz work never blocks the main thread. Both the implementation waves and the
-recurring runtime step (regenerate diagrams + republish the roadmap after log
-changes) are delegated to ONE background subagent, run in parallel with other
-tasks — the same non-blocking pattern plan-capture uses for ticket/wiki
-publishing. The main session folds the result in when the notification
-arrives; it never waits.
-
 ### Out of scope
 
 - `--html` interactive dashboard (Mermaid.js standalone) — separate plan if
