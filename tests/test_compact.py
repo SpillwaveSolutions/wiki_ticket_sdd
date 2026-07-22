@@ -167,5 +167,56 @@ class TestFileInvariants(CompactBase):
             self.assertEqual(marks, [MAX_EV], path)
 
 
+class TestTheBugThisPrevents(unittest.TestCase):
+    """Item 01KY5HW7KS / #101.
+
+    01KXSP277AE68GPTHC1QJV1NX is a one-character typo of a real epic id
+    (missing a `J`). It got a `link` event and a `close` event -- never a
+    `create` -- so the fold leaves it `_orphan: true` with no level/kind at
+    all: `_normalize_taxonomy` only defaults on `create`, and this id never
+    had one.
+
+    Before the fix, compact.py's snapshot builder wrote that orphan's folded
+    state verbatim (correctly, no level/kind) into a `snapshot` event -- but
+    `_normalize_taxonomy` ran unconditionally on every `snapshot` op when
+    re-folding to verify, injecting level:task/kind:triage into the
+    fold-of-new-logs that fold-of-old-logs never had. `fold(new) != fold(old)`
+    -> verify aborts -> compaction never advances the watermark.
+    """
+
+    def setUp(self):
+        d = tempfile.mkdtemp(prefix="worklog-compact-orphan-")
+        self.addCleanup(shutil.rmtree, d, True)
+        os.makedirs(os.path.join(d, ".work"))
+        self.todo = os.path.join(d, ".work", "todo.jsonl")
+        self.done = os.path.join(d, ".work", "done.jsonl")
+        write_log(self.todo, [
+            {"ev": "01B1", "ts": "t", "actor": "r",
+             "item": "01KXSP277AE68GPTHC1QJV1NX", "op": "link",
+             "set": {}, "add": {"labels": []}, "src": {"issue": 34}},
+            {"ev": "01B2", "ts": "t", "actor": "r",
+             "item": "01KXSP277AE68GPTHC1QJV1NX", "op": "close",
+             "set": {"status": "cancelled"}},
+        ])
+        write_log(self.done, [])
+
+    def test_closed_orphan_compacts_without_verify_failure(self):
+        # Would raise SystemExit(1) ("VERIFY FAILED") on the unfixed code.
+        compact(self.todo, self.done)
+
+    def test_closed_orphan_snapshot_invents_no_level_or_kind(self):
+        compact(self.todo, self.done)
+        item = fold([self.done]).items["01KXSP277AE68GPTHC1QJV1NX"]
+        self.assertEqual(item["status"], "cancelled")
+        self.assertNotIn("level", item)
+        self.assertNotIn("kind", item)
+
+    def test_fold_is_unchanged_by_compaction(self):
+        before = snap(fold([self.todo, self.done]))
+        compact(self.todo, self.done)
+        after = snap(fold([self.todo, self.done]))
+        self.assertEqual(before, after)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
