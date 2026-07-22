@@ -2,6 +2,70 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed
+`01KY5VY0TEWBMZK5W6YJN5FQ9D` · status: todo
+- belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
+- references: [github#117](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/117)
+- produced-by: [[Plan-wiki-ticket-ui-ia]]
+
+### Server: Hono JSON API over any worklog repo — fold, events, docs, index plane, git, gh, ledger, sync state
+`01KY5VY0TEW87KK6AW6FQTYGZ9` · status: todo
+- belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
+- references: [github#115](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/115)
+- produced-by: [[Plan-wiki-ticket-ui-ia]]
+
+### Panels wave 2: Releases, Docs browser (inventory-driven), Publish plane (3-way drift), Sync health, Charts
+`01KY5VY0TEKXBXK91S9ZFZTJZ5` · status: todo
+- belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
+- references: [github#118](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/118)
+- produced-by: [[Plan-wiki-ticket-ui-ia]]
+
+### Web shell: Vite + React + Tailwind dark dashboard chrome with repo picker
+`01KY5VY0TEK8XSGP2SG57GF0KT` · status: todo
+- belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
+- references: [github#116](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/116)
+- produced-by: [[Plan-wiki-ticket-ui-ia]]
+
+### Traceability panel: interactive _graph.json explorer with trace-check integrity checklist
+`01KY5VY0TE8EZPWNZPZWSPTSAR` · status: todo
+- belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
+- references: [github#119](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/119)
+- produced-by: [[Plan-wiki-ticket-ui-ia]]
+
+### Polish pass to the visually-stunning bar; README screenshots; tag v0.1.0
+`01KY5VY0TE8B6RXVX1MQYJZ0TH` · status: todo
+- belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
+- references: [github#120](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/120)
+- produced-by: [[Plan-wiki-ticket-ui-ia]]
+
+### Tauri 2 desktop shell wrapping the same frontend
+`01KY5VY0TE7G7ZC5W20T3KAXJ7` · status: todo
+- belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
+- references: [github#121](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/121)
+- produced-by: [[Plan-wiki-ticket-ui-ia]]
+
+### Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI
+`01KY5VY0TDTD7PQDT6EVD5AG9N` · status: todo
+- belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
+- references: [github#114](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/114)
+- produced-by: [[Plan-wiki-ticket-ui-ia]]
+
+### WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
+`01KY5VY0TDSWJE6W80CNCWA8QA` · status: todo
+- references: [github#113](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/113)
+- contains: Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI
+- contains: Tauri 2 desktop shell wrapping the same frontend
+- contains: Polish pass to the visually-stunning bar; README screenshots; tag v0.1.0
+- contains: Traceability panel: interactive _graph.json explorer with trace-check integrity checklist
+- contains: Web shell: Vite + React + Tailwind dark dashboard chrome with repo picker
+- contains: Panels wave 2: Releases, Docs browser (inventory-driven), Publish plane (3-way drift), Sync health, Charts
+- contains: Server: Hono JSON API over any worklog repo — fold, events, docs, index plane, git, gh, ledger, sync state
+- contains: Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed
+- produced-by: [[Plan-wiki-ticket-ui-ia]]
+
+### Author superseding UI plan: re-base wiki_ticket_sdd_ui design on the shipped IA & content model (manifest, wiki_key, truth_state, graph, sidecars)
+`01KY5VRR3R4JEFSV3S9J6PFD7N` · status: done
+
 ### Schema boundary: split doc.schema.json (documents) from entity schema (items, releases, code-changes) — defer until a second graph entity needs validation
 `01KY5QV5G05V77TKESCJVY62S3` · status: done
 - references: [github#111](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/111)
@@ -206,31 +270,31 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.12.0
 
 ### Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed
-`01KY111BC8QJAS9KH7N368N6RF` · status: todo
+`01KY111BC8QJAS9KH7N368N6RF` · status: cancelled
 - belongs-to: WikiTicket UI — project status dashboard (wiki_ticket_sdd_ui)
 - references: [github#72](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/72)
 - produced-by: [[Plan-wiki-ticket-ui]]
 
 ### Polish pass to the visually-stunning bar; README screenshots; tag v0.1.0
-`01KY111BC8F9BH0T3TERYEFC3C` · status: todo
+`01KY111BC8F9BH0T3TERYEFC3C` · status: cancelled
 - belongs-to: WikiTicket UI — project status dashboard (wiki_ticket_sdd_ui)
 - references: [github#71](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/71)
 - produced-by: [[Plan-wiki-ticket-ui]]
 
 ### Panels wave 2: Releases, Docs browser, Wiki drift, Sync health, Charts
-`01KY111BC88FS6QD49JADZ9CJ5` · status: todo
+`01KY111BC88FS6QD49JADZ9CJ5` · status: cancelled
 - belongs-to: WikiTicket UI — project status dashboard (wiki_ticket_sdd_ui)
 - references: [github#70](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/70)
 - produced-by: [[Plan-wiki-ticket-ui]]
 
 ### Tauri 2 desktop shell wrapping the same frontend
-`01KY111BC842N3J7Y7H85NHSEG` · status: todo
+`01KY111BC842N3J7Y7H85NHSEG` · status: cancelled
 - belongs-to: WikiTicket UI — project status dashboard (wiki_ticket_sdd_ui)
 - references: [github#69](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/69)
 - produced-by: [[Plan-wiki-ticket-ui]]
 
 ### WikiTicket UI — project status dashboard (wiki_ticket_sdd_ui)
-`01KY111BC7PABV8W6SDNVQACSN` · status: todo
+`01KY111BC7PABV8W6SDNVQACSN` · status: cancelled
 - references: [github#68](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/68)
 - contains: Server: Hono JSON API over any worklog repo (fold, events, docs, git, gh, wiki ledger, sync state)
 - contains: Web shell: Vite + React + Tailwind dark dashboard chrome with repo picker
@@ -242,19 +306,19 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-wiki-ticket-ui]]
 
 ### Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI
-`01KY111BC7NJ4BE7JBDK2P6Y56` · status: todo
+`01KY111BC7NJ4BE7JBDK2P6Y56` · status: cancelled
 - belongs-to: WikiTicket UI — project status dashboard (wiki_ticket_sdd_ui)
 - references: [github#67](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/67)
 - produced-by: [[Plan-wiki-ticket-ui]]
 
 ### Web shell: Vite + React + Tailwind dark dashboard chrome with repo picker
-`01KY111BC7B70C7M2RF1E57G17` · status: todo
+`01KY111BC7B70C7M2RF1E57G17` · status: cancelled
 - belongs-to: WikiTicket UI — project status dashboard (wiki_ticket_sdd_ui)
 - references: [github#66](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/66)
 - produced-by: [[Plan-wiki-ticket-ui]]
 
 ### Server: Hono JSON API over any worklog repo (fold, events, docs, git, gh, wiki ledger, sync state)
-`01KY111BC71KJGNH55CB2DWMKN` · status: todo
+`01KY111BC71KJGNH55CB2DWMKN` · status: cancelled
 - belongs-to: WikiTicket UI — project status dashboard (wiki_ticket_sdd_ui)
 - references: [github#65](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/65)
 - produced-by: [[Plan-wiki-ticket-ui]]

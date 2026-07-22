@@ -1,6 +1,7 @@
 aliases: [plan/wiki-ticket-ui]
 canonical_key: plan/2026-07-21-wiki-ticket-ui
 doc_type: plan
-status: planned
-truth_state: current
+status: superseded
+superseded_by: plan/2026-07-22-wiki-ticket-ui-ia
+truth_state: superseded
 wiki_key: plan/wiki-ticket-ui

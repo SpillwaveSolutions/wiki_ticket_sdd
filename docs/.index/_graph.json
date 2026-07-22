@@ -931,6 +931,91 @@
    "type": "references"
   },
   {
+   "from": "item/01KY5VY0TDSWJE6W80CNCWA8QA",
+   "to": "ticket/github#113",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5VY0TDTD7PQDT6EVD5AG9N",
+   "to": "item/01KY5VY0TDSWJE6W80CNCWA8QA",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5VY0TDTD7PQDT6EVD5AG9N",
+   "to": "ticket/github#114",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5VY0TE7G7ZC5W20T3KAXJ7",
+   "to": "item/01KY5VY0TDSWJE6W80CNCWA8QA",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5VY0TE7G7ZC5W20T3KAXJ7",
+   "to": "ticket/github#121",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5VY0TE8B6RXVX1MQYJZ0TH",
+   "to": "item/01KY5VY0TDSWJE6W80CNCWA8QA",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5VY0TE8B6RXVX1MQYJZ0TH",
+   "to": "ticket/github#120",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5VY0TE8EZPWNZPZWSPTSAR",
+   "to": "item/01KY5VY0TDSWJE6W80CNCWA8QA",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5VY0TE8EZPWNZPZWSPTSAR",
+   "to": "ticket/github#119",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5VY0TEK8XSGP2SG57GF0KT",
+   "to": "item/01KY5VY0TDSWJE6W80CNCWA8QA",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5VY0TEK8XSGP2SG57GF0KT",
+   "to": "ticket/github#116",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5VY0TEKXBXK91S9ZFZTJZ5",
+   "to": "item/01KY5VY0TDSWJE6W80CNCWA8QA",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5VY0TEKXBXK91S9ZFZTJZ5",
+   "to": "ticket/github#118",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5VY0TEW87KK6AW6FQTYGZ9",
+   "to": "item/01KY5VY0TDSWJE6W80CNCWA8QA",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5VY0TEW87KK6AW6FQTYGZ9",
+   "to": "ticket/github#115",
+   "type": "references"
+  },
+  {
+   "from": "item/01KY5VY0TEWBMZK5W6YJN5FQ9D",
+   "to": "item/01KY5VY0TDSWJE6W80CNCWA8QA",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5VY0TEWBMZK5W6YJN5FQ9D",
+   "to": "ticket/github#117",
+   "type": "references"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -1104,6 +1189,56 @@
    "from": "plan/2026-07-22-grok-viz-background-execution",
    "to": "plan/grok-compat-and-mermaid-viz",
    "type": "references"
+  },
+  {
+   "from": "plan/2026-07-22-wiki-ticket-ui-ia",
+   "to": "item/01KY5VY0TDSWJE6W80CNCWA8QA",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-22-wiki-ticket-ui-ia",
+   "to": "item/01KY5VY0TDTD7PQDT6EVD5AG9N",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-22-wiki-ticket-ui-ia",
+   "to": "item/01KY5VY0TE7G7ZC5W20T3KAXJ7",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-22-wiki-ticket-ui-ia",
+   "to": "item/01KY5VY0TE8B6RXVX1MQYJZ0TH",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-22-wiki-ticket-ui-ia",
+   "to": "item/01KY5VY0TE8EZPWNZPZWSPTSAR",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-22-wiki-ticket-ui-ia",
+   "to": "item/01KY5VY0TEK8XSGP2SG57GF0KT",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-22-wiki-ticket-ui-ia",
+   "to": "item/01KY5VY0TEKXBXK91S9ZFZTJZ5",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-22-wiki-ticket-ui-ia",
+   "to": "item/01KY5VY0TEW87KK6AW6FQTYGZ9",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-22-wiki-ticket-ui-ia",
+   "to": "item/01KY5VY0TEWBMZK5W6YJN5FQ9D",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-22-wiki-ticket-ui-ia",
+   "to": "plan/wiki-ticket-ui",
+   "type": "supersedes"
   },
   {
    "from": "plan/design-docs-release-sync",
@@ -2302,42 +2437,42 @@
   },
   "item/01KY111BC71KJGNH55CB2DWMKN": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Server: Hono JSON API over any worklog repo (fold, events, docs, git, gh, wiki ledger, sync state)"
   },
   "item/01KY111BC7B70C7M2RF1E57G17": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Web shell: Vite + React + Tailwind dark dashboard chrome with repo picker"
   },
   "item/01KY111BC7NJ4BE7JBDK2P6Y56": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI"
   },
   "item/01KY111BC7PABV8W6SDNVQACSN": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "WikiTicket UI \u2014 project status dashboard (wiki_ticket_sdd_ui)"
   },
   "item/01KY111BC842N3J7Y7H85NHSEG": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Tauri 2 desktop shell wrapping the same frontend"
   },
   "item/01KY111BC88FS6QD49JADZ9CJ5": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Panels wave 2: Releases, Docs browser, Wiki drift, Sync health, Charts"
   },
   "item/01KY111BC8F9BH0T3TERYEFC3C": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Polish pass to the visually-stunning bar; README screenshots; tag v0.1.0"
   },
   "item/01KY111BC8QJAS9KH7N368N6RF": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed"
   },
   "item/01KY11HDR3A5SR342DHG1BH5AZ": {
@@ -2520,6 +2655,56 @@
    "status": "done",
    "title": "Schema boundary: split doc.schema.json (documents) from entity schema (items, releases, code-changes) \u2014 defer until a second graph entity needs validation"
   },
+  "item/01KY5VRR3R4JEFSV3S9J6PFD7N": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Author superseding UI plan: re-base wiki_ticket_sdd_ui design on the shipped IA & content model (manifest, wiki_key, truth_state, graph, sidecars)"
+  },
+  "item/01KY5VY0TDSWJE6W80CNCWA8QA": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "WikiTicket UI \u2014 IA-aware dashboard (supersedes wiki-ticket-ui)"
+  },
+  "item/01KY5VY0TDTD7PQDT6EVD5AG9N": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI"
+  },
+  "item/01KY5VY0TE7G7ZC5W20T3KAXJ7": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Tauri 2 desktop shell wrapping the same frontend"
+  },
+  "item/01KY5VY0TE8B6RXVX1MQYJZ0TH": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Polish pass to the visually-stunning bar; README screenshots; tag v0.1.0"
+  },
+  "item/01KY5VY0TE8EZPWNZPZWSPTSAR": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Traceability panel: interactive _graph.json explorer with trace-check integrity checklist"
+  },
+  "item/01KY5VY0TEK8XSGP2SG57GF0KT": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Web shell: Vite + React + Tailwind dark dashboard chrome with repo picker"
+  },
+  "item/01KY5VY0TEKXBXK91S9ZFZTJZ5": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Panels wave 2: Releases, Docs browser (inventory-driven), Publish plane (3-way drift), Sync health, Charts"
+  },
+  "item/01KY5VY0TEW87KK6AW6FQTYGZ9": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Server: Hono JSON API over any worklog repo \u2014 fold, events, docs, index plane, git, gh, ledger, sync state"
+  },
+  "item/01KY5VY0TEWBMZK5W6YJN5FQ9D": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -2548,6 +2733,12 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-07-22-grok-viz-background-execution.md",
    "title": "Grok viz \u2014 background-subagent execution rule (amendment record)",
+   "truth_state": "current"
+  },
+  "plan/2026-07-22-wiki-ticket-ui-ia": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-22-wiki-ticket-ui-ia.md",
+   "title": "WikiTicket UI \u2014 IA-aware dashboard (supersedes wiki-ticket-ui)",
    "truth_state": "current"
   },
   "plan/design-docs-release-sync": {
@@ -2590,7 +2781,7 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-07-21-wiki-ticket-ui.md",
    "title": "WikiTicket UI \u2014 project status dashboard (wiki_ticket_sdd_ui)",
-   "truth_state": "current"
+   "truth_state": "superseded"
   },
   "plan/work-taxonomy": {
    "doc_type": "plan",
@@ -2765,9 +2956,45 @@
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/111"
   },
+  "ticket/github#113": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/113"
+  },
+  "ticket/github#114": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/114"
+  },
+  "ticket/github#115": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/115"
+  },
+  "ticket/github#116": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/116"
+  },
+  "ticket/github#117": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/117"
+  },
+  "ticket/github#118": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/118"
+  },
+  "ticket/github#119": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/119"
+  },
   "ticket/github#12": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/12"
+  },
+  "ticket/github#120": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/120"
+  },
+  "ticket/github#121": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/121"
   },
   "ticket/github#13": {
    "doc_type": "ticket",

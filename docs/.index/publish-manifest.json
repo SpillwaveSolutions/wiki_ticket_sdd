@@ -4,7 +4,7 @@
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "b43814435de2",
+   "render_hash": "a19739dc6031",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "9b134dcf2e5d",
+   "render_hash": "a5eb18ad9f0b",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "db4f37a1b127",
+   "render_hash": "d362d9545dfd",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -240,6 +240,17 @@
   {
    "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
    "frozen": true,
+   "page_name": "Plan-wiki-ticket-ui-ia",
+   "render": "doc+banner",
+   "render_hash": "da87f6adbeda",
+   "source": "docs/plans/2026-07-22-wiki-ticket-ui-ia.md",
+   "title": "WikiTicket UI \u2014 IA-aware dashboard (supersedes wiki-ticket-ui)",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-22-wiki-ticket-ui-ia"
+  },
+  {
+   "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
+   "frozen": true,
    "page_name": "Plan-design-docs-release-sync",
    "render": "doc+banner",
    "render_hash": "9f3a72d1e016",
@@ -304,14 +315,14 @@
    "wiki_key": "plan/wiki-information-architecture"
   },
   {
-   "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
+   "banner": "> **Superseded** by [[Plan-wiki-ticket-ui-ia]] \u2014 kept as the record of why the earlier approach changed.",
    "frozen": true,
    "page_name": "Plan-wiki-ticket-ui",
    "render": "doc+banner",
-   "render_hash": "50df458ae989",
+   "render_hash": "2895747f98df",
    "source": "docs/plans/2026-07-21-wiki-ticket-ui.md",
    "title": "WikiTicket UI \u2014 project status dashboard (wiki_ticket_sdd_ui)",
-   "truth_state": "current",
+   "truth_state": "superseded",
    "wiki_key": "plan/wiki-ticket-ui"
   },
   {
@@ -337,11 +348,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-22T20:47:18Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-22T21:34:50Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "1c4f18e566b7",
+   "render_hash": "edf1aaac4f07",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -514,7 +525,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "c90cb7543bdc",
+  "render_hash": "994b669e725f",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

@@ -149,19 +149,19 @@
   "home": {
     "canonical_key": "home",
     "doc_type": "guide",
-    "render_hash": "b43814435de2",
+    "render_hash": "a19739dc6031",
     "rev": "ad14667",
     "source": "docs/.index/rendered/home.md",
-    "source_hash": "b43814435de2",
+    "source_hash": "a19739dc6031",
     "title": "Home",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Home",
     "wiki_key": "home"
   },
   "index/decisions": {
-    "render_hash": "9b134dcf2e5d",
+    "render_hash": "a5eb18ad9f0b",
     "source": "docs/.index/rendered/decisions.md",
-    "source_hash": "9b134dcf2e5d",
+    "source_hash": "a5eb18ad9f0b",
     "title": "Decisions Index",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Decisions"
   },
@@ -180,9 +180,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Status"
   },
   "index/traceability": {
-    "render_hash": "db4f37a1b127",
+    "render_hash": "d362d9545dfd",
     "source": "docs/.index/rendered/traceability.md",
-    "source_hash": "db4f37a1b127",
+    "source_hash": "d362d9545dfd",
     "title": "Traceability Index",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Traceability"
   },
@@ -240,6 +240,13 @@
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-grok-viz-background-execution",
     "wiki_key": "plan/2026-07-22-grok-viz-background-execution"
+  },
+  "plan/2026-07-22-wiki-ticket-ui-ia": {
+    "render_hash": "da87f6adbeda",
+    "source": "docs/plans/2026-07-22-wiki-ticket-ui-ia.md",
+    "source_hash": "ab27d23f82ca",
+    "title": "WikiTicket UI \u2014 IA-aware dashboard (supersedes wiki-ticket-ui)",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-ticket-ui-ia"
   },
   "plan/design-docs-release-sync": {
     "aliases": [
@@ -337,12 +344,12 @@
     ],
     "canonical_key": "plan/2026-07-21-wiki-ticket-ui",
     "doc_type": "plan",
-    "render_hash": "50df458ae989",
+    "render_hash": "2895747f98df",
     "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/plans/2026-07-21-wiki-ticket-ui.md",
     "source_hash": "e71c38b1a5c8",
     "title": "WikiTicket UI \u2014 project status dashboard (wiki_ticket_sdd_ui)",
-    "truth_state": "current",
+    "truth_state": "superseded",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-ticket-ui",
     "wiki_key": "plan/wiki-ticket-ui"
   },
@@ -379,10 +386,10 @@
   "roadmap": {
     "canonical_key": "roadmap",
     "doc_type": "roadmap",
-    "render_hash": "1c4f18e566b7",
+    "render_hash": "edf1aaac4f07",
     "rev": "ad14667",
     "source": "docs/roadmap.md",
-    "source_hash": "be72b3210ab7",
+    "source_hash": "7f9401fb5dec",
     "title": "Roadmap",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

@@ -13,7 +13,7 @@ work is fishbowled, not hidden.
 
 ## What are we working on now?
 [[Roadmap]] · latest status: [[Status-2026-07-19-daily]]
-Active plans: [[Plan-ia-content-model]], [[Plan-wiki-ticket-ui]], [[Plan-ticket-sync-and-init-detection]]
+Active plans: [[Plan-wiki-ticket-ui-ia]], [[Plan-ia-content-model]], [[Plan-ticket-sync-and-init-detection]]
 
 ## Why was it built this way?
 [[Index-Decisions]] — ADRs and plans, with supersede chains

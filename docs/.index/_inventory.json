@@ -331,6 +331,29 @@
    "wiki_key": "plan/2026-07-22-grok-viz-background-execution"
   },
   {
+   "canonical_key": "plan/2026-07-22-wiki-ticket-ui-ia",
+   "date": "2026-07-22",
+   "doc_type": "plan",
+   "epic": "01KY5VY0TDSWJE6W80CNCWA8QA",
+   "items": [
+    "01KY5VY0TDTD7PQDT6EVD5AG9N",
+    "01KY5VY0TEW87KK6AW6FQTYGZ9",
+    "01KY5VY0TEK8XSGP2SG57GF0KT",
+    "01KY5VY0TEWBMZK5W6YJN5FQ9D",
+    "01KY5VY0TEKXBXK91S9ZFZTJZ5",
+    "01KY5VY0TE8EZPWNZPZWSPTSAR",
+    "01KY5VY0TE8B6RXVX1MQYJZ0TH",
+    "01KY5VY0TE7G7ZC5W20T3KAXJ7"
+   ],
+   "slug": "wiki-ticket-ui-ia",
+   "source": "docs/plans/2026-07-22-wiki-ticket-ui-ia.md",
+   "status": "planned",
+   "supersedes": "plan/wiki-ticket-ui",
+   "title": "WikiTicket UI \u2014 IA-aware dashboard (supersedes wiki-ticket-ui)",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-22-wiki-ticket-ui-ia"
+  },
+  {
    "aliases": [
     "plan/design-docs-release-sync"
    ],
@@ -487,9 +510,10 @@
    ],
    "slug": "wiki-ticket-ui",
    "source": "docs/plans/2026-07-21-wiki-ticket-ui.md",
-   "status": "planned",
+   "status": "superseded",
+   "superseded_by": "plan/2026-07-22-wiki-ticket-ui-ia",
    "title": "WikiTicket UI \u2014 project status dashboard (wiki_ticket_sdd_ui)",
-   "truth_state": "current",
+   "truth_state": "superseded",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-ticket-ui",
    "wiki_key": "plan/wiki-ticket-ui"
   },
@@ -529,10 +553,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-22T20:47:18Z",
+   "generated_at": "2026-07-22T21:34:50Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "e0aa0cf2",
+   "source_hash": "2e6248e2",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
