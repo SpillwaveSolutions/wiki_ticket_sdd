@@ -75,9 +75,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc"
   },
   "home": {
-    "rev": "f8c57f6",
+    "rev": "991033f",
     "source": "docs/wiki-home.md",
-    "source_hash": "7bac7e70faf8",
+    "source_hash": "681a14704618",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Home"
   },
   "plan/design-docs-release-sync": {
@@ -104,6 +104,12 @@
     "source_hash": "41a12da2f252",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-typed-adapter-contract"
   },
+  "plan/wiki-information-architecture": {
+    "rev": "991033f",
+    "source": "docs/plans/2026-07-22-wiki-information-architecture.md",
+    "source_hash": "46be463e5467",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-information-architecture"
+  },
   "plan/wiki-ticket-ui": {
     "rev": "e5516a5a7a32c3fad45b929b64c16893b6db413d",
     "source": "docs/plans/2026-07-21-wiki-ticket-ui.md",
@@ -123,9 +129,9 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plugin-Guide"
   },
   "roadmap": {
-    "rev": "c4e36bc",
+    "rev": "991033f",
     "source": "docs/roadmap.md",
-    "source_hash": "976823d4ca83",
+    "source_hash": "12d18747b92e",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap"
   },
   "roadmap-snapshot/2026-07-19_v0.11.0-release": {

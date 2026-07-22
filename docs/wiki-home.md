@@ -37,6 +37,7 @@ work is fishbowled, not hidden.
 
 ## Plans
 
+- [[Plan-wiki-information-architecture]]
 - [[Plan-wiki-ticket-ui]]
 - [[Plan-design-docs-release-sync]]
 - [[Plan-grok-compat-and-mermaid-viz]]
