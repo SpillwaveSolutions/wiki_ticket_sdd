@@ -62,7 +62,22 @@ If tooling is missing, RESEARCH it (docs/web) and tell the human what to
 install — do not guess blindly. These are mainstream systems; rely on model
 knowledge plus live exploration, not shipped integration code.
 
-## 3. Maintain the ledger
+## 3. Strip frontmatter for Gollum-style wikis
+
+Plans, ADRs, status reports, and design docs carry a YAML frontmatter block
+(`---` ... `---`) as their machine-readable source of truth — never touch
+that in `docs/`. But Gollum (GitHub wiki, and any other Gollum-style wiki)
+renders it as raw text instead of parsing it, so the page opens with an ugly
+`---` block up top. Fix it in the copy, not the source: for `github-wiki`
+(and `other` systems that are Gollum-backed), when writing a page into the
+wiki checkout, strip the leading frontmatter block first — only when the
+file starts with a `---` line at byte 0, delete through the next line that
+is exactly `---`, and write what remains. A doc with no frontmatter, or
+where `---` appears later in the body, is untouched. `gitlab-wiki`,
+`ado-wiki`, and `confluence` understand or can be given frontmatter, so keep
+or adapt it per platform instead of stripping.
+
+## 4. Maintain the ledger
 
 `.work/published.json` maps logical keys to what was published:
 
@@ -85,7 +100,7 @@ publishing, update the entry with the page url, the wiki revision (e.g. wiki
 commit sha), and the new hash. Commit `published.json` together with the
 docs it describes.
 
-## 4. Ledger fields across systems
+## 5. Ledger fields across systems
 
 The ledger shape is fixed by spec §9.3; systems just fill it differently.
 `url` is always the page's browse URL.
@@ -96,19 +111,19 @@ The ledger shape is fixed by spec §9.3; systems just fill it differently.
 - **ado-wiki via REST** — `rev` = the ETag/version from the response,
   `page_id` = the page path.
 
-## 5. Page naming
+## 6. Page naming
 
 Derive the wiki page name from the doc title. Keep the title stable per
 logical key — renaming a page breaks inbound links.
 
-## 6. One-time init
+## 7. One-time init
 
 Surface one-time setup steps to the human; never work around them silently.
 Example: a GitHub wiki's `.wiki.git` does not exist until someone clicks
 "Create the first page" in the repo's wiki tab — if the clone/push fails
 with not-found, ask the human to do that once, then retry.
 
-## 7. Frozen rules
+## 8. Frozen rules
 
 Snapshots, plans, status reports, and dated design docs/code walkthroughs
 publish once and are never re-published. The live Roadmap page, ADRs, and

@@ -1,20 +1,20 @@
 {
   "adr/0001-event-log-fold-union-merge": {
-    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/adr/0001-event-log-fold-union-merge.md",
     "source_hash": "021701a74deb",
     "title": "ADR-0001-event-log-fold-union-merge",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0001-event-log-fold-union-merge"
   },
   "adr/0002-skill-based-edges-typed-contract": {
-    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/adr/0002-skill-based-edges-typed-contract.md",
     "source_hash": "8bf56915f65e",
     "title": "ADR-0002-skill-based-edges-typed-contract",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0002-skill-based-edges-typed-contract"
   },
   "adr/0003-green-gates-merge": {
-    "rev": "c250f541f5a8154becfc31766bb0aa970fe30621",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/adr/0003-green-gates-merge.md",
     "source_hash": "3b90e1fdfacf",
     "title": "ADR-0003-green-gates-merge",
@@ -27,49 +27,49 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/CLI-Reference"
   },
   "design/2026-07-19_v0.11.0-release-code-walkthrough": {
-    "rev": "d7a303d",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/designs/2026-07-19_v0.11.0-release_code_walkthrough.md",
     "source_hash": "a4c62c1b0dc0",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-07-19_v0.11.0-release"
   },
   "design/2026-07-19_v0.11.0-release-design-doc": {
-    "rev": "d7a303d",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/designs/2026-07-19_v0.11.0-release_design_doc.md",
     "source_hash": "63eea17cba14",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-07-19_v0.11.0-release"
   },
   "design/2026-07-21_v0.12.0-release-code-walkthrough": {
-    "rev": "7729789",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/designs/2026-07-21_v0.12.0-release_code_walkthrough.md",
     "source_hash": "42aeeab72352",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-07-21_v0.12.0-release"
   },
   "design/2026-07-21_v0.12.0-release-design-doc": {
-    "rev": "7729789",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/designs/2026-07-21_v0.12.0-release_design_doc.md",
     "source_hash": "b3ada5a9cb43",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-07-21_v0.12.0-release"
   },
   "design/2026-07-21_v0.12.1-release-code-walkthrough": {
-    "rev": "f8c57f6",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/designs/2026-07-21_v0.12.1-release_code_walkthrough.md",
     "source_hash": "7c704558f087",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-07-21_v0.12.1-release"
   },
   "design/2026-07-21_v0.12.1-release-design-doc": {
-    "rev": "f8c57f6",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/designs/2026-07-21_v0.12.1-release_design_doc.md",
     "source_hash": "bcc72aad6b92",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-07-21_v0.12.1-release"
   },
   "design/current-code-walkthrough": {
-    "rev": "f8c57f6",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/designs/current_code_walkthrough.md",
     "source_hash": "347997233f54",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough"
   },
   "design/current-design-doc": {
-    "rev": "f8c57f6",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/designs/current_design_doc.md",
     "source_hash": "8532867480ad",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc"
@@ -81,49 +81,49 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Home"
   },
   "plan/design-docs-release-sync": {
-    "rev": "34881bc61e47b2e7788251bb6b1ac8bb739f3bda",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/plans/2026-07-19-design-docs-release-sync.md",
     "source_hash": "c0756a150c1a",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-design-docs-release-sync"
   },
   "plan/grok-compat-and-mermaid-viz": {
-    "rev": "d08da9fbe9c0e14552c5d53dec0d78b8b13415c6",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/plans/2026-07-19-grok-compat-and-mermaid-viz.md",
     "source_hash": "0bfe624745fd",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-grok-compat-and-mermaid-viz"
   },
   "plan/ia-content-model": {
-    "rev": "ad14667",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/plans/2026-07-22-ia-content-model.md",
     "source_hash": "0d3a5032659f",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-ia-content-model"
   },
   "plan/ticket-sync-and-init-detection": {
-    "rev": "3b2030e7cdcf12623fd60f1431a962ebf76956c4",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/plans/2026-07-18-ticket-sync-and-init-detection.md",
     "source_hash": "5f1c7269f072",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-ticket-sync-and-init-detection"
   },
   "plan/typed-adapter-contract": {
-    "rev": "5fe1d949ff93c1153f18f679394b0287e050acde",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/plans/2026-07-18-typed-adapter-contract.md",
     "source_hash": "41a12da2f252",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-typed-adapter-contract"
   },
   "plan/wiki-information-architecture": {
-    "rev": "991033f",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/plans/2026-07-22-wiki-information-architecture.md",
     "source_hash": "46be463e5467",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-information-architecture"
   },
   "plan/wiki-ticket-ui": {
-    "rev": "e5516a5a7a32c3fad45b929b64c16893b6db413d",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/plans/2026-07-21-wiki-ticket-ui.md",
     "source_hash": "e71c38b1a5c8",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-ticket-ui"
   },
   "plan/work-taxonomy": {
-    "rev": "607e285fbd7b33b12b2044025a91643782cd09d9",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/plans/2026-07-18-work-taxonomy.md",
     "source_hash": "514fc74c6594",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-work-taxonomy"
@@ -210,20 +210,20 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Worklog-Spec"
   },
   "status/2026-07-18-timecard": {
-    "rev": "50a12a88581946c59f51b019ac94b3feebfc638a",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/status/2026-07-18-timecard.md",
     "source_hash": "ae8d8d311df5",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-18-timecard"
   },
   "status/2026-07-18-weekly": {
-    "rev": "456ff1649bc8aa2b584ae57f1cb2436e37cf5673",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/status/2026-07-18-weekly.md",
     "source_hash": "ec2e71d197f8",
     "title": "Status-2026-07-18-weekly",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-18-weekly"
   },
   "status/2026-07-19-daily": {
-    "rev": "10c60b5",
+    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
     "source": "docs/status/2026-07-19-daily.md",
     "source_hash": "9ee42dc99960",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-19-daily"
