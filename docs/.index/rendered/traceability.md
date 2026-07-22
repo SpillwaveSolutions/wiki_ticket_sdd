@@ -45,7 +45,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-wiki-ticket-ui-ia]]
 
 ### Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI
-`01KY5VY0TDTD7PQDT6EVD5AG9N` · status: todo
+`01KY5VY0TDTD7PQDT6EVD5AG9N` · status: in_progress
 - belongs-to: WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui)
 - references: [github#114](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/114)
 - produced-by: [[Plan-wiki-ticket-ui-ia]]

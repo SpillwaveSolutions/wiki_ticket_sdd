@@ -14,7 +14,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 
 | Plan | Lifecycle | Truth | Date |
 |---|---|---|---|
-| [[Plan-wiki-ticket-ui-ia]] WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui) | planned | current | 2026-07-22 |
+| [[Plan-wiki-ticket-ui-ia]] WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui) | active | current | 2026-07-22 |
 | [[Plan-wiki-information-architecture]] Wiki information architecture | superseded → superseded by [[Plan-ia-content-model]] | superseded | 2026-07-22 |
 | [[Plan-ia-content-model]] IA & content model (supersedes wiki-information-architecture) | active | current | 2026-07-22 |
 | [[Plan-grok-viz-background-execution]] Grok viz — background-subagent execution rule (amendment record) | completed | current | 2026-07-22 |

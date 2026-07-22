@@ -2667,7 +2667,7 @@
   },
   "item/01KY5VY0TDTD7PQDT6EVD5AG9N": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "in_progress",
    "title": "Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI"
   },
   "item/01KY5VY0TE7G7ZC5W20T3KAXJ7": {
