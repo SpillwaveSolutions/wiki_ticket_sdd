@@ -4,12 +4,15 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Schema boundary: split doc.schema.json (documents) from entity schema (items, releases, code-changes) — defer until a second graph entity needs validation
 `01KY5QV5G05V77TKESCJVY62S3` · status: todo
+- references: [github#111](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/111)
 
 ### Add schema drift test: schema/doc.schema.json must stay equivalent to bin/ia.py validator constants
 `01KY5QJAY8C8G5C4FEBMRFKM51` · status: done
+- references: [github#110](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/110)
 
 ### Repair frozen-plan drift: restore grok-compat-and-mermaid-viz to published version, move background-subagent rule to amendment doc
 `01KY5QJARJ0S9QHGRPAV8SFV9H` · status: done
+- references: [github#109](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/109)
 - produced-by: [[Plan-grok-viz-background-execution]]
 
 ### pre-commit hook pollutes worktree with bin/__pycache__ after git add — merge aborts on tracked-vs-untracked pyc collision
