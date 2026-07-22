@@ -470,3 +470,4 @@
 {"actor":"richardhightower","ev":"01KY5JDSXV2APJP1507W1A95SE","item":"01KY5JB9F9XKKD1RNS66J6DXHZ","op":"update","set":{"status":"in_progress"},"ts":"2026-07-22T18:46:50Z"}
 {"actor":"richardhightower","ev":"01KY5JKKKMW9M4EWV5ZG98TPNA","item":"01KY5HW7KSBAYS1RE95ZT8BYM4","op":"update","set":{"status":"in_progress"},"ts":"2026-07-22T18:50:00Z"}
 {"actor":"richardhightower","ev":"01KY5JM21FP1FS2AM9WDZ7FC8P","item":"01KY5JB9F9XKKD1RNS66J6DXHZ","op":"close","set":{"status":"done"},"ts":"2026-07-22T18:50:15Z"}
+{"actor":"richardhightower","ev":"01KY5K8X8YGA6HRRXSNFX2HHR4","item":"01KY5HW7KSBAYS1RE95ZT8BYM4","op":"close","set":{"resolution":"fixed in PR #103 \u2014 fold snapshot branch no longer fabricates taxonomy defaults","status":"done"},"ts":"2026-07-22T19:01:38Z"}
