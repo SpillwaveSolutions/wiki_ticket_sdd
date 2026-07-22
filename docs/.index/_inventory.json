@@ -230,6 +230,7 @@
    "status": "completed",
    "title": "Worklog Core (Spec \u00a718 Steps 3\u20134 + CI) Implementation Plan",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-2026-07-17_worklog-core_plan",
    "wiki_key": "plan/2026-07-17_worklog-core_plan"
   },
   {
@@ -254,6 +255,7 @@
    "status": "completed",
    "title": "Worklog Claude plugin",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-claude-plugin",
    "wiki_key": "plan/2026-07-18-claude-plugin"
   },
   {
@@ -286,6 +288,7 @@
    "status": "completed",
    "title": "Docs, wiki publishing & dogfood discipline",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-docs-wiki-dogfood",
    "wiki_key": "plan/2026-07-18-docs-wiki-dogfood"
   },
   {
@@ -303,6 +306,7 @@
    "story": "01KXXJYK5KS3MQWRPGZ3WNA790",
    "title": "Architecture Decision Records \u2014 schema-validated, wiki-synced",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-adr",
    "wiki_key": "plan/2026-07-19-adr"
   },
   {
@@ -504,10 +508,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-22T19:56:21Z",
+   "generated_at": "2026-07-22T20:02:40Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "b889c2cf",
+   "source_hash": "b27cfe43",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

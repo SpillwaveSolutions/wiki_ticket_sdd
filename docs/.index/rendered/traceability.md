@@ -4,15 +4,19 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### pre-commit hook pollutes worktree with bin/__pycache__ after git add — merge aborts on tracked-vs-untracked pyc collision
 `01KY5P9V0CMM86G43HH4Q28ZDD` · status: done
+- references: [github#107](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/107)
 
 ### Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config
 `01KY5NE0ZYGBWG44N0KPEBFCZ8` · status: todo
+- references: [github#108](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/108)
 
 ### issue-description skill + rich ticket bodies in ticket-sync (summary/context/outcome/scope/acceptance/traceability from the item graph)
 `01KY5N7DF2YMR9E11G4W3HF6PY` · status: done
+- references: [github#106](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/106)
 
 ### PR-description skill: 10-section high-context PR body spec (big picture, runtime context, scope, flow, testing honesty, out-of-scope, ticket glossary)
 `01KY5N447CK55EXFHTQGWA9JZ9` · status: done
+- references: [github#105](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/105)
 
 ### GitHub Wiki shows raw YAML frontmatter on published pages — strip at publish time
 `01KY5JB9F9XKKD1RNS66J6DXHZ` · status: done
