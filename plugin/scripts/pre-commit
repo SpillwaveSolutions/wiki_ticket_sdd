@@ -65,3 +65,13 @@ fi
 
 # ADRs: schema + cross-file invariants. Guarded like the fold tests.
 [ ! -d docs/adr ] || [ ! -x bin/worklog ] || python3 bin/worklog adr check >/dev/null || fail "ADR validation failed — run: worklog adr check"
+
+# IA gates (plan ia-content-model, migration 0002): wiki_key present/unique,
+# schema-valid frontmatter, fresh inventory. WARN-ONLY for one release cycle,
+# then promoted to hard fail. Guarded like the fold tests.
+if [ -f bin/ia.py ] && [ -x bin/worklog ]; then
+  python3 bin/worklog ia-normalize --check >/dev/null 2>&1 || \
+    echo "worklog: WARNING (soon a hard gate) — doc metadata drift; run: worklog ia-normalize" >&2
+  python3 bin/worklog ia-inventory --check >/dev/null 2>&1 || \
+    echo "worklog: WARNING (soon a hard gate) — inventory stale/invalid; run: worklog ia-inventory" >&2
+fi

@@ -1,3 +1,10 @@
+---
+doc_type: guide
+slug: cli-reference
+title: WikiTicket SDD — CLI Reference
+truth_state: current
+wiki_key: cli-reference
+---
 # WikiTicket SDD — CLI Reference
 
 Complete reference for `bin/worklog`. For concepts and workflows, start with

@@ -1,3 +1,10 @@
+---
+doc_type: guide
+slug: plugin-guide
+title: WikiTicket SDD — Plugin Guide
+truth_state: current
+wiki_key: plugin-guide
+---
 # WikiTicket SDD — Plugin Guide
 
 How the Claude Code plugin packages WikiTicket SDD, and how the two install

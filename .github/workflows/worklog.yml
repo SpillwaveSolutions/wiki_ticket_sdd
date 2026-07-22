@@ -16,6 +16,7 @@ jobs:
           python3 tests/test_ulid.py
           python3 tests/test_render_roadmap.py
           python3 tests/test_plan_capture.py
+          python3 tests/test_ia.py
       # PR simulations: real git repos, branches, union merges, hook gates
       - name: integration tests
         run: |

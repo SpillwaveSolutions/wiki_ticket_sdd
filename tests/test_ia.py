@@ -119,7 +119,8 @@ class TestInventory(unittest.TestCase):
                    "through: 01AAAA\ngenerated_at: 2026-07-02T00:00:00Z\n---\n# S2\n")
         self.write("docs/adr/0001-x.md",
                    "---\nid: 1\nslug: x\ntitle: X\ndate: 2026-07-01\n"
-                   "status: accepted\n---\n# ADR-0001\n")
+                   "status: accepted\n---\n# ADR-0001\n\n## Context\nc\n\n"
+                   "## Decision\nd\n\n## Consequences\nq\n")
         self.write("docs/user_guide/user-guide.md", "# User guide\n")
         self.write(".work/published.json", json.dumps(
             {"plan/alpha": {"source": "docs/plans/2026-07-01-alpha.md",
@@ -207,7 +208,10 @@ class TestInventory(unittest.TestCase):
         self.assertEqual(p.returncode, 1)
 
     def test_plan_lifecycle_from_fold(self):
-        self.assertEqual(ia.plan_lifecycle({"items": []}, {}), "planned")
+        # no items at all = legacy pre-worklog plan; those shipped
+        self.assertEqual(ia.plan_lifecycle({"items": []}, {}), "completed")
+        # items that aren't in the fold yet = planned
+        self.assertEqual(ia.plan_lifecycle({"items": ["ZZ"]}, {}), "planned")
         items = {"A": {"status": "todo"}, "B": {"status": "todo"}}
         self.assertEqual(ia.plan_lifecycle({"items": ["A", "B"]}, items), "planned")
         items["A"]["status"] = "in_progress"
@@ -215,6 +219,81 @@ class TestInventory(unittest.TestCase):
         items["A"]["status"] = "done"
         items["B"]["status"] = "cancelled"
         self.assertEqual(ia.plan_lifecycle({"items": ["A", "B"]}, items), "completed")
+
+
+class TestNormalize(TestInventory):
+    """Same sandbox; exercises ia-normalize end to end."""
+
+    def test_normalize_backfills_then_noop(self):
+        p = run(self.dir, "ia-normalize")
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("normalization(s) applied", p.stdout)
+        # frozen plan got a sidecar, artifact untouched
+        side = os.path.join(self.dir, "docs/.index/plan/alpha.yml")
+        self.assertTrue(os.path.exists(side))
+        with open(os.path.join(self.dir, "docs/plans/2026-07-01-alpha.md")) as fh:
+            self.assertFalse(fh.read().startswith("---\nwiki_key"))
+        # guide got in-place frontmatter, body intact
+        with open(os.path.join(self.dir, "docs/user_guide/user-guide.md")) as fh:
+            text = fh.read()
+        self.assertIn("wiki_key: user-guide", text)
+        self.assertIn("# User guide", text)
+        # ADR got wiki_key + truth_state without disturbing its schema
+        with open(os.path.join(self.dir, "docs/adr/0001-x.md")) as fh:
+            self.assertIn("wiki_key: adr/0001-x", fh.read())
+        a = run(self.dir, "adr", "check")
+        self.assertEqual(a.returncode, 0, a.stdout + a.stderr)
+        # ledger gained self-description
+        pub = json.load(open(os.path.join(self.dir, ".work/published.json")))
+        self.assertEqual(pub["plan/alpha"]["canonical_key"], "plan/2026-07-01-alpha")
+        self.assertEqual(pub["plan/alpha"]["truth_state"], "superseded")
+        # second run is a no-op; --check agrees
+        p2 = run(self.dir, "ia-normalize")
+        self.assertIn("no-op", p2.stdout)
+        c = run(self.dir, "ia-normalize", "--check")
+        self.assertEqual(c.returncode, 0, c.stdout)
+
+    def test_check_reports_without_writing(self):
+        c = run(self.dir, "ia-normalize", "--check")
+        self.assertEqual(c.returncode, 1)
+        self.assertIn("needs: ", c.stdout)
+        self.assertFalse(os.path.exists(os.path.join(self.dir, "docs/.index")))
+
+    def test_truth_state_recomputed_not_pinned(self):
+        run(self.dir, "ia-normalize")
+        side = os.path.join(self.dir, "docs/.index/status/2026-07-02-daily.yml")
+        with open(side) as fh:
+            self.assertIn("truth_state: current", fh.read())
+        # a newer daily lands; the old one must flip to archived on re-run
+        self.write("docs/status/2026-07-03-daily.md",
+                   "---\nkind: daily\ndate: 2026-07-03\nwindow: {from: c, to: d}\n"
+                   "through: 01AAAA\ngenerated_at: 2026-07-03T00:00:00Z\n---\n# S3\n")
+        run(self.dir, "ia-normalize")
+        with open(side) as fh:
+            self.assertIn("truth_state: archived", fh.read())
+
+    def test_authored_sidecar_fields_survive(self):
+        run(self.dir, "ia-normalize")
+        side = os.path.join(self.dir, "docs/.index/plan/alpha.yml")
+        with open(side, "a") as fh:
+            fh.write("owner: rick\n")
+        run(self.dir, "ia-normalize")
+        with open(side) as fh:
+            self.assertIn("owner: rick", fh.read())
+
+    def test_snapshot_chain_and_restamped_snapshot(self):
+        os.makedirs(os.path.join(self.dir, "docs/roadmap"))
+        for stem in ("2026-07-01_v1-release", "2026-07-02_v2-release"):
+            self.write("docs/roadmap/%s.md" % stem,
+                       "---\nwiki_key: roadmap-snapshot/%s\n"
+                       "doc_type: roadmap-snapshot\ntruth_state: snapshot\n"
+                       "---\n# Roadmap\n" % stem)
+        run(self.dir, "ia-normalize")
+        with open(os.path.join(
+                self.dir, "docs/.index/roadmap-snapshot/2026-07-02_v2-release.yml")) as fh:
+            text = fh.read()
+        self.assertIn("supersedes: roadmap-snapshot/2026-07-01_v1-release", text)
+        self.assertIn("release: v2", text)
 
 
 if __name__ == "__main__":

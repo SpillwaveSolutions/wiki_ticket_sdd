@@ -4,6 +4,9 @@ git_hash: 04cf8e8111bd0be37f7048f72474baf75e836635
 branch: main
 tag: v0.12.1
 roadmap: docs/roadmap.md
+wiki_key: design/current-code-walkthrough
+truth_state: current
+doc_type: design
 ---
 
 # Worklog — Code Walkthrough

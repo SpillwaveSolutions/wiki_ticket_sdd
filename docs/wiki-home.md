@@ -1,3 +1,10 @@
+---
+doc_type: guide
+slug: wiki-home
+title: WikiTicket SDD
+truth_state: current
+wiki_key: home
+---
 # WikiTicket SDD
 
 WikiTicket SDD (pronounced "wicked ticket") is spec-driven development with

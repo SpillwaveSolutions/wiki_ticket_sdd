@@ -324,6 +324,15 @@ def cmd_roadmap_snapshot(a):
                  "— pick a new --name")
     os.makedirs("docs/roadmap", exist_ok=True)
     shutil.copyfile("docs/roadmap.md", path)
+    # restamp the copy's identity before it freezes: this page is a snapshot,
+    # not the live roadmap (plan ia-content-model §5.4)
+    import ia
+    fields = {"wiki_key": f"roadmap-snapshot/{name}",
+              "doc_type": "roadmap-snapshot", "truth_state": "snapshot",
+              "date": date}
+    if a.name:
+        fields["name"] = a.name
+    ia.ensure_front_matter_fields(path, fields)
     print(path)
 
 
@@ -496,6 +505,19 @@ def cmd_wiki_key(a):
         print(f"canonical: {canonical}")
         if aliases:
             print(f"aliases: {', '.join(aliases)}")
+
+
+def cmd_ia_normalize(a):
+    import ia
+    changes = ia.normalize(check=a.check)
+    for c in changes:
+        print(("needs: " if a.check else "wrote: ") + c)
+    if a.check and changes:
+        sys.exit(1)
+    if not changes:
+        print("ia: everything normalized (no-op)")
+    elif not a.check:
+        print(f"ia: {len(changes)} normalization(s) applied")
 
 
 def cmd_ia_inventory(a):
@@ -1011,6 +1033,15 @@ wk = sub.add_parser(
 wk.set_defaults(fn=cmd_wiki_key)
 wk.add_argument("path")
 wk.add_argument("-v", "--verbose", action="store_true")
+
+inorm = sub.add_parser(
+    "ia-normalize",
+    description="Backfill wiki_key + truth_state: sidecars for frozen docs "
+                "(never edits them), in-place frontmatter for sanctioned-live "
+                "docs, self-description on the publish ledger. Idempotent.")
+inorm.set_defaults(fn=cmd_ia_normalize)
+inorm.add_argument("--check", action="store_true",
+                   help="report pending normalizations, write nothing")
 
 ii = sub.add_parser(
     "ia-inventory",

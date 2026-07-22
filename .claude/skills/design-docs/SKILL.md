@@ -26,6 +26,9 @@ naming). Ad-hoc names are fine mid-cycle.
 Dated files:
 
     ---
+    wiki_key: design/<date>_<name>-design-doc   # or -code-walkthrough
+    doc_type: design
+    truth_state: snapshot
     date: YYYY-MM-DD
     name: vX.Y.Z-release
     tag: vX.Y.Z
@@ -35,9 +38,14 @@ Dated files:
     ---
 
 Current files: same minus `date`/`name`/`roadmap_snapshot`, plus
-`generated_at: <UTC ISO date-time>` and `roadmap: docs/roadmap.md`. `tag` is
+`generated_at: <UTC ISO date-time>` and `roadmap: docs/roadmap.md`, with
+`wiki_key: design/current-design-doc` (or `-code-walkthrough`) and
+`truth_state: current`. `tag` is
 the latest release tag at generation. Stamp from `git rev-parse HEAD`,
 `git branch --show-current`, `git describe --tags --abbrev=0` — never guess.
+The identity trio (`wiki_key`, `doc_type`, `truth_state`) is required by the
+IA gates (plan ia-content-model §5.4) — regenerating without it trips
+`worklog ia-normalize --check`.
 
 ## 1. Read the config
 

@@ -8,6 +8,8 @@ deciders: [rick, claude]
 tags: [sync, adapters]
 supersedes: null
 superseded_by: null
+wiki_key: adr/0002-skill-based-edges-typed-contract
+truth_state: current
 ---
 
 ## Context
