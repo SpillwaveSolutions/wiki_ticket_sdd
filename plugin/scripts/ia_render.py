@@ -20,6 +20,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ia
+import ia_graph
 from fold import fold, CLOSED_STATUSES
 
 RENDERED = os.path.join(ia.INDEX_DIR, "rendered")
@@ -31,6 +32,8 @@ INDEX_PAGES = (  # wiki_key, filename, page name, title
     ("index/decisions", "decisions.md", "Index-Decisions", "Decisions Index"),
     ("index/releases", "releases.md", "Index-Releases", "Releases Index"),
     ("index/status", "status.md", "Index-Status", "Status Archive"),
+    ("index/traceability", "traceability.md", "Index-Traceability",
+     "Traceability Index"),
 )
 
 
@@ -253,6 +256,45 @@ def render_status_index(records):
     return "\n".join(lines) + "\n"
 
 
+def render_traceability(graph, records):
+    """§9.5: the evidence chain per work item, forward and backward links
+    derived from one edge set."""
+    fwd, back = {}, {}
+    for e in graph["edges"]:
+        fwd.setdefault(e["from"], []).append((e["type"], e["to"]))
+        back.setdefault(e["to"], []).append(
+            (ia_graph.REVERSE[e["type"]], e["from"]))
+    nodes = graph["nodes"]
+
+    def show(key):
+        n = nodes.get(key, {})
+        rec = records.get(key)
+        if rec:
+            return "[[%s]]" % page_name(rec)
+        if n.get("doc_type") == "ticket":
+            return "[%s](%s)" % (key.split("/", 1)[1], n["url"]) if n.get("url") else key
+        return n.get("title", key) if n.get("doc_type") == "item" else key
+
+    lines = ["# Traceability", "",
+             "_The evidence chain: plan → item → ticket → code → release, "
+             "forward and backward. Generated from `docs/.index/_graph.json`; "
+             "do not edit._", ""]
+    items = sorted((k for k, n in nodes.items()
+                    if n.get("doc_type") == "item"),
+                   key=lambda k: k, reverse=True)
+    for key in items:
+        n = nodes[key]
+        lines.append("### %s" % n.get("title", key))
+        lines.append("`%s` · status: %s" % (key.split("/", 1)[1],
+                                            n.get("status", "?")))
+        for typ, to in sorted(fwd.get(key, [])):
+            lines.append("- %s: %s" % (typ, show(to)))
+        for typ, frm in sorted(back.get(key, [])):
+            lines.append("- %s: %s" % (typ, show(frm)))
+        lines.append("")
+    return "\n".join(lines) + "\n"
+
+
 # ------------------------------------------------------------- manifest
 
 def _hash_bytes(data):
@@ -302,31 +344,33 @@ def build_aliases(records):
 # ------------------------------------------------------------ driver
 
 def render_all():
-    """-> {filename: content} for rendered/, plus manifest + aliases dicts."""
+    """-> ({filename: content}, manifest, aliases, graph)."""
     records = ia.build_records()
     fr = fold((".work/todo.jsonl", ".work/done.jsonl"))
-    has_graph = os.path.exists(os.path.join(ia.INDEX_DIR, "_graph.json"))
+    graph = ia_graph.build_graph(records, fr.items)
     rendered = {
-        "home.md": render_home(records, has_graph),
-        "_Sidebar.md": render_sidebar(records, has_graph),
+        "home.md": render_home(records, True),
+        "_Sidebar.md": render_sidebar(records, True),
         "decisions.md": render_decisions(records),
         "releases.md": render_releases(records, fr.items),
         "status.md": render_status_index(records),
+        "traceability.md": render_traceability(graph, records),
     }
     manifest = build_manifest(records, rendered)
     aliases = build_aliases(records)
-    return rendered, manifest, aliases
+    return rendered, manifest, aliases, graph
 
 
 def write_all(check=False):
-    """Write rendered pages + manifest + aliases; in check mode report what
-    is stale instead. -> list of stale/written paths."""
-    rendered, manifest, aliases = render_all()
+    """Write rendered pages + manifest + aliases + graph; in check mode
+    report what is stale instead. -> list of stale/written paths."""
+    rendered, manifest, aliases, graph = render_all()
     out = []
     targets = [(os.path.join(RENDERED, f), c + ("" if c.endswith("\n") else "\n"))
                for f, c in rendered.items()]
     targets += [(MANIFEST, json.dumps(manifest, indent=1, sort_keys=True) + "\n"),
-                (ALIASES, json.dumps(aliases, indent=1, sort_keys=True) + "\n")]
+                (ALIASES, json.dumps(aliases, indent=1, sort_keys=True) + "\n"),
+                (ia_graph.GRAPH, json.dumps(graph, indent=1, sort_keys=True) + "\n")]
     for path, content in targets:
         try:
             with open(path, encoding="utf-8") as fh:

@@ -30,6 +30,10 @@ skill; use the platform's own release tooling.
   `release` and supersede chain), refreshes the inventory, and re-renders
   Home/Sidebar/Releases-index + publish manifest so the release is
   navigable. Commit `docs/.index/` with the snapshot.
+- `bin/worklog trace-check --strict` — the pre-release evidence gate: every
+  closed item must trace to a plan, ticket, and PR. Failures block the
+  release; fix the links (`worklog link-pr`, sidecar `relates_to`) or
+  consciously report the gaps to the human — never skip silently.
 
 ## 3. Land it
 

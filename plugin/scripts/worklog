@@ -541,6 +541,51 @@ def cmd_ia_index(a):
         print("wrote: " + path)
 
 
+def cmd_ia_graph(a):
+    import ia_graph
+    if a.seed:
+        proposed = ia_graph.seed_edges()
+        for rec in proposed:
+            pe = rec["proposed_edge"]
+            print(f"proposed: {pe['from']} -{pe['type']}-> {pe['target']} "
+                  f"({rec['suggestion_id']})")
+        print(f"ia: {len(proposed)} edge suggestion(s) -> {ia_graph.SUGGESTIONS} "
+              "(confirm by adding relates_to to the doc's sidecar)")
+        return
+    g = ia_graph.write_graph()
+    print(f"ia: {len(g['nodes'])} nodes, {len(g['edges'])} edges -> {ia_graph.GRAPH}")
+
+
+def cmd_ticket_body(a):
+    import ia_graph
+    try:
+        sys.stdout.write(ia_graph.ticket_body(a.item))
+    except KeyError:
+        sys.exit(f"worklog: no item {a.item}")
+
+
+def cmd_link_pr(a):
+    import ia_graph
+    try:
+        entry = ia_graph.link_pr(a.item, pr=a.pr, commit=a.commit)
+    except ValueError as e:
+        sys.exit(f"worklog: {e}")
+    print(f"linked {a.item} -> {entry}")
+
+
+def cmd_trace_check(a):
+    import ia_graph
+    gaps = ia_graph.trace_check(strict=a.strict)
+    for g in gaps:
+        print(g)
+    if gaps:
+        print(f"trace: {len(gaps)} unlinked-evidence gap(s)")
+        if a.strict:
+            sys.exit(1)
+    else:
+        print("trace: no unlinked evidence")
+
+
 def cmd_ia_inventory(a):
     import ia
     if a.check:
@@ -1080,6 +1125,38 @@ ix = sub.add_parser(
     description="Convenience wrapper: ia-normalize -> ia-inventory -> "
                 "ia-render (plan ia-content-model §12.1).")
 ix.set_defaults(fn=cmd_ia_index)
+
+ig = sub.add_parser(
+    "ia-graph",
+    description="Build docs/.index/_graph.json — the typed-edge traceability "
+                "graph (plan ia-content-model §9). --seed proposes decides/"
+                "implements edges into .work/suggestions.jsonl (propose-only).")
+ig.set_defaults(fn=cmd_ia_graph)
+ig.add_argument("--seed", action="store_true")
+
+tb = sub.add_parser(
+    "ticket-body",
+    description="Print the rich issue body for an item — summary, context "
+                "(epic/plan/milestone), traceability — for ticket-sync to "
+                "push (issue-description skill).")
+tb.set_defaults(fn=cmd_ticket_body)
+tb.add_argument("item")
+
+lp = sub.add_parser(
+    "link-pr",
+    description="Record a PR/commit code edge on an item (sidecar overlay; "
+                "the event log still owns item state).")
+lp.set_defaults(fn=cmd_link_pr)
+lp.add_argument("item")
+lp.add_argument("--pr", type=int)
+lp.add_argument("--commit")
+
+tc = sub.add_parser(
+    "trace-check",
+    description="Unlinked-evidence report: closed items missing plan/ticket/"
+                "PR links. Warn by default; --strict exits 1 (pre-release).")
+tc.set_defaults(fn=cmd_trace_check)
+tc.add_argument("--strict", action="store_true")
 
 ii = sub.add_parser(
     "ia-inventory",

@@ -20,3 +20,4 @@
 
 - [[User-Guide]] · [[CLI-Reference]] · [[Plugin-Guide]]
 - [[Worklog-Spec]]
+- [[Index-Traceability]]

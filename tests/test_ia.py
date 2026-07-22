@@ -387,5 +387,98 @@ class TestRender(TestInventory):
             return fh.read()
 
 
+class TestGraph(TestRender):
+    """Traceability: graph build, link-pr, trace-check, seeding."""
+
+    def setUp(self):
+        super().setUp()
+        # two items: one clean chain, one with no links at all
+        p = run(self.dir, "add", "Wire the frobnicator", "--level", "task",
+                "--kind", "feature", "--milestone", "v1",
+                "--plan", "docs/plans/2026-07-01-alpha.md")
+        self.iid = p.stdout.strip().splitlines()[-1]
+        p = run(self.dir, "add", "Orphan chore", "--level", "task",
+                "--kind", "ops")
+        self.orphan = p.stdout.strip().splitlines()[-1]
+
+    def test_graph_edges_and_traceability_page(self):
+        run(self.dir, "close", self.iid)
+        g = run(self.dir, "ia-graph")
+        self.assertEqual(g.returncode, 0, g.stderr)
+        graph = json.load(open(os.path.join(self.dir, "docs/.index/_graph.json")))
+        edges = {(e["from"], e["type"], e["to"]) for e in graph["edges"]}
+        self.assertIn(("item/" + self.iid, "targets", "release/v1"), edges)
+        self.assertIn(("plan/alpha", "produces", "item/" + self.iid), edges)
+        self.assertIn(("plan/2026-07-02-beta", "supersedes", "plan/alpha"), edges)
+        self.assertIn(("roadmap-snapshot/2026-07-01_v1-release", "snapshot-of",
+                       "roadmap"), edges)
+        run(self.dir, "ia-render")
+        trace = self.read("docs/.index/rendered/traceability.md")
+        self.assertIn("Wire the frobnicator", trace)
+        self.assertIn("produced-by: [[Plan-alpha]]", trace)
+
+    def test_link_pr_is_overlay_only(self):
+        p = run(self.dir, "link-pr", self.iid, "--pr", "7")
+        self.assertEqual(p.returncode, 0, p.stderr)
+        side = self.read("docs/.index/item/%s.yml" % self.iid)
+        self.assertIn("pr: 7", side)
+        # overlay only: no item state in the sidecar
+        self.assertNotIn("status", side)
+        self.assertNotIn("title", side)
+        # idempotent
+        run(self.dir, "link-pr", self.iid, "--pr", "7")
+        self.assertEqual(self.read("docs/.index/item/%s.yml" % self.iid).count("pr: 7"), 1)
+        graph = json.loads(run(self.dir, "ia-graph").stdout and open(
+            os.path.join(self.dir, "docs/.index/_graph.json")).read())
+        edges = {(e["from"], e["type"], e["to"]) for e in graph["edges"]}
+        self.assertIn(("item/" + self.iid, "lands-in", "pr/7"), edges)
+        bad = run(self.dir, "link-pr", self.iid)
+        self.assertEqual(bad.returncode, 1)
+
+    def test_trace_check_warn_and_strict(self):
+        run(self.dir, "close", self.iid)
+        run(self.dir, "close", self.orphan)
+        w = run(self.dir, "trace-check")
+        self.assertEqual(w.returncode, 0)          # warn level never fails
+        self.assertIn("no plan link", w.stdout)     # orphan has no plan
+        self.assertIn("no external ticket", w.stdout)
+        s = run(self.dir, "trace-check", "--strict")
+        self.assertEqual(s.returncode, 1)
+        self.assertIn("no PR/commit link", s.stdout)
+        # open items are not in scope
+        self.assertNotIn("frobnicator, todo", s.stdout)
+
+    def test_ticket_body_projection(self):
+        run(self.dir, "link-pr", self.iid, "--pr", "9")
+        p = run(self.dir, "ticket-body", self.iid)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("## Summary", p.stdout)
+        self.assertIn("Produced by plan: [Alpha](https://x/wiki/Plan-alpha)",
+                      p.stdout)
+        self.assertIn("Ships in: v1", p.stdout)
+        self.assertIn("delivered by: PR #9", p.stdout)
+        self.assertIn("worklog `%s`" % self.iid, p.stdout)
+        bad = run(self.dir, "ticket-body", "01NOPE")
+        self.assertEqual(bad.returncode, 1)
+
+    def test_seed_edges_propose_only_and_deduped(self):
+        self.write("docs/plans/2026-07-01-alpha.md",
+                   "---\ndate: 2026-07-01\nslug: alpha\ntitle: Alpha\n"
+                   "epic: null\nitems: [%s]\n---\n# Alpha\n\n"
+                   "This enacts ADR-0001 per spec §5.4.\n" % self.iid)
+        p = run(self.dir, "ia-graph", "--seed")
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("plan/alpha -decides-> adr/0001-x", p.stdout)
+        self.assertIn("-implements-> spec#5.4", p.stdout)
+        sug = self.read(".work/suggestions.jsonl")
+        self.assertIn("proposed_edge", sug)
+        # nothing was auto-written to sidecars or docs
+        self.assertNotIn("relates_to",
+                         self.read("docs/.index/plan/alpha.yml"))
+        # re-seed is a no-op (dedupe against existing suggestions)
+        p2 = run(self.dir, "ia-graph", "--seed")
+        self.assertIn("0 edge suggestion(s)", p2.stdout)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
