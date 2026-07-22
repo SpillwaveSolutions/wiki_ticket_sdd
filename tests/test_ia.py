@@ -21,11 +21,11 @@ def run(cwd, *args):
 
 
 class TestSchemaSync(unittest.TestCase):
-    """schema/doc.schema.json and bin/ia.py are deliberate duplicates
-    (dependency-free bin/); this pins them equivalent so they cannot
-    silently diverge before the Phase 5 hard-fail promotion."""
+    """schema/doc.schema.json + schema/entity.schema.json and bin/ia.py are
+    deliberate duplicates (dependency-free bin/); this pins them equivalent
+    so they cannot silently diverge before the Phase 5 hard-fail promotion."""
 
-    def test_schema_json_matches_ia_constants(self):
+    def test_doc_schema_json_matches_ia_constants(self):
         with open(os.path.join(ROOT, "schema", "doc.schema.json")) as fh:
             schema = json.load(fh)
         props = schema["properties"]
@@ -37,6 +37,22 @@ class TestSchemaSync(unittest.TestCase):
             list(ia.EDGE_TYPES))
         self.assertEqual(schema["x-required-by-type"],
                          {k: list(v) for k, v in ia.REQUIRED_BY_TYPE.items()})
+
+    def test_entity_schema_json_matches_ia_constants(self):
+        with open(os.path.join(ROOT, "schema", "entity.schema.json")) as fh:
+            schema = json.load(fh)
+        props = schema["properties"]
+        self.assertEqual(schema["required"], list(ia.REQUIRED_ALL))
+        self.assertEqual(props["doc_type"]["enum"], list(ia.ENTITY_TYPES))
+        self.assertEqual(props["truth_state"]["enum"], list(ia.TRUTH_STATES))
+        self.assertEqual(
+            props["relates_to"]["items"]["properties"]["type"]["enum"],
+            list(ia.EDGE_TYPES))
+        self.assertEqual(schema["x-required-by-type"],
+                         {k: list(v) for k, v in ia.REQUIRED_BY_ENTITY.items()})
+
+    def test_doc_and_entity_types_are_disjoint(self):
+        self.assertEqual(set(ia.DOC_TYPES) & set(ia.ENTITY_TYPES), set())
 
 
 class TestParsing(unittest.TestCase):

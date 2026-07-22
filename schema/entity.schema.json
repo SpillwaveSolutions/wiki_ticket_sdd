@@ -1,0 +1,29 @@
+{
+  "$comment": "Graph/execution entity schema (plan ia-content-model §5), split from schema/doc.schema.json (documents). Entities are things the graph tracks, not things people read: today only 'item' (work items, sidecar-overlaid onto the worklog fold); release and code-change join this enum when they need their own validation. Mirrored in bin/ia.py DOC_SCHEMA — same deliberate duplication as adr.schema.json / bin/adr.py. Per-type required subsets live in x-required-by-type (§5.4); the mini validator applies them to the merged record (fold ∪ sidecar).",
+  "type": "object",
+  "required": ["wiki_key", "doc_type", "truth_state"],
+  "properties": {
+    "wiki_key": {"type": "string"},
+    "canonical_key": {"type": "string"},
+    "aliases": {"type": "array", "items": {"type": "string"}},
+    "doc_type": {"enum": ["item"]},
+    "title": {"type": "string"},
+    "truth_state": {"enum": ["current", "snapshot", "superseded", "archived"]},
+    "status": {"type": "string"},
+    "relates_to": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "target"],
+        "properties": {
+          "type": {"enum": ["produces", "decides", "implements", "supersedes", "verified-by", "lands-in", "belongs-to", "targets", "snapshot-of", "references"]},
+          "target": {"type": "string"}
+        }
+      }
+    },
+    "code": {"type": ["object", "array", "string"]}
+  },
+  "x-required-by-type": {
+    "item": ["wiki_key", "doc_type", "title", "status", "truth_state"]
+  }
+}
