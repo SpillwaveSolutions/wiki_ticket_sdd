@@ -242,11 +242,15 @@
     "wiki_key": "plan/2026-07-22-grok-viz-background-execution"
   },
   "plan/2026-07-22-wiki-ticket-ui-ia": {
+    "canonical_key": "plan/2026-07-22-wiki-ticket-ui-ia",
+    "doc_type": "plan",
     "render_hash": "da87f6adbeda",
     "source": "docs/plans/2026-07-22-wiki-ticket-ui-ia.md",
     "source_hash": "ab27d23f82ca",
     "title": "WikiTicket UI \u2014 IA-aware dashboard (supersedes wiki-ticket-ui)",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-ticket-ui-ia"
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-ticket-ui-ia",
+    "wiki_key": "plan/2026-07-22-wiki-ticket-ui-ia"
   },
   "plan/design-docs-release-sync": {
     "aliases": [

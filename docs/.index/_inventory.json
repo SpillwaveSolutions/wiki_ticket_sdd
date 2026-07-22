@@ -351,6 +351,7 @@
    "supersedes": "plan/wiki-ticket-ui",
    "title": "WikiTicket UI \u2014 IA-aware dashboard (supersedes wiki-ticket-ui)",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-ticket-ui-ia",
    "wiki_key": "plan/2026-07-22-wiki-ticket-ui-ia"
   },
   {
