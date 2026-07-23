@@ -6,10 +6,10 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 `01KY69K4ZJMYJ1HWMWXMQ4J7BA` · status: done
 
 ### ia.classify treats README.md inside docs/plans|status|adr dirs as a doc of that type — generic repos with folder READMEs fail inventory
-`01KY6037BN94086PR1QP0CM7XC` · status: todo
+`01KY6037BN94086PR1QP0CM7XC` · status: done
 
 ### init.sh copy list missing IA modules (ia.py, ia_render.py, ia_graph.py, canonical.py, sync_dispatch.py) — fresh repos get worklog with broken ia-* commands
-`01KY5ZY3ZX2Z4F73Y0BT0M0NR5` · status: todo
+`01KY5ZY3ZX2Z4F73Y0BT0M0NR5` · status: done
 
 ### Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed
 `01KY5VY0TEWBMZK5W6YJN5FQ9D` · status: cancelled

@@ -115,6 +115,10 @@ class TestKeys(unittest.TestCase):
         for path, want in cases.items():
             self.assertEqual(ia.derive_canonical_key(path), want, path)
         self.assertIsNone(ia.derive_canonical_key("docs/migrations/0001-type-split.md"))
+        # folder READMEs are navigation, not typed docs (generic repos have them)
+        for p in ("docs/plans/README.md", "docs/status/README.md",
+                  "docs/adr/README.md", "docs/user_guide/README.md"):
+            self.assertIsNone(ia.classify(p), p)
         self.assertIsNone(ia.classify("README.md"))
 
     def test_legacy_key_seeded_from_ledger(self):

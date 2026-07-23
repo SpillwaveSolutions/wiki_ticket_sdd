@@ -553,3 +553,7 @@
 {"actor":"richardhightower","ev":"01KY604535KTD10V9S4J5NVXQB","item":"01KY5VY0TE7G7ZC5W20T3KAXJ7","op":"close","set":{"resolution":"tracking moved to wiki_ticket_sdd_ui (epic #1, items #2-#9)","status":"cancelled"},"ts":"2026-07-22T22:46:14Z"}
 {"actor":"richardhightower","ev":"01KY69K4ZJSMXKJ8P9SSYTPCG7","item":"01KY69K4ZJMYJ1HWMWXMQ4J7BA","op":"create","set":{"kind":"ops","level":"task","priority":"P2","status":"todo","title":"Add MIT LICENSE (repo was public with no license)"},"ts":"2026-07-23T01:31:42Z"}
 {"actor":"richardhightower","ev":"01KY69KG30R9JHRHXX5K5HJJVQ","item":"01KY69K4ZJMYJ1HWMWXMQ4J7BA","op":"close","set":{"status":"done"},"ts":"2026-07-23T01:31:54Z"}
+{"actor":"richardhightower","ev":"01KY69MH83HKZRHAX1XYXHSW95","item":"01KY6037BN94086PR1QP0CM7XC","op":"update","set":{"status":"in_progress"},"ts":"2026-07-23T01:32:28Z"}
+{"actor":"richardhightower","ev":"01KY69MHDNWHMX8N0H2KXN5DBW","item":"01KY5ZY3ZX2Z4F73Y0BT0M0NR5","op":"update","set":{"status":"in_progress"},"ts":"2026-07-23T01:32:28Z"}
+{"actor":"richardhightower","ev":"01KY69TERCMAW183T7FZ5EED6V","item":"01KY5ZY3ZX2Z4F73Y0BT0M0NR5","op":"close","set":{"status":"done"},"ts":"2026-07-23T01:35:42Z"}
+{"actor":"richardhightower","ev":"01KY69TEYG035HC0G05EYVWASQ","item":"01KY6037BN94086PR1QP0CM7XC","op":"close","set":{"status":"done"},"ts":"2026-07-23T01:35:42Z"}

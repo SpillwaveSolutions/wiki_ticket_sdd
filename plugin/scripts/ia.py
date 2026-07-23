@@ -159,6 +159,8 @@ def classify(path):
     """Repo path -> doc_type, or None for paths outside the content model
     (migrations, README, .index itself)."""
     p = path.replace(os.sep, "/")
+    if os.path.basename(p) == "README.md":
+        return None  # folder READMEs are navigation, not typed docs
     if p.startswith("docs/plans/"):
         return "plan"
     if p == "docs/roadmap.md":

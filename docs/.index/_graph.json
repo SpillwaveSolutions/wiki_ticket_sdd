@@ -2707,12 +2707,12 @@
   },
   "item/01KY5ZY3ZX2Z4F73Y0BT0M0NR5": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "init.sh copy list missing IA modules (ia.py, ia_render.py, ia_graph.py, canonical.py, sync_dispatch.py) \u2014 fresh repos get worklog with broken ia-* commands"
   },
   "item/01KY6037BN94086PR1QP0CM7XC": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "ia.classify treats README.md inside docs/plans|status|adr dirs as a doc of that type \u2014 generic repos with folder READMEs fail inventory"
   },
   "item/01KY69K4ZJMYJ1HWMWXMQ4J7BA": {
