@@ -1,8 +1,7 @@
 ---
 name: work-track
 description: Track work items — use when creating, updating, closing, or listing work items, or when discovering unplanned work mid-flight ("we also need to…", a bug found while doing something else).
-version: 0.12.1
----
+version: 0.13.0---
 
 # Work tracking
 

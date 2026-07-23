@@ -1,8 +1,7 @@
 ---
 name: issue-description
 description: Write rich, durable issue/ticket descriptions. Use when creating or updating tickets by hand, when composing bodies for ticket-sync, or when a work item needs a description a future reader (human or agent) can act on without archaeology.
-version: 0.12.1
----
+version: 0.13.0---
 
 # Rich issue descriptions
 

@@ -1,6 +1,39 @@
 # Changelog
 
+## 0.13.0 — 2026-07-23
+
+IA & content model wave (plan `docs/plans/2026-07-22-ia-content-model.md`,
+PR #104) plus follow-on schema and reliability fixes. Wiki-ticket UI tracking
+moved to `wiki_ticket_sdd_ui` and is not shipped in this plugin.
+
+- **Doc identity & schema (Phase 0):** unified `schema/doc.schema.json`,
+  `worklog wiki-key`, `worklog ia-inventory`, migration helpers for stable
+  `wiki_key` / `truth_state` frontmatter.
+- **Normalize + warn gates (Phase 1):** `worklog ia-normalize` writes sidecars
+  for frozen docs and in-place frontmatter for live ones; CI/hooks warn on
+  missing/duplicate `wiki_key` and invalid frontmatter (hard-fail deferred to
+  Phase 5).
+- **Reader plane (Phase 2):** `worklog ia-render` + `ia-manifest` generate
+  Home, Sidebar, and `publish-manifest.json`; wiki-publish consumes the
+  manifest and strips YAML frontmatter at publish time so GitHub Wiki pages
+  stay clean.
+- **Indexes (Phase 3):** generated Decisions / Releases / Status Archive
+  indexes wired into release and plan-capture flows.
+- **Traceability (Phase 4):** typed-edge graph (`ia-graph`), `worklog link-pr`,
+  `worklog trace-check` (warn by default, `--strict` pre-release), rich
+  ticket bodies via `worklog ticket-body`.
+- **Schema boundary (PR #112):** split document schema from entity/item
+  schema — documents vs work items no longer share one overloaded schema.
+- **Skills:** new `issue-description` and `pr-description` skills for
+  durable ticket and PR prose.
+- **Fixes:** pre-commit no longer dirties the tree with `bin/__pycache__`
+  (`PYTHONDONTWRITEBYTECODE`); compaction snapshot writes folded state
+  verbatim so closed orphans no longer abort verify; ticket bodies required
+  and readable for junior devs/PMs (spec §13.4); `init.sh` installs IA
+  modules; classify skips folder READMEs under plans/status/adr.
+
 ## 0.12.1 — 2026-07-21
+
 
 - Dirty close syncs fields first: the dispatcher now pushes an `update`
   before the `close` verb when a closing item's hash is dirty, so remote
