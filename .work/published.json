@@ -41,10 +41,11 @@
     ],
     "canonical_key": "guide/cli-reference",
     "doc_type": "guide",
-    "render_hash": "b0a33a3a7466",
-    "rev": "43ea3f3",
+    "page_id": "CLI-Reference",
+    "render_hash": "c4bcb2304d74",
+    "rev": "0c2de34",
     "source": "docs/user_guide/cli-reference.md",
-    "source_hash": "199d33e54955",
+    "source_hash": "e31a3823b23a",
     "title": "WikiTicket SDD \u2014 CLI Reference",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/CLI-Reference",
@@ -166,9 +167,11 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Decisions"
   },
   "index/releases": {
-    "render_hash": "363c878dba8d",
+    "page_id": "Index-Releases",
+    "render_hash": "598cdf7523c1",
+    "rev": "0c2de34",
     "source": "docs/.index/rendered/releases.md",
-    "source_hash": "363c878dba8d",
+    "source_hash": "598cdf7523c1",
     "title": "Releases Index",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Releases"
   },
@@ -180,9 +183,11 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Status"
   },
   "index/traceability": {
-    "render_hash": "f10dda8c312b",
+    "page_id": "Index-Traceability",
+    "render_hash": "eba58241217a",
+    "rev": "0c2de34",
     "source": "docs/.index/rendered/traceability.md",
-    "source_hash": "f10dda8c312b",
+    "source_hash": "eba58241217a",
     "title": "Traceability Index",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Traceability"
   },
@@ -378,10 +383,11 @@
     ],
     "canonical_key": "guide/plugin-guide",
     "doc_type": "guide",
-    "render_hash": "0a39f8fe01de",
-    "rev": "330dbf1",
+    "page_id": "Plugin-Guide",
+    "render_hash": "e79d810f0b39",
+    "rev": "0c2de34",
     "source": "docs/user_guide/plugin-guide.md",
-    "source_hash": "4261e79529ff",
+    "source_hash": "aaa60680783f",
     "title": "WikiTicket SDD \u2014 Plugin Guide",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plugin-Guide",
@@ -390,10 +396,11 @@
   "roadmap": {
     "canonical_key": "roadmap",
     "doc_type": "roadmap",
-    "render_hash": "979e552f1526",
-    "rev": "ad14667",
+    "page_id": "Roadmap",
+    "render_hash": "b7776554d3aa",
+    "rev": "0c2de34",
     "source": "docs/roadmap.md",
-    "source_hash": "38e4ea3c4a60",
+    "source_hash": "09642f2bf2a2",
     "title": "Roadmap",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
@@ -436,6 +443,15 @@
     "truth_state": "snapshot",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-21_v0.12.1-release",
     "wiki_key": "roadmap-snapshot/2026-07-21_v0.12.1-release"
+  },
+  "roadmap-snapshot/2026-07-23_v0.13.0-release": {
+    "page_id": "Roadmap-2026-07-23_v0.13.0-release",
+    "render_hash": "7121cb07743f",
+    "rev": "0c2de34",
+    "source": "docs/roadmap/2026-07-23_v0.13.0-release.md",
+    "source_hash": "31342778a995",
+    "title": "Roadmap 2026 07 23_v0.13.0 release",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-23_v0.13.0-release"
   },
   "roadmap/2026-07-18_v0.2-roadmap": {
     "aliases": [
@@ -542,6 +558,15 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-19_v0.9.0-release",
     "wiki_key": "roadmap/2026-07-19_v0.9.0-release"
   },
+  "sidebar": {
+    "page_id": "_Sidebar",
+    "render_hash": "a6e4892b756e",
+    "rev": "0c2de34",
+    "source": "docs/.index/rendered/_Sidebar.md",
+    "source_hash": "a6e4892b756e",
+    "title": "_Sidebar",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/_Sidebar"
+  },
   "spec": {
     "canonical_key": "spec",
     "doc_type": "guide",
@@ -596,10 +621,11 @@
     ],
     "canonical_key": "guide/user-guide",
     "doc_type": "guide",
-    "render_hash": "098225362375",
-    "rev": "330dbf1",
+    "page_id": "User-Guide",
+    "render_hash": "e47c664f9379",
+    "rev": "0c2de34",
     "source": "docs/user_guide/user-guide.md",
-    "source_hash": "949a187bb277",
+    "source_hash": "6bf92583a376",
     "title": "WikiTicket SDD \u2014 User Guide",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/User-Guide",
