@@ -91,13 +91,15 @@ Skills are the judgment layer: the model decides *when*, the deterministic
 
 | Skill | What it does |
 |---|---|
-| `plan-capture` | Turns an approved plan into a frozen plan doc plus tracked items (epic + tasks), renders the roadmap, commits together |
+| `plan-capture` | Turns an approved plan into a frozen plan doc plus tracked items (epic + tasks), renders the roadmap, runs `ia-index`, commits together |
 | `work-track` | Runs the right `worklog` command for create/update/close; enforces "record unplanned work BEFORE doing it" and sets `level`/`kind`/`milestone` |
 | `plan-next` | Read-only "what should we do next?": folds the log, filters open unblocked items, ranks by priority and epic |
-| `ticket-sync` | Runs `worklog adapter check` + `worklog sync` (dispatcher owns the invariants) and reads back the drift report |
-| `wiki-publish` | Publishes the configured docs to the team's wiki with the `.work/published.json` ledger, whatever the system (GitHub/GitLab/ADO/Confluence) |
+| `ticket-sync` | Runs `worklog adapter check` + `worklog sync` (dispatcher owns the invariants) and reads back the drift report; bodies from `ticket-body` |
+| `issue-description` | Durable ticket prose: compose via `worklog ticket-body` (summary, plan/epic context, traceability); enrich source with `update --body` / `link-pr` |
+| `pr-description` | Durable PR prose for the change set (pairs with green-gates merge flow) |
+| `wiki-publish` | Publishes via `docs/.index/publish-manifest.json` when present (Home, Sidebar, indexes, banners) and the `.work/published.json` ledger; strips YAML frontmatter for GitHub Wiki |
 | `status-report` | Generates and publishes frozen daily/weekly/timecard reports via `worklog status` |
-| `release` | Cuts a versioned release: stamp the changelog, snapshot the roadmap, tag, platform release, publish, sync |
+| `release` | Cuts a versioned release: stamp the changelog, snapshot the roadmap, tag, platform release, publish, sync; refreshes indexes |
 | `design-docs` | Generates/syncs the design doc + code walkthrough pair under `docs/designs/`: frozen dated copies per release, live `current` copies; runs in background agents at release time |
 | `merge-green` | Merges PRs only when every quality gate is green — polls every 5 minutes via `merge-when-green.sh`, never bypasses |
 | `classify` | Flag-gated classifier: sweeps a conversation for untracked work, propose-only into `.work/suggestions.jsonl` — never the event log |

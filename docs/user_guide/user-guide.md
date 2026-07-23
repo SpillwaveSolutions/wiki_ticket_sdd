@@ -289,6 +289,38 @@ release skill spawns background agents to regenerate them and refresh the user
 guide and README. The `release.sync_docs` list in `.work/config.yml` is the
 opt-in/out: what's listed gets synced at release, what isn't doesn't.
 
+## Information architecture & content model
+
+Storage is organized by how docs are produced; **navigation is a generated
+reader plane on top** (plugin 0.13.0, plan
+`docs/plans/2026-07-22-ia-content-model.md`). Paths under `docs/` do not
+move. What is added:
+
+| Idea | Meaning |
+|---|---|
+| `wiki_key` | Stable logical identity for a doc (the same key the publish ledger uses). Path, title, and wiki page name can change; the key does not. |
+| `truth_state` | What kind of truth the page is for a reader: `current`, `snapshot`, `superseded`, or `archived`. Orthogonal to lifecycle `status` on ADRs/plans. |
+| Doc types | Unified frontmatter via `schema/doc.schema.json` — plans, roadmap, snapshots, status, design, ADR, guide, and related types share required fields (`wiki_key`, `doc_type`, `truth_state`, …). Work items use a separate entity schema. |
+| Sidecars | Frozen docs are never rewritten to add metadata. `ia-normalize` writes `docs/.index/<wiki_key>.yml` sidecars instead. Live docs (`roadmap.md`, `current_*` designs) may get in-place frontmatter. |
+| Reader plane | `worklog ia-render` generates Home, Sidebar, and indexes (Decisions, Releases, Status archive, Traceability) under `docs/.index/rendered/`, plus `publish-manifest.json`. |
+| Traceability | `worklog ia-graph` builds a typed-edge graph; `link-pr` records PR/commit edges; `trace-check` reports closed items missing plan/ticket/PR links (warn by default, `--strict` pre-release). |
+
+Day-to-day: after plan-capture or a release doc set change, run
+`bin/worklog ia-index` (normalize → inventory → render). Wiki publish
+reads the **publish manifest**, not a hand-curated page list: each entry
+has `source`, `page_name`, and either publish-as-is or doc-plus-banner
+(banners are applied at publish time so frozen sources stay frozen). For
+GitHub Wiki, frontmatter is stripped in the wiki copy only.
+
+```bash
+bin/worklog ia-index                 # refresh inventory + Home/Sidebar/indexes
+bin/worklog ia-graph                 # rebuild traceability graph
+bin/worklog link-pr <ulid> --pr 104  # attach code evidence
+bin/worklog trace-check              # unlinked-evidence report
+```
+
+Full command flags: [CLI Reference](cli-reference.md#information-architecture-ia-commands).
+
 ## System-agnostic edges: your tracker, your wiki
 
 `.work/config.yml` names your team's systems:
@@ -308,10 +340,14 @@ If the tooling isn't installed, the agent researches it at runtime and, when
 a step needs a human (e.g. creating a GitHub wiki's first page in the web
 UI), it says so. The wiki-publish skill keeps a ledger in
 `.work/published.json` so republishing updates pages instead of duplicating
-them. Per-system guidance (GitHub, GitLab, ADO, Confluence) lives in the
-wiki-publish skill itself; the ledger shape is identical everywhere — only
-how each system fills `url`/`rev`/`page_id` differs. Missing tooling
-degrades to local-only; it never fails a command.
+them. When `docs/.index/publish-manifest.json` exists (from `ia-render`),
+that file **is** the publish set — including generated Home/Sidebar and
+indexes — and ledger skip uses `render_hash` so a frozen page can still
+republish when only its banner changed. Per-system guidance (GitHub,
+GitLab, ADO, Confluence) lives in the wiki-publish skill itself; the ledger
+shape is identical everywhere — only how each system fills
+`url`/`rev`/`page_id` differs. Missing tooling degrades to local-only; it
+never fails a command.
 
 ## Sync in depth
 
@@ -327,6 +363,12 @@ drift report — counts plus anything a human should see (conflicts,
 unsupported fields, deferred items). That report is the sync's voice; read
 it. Conflicts it detects are resolved with
 `bin/worklog resolve <item> --field <f> --take local|remote`.
+
+Remote ticket **bodies** are composed from the local source via
+`bin/worklog ticket-body <ulid>` (issue-description skill): summary,
+epic/plan context, milestone, and traceability edges. Enrich items with
+`worklog update --body "…"` and `worklog link-pr` rather than editing only
+the remote description.
 
 ## The classifier (off by default)
 

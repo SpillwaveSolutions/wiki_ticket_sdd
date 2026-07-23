@@ -31,6 +31,12 @@ of stuff last week and nobody knows what."
 - **Design docs and code walkthroughs, generated from the actual code** at
   every release: frozen per-release copies plus always-current versions in
   `docs/designs/`, published to the wiki.
+- **Information architecture & content model.** Stable `wiki_key` identity,
+  `truth_state` (current vs snapshot/superseded), a generated reader plane
+  (Home, Sidebar, Decisions/Releases/Status/Traceability indexes), and a
+  typed-edge graph (`worklog ia-index`, `ia-graph`, `trace-check`,
+  `ticket-body`, `link-pr`). Wiki publish follows
+  `docs/.index/publish-manifest.json`.
 - **Syncs to the team's OWN systems** — wiki *and* tickets. Your work log
   publishes to whatever your team already uses.
 
@@ -144,15 +150,19 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 
 | Path | What |
 |---|---|
-| `.work/` | Append-only event log (`todo.jsonl`, `done.jsonl`) and `config.yml` |
+| `.work/` | Append-only event log (`todo.jsonl`, `done.jsonl`), `config.yml`, publish ledger |
 | `adapters/` | Ticket-sync adapters: shipped `fake` (CI double) and `github` (worked example), plus authoring rules |
-| `schema/` | JSON Schemas for the adapter contract (capabilities, adapter I/O) |
-| `bin/` | `worklog` CLI plus its Python modules (`fold.py`, `sync_dispatch.py`, `render_roadmap.py`, `plan_capture.py`, `ulid.py`) |
+| `schema/` | JSON Schemas: adapter contract, ADR, document IA (`doc.schema.json`), entity/item |
+| `bin/` | `worklog` CLI plus its Python modules (fold, sync, roadmap, plan capture, IA, …) |
 | `docs/plans/` | Captured plan documents (frontmatter links plans to items) |
 | `docs/status/` | Generated status reports |
 | `docs/roadmap.md` | Generated roadmap — do not edit |
+| `docs/adr/` | Architecture Decision Records |
+| `docs/designs/` | Current + frozen design docs and code walkthroughs |
+| `docs/.index/` | IA inventory, graph, publish manifest, sidecars, rendered Home/Sidebar/indexes |
+| `docs/user_guide/` | User guide, CLI reference, plugin guide |
 | `hooks/` | `pre-commit`, `pre-merge-commit`, `exit-plan-capture.sh` |
-| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) |
+| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.13.0** |
 | `tests/` | Unit and integration tests |
 
 ## Testing

@@ -61,10 +61,12 @@ Taxonomy rules are checked at write time
 
 ### update
 
-Change status, priority, title, kind, milestone, or labels on an open item.
+Change status, priority, title, kind, milestone, body, or labels on an open
+item.
 
 ```bash
 bin/worklog update 01J8X0M2QQ --status in_progress --kind bug --add-label urgent
+bin/worklog update 01J8X0M2QQ --body "What and why a junior dev/PM can read"
 ```
 
 | Flag | Values |
@@ -75,13 +77,15 @@ bin/worklog update 01J8X0M2QQ --status in_progress --kind bug --add-label urgent
 | `--title` | new title |
 | `--kind` | `feature` `bug` `ops` `triage` |
 | `--milestone <m>` | free string |
+| `--body` | human-readable description (what/why; no ULIDs — spec §13.4) |
 | `--add-label a,b` / `--del-label a,b` | comma-separated |
 
 At least one change flag is required. `--kind`/`--milestone` are validated
 against the item's current level with the same taxonomy rules (and error
 messages) as `add` — you cannot update an epic to `kind:bug` or put a
 milestone on it. `--status` on a closed item is refused — it would leave
-the stale resolution behind; use `reopen`.
+the stale resolution behind; use `reopen`. `--body` is the durable prose
+source that `ticket-body` and ticket-sync push to the remote tracker.
 
 ### close
 
@@ -328,6 +332,119 @@ Compact the event log per spec §7, verifying `fold(new) == fold(old)`
 before writing. Requires `--yes`. Meant for CI (a nightly job on the main
 branch), not day-to-day use — compaction is also what physically migrates
 old `type` events to `level`/`kind`.
+
+## Information architecture (IA) commands
+
+These implement the IA & content model (plan
+`docs/plans/2026-07-22-ia-content-model.md`, plugin 0.13.0). Storage paths
+stay the same; the commands add a **reader plane** — stable `wiki_key`
+identity, `truth_state`, generated Home/Sidebar/indexes, a publish
+manifest, and a typed-edge traceability graph. Concepts are covered in
+the [User Guide](user-guide.md#information-architecture--content-model).
+
+### wiki-key
+
+Print the stable `wiki_key` for a document path (legacy keys are seeded
+from the publish ledger; new docs use the §5.5 derivation rules).
+
+```bash
+bin/worklog wiki-key docs/plans/2026-07-22-ia-content-model.md
+```
+
+`-v` / `--verbose` adds derivation detail.
+
+### ia-normalize
+
+Backfill `wiki_key` + `truth_state`: **sidecars** under `docs/.index/` for
+frozen docs (never edits the frozen file), **in-place frontmatter** for
+sanctioned-live docs, and self-description on the publish ledger.
+Idempotent.
+
+```bash
+bin/worklog ia-normalize
+bin/worklog ia-normalize --check   # report pending normalizations only
+```
+
+### ia-inventory
+
+Generate `docs/.index/_inventory.json` — one metadata record per doc
+(`wiki_key`, `doc_type`, `truth_state`, relationships).
+
+```bash
+bin/worklog ia-inventory
+bin/worklog ia-inventory --check   # validate + freshness only
+```
+
+### ia-render / ia-manifest
+
+Render the reader plane into `docs/.index/rendered/` (Home, Sidebar,
+Decisions / Releases / Status / Traceability indexes) plus
+`publish-manifest.json` and `aliases.json`. Deterministic.
+`ia-manifest` is an alias of `ia-render`.
+
+```bash
+bin/worklog ia-render
+bin/worklog ia-render --check      # report stale files instead of writing
+```
+
+The wiki-publish skill consumes `publish-manifest.json`: each page has a
+`source`, `page_name`, and either `render: as-is` or `render: doc+banner`
+(banner prepended at publish time, never written into frozen sources). For
+GitHub Wiki, YAML frontmatter is stripped in the wiki copy so Gollum does
+not show the `---` block.
+
+### ia-index
+
+Convenience wrapper: `ia-normalize` → `ia-inventory` → `ia-render`. Run
+after plan-capture, release, or any doc set change that should refresh
+navigation.
+
+```bash
+bin/worklog ia-index
+```
+
+### ia-graph
+
+Build `docs/.index/_graph.json` — the typed-edge traceability graph
+(plan → item → ticket → PR/commit → release, plus ADR/design edges).
+
+```bash
+bin/worklog ia-graph
+bin/worklog ia-graph --seed   # propose decides/implements edges into
+                             # .work/suggestions.jsonl (propose-only)
+```
+
+### link-pr
+
+Record a PR or commit code edge on an item as a **sidecar overlay** (the
+event log still owns item state). Prefer this over hand-editing richness
+only on the remote ticket.
+
+```bash
+bin/worklog link-pr 01J8X0M2QQ --pr 104
+bin/worklog link-pr 01J8X0M2QQ --commit abcdef1
+```
+
+### ticket-body
+
+Print the rich issue body for an item — summary, epic/plan/milestone
+context, and traceability — for ticket-sync / the issue-description skill
+to push. Enrich the **source** (`update --body`, `link-pr`, relationships)
+and let sync carry it out.
+
+```bash
+bin/worklog ticket-body 01J8X0M2QQ
+```
+
+### trace-check
+
+Unlinked-evidence report: closed items missing plan / ticket / PR links.
+Warns by default; `--strict` exits 1 (use pre-release).
+
+```bash
+bin/worklog trace-check
+bin/worklog trace-check --strict
+```
 
 ## Git hooks
 
