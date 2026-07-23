@@ -2715,6 +2715,11 @@
    "status": "todo",
    "title": "ia.classify treats README.md inside docs/plans|status|adr dirs as a doc of that type \u2014 generic repos with folder READMEs fail inventory"
   },
+  "item/01KY69K4ZJMYJ1HWMWXMQ4J7BA": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Add MIT LICENSE (repo was public with no license)"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",

@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Add MIT LICENSE (repo was public with no license)
+`01KY69K4ZJMYJ1HWMWXMQ4J7BA` · status: done
+
 ### ia.classify treats README.md inside docs/plans|status|adr dirs as a doc of that type — generic repos with folder READMEs fail inventory
 `01KY6037BN94086PR1QP0CM7XC` · status: todo
 
