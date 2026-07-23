@@ -568,3 +568,4 @@
 {"actor":"richardhightower","ev":"01KY8KQFCTXX1D2KA9GMA4R2Z2","item":"01KY8KQ8WW4A4RJ07YC4QVE7HB","op":"update","set":{"status":"in_progress"},"ts":"2026-07-23T23:07:19Z"}
 {"actor":"richardhightower","ev":"01KY8KQFJ61S8ZB7YV026BX2FK","item":"01KY8KQ923Q5DMVDACGK2S4EHD","op":"update","set":{"status":"in_progress"},"ts":"2026-07-23T23:07:19Z"}
 {"actor":"richardhightower","ev":"01KY8KX66DYEJVS25711906V71","item":"01KY8KQ923Q5DMVDACGK2S4EHD","op":"close","set":{"resolution":"CHANGELOG 0.13.0 section written from git history (IA wave, skills, fixes); UI epic excluded as moved.","status":"done"},"ts":"2026-07-23T23:10:26Z"}
+{"actor":"richardhightower","ev":"01KY8M7XBR7VGV01X1BG424W6F","item":"01KY8KQ8WW4A4RJ07YC4QVE7HB","op":"close","set":{"resolution":"Tagged v0.13.0 on PR #122 merge; GitHub release published; residual historical trace gaps reported in PR body.","status":"done"},"ts":"2026-07-23T23:16:17Z"}
