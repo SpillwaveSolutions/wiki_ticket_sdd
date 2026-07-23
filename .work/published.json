@@ -124,32 +124,48 @@
     "wiki_key": "design/2026-07-21_v0.12.1-release-design-doc"
   },
   "design/2026-07-23_v0.13.0-release-code-walkthrough": {
+    "canonical_key": "design/2026-07-23_v0.13.0-release-code-walkthrough",
+    "doc_type": "design",
     "page_id": "Code-Walkthrough-2026-07-23_v0.13.0-release",
     "render_hash": "e3d27687b1f9",
     "source": "docs/designs/2026-07-23_v0.13.0-release_code_walkthrough.md",
     "source_hash": "e68c23055100",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-07-23_v0.13.0-release"
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-07-23_v0.13.0-release",
+    "wiki_key": "design/2026-07-23_v0.13.0-release-code-walkthrough"
   },
   "design/2026-07-23_v0.13.0-release-design-doc": {
+    "canonical_key": "design/2026-07-23_v0.13.0-release-design-doc",
+    "doc_type": "design",
     "page_id": "Design-Doc-2026-07-23_v0.13.0-release",
     "render_hash": "4b017d26e740",
     "source": "docs/designs/2026-07-23_v0.13.0-release_design_doc.md",
     "source_hash": "93e578c8e4c7",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-07-23_v0.13.0-release"
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-07-23_v0.13.0-release",
+    "wiki_key": "design/2026-07-23_v0.13.0-release-design-doc"
   },
   "design/current-code-walkthrough": {
+    "canonical_key": "design/current-code-walkthrough",
+    "doc_type": "design",
     "page_id": "Code-Walkthrough",
     "render_hash": "23722d5912e3",
     "source": "docs/designs/current_code_walkthrough.md",
     "source_hash": "b33e3d2d16eb",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough"
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough",
+    "wiki_key": "design/current-code-walkthrough"
   },
   "design/current-design-doc": {
+    "canonical_key": "design/current-design-doc",
+    "doc_type": "design",
     "page_id": "Design-Doc",
     "render_hash": "9a737c926806",
     "source": "docs/designs/current_design_doc.md",
     "source_hash": "4a5d0f1bcbb2",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc"
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc",
+    "wiki_key": "design/current-design-doc"
   },
   "home": {
     "canonical_key": "home",
@@ -172,11 +188,9 @@
   },
   "index/releases": {
     "page_id": "Index-Releases",
-    "render_hash": "598cdf7523c1",
-    "rev": "0c2de34",
+    "render_hash": "909812261196",
     "source": "docs/.index/rendered/releases.md",
-    "source_hash": "598cdf7523c1",
-    "title": "Releases Index",
+    "source_hash": "909812261196",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Releases"
   },
   "index/status": {
