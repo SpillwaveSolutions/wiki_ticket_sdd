@@ -7,7 +7,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.13.0
 
 ### Cut v0.13.0 release
-`01KY8KQ8WW4A4RJ07YC4QVE7HB` · status: in_progress
+`01KY8KQ8WW4A4RJ07YC4QVE7HB` · status: done
 - targets: release/v0.13.0
 
 ### Add MIT LICENSE (repo was public with no license)

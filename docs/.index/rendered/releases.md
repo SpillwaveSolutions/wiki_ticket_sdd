@@ -5,6 +5,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 ## v0.13.0 — 2026-07-23
 
 - Roadmap snapshot: [[Roadmap-2026-07-23_v0.13.0-release]]
+- Shipped: Cut v0.13.0 release
 - Shipped: Backfill missing 0.13.0 changelog entries (process gap)
 
 ## v0.12.1 — 2026-07-21
