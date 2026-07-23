@@ -2,6 +2,14 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Backfill missing 0.13.0 changelog entries (process gap)
+`01KY8KQ923Q5DMVDACGK2S4EHD` · status: done
+- targets: release/v0.13.0
+
+### Cut v0.13.0 release
+`01KY8KQ8WW4A4RJ07YC4QVE7HB` · status: in_progress
+- targets: release/v0.13.0
+
 ### Add MIT LICENSE (repo was public with no license)
 `01KY69K4ZJMYJ1HWMWXMQ4J7BA` · status: done
 
@@ -77,19 +85,23 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Schema boundary: split doc.schema.json (documents) from entity schema (items, releases, code-changes) — defer until a second graph entity needs validation
 `01KY5QV5G05V77TKESCJVY62S3` · status: done
+- lands-in: pr/112
 - references: [github#111](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/111)
 
 ### Add schema drift test: schema/doc.schema.json must stay equivalent to bin/ia.py validator constants
 `01KY5QJAY8C8G5C4FEBMRFKM51` · status: done
+- lands-in: pr/112
 - references: [github#110](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/110)
 
 ### Repair frozen-plan drift: restore grok-compat-and-mermaid-viz to published version, move background-subagent rule to amendment doc
 `01KY5QJARJ0S9QHGRPAV8SFV9H` · status: done
+- lands-in: pr/112
 - references: [github#109](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/109)
 - produced-by: [[Plan-grok-viz-background-execution]]
 
 ### pre-commit hook pollutes worktree with bin/__pycache__ after git add — merge aborts on tracked-vs-untracked pyc collision
 `01KY5P9V0CMM86G43HH4Q28ZDD` · status: done
+- lands-in: pr/104
 - references: [github#107](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/107)
 
 ### Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config
@@ -106,23 +118,28 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### GitHub Wiki shows raw YAML frontmatter on published pages — strip at publish time
 `01KY5JB9F9XKKD1RNS66J6DXHZ` · status: done
+- lands-in: pr/102
 
 ### Compaction aborts on closed orphan item — snapshot must not inject taxonomy defaults
 `01KY5HW7KSBAYS1RE95ZT8BYM4` · status: done
+- lands-in: pr/103
 - references: [github#101](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/101)
 
 ### Tickets unreadable: no junior-dev/PM description — add --body to add/update, plan-capture task descriptions, skill rule, backfill open items
 `01KY5HGKCBKJA5A3ZJGMPASP3X` · status: done
+- lands-in: pr/102
 
 ### Phase 4: ia-graph typed-edge taxonomy + link-pr + trace-check + Traceability Index; propose-only edge seeding via suggestions.jsonl
 `01KY5G9ZW0Z6JFMVTAFC54RM36` · status: done
 - belongs-to: IA & content model (supersedes wiki-information-architecture)
+- lands-in: pr/104
 - references: [github#100](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/100)
 - produced-by: [[Plan-ia-content-model]]
 
 ### Phase 2: worklog ia-render + ia-manifest — generated Home, Sidebar, publish-time truth banners in docs/.index/rendered/
 `01KY5G9ZW0X5F3K7KHP1SXFM3Q` · status: done
 - belongs-to: IA & content model (supersedes wiki-information-architecture)
+- lands-in: pr/104
 - references: [github#99](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/99)
 - produced-by: [[Plan-ia-content-model]]
 
@@ -135,24 +152,28 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Phase 1: CI gates — wiki_key present/unique, schema-valid frontmatter (warn one cycle, then hard)
 `01KY5G9ZW0PNKDDEK5TM8GS2J6` · status: done
 - belongs-to: IA & content model (supersedes wiki-information-architecture)
+- lands-in: pr/104
 - references: [github#97](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/97)
 - produced-by: [[Plan-ia-content-model]]
 
 ### Phase 2: extend wiki-publish to consume publish-manifest.json; replace hand-maintained wiki-home.md with generated Home
 `01KY5G9ZW0PEZK9PTM3NG0PYX7` · status: done
 - belongs-to: IA & content model (supersedes wiki-information-architecture)
+- lands-in: pr/104
 - references: [github#96](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/96)
 - produced-by: [[Plan-ia-content-model]]
 
 ### Phase 0: schema/doc.schema.json unified frontmatter schema + stdlib validator (adr.schema.json pattern)
 `01KY5G9ZW0PBXTBKRJJ70QHR5P` · status: done
 - belongs-to: IA & content model (supersedes wiki-information-architecture)
+- lands-in: pr/104
 - references: [github#95](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/95)
 - produced-by: [[Plan-ia-content-model]]
 
 ### Phase 3: generated indexes — Decisions, Releases, Status Archive; wire ia-index into release + plan-capture skills
 `01KY5G9ZW0MQD9335S641DC7ZG` · status: done
 - belongs-to: IA & content model (supersedes wiki-information-architecture)
+- lands-in: pr/104
 - references: [github#94](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/94)
 - produced-by: [[Plan-ia-content-model]]
 
@@ -173,12 +194,14 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Phase 1: worklog ia-normalize — sidecars for frozen docs, in-place for sanctioned-live; backfill wiki_key (ledger-seeded) + truth_state
 `01KY5G9ZW0EYQ5T83RP46Z7952` · status: done
 - belongs-to: IA & content model (supersedes wiki-information-architecture)
+- lands-in: pr/104
 - references: [github#92](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/92)
 - produced-by: [[Plan-ia-content-model]]
 
 ### Phase 0: worklog wiki-key + worklog ia-inventory (read-only) + migration record docs/migrations/0002-ia-content-model.md
 `01KY5G9ZW025TRGTHFAFSVEXSX` · status: done
 - belongs-to: IA & content model (supersedes wiki-information-architecture)
+- lands-in: pr/104
 - references: [github#91](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/91)
 - produced-by: [[Plan-ia-content-model]]
 
@@ -261,7 +284,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 `01KY5D79CY0DPSDAQ09QZFW694` · status: done
 
 ### Scrub inputs/ from main history (drop d538d15 + revert f97626a via rebase, force-with-lease) and delete local copies
-`01KY2KHHF43KAZ54F57BQW71TD` · status: todo
+`01KY2KHHF43KAZ54F57BQW71TD` · status: done
 - references: [github#79](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/79)
 
 ### Cut v0.12.1: stamp CHANGELOG, snapshot roadmap, tag, GitHub release, publish

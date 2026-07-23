@@ -802,6 +802,11 @@
   },
   {
    "from": "item/01KY5G9ZW025TRGTHFAFSVEXSX",
+   "to": "pr/104",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KY5G9ZW025TRGTHFAFSVEXSX",
    "to": "ticket/github#91",
    "type": "references"
   },
@@ -809,6 +814,11 @@
    "from": "item/01KY5G9ZW0EYQ5T83RP46Z7952",
    "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW0EYQ5T83RP46Z7952",
+   "to": "pr/104",
+   "type": "lands-in"
   },
   {
    "from": "item/01KY5G9ZW0EYQ5T83RP46Z7952",
@@ -827,6 +837,11 @@
   },
   {
    "from": "item/01KY5G9ZW0MQD9335S641DC7ZG",
+   "to": "pr/104",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KY5G9ZW0MQD9335S641DC7ZG",
    "to": "ticket/github#94",
    "type": "references"
   },
@@ -834,6 +849,11 @@
    "from": "item/01KY5G9ZW0PBXTBKRJJ70QHR5P",
    "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW0PBXTBKRJJ70QHR5P",
+   "to": "pr/104",
+   "type": "lands-in"
   },
   {
    "from": "item/01KY5G9ZW0PBXTBKRJJ70QHR5P",
@@ -847,6 +867,11 @@
   },
   {
    "from": "item/01KY5G9ZW0PEZK9PTM3NG0PYX7",
+   "to": "pr/104",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KY5G9ZW0PEZK9PTM3NG0PYX7",
    "to": "ticket/github#96",
    "type": "references"
   },
@@ -854,6 +879,11 @@
    "from": "item/01KY5G9ZW0PNKDDEK5TM8GS2J6",
    "to": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KY5G9ZW0PNKDDEK5TM8GS2J6",
+   "to": "pr/104",
+   "type": "lands-in"
   },
   {
    "from": "item/01KY5G9ZW0PNKDDEK5TM8GS2J6",
@@ -877,6 +907,11 @@
   },
   {
    "from": "item/01KY5G9ZW0X5F3K7KHP1SXFM3Q",
+   "to": "pr/104",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KY5G9ZW0X5F3K7KHP1SXFM3Q",
    "to": "ticket/github#99",
    "type": "references"
   },
@@ -887,13 +922,33 @@
   },
   {
    "from": "item/01KY5G9ZW0Z6JFMVTAFC54RM36",
+   "to": "pr/104",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KY5G9ZW0Z6JFMVTAFC54RM36",
    "to": "ticket/github#100",
    "type": "references"
+  },
+  {
+   "from": "item/01KY5HGKCBKJA5A3ZJGMPASP3X",
+   "to": "pr/102",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KY5HW7KSBAYS1RE95ZT8BYM4",
+   "to": "pr/103",
+   "type": "lands-in"
   },
   {
    "from": "item/01KY5HW7KSBAYS1RE95ZT8BYM4",
    "to": "ticket/github#101",
    "type": "references"
+  },
+  {
+   "from": "item/01KY5JB9F9XKKD1RNS66J6DXHZ",
+   "to": "pr/102",
+   "type": "lands-in"
   },
   {
    "from": "item/01KY5N447CK55EXFHTQGWA9JZ9",
@@ -912,8 +967,18 @@
   },
   {
    "from": "item/01KY5P9V0CMM86G43HH4Q28ZDD",
+   "to": "pr/104",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KY5P9V0CMM86G43HH4Q28ZDD",
    "to": "ticket/github#107",
    "type": "references"
+  },
+  {
+   "from": "item/01KY5QJARJ0S9QHGRPAV8SFV9H",
+   "to": "pr/112",
+   "type": "lands-in"
   },
   {
    "from": "item/01KY5QJARJ0S9QHGRPAV8SFV9H",
@@ -922,8 +987,18 @@
   },
   {
    "from": "item/01KY5QJAY8C8G5C4FEBMRFKM51",
+   "to": "pr/112",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KY5QJAY8C8G5C4FEBMRFKM51",
    "to": "ticket/github#110",
    "type": "references"
+  },
+  {
+   "from": "item/01KY5QV5G05V77TKESCJVY62S3",
+   "to": "pr/112",
+   "type": "lands-in"
   },
   {
    "from": "item/01KY5QV5G05V77TKESCJVY62S3",
@@ -1014,6 +1089,16 @@
    "from": "item/01KY5VY0TEWBMZK5W6YJN5FQ9D",
    "to": "ticket/github#117",
    "type": "references"
+  },
+  {
+   "from": "item/01KY8KQ8WW4A4RJ07YC4QVE7HB",
+   "to": "release/v0.13.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KY8KQ923Q5DMVDACGK2S4EHD",
+   "to": "release/v0.13.0",
+   "type": "targets"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -1713,6 +1798,21 @@
   {
    "from": "roadmap-snapshot/2026-07-21_v0.12.1-release",
    "to": "release/v0.12.1",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-23_v0.13.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-23_v0.13.0-release",
+   "to": "roadmap-snapshot/2026-07-21_v0.12.1-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-23_v0.13.0-release",
+   "to": "release/v0.13.0",
    "type": "targets"
   },
   {
@@ -2492,7 +2592,7 @@
   },
   "item/01KY2KHHF43KAZ54F57BQW71TD": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Scrub inputs/ from main history (drop d538d15 + revert f97626a via rebase, force-with-lease) and delete local copies"
   },
   "item/01KY5D79CY0DPSDAQ09QZFW694": {
@@ -2720,6 +2820,16 @@
    "status": "done",
    "title": "Add MIT LICENSE (repo was public with no license)"
   },
+  "item/01KY8KQ8WW4A4RJ07YC4QVE7HB": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Cut v0.13.0 release"
+  },
+  "item/01KY8KQ923Q5DMVDACGK2S4EHD": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Backfill missing 0.13.0 changelog entries (process gap)"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -2810,6 +2920,18 @@
    "title": "WikiTicket SDD \u2014 Plugin Guide",
    "truth_state": "current"
   },
+  "pr/102": {
+   "doc_type": "pr"
+  },
+  "pr/103": {
+   "doc_type": "pr"
+  },
+  "pr/104": {
+   "doc_type": "pr"
+  },
+  "pr/112": {
+   "doc_type": "pr"
+  },
   "release/v0.10.0": {
    "doc_type": "release"
   },
@@ -2820,6 +2942,9 @@
    "doc_type": "release"
   },
   "release/v0.12.1": {
+   "doc_type": "release"
+  },
+  "release/v0.13.0": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
@@ -2858,6 +2983,12 @@
   "roadmap-snapshot/2026-07-21_v0.12.1-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-07-21_v0.12.1-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-23_v0.13.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-23_v0.13.0-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

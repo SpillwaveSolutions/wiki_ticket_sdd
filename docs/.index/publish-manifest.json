@@ -24,7 +24,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "363c878dba8d",
+   "render_hash": "aac7d5e95cc3",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "01bcc68f0393",
+   "render_hash": "f5e4465e67eb",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -348,11 +348,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-23T01:35:42Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-23T23:10:26Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "12a6005638ff",
+   "render_hash": "4d3a368c94ba",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -390,6 +390,17 @@
    "title": "Roadmap",
    "truth_state": "snapshot",
    "wiki_key": "roadmap-snapshot/2026-07-21_v0.12.1-release"
+  },
+  {
+   "banner": "> **Snapshot** of release v0.13.0 (2026-07-23) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-07-23_v0.13.0-release",
+   "render": "doc+banner",
+   "render_hash": "7121cb07743f",
+   "source": "docs/roadmap/2026-07-23_v0.13.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-07-23_v0.13.0-release"
   },
   {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
@@ -525,7 +536,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "386a39d44266",
+  "render_hash": "a6e4892b756e",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1
