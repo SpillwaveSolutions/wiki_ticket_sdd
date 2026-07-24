@@ -1126,6 +1126,61 @@
    "type": "targets"
   },
   {
+   "from": "item/01KYABYEQP3YCB9AVHRPCTCMRS",
+   "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQP9FDY8THDV79F324G",
+   "to": "item/01KYABYEQPK6PV87WNZXEYRB12",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPAFJM7WC3XZV6YY76",
+   "to": "item/01KYABYEQPK6PV87WNZXEYRB12",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPDS2VFQKQ7B6YXZVR",
+   "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPF8N2K26ENRKREE0W",
+   "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPK6PV87WNZXEYRB12",
+   "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPNK7HHH5CMAR2V1JG",
+   "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPP82DJEN19F43YRAE",
+   "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPRM8308SYFPR8X437",
+   "to": "item/01KYABYEQPK6PV87WNZXEYRB12",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPW8Q2RGGTNP71W88E",
+   "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPXZAAY0VWF6Z8TQ27",
+   "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
+   "type": "belongs-to"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -1349,6 +1404,66 @@
    "from": "plan/2026-07-22-wiki-ticket-ui-ia",
    "to": "plan/wiki-ticket-ui",
    "type": "supersedes"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQP3YCB9AVHRPCTCMRS",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQP9FDY8THDV79F324G",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQPAFJM7WC3XZV6YY76",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQPDS2VFQKQ7B6YXZVR",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQPF8N2K26ENRKREE0W",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQPK6PV87WNZXEYRB12",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQPNK7HHH5CMAR2V1JG",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQPP82DJEN19F43YRAE",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQPRM8308SYFPR8X437",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQPW8Q2RGGTNP71W88E",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-24-artifact-pages",
+   "to": "item/01KYABYEQPXZAAY0VWF6Z8TQ27",
+   "type": "produces"
   },
   {
    "from": "plan/design-docs-release-sync",
@@ -2867,6 +2982,81 @@
    "status": "done",
    "title": "Backfill missing 0.13.0 changelog entries (process gap)"
   },
+  "item/01KYA8MD": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "01KYA8MD"
+  },
+  "item/01KYA8MDY5HP9MC5KQMJX3BN84": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Give kind:ops release items a GitHub issue going forward"
+  },
+  "item/01KYA99TVCGX79HFNHN1DVT7Y6": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "close/update silently corrupt log when given an item-id prefix instead of the full ULID"
+  },
+  "item/01KYABYEQP3YCB9AVHRPCTCMRS": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Phase 0: add item_links() graph helper"
+  },
+  "item/01KYABYEQP8ANXGYPBCV2T20D8": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Extend IA to tickets, PRs, and releases (artifact pages)"
+  },
+  "item/01KYABYEQP9FDY8THDV79F324G": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "One-line summary derivation from body's first sentence (no cache)"
+  },
+  "item/01KYABYEQPAFJM7WC3XZV6YY76": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "`ia-ticket <ULID>` preview subcommand on `bin/worklog`"
+  },
+  "item/01KYABYEQPDS2VFQKQ7B6YXZVR": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Phase 4: regenerate all pages and confirm coverage gate holds"
+  },
+  "item/01KYABYEQPF8N2K26ENRKREE0W": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Phase 3: file PR live-metadata follow-up item"
+  },
+  "item/01KYABYEQPK6PV87WNZXEYRB12": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Phase 1: render ticket pages for all four levels"
+  },
+  "item/01KYABYEQPNK7HHH5CMAR2V1JG": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Phase 4: extend tests/test_ia.py for the new page shapes"
+  },
+  "item/01KYABYEQPP82DJEN19F43YRAE": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Phase 2: render release pages with graph-derived Change Log"
+  },
+  "item/01KYABYEQPRM8308SYFPR8X437": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Aggregate progress rollup for Story/Feature/Epic pages"
+  },
+  "item/01KYABYEQPW8Q2RGGTNP71W88E": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Phase 2: render PR pages"
+  },
+  "item/01KYABYEQPXZAAY0VWF6Z8TQ27": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Phase 0: add item/release page-name helpers and extend build_manifest()"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -2901,6 +3091,12 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-07-22-wiki-ticket-ui-ia.md",
    "title": "WikiTicket UI \u2014 IA-aware dashboard (supersedes wiki-ticket-ui)",
+   "truth_state": "current"
+  },
+  "plan/2026-07-24-artifact-pages": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-24-artifact-pages.md",
+   "title": "Extend IA to tickets, PRs, and releases (artifact pages)",
    "truth_state": "current"
   },
   "plan/design-docs-release-sync": {
