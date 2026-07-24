@@ -1246,9 +1246,24 @@
    "type": "references"
   },
   {
+   "from": "item/01KYAC0AC01R4C6W7YY1X8NVRV",
+   "to": "ticket/github#136",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYACFJA0SQSF4C83BJZXB5MY",
+   "to": "ticket/github#137",
+   "type": "references"
+  },
+  {
    "from": "item/01KYADGT9Q48EKJZVQQSH4HXWZ",
    "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYADGT9Q48EKJZVQQSH4HXWZ",
+   "to": "ticket/github#138",
+   "type": "references"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -3518,6 +3533,18 @@
   "ticket/github#135": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/135"
+  },
+  "ticket/github#136": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/136"
+  },
+  "ticket/github#137": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/137"
+  },
+  "ticket/github#138": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/138"
   },
   "ticket/github#14": {
    "doc_type": "ticket",

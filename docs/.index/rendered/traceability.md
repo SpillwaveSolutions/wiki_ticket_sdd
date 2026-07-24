@@ -5,12 +5,15 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### worklog pr-sync: fetch live PR metadata (files, review/CI status)
 `01KYADGT9Q48EKJZVQQSH4HXWZ` · status: todo
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- references: [github#138](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/138)
 
 ### banner() mislabels frozen 'current' plans as status reports
 `01KYACFJA0SQSF4C83BJZXB5MY` · status: todo
+- references: [github#137](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/137)
 
 ### Auto-draft the release CHANGELOG unreleased section from git log
 `01KYAC0AC01R4C6W7YY1X8NVRV` · status: todo
+- references: [github#136](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/136)
 
 ### Phase 0: add item/release page-name helpers and extend build_manifest()
 `01KYABYEQPXZAAY0VWF6Z8TQ27` · status: done
