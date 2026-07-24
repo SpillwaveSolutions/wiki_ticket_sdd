@@ -275,6 +275,18 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-ticket-ui-ia",
     "wiki_key": "plan/2026-07-22-wiki-ticket-ui-ia"
   },
+  "plan/2026-07-24-artifact-pages": {
+    "canonical_key": "plan/2026-07-24-artifact-pages",
+    "doc_type": "plan",
+    "render_hash": "cf57392e75ba",
+    "rev": "5213ddcaa6fdedbf171c469a1ab09344ec1f4c43",
+    "source": "docs/plans/2026-07-24-artifact-pages.md",
+    "source_hash": "87aae657edde",
+    "title": "Extend IA to tickets, PRs, and releases (artifact pages)",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-artifact-pages",
+    "wiki_key": "plan/2026-07-24-artifact-pages"
+  },
   "plan/design-docs-release-sync": {
     "aliases": [
       "plan/design-docs-release-sync"
@@ -582,10 +594,10 @@
   },
   "sidebar": {
     "page_id": "_Sidebar",
-    "render_hash": "a6e4892b756e",
-    "rev": "0c2de34",
+    "render_hash": "10b76d2926dc",
+    "rev": "5213ddcaa6fdedbf171c469a1ab09344ec1f4c43",
     "source": "docs/.index/rendered/_Sidebar.md",
-    "source_hash": "a6e4892b756e",
+    "source_hash": "10b76d2926dc",
     "title": "_Sidebar",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/_Sidebar"
   },
