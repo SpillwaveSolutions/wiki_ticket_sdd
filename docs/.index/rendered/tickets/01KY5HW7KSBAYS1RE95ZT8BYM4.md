@@ -6,7 +6,7 @@ Nightly log compaction has failed for three nights, so old events are not being 
 
 ## Linked PRs
 
-- PR #103
+- [[PR-103]]
 
 ## Related tickets
 

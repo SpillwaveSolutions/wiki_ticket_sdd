@@ -10,7 +10,7 @@ Generate the reader-facing wiki pages: a question-driven Home, a sidebar grouped
 
 ## Linked PRs
 
-- PR #104
+- [[PR-104]]
 
 ## Related tickets
 

@@ -10,7 +10,7 @@ Define one frontmatter schema that every doc type validates against, with per-ty
 
 ## Linked PRs
 
-- PR #104
+- [[PR-104]]
 
 ## Related tickets
 

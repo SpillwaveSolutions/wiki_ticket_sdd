@@ -15,7 +15,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 2: render PR pages
-`01KYABYEQPW8Q2RGGTNP71W88E` · status: todo
+`01KYABYEQPW8Q2RGGTNP71W88E` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
 - references: [github#134](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/134)
 - produced-by: [[Plan-artifact-pages]]
@@ -27,7 +27,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 2: render release pages with graph-derived Change Log
-`01KYABYEQPP82DJEN19F43YRAE` · status: todo
+`01KYABYEQPP82DJEN19F43YRAE` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
 - references: [github#132](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/132)
 - produced-by: [[Plan-artifact-pages]]

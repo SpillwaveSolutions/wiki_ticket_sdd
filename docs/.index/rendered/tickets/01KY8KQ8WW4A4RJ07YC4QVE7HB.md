@@ -6,7 +6,7 @@ Ship the IA & content model wave and related fixes as plugin 0.13.0: backfill ch
 
 ## Linked PRs
 
-- PR #122
+- [[PR-122]]
 
 ## Release
 

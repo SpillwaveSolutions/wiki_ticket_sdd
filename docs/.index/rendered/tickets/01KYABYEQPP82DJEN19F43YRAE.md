@@ -1,6 +1,6 @@
 # Phase 2: render release pages with graph-derived Change Log
 
-`01KYABYEQPP82DJEN19F43YRAE` · task/feature · **open**
+`01KYABYEQPP82DJEN19F43YRAE` · task/feature · **done**
 
 Add `render_release_page()` — Change Log section built from milestone-
 tagged closed items and their linked PRs (not a CHANGELOG.md parser),

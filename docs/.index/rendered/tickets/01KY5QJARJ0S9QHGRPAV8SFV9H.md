@@ -6,7 +6,7 @@ Repair frozen-plan drift: restore grok-compat-and-mermaid-viz to published versi
 
 ## Linked PRs
 
-- PR #112
+- [[PR-112]]
 
 ## Related tickets
 

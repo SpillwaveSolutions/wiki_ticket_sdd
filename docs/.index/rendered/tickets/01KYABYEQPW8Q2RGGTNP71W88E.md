@@ -1,6 +1,6 @@
 # Phase 2: render PR pages
 
-`01KYABYEQPW8Q2RGGTNP71W88E` · task/feature · **open**
+`01KYABYEQPW8Q2RGGTNP71W88E` · task/feature · **done**
 
 Add `render_pr_page()` — title/status, linked tickets via reverse
 lands-in edges, related release via targets; files-changed/test-review

@@ -10,7 +10,7 @@ The wiki publisher reads a generated manifest that says exactly which pages belo
 
 ## Linked PRs
 
-- PR #104
+- [[PR-104]]
 
 ## Related tickets
 

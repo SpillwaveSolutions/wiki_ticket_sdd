@@ -6,7 +6,7 @@ Add schema drift test: schema/doc.schema.json must stay equivalent to bin/ia.py 
 
 ## Linked PRs
 
-- PR #112
+- [[PR-112]]
 
 ## Related tickets
 

@@ -10,7 +10,7 @@ Add two read-only commands: one prints the stable identity key for any doc, the 
 
 ## Linked PRs
 
-- PR #104
+- [[PR-104]]
 
 ## Related tickets
 

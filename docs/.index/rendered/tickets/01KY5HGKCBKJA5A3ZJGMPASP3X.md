@@ -6,4 +6,4 @@ Synced tickets showed only an internal id instead of a human-readable descriptio
 
 ## Linked PRs
 
-- PR #102
+- [[PR-102]]

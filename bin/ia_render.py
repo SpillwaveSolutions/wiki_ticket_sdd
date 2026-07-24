@@ -73,6 +73,11 @@ def release_page_name(tag):
     return "Release-" + tag
 
 
+def pr_page_name(pr_num):
+    """Wiki page name for a PR page, e.g. 'PR-122'."""
+    return "PR-%s" % pr_num
+
+
 def banner(rec, by_key):
     """Reader-visible truth banner (§6.1), one blockquote line."""
     ts = rec["truth_state"]
@@ -385,7 +390,7 @@ def render_item_page(iid, items, fwd, back):
 
     if links["prs"]:
         lines += ["## Linked PRs", ""]
-        lines += ["- PR #%s" % pr_key.split("/", 1)[1]
+        lines += ["- [[%s]]" % pr_page_name(pr_key.split("/", 1)[1])
                  for pr_key in links["prs"]]
         lines += [""]
 
@@ -399,6 +404,139 @@ def render_item_page(iid, items, fwd, back):
         lines += ["## Related tickets", "",
                   "- [%s #%s](%s)" % (ext.get("system", "ticket"),
                                       ext.get("key", ""), ext["url"]), ""]
+
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def _release_tree(shipped_ids, items):
+    """Nested-list hierarchy of the items that shipped in a release —
+    roots (no parent among the shipped set) with their shipped descendants
+    indented beneath. A lighter-weight 'visual hierarchy' than a Mermaid
+    diagram; viz_mermaid.hierarchy() only covers OPEN items (a different,
+    unrelated use case: 'what's left'), so it isn't reused here."""
+    shipped = set(shipped_ids)
+    children_of = {}
+    for iid in shipped_ids:
+        pid = items[iid].get("parent")
+        if pid in shipped:
+            children_of.setdefault(pid, []).append(iid)
+    roots = sorted(iid for iid in shipped_ids if items[iid].get("parent") not in shipped)
+
+    def walk(iid, depth):
+        it = items[iid]
+        yield "%s- [[%s]] %s (%s)" % (
+            "  " * depth, item_page_name(iid), it.get("title", iid),
+            it.get("level", "?"))
+        for cid in sorted(children_of.get(iid, [])):
+            yield from walk(cid, depth + 1)
+
+    lines = []
+    for iid in roots:
+        lines.extend(walk(iid, 0))
+    return lines
+
+
+def render_release_page(tag, items, fwd, back):
+    """A release page (§ artifact-pages plan): Change Log and Related PRs/
+    Tickets are graph-derived from milestone-tagged closed items — not a
+    CHANGELOG.md parser (that file stays human-authored prose, untouched;
+    this is a separate, always-accurate, mechanical list)."""
+    shipped = sorted(iid for iid, it in items.items()
+                     if it.get("status") in CLOSED_STATUSES
+                     and it.get("milestone") == tag)
+    lines = ["# Release %s" % tag, "",
+             "`release/%s` · **shipped**" % tag, "",
+             "%d item(s) shipped." % len(shipped), ""]
+
+    if shipped:
+        lines += ["## Change Log", ""]
+        for iid in shipped:
+            it = items[iid]
+            ext = (it.get("external") or {}).get("key")
+            ref = " (#%s)" % ext if ext else ""
+            lines.append("- [[%s]] %s%s — %s" % (
+                item_page_name(iid), it.get("title", iid), ref,
+                one_line_summary(it)))
+        lines += [""]
+
+        lines += ["## Release Tree", ""]
+        lines += _release_tree(shipped, items) + [""]
+
+    all_prs, all_related, deps = set(), set(), set()
+    for iid in shipped:
+        links = ia_graph.item_links(iid, fwd, back)
+        all_prs.update(links["prs"])
+        for pid, _ in _upward_chain(iid, items, fwd, back):
+            all_related.add(pid)
+        for dep in items[iid].get("depends_on") or []:
+            deps.add(dep)
+    all_related -= set(shipped)
+
+    if all_prs:
+        lines += ["## Related PRs", ""]
+        lines += ["- [[%s]]" % pr_page_name(pr_key.split("/", 1)[1])
+                 for pr_key in sorted(all_prs)]
+        lines += [""]
+
+    if all_related:
+        lines += ["## Related Tickets", ""]
+        lines += ["- [[%s]] %s (%s)" % (
+            item_page_name(rid), items[rid].get("title", rid),
+            items[rid].get("level", "?")) for rid in sorted(all_related)]
+        lines += [""]
+
+    if deps:
+        lines += ["## Dependencies & Risks", ""]
+        lines += ["- depends on: [[%s]] %s" % (
+            item_page_name(d), items.get(d, {}).get("title", d))
+                 for d in sorted(deps)]
+        lines += [""]
+
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def render_pr_page(pr_num, items, fwd, back):
+    """A PR page (§ artifact-pages plan): linked tickets + related release
+    from existing graph edges; no live GitHub data exists anywhere in this
+    repo today (no `gh pr view` integration), so files-changed/review/CI
+    status render as 'not tracked' pending a separately-scoped follow-up."""
+    pr_key = "pr/%s" % pr_num
+    linked = sorted(frm.split("/", 1)[1] for typ, frm in back.get(pr_key, [])
+                    if typ == "delivers")
+    lines = ["# PR #%s" % pr_num, "",
+             "`%s` · status: **not tracked**" % pr_key, "",
+             "Changed files: not tracked. Test/Review status: not tracked "
+             "(see the deferred PR live-metadata sync item).", ""]
+
+    if linked:
+        lines += ["## Linked Tickets", ""]
+        for iid in linked:
+            it = items.get(iid)
+            if not it:
+                continue
+            lines.append("- [[%s]] %s — %s" % (
+                item_page_name(iid), it.get("title", iid), one_line_summary(it)))
+        lines += [""]
+
+        releases, epics = set(), set()
+        for iid in linked:
+            links = ia_graph.item_links(iid, fwd, back)
+            if links["release"]:
+                releases.add(links["release"])
+            chain = _upward_chain(iid, items, fwd, back)
+            if chain:
+                epics.add(chain[-1][0])  # root ancestor
+        if releases:
+            lines += ["## Related Releases", ""]
+            lines += ["- [[%s]]" % release_page_name(r.split("/", 1)[1])
+                     for r in sorted(releases)]
+            lines += [""]
+        if epics:
+            lines += ["## Traceability", ""]
+            lines += ["- back to: [[%s]] %s" % (
+                item_page_name(e), items.get(e, {}).get("title", e))
+                     for e in sorted(epics)]
+            lines += [""]
 
     return "\n".join(lines).rstrip() + "\n"
 
@@ -417,7 +555,9 @@ def _file_hash(path):
 def build_manifest(records, rendered, items=None):
     """The intended publish set (§10.2): every rendered page + every doc the
     default set publishes, each with its banner and render_hash. Also one
-    entry per work item once its ticket page exists in `rendered`."""
+    entry per work item/release/PR once its page exists in `rendered` --
+    keyed off the tickets/releases/prs filename prefix rather than three
+    separate loops, so a new entity type only needs a new prefix here."""
     pages = []
     for key, fname, pname, title in INDEX_PAGES:
         src = "%s/%s" % (RENDERED, fname)
@@ -425,18 +565,29 @@ def build_manifest(records, rendered, items=None):
                       "page_name": pname, "truth_state": "current",
                       "render": "as-is", "frozen": False,
                       "render_hash": _hash_bytes(rendered[fname].encode())})
-    for iid, it in sorted((items or {}).items()):
-        fname = "tickets/%s.md" % iid
-        if fname not in rendered:
+    items = items or {}
+    for fname in sorted(rendered):
+        if fname.startswith("tickets/"):
+            iid = fname[len("tickets/"):-3]
+            it = items.get(iid, {})
+            wiki_key, pname = "item/" + iid, item_page_name(iid)
+            title = it.get("title", iid)
+            ts = TICKET_BADGE.get(it.get("status"), it.get("status") or "?")
+        elif fname.startswith("releases/"):
+            tag = fname[len("releases/"):-3]
+            wiki_key, pname = "release/" + tag, release_page_name(tag)
+            title, ts = "Release %s" % tag, "shipped"
+        elif fname.startswith("prs/"):
+            num = fname[len("prs/"):-3]
+            wiki_key, pname = "pr/" + num, pr_page_name(num)
+            title, ts = "PR #%s" % num, "not tracked"
+        else:
             continue
-        pages.append({
-            "wiki_key": "item/" + iid,
-            "source": "%s/%s" % (RENDERED, fname),
-            "title": it.get("title", iid), "page_name": item_page_name(iid),
-            "truth_state": TICKET_BADGE.get(it.get("status"),
-                                            it.get("status") or "?"),
-            "render": "as-is", "frozen": False,
-            "render_hash": _hash_bytes(rendered[fname].encode())})
+        pages.append({"wiki_key": wiki_key,
+                      "source": "%s/%s" % (RENDERED, fname),
+                      "title": title, "page_name": pname,
+                      "truth_state": ts, "render": "as-is", "frozen": False,
+                      "render_hash": _hash_bytes(rendered[fname].encode())})
     for key in sorted(records):
         rec = records[key]
         if rec["doc_type"] == "guide" and key == "home":
@@ -480,6 +631,15 @@ def render_all():
     }
     for iid in fr.items:
         rendered["tickets/%s.md" % iid] = render_item_page(iid, fr.items, fwd, back)
+    for key, node in graph["nodes"].items():
+        if node.get("doc_type") == "release":
+            tag = key.split("/", 1)[1]
+            rendered["releases/%s.md" % tag] = render_release_page(
+                tag, fr.items, fwd, back)
+        elif node.get("doc_type") == "pr":
+            num = key.split("/", 1)[1]
+            rendered["prs/%s.md" % num] = render_pr_page(
+                num, fr.items, fwd, back)
     manifest = build_manifest(records, rendered, fr.items)
     aliases = build_aliases(records)
     return rendered, manifest, aliases, graph

@@ -6,4 +6,4 @@ Pages published to the GitHub wiki show the metadata block from the top of the s
 
 ## Linked PRs
 
-- PR #102
+- [[PR-102]]

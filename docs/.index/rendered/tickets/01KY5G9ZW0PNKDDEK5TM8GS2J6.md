@@ -10,7 +10,7 @@ CI checks that every doc has an identity key, no two docs share one, and frontma
 
 ## Linked PRs
 
-- PR #104
+- [[PR-104]]
 
 ## Related tickets
 

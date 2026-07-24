@@ -10,7 +10,7 @@ Build the traceability graph linking plans to work items to tickets, code change
 
 ## Linked PRs
 
-- PR #104
+- [[PR-104]]
 
 ## Related tickets
 

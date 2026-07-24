@@ -23,16 +23,16 @@ test, and a manifest-growth assertion to the existing test fixture
 classes — do not fork a new test file. (open)
 - [[Ticket-01KYABYEQPP82DJEN19F43YRAE]] Phase 2: render release pages with graph-derived Change Log — Add `render_release_page()` — Change Log section built from milestone-
 tagged closed items and their linked PRs (not a CHANGELOG.md parser),
-plus Release Tree, Related PRs, Related Tickets, Dependencies sections. (open)
+plus Release Tree, Related PRs, Related Tickets, Dependencies sections. (done)
 - [[Ticket-01KYABYEQPW8Q2RGGTNP71W88E]] Phase 2: render PR pages — Add `render_pr_page()` — title/status, linked tickets via reverse
 lands-in edges, related release via targets; files-changed/test-review
-status render as "not tracked" pending the Phase 3 follow-up. (open)
+status render as "not tracked" pending the Phase 3 follow-up. (done)
 - [[Ticket-01KYABYEQPXZAAY0VWF6Z8TQ27]] Phase 0: add item/release page-name helpers and extend build_manifest() — Add `item_page_name(iid, it)` and `release_page_name(tag)` to
 `bin/ia_render.py` next to `page_name()`, and extend `build_manifest()` to
 loop work items and release tags in addition to doc records, so every
 item/PR/release gets a manifest slot. (done)
 
-Progress: 3/8 done
+Progress: 5/8 done
 
 ## Related tickets
 

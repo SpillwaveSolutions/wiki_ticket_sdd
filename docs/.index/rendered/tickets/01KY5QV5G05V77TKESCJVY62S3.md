@@ -6,7 +6,7 @@ Schema boundary: split doc.schema.json (documents) from entity schema (items, re
 
 ## Linked PRs
 
-- PR #112
+- [[PR-112]]
 
 ## Related tickets
 

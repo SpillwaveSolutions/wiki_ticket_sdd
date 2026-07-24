@@ -6,7 +6,7 @@ The IA gates added to pre-commit import new modules during the hook, creating .p
 
 ## Linked PRs
 
-- PR #104
+- [[PR-104]]
 
 ## Related tickets
 
