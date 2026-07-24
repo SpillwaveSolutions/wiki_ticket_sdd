@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### worklog sync --pull can never bootstrap: cursor-less pull calls the adapter with no --since, which it requires
+`01KYAGZ8KK46SQF1MKHAHVCTJV` · status: todo
+
 ### worklog pr-sync: fetch live PR metadata (files, review/CI status)
 `01KYADGT9Q48EKJZVQQSH4HXWZ` · status: todo
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)

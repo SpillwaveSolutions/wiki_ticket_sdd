@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "f48c131a6f52",
+   "render_hash": "f94dedcf572c",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2061,6 +2061,16 @@
    "wiki_key": "item/01KYADGT9Q48EKJZVQQSH4HXWZ"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KYAGZ8KK46SQF1MKHAHVCTJV",
+   "render": "as-is",
+   "render_hash": "222cb6990017",
+   "source": "docs/.index/rendered/tickets/01KYAGZ8KK46SQF1MKHAHVCTJV.md",
+   "title": "worklog sync --pull can never bootstrap: cursor-less pull calls the adapter with no --since, which it requires",
+   "truth_state": "open",
+   "wiki_key": "item/01KYAGZ8KK46SQF1MKHAHVCTJV"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -2391,11 +2401,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-24T16:50:13Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-24T16:57:37Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "637b9e9b7d84",
+   "render_hash": "73b30b67da54",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

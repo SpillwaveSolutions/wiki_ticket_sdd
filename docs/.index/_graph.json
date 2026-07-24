@@ -3157,6 +3157,11 @@
    "status": "todo",
    "title": "worklog pr-sync: fetch live PR metadata (files, review/CI status)"
   },
+  "item/01KYAGZ8KK46SQF1MKHAHVCTJV": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "worklog sync --pull can never bootstrap: cursor-less pull calls the adapter with no --since, which it requires"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
