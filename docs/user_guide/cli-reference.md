@@ -336,10 +336,12 @@ old `type` events to `level`/`kind`.
 ## Information architecture (IA) commands
 
 These implement the IA & content model (plan
-`docs/plans/2026-07-22-ia-content-model.md`, plugin 0.13.0). Storage paths
-stay the same; the commands add a **reader plane** — stable `wiki_key`
-identity, `truth_state`, generated Home/Sidebar/indexes, a publish
-manifest, and a typed-edge traceability graph. Concepts are covered in
+`docs/plans/2026-07-22-ia-content-model.md`, plugin 0.13.0) plus artifact
+pages (plan `docs/plans/2026-07-24-artifact-pages.md`, plugin 0.14.0).
+Storage paths stay the same; the commands add a **reader plane** — stable
+`wiki_key` identity, `truth_state`, generated Home/Sidebar/indexes, a
+generated page per ticket/PR/release, a publish manifest, and a typed-edge
+traceability graph. Concepts are covered in
 the [User Guide](user-guide.md#information-architecture--content-model).
 
 ### wiki-key
@@ -434,6 +436,20 @@ and let sync carry it out.
 
 ```bash
 bin/worklog ticket-body 01J8X0M2QQ
+```
+
+### ia-ticket
+
+Preview the generated **ticket page** for an item — the same page
+`ia-render` writes to `docs/.index/rendered/tickets/<ULID>.md` and publishes
+as wiki page `Ticket-<ULID>`: own description/status, upward hierarchy to
+the epic, downward children/subtasks with a progress rollup, linked PRs
+(`PR-<num>`), and the linked release (`Release-<tag>`). Releases and PRs get
+matching generated pages (`releases/<tag>.md`, `prs/<num>.md`) — there's no
+separate preview subcommand for those, only for tickets.
+
+```bash
+bin/worklog ia-ticket 01J8X0M2QQ
 ```
 
 ### trace-check

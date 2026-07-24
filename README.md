@@ -36,7 +36,8 @@ of stuff last week and nobody knows what."
   (Home, Sidebar, Decisions/Releases/Status/Traceability indexes), and a
   typed-edge graph (`worklog ia-index`, `ia-graph`, `trace-check`,
   `ticket-body`, `link-pr`). Wiki publish follows
-  `docs/.index/publish-manifest.json`.
+  `docs/.index/publish-manifest.json`, which also carries a generated page
+  per ticket, PR, and release (`worklog ia-ticket <ULID>` to preview one).
 - **Syncs to the team's OWN systems** — wiki *and* tickets. Your work log
   publishes to whatever your team already uses.
 
@@ -162,7 +163,7 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | `docs/.index/` | IA inventory, graph, publish manifest, sidecars, rendered Home/Sidebar/indexes |
 | `docs/user_guide/` | User guide, CLI reference, plugin guide |
 | `hooks/` | `pre-commit`, `pre-merge-commit`, `exit-plan-capture.sh` |
-| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.13.0** |
+| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.14.0** |
 | `tests/` | Unit and integration tests |
 
 ## Testing

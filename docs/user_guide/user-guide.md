@@ -303,6 +303,7 @@ move. What is added:
 | Doc types | Unified frontmatter via `schema/doc.schema.json` — plans, roadmap, snapshots, status, design, ADR, guide, and related types share required fields (`wiki_key`, `doc_type`, `truth_state`, …). Work items use a separate entity schema. |
 | Sidecars | Frozen docs are never rewritten to add metadata. `ia-normalize` writes `docs/.index/<wiki_key>.yml` sidecars instead. Live docs (`roadmap.md`, `current_*` designs) may get in-place frontmatter. |
 | Reader plane | `worklog ia-render` generates Home, Sidebar, and indexes (Decisions, Releases, Status archive, Traceability) under `docs/.index/rendered/`, plus `publish-manifest.json`. |
+| Artifact pages | `ia-render` also generates one page per **ticket** (`Ticket-<ULID>`), **release** (`Release-<tag>`), and **PR** (`PR-<num>`) — hierarchy, subtasks/progress, linked PRs, and release for tickets; a graph-derived Change Log and Release Tree for releases; linked tickets and related release for PRs. All derived from existing graph edges at render time, no new stored fields. Preview a ticket page with `worklog ia-ticket <ULID>` (plan `docs/plans/2026-07-24-artifact-pages.md`). PR pages show "not tracked" for files-changed/review/CI status — live `gh pr view` sync is a deferred follow-up. |
 | Traceability | `worklog ia-graph` builds a typed-edge graph; `link-pr` records PR/commit edges; `trace-check` reports closed items missing plan/ticket/PR links (warn by default, `--strict` pre-release). |
 
 Day-to-day: after plan-capture or a release doc set change, run
@@ -316,6 +317,7 @@ GitHub Wiki, frontmatter is stripped in the wiki copy only.
 bin/worklog ia-index                 # refresh inventory + Home/Sidebar/indexes
 bin/worklog ia-graph                 # rebuild traceability graph
 bin/worklog link-pr <ulid> --pr 104  # attach code evidence
+bin/worklog ia-ticket <ulid>         # preview a generated ticket page
 bin/worklog trace-check              # unlinked-evidence report
 ```
 
@@ -341,8 +343,9 @@ a step needs a human (e.g. creating a GitHub wiki's first page in the web
 UI), it says so. The wiki-publish skill keeps a ledger in
 `.work/published.json` so republishing updates pages instead of duplicating
 them. When `docs/.index/publish-manifest.json` exists (from `ia-render`),
-that file **is** the publish set — including generated Home/Sidebar and
-indexes — and ledger skip uses `render_hash` so a frozen page can still
+that file **is** the publish set — including generated Home/Sidebar,
+indexes, and the per-ticket/release/PR artifact pages — and ledger skip
+uses `render_hash` so a frozen page can still
 republish when only its banner changed. Per-system guidance (GitHub,
 GitLab, ADO, Confluence) lives in the wiki-publish skill itself; the ledger
 shape is identical everywhere — only how each system fills

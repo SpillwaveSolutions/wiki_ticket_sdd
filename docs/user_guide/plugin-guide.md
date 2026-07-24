@@ -97,7 +97,7 @@ Skills are the judgment layer: the model decides *when*, the deterministic
 | `ticket-sync` | Runs `worklog adapter check` + `worklog sync` (dispatcher owns the invariants) and reads back the drift report; bodies from `ticket-body` |
 | `issue-description` | Durable ticket prose: compose via `worklog ticket-body` (summary, plan/epic context, traceability); enrich source with `update --body` / `link-pr` |
 | `pr-description` | Durable PR prose for the change set (pairs with green-gates merge flow) |
-| `wiki-publish` | Publishes via `docs/.index/publish-manifest.json` when present (Home, Sidebar, indexes, banners) and the `.work/published.json` ledger; strips YAML frontmatter for GitHub Wiki |
+| `wiki-publish` | Publishes via `docs/.index/publish-manifest.json` when present (Home, Sidebar, indexes, per-ticket/release/PR artifact pages, banners) and the `.work/published.json` ledger; strips YAML frontmatter for GitHub Wiki |
 | `status-report` | Generates and publishes frozen daily/weekly/timecard reports via `worklog status` |
 | `release` | Cuts a versioned release: stamp the changelog, snapshot the roadmap, tag, platform release, publish, sync; refreshes indexes |
 | `design-docs` | Generates/syncs the design doc + code walkthrough pair under `docs/designs/`: frozen dated copies per release, live `current` copies; runs in background agents at release time |
