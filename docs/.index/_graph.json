@@ -1266,6 +1266,11 @@
    "type": "references"
   },
   {
+   "from": "item/01KYAH3VHPSEK2RY63J7Y109FR",
+   "to": "release/v0.14.0",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -2038,6 +2043,21 @@
   {
    "from": "roadmap-snapshot/2026-07-23_v0.13.0-release",
    "to": "release/v0.13.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-24_v0.14.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-24_v0.14.0-release",
+   "to": "roadmap-snapshot/2026-07-23_v0.13.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-24_v0.14.0-release",
+   "to": "release/v0.14.0",
    "type": "targets"
   },
   {
@@ -3157,6 +3177,21 @@
    "status": "todo",
    "title": "worklog pr-sync: fetch live PR metadata (files, review/CI status)"
   },
+  "item/01KYAGZ8KK46SQF1MKHAHVCTJV": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "worklog sync --pull can never bootstrap: cursor-less pull calls the adapter with no --since, which it requires"
+  },
+  "item/01KYAH3VHPSEK2RY63J7Y109FR": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.14.0 release"
+  },
+  "item/01KYAHAB3T2QXGMN4SQT4ZNZGW": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "ia_graph build_graph() ignores commit-only sidecar code links (lands-in only honors code.pr)"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -3283,6 +3318,9 @@
   "release/v0.13.0": {
    "doc_type": "release"
   },
+  "release/v0.14.0": {
+   "doc_type": "release"
+  },
   "release/v0.5.0": {
    "doc_type": "release"
   },
@@ -3325,6 +3363,12 @@
   "roadmap-snapshot/2026-07-23_v0.13.0-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-07-23_v0.13.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-24_v0.14.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-24_v0.14.0-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },
