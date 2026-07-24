@@ -71,7 +71,11 @@ the contract, not this prose.
 - wiki-publish: the updated Roadmap and the release snapshot page; link the
   snapshot from Home.
 - ticket-sync: close the release work item(s); anything shipped-and-closed
-  reconciles with the tracker.
+  reconciles with the tracker. Release items are local-only by convention —
+  no external ticket is filed for them, so this step is a no-op for the
+  release item itself. That's intentional, not a gap: the tag and platform
+  release already give the release public visibility; don't file a
+  redundant issue just to have something for ticket-sync to close.
 
 ## 7. After
 
