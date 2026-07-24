@@ -62,6 +62,17 @@ def page_name(rec):
     return rec.get("title", stem).replace(" ", "-")
 
 
+def item_page_name(iid):
+    """Wiki page name for a ticket page — stable on the ULID; titles can
+    change without breaking the published URL (same rule as page_name())."""
+    return "Ticket-" + iid
+
+
+def release_page_name(tag):
+    """Wiki page name for a release page, e.g. 'Release-v0.13.0'."""
+    return "Release-" + tag
+
+
 def banner(rec, by_key):
     """Reader-visible truth banner (§6.1), one blockquote line."""
     ts = rec["truth_state"]

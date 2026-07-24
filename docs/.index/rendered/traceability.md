@@ -2,34 +2,43 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Auto-draft the release CHANGELOG unreleased section from git log
+`01KYAC0AC01R4C6W7YY1X8NVRV` · status: todo
+
 ### Phase 0: add item/release page-name helpers and extend build_manifest()
-`01KYABYEQPXZAAY0VWF6Z8TQ27` · status: todo
+`01KYABYEQPXZAAY0VWF6Z8TQ27` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- references: [github#135](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/135)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 2: render PR pages
 `01KYABYEQPW8Q2RGGTNP71W88E` · status: todo
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- references: [github#134](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/134)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Aggregate progress rollup for Story/Feature/Epic pages
 `01KYABYEQPRM8308SYFPR8X437` · status: todo
 - belongs-to: Phase 1: render ticket pages for all four levels
+- references: [github#133](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/133)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 2: render release pages with graph-derived Change Log
 `01KYABYEQPP82DJEN19F43YRAE` · status: todo
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- references: [github#132](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/132)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 4: extend tests/test_ia.py for the new page shapes
 `01KYABYEQPNK7HHH5CMAR2V1JG` · status: todo
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- references: [github#131](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/131)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 1: render ticket pages for all four levels
 `01KYABYEQPK6PV87WNZXEYRB12` · status: todo
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- references: [github#130](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/130)
 - contains: One-line summary derivation from body's first sentence (no cache)
 - contains: `ia-ticket <ULID>` preview subcommand on `bin/worklog`
 - contains: Aggregate progress rollup for Story/Feature/Epic pages
@@ -38,25 +47,30 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Phase 3: file PR live-metadata follow-up item
 `01KYABYEQPF8N2K26ENRKREE0W` · status: todo
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- references: [github#129](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/129)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 4: regenerate all pages and confirm coverage gate holds
 `01KYABYEQPDS2VFQKQ7B6YXZVR` · status: todo
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- references: [github#128](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/128)
 - produced-by: [[Plan-artifact-pages]]
 
 ### `ia-ticket <ULID>` preview subcommand on `bin/worklog`
 `01KYABYEQPAFJM7WC3XZV6YY76` · status: todo
 - belongs-to: Phase 1: render ticket pages for all four levels
+- references: [github#127](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/127)
 - produced-by: [[Plan-artifact-pages]]
 
 ### One-line summary derivation from body's first sentence (no cache)
 `01KYABYEQP9FDY8THDV79F324G` · status: todo
 - belongs-to: Phase 1: render ticket pages for all four levels
+- references: [github#126](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/126)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Extend IA to tickets, PRs, and releases (artifact pages)
 `01KYABYEQP8ANXGYPBCV2T20D8` · status: todo
+- references: [github#125](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/125)
 - contains: Phase 0: add item_links() graph helper
 - contains: Phase 4: regenerate all pages and confirm coverage gate holds
 - contains: Phase 3: file PR live-metadata follow-up item
@@ -68,12 +82,14 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 0: add item_links() graph helper
-`01KYABYEQP3YCB9AVHRPCTCMRS` · status: todo
+`01KYABYEQP3YCB9AVHRPCTCMRS` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- references: [github#124](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/124)
 - produced-by: [[Plan-artifact-pages]]
 
 ### close/update silently corrupt log when given an item-id prefix instead of the full ULID
 `01KYA99TVCGX79HFNHN1DVT7Y6` · status: todo
+- references: [github#123](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/123)
 
 ### Give kind:ops release items a GitHub issue going forward
 `01KYA8MDY5HP9MC5KQMJX3BN84` · status: done

@@ -115,6 +115,32 @@ def write_graph(graph=None):
     return graph
 
 
+def build_adjacency(graph):
+    """Forward/backward edge maps keyed by node — the traversal every
+    per-entity page renderer needs, built once per render pass rather than
+    once per item."""
+    fwd, back = {}, {}
+    for e in graph["edges"]:
+        fwd.setdefault(e["from"], []).append((e["type"], e["to"]))
+        back.setdefault(e["to"], []).append((REVERSE[e["type"]], e["from"]))
+    return fwd, back
+
+
+def item_links(iid, fwd, back):
+    """Parent/children/PRs/release for one item — a thin projection over
+    graph adjacency (from build_adjacency), shared by every ticket/release/PR
+    page renderer instead of each re-walking the edge list."""
+    key = item_key(iid)
+    parent = next((to for typ, to in fwd.get(key, []) if typ == "belongs-to"),
+                  None)
+    children = sorted(to for typ, to in back.get(key, []) if typ == "contains")
+    prs = sorted(to for typ, to in fwd.get(key, []) if typ == "lands-in")
+    release = next((to for typ, to in fwd.get(key, [])
+                    if typ == "targets" and to.startswith("release/")), None)
+    return {"parent": parent, "children": children, "prs": prs,
+            "release": release}
+
+
 def link_pr(ulid_, pr=None, commit=None):
     """Record a code edge on an item's sidecar (overlay-only). -> the entry."""
     side = ia.read_sidecar(item_key(ulid_))
