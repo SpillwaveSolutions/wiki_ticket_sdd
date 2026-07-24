@@ -564,6 +564,16 @@ def cmd_ticket_body(a):
         sys.exit(f"worklog: no item {a.item}")
 
 
+def cmd_ia_ticket(a):
+    import ia_graph, ia_render
+    from fold import fold
+    items = fold((".work/todo.jsonl", ".work/done.jsonl")).items
+    if a.item not in items:
+        sys.exit(f"worklog: no item {a.item}")
+    fwd, back = ia_graph.build_adjacency(ia_graph.build_graph(items=items))
+    sys.stdout.write(ia_render.render_item_page(a.item, items, fwd, back))
+
+
 def cmd_link_pr(a):
     import ia_graph
     try:
@@ -1141,6 +1151,14 @@ tb = sub.add_parser(
                 "push (issue-description skill).")
 tb.set_defaults(fn=cmd_ticket_body)
 tb.add_argument("item")
+
+it_ = sub.add_parser(
+    "ia-ticket",
+    description="Preview the generated ticket page for an item — own "
+                "description/status, hierarchy, subtasks/children with "
+                "progress, linked PRs, release (plan artifact-pages).")
+it_.set_defaults(fn=cmd_ia_ticket)
+it_.add_argument("item")
 
 lp = sub.add_parser(
     "link-pr",

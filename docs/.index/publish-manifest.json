@@ -44,11 +44,1861 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "48c953b879e8",
+   "render_hash": "7da396d0be8b",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
    "wiki_key": "index/traceability"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXS7W15SHYS5PSGGWHYMFKYM",
+   "render": "as-is",
+   "render_hash": "67826460cc8b",
+   "source": "docs/.index/rendered/tickets/01KXS7W15SHYS5PSGGWHYMFKYM.md",
+   "title": "Smoke test item",
+   "truth_state": "done",
+   "wiki_key": "item/01KXS7W15SHYS5PSGGWHYMFKYM"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSFEWNCJMXPZDNT7RNYTG8X",
+   "render": "as-is",
+   "render_hash": "9957c3378528",
+   "source": "docs/.index/rendered/tickets/01KXSFEWNCJMXPZDNT7RNYTG8X.md",
+   "title": "Worklog Claude plugin",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSFEWNCJMXPZDNT7RNYTG8X"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSFEWND18ATDAPCWJXKV8C1",
+   "render": "as-is",
+   "render_hash": "4ec1565067e9",
+   "source": "docs/.index/rendered/tickets/01KXSFEWND18ATDAPCWJXKV8C1.md",
+   "title": "Move the three skills into plugin/skills, canonical copies",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSFEWND18ATDAPCWJXKV8C1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSFEWND2PG3PQW8GMZ9B319",
+   "render": "as-is",
+   "render_hash": "149cadf36170",
+   "source": "docs/.index/rendered/tickets/01KXSFEWND2PG3PQW8GMZ9B319.md",
+   "title": "/worklog:doctor \u2014 version skew report + invariant checks",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSFEWND2PG3PQW8GMZ9B319"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSFEWND3DGDF12DSWJEKVDF",
+   "render": "as-is",
+   "render_hash": "527b018d4c24",
+   "source": "docs/.index/rendered/tickets/01KXSFEWND3DGDF12DSWJEKVDF.md",
+   "title": "Marketplace manifest + README install docs",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSFEWND3DGDF12DSWJEKVDF"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSFEWND4TYQ2V26KRPFHW9M",
+   "render": "as-is",
+   "render_hash": "609dc45bf056",
+   "source": "docs/.index/rendered/tickets/01KXSFEWND4TYQ2V26KRPFHW9M.md",
+   "title": "Integration test: init, track, uninstall in a sandbox repo",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSFEWND4TYQ2V26KRPFHW9M"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSFEWND595MAFB1GMB9KECF",
+   "render": "as-is",
+   "render_hash": "fadcf5fbf68c",
+   "source": "docs/.index/rendered/tickets/01KXSFEWND595MAFB1GMB9KECF.md",
+   "title": "Plugin hooks.json ExitPlanMode hook with uninitialized-repo guard",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSFEWND595MAFB1GMB9KECF"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSFEWNDBM4RHBFMNYJWR9CE",
+   "render": "as-is",
+   "render_hash": "9e43ec61a493",
+   "source": "docs/.index/rendered/tickets/01KXSFEWNDBM4RHBFMNYJWR9CE.md",
+   "title": "bin/worklog --version + plugin CHANGELOG.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSFEWNDBM4RHBFMNYJWR9CE"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSFEWNDM44B8A8RV30PF6X1",
+   "render": "as-is",
+   "render_hash": "8f4092eda8c0",
+   "source": "docs/.index/rendered/tickets/01KXSFEWNDM44B8A8RV30PF6X1.md",
+   "title": "/worklog:uninstall command \u2014 remove scaffolding, always preserve .work data and docs",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSFEWNDM44B8A8RV30PF6X1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSFEWNDR0ZDTHHGQVN3PG9Z",
+   "render": "as-is",
+   "render_hash": "9398f7c301c1",
+   "source": "docs/.index/rendered/tickets/01KXSFEWNDR0ZDTHHGQVN3PG9Z.md",
+   "title": "Record installed plugin version in .work/config.yml",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSFEWNDR0ZDTHHGQVN3PG9Z"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSFEWNDT1B5D0PRK16NX14T",
+   "render": "as-is",
+   "render_hash": "e423ef9af051",
+   "source": "docs/.index/rendered/tickets/01KXSFEWNDT1B5D0PRK16NX14T.md",
+   "title": "Scaffold plugin/ with .claude-plugin/plugin.json manifest v0.1.0",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSFEWNDT1B5D0PRK16NX14T"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSFEWNDZ55K8AQJBCN9MRD6",
+   "render": "as-is",
+   "render_hash": "f4ebc7d38e9e",
+   "source": "docs/.index/rendered/tickets/01KXSFEWNDZ55K8AQJBCN9MRD6.md",
+   "title": "/worklog:init command \u2014 scaffold bin, hooks, .work, .gitattributes, CI into the current repo",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSFEWNDZ55K8AQJBCN9MRD6"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJ0P23QC3SYXRQ01WA",
+   "render": "as-is",
+   "render_hash": "0227ba565219",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJ0P23QC3SYXRQ01WA.md",
+   "title": "UserPromptSubmit hook \u2014 inject a one-line reminder: requests that produce work get worklog items first (work-track), keep statuses moving",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJ0P23QC3SYXRQ01WA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJ3QKFCRBB3A12H5GT",
+   "render": "as-is",
+   "render_hash": "bdad45283522",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJ3QKFCRBB3A12H5GT.md",
+   "title": "Rewrite README.md \u2014 what/why: WikiTicket SDD (\"wicked ticket\"), fishbowled AI development, spec-driven (plans are the spec, tickets are the WIP), multi-team, system-agnostic edges (GitHub/GitLab/ADO/Jira/Confluence \u2014 they pick), epics/stories/tasks/bugs/subtasks, event-log history, generated roadmap/status. Keep quick-start + plugin sections, tightened.",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJ3QKFCRBB3A12H5GT"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJ72MM7XHEJBHM6A1Y",
+   "render": "as-is",
+   "render_hash": "2de49a71f042",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJ72MM7XHEJBHM6A1Y.md",
+   "title": "Write docs/user_guide/plugin-guide.md \u2014 plugin vs repo install levels, /worklog:* commands, skills, version/doctor, harness notes (Claude Code + Grok build now; OpenCode/Codex ports on roadmap)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJ72MM7XHEJBHM6A1Y"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJ8RHP53Z2VQJH4D9J",
+   "render": "as-is",
+   "render_hash": "f592f3eba719",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJ8RHP53Z2VQJH4D9J.md",
+   "title": "Write docs/user_guide/user-guide.md \u2014 concepts (event log, fold, visible WIP), core workflows (plan\u2192capture\u2192work\u2192close\u2192sync, unplanned work, PR flow incl. roadmap merge recovery)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJ8RHP53Z2VQJH4D9J"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJDK16TMR50CNR3T3V",
+   "render": "as-is",
+   "render_hash": "e8149c6a416a",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJDK16TMR50CNR3T3V.md",
+   "title": "Comprehensive user guide under docs/user_guide/ (excluded from plugin by construction; add packaging test)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJDK16TMR50CNR3T3V"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJEP1V1JMSXH2MQWYV",
+   "render": "as-is",
+   "render_hash": "2040c6f511f7",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJEP1V1JMSXH2MQWYV.md",
+   "title": "worklog roadmap-snapshot [--name] subcommand \u2014 copy docs/roadmap.md to docs/roadmap/<YYYY-MM-DD>_<name>.md, frozen (refuse overwrite), + tests; re-copy worklog to plugin/scripts (canon sync)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJEP1V1JMSXH2MQWYV"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJKRR3BF33CBK3E4Q7",
+   "render": "as-is",
+   "render_hash": "b6745fc6b5de",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJKRR3BF33CBK3E4Q7.md",
+   "title": "Enforcement hooks for the dogfood policy (plugin/hooks + repo mirror, silent outside worklog repos)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJKRR3BF33CBK3E4Q7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJMS2914A0JJYX3KEZ",
+   "render": "as-is",
+   "render_hash": "42dba1974b94",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJMS2914A0JJYX3KEZ.md",
+   "title": "wiki-publish skill (repo + plugin canonical copy) \u2014 system-vague: read .work/config.yml wiki block, publish named files using available tooling for that system (gh/git for GitHub wiki, MCP/CLI for Confluence/ADO/GitLab), research missing tooling, maintain .work/published.json ledger {key: {url, rev, source_hash}}, skip unchanged hashes, surface one-time init steps (e.g. GitHub wiki first page) to the human",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJMS2914A0JJYX3KEZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJN9C584RF3NNJK0W9",
+   "render": "as-is",
+   "render_hash": "8c2ef7593dd7",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJN9C584RF3NNJK0W9.md",
+   "title": "Dogfood policy in CLAUDE.md \u2014 every request is broken into worklog items via work-track BEFORE work starts; mirror line in work-track skill",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJN9C584RF3NNJK0W9"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJQ91JPN4QRVMJQ296",
+   "render": "as-is",
+   "render_hash": "65b55aea2ddd",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJQ91JPN4QRVMJQ296.md",
+   "title": "Write docs/user_guide/cli-reference.md \u2014 every worklog subcommand with examples, hooks, invariants",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJQ91JPN4QRVMJQ296"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJV2H5QS5CSTYASS6M",
+   "render": "as-is",
+   "render_hash": "025125451ee1",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJV2H5QS5CSTYASS6M.md",
+   "title": "Docs, wiki publishing & dogfood discipline",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJV2H5QS5CSTYASS6M"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJVJW87EPCZXE6QDCA",
+   "render": "as-is",
+   "render_hash": "39330f03a015",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJVJW87EPCZXE6QDCA.md",
+   "title": "Stop hook \u2014 if the working tree has non-.work changes but .work/todo.jsonl is unchanged vs HEAD, block once with \"record the work items or explain\" (honor stop_hook_active from stdin JSON to prevent loops)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJVJW87EPCZXE6QDCA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJWK58BS457Y2NG3JA",
+   "render": "as-is",
+   "render_hash": "48b88e339beb",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJWK58BS457Y2NG3JA.md",
+   "title": "SessionStart hook \u2014 doctor-lite on session open: verify CLAUDE.md carries the worklog policy block (marker or heading), core.hooksPath=hooks, and installed: version vs plugin version; emit additionalContext naming what's missing and pointing at /worklog:init or /worklog:doctor; silent when repo has no bin/worklog",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJWK58BS457Y2NG3JA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWJZMQQH7H68XVB654Y",
+   "render": "as-is",
+   "render_hash": "7391e2430510",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWJZMQQH7H68XVB654Y.md",
+   "title": "Seed roadmap: future epics via worklog add (ticket-sync skill-based w/ GitHub Issues first P1; spec v1.4 skill-based edges P2; wiki breadth Confluence/ADO/GitLab P2; compaction+nightly CI P2; status reports + plan-next P2; OpenCode/Codex ports P2; multi-tracker simultaneous P3)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWJZMQQH7H68XVB654Y"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWK0HC96WQ3HV98DHT8",
+   "render": "as-is",
+   "render_hash": "fe93116421ff",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWK0HC96WQ3HV98DHT8.md",
+   "title": "Publish wiki: Home, User-Guide, CLI-Reference, Plugin-Guide, Roadmap (current), dated snapshot page; record in .work/published.json; add .work/wiki-checkout/ to .gitignore",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWK0HC96WQ3HV98DHT8"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWK2PPBHVJ21MBT65ER",
+   "render": "as-is",
+   "render_hash": "f42ae41c45bb",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWK2PPBHVJ21MBT65ER.md",
+   "title": "Plugin installer/uninstaller at repo root \u2014 install-plugin.sh (claude plugin marketplace add + install, graceful message if claude CLI absent), uninstall-plugin.sh (reverse)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWK2PPBHVJ21MBT65ER"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWKC64M1XX0Y7WVT67Z",
+   "render": "as-is",
+   "render_hash": "ef43da6b0b7b",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWKC64M1XX0Y7WVT67Z.md",
+   "title": "Render roadmap, snapshot as docs/roadmap/<date>_v0.2-roadmap.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWKC64M1XX0Y7WVT67Z"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWKPDG9Q4404RPTWZY9",
+   "render": "as-is",
+   "render_hash": "e3b025b48518",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWKPDG9Q4404RPTWZY9.md",
+   "title": "Packaging guard in tests/test_plugin.py \u2014 plugin/ contains no docs/user_guide content; canon list still passes",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWKPDG9Q4404RPTWZY9"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSNNSWKTJX2QWW4PYFDEZHS",
+   "render": "as-is",
+   "render_hash": "935c1935c53e",
+   "source": "docs/.index/rendered/tickets/01KXSNNSWKTJX2QWW4PYFDEZHS.md",
+   "title": "Bump version 0.2.0 (plugin.json, worklog VERSION, skills frontmatter incl. new skill) + CHANGELOG entry",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSNNSWKTJX2QWW4PYFDEZHS"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSP26ENPKCT4APD4YE93MMV",
+   "render": "as-is",
+   "render_hash": "1298969dd11b",
+   "source": "docs/.index/rendered/tickets/01KXSP26ENPKCT4APD4YE93MMV.md",
+   "title": "Ticket sync \u2014 skill-based, GitHub Issues first",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSP26ENPKCT4APD4YE93MMV"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSP26JP91E4508YST2WXPTD",
+   "render": "as-is",
+   "render_hash": "d48742bf15b3",
+   "source": "docs/.index/rendered/tickets/01KXSP26JP91E4508YST2WXPTD.md",
+   "title": "Spec v1.4 \u2014 revise \u00a79 adapter contract to skill-based edges",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSP26JP91E4508YST2WXPTD"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSP26PS6A0WDHQ65Y4B1X94",
+   "render": "as-is",
+   "render_hash": "bdf6a897f21c",
+   "source": "docs/.index/rendered/tickets/01KXSP26PS6A0WDHQ65Y4B1X94.md",
+   "title": "Wiki publish breadth \u2014 Confluence, ADO, GitLab via skills",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSP26PS6A0WDHQ65Y4B1X94"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSP26V19JX6VTH0EYGDV2Z0",
+   "render": "as-is",
+   "render_hash": "967c69d8ab89",
+   "source": "docs/.index/rendered/tickets/01KXSP26V19JX6VTH0EYGDV2Z0.md",
+   "title": "Compaction + nightly CI job (spec \u00a77)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSP26V19JX6VTH0EYGDV2Z0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSP26Z674RTTB6D8GQCM2A8",
+   "render": "as-is",
+   "render_hash": "127ede2c26ac",
+   "source": "docs/.index/rendered/tickets/01KXSP26Z674RTTB6D8GQCM2A8.md",
+   "title": "Status reports (daily/weekly) + plan-next (spec \u00a713.3)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSP26Z674RTTB6D8GQCM2A8"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSP273B1649RGJ841PVSCF3",
+   "render": "as-is",
+   "render_hash": "a3da60ac340e",
+   "source": "docs/.index/rendered/tickets/01KXSP273B1649RGJ841PVSCF3.md",
+   "title": "Harness ports \u2014 OpenCode and Codex (Claude plugin format is canonical)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSP273B1649RGJ841PVSCF3"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSP277AE68GPTHC1QJV1NX",
+   "render": "as-is",
+   "render_hash": "c1a5d6b71d5d",
+   "source": "docs/.index/rendered/tickets/01KXSP277AE68GPTHC1QJV1NX.md",
+   "title": "01KXSP277AE68GPTHC1QJV1NX",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSP277AE68GPTHC1QJV1NX"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSP277AE68GPTJHC1QJV1NX",
+   "render": "as-is",
+   "render_hash": "67e484662c4b",
+   "source": "docs/.index/rendered/tickets/01KXSP277AE68GPTJHC1QJV1NX.md",
+   "title": "Multi-tracker: sync one worklog to two systems at once (external as array)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSP277AE68GPTJHC1QJV1NX"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSQ4JH8SCHQ94DYQ7YJ872P",
+   "render": "as-is",
+   "render_hash": "578fe042b6fe",
+   "source": "docs/.index/rendered/tickets/01KXSQ4JH8SCHQ94DYQ7YJ872P.md",
+   "title": "Background plan-publish: on plan-capture, subagent syncs tickets and publishes plan to wiki, non-blocking",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSQ4JH8SCHQ94DYQ7YJ872P"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSQJ3K19QWBDX482FRT7ETR",
+   "render": "as-is",
+   "render_hash": "c8bcd4ed01b1",
+   "source": "docs/.index/rendered/tickets/01KXSQJ3K19QWBDX482FRT7ETR.md",
+   "title": "/worklog:init detects ticket/PR/wiki systems from repo; confirm yes/no, else multi-select pick-and-mix per area",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSQJ3K19QWBDX482FRT7ETR"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSQJ3SGWWEHDNK83CDNPT4S",
+   "render": "as-is",
+   "render_hash": "ef8db1c356f1",
+   "source": "docs/.index/rendered/tickets/01KXSQJ3SGWWEHDNK83CDNPT4S.md",
+   "title": "wiki-publish always includes plans and roadmaps by default",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSQJ3SGWWEHDNK83CDNPT4S"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXSQJ3Z40QHSXEN6B4Y238AZ",
+   "render": "as-is",
+   "render_hash": "54712883ee77",
+   "source": "docs/.index/rendered/tickets/01KXSQJ3Z40QHSXEN6B4Y238AZ.md",
+   "title": "worklog wiki-add <file>: register a file in .work/published.json for wiki publishing",
+   "truth_state": "done",
+   "wiki_key": "item/01KXSQJ3Z40QHSXEN6B4Y238AZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXT88MCBB82VT84JT0PB53PG",
+   "render": "as-is",
+   "render_hash": "f3c16111e73a",
+   "source": "docs/.index/rendered/tickets/01KXT88MCBB82VT84JT0PB53PG.md",
+   "title": "worklog link subcommand: record external identity after successful push (spec 5.3)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXT88MCBB82VT84JT0PB53PG"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXT88MGRJB0ARA9CN7QX29GY",
+   "render": "as-is",
+   "render_hash": "9a7543d5415a",
+   "source": "docs/.index/rendered/tickets/01KXT88MGRJB0ARA9CN7QX29GY.md",
+   "title": "ticket-sync skill (push-only): ULID idempotency marker, sync-state hash skip; gh for GitHub, others vague",
+   "truth_state": "done",
+   "wiki_key": "item/01KXT88MGRJB0ARA9CN7QX29GY"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXT88MMR65W3CX1C37ECEEXG",
+   "render": "as-is",
+   "render_hash": "72f68d5964f5",
+   "source": "docs/.index/rendered/tickets/01KXT88MMR65W3CX1C37ECEEXG.md",
+   "title": "Config: ticketing block -> github, project SpillwaveSolutions/wiki_ticket_sdd",
+   "truth_state": "done",
+   "wiki_key": "item/01KXT88MMR65W3CX1C37ECEEXG"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXT88MRST1ZZSBFMFCXYEDA1",
+   "render": "as-is",
+   "render_hash": "be7e12fa4847",
+   "source": "docs/.index/rendered/tickets/01KXT88MRST1ZZSBFMFCXYEDA1.md",
+   "title": "Dogfood: push open items to GitHub Issues; roadmap shows issue links",
+   "truth_state": "done",
+   "wiki_key": "item/01KXT88MRST1ZZSBFMFCXYEDA1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXT88MWVW63PA5698TFNYZ5E",
+   "render": "as-is",
+   "render_hash": "1d498de78d8a",
+   "source": "docs/.index/rendered/tickets/01KXT88MWVW63PA5698TFNYZ5E.md",
+   "title": "Pull + echo suppression + conflicts (spec 10.3-10.6), after living with push-only",
+   "truth_state": "done",
+   "wiki_key": "item/01KXT88MWVW63PA5698TFNYZ5E"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXT88N0Z4EHR2HKMHGAM0WB3",
+   "render": "as-is",
+   "render_hash": "ce4b673dc042",
+   "source": "docs/.index/rendered/tickets/01KXT88N0Z4EHR2HKMHGAM0WB3.md",
+   "title": "Rewrite /worklog:init command: detect systems, yes/no confirm or multi-select pick-and-mix, write config",
+   "truth_state": "done",
+   "wiki_key": "item/01KXT88N0Z4EHR2HKMHGAM0WB3"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXT88N4W1E78NY17DW65PJPX",
+   "render": "as-is",
+   "render_hash": "64d03387e356",
+   "source": "docs/.index/rendered/tickets/01KXT88N4W1E78NY17DW65PJPX.md",
+   "title": "Version 0.3.0 + CHANGELOG",
+   "truth_state": "done",
+   "wiki_key": "item/01KXT88N4W1E78NY17DW65PJPX"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXT8JG3RNE2YZVCYEBXW9EX6",
+   "render": "as-is",
+   "render_hash": "a2b36e2c3075",
+   "source": "docs/.index/rendered/tickets/01KXT8JG3RNE2YZVCYEBXW9EX6.md",
+   "title": "Push-only sync: close the linked ticket when a local item closes (skill scope gap)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXT8JG3RNE2YZVCYEBXW9EX6"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXT9B43GA5B8AAT26W8A1VPJ",
+   "render": "as-is",
+   "render_hash": "a7c314b9ba22",
+   "source": "docs/.index/rendered/tickets/01KXT9B43GA5B8AAT26W8A1VPJ.md",
+   "title": "Spec cleanup: purge remaining adapter references (\u00a74.2 config keys, \u00a75.3, \u00a713.3, \u00a715.5, \u00a715.10)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXT9B43GA5B8AAT26W8A1VPJ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXT9W0Y40SDTZBB93XY5YXNT",
+   "render": "as-is",
+   "render_hash": "63620d82f47e",
+   "source": "docs/.index/rendered/tickets/01KXT9W0Y40SDTZBB93XY5YXNT.md",
+   "title": "Timecard status kind \u2014 narrative only per Rick: a sentence or two per day (spec \u00a717 Q4 closed)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXT9W0Y40SDTZBB93XY5YXNT"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXTZ5TAPZBC06AG50KDJKEYF",
+   "render": "as-is",
+   "render_hash": "a44913213999",
+   "source": "docs/.index/rendered/tickets/01KXTZ5TAPZBC06AG50KDJKEYF.md",
+   "title": "release skill: cutting a release is a wiki-ticket capability",
+   "truth_state": "done",
+   "wiki_key": "item/01KXTZ5TAPZBC06AG50KDJKEYF"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXTZ5TEQV2J99CHPQNHJ1NA1",
+   "render": "as-is",
+   "render_hash": "f1fdd1f34b7d",
+   "source": "docs/.index/rendered/tickets/01KXTZ5TEQV2J99CHPQNHJ1NA1.md",
+   "title": "Cut v0.5.0: stamp CHANGELOG, snapshot roadmap, tag, GitHub release, publish + sync",
+   "truth_state": "done",
+   "wiki_key": "item/01KXTZ5TEQV2J99CHPQNHJ1NA1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXTZ8134TGKGC1YC2PXYRV29",
+   "render": "as-is",
+   "render_hash": "6cf3b187046a",
+   "source": "docs/.index/rendered/tickets/01KXTZ8134TGKGC1YC2PXYRV29.md",
+   "title": "Fix: plugin release-skill copy missing version frontmatter (silent str.replace miss broke version-sync test)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXTZ8134TGKGC1YC2PXYRV29"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV0NQPPPK2K948CK20QJSS1",
+   "render": "as-is",
+   "render_hash": "835990922532",
+   "source": "docs/.index/rendered/tickets/01KXV0NQPPPK2K948CK20QJSS1.md",
+   "title": "Typed adapter contract for ticket-sync: dispatcher owns invariants, generated adapters, fake for CI",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV0NQPPPK2K948CK20QJSS1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV1B3RY3G25WR0K2ZGYEH73",
+   "render": "as-is",
+   "render_hash": "b3029252d812",
+   "source": "docs/.index/rendered/tickets/01KXV1B3RY3G25WR0K2ZGYEH73.md",
+   "title": "GitHub server-side merges ignore merge=union \u2014 log/roadmap conflicts in PR UI",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV1B3RY3G25WR0K2ZGYEH73"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV1HZMTKQGJHX0VSETZJX4Z",
+   "render": "as-is",
+   "render_hash": "a47b4fb66ee9",
+   "source": "docs/.index/rendered/tickets/01KXV1HZMTKQGJHX0VSETZJX4Z.md",
+   "title": "canonical.py + capabilities/adapter-io schemas + fake adapter + contract tests",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV1HZMTKQGJHX0VSETZJX4Z"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV1HZS08M62Z5EZF4HTVB6G",
+   "render": "as-is",
+   "render_hash": "d9853146a769",
+   "source": "docs/.index/rendered/tickets/01KXV1HZS08M62Z5EZF4HTVB6G.md",
+   "title": "spec v1.6: \u00a78.1 GitHub-UI merge caveat + \u00a79 typed-contract reconciliation; user-guide recovery section",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV1HZS08M62Z5EZF4HTVB6G"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV1HZX2B49T1PB0GA4H0YMS",
+   "render": "as-is",
+   "render_hash": "e99d68944158",
+   "source": "docs/.index/rendered/tickets/01KXV1HZX2B49T1PB0GA4H0YMS.md",
+   "title": "sync_dispatch.py: dispatcher owns \u00a74 invariants; worklog sync/adapter-check wiring (last stub falls); dispatch tests",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV1HZX2B49T1PB0GA4H0YMS"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV1J0179NHDTP9K8FRVZGYP",
+   "render": "as-is",
+   "render_hash": "0e98be64b3d5",
+   "source": "docs/.index/rendered/tickets/01KXV1J0179NHDTP9K8FRVZGYP.md",
+   "title": "adapters/github worked example over gh + ticket-sync skill delegates invariants to dispatcher + CI wiring",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV1J0179NHDTP9K8FRVZGYP"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV1J05APQR0DBP1840ZPVRM",
+   "render": "as-is",
+   "render_hash": "7fee050001c7",
+   "source": "docs/.index/rendered/tickets/01KXV1J05APQR0DBP1840ZPVRM.md",
+   "title": "v0.6.0 + dogfood: adapter check green against fake and github example",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV1J05APQR0DBP1840ZPVRM"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV1TTAW8G80DWS7ZMNJX3XE",
+   "render": "as-is",
+   "render_hash": "e522b1d37fd0",
+   "source": "docs/.index/rendered/tickets/01KXV1TTAW8G80DWS7ZMNJX3XE.md",
+   "title": "PR gate: test coverage >=80% enforced in CI (bin/ modules), target 95% stated in CLAUDE.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV1TTAW8G80DWS7ZMNJX3XE"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV2KQRXZBKE2V6ADNGMZX62",
+   "render": "as-is",
+   "render_hash": "14b1fea91437",
+   "source": "docs/.index/rendered/tickets/01KXV2KQRXZBKE2V6ADNGMZX62.md",
+   "title": "Coverage gate blind to subprocess-exercised modules: sync_dispatch tanks total to 54%; wire subprocess coverage + path aliasing",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV2KQRXZBKE2V6ADNGMZX62"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV5DQC9M70PN3A4AS0VCBQH",
+   "render": "as-is",
+   "render_hash": "036747867a56",
+   "source": "docs/.index/rendered/tickets/01KXV5DQC9M70PN3A4AS0VCBQH.md",
+   "title": "Green-gates merge policy: PRs merge only when all checks pass; /worklog:merge polls every 5 min until green",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV5DQC9M70PN3A4AS0VCBQH"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV5DQHGQ6EQZDRVR2MV92KZ",
+   "render": "as-is",
+   "render_hash": "a1de995910be",
+   "source": "docs/.index/rendered/tickets/01KXV5DQHGQ6EQZDRVR2MV92KZ.md",
+   "title": "plugin/scripts/merge-when-green.sh poll loop + fake-gh test suite",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV5DQHGQ6EQZDRVR2MV92KZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV5DQPRDD2W1QKCXRQ02A58",
+   "render": "as-is",
+   "render_hash": "f1bce5202508",
+   "source": "docs/.index/rendered/tickets/01KXV5DQPRDD2W1QKCXRQ02A58.md",
+   "title": "/worklog:merge command + merge-green skill + CLAUDE.md policy bullet",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV5DQPRDD2W1QKCXRQ02A58"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXV61H5BDS7TD99H0FF9FE11",
+   "render": "as-is",
+   "render_hash": "9277cc636422",
+   "source": "docs/.index/rendered/tickets/01KXV61H5BDS7TD99H0FF9FE11.md",
+   "title": "Work taxonomy: level/kind/milestone axes + CLAUDE.md block + flag-gated classifier (propose-only)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXV61H5BDS7TD99H0FF9FE11"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXF29E1WHP41QPNX469DVDM",
+   "render": "as-is",
+   "render_hash": "17581666ec56",
+   "source": "docs/.index/rendered/tickets/01KXXF29E1WHP41QPNX469DVDM.md",
+   "title": "Cut v0.6.0: stamp CHANGELOG, snapshot roadmap, tag, GitHub release, publish",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXF29E1WHP41QPNX469DVDM"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXFKH6438M5ZV8ZKM0CH9QN",
+   "render": "as-is",
+   "render_hash": "73a4ab36069d",
+   "source": "docs/.index/rendered/tickets/01KXXFKH6438M5ZV8ZKM0CH9QN.md",
+   "title": "Core: fold/canonical/CLI level+kind+milestone, triage default, type-alias migration, promote subcommand, tests",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXFKH6438M5ZV8ZKM0CH9QN"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXFKHBMR218J218RNN7C07N",
+   "render": "as-is",
+   "render_hash": "b929258917dc",
+   "source": "docs/.index/rendered/tickets/01KXXFKHBMR218J218RNN7C07N.md",
+   "title": "Policy: CLAUDE.md taxonomy block (markers, permissioned init step), classifier graduates Stop hook, classify skill, config block, tests",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXFKHBMR218J218RNN7C07N"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXFKHH0VP73C2X6P9EX4616",
+   "render": "as-is",
+   "render_hash": "b04819317c5f",
+   "source": "docs/.index/rendered/tickets/01KXXFKHH0VP73C2X6P9EX4616.md",
+   "title": "Edges+spec: dispatcher/adapters map kind+milestone, spec v1.7 field/hash updates, migration doc, work-track/plan-capture skill updates",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXFKHH0VP73C2X6P9EX4616"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXFKHPHDANP7S4GKC20G8EV",
+   "render": "as-is",
+   "render_hash": "9f56e3b8962f",
+   "source": "docs/.index/rendered/tickets/01KXXFKHPHDANP7S4GKC20G8EV.md",
+   "title": "Roadmap: Needs-classification section, kind-mix per epic, milestone grouping (derived epic milestone), tests",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXFKHPHDANP7S4GKC20G8EV"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXFKHVTZQZ371DF7Z5HQB8M",
+   "render": "as-is",
+   "render_hash": "4f5ef7f08ac5",
+   "source": "docs/.index/rendered/tickets/01KXXFKHVTZQZ371DF7Z5HQB8M.md",
+   "title": "v0.7.0 CHANGELOG, full-suite + coverage verification, dogfood sync with new fields",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXFKHVTZQZ371DF7Z5HQB8M"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXG2QPCE09N0V2Y1DKZDNSG",
+   "render": "as-is",
+   "render_hash": "1470dd940716",
+   "source": "docs/.index/rendered/tickets/01KXXG2QPCE09N0V2Y1DKZDNSG.md",
+   "title": "Docs refresh: README + user guide cover taxonomy, classifier, promote, adapter contract, green-gates merge, coverage gate",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXG2QPCE09N0V2Y1DKZDNSG"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXGET7PTBERR80PHA2XM7RN",
+   "render": "as-is",
+   "render_hash": "3ad0bf73ddf7",
+   "source": "docs/.index/rendered/tickets/01KXXGET7PTBERR80PHA2XM7RN.md",
+   "title": "Hook gap: pre-commit schema check does not enforce taxonomy \u00a72 rules (spec \u00a73.3) \u2014 CLI-only enforcement",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXGET7PTBERR80PHA2XM7RN"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXHXHFY3RV0X4M92PQ3PCBZ",
+   "render": "as-is",
+   "render_hash": "0bc825560898",
+   "source": "docs/.index/rendered/tickets/01KXXHXHFY3RV0X4M92PQ3PCBZ.md",
+   "title": "Cut v0.7.0: stamp CHANGELOG, snapshot roadmap, tag, GitHub release, publish",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXHXHFY3RV0X4M92PQ3PCBZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXJDW8XQ8S5MPST369MJQZT",
+   "render": "as-is",
+   "render_hash": "44ebb1ca7586",
+   "source": "docs/.index/rendered/tickets/01KXXJDW8XQ8S5MPST369MJQZT.md",
+   "title": "Dispatcher pushes orphan/untitled items: scope must skip _orphan and titleless items, drift-report instead",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXJDW8XQ8S5MPST369MJQZT"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXJYK5KS3MQWRPGZ3WNA790",
+   "render": "as-is",
+   "render_hash": "63447eac290c",
+   "source": "docs/.index/rendered/tickets/01KXXJYK5KS3MQWRPGZ3WNA790.md",
+   "title": "Architecture Decision Records: schema-validated docs/adr/, worklog adr new|list|check, wiki-synced",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXJYK5KS3MQWRPGZ3WNA790"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXJYKB1B12WEXTS6FZZ7QH2",
+   "render": "as-is",
+   "render_hash": "a89227cec7fa",
+   "source": "docs/.index/rendered/tickets/01KXXJYKB1B12WEXTS6FZZ7QH2.md",
+   "title": "worklog adr subcommands + schema/adr.schema.json + pre-commit check + tests",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXJYKB1B12WEXTS6FZZ7QH2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXJYKGPV41JK02KX0X67Q0G",
+   "render": "as-is",
+   "render_hash": "c0579f554098",
+   "source": "docs/.index/rendered/tickets/01KXXJYKGPV41JK02KX0X67Q0G.md",
+   "title": "Seed ADRs 0001-0003 from real decisions; wiki-publish default set gains ADRs; docs + Home section",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXJYKGPV41JK02KX0X67Q0G"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXKPNAHYJD2143G5VAB843C",
+   "render": "as-is",
+   "render_hash": "b5a10f650033",
+   "source": "docs/.index/rendered/tickets/01KXXKPNAHYJD2143G5VAB843C.md",
+   "title": "test_adr ran repo bin/ from sandbox cwd \u2014 invisible to subprocess coverage (caught by the green-gates loop refusing PR #36)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXKPNAHYJD2143G5VAB843C"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXKWMV2Y6YGW2GY24YFZ9HY",
+   "render": "as-is",
+   "render_hash": "02d04bd4cbfc",
+   "source": "docs/.index/rendered/tickets/01KXXKWMV2Y6YGW2GY24YFZ9HY.md",
+   "title": "Cut v0.8.0",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXKWMV2Y6YGW2GY24YFZ9HY"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXM1Z13NPYK1XBJ1EQFEKGT",
+   "render": "as-is",
+   "render_hash": "a07514587928",
+   "source": "docs/.index/rendered/tickets/01KXXM1Z13NPYK1XBJ1EQFEKGT.md",
+   "title": "Grok Build native compat statement + Mermaid roadmap viz (deps/hierarchy default, event-dated gantt)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXM1Z13NPYK1XBJ1EQFEKGT"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXM7MD5SRRZ19EM2QGWNBHJ",
+   "render": "as-is",
+   "render_hash": "c257db6ce805",
+   "source": "docs/.index/rendered/tickets/01KXXM7MD5SRRZ19EM2QGWNBHJ.md",
+   "title": "Feature flag for auto-merge-on-green (default on)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXM7MD5SRRZ19EM2QGWNBHJ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXMCG418TSDDKCEZ61ZSFMH",
+   "render": "as-is",
+   "render_hash": "58232111f574",
+   "source": "docs/.index/rendered/tickets/01KXXMCG418TSDDKCEZ61ZSFMH.md",
+   "title": "CLI accepts empty item id: update/close/link/ingest append orphan events for ''",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXMCG418TSDDKCEZ61ZSFMH"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXP6PBPXCNHAQF6Z774VAHR",
+   "render": "as-is",
+   "render_hash": "230f10072419",
+   "source": "docs/.index/rendered/tickets/01KXXP6PBPXCNHAQF6Z774VAHR.md",
+   "title": "Cut v0.9.0",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXP6PBPXCNHAQF6Z774VAHR"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXPCNQDQG9YQSEJGFRHNE12",
+   "render": "as-is",
+   "render_hash": "90db1bc12937",
+   "source": "docs/.index/rendered/tickets/01KXXPCNQDQG9YQSEJGFRHNE12.md",
+   "title": "Stop hook false-positives during background merge-chain branch handoffs (2x on 2026-07-19): gate reads transient tree state",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXPCNQDQG9YQSEJGFRHNE12"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXRQVRNAC61JC4RPYRWH6R2",
+   "render": "as-is",
+   "render_hash": "09b5d5af02e0",
+   "source": "docs/.index/rendered/tickets/01KXXRQVRNAC61JC4RPYRWH6R2.md",
+   "title": "Stop hook root cause was untracked files (inputs/) counted as dirty \u2014 race diagnosis in #46 was wrong; use status -uno",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXRQVRNAC61JC4RPYRWH6R2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXT3XSWDX75JFJJ7DRPMX1Z",
+   "render": "as-is",
+   "render_hash": "d0d0859e95de",
+   "source": "docs/.index/rendered/tickets/01KXXT3XSWDX75JFJJ7DRPMX1Z.md",
+   "title": "Cut v0.10.0",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXT3XSWDX75JFJJ7DRPMX1Z"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXY4QBSGEX3HPMPSENYFA5A",
+   "render": "as-is",
+   "render_hash": "6a129f01ead4",
+   "source": "docs/.index/rendered/tickets/01KXXY4QBSGEX3HPMPSENYFA5A.md",
+   "title": "ADO migration feedback: tag markers, update-merge safety, link-first import",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXY4QBSGEX3HPMPSENYFA5A"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXY4QH87BAJ0M7XBJH3Y0P7",
+   "render": "as-is",
+   "render_hash": "f159a4ed0408",
+   "source": "docs/.index/rendered/tickets/01KXXY4QH87BAJ0M7XBJH3Y0P7.md",
+   "title": "Marker style per system end-to-end: ADO strips HTML comments from Description \u2014 marker must be a tag (worklog:<ulid>); verify dispatcher honors capabilities.marker.style/template beyond html_comment; document in ticket-sync skill + adapters/README",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXY4QH87BAJ0M7XBJH3Y0P7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXY4QPE8RHA7D0TYN3VS0MY",
+   "render": "as-is",
+   "render_hash": "25671b426b6c",
+   "source": "docs/.index/rendered/tickets/01KXXY4QPE8RHA7D0TYN3VS0MY.md",
+   "title": "Adapter update-merge safety rule: updates merge tags and touch only changed fields \u2014 never overwrite existing remote content; add to adapters/README authoring rules + fake adapter behavior + dumbness-compatible test",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXY4QPE8RHA7D0TYN3VS0MY"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXXY4QW2MR804KTV4RQ952DW",
+   "render": "as-is",
+   "render_hash": "f1fc7144fe1a",
+   "source": "docs/.index/rendered/tickets/01KXXY4QW2MR804KTV4RQ952DW.md",
+   "title": "Migration guide: adopting worklog with existing tickets \u2014 pre-seed external via worklog link (create-vs-update keys purely on external presence), pilot one epic, sync --dry-run acceptance gate = 0 creates",
+   "truth_state": "done",
+   "wiki_key": "item/01KXXY4QW2MR804KTV4RQ952DW"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY2N7XC0BWB2AFWDD9VAECJ",
+   "render": "as-is",
+   "render_hash": "44893c5d89f0",
+   "source": "docs/.index/rendered/tickets/01KXY2N7XC0BWB2AFWDD9VAECJ.md",
+   "title": "Daily status report 2026-07-19",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY2N7XC0BWB2AFWDD9VAECJ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY3CQY87WFM35ZECK5TMR4S",
+   "render": "as-is",
+   "render_hash": "158292aa775e",
+   "source": "docs/.index/rendered/tickets/01KXY3CQY87WFM35ZECK5TMR4S.md",
+   "title": "Widen system enums: linear, gitlab, codecatalyst (AWS), explicit other; GCP no-native-tracker note; enum-is-advisory semantics",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY3CQY87WFM35ZECK5TMR4S"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY449A7CEKMJXTQPZRC2WX9",
+   "render": "as-is",
+   "render_hash": "fecaf487cd9a",
+   "source": "docs/.index/rendered/tickets/01KXY449A7CEKMJXTQPZRC2WX9.md",
+   "title": "Cut v0.11.0: stamp lockstep versions + CHANGELOG, snapshot roadmap, tag, GitHub release, publish",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY449A7CEKMJXTQPZRC2WX9"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY7X0QH47Z6B5QZD5G052FJ",
+   "render": "as-is",
+   "render_hash": "4d928db91993",
+   "source": "docs/.index/rendered/tickets/01KXY7X0QH47Z6B5QZD5G052FJ.md",
+   "title": "Design docs + code walkthroughs with release-time doc sync",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY7X0QH47Z6B5QZD5G052FJ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY7X0QJ2SBY6KTQ30AKASP7",
+   "render": "as-is",
+   "render_hash": "86166649c347",
+   "source": "docs/.index/rendered/tickets/01KXY7X0QJ2SBY6KTQ30AKASP7.md",
+   "title": "docs: user guide + plugin guide + README document design artifacts; CLAUDE.md policy bullet; wiki-publish default set gains designs",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY7X0QJ2SBY6KTQ30AKASP7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY7X0QJ79852RFK5Q8F6FZM",
+   "render": "as-is",
+   "render_hash": "a0d134222de2",
+   "source": "docs/.index/rendered/tickets/01KXY7X0QJ79852RFK5Q8F6FZM.md",
+   "title": "suites green; PR; green-gates merge; item closeout",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY7X0QJ79852RFK5Q8F6FZM"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY7X0QJAE0QH2W30JKK39TA",
+   "render": "as-is",
+   "render_hash": "aec998a9150a",
+   "source": "docs/.index/rendered/tickets/01KXY7X0QJAE0QH2W30JKK39TA.md",
+   "title": "release skill gains background-agents doc-sync step (both copies); release.sync_docs list in .work/config.yml + init.sh scaffold",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY7X0QJAE0QH2W30JKK39TA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY7X0QJCEHRDABCXF6QKXF7",
+   "render": "as-is",
+   "render_hash": "d538fed39e3d",
+   "source": "docs/.index/rendered/tickets/01KXY7X0QJCEHRDABCXF6QKXF7.md",
+   "title": "design-docs skill: SKILL.md + references/design-doc-prompt.md (Rick's 35-section prompt, improved) + references/code-walkthrough-prompt.md; plugin mirror with version frontmatter",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY7X0QJCEHRDABCXF6QKXF7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY7X0QJQHZBCSCR438RFFMM",
+   "render": "as-is",
+   "render_hash": "f68220263a92",
+   "source": "docs/.index/rendered/tickets/01KXY7X0QJQHZBCSCR438RFFMM.md",
+   "title": "dogfood generation: current_design_doc + current_code_walkthrough + dated v0.11.0-release pair under docs/designs/ (background agent, grounded in actual repo, frontmatter tag/hash/branch/roadmap)",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY7X0QJQHZBCSCR438RFFMM"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY7X0QJY4JZWYYF2CA46B9G",
+   "render": "as-is",
+   "render_hash": "ef17e3de35b7",
+   "source": "docs/.index/rendered/tickets/01KXY7X0QJY4JZWYYF2CA46B9G.md",
+   "title": "wiki: Design-Doc + Code-Walkthrough live pages, frozen dated pages, Home links, published.json ledger keys",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY7X0QJY4JZWYYF2CA46B9G"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY85EAS6YSEH2EDFW3PXN22",
+   "render": "as-is",
+   "render_hash": "a3651834433d",
+   "source": "docs/.index/rendered/tickets/01KXY85EAS6YSEH2EDFW3PXN22.md",
+   "title": "Packaging guard matches 'docs/' as substring \u2014 skills/design-docs/ false-positive; match path segments",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY85EAS6YSEH2EDFW3PXN22"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY8V5WZJ4E76B3D39KW5DCE",
+   "render": "as-is",
+   "render_hash": "533aa785b7d1",
+   "source": "docs/.index/rendered/tickets/01KXY8V5WZJ4E76B3D39KW5DCE.md",
+   "title": "Pull sync drops taxonomy: sync_dispatch INGEST_FIELDS lacks level/kind/milestone \u2014 remote taxonomy edits silently not ingested",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY8V5WZJ4E76B3D39KW5DCE"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY8V62QH1H1V70M0Y08ARXX",
+   "render": "as-is",
+   "render_hash": "219473442fe1",
+   "source": "docs/.index/rendered/tickets/01KXY8V62QH1H1V70M0Y08ARXX.md",
+   "title": "No reopen CLI: fold supports reopen but worklog has no subcommand; update --status todo leaks stale resolution",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY8V62QH1H1V70M0Y08ARXX"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KXY8V686YPK4ET2XFB2KW2RX",
+   "render": "as-is",
+   "render_hash": "b944db906fec",
+   "source": "docs/.index/rendered/tickets/01KXY8V686YPK4ET2XFB2KW2RX.md",
+   "title": "sync.conflict_policy local-wins/remote-wins documented in config but never read by dispatcher \u2014 implement or descope",
+   "truth_state": "done",
+   "wiki_key": "item/01KXY8V686YPK4ET2XFB2KW2RX"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY111BC71KJGNH55CB2DWMKN",
+   "render": "as-is",
+   "render_hash": "f5d31219ed91",
+   "source": "docs/.index/rendered/tickets/01KY111BC71KJGNH55CB2DWMKN.md",
+   "title": "Server: Hono JSON API over any worklog repo (fold, events, docs, git, gh, wiki ledger, sync state)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY111BC71KJGNH55CB2DWMKN"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY111BC7B70C7M2RF1E57G17",
+   "render": "as-is",
+   "render_hash": "d411201e0e31",
+   "source": "docs/.index/rendered/tickets/01KY111BC7B70C7M2RF1E57G17.md",
+   "title": "Web shell: Vite + React + Tailwind dark dashboard chrome with repo picker",
+   "truth_state": "done",
+   "wiki_key": "item/01KY111BC7B70C7M2RF1E57G17"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY111BC7NJ4BE7JBDK2P6Y56",
+   "render": "as-is",
+   "render_hash": "2f13b986a155",
+   "source": "docs/.index/rendered/tickets/01KY111BC7NJ4BE7JBDK2P6Y56.md",
+   "title": "Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI",
+   "truth_state": "done",
+   "wiki_key": "item/01KY111BC7NJ4BE7JBDK2P6Y56"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY111BC7PABV8W6SDNVQACSN",
+   "render": "as-is",
+   "render_hash": "a7e47fd88955",
+   "source": "docs/.index/rendered/tickets/01KY111BC7PABV8W6SDNVQACSN.md",
+   "title": "WikiTicket UI \u2014 project status dashboard (wiki_ticket_sdd_ui)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY111BC7PABV8W6SDNVQACSN"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY111BC842N3J7Y7H85NHSEG",
+   "render": "as-is",
+   "render_hash": "6fa2293997ec",
+   "source": "docs/.index/rendered/tickets/01KY111BC842N3J7Y7H85NHSEG.md",
+   "title": "Tauri 2 desktop shell wrapping the same frontend",
+   "truth_state": "done",
+   "wiki_key": "item/01KY111BC842N3J7Y7H85NHSEG"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY111BC88FS6QD49JADZ9CJ5",
+   "render": "as-is",
+   "render_hash": "88f87b821f88",
+   "source": "docs/.index/rendered/tickets/01KY111BC88FS6QD49JADZ9CJ5.md",
+   "title": "Panels wave 2: Releases, Docs browser, Wiki drift, Sync health, Charts",
+   "truth_state": "done",
+   "wiki_key": "item/01KY111BC88FS6QD49JADZ9CJ5"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY111BC8F9BH0T3TERYEFC3C",
+   "render": "as-is",
+   "render_hash": "5a863261fb30",
+   "source": "docs/.index/rendered/tickets/01KY111BC8F9BH0T3TERYEFC3C.md",
+   "title": "Polish pass to the visually-stunning bar; README screenshots; tag v0.1.0",
+   "truth_state": "done",
+   "wiki_key": "item/01KY111BC8F9BH0T3TERYEFC3C"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY111BC8QJAS9KH7N368N6RF",
+   "render": "as-is",
+   "render_hash": "97177852a320",
+   "source": "docs/.index/rendered/tickets/01KY111BC8QJAS9KH7N368N6RF.md",
+   "title": "Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed",
+   "truth_state": "done",
+   "wiki_key": "item/01KY111BC8QJAS9KH7N368N6RF"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY11HDR3A5SR342DHG1BH5AZ",
+   "render": "as-is",
+   "render_hash": "8172c69af8e8",
+   "source": "docs/.index/rendered/tickets/01KY11HDR3A5SR342DHG1BH5AZ.md",
+   "title": "Cut v0.12.0: stamp CHANGELOG, snapshot roadmap, tag, GitHub release, publish (first release exercising design-docs doc-sync)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY11HDR3A5SR342DHG1BH5AZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY129SGV3DEX5NVAP34VV9G2",
+   "render": "as-is",
+   "render_hash": "254b6cd53aa4",
+   "source": "docs/.index/rendered/tickets/01KY129SGV3DEX5NVAP34VV9G2.md",
+   "title": "Close verb leaves remote taxonomy labels stale; next pull re-ingests them, reverting local reclassify-then-close (LWW on remote rev)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY129SGV3DEX5NVAP34VV9G2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY2J9WN6WN6A8TVMR1TNS6ZX",
+   "render": "as-is",
+   "render_hash": "abc8bb65f26b",
+   "source": "docs/.index/rendered/tickets/01KY2J9WN6WN6A8TVMR1TNS6ZX.md",
+   "title": "Cut v0.12.1: stamp CHANGELOG, snapshot roadmap, tag, GitHub release, publish",
+   "truth_state": "done",
+   "wiki_key": "item/01KY2J9WN6WN6A8TVMR1TNS6ZX"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY2KHHF43KAZ54F57BQW71TD",
+   "render": "as-is",
+   "render_hash": "d6cedf9f2947",
+   "source": "docs/.index/rendered/tickets/01KY2KHHF43KAZ54F57BQW71TD.md",
+   "title": "Scrub inputs/ from main history (drop d538d15 + revert f97626a via rebase, force-with-lease) and delete local copies",
+   "truth_state": "done",
+   "wiki_key": "item/01KY2KHHF43KAZ54F57BQW71TD"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5D79CY0DPSDAQ09QZFW694",
+   "render": "as-is",
+   "render_hash": "248a1d8433b5",
+   "source": "docs/.index/rendered/tickets/01KY5D79CY0DPSDAQ09QZFW694.md",
+   "title": "Ignore tmp/ scratch dir in .gitignore (onboarding notes live there untracked)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5D79CY0DPSDAQ09QZFW694"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5F6QA220S0K7RRK2Q80XR8",
+   "render": "as-is",
+   "render_hash": "c6ed733c00b1",
+   "source": "docs/.index/rendered/tickets/01KY5F6QA220S0K7RRK2Q80XR8.md",
+   "title": "Wiki information architecture",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5F6QA220S0K7RRK2Q80XR8"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5F6QA32GH5RWA1BH42EVSQ",
+   "render": "as-is",
+   "render_hash": "ba3c3be3d26d",
+   "source": "docs/.index/rendered/tickets/01KY5F6QA32GH5RWA1BH42EVSQ.md",
+   "title": "Phase 1: docs/information-architecture.md + docs/content-model.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5F6QA32GH5RWA1BH42EVSQ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5F6QA32MWBKTYPVPTBPKQ7",
+   "render": "as-is",
+   "render_hash": "7a62c83de82b",
+   "source": "docs/.index/rendered/tickets/01KY5F6QA32MWBKTYPVPTBPKQ7.md",
+   "title": "Phase 1: document templates (plan, adr, status, design) with required frontmatter",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5F6QA32MWBKTYPVPTBPKQ7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5F6QA35SKWEN7YGMVR16XS",
+   "render": "as-is",
+   "render_hash": "0d85d81d2243",
+   "source": "docs/.index/rendered/tickets/01KY5F6QA35SKWEN7YGMVR16XS.md",
+   "title": "Phase 0: index pages \u2014 Plans-Index, ADR-Index, Status-Index, Release-History",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5F6QA35SKWEN7YGMVR16XS"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5F6QA3AV0B9NGBBKTMJS7J",
+   "render": "as-is",
+   "render_hash": "6ef792d82a40",
+   "source": "docs/.index/rendered/tickets/01KY5F6QA3AV0B9NGBBKTMJS7J.md",
+   "title": "Phase 1: docs/navigation.yml + docs/publishing.yml publish manifest",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5F6QA3AV0B9NGBBKTMJS7J"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5F6QA3G8VWG73VVD3AWDGE",
+   "render": "as-is",
+   "render_hash": "7310c76e75b5",
+   "source": "docs/.index/rendered/tickets/01KY5F6QA3G8VWG73VVD3AWDGE.md",
+   "title": "Phase 0: redesign Home as question-oriented orientation hub with current-vs-history zones",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5F6QA3G8VWG73VVD3AWDGE"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5F6QA3Y05F7S3ZMWEQ5BB2",
+   "render": "as-is",
+   "render_hash": "d9d7279d31a8",
+   "source": "docs/.index/rendered/tickets/01KY5F6QA3Y05F7S3ZMWEQ5BB2.md",
+   "title": "Phase 0: current-vs-historical banners + Wiki-Structure conventions page",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5F6QA3Y05F7S3ZMWEQ5BB2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5F6QA3YAAWKF4PC5VPM90A",
+   "render": "as-is",
+   "render_hash": "f21a54c17c0d",
+   "source": "docs/.index/rendered/tickets/01KY5F6QA3YAAWKF4PC5VPM90A.md",
+   "title": "Phase 0: _Sidebar.md mapped to the 9 target sections",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5F6QA3YAAWKF4PC5VPM90A"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5F6QA43HN4CAMFBBD6MKSA",
+   "render": "as-is",
+   "render_hash": "c39d38ee6f22",
+   "source": "docs/.index/rendered/tickets/01KY5F6QA43HN4CAMFBBD6MKSA.md",
+   "title": "Phase 2 (coarse): frontmatter normalization + generated indexes incl. Traceability Index \u2014 explode via superseding plan",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5F6QA43HN4CAMFBBD6MKSA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5F6QA4WWSSZVKE0YJ7YHXZ",
+   "render": "as-is",
+   "render_hash": "235412d330ee",
+   "source": "docs/.index/rendered/tickets/01KY5F6QA4WWSSZVKE0YJ7YHXZ.md",
+   "title": "Phase 3 (coarse): traceability graph, worklog docs validate/index/health/trace, CI gates \u2014 explode via superseding plan",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5F6QA4WWSSZVKE0YJ7YHXZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5F6QA4YVHE4ESMT3E2KYK9",
+   "render": "as-is",
+   "render_hash": "5552a5631fd5",
+   "source": "docs/.index/rendered/tickets/01KY5F6QA4YVHE4ESMT3E2KYK9.md",
+   "title": "Phase 1: content inventory \u2014 classify every existing doc and wiki page into the model",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5F6QA4YVHE4ESMT3E2KYK9"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5G9ZW025TRGTHFAFSVEXSX",
+   "render": "as-is",
+   "render_hash": "5ecadc5421dd",
+   "source": "docs/.index/rendered/tickets/01KY5G9ZW025TRGTHFAFSVEXSX.md",
+   "title": "Phase 0: worklog wiki-key + worklog ia-inventory (read-only) + migration record docs/migrations/0002-ia-content-model.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5G9ZW025TRGTHFAFSVEXSX"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5G9ZW0EYQ5T83RP46Z7952",
+   "render": "as-is",
+   "render_hash": "d8108deee987",
+   "source": "docs/.index/rendered/tickets/01KY5G9ZW0EYQ5T83RP46Z7952.md",
+   "title": "Phase 1: worklog ia-normalize \u2014 sidecars for frozen docs, in-place for sanctioned-live; backfill wiki_key (ledger-seeded) + truth_state",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5G9ZW0EYQ5T83RP46Z7952"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5G9ZW0H2YMNWDFJYGRPYE5",
+   "render": "as-is",
+   "render_hash": "57e1b6f0ba3d",
+   "source": "docs/.index/rendered/tickets/01KY5G9ZW0H2YMNWDFJYGRPYE5.md",
+   "title": "IA & content model (supersedes wiki-information-architecture)",
+   "truth_state": "open",
+   "wiki_key": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5G9ZW0MQD9335S641DC7ZG",
+   "render": "as-is",
+   "render_hash": "dbe9fa4e178a",
+   "source": "docs/.index/rendered/tickets/01KY5G9ZW0MQD9335S641DC7ZG.md",
+   "title": "Phase 3: generated indexes \u2014 Decisions, Releases, Status Archive; wire ia-index into release + plan-capture skills",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5G9ZW0MQD9335S641DC7ZG"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5G9ZW0PBXTBKRJJ70QHR5P",
+   "render": "as-is",
+   "render_hash": "00ab60052cbb",
+   "source": "docs/.index/rendered/tickets/01KY5G9ZW0PBXTBKRJJ70QHR5P.md",
+   "title": "Phase 0: schema/doc.schema.json unified frontmatter schema + stdlib validator (adr.schema.json pattern)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5G9ZW0PBXTBKRJJ70QHR5P"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5G9ZW0PEZK9PTM3NG0PYX7",
+   "render": "as-is",
+   "render_hash": "25d2d2e094f4",
+   "source": "docs/.index/rendered/tickets/01KY5G9ZW0PEZK9PTM3NG0PYX7.md",
+   "title": "Phase 2: extend wiki-publish to consume publish-manifest.json; replace hand-maintained wiki-home.md with generated Home",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5G9ZW0PEZK9PTM3NG0PYX7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5G9ZW0PNKDDEK5TM8GS2J6",
+   "render": "as-is",
+   "render_hash": "c9a799d8ce28",
+   "source": "docs/.index/rendered/tickets/01KY5G9ZW0PNKDDEK5TM8GS2J6.md",
+   "title": "Phase 1: CI gates \u2014 wiki_key present/unique, schema-valid frontmatter (warn one cycle, then hard)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5G9ZW0PNKDDEK5TM8GS2J6"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5G9ZW0RABXWHEMEP1FAV2G",
+   "render": "as-is",
+   "render_hash": "a2343717e31a",
+   "source": "docs/.index/rendered/tickets/01KY5G9ZW0RABXWHEMEP1FAV2G.md",
+   "title": "Phase 5: promote gates to hard fail; platform render adapters (GitLab/ADO/Confluence); /worklog:find + glossary",
+   "truth_state": "open",
+   "wiki_key": "item/01KY5G9ZW0RABXWHEMEP1FAV2G"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5G9ZW0X5F3K7KHP1SXFM3Q",
+   "render": "as-is",
+   "render_hash": "cfbb8ae473f7",
+   "source": "docs/.index/rendered/tickets/01KY5G9ZW0X5F3K7KHP1SXFM3Q.md",
+   "title": "Phase 2: worklog ia-render + ia-manifest \u2014 generated Home, Sidebar, publish-time truth banners in docs/.index/rendered/",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5G9ZW0X5F3K7KHP1SXFM3Q"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5G9ZW0Z6JFMVTAFC54RM36",
+   "render": "as-is",
+   "render_hash": "68ccf1c33a52",
+   "source": "docs/.index/rendered/tickets/01KY5G9ZW0Z6JFMVTAFC54RM36.md",
+   "title": "Phase 4: ia-graph typed-edge taxonomy + link-pr + trace-check + Traceability Index; propose-only edge seeding via suggestions.jsonl",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5G9ZW0Z6JFMVTAFC54RM36"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5HGKCBKJA5A3ZJGMPASP3X",
+   "render": "as-is",
+   "render_hash": "9cbc92b947e5",
+   "source": "docs/.index/rendered/tickets/01KY5HGKCBKJA5A3ZJGMPASP3X.md",
+   "title": "Tickets unreadable: no junior-dev/PM description \u2014 add --body to add/update, plan-capture task descriptions, skill rule, backfill open items",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5HGKCBKJA5A3ZJGMPASP3X"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5HW7KSBAYS1RE95ZT8BYM4",
+   "render": "as-is",
+   "render_hash": "a1662dc447fb",
+   "source": "docs/.index/rendered/tickets/01KY5HW7KSBAYS1RE95ZT8BYM4.md",
+   "title": "Compaction aborts on closed orphan item \u2014 snapshot must not inject taxonomy defaults",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5HW7KSBAYS1RE95ZT8BYM4"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5JB9F9XKKD1RNS66J6DXHZ",
+   "render": "as-is",
+   "render_hash": "aac32c909e40",
+   "source": "docs/.index/rendered/tickets/01KY5JB9F9XKKD1RNS66J6DXHZ.md",
+   "title": "GitHub Wiki shows raw YAML frontmatter on published pages \u2014 strip at publish time",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5JB9F9XKKD1RNS66J6DXHZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5N447CK55EXFHTQGWA9JZ9",
+   "render": "as-is",
+   "render_hash": "5d6fbc2299ba",
+   "source": "docs/.index/rendered/tickets/01KY5N447CK55EXFHTQGWA9JZ9.md",
+   "title": "PR-description skill: 10-section high-context PR body spec (big picture, runtime context, scope, flow, testing honesty, out-of-scope, ticket glossary)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5N447CK55EXFHTQGWA9JZ9"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5N7DF2YMR9E11G4W3HF6PY",
+   "render": "as-is",
+   "render_hash": "5b69945a3b57",
+   "source": "docs/.index/rendered/tickets/01KY5N7DF2YMR9E11G4W3HF6PY.md",
+   "title": "issue-description skill + rich ticket bodies in ticket-sync (summary/context/outcome/scope/acceptance/traceability from the item graph)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5N7DF2YMR9E11G4W3HF6PY"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5NE0ZYGBWG44N0KPEBFCZ8",
+   "render": "as-is",
+   "render_hash": "e7532788645a",
+   "source": "docs/.index/rendered/tickets/01KY5NE0ZYGBWG44N0KPEBFCZ8.md",
+   "title": "Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config",
+   "truth_state": "open",
+   "wiki_key": "item/01KY5NE0ZYGBWG44N0KPEBFCZ8"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5P9V0CMM86G43HH4Q28ZDD",
+   "render": "as-is",
+   "render_hash": "309edc9be580",
+   "source": "docs/.index/rendered/tickets/01KY5P9V0CMM86G43HH4Q28ZDD.md",
+   "title": "pre-commit hook pollutes worktree with bin/__pycache__ after git add \u2014 merge aborts on tracked-vs-untracked pyc collision",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5P9V0CMM86G43HH4Q28ZDD"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5QJARJ0S9QHGRPAV8SFV9H",
+   "render": "as-is",
+   "render_hash": "62f5646fd6a5",
+   "source": "docs/.index/rendered/tickets/01KY5QJARJ0S9QHGRPAV8SFV9H.md",
+   "title": "Repair frozen-plan drift: restore grok-compat-and-mermaid-viz to published version, move background-subagent rule to amendment doc",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5QJARJ0S9QHGRPAV8SFV9H"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5QJAY8C8G5C4FEBMRFKM51",
+   "render": "as-is",
+   "render_hash": "49f5996abdd6",
+   "source": "docs/.index/rendered/tickets/01KY5QJAY8C8G5C4FEBMRFKM51.md",
+   "title": "Add schema drift test: schema/doc.schema.json must stay equivalent to bin/ia.py validator constants",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5QJAY8C8G5C4FEBMRFKM51"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5QV5G05V77TKESCJVY62S3",
+   "render": "as-is",
+   "render_hash": "75b16c3a37bb",
+   "source": "docs/.index/rendered/tickets/01KY5QV5G05V77TKESCJVY62S3.md",
+   "title": "Schema boundary: split doc.schema.json (documents) from entity schema (items, releases, code-changes) \u2014 defer until a second graph entity needs validation",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5QV5G05V77TKESCJVY62S3"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5VRR3R4JEFSV3S9J6PFD7N",
+   "render": "as-is",
+   "render_hash": "98e338ebacfc",
+   "source": "docs/.index/rendered/tickets/01KY5VRR3R4JEFSV3S9J6PFD7N.md",
+   "title": "Author superseding UI plan: re-base wiki_ticket_sdd_ui design on the shipped IA & content model (manifest, wiki_key, truth_state, graph, sidecars)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5VRR3R4JEFSV3S9J6PFD7N"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5VY0TDSWJE6W80CNCWA8QA",
+   "render": "as-is",
+   "render_hash": "eb2eafc20507",
+   "source": "docs/.index/rendered/tickets/01KY5VY0TDSWJE6W80CNCWA8QA.md",
+   "title": "WikiTicket UI \u2014 IA-aware dashboard (supersedes wiki-ticket-ui)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5VY0TDSWJE6W80CNCWA8QA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5VY0TDTD7PQDT6EVD5AG9N",
+   "render": "as-is",
+   "render_hash": "31e27fed8ce0",
+   "source": "docs/.index/rendered/tickets/01KY5VY0TDTD7PQDT6EVD5AG9N.md",
+   "title": "Scaffold public repo wiki_ticket_sdd_ui: README, LICENSE, npm workspaces, CI",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5VY0TDTD7PQDT6EVD5AG9N"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5VY0TE7G7ZC5W20T3KAXJ7",
+   "render": "as-is",
+   "render_hash": "7cf486dc4c48",
+   "source": "docs/.index/rendered/tickets/01KY5VY0TE7G7ZC5W20T3KAXJ7.md",
+   "title": "Tauri 2 desktop shell wrapping the same frontend",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5VY0TE7G7ZC5W20T3KAXJ7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5VY0TE8B6RXVX1MQYJZ0TH",
+   "render": "as-is",
+   "render_hash": "976a217a4f24",
+   "source": "docs/.index/rendered/tickets/01KY5VY0TE8B6RXVX1MQYJZ0TH.md",
+   "title": "Polish pass to the visually-stunning bar; README screenshots; tag v0.1.0",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5VY0TE8B6RXVX1MQYJZ0TH"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5VY0TE8EZPWNZPZWSPTSAR",
+   "render": "as-is",
+   "render_hash": "e9d089b62f3d",
+   "source": "docs/.index/rendered/tickets/01KY5VY0TE8EZPWNZPZWSPTSAR.md",
+   "title": "Traceability panel: interactive _graph.json explorer with trace-check integrity checklist",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5VY0TE8EZPWNZPZWSPTSAR"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5VY0TEK8XSGP2SG57GF0KT",
+   "render": "as-is",
+   "render_hash": "856a0206dc95",
+   "source": "docs/.index/rendered/tickets/01KY5VY0TEK8XSGP2SG57GF0KT.md",
+   "title": "Web shell: Vite + React + Tailwind dark dashboard chrome with repo picker",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5VY0TEK8XSGP2SG57GF0KT"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5VY0TEKXBXK91S9ZFZTJZ5",
+   "render": "as-is",
+   "render_hash": "ab7dbbe6319b",
+   "source": "docs/.index/rendered/tickets/01KY5VY0TEKXBXK91S9ZFZTJZ5.md",
+   "title": "Panels wave 2: Releases, Docs browser (inventory-driven), Publish plane (3-way drift), Sync health, Charts",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5VY0TEKXBXK91S9ZFZTJZ5"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5VY0TEW87KK6AW6FQTYGZ9",
+   "render": "as-is",
+   "render_hash": "4b22dbb5d822",
+   "source": "docs/.index/rendered/tickets/01KY5VY0TEW87KK6AW6FQTYGZ9.md",
+   "title": "Server: Hono JSON API over any worklog repo \u2014 fold, events, docs, index plane, git, gh, ledger, sync state",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5VY0TEW87KK6AW6FQTYGZ9"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5VY0TEWBMZK5W6YJN5FQ9D",
+   "render": "as-is",
+   "render_hash": "17c37768b7c9",
+   "source": "docs/.index/rendered/tickets/01KY5VY0TEWBMZK5W6YJN5FQ9D.md",
+   "title": "Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5VY0TEWBMZK5W6YJN5FQ9D"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY5ZY3ZX2Z4F73Y0BT0M0NR5",
+   "render": "as-is",
+   "render_hash": "b6e8f043b0e7",
+   "source": "docs/.index/rendered/tickets/01KY5ZY3ZX2Z4F73Y0BT0M0NR5.md",
+   "title": "init.sh copy list missing IA modules (ia.py, ia_render.py, ia_graph.py, canonical.py, sync_dispatch.py) \u2014 fresh repos get worklog with broken ia-* commands",
+   "truth_state": "done",
+   "wiki_key": "item/01KY5ZY3ZX2Z4F73Y0BT0M0NR5"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY6037BN94086PR1QP0CM7XC",
+   "render": "as-is",
+   "render_hash": "b05e7d5271ad",
+   "source": "docs/.index/rendered/tickets/01KY6037BN94086PR1QP0CM7XC.md",
+   "title": "ia.classify treats README.md inside docs/plans|status|adr dirs as a doc of that type \u2014 generic repos with folder READMEs fail inventory",
+   "truth_state": "done",
+   "wiki_key": "item/01KY6037BN94086PR1QP0CM7XC"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY69K4ZJMYJ1HWMWXMQ4J7BA",
+   "render": "as-is",
+   "render_hash": "762333dee6e9",
+   "source": "docs/.index/rendered/tickets/01KY69K4ZJMYJ1HWMWXMQ4J7BA.md",
+   "title": "Add MIT LICENSE (repo was public with no license)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY69K4ZJMYJ1HWMWXMQ4J7BA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY8KQ8WW4A4RJ07YC4QVE7HB",
+   "render": "as-is",
+   "render_hash": "ff388430c1c9",
+   "source": "docs/.index/rendered/tickets/01KY8KQ8WW4A4RJ07YC4QVE7HB.md",
+   "title": "Cut v0.13.0 release",
+   "truth_state": "done",
+   "wiki_key": "item/01KY8KQ8WW4A4RJ07YC4QVE7HB"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KY8KQ923Q5DMVDACGK2S4EHD",
+   "render": "as-is",
+   "render_hash": "534c3284c71f",
+   "source": "docs/.index/rendered/tickets/01KY8KQ923Q5DMVDACGK2S4EHD.md",
+   "title": "Backfill missing 0.13.0 changelog entries (process gap)",
+   "truth_state": "done",
+   "wiki_key": "item/01KY8KQ923Q5DMVDACGK2S4EHD"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYA8MD",
+   "render": "as-is",
+   "render_hash": "708521bb33a3",
+   "source": "docs/.index/rendered/tickets/01KYA8MD.md",
+   "title": "01KYA8MD",
+   "truth_state": "done",
+   "wiki_key": "item/01KYA8MD"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYA8MDY5HP9MC5KQMJX3BN84",
+   "render": "as-is",
+   "render_hash": "2e1cd3ffd128",
+   "source": "docs/.index/rendered/tickets/01KYA8MDY5HP9MC5KQMJX3BN84.md",
+   "title": "Give kind:ops release items a GitHub issue going forward",
+   "truth_state": "done",
+   "wiki_key": "item/01KYA8MDY5HP9MC5KQMJX3BN84"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYA99TVCGX79HFNHN1DVT7Y6",
+   "render": "as-is",
+   "render_hash": "da03c1105f8d",
+   "source": "docs/.index/rendered/tickets/01KYA99TVCGX79HFNHN1DVT7Y6.md",
+   "title": "close/update silently corrupt log when given an item-id prefix instead of the full ULID",
+   "truth_state": "open",
+   "wiki_key": "item/01KYA99TVCGX79HFNHN1DVT7Y6"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQP3YCB9AVHRPCTCMRS",
+   "render": "as-is",
+   "render_hash": "5179ea594e45",
+   "source": "docs/.index/rendered/tickets/01KYABYEQP3YCB9AVHRPCTCMRS.md",
+   "title": "Phase 0: add item_links() graph helper",
+   "truth_state": "done",
+   "wiki_key": "item/01KYABYEQP3YCB9AVHRPCTCMRS"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQP8ANXGYPBCV2T20D8",
+   "render": "as-is",
+   "render_hash": "86b35ee9467d",
+   "source": "docs/.index/rendered/tickets/01KYABYEQP8ANXGYPBCV2T20D8.md",
+   "title": "Extend IA to tickets, PRs, and releases (artifact pages)",
+   "truth_state": "open",
+   "wiki_key": "item/01KYABYEQP8ANXGYPBCV2T20D8"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQP9FDY8THDV79F324G",
+   "render": "as-is",
+   "render_hash": "37942eb12447",
+   "source": "docs/.index/rendered/tickets/01KYABYEQP9FDY8THDV79F324G.md",
+   "title": "One-line summary derivation from body's first sentence (no cache)",
+   "truth_state": "done",
+   "wiki_key": "item/01KYABYEQP9FDY8THDV79F324G"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQPAFJM7WC3XZV6YY76",
+   "render": "as-is",
+   "render_hash": "90c1e28ec268",
+   "source": "docs/.index/rendered/tickets/01KYABYEQPAFJM7WC3XZV6YY76.md",
+   "title": "`ia-ticket <ULID>` preview subcommand on `bin/worklog`",
+   "truth_state": "done",
+   "wiki_key": "item/01KYABYEQPAFJM7WC3XZV6YY76"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQPDS2VFQKQ7B6YXZVR",
+   "render": "as-is",
+   "render_hash": "daa165c47e39",
+   "source": "docs/.index/rendered/tickets/01KYABYEQPDS2VFQKQ7B6YXZVR.md",
+   "title": "Phase 4: regenerate all pages and confirm coverage gate holds",
+   "truth_state": "open",
+   "wiki_key": "item/01KYABYEQPDS2VFQKQ7B6YXZVR"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQPF8N2K26ENRKREE0W",
+   "render": "as-is",
+   "render_hash": "9f6281303948",
+   "source": "docs/.index/rendered/tickets/01KYABYEQPF8N2K26ENRKREE0W.md",
+   "title": "Phase 3: file PR live-metadata follow-up item",
+   "truth_state": "open",
+   "wiki_key": "item/01KYABYEQPF8N2K26ENRKREE0W"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQPK6PV87WNZXEYRB12",
+   "render": "as-is",
+   "render_hash": "2dcac335601f",
+   "source": "docs/.index/rendered/tickets/01KYABYEQPK6PV87WNZXEYRB12.md",
+   "title": "Phase 1: render ticket pages for all four levels",
+   "truth_state": "done",
+   "wiki_key": "item/01KYABYEQPK6PV87WNZXEYRB12"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQPNK7HHH5CMAR2V1JG",
+   "render": "as-is",
+   "render_hash": "ba6553bfcc33",
+   "source": "docs/.index/rendered/tickets/01KYABYEQPNK7HHH5CMAR2V1JG.md",
+   "title": "Phase 4: extend tests/test_ia.py for the new page shapes",
+   "truth_state": "open",
+   "wiki_key": "item/01KYABYEQPNK7HHH5CMAR2V1JG"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQPP82DJEN19F43YRAE",
+   "render": "as-is",
+   "render_hash": "e17db9476110",
+   "source": "docs/.index/rendered/tickets/01KYABYEQPP82DJEN19F43YRAE.md",
+   "title": "Phase 2: render release pages with graph-derived Change Log",
+   "truth_state": "open",
+   "wiki_key": "item/01KYABYEQPP82DJEN19F43YRAE"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQPRM8308SYFPR8X437",
+   "render": "as-is",
+   "render_hash": "67d5ed2a1628",
+   "source": "docs/.index/rendered/tickets/01KYABYEQPRM8308SYFPR8X437.md",
+   "title": "Aggregate progress rollup for Story/Feature/Epic pages",
+   "truth_state": "done",
+   "wiki_key": "item/01KYABYEQPRM8308SYFPR8X437"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQPW8Q2RGGTNP71W88E",
+   "render": "as-is",
+   "render_hash": "d7dbde47a9bd",
+   "source": "docs/.index/rendered/tickets/01KYABYEQPW8Q2RGGTNP71W88E.md",
+   "title": "Phase 2: render PR pages",
+   "truth_state": "open",
+   "wiki_key": "item/01KYABYEQPW8Q2RGGTNP71W88E"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYABYEQPXZAAY0VWF6Z8TQ27",
+   "render": "as-is",
+   "render_hash": "f997a43dde31",
+   "source": "docs/.index/rendered/tickets/01KYABYEQPXZAAY0VWF6Z8TQ27.md",
+   "title": "Phase 0: add item/release page-name helpers and extend build_manifest()",
+   "truth_state": "done",
+   "wiki_key": "item/01KYABYEQPXZAAY0VWF6Z8TQ27"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYAC0AC01R4C6W7YY1X8NVRV",
+   "render": "as-is",
+   "render_hash": "dadcb98d5991",
+   "source": "docs/.index/rendered/tickets/01KYAC0AC01R4C6W7YY1X8NVRV.md",
+   "title": "Auto-draft the release CHANGELOG unreleased section from git log",
+   "truth_state": "open",
+   "wiki_key": "item/01KYAC0AC01R4C6W7YY1X8NVRV"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYACFJA0SQSF4C83BJZXB5MY",
+   "render": "as-is",
+   "render_hash": "e5287e76c9ef",
+   "source": "docs/.index/rendered/tickets/01KYACFJA0SQSF4C83BJZXB5MY.md",
+   "title": "banner() mislabels frozen 'current' plans as status reports",
+   "truth_state": "open",
+   "wiki_key": "item/01KYACFJA0SQSF4C83BJZXB5MY"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -381,11 +2231,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-24T15:34:28Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-24T15:43:36Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "caec8a32d9d4",
+   "render_hash": "26beab9a7bae",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

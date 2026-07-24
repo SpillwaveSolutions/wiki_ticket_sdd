@@ -411,6 +411,7 @@
    "status": "active",
    "title": "Extend IA to tickets, PRs, and releases (artifact pages)",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-artifact-pages",
    "wiki_key": "plan/2026-07-24-artifact-pages"
   },
   {
@@ -613,10 +614,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-24T15:34:28Z",
+   "generated_at": "2026-07-24T15:43:36Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "b09cd4d2",
+   "source_hash": "b6b3f494",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

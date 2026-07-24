@@ -306,6 +306,103 @@ def render_traceability(graph, records):
     return "\n".join(lines) + "\n"
 
 
+TICKET_BADGE = {"todo": "open", "in_progress": "in-progress",
+                "blocked": "blocked", "done": "done", "cancelled": "done"}
+
+
+def one_line_summary(it):
+    """First sentence of the item's body — derived at render time from
+    committed state, never stored/cached (module docstring, byte-determinism).
+    Falls back to the title when there's no body."""
+    text = (it.get("body") or it.get("title") or "").strip()
+    if not text:
+        return ""
+    m = re.match(r"(.+?[.!?])(\s|$)", text, flags=re.S)
+    return (m.group(1) if m else text).strip()
+
+
+def _upward_chain(iid, items, fwd, back):
+    """(id, item) pairs from the immediate parent up to the root — stops on
+    a missing item or a cycle rather than looping forever on a corrupt log."""
+    chain, seen, cur = [], {iid}, iid
+    while True:
+        parent_key = ia_graph.item_links(cur, fwd, back)["parent"]
+        if not parent_key:
+            return chain
+        pid = parent_key.split("/", 1)[1]
+        if pid in seen:
+            return chain
+        p_it = items.get(pid)
+        if not p_it:
+            return chain
+        seen.add(pid)
+        chain.append((pid, p_it))
+        cur = pid
+
+
+def render_item_page(iid, items, fwd, back):
+    """A ticket page (§ artifact-pages plan): own description + status,
+    upward hierarchy to the epic, downward to children with an aggregate
+    progress rollup, linked PRs, and the linked release — one function,
+    branching by level rather than four near-duplicate renderers."""
+    it = items[iid]
+    level = it.get("level", "task")
+    links = ia_graph.item_links(iid, fwd, back)
+
+    lines = ["# %s" % it.get("title", iid), "",
+             "`%s` · %s/%s · **%s**" % (
+                 iid, level, it.get("kind", "?"),
+                 TICKET_BADGE.get(it.get("status"), it.get("status") or "?")),
+             ""]
+    summary = one_line_summary(it)
+    if summary:
+        lines += [summary, ""]
+
+    upward = _upward_chain(iid, items, fwd, back)
+    if upward:
+        lines += ["## Hierarchy", ""]
+        lines += ["- %s: [[%s]] %s — %s" % (
+            p_it.get("level", "?"), item_page_name(pid),
+            p_it.get("title", pid), one_line_summary(p_it))
+                  for pid, p_it in upward]
+        lines += [""]
+
+    child_ids = sorted(c.split("/", 1)[1] for c in links["children"])
+    if child_ids:
+        lines += ["## Subtasks" if level in ("task", "subtask")
+                  else "## Children", ""]
+        for cid in child_ids:
+            c_it = items.get(cid)
+            if not c_it:
+                continue
+            lines.append("- [[%s]] %s — %s (%s)" % (
+                item_page_name(cid), c_it.get("title", cid),
+                one_line_summary(c_it),
+                TICKET_BADGE.get(c_it.get("status"), c_it.get("status") or "?")))
+        done = sum(1 for cid in child_ids
+                  if items.get(cid, {}).get("status") in CLOSED_STATUSES)
+        lines += ["", "Progress: %d/%d done" % (done, len(child_ids)), ""]
+
+    if links["prs"]:
+        lines += ["## Linked PRs", ""]
+        lines += ["- PR #%s" % pr_key.split("/", 1)[1]
+                 for pr_key in links["prs"]]
+        lines += [""]
+
+    if links["release"]:
+        lines += ["## Release", "",
+                  "- [[%s]]" % release_page_name(
+                      links["release"].split("/", 1)[1]), ""]
+
+    ext = it.get("external") or {}
+    if ext.get("url"):
+        lines += ["## Related tickets", "",
+                  "- [%s #%s](%s)" % (ext.get("system", "ticket"),
+                                      ext.get("key", ""), ext["url"]), ""]
+
+    return "\n".join(lines).rstrip() + "\n"
+
+
 # ------------------------------------------------------------- manifest
 
 def _hash_bytes(data):
@@ -317,9 +414,10 @@ def _file_hash(path):
         return _hash_bytes(fh.read())
 
 
-def build_manifest(records, rendered):
+def build_manifest(records, rendered, items=None):
     """The intended publish set (§10.2): every rendered page + every doc the
-    default set publishes, each with its banner and render_hash."""
+    default set publishes, each with its banner and render_hash. Also one
+    entry per work item once its ticket page exists in `rendered`."""
     pages = []
     for key, fname, pname, title in INDEX_PAGES:
         src = "%s/%s" % (RENDERED, fname)
@@ -327,6 +425,18 @@ def build_manifest(records, rendered):
                       "page_name": pname, "truth_state": "current",
                       "render": "as-is", "frozen": False,
                       "render_hash": _hash_bytes(rendered[fname].encode())})
+    for iid, it in sorted((items or {}).items()):
+        fname = "tickets/%s.md" % iid
+        if fname not in rendered:
+            continue
+        pages.append({
+            "wiki_key": "item/" + iid,
+            "source": "%s/%s" % (RENDERED, fname),
+            "title": it.get("title", iid), "page_name": item_page_name(iid),
+            "truth_state": TICKET_BADGE.get(it.get("status"),
+                                            it.get("status") or "?"),
+            "render": "as-is", "frozen": False,
+            "render_hash": _hash_bytes(rendered[fname].encode())})
     for key in sorted(records):
         rec = records[key]
         if rec["doc_type"] == "guide" and key == "home":
@@ -359,6 +469,7 @@ def render_all():
     records = ia.build_records()
     fr = fold((".work/todo.jsonl", ".work/done.jsonl"))
     graph = ia_graph.build_graph(records, fr.items)
+    fwd, back = ia_graph.build_adjacency(graph)
     rendered = {
         "home.md": render_home(records, True),
         "_Sidebar.md": render_sidebar(records, True),
@@ -367,7 +478,9 @@ def render_all():
         "status.md": render_status_index(records),
         "traceability.md": render_traceability(graph, records),
     }
-    manifest = build_manifest(records, rendered)
+    for iid in fr.items:
+        rendered["tickets/%s.md" % iid] = render_item_page(iid, fr.items, fwd, back)
+    manifest = build_manifest(records, rendered, fr.items)
     aliases = build_aliases(records)
     return rendered, manifest, aliases, graph
 

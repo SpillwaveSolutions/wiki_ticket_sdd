@@ -3074,12 +3074,12 @@
   },
   "item/01KYABYEQP9FDY8THDV79F324G": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "One-line summary derivation from body's first sentence (no cache)"
   },
   "item/01KYABYEQPAFJM7WC3XZV6YY76": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "`ia-ticket <ULID>` preview subcommand on `bin/worklog`"
   },
   "item/01KYABYEQPDS2VFQKQ7B6YXZVR": {
@@ -3094,7 +3094,7 @@
   },
   "item/01KYABYEQPK6PV87WNZXEYRB12": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Phase 1: render ticket pages for all four levels"
   },
   "item/01KYABYEQPNK7HHH5CMAR2V1JG": {
@@ -3109,7 +3109,7 @@
   },
   "item/01KYABYEQPRM8308SYFPR8X437": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Aggregate progress rollup for Story/Feature/Epic pages"
   },
   "item/01KYABYEQPW8Q2RGGTNP71W88E": {
@@ -3126,6 +3126,11 @@
    "doc_type": "item",
    "status": "todo",
    "title": "Auto-draft the release CHANGELOG unreleased section from git log"
+  },
+  "item/01KYACFJA0SQSF4C83BJZXB5MY": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "banner() mislabels frozen 'current' plans as status reports"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

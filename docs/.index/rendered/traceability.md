@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### banner() mislabels frozen 'current' plans as status reports
+`01KYACFJA0SQSF4C83BJZXB5MY` · status: todo
+
 ### Auto-draft the release CHANGELOG unreleased section from git log
 `01KYAC0AC01R4C6W7YY1X8NVRV` · status: todo
 
@@ -18,7 +21,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### Aggregate progress rollup for Story/Feature/Epic pages
-`01KYABYEQPRM8308SYFPR8X437` · status: todo
+`01KYABYEQPRM8308SYFPR8X437` · status: done
 - belongs-to: Phase 1: render ticket pages for all four levels
 - references: [github#133](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/133)
 - produced-by: [[Plan-artifact-pages]]
@@ -36,7 +39,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 1: render ticket pages for all four levels
-`01KYABYEQPK6PV87WNZXEYRB12` · status: todo
+`01KYABYEQPK6PV87WNZXEYRB12` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
 - references: [github#130](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/130)
 - contains: One-line summary derivation from body's first sentence (no cache)
@@ -57,13 +60,13 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### `ia-ticket <ULID>` preview subcommand on `bin/worklog`
-`01KYABYEQPAFJM7WC3XZV6YY76` · status: todo
+`01KYABYEQPAFJM7WC3XZV6YY76` · status: done
 - belongs-to: Phase 1: render ticket pages for all four levels
 - references: [github#127](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/127)
 - produced-by: [[Plan-artifact-pages]]
 
 ### One-line summary derivation from body's first sentence (no cache)
-`01KYABYEQP9FDY8THDV79F324G` · status: todo
+`01KYABYEQP9FDY8THDV79F324G` · status: done
 - belongs-to: Phase 1: render ticket pages for all four levels
 - references: [github#126](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/126)
 - produced-by: [[Plan-artifact-pages]]
