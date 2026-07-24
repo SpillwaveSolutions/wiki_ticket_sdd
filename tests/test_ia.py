@@ -519,5 +519,70 @@ class TestGraph(TestRender):
         self.assertIn("0 edge suggestion(s)", p2.stdout)
 
 
+class TestArtifactPages(TestGraph):
+    """Ticket/release/PR pages (plan artifact-pages): one page per item,
+    hierarchy + progress rollup, graph-derived release Change Log, PR
+    linked-tickets projection, and manifest growth."""
+
+    def test_ticket_page_hierarchy_and_progress(self):
+        epic = run(self.dir, "add", "Epic E", "--level", "epic",
+                  "--kind", "feature").stdout.strip().splitlines()[-1]
+        task = run(self.dir, "add", "Task T", "--level", "task",
+                  "--kind", "feature", "--parent", epic
+                  ).stdout.strip().splitlines()[-1]
+        sub = run(self.dir, "add", "Subtask S", "--level", "subtask",
+                 "--kind", "feature", "--parent", task
+                 ).stdout.strip().splitlines()[-1]
+        run(self.dir, "close", sub)
+        run(self.dir, "ia-render")
+
+        epic_page = self.read("docs/.index/rendered/tickets/%s.md" % epic)
+        self.assertIn("## Children", epic_page)
+        self.assertIn(task, epic_page)
+        self.assertIn("Progress: 0/1 done", epic_page)  # T itself still open
+
+        task_page = self.read("docs/.index/rendered/tickets/%s.md" % task)
+        self.assertIn("## Hierarchy", task_page)
+        self.assertIn("epic: [[%s]]" % ("Ticket-" + epic), task_page)
+        self.assertIn("## Subtasks", task_page)
+        self.assertIn("Progress: 1/1 done", task_page)
+
+        sub_page = self.read("docs/.index/rendered/tickets/%s.md" % sub)
+        self.assertIn("task: [[%s]]" % ("Ticket-" + task), sub_page)
+        self.assertIn("epic: [[%s]]" % ("Ticket-" + epic), sub_page)
+
+    def test_pr_page_linked_tickets_not_tracked(self):
+        p = run(self.dir, "link-pr", self.iid, "--pr", "55")
+        self.assertEqual(p.returncode, 0, p.stderr)
+        run(self.dir, "ia-render")
+        pr_page = self.read("docs/.index/rendered/prs/55.md")
+        self.assertIn("# PR #55", pr_page)
+        self.assertIn("not tracked", pr_page)
+        self.assertIn("## Linked Tickets", pr_page)
+        self.assertIn("Wire the frobnicator", pr_page)
+
+    def test_release_page_change_log_is_graph_derived(self):
+        run(self.dir, "close", self.iid)     # milestone v1, per TestGraph.setUp
+        run(self.dir, "ia-render")
+        rel_page = self.read("docs/.index/rendered/releases/v1.md")
+        self.assertIn("# Release v1", rel_page)
+        self.assertIn("## Change Log", rel_page)
+        self.assertIn("Wire the frobnicator", rel_page)
+        self.assertIn("## Release Tree", rel_page)
+
+    def test_manifest_grows_with_items_releases_prs(self):
+        run(self.dir, "close", self.iid)
+        run(self.dir, "link-pr", self.iid, "--pr", "9")
+        run(self.dir, "ia-render")
+        man = json.load(open(os.path.join(
+            self.dir, "docs/.index/publish-manifest.json")))
+        keys = {p["wiki_key"] for p in man["pages"]}
+        self.assertIn("item/" + self.iid, keys)
+        self.assertIn("item/" + self.orphan, keys)
+        self.assertIn("release/v1", keys)
+        self.assertIn("pr/9", keys)
+        self.assertEqual(sum(1 for k in keys if k.startswith("item/")), 2)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

@@ -1,6 +1,6 @@
 # Phase 4: extend tests/test_ia.py for the new page shapes
 
-`01KYABYEQPNK7HHH5CMAR2V1JG` · task/feature · **open**
+`01KYABYEQPNK7HHH5CMAR2V1JG` · task/feature · **done**
 
 Add page-shape tests per ticket level, a PR-page test, a release-page
 test, and a manifest-growth assertion to the existing test fixture

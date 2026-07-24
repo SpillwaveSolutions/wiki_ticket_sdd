@@ -33,7 +33,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 4: extend tests/test_ia.py for the new page shapes
-`01KYABYEQPNK7HHH5CMAR2V1JG` · status: todo
+`01KYABYEQPNK7HHH5CMAR2V1JG` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
 - references: [github#131](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/131)
 - produced-by: [[Plan-artifact-pages]]
@@ -54,7 +54,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 4: regenerate all pages and confirm coverage gate holds
-`01KYABYEQPDS2VFQKQ7B6YXZVR` · status: todo
+`01KYABYEQPDS2VFQKQ7B6YXZVR` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
 - references: [github#128](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/128)
 - produced-by: [[Plan-artifact-pages]]

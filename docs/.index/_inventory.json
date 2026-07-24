@@ -614,10 +614,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-24T15:50:54Z",
+   "generated_at": "2026-07-24T15:56:38Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": 26877583,
+   "source_hash": "4d897500",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

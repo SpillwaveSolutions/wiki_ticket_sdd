@@ -3084,7 +3084,7 @@
   },
   "item/01KYABYEQPDS2VFQKQ7B6YXZVR": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Phase 4: regenerate all pages and confirm coverage gate holds"
   },
   "item/01KYABYEQPF8N2K26ENRKREE0W": {
@@ -3099,7 +3099,7 @@
   },
   "item/01KYABYEQPNK7HHH5CMAR2V1JG": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Phase 4: extend tests/test_ia.py for the new page shapes"
   },
   "item/01KYABYEQPP82DJEN19F43YRAE": {

@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "b0589332e202",
+   "render_hash": "16a5c19f1d41",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -1924,7 +1924,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYABYEQP8ANXGYPBCV2T20D8",
    "render": "as-is",
-   "render_hash": "501e5d7e569b",
+   "render_hash": "6da4116d9f14",
    "source": "docs/.index/rendered/tickets/01KYABYEQP8ANXGYPBCV2T20D8.md",
    "title": "Extend IA to tickets, PRs, and releases (artifact pages)",
    "truth_state": "open",
@@ -1954,10 +1954,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYABYEQPDS2VFQKQ7B6YXZVR",
    "render": "as-is",
-   "render_hash": "daa165c47e39",
+   "render_hash": "aea2ecc9fa7c",
    "source": "docs/.index/rendered/tickets/01KYABYEQPDS2VFQKQ7B6YXZVR.md",
    "title": "Phase 4: regenerate all pages and confirm coverage gate holds",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYABYEQPDS2VFQKQ7B6YXZVR"
   },
   {
@@ -1984,10 +1984,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYABYEQPNK7HHH5CMAR2V1JG",
    "render": "as-is",
-   "render_hash": "ba6553bfcc33",
+   "render_hash": "977928de7e79",
    "source": "docs/.index/rendered/tickets/01KYABYEQPNK7HHH5CMAR2V1JG.md",
    "title": "Phase 4: extend tests/test_ia.py for the new page shapes",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYABYEQPNK7HHH5CMAR2V1JG"
   },
   {
@@ -2381,11 +2381,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-24T15:50:54Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-24T15:56:38Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "fae63a06886f",
+   "render_hash": "a1b06341a9cc",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

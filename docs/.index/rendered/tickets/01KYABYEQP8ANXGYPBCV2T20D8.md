@@ -11,7 +11,7 @@ parent/children/PR/release adjacency lookup, reusing the fwd/back pattern
 already in `render_traceability`, so ticket/PR/release renderers don't
 each reimplement graph traversal. (done)
 - [[Ticket-01KYABYEQPDS2VFQKQ7B6YXZVR]] Phase 4: regenerate all pages and confirm coverage gate holds — Run `worklog ia-render`, verify CI diff-clean, confirm bin/ia*.py stays
-at or above the 80%/95% coverage target. (open)
+at or above the 80%/95% coverage target. (done)
 - [[Ticket-01KYABYEQPF8N2K26ENRKREE0W]] Phase 3: file PR live-metadata follow-up item — After Phases 0-2 land, file a separate kind:feature child item for
 `worklog pr-sync` (gh pr view integration) — not implemented in this epic. (open)
 - [[Ticket-01KYABYEQPK6PV87WNZXEYRB12]] Phase 1: render ticket pages for all four levels — Add `render_item_page()` to `bin/ia_render.py`, reusing `ticket_body()` for
@@ -20,7 +20,7 @@ story/feature/epic) for upward/downward hierarchy sections, wired into
 `render_all()`. (done)
 - [[Ticket-01KYABYEQPNK7HHH5CMAR2V1JG]] Phase 4: extend tests/test_ia.py for the new page shapes — Add page-shape tests per ticket level, a PR-page test, a release-page
 test, and a manifest-growth assertion to the existing test fixture
-classes — do not fork a new test file. (open)
+classes — do not fork a new test file. (done)
 - [[Ticket-01KYABYEQPP82DJEN19F43YRAE]] Phase 2: render release pages with graph-derived Change Log — Add `render_release_page()` — Change Log section built from milestone-
 tagged closed items and their linked PRs (not a CHANGELOG.md parser),
 plus Release Tree, Related PRs, Related Tickets, Dependencies sections. (done)
@@ -32,7 +32,7 @@ status render as "not tracked" pending the Phase 3 follow-up. (done)
 loop work items and release tags in addition to doc records, so every
 item/PR/release gets a manifest slot. (done)
 
-Progress: 5/8 done
+Progress: 7/8 done
 
 ## Related tickets
 

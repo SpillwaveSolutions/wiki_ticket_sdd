@@ -1,6 +1,6 @@
 # Phase 4: regenerate all pages and confirm coverage gate holds
 
-`01KYABYEQPDS2VFQKQ7B6YXZVR` · task/feature · **open**
+`01KYABYEQPDS2VFQKQ7B6YXZVR` · task/feature · **done**
 
 Run `worklog ia-render`, verify CI diff-clean, confirm bin/ia*.py stays
 at or above the 80%/95% coverage target.
