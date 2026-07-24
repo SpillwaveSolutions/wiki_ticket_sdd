@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### worklog pr-sync: fetch live PR metadata (files, review/CI status)
+`01KYADGT9Q48EKJZVQQSH4HXWZ` · status: todo
+- belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+
 ### banner() mislabels frozen 'current' plans as status reports
 `01KYACFJA0SQSF4C83BJZXB5MY` · status: todo
 
@@ -48,7 +52,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 3: file PR live-metadata follow-up item
-`01KYABYEQPF8N2K26ENRKREE0W` · status: todo
+`01KYABYEQPF8N2K26ENRKREE0W` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
 - references: [github#129](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/129)
 - produced-by: [[Plan-artifact-pages]]
@@ -82,6 +86,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - contains: Phase 2: render release pages with graph-derived Change Log
 - contains: Phase 2: render PR pages
 - contains: Phase 0: add item/release page-name helpers and extend build_manifest()
+- contains: worklog pr-sync: fetch live PR metadata (files, review/CI status)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 0: add item_links() graph helper

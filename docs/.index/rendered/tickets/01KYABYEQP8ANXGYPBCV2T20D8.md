@@ -13,7 +13,7 @@ each reimplement graph traversal. (done)
 - [[Ticket-01KYABYEQPDS2VFQKQ7B6YXZVR]] Phase 4: regenerate all pages and confirm coverage gate holds — Run `worklog ia-render`, verify CI diff-clean, confirm bin/ia*.py stays
 at or above the 80%/95% coverage target. (done)
 - [[Ticket-01KYABYEQPF8N2K26ENRKREE0W]] Phase 3: file PR live-metadata follow-up item — After Phases 0-2 land, file a separate kind:feature child item for
-`worklog pr-sync` (gh pr view integration) — not implemented in this epic. (open)
+`worklog pr-sync` (gh pr view integration) — not implemented in this epic. (done)
 - [[Ticket-01KYABYEQPK6PV87WNZXEYRB12]] Phase 1: render ticket pages for all four levels — Add `render_item_page()` to `bin/ia_render.py`, reusing `ticket_body()` for
 the description/traceability base and branching by level (subtask/task vs
 story/feature/epic) for upward/downward hierarchy sections, wired into
@@ -31,8 +31,9 @@ status render as "not tracked" pending the Phase 3 follow-up. (done)
 `bin/ia_render.py` next to `page_name()`, and extend `build_manifest()` to
 loop work items and release tags in addition to doc records, so every
 item/PR/release gets a manifest slot. (done)
+- [[Ticket-01KYADGT9Q48EKJZVQQSH4HXWZ]] worklog pr-sync: fetch live PR metadata (files, review/CI status) — PR pages (docs/.index/rendered/prs/<N>.md, from render_pr_page() in bin/ia_render.py) currently show files-changed and test/review status as 'not tracked' -- deliberately deferred out of the artifact-pages epic since no code in this repo fetches gh pr view data today. (open)
 
-Progress: 7/8 done
+Progress: 8/9 done
 
 ## Related tickets
 

@@ -4,7 +4,7 @@
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "15b8a991e792",
+   "render_hash": "f21a5b0582a2",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "0b379104923a",
+   "render_hash": "e20693bcde66",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "16a5c19f1d41",
+   "render_hash": "bec22f3d0fb8",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -1924,7 +1924,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYABYEQP8ANXGYPBCV2T20D8",
    "render": "as-is",
-   "render_hash": "6da4116d9f14",
+   "render_hash": "5f5bf436bbd0",
    "source": "docs/.index/rendered/tickets/01KYABYEQP8ANXGYPBCV2T20D8.md",
    "title": "Extend IA to tickets, PRs, and releases (artifact pages)",
    "truth_state": "open",
@@ -1964,10 +1964,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYABYEQPF8N2K26ENRKREE0W",
    "render": "as-is",
-   "render_hash": "9f6281303948",
+   "render_hash": "a4c5dec90d4d",
    "source": "docs/.index/rendered/tickets/01KYABYEQPF8N2K26ENRKREE0W.md",
    "title": "Phase 3: file PR live-metadata follow-up item",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYABYEQPF8N2K26ENRKREE0W"
   },
   {
@@ -2049,6 +2049,16 @@
    "title": "banner() mislabels frozen 'current' plans as status reports",
    "truth_state": "open",
    "wiki_key": "item/01KYACFJA0SQSF4C83BJZXB5MY"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYADGT9Q48EKJZVQQSH4HXWZ",
+   "render": "as-is",
+   "render_hash": "79ea8765f905",
+   "source": "docs/.index/rendered/tickets/01KYADGT9Q48EKJZVQQSH4HXWZ.md",
+   "title": "worklog pr-sync: fetch live PR metadata (files, review/CI status)",
+   "truth_state": "open",
+   "wiki_key": "item/01KYADGT9Q48EKJZVQQSH4HXWZ"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -2381,11 +2391,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-24T15:56:38Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-24T15:57:23Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "a1b06341a9cc",
+   "render_hash": "9d12d7e2a2c0",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -2569,7 +2579,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "10b76d2926dc",
+  "render_hash": "a6e4892b756e",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

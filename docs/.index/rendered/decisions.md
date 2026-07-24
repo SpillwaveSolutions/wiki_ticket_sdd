@@ -14,7 +14,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 
 | Plan | Lifecycle | Truth | Date |
 |---|---|---|---|
-| [[Plan-artifact-pages]] Extend IA to tickets, PRs, and releases (artifact pages) | active | current | 2026-07-24 |
+| [[Plan-artifact-pages]] Extend IA to tickets, PRs, and releases (artifact pages) | completed | current | 2026-07-24 |
 | [[Plan-wiki-ticket-ui-ia]] WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui) | completed | current | 2026-07-22 |
 | [[Plan-wiki-information-architecture]] Wiki information architecture | superseded → superseded by [[Plan-ia-content-model]] | superseded | 2026-07-22 |
 | [[Plan-ia-content-model]] IA & content model (supersedes wiki-information-architecture) | active | current | 2026-07-22 |

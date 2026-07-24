@@ -1246,6 +1246,11 @@
    "type": "references"
   },
   {
+   "from": "item/01KYADGT9Q48EKJZVQQSH4HXWZ",
+   "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
+   "type": "belongs-to"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -3089,7 +3094,7 @@
   },
   "item/01KYABYEQPF8N2K26ENRKREE0W": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Phase 3: file PR live-metadata follow-up item"
   },
   "item/01KYABYEQPK6PV87WNZXEYRB12": {
@@ -3131,6 +3136,11 @@
    "doc_type": "item",
    "status": "todo",
    "title": "banner() mislabels frozen 'current' plans as status reports"
+  },
+  "item/01KYADGT9Q48EKJZVQQSH4HXWZ": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "worklog pr-sync: fetch live PR metadata (files, review/CI status)"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
