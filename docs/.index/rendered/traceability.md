@@ -2,6 +2,13 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### ia_graph build_graph() ignores commit-only sidecar code links (lands-in only honors code.pr)
+`01KYAHAB3T2QXGMN4SQT4ZNZGW` · status: todo
+
+### Cut v0.14.0 release
+`01KYAH3VHPSEK2RY63J7Y109FR` · status: done
+- targets: release/v0.14.0
+
 ### worklog sync --pull can never bootstrap: cursor-less pull calls the adapter with no --since, which it requires
 `01KYAGZ8KK46SQF1MKHAHVCTJV` · status: todo
 

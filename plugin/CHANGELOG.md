@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.14.0 — 2026-07-24
+
+Artifact-pages epic (plan `docs/plans/2026-07-24-artifact-pages.md`): the IA
+content model now covers tickets, PRs, and releases, not just docs.
+
+- **Ticket pages** (`worklog ia-render` → one page per work item under
+  `docs/.index/rendered/tickets/`): own description/status, upward hierarchy
+  to the epic, downward children with an aggregate progress rollup, linked
+  PRs, linked release — `render_item_page()`, branching by level rather than
+  four near-duplicate renderers. New `worklog ia-ticket <ULID>` preview
+  command.
+- **Release pages**: a Change Log section derived from the graph
+  (milestone-tagged closed items plus their linked PRs), not a
+  `CHANGELOG.md` parser — this file stays human-authored prose. Plus a
+  Release Tree, Related PRs/Tickets, and Dependencies & Risks.
+- **PR pages**: linked tickets, related release, traceability back to the
+  root epic. Files-changed/review/CI status render as "not tracked" —
+  fetching live PR metadata is scoped out to a separate follow-up
+  (`worklog pr-sync`, not built in this release).
+- Published-page manifest grew from 51 to 252 entries.
+- Two bugs found while building this, filed but not yet fixed: `worklog
+  close`/`update` don't resolve item-id prefixes the way `reopen` does
+  (a short, valid prefix silently creates an orphan item instead of
+  resolving to the real one); the reader-plane `banner()` mislabels every
+  frozen "current" doc as a status report regardless of its actual
+  `doc_type` (verified live on 12 of 14 published plan pages).
+
 ## 0.13.0 — 2026-07-23
 
 IA & content model wave (plan `docs/plans/2026-07-22-ia-content-model.md`,
