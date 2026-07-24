@@ -7,3 +7,7 @@ Ship the artifact-pages epic as plugin 0.14.0: per-item/release/PR generated wik
 ## Release
 
 - [[Release-v0.14.0]]
+
+## Related tickets
+
+- [github #140](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/140)

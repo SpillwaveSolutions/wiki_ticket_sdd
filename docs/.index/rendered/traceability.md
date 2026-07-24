@@ -2,15 +2,22 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### sync_dispatch push_items KeyError on ext['key'] when forcing a never-remote closed item into scope via --keys
+`01KYAKH389T1ZKKBP94WH2HK94` · status: todo
+- references: [github#143](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/143)
+
 ### ia_graph build_graph() ignores commit-only sidecar code links (lands-in only honors code.pr)
 `01KYAHAB3T2QXGMN4SQT4ZNZGW` · status: todo
+- references: [github#142](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/142)
 
 ### Cut v0.14.0 release
 `01KYAH3VHPSEK2RY63J7Y109FR` · status: done
+- references: [github#140](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/140)
 - targets: release/v0.14.0
 
 ### worklog sync --pull can never bootstrap: cursor-less pull calls the adapter with no --since, which it requires
 `01KYAGZ8KK46SQF1MKHAHVCTJV` · status: todo
+- references: [github#141](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/141)
 
 ### worklog pr-sync: fetch live PR metadata (files, review/CI status)
 `01KYADGT9Q48EKJZVQQSH4HXWZ` · status: todo

@@ -1286,9 +1286,29 @@
    "type": "references"
   },
   {
+   "from": "item/01KYAGZ8KK46SQF1MKHAHVCTJV",
+   "to": "ticket/github#141",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYAH3VHPSEK2RY63J7Y109FR",
+   "to": "ticket/github#140",
+   "type": "references"
+  },
+  {
    "from": "item/01KYAH3VHPSEK2RY63J7Y109FR",
    "to": "release/v0.14.0",
    "type": "targets"
+  },
+  {
+   "from": "item/01KYAHAB3T2QXGMN4SQT4ZNZGW",
+   "to": "ticket/github#142",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYAKH389T1ZKKBP94WH2HK94",
+   "to": "ticket/github#143",
+   "type": "references"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -3224,6 +3244,11 @@
    "status": "todo",
    "title": "ia_graph build_graph() ignores commit-only sidecar code links (lands-in only honors code.pr)"
   },
+  "item/01KYAKH389T1ZKKBP94WH2HK94": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "sync_dispatch push_items KeyError on ext['key'] when forcing a never-remote closed item into scope via --keys"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -3625,6 +3650,22 @@
   "ticket/github#14": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/14"
+  },
+  "ticket/github#140": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/140"
+  },
+  "ticket/github#141": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/141"
+  },
+  "ticket/github#142": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/142"
+  },
+  "ticket/github#143": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/143"
   },
   "ticket/github#16": {
    "doc_type": "ticket",
