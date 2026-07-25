@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.15.1 — 2026-07-25
+
+- Doc fix: user-guide miscounted branch-discipline hook checks ("two more
+  pre-commit checks" → "two more checks" — one is `pre-commit`, the other
+  is the separate `commit-msg` hook). Found by `/code-review` (#160).
+
 ## 0.15.0 — 2026-07-25
 
 Branch-discipline hooks (plan `docs/plans/2026-07-25-branch-discipline-hooks.md`):

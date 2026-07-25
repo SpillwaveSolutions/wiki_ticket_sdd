@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Cut v0.15.1 release
+`01KYDMC6M6B2W8F48271TG0VEK` · status: in_progress
+- targets: release/v0.15.1
+
 ### user-guide.md miscounts branch-discipline hook checks (code-review finding)
 `01KYDKDJFCJTDVFZJ27Q9Y08TV` · status: done
 
