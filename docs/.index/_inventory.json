@@ -470,6 +470,7 @@
    "status": "planned",
    "title": "Branch-discipline hooks: never commit on main, always reference work",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-branch-discipline-hooks",
    "wiki_key": "plan/2026-07-25-branch-discipline-hooks"
   },
   {
@@ -672,10 +673,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-25T01:08:45Z",
+   "generated_at": "2026-07-25T01:10:26Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "fd7994d9",
+   "source_hash": "22fd3775",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

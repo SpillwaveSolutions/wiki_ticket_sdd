@@ -15,3 +15,7 @@ the bin/ulid.py alphabet.
 - [[Ticket-01KYBD2HYK1AT1YCN3GW8Q3QQW]] Mirror to plugin/scripts/commit-msg (byte-identical canon copy) — Mirror to plugin/scripts/commit-msg (byte-identical canon copy) (open)
 
 Progress: 0/1 done
+
+## Related tickets
+
+- [github #153](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/153)

@@ -38,3 +38,7 @@ the bin/ulid.py alphabet. (open)
 copy); needs fetch-depth 0. (open)
 
 Progress: 0/9 done
+
+## Related tickets
+
+- [github #144](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/144)
