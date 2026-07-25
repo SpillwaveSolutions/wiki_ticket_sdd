@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.15.0 — 2026-07-25
+
+Branch-discipline hooks (plan `docs/plans/2026-07-25-branch-discipline-hooks.md`):
+main is now pull-only, and every commit must be traceable to a worklog item
+or ticket.
+
+- **Branch guard** (`hooks/pre-commit`): rejects a commit authored directly
+  on `main`/`master`. Exempt for a real reconciliation merge (`git merge
+  origin/main`) via `WORKLOG_MERGE_COMMIT`, set by `pre-merge-commit` before
+  it exec's into `pre-commit` — `MERGE_HEAD` is not yet on disk at the point
+  git invokes `pre-merge-commit` (only appearing later, before `commit-msg`
+  fires), so a MERGE_HEAD-only check would have missed this case.
+  `WORKLOG_SKIP_BRANCH_GUARD` covers the handful of existing bare
+  (non-commit) invocations of this script (`worklog doctor`, CI's
+  `--no-verify` backstop) that would otherwise false-positive on `main`.
+- **`hooks/commit-msg`** (new): requires a 26-char Crockford ULID or a
+  `#123` ticket reference in every commit message; exempt for merge
+  commits.
+- Wired end-to-end: `worklog init`'s hook-copy loop and CI template,
+  `worklog uninstall`, `worklog doctor`'s health check, and a new
+  PR-scoped CI step validating every commit message in the PR range.
+- `release` skill's "direct-commit repos" landing mode removed — dead once
+  this ships; releases land as a PR like everything else now.
+
 ## 0.14.0 — 2026-07-24
 
 Artifact-pages epic (plan `docs/plans/2026-07-24-artifact-pages.md`): the IA

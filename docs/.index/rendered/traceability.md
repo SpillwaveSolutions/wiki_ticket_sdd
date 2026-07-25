@@ -2,15 +2,21 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Cut v0.15.0 release
+`01KYBPP7619CBXN3ZTV9FZJMEJ` · status: done
+- targets: release/v0.15.0
+
 ### Add a CI step validating commit messages on PRs
 `01KYBD2HYKYBBNGDMCQSW4VE2T` · status: done
 - belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- lands-in: pr/155
 - references: [github#154](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/154)
 - produced-by: [[Plan-branch-discipline-hooks]]
 
 ### Create hooks/commit-msg requiring a ULID or ticket reference
 `01KYBD2HYKKZM22DFM16ZJXYFG` · status: done
 - belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- lands-in: pr/155
 - references: [github#153](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/153)
 - contains: Mirror to plugin/scripts/commit-msg (byte-identical canon copy)
 - produced-by: [[Plan-branch-discipline-hooks]]
@@ -18,48 +24,56 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Add the branch-guard block to hooks/pre-commit
 `01KYBD2HYKKC2G9NW4VA3RVC6G` · status: done
 - belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- lands-in: pr/155
 - references: [github#152](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/152)
 - produced-by: [[Plan-branch-discipline-hooks]]
 
 ### Add TestBranchGuard and TestCommitMsgReference test classes
 `01KYBD2HYKJHS5M2PFZ78Y585C` · status: done
 - belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- lands-in: pr/155
 - references: [github#151](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/151)
 - produced-by: [[Plan-branch-discipline-hooks]]
 
 ### Update test fixtures for the new hooks
 `01KYBD2HYKG0DW7QJX7XG561A8` · status: done
 - belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- lands-in: pr/155
 - references: [github#150](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/150)
 - produced-by: [[Plan-branch-discipline-hooks]]
 
 ### Remove the "direct-commit repos" mode from the release skill
 `01KYBD2HYKET7WJARQFB2NVMFS` · status: done
 - belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- lands-in: pr/155
 - references: [github#149](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/149)
 - produced-by: [[Plan-branch-discipline-hooks]]
 
 ### Full test suite green + manual verification
 `01KYBD2HYKB5E4JXNYYQ9BPDAE` · status: done
 - belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- lands-in: pr/155
 - references: [github#148](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/148)
 - produced-by: [[Plan-branch-discipline-hooks]]
 
 ### Wire commit-msg into install/uninstall/doctor/CANON
 `01KYBD2HYK9XY02QHSVF1849BQ` · status: done
 - belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- lands-in: pr/155
 - references: [github#147](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/147)
 - produced-by: [[Plan-branch-discipline-hooks]]
 
 ### Mirror to plugin/scripts/commit-msg (byte-identical canon copy)
 `01KYBD2HYK1AT1YCN3GW8Q3QQW` · status: done
 - belongs-to: Create hooks/commit-msg requiring a ULID or ticket reference
+- lands-in: pr/155
 - references: [github#146](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/146)
 - produced-by: [[Plan-branch-discipline-hooks]]
 
 ### Add WORKLOG_SKIP_BRANCH_GUARD to the three bare pre-commit call sites
 `01KYBD2HYK196RQN7JNCMV6PDS` · status: done
 - belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- lands-in: pr/155
 - references: [github#145](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/145)
 - produced-by: [[Plan-branch-discipline-hooks]]
 
