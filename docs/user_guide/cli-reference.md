@@ -465,7 +465,7 @@ bin/worklog trace-check --strict
 ## Git hooks
 
 Installed via `git config core.hooksPath hooks` (done for you by
-`/worklog:init`). Both hooks run the same checks:
+`/worklog:init`).
 
 - **`hooks/pre-commit`** — on every commit:
   1. Every `.work/*.jsonl` file ends with a trailing newline (the invariant
@@ -476,14 +476,27 @@ Installed via `git config core.hooksPath hooks` (done for you by
      or hand-edited roadmap blocks the commit
      (`Run: worklog roadmap-render`).
   4. The fold test suite passes (only in repos that carry `tests/`).
-- **`hooks/pre-merge-commit`** — the same script. Git does *not* run
-  `pre-commit` for merge auto-commits, so without this a merge could
-  silently land a stale roadmap or a smuggled corrupt line. If it blocks
-  your merge: `bin/worklog roadmap-render && git add -A && git commit
-  --no-edit`.
+  5. **Branch guard**: rejects a commit authored directly on `main`/`master`
+     — those branches are pull-only, land work via a PR instead. A real
+     reconciliation merge (`git merge origin/main`) is exempt via
+     `WORKLOG_MERGE_COMMIT`, set by `pre-merge-commit` before it exec's into
+     `pre-commit` (`MERGE_HEAD` isn't on disk yet at that point in git's
+     merge sequence). `WORKLOG_SKIP_BRANCH_GUARD` covers the tool's own bare,
+     non-commit invocations (`worklog doctor`, CI's `--no-verify` backstop)
+     that would otherwise false-positive on `main`.
+- **`hooks/commit-msg`** — every commit message must reference a worklog
+  item (26-char Crockford ULID) or a ticket (`#123`); merge commits are
+  exempt (detected via `MERGE_HEAD`, reliably present by this point in the
+  sequence).
+- **`hooks/pre-merge-commit`** — runs `pre-commit`'s checks (1–4) with
+  `WORKLOG_MERGE_COMMIT` set. Git does *not* run `pre-commit` for merge
+  auto-commits, so without this a merge could silently land a stale roadmap
+  or a smuggled corrupt line. If it blocks your merge: `bin/worklog
+  roadmap-render && git add -A && git commit --no-edit`.
 
-CI runs the same script on every push and PR, so bypassing the local hook
-with `--no-verify` only defers the failure.
+CI runs the same checks — including a PR-scoped step that validates every
+commit message in the PR range — on every push and PR, so bypassing a local
+hook with `--no-verify` only defers the failure.
 
 ## Invariants worth knowing
 
