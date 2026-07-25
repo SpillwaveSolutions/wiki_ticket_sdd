@@ -36,8 +36,11 @@
     "wiki_key": "adr/0003-green-gates-merge"
   },
   "cli-reference": {
-    "canonical_key": "cli-reference",
-    "doc_type": "cli-reference",
+    "aliases": [
+      "cli-reference"
+    ],
+    "canonical_key": "guide/cli-reference",
+    "doc_type": "guide",
     "page_id": "CLI-Reference",
     "render_hash": "b72c012708b4",
     "rev": "af5391b6dae8964ad15e2321be10efa996385aa0",
@@ -3621,8 +3624,11 @@
     "wiki_key": "status/2026-07-19-daily"
   },
   "user-guide": {
-    "canonical_key": "user-guide",
-    "doc_type": "user-guide",
+    "aliases": [
+      "user-guide"
+    ],
+    "canonical_key": "guide/user-guide",
+    "doc_type": "guide",
     "page_id": "User-Guide",
     "render_hash": "1563c2173eab",
     "rev": "af5391b6dae8964ad15e2321be10efa996385aa0",
