@@ -1322,6 +1322,11 @@
   },
   {
    "from": "item/01KYBD2HYK196RQN7JNCMV6PDS",
+   "to": "pr/155",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYBD2HYK196RQN7JNCMV6PDS",
    "to": "ticket/github#145",
    "type": "references"
   },
@@ -1329,6 +1334,11 @@
    "from": "item/01KYBD2HYK1AT1YCN3GW8Q3QQW",
    "to": "item/01KYBD2HYKKZM22DFM16ZJXYFG",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYK1AT1YCN3GW8Q3QQW",
+   "to": "pr/155",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYBD2HYK1AT1YCN3GW8Q3QQW",
@@ -1342,6 +1352,11 @@
   },
   {
    "from": "item/01KYBD2HYK9XY02QHSVF1849BQ",
+   "to": "pr/155",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYBD2HYK9XY02QHSVF1849BQ",
    "to": "ticket/github#147",
    "type": "references"
   },
@@ -1349,6 +1364,11 @@
    "from": "item/01KYBD2HYKB5E4JXNYYQ9BPDAE",
    "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYKB5E4JXNYYQ9BPDAE",
+   "to": "pr/155",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYBD2HYKB5E4JXNYYQ9BPDAE",
@@ -1362,6 +1382,11 @@
   },
   {
    "from": "item/01KYBD2HYKET7WJARQFB2NVMFS",
+   "to": "pr/155",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYBD2HYKET7WJARQFB2NVMFS",
    "to": "ticket/github#149",
    "type": "references"
   },
@@ -1369,6 +1394,11 @@
    "from": "item/01KYBD2HYKG0DW7QJX7XG561A8",
    "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYKG0DW7QJX7XG561A8",
+   "to": "pr/155",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYBD2HYKG0DW7QJX7XG561A8",
@@ -1382,6 +1412,11 @@
   },
   {
    "from": "item/01KYBD2HYKJHS5M2PFZ78Y585C",
+   "to": "pr/155",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYBD2HYKJHS5M2PFZ78Y585C",
    "to": "ticket/github#151",
    "type": "references"
   },
@@ -1389,6 +1424,11 @@
    "from": "item/01KYBD2HYKKC2G9NW4VA3RVC6G",
    "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYKKC2G9NW4VA3RVC6G",
+   "to": "pr/155",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYBD2HYKKC2G9NW4VA3RVC6G",
@@ -1402,6 +1442,11 @@
   },
   {
    "from": "item/01KYBD2HYKKZM22DFM16ZJXYFG",
+   "to": "pr/155",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYBD2HYKKZM22DFM16ZJXYFG",
    "to": "ticket/github#153",
    "type": "references"
   },
@@ -1412,8 +1457,18 @@
   },
   {
    "from": "item/01KYBD2HYKYBBNGDMCQSW4VE2T",
+   "to": "pr/155",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYBD2HYKYBBNGDMCQSW4VE2T",
    "to": "ticket/github#154",
    "type": "references"
+  },
+  {
+   "from": "item/01KYBPP7619CBXN3ZTV9FZJMEJ",
+   "to": "release/v0.15.0",
+   "type": "targets"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -2258,6 +2313,21 @@
   {
    "from": "roadmap-snapshot/2026-07-24_v0.14.0-release",
    "to": "release/v0.14.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-25_v0.15.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-25_v0.15.0-release",
+   "to": "roadmap-snapshot/2026-07-24_v0.14.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-25_v0.15.0-release",
+   "to": "release/v0.15.0",
    "type": "targets"
   },
   {
@@ -3464,6 +3534,11 @@
    "status": "done",
    "title": "Add a CI step validating commit messages on PRs"
   },
+  "item/01KYBPP7619CBXN3ZTV9FZJMEJ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.15.0 release"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -3581,6 +3656,9 @@
   "pr/122": {
    "doc_type": "pr"
   },
+  "pr/155": {
+   "doc_type": "pr"
+  },
   "release/v0.10.0": {
    "doc_type": "release"
   },
@@ -3597,6 +3675,9 @@
    "doc_type": "release"
   },
   "release/v0.14.0": {
+   "doc_type": "release"
+  },
+  "release/v0.15.0": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
@@ -3647,6 +3728,12 @@
   "roadmap-snapshot/2026-07-24_v0.14.0-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-07-24_v0.14.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-25_v0.15.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-25_v0.15.0-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

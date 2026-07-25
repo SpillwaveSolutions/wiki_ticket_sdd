@@ -24,7 +24,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "682709792c50",
+   "render_hash": "c36e650f974b",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "d685304a5ac6",
+   "render_hash": "3b610626b0fe",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -99,6 +99,16 @@
    "title": "PR #122",
    "truth_state": "not tracked",
    "wiki_key": "pr/122"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-155",
+   "render": "as-is",
+   "render_hash": "e88159e3b92a",
+   "source": "docs/.index/rendered/prs/155.md",
+   "title": "PR #155",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/155"
   },
   {
    "frozen": false,
@@ -159,6 +169,16 @@
    "title": "Release v0.14.0",
    "truth_state": "shipped",
    "wiki_key": "release/v0.14.0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.15.0",
+   "render": "as-is",
+   "render_hash": "e6399faaa455",
+   "source": "docs/.index/rendered/releases/v0.15.0.md",
+   "title": "Release v0.15.0",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.15.0"
   },
   {
    "frozen": false,
@@ -2124,7 +2144,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYK196RQN7JNCMV6PDS",
    "render": "as-is",
-   "render_hash": "1a81ff63d56c",
+   "render_hash": "c59f2ccd4246",
    "source": "docs/.index/rendered/tickets/01KYBD2HYK196RQN7JNCMV6PDS.md",
    "title": "Add WORKLOG_SKIP_BRANCH_GUARD to the three bare pre-commit call sites",
    "truth_state": "done",
@@ -2134,7 +2154,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYK1AT1YCN3GW8Q3QQW",
    "render": "as-is",
-   "render_hash": "14f02f63f172",
+   "render_hash": "50c3da96d531",
    "source": "docs/.index/rendered/tickets/01KYBD2HYK1AT1YCN3GW8Q3QQW.md",
    "title": "Mirror to plugin/scripts/commit-msg (byte-identical canon copy)",
    "truth_state": "done",
@@ -2144,7 +2164,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYK9XY02QHSVF1849BQ",
    "render": "as-is",
-   "render_hash": "a5b002d7d120",
+   "render_hash": "a7a3b40e1a01",
    "source": "docs/.index/rendered/tickets/01KYBD2HYK9XY02QHSVF1849BQ.md",
    "title": "Wire commit-msg into install/uninstall/doctor/CANON",
    "truth_state": "done",
@@ -2154,7 +2174,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYKB5E4JXNYYQ9BPDAE",
    "render": "as-is",
-   "render_hash": "ad6652168a61",
+   "render_hash": "96817edc2e56",
    "source": "docs/.index/rendered/tickets/01KYBD2HYKB5E4JXNYYQ9BPDAE.md",
    "title": "Full test suite green + manual verification",
    "truth_state": "done",
@@ -2164,7 +2184,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYKET7WJARQFB2NVMFS",
    "render": "as-is",
-   "render_hash": "c049874cdfed",
+   "render_hash": "080451c6ae95",
    "source": "docs/.index/rendered/tickets/01KYBD2HYKET7WJARQFB2NVMFS.md",
    "title": "Remove the \"direct-commit repos\" mode from the release skill",
    "truth_state": "done",
@@ -2174,7 +2194,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYKG0DW7QJX7XG561A8",
    "render": "as-is",
-   "render_hash": "43601c14bfb0",
+   "render_hash": "c2019e870ac1",
    "source": "docs/.index/rendered/tickets/01KYBD2HYKG0DW7QJX7XG561A8.md",
    "title": "Update test fixtures for the new hooks",
    "truth_state": "done",
@@ -2184,7 +2204,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYKJHS5M2PFZ78Y585C",
    "render": "as-is",
-   "render_hash": "fdafb5038d62",
+   "render_hash": "0b5b87605922",
    "source": "docs/.index/rendered/tickets/01KYBD2HYKJHS5M2PFZ78Y585C.md",
    "title": "Add TestBranchGuard and TestCommitMsgReference test classes",
    "truth_state": "done",
@@ -2194,7 +2214,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYKKC2G9NW4VA3RVC6G",
    "render": "as-is",
-   "render_hash": "9cd2d53b2dc4",
+   "render_hash": "ce58784a4437",
    "source": "docs/.index/rendered/tickets/01KYBD2HYKKC2G9NW4VA3RVC6G.md",
    "title": "Add the branch-guard block to hooks/pre-commit",
    "truth_state": "done",
@@ -2204,7 +2224,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYKKZM22DFM16ZJXYFG",
    "render": "as-is",
-   "render_hash": "635b413a0eec",
+   "render_hash": "eec002874f80",
    "source": "docs/.index/rendered/tickets/01KYBD2HYKKZM22DFM16ZJXYFG.md",
    "title": "Create hooks/commit-msg requiring a ULID or ticket reference",
    "truth_state": "done",
@@ -2214,11 +2234,21 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYKYBBNGDMCQSW4VE2T",
    "render": "as-is",
-   "render_hash": "4f55d6ed4191",
+   "render_hash": "5c150d2ca8b4",
    "source": "docs/.index/rendered/tickets/01KYBD2HYKYBBNGDMCQSW4VE2T.md",
    "title": "Add a CI step validating commit messages on PRs",
    "truth_state": "done",
    "wiki_key": "item/01KYBD2HYKYBBNGDMCQSW4VE2T"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYBPP7619CBXN3ZTV9FZJMEJ",
+   "render": "as-is",
+   "render_hash": "29a1c4f490ea",
+   "source": "docs/.index/rendered/tickets/01KYBPP7619CBXN3ZTV9FZJMEJ.md",
+   "title": "Cut v0.15.0 release",
+   "truth_state": "done",
+   "wiki_key": "item/01KYBPP7619CBXN3ZTV9FZJMEJ"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -2584,11 +2614,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T01:29:35Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T03:59:00Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "6ed5949f5aec",
+   "render_hash": "a0ef4fd14b2f",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -2648,6 +2678,17 @@
    "title": "Roadmap",
    "truth_state": "snapshot",
    "wiki_key": "roadmap-snapshot/2026-07-24_v0.14.0-release"
+  },
+  {
+   "banner": "> **Snapshot** of release v0.15.0 (2026-07-25) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-07-25_v0.15.0-release",
+   "render": "doc+banner",
+   "render_hash": "d06a92b12de9",
+   "source": "docs/roadmap/2026-07-25_v0.15.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-07-25_v0.15.0-release"
   },
   {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
@@ -2783,7 +2824,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "624f8a84f3ae",
+  "render_hash": "3f7c0bd346d7",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1
