@@ -1,6 +1,6 @@
 # Add a CI step validating commit messages on PRs
 
-`01KYBD2HYKYBBNGDMCQSW4VE2T` · task/feature · **open**
+`01KYBD2HYKYBBNGDMCQSW4VE2T` · task/feature · **done**
 
 Walk git rev-list --no-merges base..HEAD through hooks/commit-msg in
 .github/workflows/worklog.yml (template and this repo's installed

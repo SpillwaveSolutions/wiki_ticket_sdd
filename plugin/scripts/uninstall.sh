@@ -21,7 +21,7 @@ done
 rm -rf bin/__pycache__   # byproduct of running the scripts init installed
 rmdir bin 2>/dev/null && removed+=("bin/ (empty)") || true
 
-for f in hooks/pre-commit hooks/pre-merge-commit; do
+for f in hooks/pre-commit hooks/pre-merge-commit hooks/commit-msg; do
   if [ -f "$f" ]; then
     rm "$f"
     removed+=("$f")

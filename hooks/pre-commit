@@ -11,6 +11,28 @@ export PYTHONDONTWRITEBYTECODE=1
 
 fail() { echo "worklog: $*" >&2; exit 1; }
 
+# Branch guard: never author a commit directly on main/master. A local
+# reconciliation merge (e.g. `git merge origin/main`) is legitimate and
+# exempted two ways: WORKLOG_MERGE_COMMIT (set by pre-merge-commit before
+# exec'ing here -- MERGE_HEAD is NOT yet on disk at this point in git's own
+# merge sequence, verified empirically) covers a fresh `git merge`; MERGE_HEAD
+# itself (present by the time a merge that a hook rejected is resumed via a
+# later plain `git commit`) covers that follow-up case. WORKLOG_SKIP_BRANCH_
+# GUARD is set only by non-commit callers of this script (doctor.sh, CI's
+# --no-verify backstop, the integration-test "CI gate passes" assertions)
+# that run it standalone, with no commit in flight, and would otherwise get
+# a false FAIL on main.
+if [ -z "${WORKLOG_SKIP_BRANCH_GUARD:-}" ] && \
+   [ -z "${WORKLOG_MERGE_COMMIT:-}" ] && \
+   [ ! -f "$(git rev-parse --git-path MERGE_HEAD)" ]; then
+  branch=$(git symbolic-ref --quiet --short HEAD || true)
+  case "$branch" in
+    main|master)
+      fail "commits go on a branch, not '$branch' (main/master is pull-only). Run: git checkout -b <branch-name>, then commit there."
+      ;;
+  esac
+fi
+
 for f in .work/todo.jsonl .work/done.jsonl; do
   [ -f "$f" ] || continue
 

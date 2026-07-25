@@ -47,7 +47,7 @@ for f in worklog fold.py ulid.py render_roadmap.py plan_capture.py; do
     ok "bin/$f present, executable, matches plugin"
   fi
 done
-for f in pre-commit pre-merge-commit; do
+for f in pre-commit pre-merge-commit commit-msg; do
   if [ ! -f "hooks/$f" ]; then
     bad "hooks/$f missing"
   elif [ ! -x "hooks/$f" ]; then
@@ -66,8 +66,11 @@ else
 fi
 
 # invariants: run the pre-commit checks (newline, schema, roadmap freshness)
+# WORKLOG_SKIP_BRANCH_GUARD: this is a standalone health check, not a real
+# commit -- doctor is usually run on main, which the branch guard would
+# otherwise always fail.
 if [ -x hooks/pre-commit ]; then
-  out=$(hooks/pre-commit 2>&1)
+  out=$(WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit 2>&1)
   if [ $? -eq 0 ]; then
     ok "hooks/pre-commit invariant checks pass"
   else

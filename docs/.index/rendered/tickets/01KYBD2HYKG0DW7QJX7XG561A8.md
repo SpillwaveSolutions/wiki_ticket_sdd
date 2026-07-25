@@ -1,6 +1,6 @@
 # Update test fixtures for the new hooks
 
-`01KYBD2HYKG0DW7QJX7XG561A8` · task/feature · **open**
+`01KYBD2HYKG0DW7QJX7XG561A8` · task/feature · **done**
 
 tests/test_integration.py (~23 commit_all calls) and
 tests/test_plugin.py (3 raw git commit calls) mostly commit on main with

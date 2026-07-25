@@ -1,6 +1,6 @@
 # Add the branch-guard block to hooks/pre-commit
 
-`01KYBD2HYKKC2G9NW4VA3RVC6G` · task/feature · **open**
+`01KYBD2HYKKC2G9NW4VA3RVC6G` · task/feature · **done**
 
 Insert the MERGE_HEAD-exempt, WORKLOG_SKIP_BRANCH_GUARD-overridable check
 that fails when HEAD is main/master, right after fail() is defined.

@@ -1,6 +1,6 @@
 # Add TestBranchGuard and TestCommitMsgReference test classes
 
-`01KYBD2HYKJHS5M2PFZ78Y585C` · task/feature · **open**
+`01KYBD2HYKJHS5M2PFZ78Y585C` · task/feature · **done**
 
 New tests in tests/test_integration.py covering: commit on main
 rejected, commit on branch succeeds, merge onto main allowed (the

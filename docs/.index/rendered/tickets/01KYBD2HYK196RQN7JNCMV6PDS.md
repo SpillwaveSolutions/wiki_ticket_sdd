@@ -1,6 +1,6 @@
 # Add WORKLOG_SKIP_BRANCH_GUARD to the three bare pre-commit call sites
 
-`01KYBD2HYK196RQN7JNCMV6PDS` · task/feature · **open**
+`01KYBD2HYK196RQN7JNCMV6PDS` · task/feature · **done**
 
 plugin/scripts/doctor.sh's own invocation, plugin/scripts/init.sh's CI
 backstop step, and tests/test_integration.py's two "CI would pass"

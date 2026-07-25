@@ -1,6 +1,6 @@
 # Create hooks/commit-msg requiring a ULID or ticket reference
 
-`01KYBD2HYKKZM22DFM16ZJXYFG` · task/feature · **open**
+`01KYBD2HYKKZM22DFM16ZJXYFG` · task/feature · **done**
 
 New hook: exempt merge commits via MERGE_HEAD, otherwise require a
 26-char Crockford ULID or #123 ticket reference in the message, reusing
@@ -12,9 +12,9 @@ the bin/ulid.py alphabet.
 
 ## Subtasks
 
-- [[Ticket-01KYBD2HYK1AT1YCN3GW8Q3QQW]] Mirror to plugin/scripts/commit-msg (byte-identical canon copy) — Mirror to plugin/scripts/commit-msg (byte-identical canon copy) (open)
+- [[Ticket-01KYBD2HYK1AT1YCN3GW8Q3QQW]] Mirror to plugin/scripts/commit-msg (byte-identical canon copy) — Mirror to plugin/scripts/commit-msg (byte-identical canon copy) (done)
 
-Progress: 0/1 done
+Progress: 1/1 done
 
 ## Related tickets
 

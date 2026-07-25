@@ -1,6 +1,6 @@
 # Remove the "direct-commit repos" mode from the release skill
 
-`01KYBD2HYKET7WJARQFB2NVMFS` · task/feature · **open**
+`01KYBD2HYKET7WJARQFB2NVMFS` · task/feature · **done**
 
 plugin/skills/release/SKILL.md section 3 currently documents committing
 release stamps directly on the default branch -- dead once the branch

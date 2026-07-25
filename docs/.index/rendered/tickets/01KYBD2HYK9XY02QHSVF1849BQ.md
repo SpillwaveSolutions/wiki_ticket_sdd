@@ -1,6 +1,6 @@
 # Wire commit-msg into install/uninstall/doctor/CANON
 
-`01KYBD2HYK9XY02QHSVF1849BQ` · task/feature · **open**
+`01KYBD2HYK9XY02QHSVF1849BQ` · task/feature · **done**
 
 plugin/scripts/init.sh's hook-copy loop and CI template,
 plugin/scripts/uninstall.sh's removal loop, plugin/scripts/doctor.sh's

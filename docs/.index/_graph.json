@@ -3416,17 +3416,17 @@
   },
   "item/01KYBD2HYK196RQN7JNCMV6PDS": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Add WORKLOG_SKIP_BRANCH_GUARD to the three bare pre-commit call sites"
   },
   "item/01KYBD2HYK1AT1YCN3GW8Q3QQW": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Mirror to plugin/scripts/commit-msg (byte-identical canon copy)"
   },
   "item/01KYBD2HYK9XY02QHSVF1849BQ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Wire commit-msg into install/uninstall/doctor/CANON"
   },
   "item/01KYBD2HYKB5E4JXNYYQ9BPDAE": {
@@ -3436,32 +3436,32 @@
   },
   "item/01KYBD2HYKET7WJARQFB2NVMFS": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Remove the \"direct-commit repos\" mode from the release skill"
   },
   "item/01KYBD2HYKG0DW7QJX7XG561A8": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Update test fixtures for the new hooks"
   },
   "item/01KYBD2HYKJHS5M2PFZ78Y585C": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Add TestBranchGuard and TestCommitMsgReference test classes"
   },
   "item/01KYBD2HYKKC2G9NW4VA3RVC6G": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Add the branch-guard block to hooks/pre-commit"
   },
   "item/01KYBD2HYKKZM22DFM16ZJXYFG": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Create hooks/commit-msg requiring a ULID or ticket reference"
   },
   "item/01KYBD2HYKYBBNGDMCQSW4VE2T": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Add a CI step validating commit messages on PRs"
   },
   "plan/2026-07-17_worklog-core_plan": {

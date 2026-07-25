@@ -1,6 +1,6 @@
 # Mirror to plugin/scripts/commit-msg (byte-identical canon copy)
 
-`01KYBD2HYK1AT1YCN3GW8Q3QQW` · subtask/feature · **open**
+`01KYBD2HYK1AT1YCN3GW8Q3QQW` · subtask/feature · **done**
 
 Mirror to plugin/scripts/commit-msg (byte-identical canon copy)
 
