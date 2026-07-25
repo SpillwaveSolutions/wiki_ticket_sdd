@@ -1,6 +1,6 @@
 # fallback-googleclouddevops.md
 
-`01KYDP0BQHV6MW1XX7H7JC1EN4` · subtask/feature · **open**
+`01KYDP0BQHV6MW1XX7H7JC1EN4` · subtask/feature · **done**
 
 Guide covering Google Cloud's lack of a native work tracker and how a
 GCP-hosted team should pick a different supported system instead.

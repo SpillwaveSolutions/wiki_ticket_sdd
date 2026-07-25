@@ -1,6 +1,6 @@
 # fallback-awscodecatalyst.md
 
-`01KYDP0BQHXZCGTTM5PAV262RM` · subtask/feature · **open**
+`01KYDP0BQHXZCGTTM5PAV262RM` · subtask/feature · **done**
 
 Guide for syncing to AWS CodeCatalyst, honestly noting no adapter ships
 yet and that the service is closed to new customers.

@@ -1,6 +1,6 @@
 # fallback-gitlab.md
 
-`01KYDP0BQHZHYH9CKM3D0ZM803` · subtask/feature · **open**
+`01KYDP0BQHZHYH9CKM3D0ZM803` · subtask/feature · **done**
 
 Guide for syncing to GitLab issues/wiki, honestly noting no adapter
 ships yet and giving CLI/REST research pointers.

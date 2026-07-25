@@ -1,6 +1,6 @@
 # fallback-gsd.md
 
-`01KYDP0BQHAE38H6VPDNVXV8JA` · subtask/feature · **open**
+`01KYDP0BQHAE38H6VPDNVXV8JA` · subtask/feature · **done**
 
 Guide covering when and how to combine this repo's spec-driven workflow
 with the GSD (Get Shit Done) skill set.

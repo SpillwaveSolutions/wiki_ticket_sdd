@@ -1,6 +1,6 @@
 # Write the Integrations meta index page
 
-`01KYDP0BQHAMP5AC6AP7854N9H` · task/feature · **open**
+`01KYDP0BQHAMP5AC6AP7854N9H` · task/feature · **done**
 
 Create a single index page listing all 11 systems with a one-sentence
 description and a link to each, so someone browsing the wiki can find the

@@ -1,6 +1,6 @@
 # End-to-end verification
 
-`01KYDP0BQHZAPBZPSSY38J33ZZ` · task/feature · **open**
+`01KYDP0BQHZAPBZPSSY38J33ZZ` · task/feature · **done**
 
 Exercise the new skill for a live-page fetch and confirm it states which
 guide it's using and follows its recommended workflow, then simulate a

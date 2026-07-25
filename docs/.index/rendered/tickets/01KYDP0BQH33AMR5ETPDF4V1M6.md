@@ -1,6 +1,6 @@
 # Register and publish the new pages
 
-`01KYDP0BQH33AMR5ETPDF4V1M6` · task/feature · **open**
+`01KYDP0BQH33AMR5ETPDF4V1M6` · task/feature · **done**
 
 Register all 12 new files with the existing wiki-add mechanism and run a
 normal wiki-publish pass to push them to the GitHub wiki, then confirm the

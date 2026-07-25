@@ -3853,87 +3853,87 @@
   },
   "item/01KYDP0BQG59M8QGCQY72SC0G1": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Create the integration-guide skill"
   },
   "item/01KYDP0BQGC8N7K1TE571K74JF": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Write the 11 fallback integration pages"
   },
   "item/01KYDP0BQGW4XAAGX68526C9ES": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems"
   },
   "item/01KYDP0BQH33AMR5ETPDF4V1M6": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Register and publish the new pages"
   },
   "item/01KYDP0BQH6389PTNGKXHSN2KR": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "fallback-speckit.md"
   },
   "item/01KYDP0BQHAE38H6VPDNVXV8JA": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "fallback-gsd.md"
   },
   "item/01KYDP0BQHAMP5AC6AP7854N9H": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Write the Integrations meta index page"
   },
   "item/01KYDP0BQHANV652NZVV8N7VX5": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "fallback-confluence.md"
   },
   "item/01KYDP0BQHDBJ50D8HZHWN3G4H": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "fallback-openspec.md"
   },
   "item/01KYDP0BQHPP0JZRK856QHN76S": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "fallback-github.md"
   },
   "item/01KYDP0BQHRM2Q3C5727FAZ7RD": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "fallback-azuredevops.md"
   },
   "item/01KYDP0BQHV6MW1XX7H7JC1EN4": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "fallback-googleclouddevops.md"
   },
   "item/01KYDP0BQHW1A3235YSF16ZZAQ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "fallback-jira.md"
   },
   "item/01KYDP0BQHXGEBEY40SC1Q4ST3": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "fallback-superpowers.md"
   },
   "item/01KYDP0BQHXZCGTTM5PAV262RM": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "fallback-awscodecatalyst.md"
   },
   "item/01KYDP0BQHZAPBZPSSY38J33ZZ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "End-to-end verification"
   },
   "item/01KYDP0BQHZHYH9CKM3D0ZM803": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "fallback-gitlab.md"
   },
   "plan/2026-07-17_worklog-core_plan": {

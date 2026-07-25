@@ -1,6 +1,6 @@
 # fallback-openspec.md
 
-`01KYDP0BQHDBJ50D8HZHWN3G4H` · subtask/feature · **open**
+`01KYDP0BQHDBJ50D8HZHWN3G4H` · subtask/feature · **done**
 
 Guide covering when and how to combine this repo's spec-driven workflow
 with OpenSpec.

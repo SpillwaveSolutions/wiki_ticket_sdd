@@ -1,6 +1,6 @@
 # fallback-confluence.md
 
-`01KYDP0BQHANV652NZVV8N7VX5` · subtask/feature · **open**
+`01KYDP0BQHANV652NZVV8N7VX5` · subtask/feature · **done**
 
 Guide for publishing docs to Confluence, honestly noting no adapter
 ships yet, instructing reuse of the existing Confluence skill, and

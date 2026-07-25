@@ -1,6 +1,6 @@
 # fallback-github.md
 
-`01KYDP0BQHPP0JZRK856QHN76S` · subtask/feature · **open**
+`01KYDP0BQHPP0JZRK856QHN76S` · subtask/feature · **done**
 
 Guide for the one system with a real, shipped adapter today — GitHub
 Issues plus the GitHub wiki.

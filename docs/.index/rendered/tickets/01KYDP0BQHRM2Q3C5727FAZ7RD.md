@@ -1,6 +1,6 @@
 # fallback-azuredevops.md
 
-`01KYDP0BQHRM2Q3C5727FAZ7RD` · subtask/feature · **open**
+`01KYDP0BQHRM2Q3C5727FAZ7RD` · subtask/feature · **done**
 
 Guide for syncing to Azure DevOps boards/wiki, honestly noting no
 adapter ships yet and carrying forward the existing field-tested

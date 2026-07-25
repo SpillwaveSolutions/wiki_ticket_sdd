@@ -1,6 +1,6 @@
 # fallback-jira.md
 
-`01KYDP0BQHW1A3235YSF16ZZAQ` · subtask/feature · **open**
+`01KYDP0BQHW1A3235YSF16ZZAQ` · subtask/feature · **done**
 
 Guide for syncing work items to Jira, honestly noting no adapter ships
 yet, and instructing the agent to reuse the existing Jira skill for any

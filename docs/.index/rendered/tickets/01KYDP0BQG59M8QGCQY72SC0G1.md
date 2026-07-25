@@ -1,6 +1,6 @@
 # Create the integration-guide skill
 
-`01KYDP0BQG59M8QGCQY72SC0G1` · task/feature · **open**
+`01KYDP0BQG59M8QGCQY72SC0G1` · task/feature · **done**
 
 Add a new Claude Code skill that recognizes when someone mentions one of 11
 supported tools/systems (Superpowers, GSD, SpecKit, OpenSpec, Jira,
