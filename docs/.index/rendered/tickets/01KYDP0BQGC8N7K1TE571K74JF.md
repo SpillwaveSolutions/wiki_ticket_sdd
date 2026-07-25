@@ -40,3 +40,7 @@ yet and that the service is closed to new customers. (open)
 ships yet and giving CLI/REST research pointers. (open)
 
 Progress: 0/11 done
+
+## Related tickets
+
+- [github #163](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/163)

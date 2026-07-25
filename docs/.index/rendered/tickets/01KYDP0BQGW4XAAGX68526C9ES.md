@@ -23,3 +23,7 @@ guide it's using and follows its recommended workflow, then simulate a
 fetch failure and confirm it falls back to the local copy and says so. (open)
 
 Progress: 0/5 done
+
+## Related tickets
+
+- [github #164](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/164)
