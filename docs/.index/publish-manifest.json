@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "d2ce8fa8f419",
+   "render_hash": "b458dbf020d5",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -109,6 +109,16 @@
    "title": "PR #155",
    "truth_state": "not tracked",
    "wiki_key": "pr/155"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-179",
+   "render": "as-is",
+   "render_hash": "0d464c895334",
+   "source": "docs/.index/rendered/prs/179.md",
+   "title": "PR #179",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/179"
   },
   {
    "frozen": false,
@@ -2304,7 +2314,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYDP0BQGW4XAAGX68526C9ES",
    "render": "as-is",
-   "render_hash": "0b837229fa28",
+   "render_hash": "ddb3118fd09e",
    "source": "docs/.index/rendered/tickets/01KYDP0BQGW4XAAGX68526C9ES.md",
    "title": "Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems",
    "truth_state": "done",

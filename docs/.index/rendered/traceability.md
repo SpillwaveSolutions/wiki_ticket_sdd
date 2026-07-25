@@ -88,6 +88,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
 `01KYDP0BQGW4XAAGX68526C9ES` · status: done
+- lands-in: pr/179
 - references: [github#164](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/164)
 - contains: Create the integration-guide skill
 - contains: Write the 11 fallback integration pages
