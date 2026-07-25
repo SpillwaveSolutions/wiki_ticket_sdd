@@ -1,0 +1,17 @@
+# fallback-jira.md
+
+`01KYDP0BQHW1A3235YSF16ZZAQ` · subtask/feature · **done**
+
+Guide for syncing work items to Jira, honestly noting no adapter ships
+yet, and instructing the agent to reuse the existing Jira skill for any
+real API calls rather than improvising raw REST calls.
+
+## Hierarchy
+
+- task: [[Ticket-01KYDP0BQGC8N7K1TE571K74JF]] Write the 11 fallback integration pages — Author one markdown guide per supported tool/system, each following the
+same 10-section outline so the skill can navigate them predictably.
+- epic: [[Ticket-01KYDP0BQGW4XAAGX68526C9ES]] Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems — Add a new integration-guide skill plus 11 markdown wiki pages (fallback copies committed to the repo) so wiki_ticket_sdd can point users at living setup guides for Superpowers, GSD, SpecKit, OpenSpec, Jira, Confluence, GitHub, GitLab, Azure DevOps, AWS CodeCatalyst, and Google Cloud DevOps, without hard-coding any of that guidance into the shipped skill set.
+
+## Related tickets
+
+- [github #174](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/174)

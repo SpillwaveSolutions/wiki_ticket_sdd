@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "3402bbac8df2",
+   "render_hash": "7abeb22507cb",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -24,7 +24,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "e3eecd49c9ec",
+   "render_hash": "782810854ca9",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "48756888d21e",
+   "render_hash": "b458dbf020d5",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -109,6 +109,16 @@
    "title": "PR #155",
    "truth_state": "not tracked",
    "wiki_key": "pr/155"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-179",
+   "render": "as-is",
+   "render_hash": "0d464c895334",
+   "source": "docs/.index/rendered/prs/179.md",
+   "title": "PR #179",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/179"
   },
   {
    "frozen": false,
@@ -184,7 +194,7 @@
    "frozen": false,
    "page_name": "Release-v0.15.1",
    "render": "as-is",
-   "render_hash": "0fd91e1c8670",
+   "render_hash": "391f9e1c7995",
    "source": "docs/.index/rendered/releases/v0.15.1.md",
    "title": "Release v0.15.1",
    "truth_state": "shipped",
@@ -2274,11 +2284,181 @@
    "frozen": false,
    "page_name": "Ticket-01KYDMC6M6B2W8F48271TG0VEK",
    "render": "as-is",
-   "render_hash": "0e436fb9660e",
+   "render_hash": "44db8bdd2902",
    "source": "docs/.index/rendered/tickets/01KYDMC6M6B2W8F48271TG0VEK.md",
    "title": "Cut v0.15.1 release",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01KYDMC6M6B2W8F48271TG0VEK"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQG59M8QGCQY72SC0G1",
+   "render": "as-is",
+   "render_hash": "4d3d5bef6bf7",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQG59M8QGCQY72SC0G1.md",
+   "title": "Create the integration-guide skill",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQG59M8QGCQY72SC0G1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQGC8N7K1TE571K74JF",
+   "render": "as-is",
+   "render_hash": "66b1df539628",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQGC8N7K1TE571K74JF.md",
+   "title": "Write the 11 fallback integration pages",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQGC8N7K1TE571K74JF"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQGW4XAAGX68526C9ES",
+   "render": "as-is",
+   "render_hash": "ddb3118fd09e",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQGW4XAAGX68526C9ES.md",
+   "title": "Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQGW4XAAGX68526C9ES"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQH33AMR5ETPDF4V1M6",
+   "render": "as-is",
+   "render_hash": "fd874ff121a5",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQH33AMR5ETPDF4V1M6.md",
+   "title": "Register and publish the new pages",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQH33AMR5ETPDF4V1M6"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQH6389PTNGKXHSN2KR",
+   "render": "as-is",
+   "render_hash": "2322d023644e",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQH6389PTNGKXHSN2KR.md",
+   "title": "fallback-speckit.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQH6389PTNGKXHSN2KR"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHAE38H6VPDNVXV8JA",
+   "render": "as-is",
+   "render_hash": "ee7d5b8ec20b",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHAE38H6VPDNVXV8JA.md",
+   "title": "fallback-gsd.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHAE38H6VPDNVXV8JA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHAMP5AC6AP7854N9H",
+   "render": "as-is",
+   "render_hash": "daa26bb159a0",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHAMP5AC6AP7854N9H.md",
+   "title": "Write the Integrations meta index page",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHAMP5AC6AP7854N9H"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHANV652NZVV8N7VX5",
+   "render": "as-is",
+   "render_hash": "3f986c2f071a",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHANV652NZVV8N7VX5.md",
+   "title": "fallback-confluence.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHANV652NZVV8N7VX5"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHDBJ50D8HZHWN3G4H",
+   "render": "as-is",
+   "render_hash": "70c8142faf43",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHDBJ50D8HZHWN3G4H.md",
+   "title": "fallback-openspec.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHDBJ50D8HZHWN3G4H"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHPP0JZRK856QHN76S",
+   "render": "as-is",
+   "render_hash": "2a0218da910c",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHPP0JZRK856QHN76S.md",
+   "title": "fallback-github.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHPP0JZRK856QHN76S"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHRM2Q3C5727FAZ7RD",
+   "render": "as-is",
+   "render_hash": "3fbb4bb83f55",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHRM2Q3C5727FAZ7RD.md",
+   "title": "fallback-azuredevops.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHRM2Q3C5727FAZ7RD"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHV6MW1XX7H7JC1EN4",
+   "render": "as-is",
+   "render_hash": "12ece38493c3",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHV6MW1XX7H7JC1EN4.md",
+   "title": "fallback-googleclouddevops.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHV6MW1XX7H7JC1EN4"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHW1A3235YSF16ZZAQ",
+   "render": "as-is",
+   "render_hash": "3f01cdb9d77b",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHW1A3235YSF16ZZAQ.md",
+   "title": "fallback-jira.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHW1A3235YSF16ZZAQ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHXGEBEY40SC1Q4ST3",
+   "render": "as-is",
+   "render_hash": "5ccc7052c3e3",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHXGEBEY40SC1Q4ST3.md",
+   "title": "fallback-superpowers.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHXGEBEY40SC1Q4ST3"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHXZCGTTM5PAV262RM",
+   "render": "as-is",
+   "render_hash": "e70273bf0c37",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHXZCGTTM5PAV262RM.md",
+   "title": "fallback-awscodecatalyst.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHXZCGTTM5PAV262RM"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHZAPBZPSSY38J33ZZ",
+   "render": "as-is",
+   "render_hash": "69213d1904b4",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHZAPBZPSSY38J33ZZ.md",
+   "title": "End-to-end verification",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHZAPBZPSSY38J33ZZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHZHYH9CKM3D0ZM803",
+   "render": "as-is",
+   "render_hash": "c5c5a5d99b4c",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHZHYH9CKM3D0ZM803.md",
+   "title": "fallback-gitlab.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHZHYH9CKM3D0ZM803"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -2569,6 +2749,17 @@
   {
    "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
    "frozen": true,
+   "page_name": "Plan-wiki-driven-integration-guides",
+   "render": "doc+banner",
+   "render_hash": "707c28fd7b58",
+   "source": "docs/plans/2026-07-25-wiki-driven-integration-guides.md",
+   "title": "Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-25-wiki-driven-integration-guides"
+  },
+  {
+   "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
+   "frozen": true,
    "page_name": "Plan-design-docs-release-sync",
    "render": "doc+banner",
    "render_hash": "9f3a72d1e016",
@@ -2666,11 +2857,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T21:38:14Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T22:37:14Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "f56a60a64f56",
+   "render_hash": "0ad2b7e1250e",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

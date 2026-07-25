@@ -2,8 +2,126 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### fallback-gitlab.md
+`01KYDP0BQHZHYH9CKM3D0ZM803` · status: done
+- belongs-to: Write the 11 fallback integration pages
+- references: [github#178](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/178)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### End-to-end verification
+`01KYDP0BQHZAPBZPSSY38J33ZZ` · status: done
+- belongs-to: Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+- references: [github#177](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/177)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-awscodecatalyst.md
+`01KYDP0BQHXZCGTTM5PAV262RM` · status: done
+- belongs-to: Write the 11 fallback integration pages
+- references: [github#176](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/176)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-superpowers.md
+`01KYDP0BQHXGEBEY40SC1Q4ST3` · status: done
+- belongs-to: Write the 11 fallback integration pages
+- references: [github#175](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/175)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-jira.md
+`01KYDP0BQHW1A3235YSF16ZZAQ` · status: done
+- belongs-to: Write the 11 fallback integration pages
+- references: [github#174](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/174)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-googleclouddevops.md
+`01KYDP0BQHV6MW1XX7H7JC1EN4` · status: done
+- belongs-to: Write the 11 fallback integration pages
+- references: [github#173](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/173)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-azuredevops.md
+`01KYDP0BQHRM2Q3C5727FAZ7RD` · status: done
+- belongs-to: Write the 11 fallback integration pages
+- references: [github#172](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/172)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-github.md
+`01KYDP0BQHPP0JZRK856QHN76S` · status: done
+- belongs-to: Write the 11 fallback integration pages
+- references: [github#171](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/171)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-openspec.md
+`01KYDP0BQHDBJ50D8HZHWN3G4H` · status: done
+- belongs-to: Write the 11 fallback integration pages
+- references: [github#170](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/170)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-confluence.md
+`01KYDP0BQHANV652NZVV8N7VX5` · status: done
+- belongs-to: Write the 11 fallback integration pages
+- references: [github#169](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/169)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### Write the Integrations meta index page
+`01KYDP0BQHAMP5AC6AP7854N9H` · status: done
+- belongs-to: Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+- references: [github#168](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/168)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-gsd.md
+`01KYDP0BQHAE38H6VPDNVXV8JA` · status: done
+- belongs-to: Write the 11 fallback integration pages
+- references: [github#167](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/167)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-speckit.md
+`01KYDP0BQH6389PTNGKXHSN2KR` · status: done
+- belongs-to: Write the 11 fallback integration pages
+- references: [github#166](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/166)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### Register and publish the new pages
+`01KYDP0BQH33AMR5ETPDF4V1M6` · status: done
+- belongs-to: Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+- references: [github#165](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/165)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+`01KYDP0BQGW4XAAGX68526C9ES` · status: done
+- lands-in: pr/179
+- references: [github#164](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/164)
+- contains: Create the integration-guide skill
+- contains: Write the 11 fallback integration pages
+- contains: Register and publish the new pages
+- contains: Write the Integrations meta index page
+- contains: End-to-end verification
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### Write the 11 fallback integration pages
+`01KYDP0BQGC8N7K1TE571K74JF` · status: done
+- belongs-to: Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+- references: [github#163](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/163)
+- contains: fallback-speckit.md
+- contains: fallback-gsd.md
+- contains: fallback-confluence.md
+- contains: fallback-openspec.md
+- contains: fallback-github.md
+- contains: fallback-azuredevops.md
+- contains: fallback-googleclouddevops.md
+- contains: fallback-jira.md
+- contains: fallback-superpowers.md
+- contains: fallback-awscodecatalyst.md
+- contains: fallback-gitlab.md
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### Create the integration-guide skill
+`01KYDP0BQG59M8QGCQY72SC0G1` · status: done
+- belongs-to: Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+- references: [github#162](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/162)
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
 ### Cut v0.15.1 release
-`01KYDMC6M6B2W8F48271TG0VEK` · status: in_progress
+`01KYDMC6M6B2W8F48271TG0VEK` · status: done
 - targets: release/v0.15.1
 
 ### user-guide.md miscounts branch-discipline hook checks (code-review finding)
