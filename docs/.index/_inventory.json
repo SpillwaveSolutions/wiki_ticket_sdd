@@ -508,6 +508,36 @@
    "wiki_key": "plan/2026-07-25-branch-discipline-hooks"
   },
   {
+   "canonical_key": "plan/2026-07-25-wiki-driven-integration-guides",
+   "date": "2026-07-25",
+   "doc_type": "plan",
+   "epic": "01KYDP0BQGW4XAAGX68526C9ES",
+   "items": [
+    "01KYDP0BQG59M8QGCQY72SC0G1",
+    "01KYDP0BQGC8N7K1TE571K74JF",
+    "01KYDP0BQHXGEBEY40SC1Q4ST3",
+    "01KYDP0BQHAE38H6VPDNVXV8JA",
+    "01KYDP0BQH6389PTNGKXHSN2KR",
+    "01KYDP0BQHDBJ50D8HZHWN3G4H",
+    "01KYDP0BQHW1A3235YSF16ZZAQ",
+    "01KYDP0BQHANV652NZVV8N7VX5",
+    "01KYDP0BQHPP0JZRK856QHN76S",
+    "01KYDP0BQHZHYH9CKM3D0ZM803",
+    "01KYDP0BQHRM2Q3C5727FAZ7RD",
+    "01KYDP0BQHXZCGTTM5PAV262RM",
+    "01KYDP0BQHV6MW1XX7H7JC1EN4",
+    "01KYDP0BQHAMP5AC6AP7854N9H",
+    "01KYDP0BQH33AMR5ETPDF4V1M6",
+    "01KYDP0BQHZAPBZPSSY38J33ZZ"
+   ],
+   "slug": "wiki-driven-integration-guides",
+   "source": "docs/plans/2026-07-25-wiki-driven-integration-guides.md",
+   "status": "planned",
+   "title": "Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-25-wiki-driven-integration-guides"
+  },
+  {
    "aliases": [
     "plan/design-docs-release-sync"
    ],
@@ -707,10 +737,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-25T21:38:14Z",
+   "generated_at": "2026-07-25T22:23:19Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "7e543d86",
+   "source_hash": "97c081f4",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
@@ -828,6 +858,7 @@
    "supersedes": "roadmap-snapshot/2026-07-25_v0.15.0-release",
    "title": "Roadmap",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-25_v0.15.1-release",
    "wiki_key": "roadmap-snapshot/2026-07-25_v0.15.1-release"
   },
   {

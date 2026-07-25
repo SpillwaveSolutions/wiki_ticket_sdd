@@ -1,0 +1,15 @@
+# fallback-confluence.md
+
+`01KYDP0BQHANV652NZVV8N7VX5` · subtask/feature · **open**
+
+Guide for publishing docs to Confluence, honestly noting no adapter
+ships yet, instructing reuse of the existing Confluence skill, and
+requiring diagrams to be converted to PNG/SVG images (via the Mermaid
+and PlantUML skills) before upload since Confluence can't render them
+natively.
+
+## Hierarchy
+
+- task: [[Ticket-01KYDP0BQGC8N7K1TE571K74JF]] Write the 11 fallback integration pages — Author one markdown guide per supported tool/system, each following the
+same 10-section outline so the skill can navigate them predictably.
+- epic: [[Ticket-01KYDP0BQGW4XAAGX68526C9ES]] Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems — Add a new integration-guide skill plus 11 markdown wiki pages (fallback copies committed to the repo) so wiki_ticket_sdd can point users at living setup guides for Superpowers, GSD, SpecKit, OpenSpec, Jira, Confluence, GitHub, GitLab, Azure DevOps, AWS CodeCatalyst, and Google Cloud DevOps, without hard-coding any of that guidance into the shipped skill set.

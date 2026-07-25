@@ -14,6 +14,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 
 | Plan | Lifecycle | Truth | Date |
 |---|---|---|---|
+| [[Plan-wiki-driven-integration-guides]] Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems | planned | current | 2026-07-25 |
 | [[Plan-branch-discipline-hooks]] Branch-discipline hooks: never commit on main, always reference work | completed | current | 2026-07-25 |
 | [[Plan-artifact-pages]] Extend IA to tickets, PRs, and releases (artifact pages) | completed | current | 2026-07-24 |
 | [[Plan-wiki-ticket-ui-ia]] WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui) | completed | current | 2026-07-22 |

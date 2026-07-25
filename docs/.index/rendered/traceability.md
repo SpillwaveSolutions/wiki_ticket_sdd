@@ -2,8 +2,108 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### fallback-gitlab.md
+`01KYDP0BQHZHYH9CKM3D0ZM803` · status: todo
+- belongs-to: Write the 11 fallback integration pages
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### End-to-end verification
+`01KYDP0BQHZAPBZPSSY38J33ZZ` · status: todo
+- belongs-to: Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-awscodecatalyst.md
+`01KYDP0BQHXZCGTTM5PAV262RM` · status: todo
+- belongs-to: Write the 11 fallback integration pages
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-superpowers.md
+`01KYDP0BQHXGEBEY40SC1Q4ST3` · status: todo
+- belongs-to: Write the 11 fallback integration pages
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-jira.md
+`01KYDP0BQHW1A3235YSF16ZZAQ` · status: todo
+- belongs-to: Write the 11 fallback integration pages
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-googleclouddevops.md
+`01KYDP0BQHV6MW1XX7H7JC1EN4` · status: todo
+- belongs-to: Write the 11 fallback integration pages
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-azuredevops.md
+`01KYDP0BQHRM2Q3C5727FAZ7RD` · status: todo
+- belongs-to: Write the 11 fallback integration pages
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-github.md
+`01KYDP0BQHPP0JZRK856QHN76S` · status: todo
+- belongs-to: Write the 11 fallback integration pages
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-openspec.md
+`01KYDP0BQHDBJ50D8HZHWN3G4H` · status: todo
+- belongs-to: Write the 11 fallback integration pages
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-confluence.md
+`01KYDP0BQHANV652NZVV8N7VX5` · status: todo
+- belongs-to: Write the 11 fallback integration pages
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### Write the Integrations meta index page
+`01KYDP0BQHAMP5AC6AP7854N9H` · status: todo
+- belongs-to: Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-gsd.md
+`01KYDP0BQHAE38H6VPDNVXV8JA` · status: todo
+- belongs-to: Write the 11 fallback integration pages
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### fallback-speckit.md
+`01KYDP0BQH6389PTNGKXHSN2KR` · status: todo
+- belongs-to: Write the 11 fallback integration pages
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### Register and publish the new pages
+`01KYDP0BQH33AMR5ETPDF4V1M6` · status: todo
+- belongs-to: Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+`01KYDP0BQGW4XAAGX68526C9ES` · status: todo
+- contains: Create the integration-guide skill
+- contains: Write the 11 fallback integration pages
+- contains: Register and publish the new pages
+- contains: Write the Integrations meta index page
+- contains: End-to-end verification
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### Write the 11 fallback integration pages
+`01KYDP0BQGC8N7K1TE571K74JF` · status: todo
+- belongs-to: Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+- contains: fallback-speckit.md
+- contains: fallback-gsd.md
+- contains: fallback-confluence.md
+- contains: fallback-openspec.md
+- contains: fallback-github.md
+- contains: fallback-azuredevops.md
+- contains: fallback-googleclouddevops.md
+- contains: fallback-jira.md
+- contains: fallback-superpowers.md
+- contains: fallback-awscodecatalyst.md
+- contains: fallback-gitlab.md
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
+### Create the integration-guide skill
+`01KYDP0BQG59M8QGCQY72SC0G1` · status: todo
+- belongs-to: Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems
+- produced-by: [[Plan-wiki-driven-integration-guides]]
+
 ### Cut v0.15.1 release
-`01KYDMC6M6B2W8F48271TG0VEK` · status: in_progress
+`01KYDMC6M6B2W8F48271TG0VEK` · status: done
 - targets: release/v0.15.1
 
 ### user-guide.md miscounts branch-discipline hook checks (code-review finding)
