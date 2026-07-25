@@ -280,6 +280,90 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Traceability",
     "wiki_key": "index/traceability"
   },
+  "integrations/awscodecatalyst": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/fallback-awscodecatalyst.md",
+    "source_hash": "9e60522c7253",
+    "title": "Integration-AWSCodeCatalyst",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integration-AWSCodeCatalyst"
+  },
+  "integrations/azuredevops": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/fallback-azuredevops.md",
+    "source_hash": "398f9126fd94",
+    "title": "Integration-AzureDevOps",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integration-AzureDevOps"
+  },
+  "integrations/confluence": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/fallback-confluence.md",
+    "source_hash": "3467260e2351",
+    "title": "Integration-Confluence",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integration-Confluence"
+  },
+  "integrations/github": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/fallback-github.md",
+    "source_hash": "02d5dcb99d65",
+    "title": "Integration-GitHub",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integration-GitHub"
+  },
+  "integrations/gitlab": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/fallback-gitlab.md",
+    "source_hash": "a70ffe5f2cde",
+    "title": "Integration-GitLab",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integration-GitLab"
+  },
+  "integrations/googleclouddevops": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/fallback-googleclouddevops.md",
+    "source_hash": "f6b188324864",
+    "title": "Integration-GoogleCloudDevOps",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integration-GoogleCloudDevOps"
+  },
+  "integrations/gsd": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/fallback-gsd.md",
+    "source_hash": "d0c9498a60ab",
+    "title": "Integration-GSD",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integration-GSD"
+  },
+  "integrations/index": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/README.md",
+    "source_hash": "42d420c9d538",
+    "title": "Integrations",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integrations"
+  },
+  "integrations/jira": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/fallback-jira.md",
+    "source_hash": "82cf89747b32",
+    "title": "Integration-Jira",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integration-Jira"
+  },
+  "integrations/openspec": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/fallback-openspec.md",
+    "source_hash": "cacf3a0457c6",
+    "title": "Integration-OpenSpec",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integration-OpenSpec"
+  },
+  "integrations/speckit": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/fallback-speckit.md",
+    "source_hash": "812a52ef110e",
+    "title": "Integration-SpecKit",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integration-SpecKit"
+  },
+  "integrations/superpowers": {
+    "rev": "12880baf1526da7055fb96e7687718e6813be764",
+    "source": "docs/integrations/fallback-superpowers.md",
+    "source_hash": "b97af0fd4a60",
+    "title": "Integration-Superpowers",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Integration-Superpowers"
+  },
   "item/01KXS7W15SHYS5PSGGWHYMFKYM": {
     "canonical_key": "item/01KXS7W15SHYS5PSGGWHYMFKYM",
     "doc_type": "item",
