@@ -1311,6 +1311,56 @@
    "type": "references"
   },
   {
+   "from": "item/01KYBD2HYK196RQN7JNCMV6PDS",
+   "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYK1AT1YCN3GW8Q3QQW",
+   "to": "item/01KYBD2HYKKZM22DFM16ZJXYFG",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYK9XY02QHSVF1849BQ",
+   "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYKB5E4JXNYYQ9BPDAE",
+   "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYKET7WJARQFB2NVMFS",
+   "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYKG0DW7QJX7XG561A8",
+   "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYKJHS5M2PFZ78Y585C",
+   "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYKKC2G9NW4VA3RVC6G",
+   "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYKKZM22DFM16ZJXYFG",
+   "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYBD2HYKYBBNGDMCQSW4VE2T",
+   "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
+   "type": "belongs-to"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -1593,6 +1643,61 @@
   {
    "from": "plan/2026-07-24-artifact-pages",
    "to": "item/01KYABYEQPXZAAY0VWF6Z8TQ27",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-branch-discipline-hooks",
+   "to": "item/01KYBD2HYJVNHX698WR1JD96YC",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-branch-discipline-hooks",
+   "to": "item/01KYBD2HYK196RQN7JNCMV6PDS",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-branch-discipline-hooks",
+   "to": "item/01KYBD2HYK1AT1YCN3GW8Q3QQW",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-branch-discipline-hooks",
+   "to": "item/01KYBD2HYK9XY02QHSVF1849BQ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-branch-discipline-hooks",
+   "to": "item/01KYBD2HYKB5E4JXNYYQ9BPDAE",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-branch-discipline-hooks",
+   "to": "item/01KYBD2HYKET7WJARQFB2NVMFS",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-branch-discipline-hooks",
+   "to": "item/01KYBD2HYKG0DW7QJX7XG561A8",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-branch-discipline-hooks",
+   "to": "item/01KYBD2HYKJHS5M2PFZ78Y585C",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-branch-discipline-hooks",
+   "to": "item/01KYBD2HYKKC2G9NW4VA3RVC6G",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-branch-discipline-hooks",
+   "to": "item/01KYBD2HYKKZM22DFM16ZJXYFG",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-branch-discipline-hooks",
+   "to": "item/01KYBD2HYKYBBNGDMCQSW4VE2T",
    "type": "produces"
   },
   {
@@ -3249,6 +3354,61 @@
    "status": "todo",
    "title": "sync_dispatch push_items KeyError on ext['key'] when forcing a never-remote closed item into scope via --keys"
   },
+  "item/01KYBD2HYJVNHX698WR1JD96YC": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Branch-discipline hooks: never commit on main, always reference work"
+  },
+  "item/01KYBD2HYK196RQN7JNCMV6PDS": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Add WORKLOG_SKIP_BRANCH_GUARD to the three bare pre-commit call sites"
+  },
+  "item/01KYBD2HYK1AT1YCN3GW8Q3QQW": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Mirror to plugin/scripts/commit-msg (byte-identical canon copy)"
+  },
+  "item/01KYBD2HYK9XY02QHSVF1849BQ": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Wire commit-msg into install/uninstall/doctor/CANON"
+  },
+  "item/01KYBD2HYKB5E4JXNYYQ9BPDAE": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Full test suite green + manual verification"
+  },
+  "item/01KYBD2HYKET7WJARQFB2NVMFS": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Remove the \"direct-commit repos\" mode from the release skill"
+  },
+  "item/01KYBD2HYKG0DW7QJX7XG561A8": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Update test fixtures for the new hooks"
+  },
+  "item/01KYBD2HYKJHS5M2PFZ78Y585C": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Add TestBranchGuard and TestCommitMsgReference test classes"
+  },
+  "item/01KYBD2HYKKC2G9NW4VA3RVC6G": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Add the branch-guard block to hooks/pre-commit"
+  },
+  "item/01KYBD2HYKKZM22DFM16ZJXYFG": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Create hooks/commit-msg requiring a ULID or ticket reference"
+  },
+  "item/01KYBD2HYKYBBNGDMCQSW4VE2T": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Add a CI step validating commit messages on PRs"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -3289,6 +3449,12 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-07-24-artifact-pages.md",
    "title": "Extend IA to tickets, PRs, and releases (artifact pages)",
+   "truth_state": "current"
+  },
+  "plan/2026-07-25-branch-discipline-hooks": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-25-branch-discipline-hooks.md",
+   "title": "Branch-discipline hooks: never commit on main, always reference work",
    "truth_state": "current"
   },
   "plan/design-docs-release-sync": {

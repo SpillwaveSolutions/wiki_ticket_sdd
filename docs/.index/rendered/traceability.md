@@ -2,6 +2,70 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Add a CI step validating commit messages on PRs
+`01KYBD2HYKYBBNGDMCQSW4VE2T` · status: todo
+- belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- produced-by: [[Plan-branch-discipline-hooks]]
+
+### Create hooks/commit-msg requiring a ULID or ticket reference
+`01KYBD2HYKKZM22DFM16ZJXYFG` · status: todo
+- belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- contains: Mirror to plugin/scripts/commit-msg (byte-identical canon copy)
+- produced-by: [[Plan-branch-discipline-hooks]]
+
+### Add the branch-guard block to hooks/pre-commit
+`01KYBD2HYKKC2G9NW4VA3RVC6G` · status: todo
+- belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- produced-by: [[Plan-branch-discipline-hooks]]
+
+### Add TestBranchGuard and TestCommitMsgReference test classes
+`01KYBD2HYKJHS5M2PFZ78Y585C` · status: todo
+- belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- produced-by: [[Plan-branch-discipline-hooks]]
+
+### Update test fixtures for the new hooks
+`01KYBD2HYKG0DW7QJX7XG561A8` · status: todo
+- belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- produced-by: [[Plan-branch-discipline-hooks]]
+
+### Remove the "direct-commit repos" mode from the release skill
+`01KYBD2HYKET7WJARQFB2NVMFS` · status: todo
+- belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- produced-by: [[Plan-branch-discipline-hooks]]
+
+### Full test suite green + manual verification
+`01KYBD2HYKB5E4JXNYYQ9BPDAE` · status: todo
+- belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- produced-by: [[Plan-branch-discipline-hooks]]
+
+### Wire commit-msg into install/uninstall/doctor/CANON
+`01KYBD2HYK9XY02QHSVF1849BQ` · status: todo
+- belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- produced-by: [[Plan-branch-discipline-hooks]]
+
+### Mirror to plugin/scripts/commit-msg (byte-identical canon copy)
+`01KYBD2HYK1AT1YCN3GW8Q3QQW` · status: todo
+- belongs-to: Create hooks/commit-msg requiring a ULID or ticket reference
+- produced-by: [[Plan-branch-discipline-hooks]]
+
+### Add WORKLOG_SKIP_BRANCH_GUARD to the three bare pre-commit call sites
+`01KYBD2HYK196RQN7JNCMV6PDS` · status: todo
+- belongs-to: Branch-discipline hooks: never commit on main, always reference work
+- produced-by: [[Plan-branch-discipline-hooks]]
+
+### Branch-discipline hooks: never commit on main, always reference work
+`01KYBD2HYJVNHX698WR1JD96YC` · status: todo
+- contains: Add WORKLOG_SKIP_BRANCH_GUARD to the three bare pre-commit call sites
+- contains: Wire commit-msg into install/uninstall/doctor/CANON
+- contains: Full test suite green + manual verification
+- contains: Remove the "direct-commit repos" mode from the release skill
+- contains: Update test fixtures for the new hooks
+- contains: Add TestBranchGuard and TestCommitMsgReference test classes
+- contains: Add the branch-guard block to hooks/pre-commit
+- contains: Create hooks/commit-msg requiring a ULID or ticket reference
+- contains: Add a CI step validating commit messages on PRs
+- produced-by: [[Plan-branch-discipline-hooks]]
+
 ### sync_dispatch push_items KeyError on ext['key'] when forcing a never-remote closed item into scope via --keys
 `01KYAKH389T1ZKKBP94WH2HK94` · status: todo
 - references: [github#143](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/143)
