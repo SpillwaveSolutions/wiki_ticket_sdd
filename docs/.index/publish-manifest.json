@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "3b610626b0fe",
+   "render_hash": "522d878499d0",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2251,6 +2251,16 @@
    "wiki_key": "item/01KYBPP7619CBXN3ZTV9FZJMEJ"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KYDKDJFCJTDVFZJ27Q9Y08TV",
+   "render": "as-is",
+   "render_hash": "5b4b16761ad9",
+   "source": "docs/.index/rendered/tickets/01KYDKDJFCJTDVFZJ27Q9Y08TV.md",
+   "title": "user-guide.md miscounts branch-discipline hook checks (code-review finding)",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDKDJFCJTDVFZJ27Q9Y08TV"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -2636,11 +2646,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T03:59:00Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T21:38:14Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "a0ef4fd14b2f",
+   "render_hash": "841a00ee781c",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -2838,7 +2848,7 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "1563c2173eab",
+   "render_hash": "caff5e21966c",
    "source": "docs/user_guide/user-guide.md",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",

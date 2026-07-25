@@ -3571,6 +3571,11 @@
    "status": "done",
    "title": "Cut v0.15.0 release"
   },
+  "item/01KYDKDJFCJTDVFZJ27Q9Y08TV": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "user-guide.md miscounts branch-discipline hook checks (code-review finding)"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
