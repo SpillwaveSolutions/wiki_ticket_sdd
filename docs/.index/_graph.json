@@ -3431,7 +3431,7 @@
   },
   "item/01KYBD2HYKB5E4JXNYYQ9BPDAE": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Full test suite green + manual verification"
   },
   "item/01KYBD2HYKET7WJARQFB2NVMFS": {

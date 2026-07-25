@@ -40,7 +40,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-branch-discipline-hooks]]
 
 ### Full test suite green + manual verification
-`01KYBD2HYKB5E4JXNYYQ9BPDAE` · status: todo
+`01KYBD2HYKB5E4JXNYYQ9BPDAE` · status: done
 - belongs-to: Branch-discipline hooks: never commit on main, always reference work
 - references: [github#148](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/148)
 - produced-by: [[Plan-branch-discipline-hooks]]

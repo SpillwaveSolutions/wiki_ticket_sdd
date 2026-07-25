@@ -4,7 +4,7 @@
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "bf15c154533e",
+   "render_hash": "f21a5b0582a2",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "16f203970a50",
+   "render_hash": "3402bbac8df2",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "306642c118cd",
+   "render_hash": "d685304a5ac6",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2114,7 +2114,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYJVNHX698WR1JD96YC",
    "render": "as-is",
-   "render_hash": "acbda297ec84",
+   "render_hash": "83cf36d7adba",
    "source": "docs/.index/rendered/tickets/01KYBD2HYJVNHX698WR1JD96YC.md",
    "title": "Branch-discipline hooks: never commit on main, always reference work",
    "truth_state": "open",
@@ -2154,10 +2154,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYKB5E4JXNYYQ9BPDAE",
    "render": "as-is",
-   "render_hash": "14b713a99beb",
+   "render_hash": "ad6652168a61",
    "source": "docs/.index/rendered/tickets/01KYBD2HYKB5E4JXNYYQ9BPDAE.md",
    "title": "Full test suite green + manual verification",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYBD2HYKB5E4JXNYYQ9BPDAE"
   },
   {
@@ -2584,11 +2584,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T01:26:25Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T01:29:35Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "fee5a799f171",
+   "render_hash": "6ed5949f5aec",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -2783,7 +2783,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "b16ef4671819",
+  "render_hash": "624f8a84f3ae",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

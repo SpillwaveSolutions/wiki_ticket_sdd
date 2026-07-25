@@ -1,6 +1,6 @@
 # Full test suite green + manual verification
 
-`01KYBD2HYKB5E4JXNYYQ9BPDAE` · task/feature · **open**
+`01KYBD2HYKB5E4JXNYYQ9BPDAE` · task/feature · **done**
 
 Run the full suite, confirm TestCanonSync passes, and manually exercise
 the incident scenario (branch -> commit -> merge onto main) plus

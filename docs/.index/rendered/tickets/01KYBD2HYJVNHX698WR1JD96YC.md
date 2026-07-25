@@ -15,7 +15,7 @@ plugin/scripts/uninstall.sh's removal loop, plugin/scripts/doctor.sh's
 existence check, tests/test_plugin.py's CANON list. (done)
 - [[Ticket-01KYBD2HYKB5E4JXNYYQ9BPDAE]] Full test suite green + manual verification — Run the full suite, confirm TestCanonSync passes, and manually exercise
 the incident scenario (branch -> commit -> merge onto main) plus
-worklog doctor's health report on main. (open)
+worklog doctor's health report on main. (done)
 - [[Ticket-01KYBD2HYKET7WJARQFB2NVMFS]] Remove the "direct-commit repos" mode from the release skill — plugin/skills/release/SKILL.md section 3 currently documents committing
 release stamps directly on the default branch -- dead once the branch
 guard ships; describe branch+PR landing only. (done)
@@ -37,7 +37,7 @@ the bin/ulid.py alphabet. (done)
 .github/workflows/worklog.yml (template and this repo's installed
 copy); needs fetch-depth 0. (done)
 
-Progress: 8/9 done
+Progress: 9/9 done
 
 ## Related tickets
 
