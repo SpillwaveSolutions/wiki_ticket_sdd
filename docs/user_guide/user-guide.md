@@ -220,6 +220,16 @@ On every commit, the git hooks check: trailing newline on the logs, event
 schema, roadmap freshness, and the fold test suite. CI runs the same checks,
 so a `--no-verify` commit doesn't get far.
 
+Two more `pre-commit` checks enforce branch discipline: it rejects a commit
+authored directly on `main`/`master` (`main`/`master` is pull-only — branch,
+then merge via PR); a real reconciliation merge (`git merge origin/main`) is
+exempt via `WORKLOG_MERGE_COMMIT`, set by `pre-merge-commit` before it
+exec's into `pre-commit`. A separate `commit-msg` hook requires every commit
+message to reference a worklog item (26-char Crockford ULID) or a ticket
+(`#123`) — merge commits are exempt. CI runs a PR-scoped step validating
+every commit message in the PR range, so a `--no-verify` local commit still
+gets caught before merge.
+
 ### Merging: the roadmap-conflict recovery
 
 The event logs union-merge with **zero conflicts** — that's the guarantee.

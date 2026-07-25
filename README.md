@@ -82,7 +82,11 @@ bin/worklog roadmap-render
 ```
 
 The pre-commit and pre-merge-commit hooks enforce the invariants: trailing
-newline on the log, event schema validation, and `roadmap.md` freshness.
+newline on the log, event schema validation, and `roadmap.md` freshness —
+plus branch discipline: `pre-commit` rejects a commit authored directly on
+`main`/`master` (merges via `git merge origin/main` are exempt), and
+`commit-msg` requires every commit message to reference a worklog item
+(26-char ULID) or a ticket (`#123`), merge commits exempt.
 
 ## House rules, enforced
 
@@ -162,8 +166,8 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | `docs/designs/` | Current + frozen design docs and code walkthroughs |
 | `docs/.index/` | IA inventory, graph, publish manifest, sidecars, rendered Home/Sidebar/indexes |
 | `docs/user_guide/` | User guide, CLI reference, plugin guide |
-| `hooks/` | `pre-commit`, `pre-merge-commit`, `exit-plan-capture.sh` |
-| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.14.0** |
+| `hooks/` | `pre-commit`, `pre-merge-commit`, `commit-msg`, `exit-plan-capture.sh` |
+| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.15.0** |
 | `tests/` | Unit and integration tests |
 
 ## Testing
