@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "e20693bcde66",
+   "render_hash": "3402bbac8df2",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "29f5fb49ad2d",
+   "render_hash": "d685304a5ac6",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2111,6 +2111,116 @@
    "wiki_key": "item/01KYAKH389T1ZKKBP94WH2HK94"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KYBD2HYJVNHX698WR1JD96YC",
+   "render": "as-is",
+   "render_hash": "83cf36d7adba",
+   "source": "docs/.index/rendered/tickets/01KYBD2HYJVNHX698WR1JD96YC.md",
+   "title": "Branch-discipline hooks: never commit on main, always reference work",
+   "truth_state": "open",
+   "wiki_key": "item/01KYBD2HYJVNHX698WR1JD96YC"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYBD2HYK196RQN7JNCMV6PDS",
+   "render": "as-is",
+   "render_hash": "1a81ff63d56c",
+   "source": "docs/.index/rendered/tickets/01KYBD2HYK196RQN7JNCMV6PDS.md",
+   "title": "Add WORKLOG_SKIP_BRANCH_GUARD to the three bare pre-commit call sites",
+   "truth_state": "done",
+   "wiki_key": "item/01KYBD2HYK196RQN7JNCMV6PDS"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYBD2HYK1AT1YCN3GW8Q3QQW",
+   "render": "as-is",
+   "render_hash": "14f02f63f172",
+   "source": "docs/.index/rendered/tickets/01KYBD2HYK1AT1YCN3GW8Q3QQW.md",
+   "title": "Mirror to plugin/scripts/commit-msg (byte-identical canon copy)",
+   "truth_state": "done",
+   "wiki_key": "item/01KYBD2HYK1AT1YCN3GW8Q3QQW"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYBD2HYK9XY02QHSVF1849BQ",
+   "render": "as-is",
+   "render_hash": "a5b002d7d120",
+   "source": "docs/.index/rendered/tickets/01KYBD2HYK9XY02QHSVF1849BQ.md",
+   "title": "Wire commit-msg into install/uninstall/doctor/CANON",
+   "truth_state": "done",
+   "wiki_key": "item/01KYBD2HYK9XY02QHSVF1849BQ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYBD2HYKB5E4JXNYYQ9BPDAE",
+   "render": "as-is",
+   "render_hash": "ad6652168a61",
+   "source": "docs/.index/rendered/tickets/01KYBD2HYKB5E4JXNYYQ9BPDAE.md",
+   "title": "Full test suite green + manual verification",
+   "truth_state": "done",
+   "wiki_key": "item/01KYBD2HYKB5E4JXNYYQ9BPDAE"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYBD2HYKET7WJARQFB2NVMFS",
+   "render": "as-is",
+   "render_hash": "c049874cdfed",
+   "source": "docs/.index/rendered/tickets/01KYBD2HYKET7WJARQFB2NVMFS.md",
+   "title": "Remove the \"direct-commit repos\" mode from the release skill",
+   "truth_state": "done",
+   "wiki_key": "item/01KYBD2HYKET7WJARQFB2NVMFS"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYBD2HYKG0DW7QJX7XG561A8",
+   "render": "as-is",
+   "render_hash": "43601c14bfb0",
+   "source": "docs/.index/rendered/tickets/01KYBD2HYKG0DW7QJX7XG561A8.md",
+   "title": "Update test fixtures for the new hooks",
+   "truth_state": "done",
+   "wiki_key": "item/01KYBD2HYKG0DW7QJX7XG561A8"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYBD2HYKJHS5M2PFZ78Y585C",
+   "render": "as-is",
+   "render_hash": "fdafb5038d62",
+   "source": "docs/.index/rendered/tickets/01KYBD2HYKJHS5M2PFZ78Y585C.md",
+   "title": "Add TestBranchGuard and TestCommitMsgReference test classes",
+   "truth_state": "done",
+   "wiki_key": "item/01KYBD2HYKJHS5M2PFZ78Y585C"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYBD2HYKKC2G9NW4VA3RVC6G",
+   "render": "as-is",
+   "render_hash": "9cd2d53b2dc4",
+   "source": "docs/.index/rendered/tickets/01KYBD2HYKKC2G9NW4VA3RVC6G.md",
+   "title": "Add the branch-guard block to hooks/pre-commit",
+   "truth_state": "done",
+   "wiki_key": "item/01KYBD2HYKKC2G9NW4VA3RVC6G"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYBD2HYKKZM22DFM16ZJXYFG",
+   "render": "as-is",
+   "render_hash": "635b413a0eec",
+   "source": "docs/.index/rendered/tickets/01KYBD2HYKKZM22DFM16ZJXYFG.md",
+   "title": "Create hooks/commit-msg requiring a ULID or ticket reference",
+   "truth_state": "done",
+   "wiki_key": "item/01KYBD2HYKKZM22DFM16ZJXYFG"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYBD2HYKYBBNGDMCQSW4VE2T",
+   "render": "as-is",
+   "render_hash": "4f55d6ed4191",
+   "source": "docs/.index/rendered/tickets/01KYBD2HYKYBBNGDMCQSW4VE2T.md",
+   "title": "Add a CI step validating commit messages on PRs",
+   "truth_state": "done",
+   "wiki_key": "item/01KYBD2HYKYBBNGDMCQSW4VE2T"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -2366,6 +2476,17 @@
   {
    "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
    "frozen": true,
+   "page_name": "Plan-branch-discipline-hooks",
+   "render": "doc+banner",
+   "render_hash": "ec09594c2bb3",
+   "source": "docs/plans/2026-07-25-branch-discipline-hooks.md",
+   "title": "Branch-discipline hooks: never commit on main, always reference work",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-25-branch-discipline-hooks"
+  },
+  {
+   "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
+   "frozen": true,
    "page_name": "Plan-design-docs-release-sync",
    "render": "doc+banner",
    "render_hash": "9f3a72d1e016",
@@ -2463,11 +2584,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-24T17:43:02Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T01:29:35Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "ebd580c003dc",
+   "render_hash": "6ed5949f5aec",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

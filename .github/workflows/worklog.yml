@@ -6,10 +6,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       # Same script as the local hook: trailing newline, event schema,
-      # roadmap freshness. A dev can --no-verify past the local hook; not this.
+      # roadmap freshness. A dev can --no-verify past the local hook; not
+      # this. WORKLOG_SKIP_BRANCH_GUARD: this step runs on whatever ref was
+      # checked out (including main on push) with no commit in flight --
+      # the branch guard only makes sense for an actual `git commit`.
       - name: log invariants
-        run: hooks/pre-commit
+        run: WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
+      # commit-msg's own MERGE_HEAD check doesn't exist post-hoc in a CI
+      # checkout, so re-derive "was this a merge" via --no-merges instead.
+      - name: commit messages reference a worklog item or ticket
+        if: github.event_name == 'pull_request'
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          for sha in $(git rev-list --no-merges "$base..HEAD"); do
+            git log -1 --format=%B "$sha" > /tmp/msg
+            hooks/commit-msg /tmp/msg || { echo "commit $sha:"; cat /tmp/msg; exit 1; }
+          done
       - name: tests
         run: |
           python3 tests/test_fold.py

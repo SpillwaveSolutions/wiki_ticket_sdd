@@ -37,9 +37,10 @@ skill; use the platform's own release tooling.
 
 ## 3. Land it
 
-PR-based repos: commit the stamp + snapshot as a release-prep PR and get it
-merged. Direct-commit repos: commit on the default branch. Either way the
-release tags the commit that carries the dated changelog.
+Commit the stamp + snapshot on a release-prep branch and land it as a PR
+(the branch guard hook refuses commits directly on the default branch --
+main is pull-only). The release tags the commit that carries the dated
+changelog.
 
 ## 4. Tag and platform release
 

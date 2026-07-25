@@ -449,6 +449,31 @@
    "wiki_key": "plan/2026-07-24-artifact-pages"
   },
   {
+   "canonical_key": "plan/2026-07-25-branch-discipline-hooks",
+   "date": "2026-07-25",
+   "doc_type": "plan",
+   "epic": "01KYBD2HYJVNHX698WR1JD96YC",
+   "items": [
+    "01KYBD2HYKKC2G9NW4VA3RVC6G",
+    "01KYBD2HYKKZM22DFM16ZJXYFG",
+    "01KYBD2HYK1AT1YCN3GW8Q3QQW",
+    "01KYBD2HYK9XY02QHSVF1849BQ",
+    "01KYBD2HYK196RQN7JNCMV6PDS",
+    "01KYBD2HYKYBBNGDMCQSW4VE2T",
+    "01KYBD2HYKET7WJARQFB2NVMFS",
+    "01KYBD2HYKG0DW7QJX7XG561A8",
+    "01KYBD2HYKJHS5M2PFZ78Y585C",
+    "01KYBD2HYKB5E4JXNYYQ9BPDAE"
+   ],
+   "slug": "branch-discipline-hooks",
+   "source": "docs/plans/2026-07-25-branch-discipline-hooks.md",
+   "status": "completed",
+   "title": "Branch-discipline hooks: never commit on main, always reference work",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-branch-discipline-hooks",
+   "wiki_key": "plan/2026-07-25-branch-discipline-hooks"
+  },
+  {
    "aliases": [
     "plan/design-docs-release-sync"
    ],
@@ -648,10 +673,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-24T17:43:02Z",
+   "generated_at": "2026-07-25T01:29:35Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "a141aa9d",
+   "source_hash": "b4fb7dd1",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

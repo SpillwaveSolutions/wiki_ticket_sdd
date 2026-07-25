@@ -56,7 +56,7 @@ class Sandbox:
         self.git("config", "user.name", "integration-test")
         self.git("config", "core.hooksPath", "hooks")
         self.worklog("roadmap-render")
-        self.commit_all("init")
+        self.commit_all("init", no_verify=True)  # bootstrap, not real work
 
     # -- plumbing ---------------------------------------------------------
     def git(self, *args, **kw):
@@ -137,19 +137,19 @@ class TestTwoPRsOneItem(unittest.TestCase):
         sb = make_sandbox(self)
         item = sb.add("Extract auth middleware", "--priority", "P1")
         sb.worklog("roadmap-render")
-        sb.commit_all("base item")
+        sb.commit_all("base item", no_verify=True)  # pre-PR baseline
 
         sb.branch("alice")
         sb.worklog("update", item, "--status", "in_progress",
                    "--add-label", "backend", actor="alice")
         sb.worklog("roadmap-render")
-        sb.commit_all("alice: start work")
+        sb.commit_all(f"alice: start work {item}")
 
         sb.branch("bob")
         sb.worklog("update", item, "--priority", "P0",
                    "--add-label", "urgent", actor="bob")
         sb.worklog("roadmap-render")
-        sb.commit_all("bob: escalate")
+        sb.commit_all(f"bob: escalate {item}")
 
         sb.checkout("main")
         sb.merge("alice")
@@ -164,25 +164,25 @@ class TestTwoPRsOneItem(unittest.TestCase):
         roadmap = sb.read("docs/roadmap.md")
         self.assertIn("in progress", roadmap)
         self.assertIn("P0", roadmap)
-        sh(sb.dir, "hooks/pre-commit")  # the CI gate passes
+        sh(sb.dir, "env", "WORKLOG_SKIP_BRANCH_GUARD=1", "hooks/pre-commit")  # the CI gate passes
 
     def test_merge_order_does_not_change_the_outcome(self):
         sb = make_sandbox(self)
         item = sb.add("Contested item", "--priority", "P2")
         sb.worklog("roadmap-render")
-        sb.commit_all("base")
+        sb.commit_all("base", no_verify=True)  # pre-PR baseline
         base = sb.git("rev-parse", "HEAD").stdout.strip()
 
         sb.branch("alice")
         sb.worklog("update", item, "--status", "in_progress", actor="alice")
         sb.worklog("roadmap-render")
-        sb.commit_all("alice")
+        sb.commit_all(f"alice: {item}")
 
         sb.branch("bob")
         sb.worklog("update", item, "--priority", "P0", "--add-label", "hot",
                    actor="bob")
         sb.worklog("roadmap-render")
-        sb.commit_all("bob")
+        sb.commit_all(f"bob: {item}")
 
         sb.checkout("main")
         sb.merge("alice")
@@ -202,18 +202,18 @@ class TestCloseVsUpdateRace(unittest.TestCase):
         sb = make_sandbox(self)
         item = sb.add("Racy item", "--priority", "P1")
         sb.worklog("roadmap-render")
-        sb.commit_all("base")
+        sb.commit_all("base", no_verify=True)  # pre-PR baseline
 
         sb.branch("closer")
         sb.worklog("close", item, "--status", "done", actor="closer")
         sb.worklog("roadmap-render")
-        sb.commit_all("closer: done")
+        sb.commit_all(f"closer: done {item}")
 
         time.sleep(0.01)  # guarantee the update's ULID sorts after the close
         sb.branch("worker")
         sb.worklog("update", item, "--status", "in_progress", actor="worker")
         sb.worklog("roadmap-render")
-        sb.commit_all("worker: still going")
+        sb.commit_all(f"worker: still going {item}")
 
         sb.checkout("main")
         sb.merge("closer")
@@ -233,6 +233,7 @@ class TestHookGates(unittest.TestCase):
 
     def test_missing_trailing_newline_blocked_then_repair_cascade(self):
         sb = make_sandbox(self)
+        sb.branch("work")
         sb.append_raw(".work/todo.jsonl", self._valid_event())  # no newline
 
         p = sb.commit_all("bad newline", check=False)
@@ -245,10 +246,11 @@ class TestHookGates(unittest.TestCase):
         self.assertIn("stale or hand-edited", p.stdout + p.stderr)
 
         sb.worklog("roadmap-render")
-        sb.commit_all("fresh and newline-terminated")  # now it lands
+        sb.commit_all("fresh and newline-terminated #1")  # now it lands
 
     def test_schema_violation_blocked(self):
         sb = make_sandbox(self)
+        sb.branch("work")
         bad = json.dumps({"ev": "7ZZZZZZZZZZZZZZZZZZZZZZZZZ", "ts": "t",
                           "item": "A", "op": "update"})  # no actor
         sb.append_raw(".work/todo.jsonl", bad + "\n")
@@ -263,12 +265,12 @@ class TestHookGates(unittest.TestCase):
         sb = make_sandbox(self)
         item = sb.add("Base item", "--priority", "P1")
         sb.worklog("roadmap-render")
-        sb.commit_all("base")
+        sb.commit_all("base", no_verify=True)  # pre-PR baseline
 
         sb.branch("alice")
         sb.worklog("update", item, "--status", "in_progress", actor="alice")
         sb.worklog("roadmap-render")
-        sb.commit_all("alice: honest PR")
+        sb.commit_all(f"alice: honest PR {item}")
 
         sb.checkout("main")
         sb.worklog("update", item, "--add-label", "sneaky")
@@ -317,7 +319,7 @@ class TestNewlineCorruption(unittest.TestCase):
         sb = make_sandbox(self)
         keep = sb.add("Survivor", "--priority", "P1")
         sb.worklog("roadmap-render")
-        sb.commit_all("base")
+        sb.commit_all("base", no_verify=True)  # pre-PR baseline
 
         sb.branch("vandal")
         fused = (json.dumps({"ev": "7YY1AAAAAAAAAAAAAAAAAAAAAA", "ts": "t",
@@ -334,7 +336,7 @@ class TestNewlineCorruption(unittest.TestCase):
         sb.branch("victim", base="main")
         sb.worklog("update", keep, "--status", "in_progress", actor="victim")
         sb.worklog("roadmap-render")
-        sb.commit_all("victim: honest work")
+        sb.commit_all(f"victim: honest work {keep}")
 
         sb.checkout("main")
         sb.merge("vandal")  # fast-forward
@@ -370,7 +372,7 @@ class TestPlanCapturePR(unittest.TestCase):
         plan_path, epic = out[0], out[1]
         os.remove(os.path.join(sb.dir, "draft.md"))
         sb.worklog("roadmap-render")
-        sb.commit_all("feature: capture plan")
+        sb.commit_all(f"feature: capture plan {epic}")
 
         sb.checkout("main")
         sb.merge("feature")
@@ -389,11 +391,12 @@ class TestPlanCapturePR(unittest.TestCase):
             sb.branch(branch)
             sb.write("draft.md",
                      f"# Plan {n}\n\n## Tasks\n\n- [ ] (P2) Task {n}\n")
-            sb.worklog("plan-capture", "--slug", n, "--title", f"Plan {n}",
-                       "--file", "draft.md")
+            out = sb.worklog("plan-capture", "--slug", n, "--title", f"Plan {n}",
+                             "--file", "draft.md").stdout.splitlines()
+            epic = out[1]
             os.remove(os.path.join(sb.dir, "draft.md"))
             sb.worklog("roadmap-render")
-            sb.commit_all(f"capture plan {n}")
+            sb.commit_all(f"capture plan {n}: {epic}")
 
         sb.checkout("main")
         sb.merge("feat-one")
@@ -403,7 +406,79 @@ class TestPlanCapturePR(unittest.TestCase):
         self.assertEqual(len(items), 4)  # 2 epics + 2 tasks
         titles = sorted(i["title"] for i in items.values())
         self.assertEqual(titles, ["Plan one", "Plan two", "Task one", "Task two"])
-        sh(sb.dir, "hooks/pre-commit")  # CI gate green on the merged result
+        sh(sb.dir, "env", "WORKLOG_SKIP_BRANCH_GUARD=1", "hooks/pre-commit")  # CI gate green on the merged result
+
+
+class TestBranchGuard(unittest.TestCase):
+    """The incident this plan exists for: main must stay pull-only."""
+
+    def test_commit_on_main_rejected(self):
+        sb = make_sandbox(self)
+        item = sb.add("Untracked change", "--priority", "P2")
+        sb.write("x.txt", "1")
+        p = sb.commit_all(f"no branch: {item}", check=False)
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn("pull-only", p.stdout + p.stderr)
+
+    def test_commit_on_branch_succeeds(self):
+        sb = make_sandbox(self)
+        item = sb.add("Tracked change", "--priority", "P2")
+        sb.branch("feature/x")
+        sb.worklog("roadmap-render")
+        sb.write("x.txt", "1")
+        sb.commit_all(f"feat: {item}")  # must not raise
+
+    def test_merge_onto_main_allowed(self):
+        """The exact incident scenario: `git merge origin/main` (here
+        simulated as merging a feature branch onto main) must keep working
+        even though it's a commit landing directly on main."""
+        sb = make_sandbox(self)
+        item = sb.add("Reconciled change", "--priority", "P2")
+        sb.branch("feature/x")
+        sb.worklog("roadmap-render")
+        sb.write("x.txt", "1")
+        sb.commit_all(f"feat: {item}")
+        sb.checkout("main")
+        sb.merge("feature/x")  # must not raise
+
+
+class TestCommitMsgReference(unittest.TestCase):
+    """Work must be traceable to a worklog item or ticket."""
+
+    def test_message_without_reference_rejected(self):
+        sb = make_sandbox(self)
+        sb.branch("feature/x")
+        sb.write("x.txt", "1")
+        p = sb.commit_all("no reference at all", check=False)
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn("worklog item", p.stdout + p.stderr)
+
+    def test_message_with_ulid_passes(self):
+        sb = make_sandbox(self)
+        item = sb.add("Referenced change", "--priority", "P2")
+        sb.branch("feature/x")
+        sb.worklog("roadmap-render")
+        sb.write("x.txt", "1")
+        sb.commit_all(f"fix: {item}")  # must not raise
+
+    def test_message_with_ticket_passes(self):
+        sb = make_sandbox(self)
+        sb.branch("feature/x")
+        sb.write("x.txt", "1")
+        sb.commit_all("fix: closes #42")  # must not raise
+
+    def test_merge_commit_message_exempt(self):
+        """git's default "Merge branch 'x'" message carries no ULID/ticket
+        -- this is the real-world shape of the incident's reconciliation
+        merge, and must not be blocked."""
+        sb = make_sandbox(self)
+        item = sb.add("Reconciled change", "--priority", "P2")
+        sb.branch("feature/x")
+        sb.worklog("roadmap-render")
+        sb.write("x.txt", "1")
+        sb.commit_all(f"feat: {item}")
+        sb.checkout("main")
+        sb.merge("feature/x")  # default merge message, must not raise
 
 
 if __name__ == "__main__":

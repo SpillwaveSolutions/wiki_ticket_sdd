@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Work must be traceable to a worklog item or ticket (branch-discipline plan,
+# 2026-07-25). Install: git config core.hooksPath hooks
+set -euo pipefail
+
+fail() { echo "worklog: $*" >&2; exit 1; }
+
+# Merge commits aren't new work. MERGE_HEAD is git's own signal that a merge
+# commit is being created -- present here for the same reason it's present
+# in pre-commit's branch guard.
+[ -f "$(git rev-parse --git-path MERGE_HEAD)" ] && exit 0
+
+python3 - "$1" <<'PY' || fail "commit message must reference a worklog item (26-char ULID) or a ticket (#123) -- see: worklog show <id>. Merge commits are exempt."
+import re, sys
+msg = open(sys.argv[1], encoding="utf-8").read()
+sys.exit(0 if (re.search(r'\b[0-9A-HJKMNP-TV-Z]{26}\b', msg) or
+               re.search(r'#\d+', msg)) else 1)
+PY

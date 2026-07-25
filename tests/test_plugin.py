@@ -26,7 +26,7 @@ CANON = ["bin/worklog", "bin/fold.py", "bin/ulid.py", "bin/render_roadmap.py",
          "bin/plan_capture.py", "bin/compact.py", "bin/adr.py",
          "bin/sync_dispatch.py", "bin/canonical.py", "bin/ia.py",
          "bin/ia_render.py", "bin/ia_graph.py",
-         "hooks/pre-commit", "hooks/pre-merge-commit"]
+         "hooks/pre-commit", "hooks/pre-merge-commit", "hooks/commit-msg"]
 
 
 def sh(cwd, *cmd, check=True):
@@ -112,10 +112,11 @@ class TestPackaging(unittest.TestCase):
 class TestInit(unittest.TestCase):
     def test_scaffolds_a_usable_repo(self):
         d = init_repo(self)
-        worklog(d, "add", "First item", "--priority", "P1")
+        iid = worklog(d, "add", "First item", "--priority", "P1").stdout.strip()
         worklog(d, "roadmap-render")
+        sh(d, "git", "checkout", "-q", "-b", "work")
         sh(d, "git", "add", "-A")
-        sh(d, "git", "commit", "-q", "-m", "scaffold")  # through the hooks
+        sh(d, "git", "commit", "-q", "-m", f"scaffold: {iid}")  # through the hooks
 
         ga = read(d, ".gitattributes")
         self.assertIn(".work/todo.jsonl merge=union", ga)
@@ -149,10 +150,11 @@ class TestInit(unittest.TestCase):
 class TestDoctor(unittest.TestCase):
     def test_healthy_then_skew(self):
         d = init_repo(self)
-        worklog(d, "add", "Item", "--priority", "P2")
+        iid = worklog(d, "add", "Item", "--priority", "P2").stdout.strip()
         worklog(d, "roadmap-render")
+        sh(d, "git", "checkout", "-q", "-b", "work")
         sh(d, "git", "add", "-A")
-        sh(d, "git", "commit", "-q", "-m", "base")
+        sh(d, "git", "commit", "-q", "-m", f"base: {iid}")
         doctor = os.path.join(PLUGIN, "scripts", "doctor.sh")
 
         before = hashlib.sha256(read(d, ".work/config.yml").encode()).hexdigest()
@@ -173,10 +175,11 @@ class TestDoctor(unittest.TestCase):
 class TestUninstall(unittest.TestCase):
     def test_preserves_data(self):
         d = init_repo(self)
-        worklog(d, "add", "Keep me", "--priority", "P1")
+        iid = worklog(d, "add", "Keep me", "--priority", "P1").stdout.strip()
         worklog(d, "roadmap-render")
+        sh(d, "git", "checkout", "-q", "-b", "work")
         sh(d, "git", "add", "-A")
-        sh(d, "git", "commit", "-q", "-m", "tracked")
+        sh(d, "git", "commit", "-q", "-m", f"tracked: {iid}")
 
         sh(d, "bash", os.path.join(PLUGIN, "scripts", "uninstall.sh"))
         for rel in CANON:

@@ -2,4 +2,13 @@
 # git runs THIS hook (not pre-commit) when a merge auto-commits. Without it,
 # merging two PRs that each carried a fresh roadmap lands a stale one on main
 # and only CI notices. Same checks, same script.
+#
+# WORKLOG_MERGE_COMMIT: pre-commit's branch guard needs to know this is a
+# merge, not authored work, so it can exempt `git merge` onto main -- but
+# empirically, MERGE_HEAD is NOT yet on disk at the point git invokes THIS
+# hook (verified: it only appears between here and commit-msg firing, i.e.
+# git writes it while finalizing the commit, after this hook already ran).
+# This hook is git's own reliable "a merge commit is being created" signal
+# instead -- it only ever fires for merge commits, by git's own contract.
+export WORKLOG_MERGE_COMMIT=1
 exec "$(dirname "$0")/pre-commit"
