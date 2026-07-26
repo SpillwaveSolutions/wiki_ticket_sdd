@@ -2,6 +2,7 @@ canonical_key: roadmap-snapshot/2026-07-26_v0.16.0-release
 doc_type: roadmap-snapshot
 release: v0.16.0
 slug: 2026-07-26_v0.16.0-release
+superseded_by: roadmap-snapshot/2026-07-26_v0.16.1-release
 supersedes: roadmap-snapshot/2026-07-25_v0.15.1-release
 title: Roadmap
 truth_state: snapshot

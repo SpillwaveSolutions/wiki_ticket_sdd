@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.16.1 — 2026-07-26
+
+Post-tag doc sync and a real bug fix for v0.16.0, landed on `main` after the
+tag per the release process (docs and fixes never block a tag, they follow
+it):
+
+- **Fix**: `bin/sync_dispatch.py` crashed with `KeyError: 'key'` when a
+  closed item that was never pushed to the tracker got forced into sync
+  scope via `--keys` — the closed-item branch assumed a remote key already
+  existed. It now creates the ticket first, links it, then closes, mirroring
+  how the open-item branch already handles create-vs-update.
+- Design doc and code walkthrough regenerated and frozen for v0.16.0.
+- `docs/user_guide/plugin-guide.md` and `README.md` updated for the new
+  `integration-guide` skill.
+
 ## 0.16.0 — 2026-07-26
 
 Wiki-driven integration guides (plan
