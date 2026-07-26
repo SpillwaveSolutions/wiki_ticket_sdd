@@ -7,3 +7,7 @@ trace-check --strict found 311 closed/released items missing a plan link, extern
 ## Release
 
 - [[Release-v0.16.0]]
+
+## Related tickets
+
+- [github #185](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/185)

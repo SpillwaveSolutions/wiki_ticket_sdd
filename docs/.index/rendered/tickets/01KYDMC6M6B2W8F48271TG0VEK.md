@@ -11,3 +11,7 @@ Ship the user-guide branch-discipline wording fix (PR #160, code-review finding)
 ## Release
 
 - [[Release-v0.15.1]]
+
+## Related tickets
+
+- [github #183](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/183)

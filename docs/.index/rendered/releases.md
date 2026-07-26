@@ -4,20 +4,22 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 
 ## v0.16.0 — 2026-07-26
 
+- Design: [[Code-Walkthrough-2026-07-26_v0.16.0-release]]
+- Design: [[Design-Doc-2026-07-26_v0.16.0-release]]
 - Roadmap snapshot: [[Roadmap-2026-07-26_v0.16.0-release]]
-- Shipped: Backfill trace-check evidence gaps (311 historical items)
+- Shipped: Backfill trace-check evidence gaps (311 historical items) (#185)
 
 ## v0.15.1 — 2026-07-25
 
 - Roadmap snapshot: [[Roadmap-2026-07-25_v0.15.1-release]]
-- Shipped: Cut v0.15.1 release
+- Shipped: Cut v0.15.1 release (#183)
 
 ## v0.15.0 — 2026-07-25
 
 - Design: [[Code-Walkthrough-2026-07-25_v0.15.0-release]]
 - Design: [[Design-Doc-2026-07-25_v0.15.0-release]]
 - Roadmap snapshot: [[Roadmap-2026-07-25_v0.15.0-release]]
-- Shipped: Cut v0.15.0 release
+- Shipped: Cut v0.15.0 release (#181)
 
 ## v0.14.0 — 2026-07-24
 
