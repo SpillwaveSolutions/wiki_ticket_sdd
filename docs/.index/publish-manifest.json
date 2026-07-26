@@ -2959,11 +2959,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-26T16:29:21Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-26T17:48:56Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "21922b12151c",
+   "render_hash": "cc9593617e97",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
