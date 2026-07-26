@@ -2,6 +2,28 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Declare wiki_ticket_sdd as a Graph Engineering system
+`01KYFSRNDMYCTQ1XTMXFWEVBWT` · status: todo
+- contains: Add a graph-engineering callout to README.md
+- contains: Verify accuracy and scope boundaries
+- contains: Write docs/graph-engineering.md
+- produced-by: [[Plan-declare-graph-engineering]]
+
+### Write docs/graph-engineering.md
+`01KYFSRNDMYBVMWXJFEK2AJWJJ` · status: todo
+- belongs-to: Declare wiki_ticket_sdd as a Graph Engineering system
+- produced-by: [[Plan-declare-graph-engineering]]
+
+### Verify accuracy and scope boundaries
+`01KYFSRNDMSMEXKT7PV0F9X54M` · status: todo
+- belongs-to: Declare wiki_ticket_sdd as a Graph Engineering system
+- produced-by: [[Plan-declare-graph-engineering]]
+
+### Add a graph-engineering callout to README.md
+`01KYFSRNDMMPY0E54PQ9QSWJWK` · status: todo
+- belongs-to: Declare wiki_ticket_sdd as a Graph Engineering system
+- produced-by: [[Plan-declare-graph-engineering]]
+
 ### Release v0.16.1
 `01KYFRPNEQEVTFB6144W7A79BJ` · status: done
 - targets: release/v0.16.1

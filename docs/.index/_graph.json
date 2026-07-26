@@ -1821,6 +1821,21 @@
    "type": "targets"
   },
   {
+   "from": "item/01KYFSRNDMMPY0E54PQ9QSWJWK",
+   "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYFSRNDMSMEXKT7PV0F9X54M",
+   "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYFSRNDMYBVMWXJFEK2AJWJJ",
+   "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "type": "belongs-to"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -2243,6 +2258,26 @@
   {
    "from": "plan/2026-07-25-wiki-driven-integration-guides",
    "to": "item/01KYDP0BQHZHYH9CKM3D0ZM803",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-26-declare-graph-engineering",
+   "to": "item/01KYFSRNDMMPY0E54PQ9QSWJWK",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-26-declare-graph-engineering",
+   "to": "item/01KYFSRNDMSMEXKT7PV0F9X54M",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-26-declare-graph-engineering",
+   "to": "item/01KYFSRNDMYBVMWXJFEK2AJWJJ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-26-declare-graph-engineering",
+   "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
    "type": "produces"
   },
   {
@@ -4153,6 +4188,26 @@
    "status": "done",
    "title": "Release v0.16.1"
   },
+  "item/01KYFSRNDMMPY0E54PQ9QSWJWK": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Add a graph-engineering callout to README.md"
+  },
+  "item/01KYFSRNDMSMEXKT7PV0F9X54M": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Verify accuracy and scope boundaries"
+  },
+  "item/01KYFSRNDMYBVMWXJFEK2AJWJJ": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Write docs/graph-engineering.md"
+  },
+  "item/01KYFSRNDMYCTQ1XTMXFWEVBWT": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Declare wiki_ticket_sdd as a Graph Engineering system"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -4205,6 +4260,12 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-07-25-wiki-driven-integration-guides.md",
    "title": "Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems",
+   "truth_state": "current"
+  },
+  "plan/2026-07-26-declare-graph-engineering": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-26-declare-graph-engineering.md",
+   "title": "Declare wiki_ticket_sdd as a Graph Engineering system",
    "truth_state": "current"
   },
   "plan/design-docs-release-sync": {
