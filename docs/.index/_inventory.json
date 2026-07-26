@@ -573,6 +573,23 @@
    "wiki_key": "plan/2026-07-25-wiki-driven-integration-guides"
   },
   {
+   "canonical_key": "plan/2026-07-26-declare-graph-engineering",
+   "date": "2026-07-26",
+   "doc_type": "plan",
+   "epic": "01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "items": [
+    "01KYFSRNDMYBVMWXJFEK2AJWJJ",
+    "01KYFSRNDMMPY0E54PQ9QSWJWK",
+    "01KYFSRNDMSMEXKT7PV0F9X54M"
+   ],
+   "slug": "declare-graph-engineering",
+   "source": "docs/plans/2026-07-26-declare-graph-engineering.md",
+   "status": "completed",
+   "title": "Declare wiki_ticket_sdd as a Graph Engineering system",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-26-declare-graph-engineering"
+  },
+  {
    "aliases": [
     "plan/design-docs-release-sync"
    ],
@@ -772,10 +789,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-26T18:06:25Z",
+   "generated_at": "2026-07-26T18:11:56Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "6f42562d",
+   "source_hash": "2cb98973",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

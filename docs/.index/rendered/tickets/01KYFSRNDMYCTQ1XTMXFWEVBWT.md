@@ -1,0 +1,28 @@
+# Declare wiki_ticket_sdd as a Graph Engineering system
+
+`01KYFSRNDMYCTQ1XTMXFWEVBWT` · epic/feature · **done**
+
+Add a new docs/graph-engineering.md declaring and documenting how wiki_ticket_sdd already embodies the graph engineering pattern (nodes, typed edges, persistent state, index/router), backed by real code citations, plus a short README callout linking to it.
+
+## Children
+
+- [[Ticket-01KYFSRNDMMPY0E54PQ9QSWJWK]] Add a graph-engineering callout to README.md — Add one short paragraph near the top of the README declaring the
+graph-engineering framing and linking to the new doc, matching the
+README's existing bolded-lead-phrase style and vocabulary it already uses. (done)
+- [[Ticket-01KYFSRNDMSMEXKT7PV0F9X54M]] Verify accuracy and scope boundaries — Confirm every claim in the new doc has real code evidence, the future
+UI-repo mention is honestly framed as planned rather than shipped, both
+Mermaid diagrams are syntactically valid, and that CLAUDE.md and the
+wiki_ticket_sdd_ui repo were not touched. (done)
+- [[Ticket-01KYFSRNDMYBVMWXJFEK2AJWJJ]] Write docs/graph-engineering.md — Author the main deliverable: a confident declaration that this project is
+a graph engineering system, a table mapping the four primitives (nodes,
+typed edges, persistent state, index/router) to real code with file:line
+citations, two Mermaid diagrams (architecture overview and the
+event-sourcing lifecycle flow), a short forward-looking section with 2-3
+clearly-labeled proposals, and a further-reading list of real, verifiable
+external sources only. (done)
+
+Progress: 3/3 done
+
+## Related tickets
+
+- [github #195](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/195)
