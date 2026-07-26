@@ -1816,6 +1816,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KYFRPNEQEVTFB6144W7A79BJ",
+   "to": "release/v0.16.1",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -2788,6 +2793,21 @@
   {
    "from": "roadmap-snapshot/2026-07-26_v0.16.0-release",
    "to": "release/v0.16.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.1-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.1-release",
+   "to": "roadmap-snapshot/2026-07-26_v0.16.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.1-release",
+   "to": "release/v0.16.1",
    "type": "targets"
   },
   {
@@ -4128,6 +4148,11 @@
    "status": "done",
    "title": "Backfill trace-check evidence gaps (311 historical items)"
   },
+  "item/01KYFRPNEQEVTFB6144W7A79BJ": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Release v0.16.1"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -4293,6 +4318,9 @@
   "release/v0.16.0": {
    "doc_type": "release"
   },
+  "release/v0.16.1": {
+   "doc_type": "release"
+  },
   "release/v0.5.0": {
    "doc_type": "release"
   },
@@ -4359,6 +4387,12 @@
   "roadmap-snapshot/2026-07-26_v0.16.0-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-07-26_v0.16.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-26_v0.16.1-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-26_v0.16.1-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

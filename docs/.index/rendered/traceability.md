@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Release v0.16.1
+`01KYFRPNEQEVTFB6144W7A79BJ` · status: todo
+- targets: release/v0.16.1
+
 ### Backfill trace-check evidence gaps (311 historical items)
 `01KYFJVN7Y30B50D8A9RG60CJS` · status: done
 - references: [github#185](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/185)
