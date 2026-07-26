@@ -4,8 +4,6 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 
 ## v0.16.0 — 2026-07-26
 
-- Design: [[Code-Walkthrough-2026-07-26_v0.16.0-release]]
-- Design: [[Design-Doc-2026-07-26_v0.16.0-release]]
 - Roadmap snapshot: [[Roadmap-2026-07-26_v0.16.0-release]]
 - Shipped: Backfill trace-check evidence gaps (311 historical items) (#185)
 
