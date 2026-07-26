@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.16.0 — 2026-07-26
+
+Wiki-driven integration guides (plan
+`docs/plans/2026-07-25-wiki-driven-integration-guides.md`, epic #164): a new
+`integration-guide` skill points users at living, wiki-hosted setup guides
+for tools this repo doesn't ship adapter code for, instead of hard-coding
+that knowledge into the skill set.
+
+- **New skill** `integration-guide`: on mention of Superpowers, GSD,
+  SpecKit, OpenSpec, Jira, Confluence, GitHub, GitLab, Azure DevOps, AWS
+  CodeCatalyst, or Google Cloud DevOps, fetches the matching
+  `Integration-<Name>` wiki page, verifies it's the real page (a GitHub
+  wiki redirects a missing slug to Home instead of 404ing — a naive
+  fetch-succeeded check would be fooled by this), and falls back to a
+  local copy under `docs/integrations/` if the fetch fails or fails
+  verification. No new adapter or fetch code — built on `WebFetch` plus
+  the existing `worklog wiki-add`/`wiki-publish` mechanism.
+- **11 integration pages** (`docs/integrations/fallback-*.md`, published to
+  the wiki): one fixed 10-section template per system. Only GitHub has a
+  real, shipped adapter — the other six ticket/wiki systems are documented
+  honestly as agent-researched-at-runtime, matching `ticket-sync`'s
+  existing ADO-caveats tone; the four SDD tools are framed as
+  compositional guidance, not technical integration, since nothing in this
+  repo wires to them today. Jira and Confluence require reusing the
+  existing `jira`/`confluence` skills rather than raw REST calls;
+  Confluence additionally requires converting Mermaid/PlantUML diagrams to
+  images before upload.
+- **Meta index** at `docs/integrations/README.md` / wiki page
+  `Integrations`, linking all 11 pages.
+
 ## 0.15.1 — 2026-07-25
 
 - Doc fix: user-guide miscounted branch-discipline hook checks ("two more
