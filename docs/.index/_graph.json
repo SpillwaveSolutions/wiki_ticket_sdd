@@ -1487,8 +1487,23 @@
   },
   {
    "from": "item/01KYBPP7619CBXN3ZTV9FZJMEJ",
+   "to": "pr/157",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYBPP7619CBXN3ZTV9FZJMEJ",
    "to": "release/v0.15.0",
    "type": "targets"
+  },
+  {
+   "from": "item/01KYDKDJFCJTDVFZJ27Q9Y08TV",
+   "to": "pr/160",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDMC6M6B2W8F48271TG0VEK",
+   "to": "pr/161",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYDMC6M6B2W8F48271TG0VEK",
@@ -1502,6 +1517,11 @@
   },
   {
    "from": "item/01KYDP0BQG59M8QGCQY72SC0G1",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQG59M8QGCQY72SC0G1",
    "to": "ticket/github#162",
    "type": "references"
   },
@@ -1509,6 +1529,11 @@
    "from": "item/01KYDP0BQGC8N7K1TE571K74JF",
    "to": "item/01KYDP0BQGW4XAAGX68526C9ES",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "to": "pr/179",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYDP0BQGC8N7K1TE571K74JF",
@@ -1532,6 +1557,11 @@
   },
   {
    "from": "item/01KYDP0BQH33AMR5ETPDF4V1M6",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQH33AMR5ETPDF4V1M6",
    "to": "ticket/github#165",
    "type": "references"
   },
@@ -1539,6 +1569,11 @@
    "from": "item/01KYDP0BQH6389PTNGKXHSN2KR",
    "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQH6389PTNGKXHSN2KR",
+   "to": "pr/179",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYDP0BQH6389PTNGKXHSN2KR",
@@ -1552,6 +1587,11 @@
   },
   {
    "from": "item/01KYDP0BQHAE38H6VPDNVXV8JA",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHAE38H6VPDNVXV8JA",
    "to": "ticket/github#167",
    "type": "references"
   },
@@ -1559,6 +1599,11 @@
    "from": "item/01KYDP0BQHAMP5AC6AP7854N9H",
    "to": "item/01KYDP0BQGW4XAAGX68526C9ES",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHAMP5AC6AP7854N9H",
+   "to": "pr/179",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYDP0BQHAMP5AC6AP7854N9H",
@@ -1572,6 +1617,11 @@
   },
   {
    "from": "item/01KYDP0BQHANV652NZVV8N7VX5",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHANV652NZVV8N7VX5",
    "to": "ticket/github#169",
    "type": "references"
   },
@@ -1579,6 +1629,11 @@
    "from": "item/01KYDP0BQHDBJ50D8HZHWN3G4H",
    "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHDBJ50D8HZHWN3G4H",
+   "to": "pr/179",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYDP0BQHDBJ50D8HZHWN3G4H",
@@ -1592,6 +1647,11 @@
   },
   {
    "from": "item/01KYDP0BQHPP0JZRK856QHN76S",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHPP0JZRK856QHN76S",
    "to": "ticket/github#171",
    "type": "references"
   },
@@ -1599,6 +1659,11 @@
    "from": "item/01KYDP0BQHRM2Q3C5727FAZ7RD",
    "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHRM2Q3C5727FAZ7RD",
+   "to": "pr/179",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYDP0BQHRM2Q3C5727FAZ7RD",
@@ -1612,6 +1677,11 @@
   },
   {
    "from": "item/01KYDP0BQHV6MW1XX7H7JC1EN4",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHV6MW1XX7H7JC1EN4",
    "to": "ticket/github#173",
    "type": "references"
   },
@@ -1619,6 +1689,11 @@
    "from": "item/01KYDP0BQHW1A3235YSF16ZZAQ",
    "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHW1A3235YSF16ZZAQ",
+   "to": "pr/179",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYDP0BQHW1A3235YSF16ZZAQ",
@@ -1632,6 +1707,11 @@
   },
   {
    "from": "item/01KYDP0BQHXGEBEY40SC1Q4ST3",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHXGEBEY40SC1Q4ST3",
    "to": "ticket/github#175",
    "type": "references"
   },
@@ -1639,6 +1719,11 @@
    "from": "item/01KYDP0BQHXZCGTTM5PAV262RM",
    "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHXZCGTTM5PAV262RM",
+   "to": "pr/179",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYDP0BQHXZCGTTM5PAV262RM",
@@ -1652,6 +1737,11 @@
   },
   {
    "from": "item/01KYDP0BQHZAPBZPSSY38J33ZZ",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHZAPBZPSSY38J33ZZ",
    "to": "ticket/github#177",
    "type": "references"
   },
@@ -1662,8 +1752,23 @@
   },
   {
    "from": "item/01KYDP0BQHZHYH9CKM3D0ZM803",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHZHYH9CKM3D0ZM803",
    "to": "ticket/github#178",
    "type": "references"
+  },
+  {
+   "from": "item/01KYDZRVN5HAP73465JAM65EK7",
+   "to": "release/v0.16.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KYFJVN7Y30B50D8A9RG60CJS",
+   "to": "release/v0.16.0",
+   "type": "targets"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -2623,6 +2728,21 @@
   {
    "from": "roadmap-snapshot/2026-07-25_v0.15.1-release",
    "to": "release/v0.15.1",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.0-release",
+   "to": "roadmap-snapshot/2026-07-25_v0.15.1-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.0-release",
+   "to": "release/v0.16.0",
    "type": "targets"
   },
   {
@@ -3941,6 +4061,16 @@
    "status": "done",
    "title": "fallback-gitlab.md"
   },
+  "item/01KYDZRVN5HAP73465JAM65EK7": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Release v0.16.0"
+  },
+  "item/01KYFJVN7Y30B50D8A9RG60CJS": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Backfill trace-check evidence gaps (311 historical items)"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -4067,6 +4197,15 @@
   "pr/155": {
    "doc_type": "pr"
   },
+  "pr/157": {
+   "doc_type": "pr"
+  },
+  "pr/160": {
+   "doc_type": "pr"
+  },
+  "pr/161": {
+   "doc_type": "pr"
+  },
   "pr/179": {
    "doc_type": "pr"
   },
@@ -4092,6 +4231,9 @@
    "doc_type": "release"
   },
   "release/v0.15.1": {
+   "doc_type": "release"
+  },
+  "release/v0.16.0": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
@@ -4154,6 +4296,12 @@
   "roadmap-snapshot/2026-07-25_v0.15.1-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-07-25_v0.15.1-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-26_v0.16.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-26_v0.16.0-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

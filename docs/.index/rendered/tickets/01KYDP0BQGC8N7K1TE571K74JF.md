@@ -41,6 +41,10 @@ ships yet and giving CLI/REST research pointers. (done)
 
 Progress: 11/11 done
 
+## Linked PRs
+
+- [[PR-179]]
+
 ## Related tickets
 
 - [github #163](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/163)
