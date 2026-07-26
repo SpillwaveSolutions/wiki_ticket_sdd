@@ -3,25 +3,29 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Declare wiki_ticket_sdd as a Graph Engineering system
-`01KYFSRNDMYCTQ1XTMXFWEVBWT` · status: todo
+`01KYFSRNDMYCTQ1XTMXFWEVBWT` · status: done
+- references: [github#195](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/195)
 - contains: Add a graph-engineering callout to README.md
 - contains: Verify accuracy and scope boundaries
 - contains: Write docs/graph-engineering.md
 - produced-by: [[Plan-declare-graph-engineering]]
 
 ### Write docs/graph-engineering.md
-`01KYFSRNDMYBVMWXJFEK2AJWJJ` · status: todo
+`01KYFSRNDMYBVMWXJFEK2AJWJJ` · status: done
 - belongs-to: Declare wiki_ticket_sdd as a Graph Engineering system
+- references: [github#194](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/194)
 - produced-by: [[Plan-declare-graph-engineering]]
 
 ### Verify accuracy and scope boundaries
-`01KYFSRNDMSMEXKT7PV0F9X54M` · status: todo
+`01KYFSRNDMSMEXKT7PV0F9X54M` · status: done
 - belongs-to: Declare wiki_ticket_sdd as a Graph Engineering system
+- references: [github#193](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/193)
 - produced-by: [[Plan-declare-graph-engineering]]
 
 ### Add a graph-engineering callout to README.md
-`01KYFSRNDMMPY0E54PQ9QSWJWK` · status: todo
+`01KYFSRNDMMPY0E54PQ9QSWJWK` · status: done
 - belongs-to: Declare wiki_ticket_sdd as a Graph Engineering system
+- references: [github#192](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/192)
 - produced-by: [[Plan-declare-graph-engineering]]
 
 ### Release v0.16.1

@@ -1,6 +1,6 @@
 # Write docs/graph-engineering.md
 
-`01KYFSRNDMYBVMWXJFEK2AJWJJ` · task/feature · **open**
+`01KYFSRNDMYBVMWXJFEK2AJWJJ` · task/feature · **done**
 
 Author the main deliverable: a confident declaration that this project is
 a graph engineering system, a table mapping the four primitives (nodes,
@@ -13,3 +13,7 @@ external sources only.
 ## Hierarchy
 
 - epic: [[Ticket-01KYFSRNDMYCTQ1XTMXFWEVBWT]] Declare wiki_ticket_sdd as a Graph Engineering system — Add a new docs/graph-engineering.md declaring and documenting how wiki_ticket_sdd already embodies the graph engineering pattern (nodes, typed edges, persistent state, index/router), backed by real code citations, plus a short README callout linking to it.
+
+## Related tickets
+
+- [github #194](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/194)

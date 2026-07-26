@@ -4,7 +4,7 @@
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "1b9c3ba6eec8",
+   "render_hash": "f21a5b0582a2",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "4749e105b31b",
+   "render_hash": "b1b912f57759",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "37fd7e94efe1",
+   "render_hash": "e31d85d3b5f2",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2544,40 +2544,40 @@
    "frozen": false,
    "page_name": "Ticket-01KYFSRNDMMPY0E54PQ9QSWJWK",
    "render": "as-is",
-   "render_hash": "c2999be758b3",
+   "render_hash": "c469ae29978e",
    "source": "docs/.index/rendered/tickets/01KYFSRNDMMPY0E54PQ9QSWJWK.md",
    "title": "Add a graph-engineering callout to README.md",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYFSRNDMMPY0E54PQ9QSWJWK"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYFSRNDMSMEXKT7PV0F9X54M",
    "render": "as-is",
-   "render_hash": "46a066eb0b49",
+   "render_hash": "a4bf51319856",
    "source": "docs/.index/rendered/tickets/01KYFSRNDMSMEXKT7PV0F9X54M.md",
    "title": "Verify accuracy and scope boundaries",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYFSRNDMSMEXKT7PV0F9X54M"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYFSRNDMYBVMWXJFEK2AJWJJ",
    "render": "as-is",
-   "render_hash": "51be1613c183",
+   "render_hash": "8055a30c7591",
    "source": "docs/.index/rendered/tickets/01KYFSRNDMYBVMWXJFEK2AJWJJ.md",
    "title": "Write docs/graph-engineering.md",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYFSRNDMYBVMWXJFEK2AJWJJ"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYFSRNDMYCTQ1XTMXFWEVBWT",
    "render": "as-is",
-   "render_hash": "5b32e9ebaa90",
+   "render_hash": "ab57c156201d",
    "source": "docs/.index/rendered/tickets/01KYFSRNDMYCTQ1XTMXFWEVBWT.md",
    "title": "Declare wiki_ticket_sdd as a Graph Engineering system",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT"
   },
   {
@@ -3010,11 +3010,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-26T18:07:30Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-26T18:11:56Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "5be5a3669711",
+   "render_hash": "8b0d5a14fcec",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -3253,7 +3253,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "704a37a9e1f1",
+  "render_hash": "ff51a1e8efda",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

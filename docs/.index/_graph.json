@@ -1826,14 +1826,34 @@
    "type": "belongs-to"
   },
   {
+   "from": "item/01KYFSRNDMMPY0E54PQ9QSWJWK",
+   "to": "ticket/github#192",
+   "type": "references"
+  },
+  {
    "from": "item/01KYFSRNDMSMEXKT7PV0F9X54M",
    "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
    "type": "belongs-to"
   },
   {
+   "from": "item/01KYFSRNDMSMEXKT7PV0F9X54M",
+   "to": "ticket/github#193",
+   "type": "references"
+  },
+  {
    "from": "item/01KYFSRNDMYBVMWXJFEK2AJWJJ",
    "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYFSRNDMYBVMWXJFEK2AJWJJ",
+   "to": "ticket/github#194",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "to": "ticket/github#195",
+   "type": "references"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -4190,22 +4210,22 @@
   },
   "item/01KYFSRNDMMPY0E54PQ9QSWJWK": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Add a graph-engineering callout to README.md"
   },
   "item/01KYFSRNDMSMEXKT7PV0F9X54M": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Verify accuracy and scope boundaries"
   },
   "item/01KYFSRNDMYBVMWXJFEK2AJWJJ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Write docs/graph-engineering.md"
   },
   "item/01KYFSRNDMYCTQ1XTMXFWEVBWT": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Declare wiki_ticket_sdd as a Graph Engineering system"
   },
   "plan/2026-07-17_worklog-core_plan": {
@@ -4834,6 +4854,22 @@
   "ticket/github#185": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/185"
+  },
+  "ticket/github#192": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/192"
+  },
+  "ticket/github#193": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/193"
+  },
+  "ticket/github#194": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/194"
+  },
+  "ticket/github#195": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/195"
   },
   "ticket/github#23": {
    "doc_type": "ticket",

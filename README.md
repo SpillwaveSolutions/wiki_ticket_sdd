@@ -12,6 +12,15 @@ the history of what was done is readily available, and roadmaps and status
 reports are generated artifacts anyone can read. No "the agent did a bunch
 of stuff last week and nobody knows what."
 
+By mid-2026 the industry gave this pattern a name: **graph engineering** —
+explicit nodes, typed edges, persistent state, and an index, in place of one
+long agent loop. WikiTicket SDD didn't adopt the framing; it already *was*
+the framing. The event log, `ia-graph`'s typed edges, and the publish
+manifest below are graph engineering made visible, the same way the fishbowl
+above makes the work itself visible. See
+[`docs/graph-engineering.md`](docs/graph-engineering.md) for the full
+picture, mapped to real code.
+
 ## What it does
 
 - **Append-only, git-native work log.** Epics, stories, tasks, subtasks, and
