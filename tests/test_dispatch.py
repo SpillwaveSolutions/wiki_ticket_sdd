@@ -200,6 +200,26 @@ class TestSchemaMirror(unittest.TestCase):
                              "mirror schema/capabilities.schema.json")
 
 
+class TestCloseNeverPushed(Sandbox):
+    def test_closed_item_forced_into_scope_creates_then_closes(self):
+        # worklog 01KYAKH3: an item created and closed locally without ever
+        # being pushed has no external key. Forcing it into scope via
+        # --keys crashed with KeyError('key') in the closed-item branch,
+        # which assumed a key already existed. It must create the ticket
+        # first, then close it.
+        item = self.wl("add", "Closed before ever pushed", "--priority", "P1").strip()
+        self.wl("close", item, "--resolution", "fixed")
+        out = self.sync("--push-only", "--keys", item)
+        self.assertNotIn("Traceback", out)
+        self.assertEqual(self.fake("_count"), "1", out)
+        shown = self.show(item)
+        self.assertEqual(shown["external"]["system"], "fake")
+        self.assertIn("key", shown["external"])
+        with open(self.fake_state, encoding="utf-8") as fh:
+            (ticket,) = json.load(fh)["tickets"].values()
+        self.assertTrue(ticket["closed"])
+
+
 class TestOrphanNeverPushed(Sandbox):
     def test_orphan_and_titleless_items_are_drift_not_tickets(self):
         # a typo'd update creates a fold orphan: an event whose item has no create
