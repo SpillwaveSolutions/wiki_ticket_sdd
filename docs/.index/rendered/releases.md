@@ -5,6 +5,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 ## v0.16.1 — 2026-07-26
 
 - Roadmap snapshot: [[Roadmap-2026-07-26_v0.16.1-release]]
+- Shipped: Release v0.16.1
 
 ## v0.16.0 — 2026-07-26
 
