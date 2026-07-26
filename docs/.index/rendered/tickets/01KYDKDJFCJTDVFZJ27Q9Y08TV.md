@@ -7,3 +7,7 @@ user-guide.md said 'Two more pre-commit checks enforce branch discipline' but de
 ## Linked PRs
 
 - [[PR-160]]
+
+## Related tickets
+
+- [github #182](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/182)

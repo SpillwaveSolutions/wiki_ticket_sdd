@@ -11,3 +11,7 @@ Ship the branch-discipline hooks as plugin 0.15.0: a branch guard (never commit 
 ## Release
 
 - [[Release-v0.15.0]]
+
+## Related tickets
+
+- [github #181](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/181)

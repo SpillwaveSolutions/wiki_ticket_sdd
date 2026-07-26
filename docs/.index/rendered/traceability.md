@@ -4,10 +4,12 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Backfill trace-check evidence gaps (311 historical items)
 `01KYFJVN7Y30B50D8A9RG60CJS` · status: done
+- references: [github#185](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/185)
 - targets: release/v0.16.0
 
 ### Release v0.16.0
 `01KYDZRVN5HAP73465JAM65EK7` · status: todo
+- references: [github#184](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/184)
 - targets: release/v0.16.0
 
 ### fallback-gitlab.md
@@ -147,15 +149,18 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Cut v0.15.1 release
 `01KYDMC6M6B2W8F48271TG0VEK` · status: done
 - lands-in: pr/161
+- references: [github#183](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/183)
 - targets: release/v0.15.1
 
 ### user-guide.md miscounts branch-discipline hook checks (code-review finding)
 `01KYDKDJFCJTDVFZJ27Q9Y08TV` · status: done
 - lands-in: pr/160
+- references: [github#182](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/182)
 
 ### Cut v0.15.0 release
 `01KYBPP7619CBXN3ZTV9FZJMEJ` · status: done
 - lands-in: pr/157
+- references: [github#181](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/181)
 - targets: release/v0.15.0
 
 ### Add a CI step validating commit messages on PRs

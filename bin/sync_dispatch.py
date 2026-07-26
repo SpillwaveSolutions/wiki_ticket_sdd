@@ -326,22 +326,57 @@ class Dispatcher:
                              local_type, caps["system"]))
 
             if closed:
-                if self.dry_run:
-                    print("would close %s (%s)" % (ext["key"], item.get("status")))
-                    continue
-                if dirty:
-                    # Close alone never syncs fields (adapter close is
-                    # key+resolution only), so reclassify-then-close left
-                    # stale remote labels the next pull re-ingested over the
-                    # local edit (worklog 01KY129S). Push the final shape
-                    # first; the close echo then hash-suppresses.
+                key = ext.get("key")
+                if not key:
+                    # Forced into scope (--keys) but never went remote: no
+                    # key to update-then-close against, so create first,
+                    # link it, then close immediately.
+                    if self.dry_run:
+                        print("would create+close %s (%s)"
+                              % (iid[:8], item.get("status")))
+                        continue
                     p = self.call_push({
-                        "op": "update", "key": ext["key"],
+                        "op": "create",
                         "marker": caps["marker"]["template"].replace("{ulid}", iid),
                         "item": payload_item})
                     if not self.handle_exit(item, p):
                         continue
-                p = self.run_adapter("close", str(ext["key"]),
+                    try:
+                        resp = json.loads(p.stdout)
+                    except json.JSONDecodeError:
+                        self.note("push %s: adapter returned non-JSON; not recorded"
+                                  % iid[:8])
+                        continue
+                    key = resp.get("key")
+                    if not key:
+                        self.note("push %s: response missing key; not linked"
+                                  % iid[:8])
+                        continue
+                    link = ["link", iid, "--system", caps["system"],
+                            "--key", str(key)]
+                    if resp.get("url"):
+                        link += ["--url", resp["url"]]
+                    if resp.get("rev"):
+                        link += ["--rev", resp["rev"]]
+                    self.worklog(*link)
+                    self.counts["created"] += 1
+                else:
+                    if self.dry_run:
+                        print("would close %s (%s)" % (key, item.get("status")))
+                        continue
+                    if dirty:
+                        # Close alone never syncs fields (adapter close is
+                        # key+resolution only), so reclassify-then-close left
+                        # stale remote labels the next pull re-ingested over
+                        # the local edit (worklog 01KY129S). Push the final
+                        # shape first; the close echo then hash-suppresses.
+                        p = self.call_push({
+                            "op": "update", "key": key,
+                            "marker": caps["marker"]["template"].replace("{ulid}", iid),
+                            "item": payload_item})
+                        if not self.handle_exit(item, p):
+                            continue
+                p = self.run_adapter("close", str(key),
                                      item.get("resolution") or item["status"])
                 if self.handle_exit(item, p):
                     self.item_state(iid)["last_pushed_hash"] = h
