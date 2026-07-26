@@ -3384,6 +3384,19 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-driven-integration-guides",
     "wiki_key": "plan/2026-07-25-wiki-driven-integration-guides"
   },
+  "plan/2026-07-26-declare-graph-engineering": {
+    "canonical_key": "plan/2026-07-26-declare-graph-engineering",
+    "doc_type": "plan",
+    "page_id": "Plan-declare-graph-engineering",
+    "render_hash": "54e7ca57d1bd",
+    "rev": "cec973f92a2283c9852c3584836de5422b72a064",
+    "source": "docs/plans/2026-07-26-declare-graph-engineering.md",
+    "source_hash": "becabcd86332",
+    "title": "Declare wiki_ticket_sdd as a Graph Engineering system",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-declare-graph-engineering",
+    "wiki_key": "plan/2026-07-26-declare-graph-engineering"
+  },
   "plan/design-docs-release-sync": {
     "aliases": [
       "plan/design-docs-release-sync"
