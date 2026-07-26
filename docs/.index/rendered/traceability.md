@@ -3,7 +3,7 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Release v0.16.1
-`01KYFRPNEQEVTFB6144W7A79BJ` · status: todo
+`01KYFRPNEQEVTFB6144W7A79BJ` · status: done
 - targets: release/v0.16.1
 
 ### Backfill trace-check evidence gaps (311 historical items)
