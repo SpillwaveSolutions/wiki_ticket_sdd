@@ -2,6 +2,40 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Remove two abandoned git worktrees
+`01KYJYG4PYJRAFEHJCP51XVCRA` · status: todo
+- belongs-to: Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
+### Close out stale work-log bookkeeping
+`01KYJYG4PYFFTK74AZ7RW90M7R` · status: todo
+- belongs-to: Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
+### Resolve work-item id prefixes in close and update
+`01KYJYG4PYDA4H10JXXRDRCXPZ` · status: done
+- belongs-to: Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
+### Regression tests for id-prefix resolution
+`01KYJYG4PY8S8RZNB9AYP3G8GW` · status: todo
+- belongs-to: Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
+### Accept an absolute core.hooksPath in the doctor checks
+`01KYJYG4PY6TE6ZTZMF8CV2VFT` · status: todo
+- belongs-to: Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
+### Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+`01KYJYG4PX7NVTS1CZQ8MPES7T` · status: todo
+- contains: Accept an absolute core.hooksPath in the doctor checks
+- contains: Regression tests for id-prefix resolution
+- contains: Resolve work-item id prefixes in close and update
+- contains: Close out stale work-log bookkeeping
+- contains: Remove two abandoned git worktrees
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
 ### Release v0.17.0
 `01KYJGF6GN93GA3FMP5EW5A7S2` · status: done
 - references: [github#203](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/203)
@@ -411,7 +445,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### close/update silently corrupt log when given an item-id prefix instead of the full ULID
-`01KYA99TVCGX79HFNHN1DVT7Y6` · status: todo
+`01KYA99TVCGX79HFNHN1DVT7Y6` · status: in_progress
 - references: [github#123](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/123)
 
 ### Give kind:ops release items a GitHub issue going forward
