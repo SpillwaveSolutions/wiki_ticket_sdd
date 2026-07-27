@@ -142,7 +142,8 @@ def render_home(records, has_graph=False):
     lines = [intro, "", "---", ""]
     lines += [
         "## What is this project?",
-        "[[User-Guide]] · [[Design-Doc]] · [[Worklog-Spec]]",
+        "[[User-Guide]] · [[Design-Doc]] · [[Code-Walkthrough]] · "
+        "[[Worklog-Spec]]",
         "",
         "## What are we working on now?",
         "[[Roadmap]]%s" % status_link,

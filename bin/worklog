@@ -20,7 +20,7 @@ triages it (never silently `feature`).
 
 Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
 """
-import argparse, json, os, sys, time
+import argparse, glob, json, os, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ulid
 from fold import (fold, FoldResult, read_lines, dedupe_and_sort,
@@ -344,9 +344,18 @@ def cmd_plan_capture(a):
         sys.exit("worklog: no '- [ ]' tasks found under a '## Tasks' heading")
     date = time.strftime("%Y-%m-%d", time.gmtime())
     path = f"docs/plans/{date}-{a.slug}.md"
-    if os.path.exists(path):
-        sys.exit(f"worklog: {path} exists; plans are never rewritten "
-                 "(invariant 15.8) — pick a new slug to supersede")
+    # Invariant 15.8 is about the SLUG, not the filename: "pick a new slug to
+    # supersede". Checking only today's path enforced that by accident and missed
+    # whenever the date differed. The date here is UTC while a plan is authored in
+    # local time, so a plan written on a US evening and captured minutes later
+    # looks for tomorrow's filename, finds nothing, and silently writes a second
+    # copy of the same plan. Observed 2026-07-26 in a downstream repo: a plan
+    # authored as 2026-07-26-<slug>.md was duplicated as 2026-07-27-<slug>.md.
+    existing = sorted(glob.glob(f"docs/plans/*-{a.slug}.md"))
+    if existing:
+        sys.exit(f"worklog: {existing[0]} already captures slug '{a.slug}'; plans "
+                 "are never rewritten (invariant 15.8) — pick a new slug to "
+                 "supersede")
 
     # Captured items get explicit kind:feature — a plan is deliberate feature
     # work, not a triage candidate (taxonomy §2.3 exemption by intent).

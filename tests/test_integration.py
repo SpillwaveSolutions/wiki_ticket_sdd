@@ -385,6 +385,34 @@ class TestPlanCapturePR(unittest.TestCase):
         self.assertIn("### Demo plan", sb.read("docs/roadmap.md"))
         self.assertEqual(items[epic]["level"], "epic")
 
+    def test_plan_capture_refuses_a_slug_already_captured_on_another_date(self):
+        """Invariant 15.8 is slug-scoped, not filename-scoped.
+
+        The guard used to check only `docs/plans/<today-UTC>-<slug>.md`, so it
+        enforced the invariant only when the dates happened to match. The date is
+        UTC while a plan is authored in local time, so capturing a plan written
+        earlier the same local day, from a timezone behind UTC, looked for
+        tomorrow's filename, found nothing, and wrote a duplicate. Observed in a
+        downstream repo on 2026-07-26: 2026-07-26-<slug>.md was silently
+        duplicated as 2026-07-27-<slug>.md.
+        """
+        sb = make_sandbox(self)
+        os.makedirs(os.path.join(sb.dir, "docs/plans"), exist_ok=True)
+        sb.write("docs/plans/2020-01-01-demo.md", "# An earlier plan, same slug\n")
+        sb.write("draft.md", "# Demo plan\n\n## Tasks\n\n- [ ] (P1) A task\n")
+
+        with self.assertRaises(Exception) as ctx:
+            sb.worklog("plan-capture", "--slug", "demo", "--title", "Demo plan",
+                       "--file", "draft.md")
+        msg = str(ctx.exception)
+        self.assertIn("2020-01-01-demo.md", msg)
+        self.assertIn("15.8", msg)
+
+        # and nothing was written for today either
+        today = time.strftime("%Y-%m-%d", time.gmtime())
+        self.assertFalse(
+            os.path.exists(os.path.join(sb.dir, f"docs/plans/{today}-demo.md")))
+
     def test_two_plan_prs_merge_cleanly(self):
         sb = make_sandbox(self)
         for n, branch in (("one", "feat-one"), ("two", "feat-two")):
