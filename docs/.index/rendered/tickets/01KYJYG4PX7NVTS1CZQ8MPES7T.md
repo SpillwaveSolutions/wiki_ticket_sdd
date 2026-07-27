@@ -24,3 +24,7 @@ roadmap. (open)
 their branches are already merged. (open)
 
 Progress: 1/5 done
+
+## Related tickets
+
+- [github #208](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/208)

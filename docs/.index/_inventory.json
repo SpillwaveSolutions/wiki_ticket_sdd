@@ -841,10 +841,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-27T23:28:23Z",
+   "generated_at": "2026-07-27T23:29:36Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "cac485fc",
+   "source_hash": "d6aa101e",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
