@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "3402bbac8df2",
+   "render_hash": "b1b912f57759",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -24,7 +24,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "140b7483f479",
+   "render_hash": "a6d0b44b17c3",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "3b610626b0fe",
+   "render_hash": "e31d85d3b5f2",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -112,6 +112,46 @@
   },
   {
    "frozen": false,
+   "page_name": "PR-157",
+   "render": "as-is",
+   "render_hash": "567861a546aa",
+   "source": "docs/.index/rendered/prs/157.md",
+   "title": "PR #157",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/157"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-160",
+   "render": "as-is",
+   "render_hash": "5fc076a048e4",
+   "source": "docs/.index/rendered/prs/160.md",
+   "title": "PR #160",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/160"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-161",
+   "render": "as-is",
+   "render_hash": "51fe6a4d16a5",
+   "source": "docs/.index/rendered/prs/161.md",
+   "title": "PR #161",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/161"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-179",
+   "render": "as-is",
+   "render_hash": "185939ed9114",
+   "source": "docs/.index/rendered/prs/179.md",
+   "title": "PR #179",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/179"
+  },
+  {
+   "frozen": false,
    "page_name": "Release-v0.10.0",
    "render": "as-is",
    "render_hash": "a1d7e2472b9e",
@@ -174,11 +214,41 @@
    "frozen": false,
    "page_name": "Release-v0.15.0",
    "render": "as-is",
-   "render_hash": "e6399faaa455",
+   "render_hash": "af26c4a4d06b",
    "source": "docs/.index/rendered/releases/v0.15.0.md",
    "title": "Release v0.15.0",
    "truth_state": "shipped",
    "wiki_key": "release/v0.15.0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.15.1",
+   "render": "as-is",
+   "render_hash": "d35d18259d5e",
+   "source": "docs/.index/rendered/releases/v0.15.1.md",
+   "title": "Release v0.15.1",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.15.1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.16.0",
+   "render": "as-is",
+   "render_hash": "f41d5d90a10e",
+   "source": "docs/.index/rendered/releases/v0.16.0.md",
+   "title": "Release v0.16.0",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.16.0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.16.1",
+   "render": "as-is",
+   "render_hash": "d4aca4870df1",
+   "source": "docs/.index/rendered/releases/v0.16.1.md",
+   "title": "Release v0.16.1",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.16.1"
   },
   {
    "frozen": false,
@@ -2244,11 +2314,271 @@
    "frozen": false,
    "page_name": "Ticket-01KYBPP7619CBXN3ZTV9FZJMEJ",
    "render": "as-is",
-   "render_hash": "29a1c4f490ea",
+   "render_hash": "ad764ec015c4",
    "source": "docs/.index/rendered/tickets/01KYBPP7619CBXN3ZTV9FZJMEJ.md",
    "title": "Cut v0.15.0 release",
    "truth_state": "done",
    "wiki_key": "item/01KYBPP7619CBXN3ZTV9FZJMEJ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDKDJFCJTDVFZJ27Q9Y08TV",
+   "render": "as-is",
+   "render_hash": "255cd301b6b8",
+   "source": "docs/.index/rendered/tickets/01KYDKDJFCJTDVFZJ27Q9Y08TV.md",
+   "title": "user-guide.md miscounts branch-discipline hook checks (code-review finding)",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDKDJFCJTDVFZJ27Q9Y08TV"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDMC6M6B2W8F48271TG0VEK",
+   "render": "as-is",
+   "render_hash": "92bb7e627f03",
+   "source": "docs/.index/rendered/tickets/01KYDMC6M6B2W8F48271TG0VEK.md",
+   "title": "Cut v0.15.1 release",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDMC6M6B2W8F48271TG0VEK"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQG59M8QGCQY72SC0G1",
+   "render": "as-is",
+   "render_hash": "d7e5866a65ba",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQG59M8QGCQY72SC0G1.md",
+   "title": "Create the integration-guide skill",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQG59M8QGCQY72SC0G1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQGC8N7K1TE571K74JF",
+   "render": "as-is",
+   "render_hash": "6400d5d6654e",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQGC8N7K1TE571K74JF.md",
+   "title": "Write the 11 fallback integration pages",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQGC8N7K1TE571K74JF"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQGW4XAAGX68526C9ES",
+   "render": "as-is",
+   "render_hash": "ddb3118fd09e",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQGW4XAAGX68526C9ES.md",
+   "title": "Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQGW4XAAGX68526C9ES"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQH33AMR5ETPDF4V1M6",
+   "render": "as-is",
+   "render_hash": "efef8bdd31ac",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQH33AMR5ETPDF4V1M6.md",
+   "title": "Register and publish the new pages",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQH33AMR5ETPDF4V1M6"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQH6389PTNGKXHSN2KR",
+   "render": "as-is",
+   "render_hash": "353524c635ad",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQH6389PTNGKXHSN2KR.md",
+   "title": "fallback-speckit.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQH6389PTNGKXHSN2KR"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHAE38H6VPDNVXV8JA",
+   "render": "as-is",
+   "render_hash": "499feb5572c5",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHAE38H6VPDNVXV8JA.md",
+   "title": "fallback-gsd.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHAE38H6VPDNVXV8JA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHAMP5AC6AP7854N9H",
+   "render": "as-is",
+   "render_hash": "a409ff7b3088",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHAMP5AC6AP7854N9H.md",
+   "title": "Write the Integrations meta index page",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHAMP5AC6AP7854N9H"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHANV652NZVV8N7VX5",
+   "render": "as-is",
+   "render_hash": "ab4530923d4e",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHANV652NZVV8N7VX5.md",
+   "title": "fallback-confluence.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHANV652NZVV8N7VX5"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHDBJ50D8HZHWN3G4H",
+   "render": "as-is",
+   "render_hash": "c066fd3ae6b7",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHDBJ50D8HZHWN3G4H.md",
+   "title": "fallback-openspec.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHDBJ50D8HZHWN3G4H"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHPP0JZRK856QHN76S",
+   "render": "as-is",
+   "render_hash": "c391ebbbba4d",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHPP0JZRK856QHN76S.md",
+   "title": "fallback-github.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHPP0JZRK856QHN76S"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHRM2Q3C5727FAZ7RD",
+   "render": "as-is",
+   "render_hash": "06f59b3a55f0",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHRM2Q3C5727FAZ7RD.md",
+   "title": "fallback-azuredevops.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHRM2Q3C5727FAZ7RD"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHV6MW1XX7H7JC1EN4",
+   "render": "as-is",
+   "render_hash": "d250405a3a3d",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHV6MW1XX7H7JC1EN4.md",
+   "title": "fallback-googleclouddevops.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHV6MW1XX7H7JC1EN4"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHW1A3235YSF16ZZAQ",
+   "render": "as-is",
+   "render_hash": "0940cbf3d413",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHW1A3235YSF16ZZAQ.md",
+   "title": "fallback-jira.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHW1A3235YSF16ZZAQ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHXGEBEY40SC1Q4ST3",
+   "render": "as-is",
+   "render_hash": "8026f64454ad",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHXGEBEY40SC1Q4ST3.md",
+   "title": "fallback-superpowers.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHXGEBEY40SC1Q4ST3"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHXZCGTTM5PAV262RM",
+   "render": "as-is",
+   "render_hash": "7f8ccf66afd2",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHXZCGTTM5PAV262RM.md",
+   "title": "fallback-awscodecatalyst.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHXZCGTTM5PAV262RM"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHZAPBZPSSY38J33ZZ",
+   "render": "as-is",
+   "render_hash": "e5302e794d5a",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHZAPBZPSSY38J33ZZ.md",
+   "title": "End-to-end verification",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHZAPBZPSSY38J33ZZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDP0BQHZHYH9CKM3D0ZM803",
+   "render": "as-is",
+   "render_hash": "0a4b361acefb",
+   "source": "docs/.index/rendered/tickets/01KYDP0BQHZHYH9CKM3D0ZM803.md",
+   "title": "fallback-gitlab.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYDP0BQHZHYH9CKM3D0ZM803"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYDZRVN5HAP73465JAM65EK7",
+   "render": "as-is",
+   "render_hash": "005afbb50f65",
+   "source": "docs/.index/rendered/tickets/01KYDZRVN5HAP73465JAM65EK7.md",
+   "title": "Release v0.16.0",
+   "truth_state": "open",
+   "wiki_key": "item/01KYDZRVN5HAP73465JAM65EK7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYFJVN7Y30B50D8A9RG60CJS",
+   "render": "as-is",
+   "render_hash": "cd4a2f21a74f",
+   "source": "docs/.index/rendered/tickets/01KYFJVN7Y30B50D8A9RG60CJS.md",
+   "title": "Backfill trace-check evidence gaps (311 historical items)",
+   "truth_state": "done",
+   "wiki_key": "item/01KYFJVN7Y30B50D8A9RG60CJS"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYFRPNEQEVTFB6144W7A79BJ",
+   "render": "as-is",
+   "render_hash": "9c171f7e1c9e",
+   "source": "docs/.index/rendered/tickets/01KYFRPNEQEVTFB6144W7A79BJ.md",
+   "title": "Release v0.16.1",
+   "truth_state": "done",
+   "wiki_key": "item/01KYFRPNEQEVTFB6144W7A79BJ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYFSRNDMMPY0E54PQ9QSWJWK",
+   "render": "as-is",
+   "render_hash": "c469ae29978e",
+   "source": "docs/.index/rendered/tickets/01KYFSRNDMMPY0E54PQ9QSWJWK.md",
+   "title": "Add a graph-engineering callout to README.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYFSRNDMMPY0E54PQ9QSWJWK"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYFSRNDMSMEXKT7PV0F9X54M",
+   "render": "as-is",
+   "render_hash": "a4bf51319856",
+   "source": "docs/.index/rendered/tickets/01KYFSRNDMSMEXKT7PV0F9X54M.md",
+   "title": "Verify accuracy and scope boundaries",
+   "truth_state": "done",
+   "wiki_key": "item/01KYFSRNDMSMEXKT7PV0F9X54M"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYFSRNDMYBVMWXJFEK2AJWJJ",
+   "render": "as-is",
+   "render_hash": "8055a30c7591",
+   "source": "docs/.index/rendered/tickets/01KYFSRNDMYBVMWXJFEK2AJWJJ.md",
+   "title": "Write docs/graph-engineering.md",
+   "truth_state": "done",
+   "wiki_key": "item/01KYFSRNDMYBVMWXJFEK2AJWJJ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "render": "as-is",
+   "render_hash": "ab57c156201d",
+   "source": "docs/.index/rendered/tickets/01KYFSRNDMYCTQ1XTMXFWEVBWT.md",
+   "title": "Declare wiki_ticket_sdd as a Graph Engineering system",
+   "truth_state": "done",
+   "wiki_key": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -2427,22 +2757,44 @@
    "wiki_key": "design/2026-07-25_v0.15.0-release-design-doc"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T04:06:56Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Snapshot** of release v0.16.0 (2026-07-26) \u2014 frozen record. The current version is [[Code-Walkthrough]].",
+   "frozen": true,
+   "page_name": "Code-Walkthrough-2026-07-26_v0.16.0-release",
+   "render": "doc+banner",
+   "render_hash": "4aeff8aaa213",
+   "source": "docs/designs/2026-07-26_v0.16.0-release_code_walkthrough.md",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "snapshot",
+   "wiki_key": "design/2026-07-26_v0.16.0-release-code-walkthrough"
+  },
+  {
+   "banner": "> **Snapshot** of release v0.16.0 (2026-07-26) \u2014 frozen record. The current version is [[Design-Doc]].",
+   "frozen": true,
+   "page_name": "Design-Doc-2026-07-26_v0.16.0-release",
+   "render": "doc+banner",
+   "render_hash": "ae85b1644e81",
+   "source": "docs/designs/2026-07-26_v0.16.0-release_design_doc.md",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot",
+   "wiki_key": "design/2026-07-26_v0.16.0-release-design-doc"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-26T00:00:00Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Code-Walkthrough",
    "render": "doc+banner",
-   "render_hash": "fda868935c16",
+   "render_hash": "c6a5948a3021",
    "source": "docs/designs/current_code_walkthrough.md",
    "title": "Worklog \u2014 Code Walkthrough",
    "truth_state": "current",
    "wiki_key": "design/current-code-walkthrough"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T04:06:56Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-26T00:00:00Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Design-Doc",
    "render": "doc+banner",
-   "render_hash": "b76b0feb4a94",
+   "render_hash": "a9149ec9fd20",
    "source": "docs/designs/current_design_doc.md",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "current",
@@ -2539,6 +2891,28 @@
   {
    "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
    "frozen": true,
+   "page_name": "Plan-wiki-driven-integration-guides",
+   "render": "doc+banner",
+   "render_hash": "707c28fd7b58",
+   "source": "docs/plans/2026-07-25-wiki-driven-integration-guides.md",
+   "title": "Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-25-wiki-driven-integration-guides"
+  },
+  {
+   "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
+   "frozen": true,
+   "page_name": "Plan-declare-graph-engineering",
+   "render": "doc+banner",
+   "render_hash": "54e7ca57d1bd",
+   "source": "docs/plans/2026-07-26-declare-graph-engineering.md",
+   "title": "Declare wiki_ticket_sdd as a Graph Engineering system",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-26-declare-graph-engineering"
+  },
+  {
+   "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
+   "frozen": true,
    "page_name": "Plan-design-docs-release-sync",
    "render": "doc+banner",
    "render_hash": "9f3a72d1e016",
@@ -2629,18 +3003,18 @@
    "frozen": false,
    "page_name": "Plugin-Guide",
    "render": "doc+banner",
-   "render_hash": "01a182633cd3",
+   "render_hash": "bf57eb131bb0",
    "source": "docs/user_guide/plugin-guide.md",
    "title": "WikiTicket SDD \u2014 Plugin Guide",
    "truth_state": "current",
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-25T03:59:00Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-26T18:11:56Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "a0ef4fd14b2f",
+   "render_hash": "8b0d5a14fcec",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -2711,6 +3085,39 @@
    "title": "Roadmap",
    "truth_state": "snapshot",
    "wiki_key": "roadmap-snapshot/2026-07-25_v0.15.0-release"
+  },
+  {
+   "banner": "> **Snapshot** of release v0.15.1 (2026-07-25) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-07-25_v0.15.1-release",
+   "render": "doc+banner",
+   "render_hash": "ab0ed569aded",
+   "source": "docs/roadmap/2026-07-25_v0.15.1-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-07-25_v0.15.1-release"
+  },
+  {
+   "banner": "> **Snapshot** of release v0.16.0 (2026-07-26) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-07-26_v0.16.0-release",
+   "render": "doc+banner",
+   "render_hash": "e340e0b8b1b2",
+   "source": "docs/roadmap/2026-07-26_v0.16.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-07-26_v0.16.0-release"
+  },
+  {
+   "banner": "> **Snapshot** of release v0.16.1 (2026-07-26) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-07-26_v0.16.1-release",
+   "render": "doc+banner",
+   "render_hash": "4a0033944c5b",
+   "source": "docs/roadmap/2026-07-26_v0.16.1-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-07-26_v0.16.1-release"
   },
   {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
@@ -2838,7 +3245,7 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "1563c2173eab",
+   "render_hash": "caff5e21966c",
    "source": "docs/user_guide/user-guide.md",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",
@@ -2846,7 +3253,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "3f7c0bd346d7",
+  "render_hash": "ff51a1e8efda",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

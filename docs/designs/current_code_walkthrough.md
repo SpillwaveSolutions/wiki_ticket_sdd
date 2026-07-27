@@ -1,8 +1,8 @@
 ---
-generated_at: 2026-07-25T04:06:56Z
-git_hash: 2e8cfe27d90d9cacf8335698caa40c493b48bf59
+generated_at: 2026-07-26T00:00:00Z
+git_hash: 60f5605a49c1a9e272ac483de620c207bab4ae92
 branch: main
-tag: v0.15.0
+tag: v0.16.0
 roadmap: docs/roadmap.md
 wiki_key: design/current-code-walkthrough
 truth_state: current
@@ -46,10 +46,11 @@ Directory map:
 | `docs/.index/` | Generated IA plane (committed, regenerate-and-diff). |
 | `adapters/` | `github` (worked example), `fake` (CI double), authoring rules. |
 | `hooks/` | git pre-commit/pre-merge-commit/commit-msg (v0.15.0) + four Claude Code hooks. |
-| `plugin/` | Claude Code packaging; `plugin/scripts/` mirrors `bin/` + `hooks/`. |
+| `plugin/` | Claude Code packaging; `plugin/scripts/` mirrors `bin/` + `hooks/`; `plugin/skills/integration-guide/` new in v0.16.0. |
 | `schema/` | `capabilities`, `adapter-io`, `adr`, `doc`, `entity` JSON schemas. |
 | `tests/` | 19 stdlib-unittest suites; the executable spec (includes `test_ia.py`). |
 | `docs/` | Generated roadmap, frozen plans/status/ADRs/designs, the spec (v1.9). |
+| `docs/integrations/` | Eleven per-system setup guides + index (v0.16.0), prose only, no code. |
 
 The one diagram (derived from actual imports and subprocess calls):
 
@@ -518,6 +519,65 @@ branch (`Sandbox.branch()`) and picked up an item-ULID in the message,
 following the file's existing precedent for "not what this test is about"
 commits.
 
+### 2.12 Integration guides (v0.16.0): a prose-only edge, no new `bin/` code
+
+`docs/plans/2026-07-25-wiki-driven-integration-guides.md`. Eleven systems this
+repo talks about but mostly doesn't ship real adapter code for — four SDD
+tools it composes with (Superpowers, GSD, SpecKit, OpenSpec) and seven
+ticket/wiki systems where only `adapters/github/adapter` is real (Jira,
+Confluence, GitHub, GitLab, Azure DevOps, AWS CodeCatalyst, Google Cloud
+DevOps) — each get a dedicated setup guide. The design choice worth noting:
+this ships **zero new Python**. `WebFetch` (already available to any Claude
+Code agent) covers "fetch the live wiki page at runtime"; `worklog wiki-add`
+(pre-existing) covers "get an arbitrary file into the wiki-publish pipeline."
+The entire feature is one new skill plus markdown content.
+
+`plugin/skills/integration-guide/SKILL.md` (mirrored to
+`.claude/skills/integration-guide/SKILL.md`) is pure prose, six numbered
+steps:
+
+1. **Match the name to a canonical key** via a fixed alias table in the skill
+   body — no network call needed to resolve "ADO" or "Azure Boards" to
+   `azuredevops`.
+2. **Try the live wiki page first.** Build the URL from `wiki.root_url` in
+   `.work/config.yml` plus `/Integration-<Name>`; `WebFetch` it.
+3. **Verify before trusting.** A GitHub wiki does not 404 a missing page
+   slug — it silently redirects to Home with a normal 200. The skill checks
+   the response for a `## Recommended workflow` heading before treating it
+   as a hit; anything else (network error, 404, wrong-page redirect) is
+   handled identically to a fetch failure.
+4. **Fall back to the local copy**, `docs/integrations/fallback-<key>.md`,
+   saying so explicitly ("using the bundled local copy, which may lag the
+   published page").
+5. **Soft version-staleness check** — only for systems with a real,
+   probeable CLI (`gh --version`, `glab --version`, `az --version`,
+   `aws --version`); the four SDD tools are Claude Code skills with nothing
+   to introspect, and the skill says so rather than fabricating a check.
+6. **Compose, don't reinvent** — for Jira/Confluence, check for the global
+   `jira`/`confluence` skill or an Atlassian MCP server before any raw
+   REST/CLI call; that skill already owns auth, pagination, and markup
+   conversion.
+
+Content: `docs/integrations/README.md` (index) plus eleven
+`fallback-<key>.md` files, one fixed ten-section template each (**When to
+use, One-command setup, Adapter configuration, Recommended workflow, Mapping
+events, Pulling changes, Rendering support, Example links, Gotchas &
+troubleshooting, Last updated**) so the skill's lookup logic is uniform
+across all eleven. Two placements are load-bearing and appear in exactly one
+page each: the Jira/Confluence skill-reuse paragraph (§Recommended workflow,
+those two files only), and the Confluence diagram-to-image conversion note
+(§Rendering support, `fallback-confluence.md` only — Confluence storage
+format doesn't render Mermaid/PlantUML fences directly).
+
+Publishing: `bin/worklog wiki-add docs/integrations/fallback-<key>.md --key
+integrations/<key> --title "Integration-<Name>"` registers the file in
+`.work/published.json`; the ordinary `wiki-publish` skill's existing
+hash-compare skip logic carries it from there — no new publish path was
+built or needed (`wiki-publish/SKILL.md` §4). Confirmed: `git diff --stat
+v0.15.1..v0.16.0` touches no file under `bin/`, `hooks/`, or `tests/` for
+this feature — only `docs/integrations/*`, the two `SKILL.md` mirrors, and
+the version/changelog/roadmap bookkeeping every release touches.
+
 ## 3. Load-bearing invariants
 
 | # | Invariant | Enforced at | Broken means |
@@ -665,7 +725,11 @@ byte-determinism — no wall clocks); a new tracker → copy
 navigation → `ia.py` / `ia_render.py` / `ia_graph.py` + `test_ia.py`; a new
 artifact-page entity type (v0.14.0 pattern) → add a `render_<x>_page()` in
 `ia_render.py` that consumes `ia_graph.item_links()`, wire it into
-`render_all()`'s loop, and add one prefix branch to `build_manifest()`.
+`render_all()`'s loop, and add one prefix branch to `build_manifest()`; a
+twelfth integration system (v0.16.0 pattern) → one row in
+`integration-guide/SKILL.md`'s alias table, one
+`docs/integrations/fallback-<key>.md`, one `worklog wiki-add` call — no
+`bin/` code.
 
 **Risky files:** `bin/canonical.py` (any change churns every clone's hashes —
 the file says "Don't."); `bin/fold.py` (every command's notion of truth);
@@ -681,6 +745,22 @@ compaction, and frozen-doc immutability (use sidecars).
 ## 6. Gaps and design drift
 
 Confirmed facts unless labeled otherwise.
+
+**Shipped in v0.16.0 (were open at v0.15.1):**
+
+- Wiki-driven integration guides: `integration-guide` skill + 11
+  `docs/integrations/fallback-*.md` pages + index. Zero new `bin/` code —
+  see §2.12.
+
+**New in v0.16.0 (found while shipping integration guides, not yet fixed —
+filed):** none found this release — the feature is content plus one
+prose-only skill with no code path to regress.
+
+**README repo-layout drift persists (Confirmed, recurring):**
+`README.md`'s `plugin/` row still reads "v0.15.0" against `VERSION =
+"0.16.0"` in `bin/worklog` — the same one-release-stale cosmetic gap noted at
+v0.14.0 and v0.15.0, not part of `release.sync_docs` and not fixed by this
+regeneration (this document is generated, not hand-patched).
 
 Closed in prior releases and still closed at v0.15.0: dispatcher
 `INGEST_FIELDS` carries taxonomy; `worklog reopen` exists; `conflict_policy` is
@@ -770,6 +850,6 @@ doctor` still healthy on `main`) was walked without surfacing new drift.
     design, not by oversight.
 
 Final check against the code: every flow above was walked at commit
-`2e8cfe27d90d9cacf8335698caa40c493b48bf59` (tag v0.15.0 on main); all
+`60f5605a49c1a9e272ac483de620c207bab4ae92` (tag v0.16.0 on main); all
 citations are to that tree. Dated freeze pairs for this release pin
 `git_hash` to this same commit.

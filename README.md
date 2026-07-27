@@ -12,6 +12,15 @@ the history of what was done is readily available, and roadmaps and status
 reports are generated artifacts anyone can read. No "the agent did a bunch
 of stuff last week and nobody knows what."
 
+By mid-2026 the industry gave this pattern a name: **graph engineering** —
+explicit nodes, typed edges, persistent state, and an index, in place of one
+long agent loop. WikiTicket SDD didn't adopt the framing; it already *was*
+the framing. The event log, `ia-graph`'s typed edges, and the publish
+manifest below are graph engineering made visible, the same way the fishbowl
+above makes the work itself visible. See
+[`docs/graph-engineering.md`](docs/graph-engineering.md) for the full
+picture, mapped to real code.
+
 ## What it does
 
 - **Append-only, git-native work log.** Epics, stories, tasks, subtasks, and
@@ -40,6 +49,11 @@ of stuff last week and nobody knows what."
   per ticket, PR, and release (`worklog ia-ticket <ULID>` to preview one).
 - **Syncs to the team's OWN systems** — wiki *and* tickets. Your work log
   publishes to whatever your team already uses.
+- **Living integration guides**, one per SDD tool and ticket/wiki system
+  (Superpowers, GSD, SpecKit, OpenSpec, Jira, Confluence, GitHub, GitLab,
+  Azure DevOps, AWS CodeCatalyst, Google Cloud DevOps), fetched from the
+  wiki at runtime with a local fallback under `docs/integrations/` — see the
+  `integration-guide` skill.
 
 ## System-agnostic edges, deliberately
 
@@ -50,10 +64,14 @@ GCP-hosted teams pick from the list like everyone else.)
 
 The core never contains per-system code. Publishing and sync are done by
 *skills* that instruct the AI to use whatever CLI, MCP server, or skill is
-available for the chosen system, researching missing tooling at runtime.
-LLMs already know these systems well; shipping a repository of per-system
-integrations would be dead weight. You could even run two trackers at once
-(GitHub + Jira) — the workflow stays identical.
+available for the chosen system, researching missing tooling at runtime. The
+`integration-guide` skill points at a living, wiki-hosted setup guide per
+system (Jira, Confluence, GitHub, GitLab, Azure DevOps, AWS CodeCatalyst,
+Google Cloud DevOps — plus Superpowers, GSD, SpecKit, and OpenSpec on the SDD
+side), with a local fallback copy under `docs/integrations/` when the wiki
+page is unreachable — knowledge that lives in docs, not hard-coded into the
+skill set. You could even run two trackers at once (GitHub + Jira) — the
+workflow stays identical.
 
 ## Quick start (no plugin)
 
@@ -166,8 +184,9 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | `docs/designs/` | Current + frozen design docs and code walkthroughs |
 | `docs/.index/` | IA inventory, graph, publish manifest, sidecars, rendered Home/Sidebar/indexes |
 | `docs/user_guide/` | User guide, CLI reference, plugin guide |
+| `docs/integrations/` | Living per-system setup guides (11 SDD tools + ticket/wiki systems), published to the wiki and used as the `integration-guide` skill's offline fallback |
 | `hooks/` | `pre-commit`, `pre-merge-commit`, `commit-msg`, `exit-plan-capture.sh` |
-| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.15.0** |
+| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.16.0** |
 | `tests/` | Unit and integration tests |
 
 ## Testing

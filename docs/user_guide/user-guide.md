@@ -220,7 +220,7 @@ On every commit, the git hooks check: trailing newline on the logs, event
 schema, roadmap freshness, and the fold test suite. CI runs the same checks,
 so a `--no-verify` commit doesn't get far.
 
-Two more `pre-commit` checks enforce branch discipline: it rejects a commit
+Two more checks enforce branch discipline. `pre-commit` rejects a commit
 authored directly on `main`/`master` (`main`/`master` is pull-only — branch,
 then merge via PR); a real reconciliation merge (`git merge origin/main`) is
 exempt via `WORKLOG_MERGE_COMMIT`, set by `pre-merge-commit` before it

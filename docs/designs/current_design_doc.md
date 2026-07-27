@@ -1,8 +1,8 @@
 ---
-generated_at: 2026-07-25T04:06:56Z
-git_hash: 2e8cfe27d90d9cacf8335698caa40c493b48bf59
+generated_at: 2026-07-26T00:00:00Z
+git_hash: 60f5605a49c1a9e272ac483de620c207bab4ae92
 branch: main
-tag: v0.15.0
+tag: v0.16.0
 roadmap: docs/roadmap.md
 wiki_key: design/current-design-doc
 truth_state: current
@@ -14,7 +14,7 @@ doc_type: design
 # 1. Document Overview
 
 **Purpose.** Describe the design of *worklog*, a local-first, git-native work-tracking
-layer for agentic coding, as actually implemented in this repository at v0.15.0.
+layer for agentic coding, as actually implemented in this repository at v0.16.0.
 
 **Audience.** Junior developers who need implementation-level guidance; project
 managers who need scope, dependencies, risks, and behavior.
@@ -31,11 +31,12 @@ artifacts under `docs/`, and the Information Architecture (IA) reader plane unde
 this work log in the v0.13.0 cycle.
 
 **Related documents.** `docs/worklog-spec.md` (v1.9, the normative spec),
-`docs/adr/0001..0003` (Architecture Decision Records), `docs/plans/` (fifteen dated
+`docs/adr/0001..0003` (Architecture Decision Records), `docs/plans/` (seventeen dated
 plan documents — the *why* record, most recently
-`docs/plans/2026-07-24-artifact-pages.md`), `docs/migrations/0001-type-split.md` and
-`0002-ia-content-model.md`, `adapters/README.md` (adapter authoring rules),
-`docs/user_guide/` (task-oriented guides), and the companion
+`docs/plans/2026-07-25-wiki-driven-integration-guides.md`), `docs/migrations/0001-type-split.md`
+and `0002-ia-content-model.md`, `adapters/README.md` (adapter authoring rules),
+`docs/user_guide/` (task-oriented guides), `docs/integrations/` (eleven per-system
+setup guides plus an index, new in v0.16.0), and the companion
 `docs/designs/current_code_walkthrough.md`.
 
 **Definitions.**
@@ -96,13 +97,28 @@ Main workflows:
   render_pr_page()`), reusing the same graph edges rather than storing new
   fields; `worklog ia-ticket <ULID>` previews a ticket page without a full
   render pass. The published-page manifest grew from 51 entries to 258.
+- **Integration guides (v0.16.0)**: a new prose-only edge, `integration-guide`
+  (`plugin/skills/integration-guide/SKILL.md`), points an agent at a
+  wiki-hosted setup guide for one of eleven named systems — the four SDD tools
+  this repo composes with (Superpowers, GSD, SpecKit, OpenSpec) and seven
+  ticket/wiki systems only one of which (GitHub) has a real adapter (Jira,
+  Confluence, GitHub, GitLab, Azure DevOps, AWS CodeCatalyst, Google Cloud
+  DevOps). It ships zero new Python: `WebFetch` reads the live
+  `Integration-<Name>` wiki page (with a redirect-to-Home detector, since a
+  GitHub wiki 200s a missing slug instead of 404ing), and on fetch failure or a
+  failed verification falls back to a bundled local copy,
+  `docs/integrations/fallback-<key>.md` (eleven files + `docs/integrations/README.md`
+  index, registered through the existing `worklog wiki-add` + wiki-publish
+  pipeline — no new publish path).
 
 Major components: the `worklog` CLI (the API, 1189 lines), `fold.py` (state
 derivation), `compact.py` (the only rewriter, CI-only), `render_roadmap.py` +
 `viz_mermaid.py` (generated docs), `sync_dispatch.py` + `adapters/` (ticket sync),
 `ia.py` / `ia_render.py` (670 lines) / `ia_graph.py` (302 lines) (reader plane +
 graph + artifact pages), `adr.py`/`plan_capture.py`/`canonical.py`/`ulid.py`
-(support modules), git hooks, GitHub Actions, and the Claude Code plugin.
+(support modules), git hooks, GitHub Actions, the Claude Code plugin, and (v0.16.0)
+the `integration-guide` skill + `docs/integrations/` content — the first edge in
+this repo built entirely from prose and existing primitives, no new `bin/` code.
 
 External dependencies: git (union merge), the `gh` CLI (GitHub adapter and
 merge-when-green), Python 3 stdlib only — **zero third-party runtime dependencies**
@@ -376,6 +392,8 @@ and platform render adapters (open item #98).
 | `plugin/` | Package | Skills, `/worklog:*` commands, hook wiring, script copies | — | — | mirrors `bin/`, `hooks/` | plugin installs |
 | `.github/workflows/worklog.yml` | CI | Invariants + tests + coverage ≥80% | push/PR | pass/fail | python3, coverage | merge gate |
 | `.github/workflows/compact.yml` | CI | Nightly compaction, own commit | schedule | compact commit | `compact.py` | log growth only |
+| `plugin/skills/integration-guide/SKILL.md` (v0.16.0) | Skill (prose only) | Resolve a named SDD tool or ticket/wiki system to its wiki page or local fallback | request naming one of 11 systems | wiki page fetch, or local file read + spoken caveat | `.work/config.yml` (`wiki.root_url`), `WebFetch` | wrong/stale integration guidance surfaced to the user |
+| `docs/integrations/*` (v0.16.0) | Content (11 fallback files + README index) | Offline-safe copy of each system's setup guide | hand-authored | `wiki-add` ledger entries, published wiki pages | none (static docs) | fallback path shows a stale guide until re-published |
 
 Owner for all components: the repo (single-team). Scaling model: none needed —
 per-repo files.
@@ -753,7 +771,7 @@ so `--viz none` costs nothing; `adr.validate` is a **deliberate copy** of
 `schema/doc.schema.json` + `schema/entity.schema.json`
 (`tests/test_ia.py — TestSchemaSync`). `plugin/scripts/` mirrors `bin/` and
 `hooks/`; `tests/test_plugin.py` guards the mirror and the version lockstep
-(`bin/worklog` line 32: `VERSION = "0.15.0"`).
+(`bin/worklog` line 32: `VERSION = "0.16.0"`).
 
 # 13. Class-by-Class Design
 
@@ -782,7 +800,7 @@ reason as the event dicts.
 # 14. API Design
 
 The CLI **is** the API. Global flags: `--actor` (defaults to `$USER`),
-`--version` (`worklog 0.15.0`). All log writes go through `append()` — a single
+`--version` (`worklog 0.16.0`). All log writes go through `append()` — a single
 `O_APPEND` write, newline-terminated, self-healing a missing prior newline.
 
 | Subcommand | Purpose | Key arguments | Writes | Notable exits |
@@ -900,6 +918,21 @@ publish once; live roadmap/designs republish when `source_hash` changes.
 **Azure DevOps** ships no adapter; field-tested caveats are recorded in
 `adapters/README.md`.
 
+**Non-adapter systems, integration-guide skill (v0.16.0).** For the six
+ticket/wiki systems with no shipped adapter (Jira, Confluence, GitLab, Azure
+DevOps, AWS CodeCatalyst, Google Cloud DevOps) and the four SDD tools this repo
+composes with rather than calls (Superpowers, GSD, SpecKit, OpenSpec), the
+`integration-guide` skill fetches a wiki page named `Integration-<Name>` at
+runtime and falls back to a bundled copy under `docs/integrations/` if the
+fetch fails or resolves to the wiki's Home page instead (GitHub wikis 200 a
+missing slug by redirecting to Home rather than 404ing — the skill checks for
+a `## Recommended workflow` heading before trusting the response). For Jira
+and Confluence specifically it defers to the existing global `jira`/
+`confluence` skills (or an Atlassian MCP server) rather than raw REST calls.
+This is deliberately **not** a twelfth adapter: no code here talks to any of
+these six systems' APIs — the guidance is agent-researched prose, honestly
+labeled as such (`docs/plans/2026-07-25-wiki-driven-integration-guides.md`).
+
 # 22. Security Design
 
 Threat surface is small by construction: no server, no listener, no stored
@@ -994,16 +1027,15 @@ There is no deployed service. "Deployment" is three widening circles, Confirmed:
    01KY6037BN).
 2. **Claude Code plugin** — `plugin/` packages skills, `/worklog:*` commands,
    hook wiring (`plugin/hooks/hooks.json`), and canonical script copies; version
-   `0.15.0` in `plugin/.claude-plugin/plugin.json` locked to `bin/worklog VERSION`
+   `0.16.0` in `plugin/.claude-plugin/plugin.json` locked to `bin/worklog VERSION`
    by `tests/test_plugin.py`. MIT LICENSE shipped. **Drift (Confirmed):**
-   `README.md`'s repo-layout table row was one release stale as of v0.14.0
-   (labeled "v0.13.0"); fixed to "v0.14.0" in this release's README edit but
-   now one release stale again against v0.15.0 — cosmetic, tracked in the
-   code walkthrough's Gaps section rather than fixed here (this document is
-   generated, not hand-patched).
+   `README.md`'s repo-layout table row still reads "v0.15.0" against a
+   `0.16.0` VERSION — one release stale again, the same recurring cosmetic gap
+   noted at v0.14.0 and v0.15.0; tracked in the code walkthrough's Gaps section
+   rather than fixed here (this document is generated, not hand-patched).
 3. **CI** — `worklog.yml` (invariants job re-runs the pre-commit script with
    `WORKLOG_SKIP_BRANCH_GUARD=1`, since the checkout runs with no commit in
-   flight; a PR-scoped step new in v0.15.0 walks
+   flight; a PR-scoped step added in v0.15.0 walks
    `git rev-list --no-merges base..HEAD` through `hooks/commit-msg`, requiring
    `fetch-depth: 0`; then unit + integration suites; coverage job with
    subprocess-aware `.pth` hook and `--fail-under=80`) and `compact.yml`
@@ -1043,7 +1075,10 @@ Confirmed:
   promote, plugin mirror/version lockstep.
 
 Coverage: CI gate ≥80% on `bin/*.py` (subprocess-aware via
-`coverage.process_startup()` in a `.pth`), target 95%.
+`coverage.process_startup()` in a `.pth`), target 95%. Still 19 suites at
+v0.16.0 — the integration-guide skill and `docs/integrations/` content added
+zero `bin/` code, so no new suite was needed (**Confirmed**, `wc -l tests/*.py`
+count unchanged from v0.15.0).
 
 # 29. Local Development
 
@@ -1170,6 +1205,40 @@ data flow; §8.2 plan-capture sequence; §8.3 sync sequence; §8.7 IA pipeline;
 **Exit-code catalog (adapter contract §3.6):** 0 success · 2 auth (abort) ·
 3 not-found (re-push next run) · 4 transient (retry ×3) · 5 remote conflict
 (record) · 1 other (drift, continue).
+
+**v0.16.0 release highlights (Confirmed against changelog / plan / code):**
+
+- Wiki-driven integration guides (plan
+  `docs/plans/2026-07-25-wiki-driven-integration-guides.md`, epic #164): a new
+  `integration-guide` skill (`plugin/skills/integration-guide/SKILL.md`) points
+  agents at living, wiki-hosted setup guides instead of hard-coding that
+  knowledge into the shipped skill set.
+- **Zero new `bin/` code.** The feature is built entirely from `WebFetch`
+  (already available to any Claude Code agent) plus the pre-existing
+  `worklog wiki-add` / wiki-publish pipeline — no adapter, no new CLI
+  subcommand.
+- **Eleven fallback pages** under `docs/integrations/fallback-*.md`
+  (Superpowers, GSD, SpecKit, OpenSpec, Jira, Confluence, GitHub, GitLab,
+  Azure DevOps, AWS CodeCatalyst, Google Cloud DevOps) plus a
+  `docs/integrations/README.md` index, each following a fixed ten-section
+  template so the skill's lookup logic works identically across all eleven.
+- **Honesty framing (deliberate design decision):** the seven ticket/wiki
+  pages state plainly that only GitHub has a real, shipped adapter — the
+  other six describe agent-researched-at-runtime CLI/MCP/REST guidance,
+  matching `ticket-sync/SKILL.md`'s existing Azure DevOps caveats tone rather
+  than implying non-existent adapter machinery.
+- **Redirect-to-Home detector:** the skill verifies a fetched wiki page
+  actually contains a `## Recommended workflow` heading before trusting it,
+  because a GitHub wiki returns HTTP 200 for a missing page slug by silently
+  redirecting to Home rather than 404ing — a naive "fetch succeeded" check
+  would be fooled into treating the Home page as the requested integration
+  guide.
+- **Skill-reuse pointer, not reimplementation:** for Jira and Confluence, the
+  page instructs checking for the global `jira`/`confluence` skill (or an
+  Atlassian MCP server) before any raw REST call; Confluence's page also
+  covers converting Mermaid/PlantUML diagrams to images before upload, since
+  Confluence storage format cannot render fenced diagrams directly.
+- No test suite changed — see §28.
 
 **v0.15.0 release highlights (Confirmed against changelog / plan / code):**
 

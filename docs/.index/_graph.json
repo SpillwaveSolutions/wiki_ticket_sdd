@@ -121,13 +121,33 @@
    "type": "targets"
   },
   {
+   "from": "design/2026-07-26_v0.16.0-release-code-walkthrough",
+   "to": "design/current-code-walkthrough",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-07-26_v0.16.0-release-code-walkthrough",
+   "to": "release/v0.16.0",
+   "type": "targets"
+  },
+  {
+   "from": "design/2026-07-26_v0.16.0-release-design-doc",
+   "to": "design/current-design-doc",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-07-26_v0.16.0-release-design-doc",
+   "to": "release/v0.16.0",
+   "type": "targets"
+  },
+  {
    "from": "design/current-code-walkthrough",
-   "to": "release/v0.15.0",
+   "to": "release/v0.16.0",
    "type": "targets"
   },
   {
    "from": "design/current-design-doc",
-   "to": "release/v0.15.0",
+   "to": "release/v0.16.0",
    "type": "targets"
   },
   {
@@ -1487,8 +1507,353 @@
   },
   {
    "from": "item/01KYBPP7619CBXN3ZTV9FZJMEJ",
+   "to": "pr/157",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYBPP7619CBXN3ZTV9FZJMEJ",
+   "to": "ticket/github#181",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYBPP7619CBXN3ZTV9FZJMEJ",
    "to": "release/v0.15.0",
    "type": "targets"
+  },
+  {
+   "from": "item/01KYDKDJFCJTDVFZJ27Q9Y08TV",
+   "to": "pr/160",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDKDJFCJTDVFZJ27Q9Y08TV",
+   "to": "ticket/github#182",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDMC6M6B2W8F48271TG0VEK",
+   "to": "pr/161",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDMC6M6B2W8F48271TG0VEK",
+   "to": "ticket/github#183",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDMC6M6B2W8F48271TG0VEK",
+   "to": "release/v0.15.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KYDP0BQG59M8QGCQY72SC0G1",
+   "to": "item/01KYDP0BQGW4XAAGX68526C9ES",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQG59M8QGCQY72SC0G1",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQG59M8QGCQY72SC0G1",
+   "to": "ticket/github#162",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "to": "item/01KYDP0BQGW4XAAGX68526C9ES",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "to": "ticket/github#163",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQGW4XAAGX68526C9ES",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQGW4XAAGX68526C9ES",
+   "to": "ticket/github#164",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQH33AMR5ETPDF4V1M6",
+   "to": "item/01KYDP0BQGW4XAAGX68526C9ES",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQH33AMR5ETPDF4V1M6",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQH33AMR5ETPDF4V1M6",
+   "to": "ticket/github#165",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQH6389PTNGKXHSN2KR",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQH6389PTNGKXHSN2KR",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQH6389PTNGKXHSN2KR",
+   "to": "ticket/github#166",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHAE38H6VPDNVXV8JA",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHAE38H6VPDNVXV8JA",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHAE38H6VPDNVXV8JA",
+   "to": "ticket/github#167",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHAMP5AC6AP7854N9H",
+   "to": "item/01KYDP0BQGW4XAAGX68526C9ES",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHAMP5AC6AP7854N9H",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHAMP5AC6AP7854N9H",
+   "to": "ticket/github#168",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHANV652NZVV8N7VX5",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHANV652NZVV8N7VX5",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHANV652NZVV8N7VX5",
+   "to": "ticket/github#169",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHDBJ50D8HZHWN3G4H",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHDBJ50D8HZHWN3G4H",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHDBJ50D8HZHWN3G4H",
+   "to": "ticket/github#170",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHPP0JZRK856QHN76S",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHPP0JZRK856QHN76S",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHPP0JZRK856QHN76S",
+   "to": "ticket/github#171",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHRM2Q3C5727FAZ7RD",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHRM2Q3C5727FAZ7RD",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHRM2Q3C5727FAZ7RD",
+   "to": "ticket/github#172",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHV6MW1XX7H7JC1EN4",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHV6MW1XX7H7JC1EN4",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHV6MW1XX7H7JC1EN4",
+   "to": "ticket/github#173",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHW1A3235YSF16ZZAQ",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHW1A3235YSF16ZZAQ",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHW1A3235YSF16ZZAQ",
+   "to": "ticket/github#174",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHXGEBEY40SC1Q4ST3",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHXGEBEY40SC1Q4ST3",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHXGEBEY40SC1Q4ST3",
+   "to": "ticket/github#175",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHXZCGTTM5PAV262RM",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHXZCGTTM5PAV262RM",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHXZCGTTM5PAV262RM",
+   "to": "ticket/github#176",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHZAPBZPSSY38J33ZZ",
+   "to": "item/01KYDP0BQGW4XAAGX68526C9ES",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHZAPBZPSSY38J33ZZ",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHZAPBZPSSY38J33ZZ",
+   "to": "ticket/github#177",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDP0BQHZHYH9CKM3D0ZM803",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYDP0BQHZHYH9CKM3D0ZM803",
+   "to": "pr/179",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYDP0BQHZHYH9CKM3D0ZM803",
+   "to": "ticket/github#178",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDZRVN5HAP73465JAM65EK7",
+   "to": "ticket/github#184",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYDZRVN5HAP73465JAM65EK7",
+   "to": "release/v0.16.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KYFJVN7Y30B50D8A9RG60CJS",
+   "to": "ticket/github#185",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYFJVN7Y30B50D8A9RG60CJS",
+   "to": "release/v0.16.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KYFRPNEQEVTFB6144W7A79BJ",
+   "to": "release/v0.16.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KYFSRNDMMPY0E54PQ9QSWJWK",
+   "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYFSRNDMMPY0E54PQ9QSWJWK",
+   "to": "ticket/github#192",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYFSRNDMSMEXKT7PV0F9X54M",
+   "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYFSRNDMSMEXKT7PV0F9X54M",
+   "to": "ticket/github#193",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYFSRNDMYBVMWXJFEK2AJWJJ",
+   "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYFSRNDMYBVMWXJFEK2AJWJJ",
+   "to": "ticket/github#194",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "to": "ticket/github#195",
+   "type": "references"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -1828,6 +2193,111 @@
   {
    "from": "plan/2026-07-25-branch-discipline-hooks",
    "to": "item/01KYBD2HYKYBBNGDMCQSW4VE2T",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQG59M8QGCQY72SC0G1",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQGC8N7K1TE571K74JF",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQGW4XAAGX68526C9ES",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQH33AMR5ETPDF4V1M6",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQH6389PTNGKXHSN2KR",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHAE38H6VPDNVXV8JA",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHAMP5AC6AP7854N9H",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHANV652NZVV8N7VX5",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHDBJ50D8HZHWN3G4H",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHPP0JZRK856QHN76S",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHRM2Q3C5727FAZ7RD",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHV6MW1XX7H7JC1EN4",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHW1A3235YSF16ZZAQ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHXGEBEY40SC1Q4ST3",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHXZCGTTM5PAV262RM",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHZAPBZPSSY38J33ZZ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-25-wiki-driven-integration-guides",
+   "to": "item/01KYDP0BQHZHYH9CKM3D0ZM803",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-26-declare-graph-engineering",
+   "to": "item/01KYFSRNDMMPY0E54PQ9QSWJWK",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-26-declare-graph-engineering",
+   "to": "item/01KYFSRNDMSMEXKT7PV0F9X54M",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-26-declare-graph-engineering",
+   "to": "item/01KYFSRNDMYBVMWXJFEK2AJWJJ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-26-declare-graph-engineering",
+   "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
    "type": "produces"
   },
   {
@@ -2351,6 +2821,51 @@
    "type": "targets"
   },
   {
+   "from": "roadmap-snapshot/2026-07-25_v0.15.1-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-25_v0.15.1-release",
+   "to": "roadmap-snapshot/2026-07-25_v0.15.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-25_v0.15.1-release",
+   "to": "release/v0.15.1",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.0-release",
+   "to": "roadmap-snapshot/2026-07-25_v0.15.1-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.0-release",
+   "to": "release/v0.16.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.1-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.1-release",
+   "to": "roadmap-snapshot/2026-07-26_v0.16.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-26_v0.16.1-release",
+   "to": "release/v0.16.1",
+   "type": "targets"
+  },
+  {
    "from": "roadmap/2026-07-18_v0.2-roadmap",
    "to": "roadmap",
    "type": "snapshot-of"
@@ -2540,6 +3055,18 @@
   "design/2026-07-25_v0.15.0-release-design-doc": {
    "doc_type": "design",
    "source": "docs/designs/2026-07-25_v0.15.0-release_design_doc.md",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot"
+  },
+  "design/2026-07-26_v0.16.0-release-code-walkthrough": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-07-26_v0.16.0-release_code_walkthrough.md",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "snapshot"
+  },
+  "design/2026-07-26_v0.16.0-release-design-doc": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-07-26_v0.16.0-release_design_doc.md",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "snapshot"
   },
@@ -3571,6 +4098,136 @@
    "status": "done",
    "title": "Cut v0.15.0 release"
   },
+  "item/01KYDKDJFCJTDVFZJ27Q9Y08TV": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "user-guide.md miscounts branch-discipline hook checks (code-review finding)"
+  },
+  "item/01KYDMC6M6B2W8F48271TG0VEK": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Cut v0.15.1 release"
+  },
+  "item/01KYDP0BQG59M8QGCQY72SC0G1": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Create the integration-guide skill"
+  },
+  "item/01KYDP0BQGC8N7K1TE571K74JF": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Write the 11 fallback integration pages"
+  },
+  "item/01KYDP0BQGW4XAAGX68526C9ES": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems"
+  },
+  "item/01KYDP0BQH33AMR5ETPDF4V1M6": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Register and publish the new pages"
+  },
+  "item/01KYDP0BQH6389PTNGKXHSN2KR": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "fallback-speckit.md"
+  },
+  "item/01KYDP0BQHAE38H6VPDNVXV8JA": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "fallback-gsd.md"
+  },
+  "item/01KYDP0BQHAMP5AC6AP7854N9H": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Write the Integrations meta index page"
+  },
+  "item/01KYDP0BQHANV652NZVV8N7VX5": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "fallback-confluence.md"
+  },
+  "item/01KYDP0BQHDBJ50D8HZHWN3G4H": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "fallback-openspec.md"
+  },
+  "item/01KYDP0BQHPP0JZRK856QHN76S": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "fallback-github.md"
+  },
+  "item/01KYDP0BQHRM2Q3C5727FAZ7RD": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "fallback-azuredevops.md"
+  },
+  "item/01KYDP0BQHV6MW1XX7H7JC1EN4": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "fallback-googleclouddevops.md"
+  },
+  "item/01KYDP0BQHW1A3235YSF16ZZAQ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "fallback-jira.md"
+  },
+  "item/01KYDP0BQHXGEBEY40SC1Q4ST3": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "fallback-superpowers.md"
+  },
+  "item/01KYDP0BQHXZCGTTM5PAV262RM": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "fallback-awscodecatalyst.md"
+  },
+  "item/01KYDP0BQHZAPBZPSSY38J33ZZ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "End-to-end verification"
+  },
+  "item/01KYDP0BQHZHYH9CKM3D0ZM803": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "fallback-gitlab.md"
+  },
+  "item/01KYDZRVN5HAP73465JAM65EK7": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Release v0.16.0"
+  },
+  "item/01KYFJVN7Y30B50D8A9RG60CJS": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Backfill trace-check evidence gaps (311 historical items)"
+  },
+  "item/01KYFRPNEQEVTFB6144W7A79BJ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Release v0.16.1"
+  },
+  "item/01KYFSRNDMMPY0E54PQ9QSWJWK": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Add a graph-engineering callout to README.md"
+  },
+  "item/01KYFSRNDMSMEXKT7PV0F9X54M": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Verify accuracy and scope boundaries"
+  },
+  "item/01KYFSRNDMYBVMWXJFEK2AJWJJ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Write docs/graph-engineering.md"
+  },
+  "item/01KYFSRNDMYCTQ1XTMXFWEVBWT": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Declare wiki_ticket_sdd as a Graph Engineering system"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -3617,6 +4274,18 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-07-25-branch-discipline-hooks.md",
    "title": "Branch-discipline hooks: never commit on main, always reference work",
+   "truth_state": "current"
+  },
+  "plan/2026-07-25-wiki-driven-integration-guides": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-25-wiki-driven-integration-guides.md",
+   "title": "Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems",
+   "truth_state": "current"
+  },
+  "plan/2026-07-26-declare-graph-engineering": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-26-declare-graph-engineering.md",
+   "title": "Declare wiki_ticket_sdd as a Graph Engineering system",
    "truth_state": "current"
   },
   "plan/design-docs-release-sync": {
@@ -3691,6 +4360,18 @@
   "pr/155": {
    "doc_type": "pr"
   },
+  "pr/157": {
+   "doc_type": "pr"
+  },
+  "pr/160": {
+   "doc_type": "pr"
+  },
+  "pr/161": {
+   "doc_type": "pr"
+  },
+  "pr/179": {
+   "doc_type": "pr"
+  },
   "release/v0.10.0": {
    "doc_type": "release"
   },
@@ -3710,6 +4391,15 @@
    "doc_type": "release"
   },
   "release/v0.15.0": {
+   "doc_type": "release"
+  },
+  "release/v0.15.1": {
+   "doc_type": "release"
+  },
+  "release/v0.16.0": {
+   "doc_type": "release"
+  },
+  "release/v0.16.1": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
@@ -3766,6 +4456,24 @@
   "roadmap-snapshot/2026-07-25_v0.15.0-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-07-25_v0.15.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-25_v0.15.1-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-25_v0.15.1-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-26_v0.16.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-26_v0.16.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-26_v0.16.1-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-26_v0.16.1-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },
@@ -4055,9 +4763,113 @@
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/16"
   },
+  "ticket/github#162": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/162"
+  },
+  "ticket/github#163": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/163"
+  },
+  "ticket/github#164": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/164"
+  },
+  "ticket/github#165": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/165"
+  },
+  "ticket/github#166": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/166"
+  },
+  "ticket/github#167": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/167"
+  },
+  "ticket/github#168": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/168"
+  },
+  "ticket/github#169": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/169"
+  },
   "ticket/github#17": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/17"
+  },
+  "ticket/github#170": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/170"
+  },
+  "ticket/github#171": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/171"
+  },
+  "ticket/github#172": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/172"
+  },
+  "ticket/github#173": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/173"
+  },
+  "ticket/github#174": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/174"
+  },
+  "ticket/github#175": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/175"
+  },
+  "ticket/github#176": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/176"
+  },
+  "ticket/github#177": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/177"
+  },
+  "ticket/github#178": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/178"
+  },
+  "ticket/github#181": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/181"
+  },
+  "ticket/github#182": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/182"
+  },
+  "ticket/github#183": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/183"
+  },
+  "ticket/github#184": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/184"
+  },
+  "ticket/github#185": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/185"
+  },
+  "ticket/github#192": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/192"
+  },
+  "ticket/github#193": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/193"
+  },
+  "ticket/github#194": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/194"
+  },
+  "ticket/github#195": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/195"
   },
   "ticket/github#23": {
    "doc_type": "ticket",

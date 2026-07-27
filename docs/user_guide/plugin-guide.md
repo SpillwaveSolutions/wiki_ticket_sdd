@@ -103,6 +103,7 @@ Skills are the judgment layer: the model decides *when*, the deterministic
 | `design-docs` | Generates/syncs the design doc + code walkthrough pair under `docs/designs/`: frozen dated copies per release, live `current` copies; runs in background agents at release time |
 | `merge-green` | Merges PRs only when every quality gate is green — polls every 5 minutes via `merge-when-green.sh`, never bypasses |
 | `classify` | Flag-gated classifier: sweeps a conversation for untracked work, propose-only into `.work/suggestions.jsonl` — never the event log |
+| `integration-guide` | Looks up the wiki-hosted setup guide for a named SDD tool or ticket/wiki system (Superpowers, GSD, SpecKit, OpenSpec, Jira, Confluence, GitHub, GitLab, Azure DevOps, AWS CodeCatalyst, Google Cloud DevOps), falling back to the local copy under `docs/integrations/` on fetch failure |
 
 ## The hooks
 
