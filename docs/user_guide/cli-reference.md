@@ -222,8 +222,8 @@ bin/worklog plan-capture --slug auth-refactor --title "Auth refactor" --file pla
 | `--file` | plan markdown (reads stdin if omitted) |
 | `--priority` | epic priority, default `P1` |
 
-Refuses to overwrite an existing plan file — plans are never rewritten; pick
-a new slug to supersede.
+Refuses if any `docs/plans/*-<slug>.md` already exists, for any date — plans
+are never rewritten; pick a new slug to supersede.
 
 ### roadmap-render
 
