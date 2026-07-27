@@ -4228,6 +4228,16 @@
    "status": "done",
    "title": "Declare wiki_ticket_sdd as a Graph Engineering system"
   },
+  "item/01KYGVDKEWT513AGM0ZTY3SZP0": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Fix plan-capture slug-scoped duplicate guard (PR #198)"
+  },
+  "item/01KYGVDTXNEER6AQNEVWVRDEY4": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Glob boundary bug in the new slug guard causes false-positive refusal"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",

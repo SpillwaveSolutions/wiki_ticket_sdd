@@ -4,7 +4,7 @@
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "f21a5b0582a2",
+   "render_hash": "c8172fe5ca77",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "e31d85d3b5f2",
+   "render_hash": "888e433bd889",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2581,6 +2581,26 @@
    "wiki_key": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KYGVDKEWT513AGM0ZTY3SZP0",
+   "render": "as-is",
+   "render_hash": "7057c8ca4646",
+   "source": "docs/.index/rendered/tickets/01KYGVDKEWT513AGM0ZTY3SZP0.md",
+   "title": "Fix plan-capture slug-scoped duplicate guard (PR #198)",
+   "truth_state": "open",
+   "wiki_key": "item/01KYGVDKEWT513AGM0ZTY3SZP0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYGVDTXNEER6AQNEVWVRDEY4",
+   "render": "as-is",
+   "render_hash": "f0817e4e5517",
+   "source": "docs/.index/rendered/tickets/01KYGVDTXNEER6AQNEVWVRDEY4.md",
+   "title": "Glob boundary bug in the new slug guard causes false-positive refusal",
+   "truth_state": "open",
+   "wiki_key": "item/01KYGVDTXNEER6AQNEVWVRDEY4"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -3010,11 +3030,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-26T18:11:56Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-27T03:55:47Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "8b0d5a14fcec",
+   "render_hash": "4c92ea8ce692",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

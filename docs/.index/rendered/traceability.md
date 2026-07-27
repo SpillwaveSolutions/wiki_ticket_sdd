@@ -2,6 +2,12 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Glob boundary bug in the new slug guard causes false-positive refusal
+`01KYGVDTXNEER6AQNEVWVRDEY4` · status: todo
+
+### Fix plan-capture slug-scoped duplicate guard (PR #198)
+`01KYGVDKEWT513AGM0ZTY3SZP0` · status: todo
+
 ### Declare wiki_ticket_sdd as a Graph Engineering system
 `01KYFSRNDMYCTQ1XTMXFWEVBWT` · status: done
 - references: [github#195](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/195)

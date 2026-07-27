@@ -9,7 +9,7 @@ work is fishbowled, not hidden.
 ---
 
 ## What is this project?
-[[User-Guide]] · [[Design-Doc]] · [[Worklog-Spec]]
+[[User-Guide]] · [[Design-Doc]] · [[Code-Walkthrough]] · [[Worklog-Spec]]
 
 ## What are we working on now?
 [[Roadmap]] · latest status: [[Status-2026-07-19-daily]]
