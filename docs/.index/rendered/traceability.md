@@ -5,10 +5,12 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Glob boundary bug in the new slug guard causes false-positive refusal
 `01KYGVDTXNEER6AQNEVWVRDEY4` · status: done
 - lands-in: pr/198
+- references: [github#200](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/200)
 
 ### Fix plan-capture slug-scoped duplicate guard (PR #198)
 `01KYGVDKEWT513AGM0ZTY3SZP0` · status: done
 - lands-in: pr/198
+- references: [github#199](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/199)
 
 ### Declare wiki_ticket_sdd as a Graph Engineering system
 `01KYFSRNDMYCTQ1XTMXFWEVBWT` · status: done

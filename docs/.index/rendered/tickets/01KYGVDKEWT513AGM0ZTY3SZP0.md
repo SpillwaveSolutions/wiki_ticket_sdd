@@ -7,3 +7,7 @@ Rick's downstream harness_engineering_book repo hit a real bug: plan-capture's o
 ## Linked PRs
 
 - [[PR-198]]
+
+## Related tickets
+
+- [github #199](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/199)

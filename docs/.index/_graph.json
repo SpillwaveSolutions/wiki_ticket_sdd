@@ -1861,9 +1861,19 @@
    "type": "lands-in"
   },
   {
+   "from": "item/01KYGVDKEWT513AGM0ZTY3SZP0",
+   "to": "ticket/github#199",
+   "type": "references"
+  },
+  {
    "from": "item/01KYGVDTXNEER6AQNEVWVRDEY4",
    "to": "pr/198",
    "type": "lands-in"
+  },
+  {
+   "from": "item/01KYGVDTXNEER6AQNEVWVRDEY4",
+   "to": "ticket/github#200",
+   "type": "references"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -4893,6 +4903,14 @@
   "ticket/github#195": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/195"
+  },
+  "ticket/github#199": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/199"
+  },
+  "ticket/github#200": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/200"
   },
   "ticket/github#23": {
    "doc_type": "ticket",
