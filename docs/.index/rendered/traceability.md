@@ -4,6 +4,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Release v0.17.0
 `01KYJGF6GN93GA3FMP5EW5A7S2` · status: done
+- references: [github#203](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/203)
 - targets: release/v0.17.0
 
 ### Glob boundary bug in the new slug guard causes false-positive refusal

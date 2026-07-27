@@ -7,3 +7,7 @@ Cut v0.17.0 (minor): ships the graph-engineering documentation (docs/graph-engin
 ## Release
 
 - [[Release-v0.17.0]]
+
+## Related tickets
+
+- [github #203](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/203)
