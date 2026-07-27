@@ -328,6 +328,7 @@
    "tag": "v0.17.0",
    "title": "Worklog \u2014 Code Walkthrough",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-07-27_v0.17.0-release",
    "wiki_key": "design/2026-07-27_v0.17.0-release-code-walkthrough"
   },
   {
@@ -344,6 +345,7 @@
    "tag": "v0.17.0",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-07-27_v0.17.0-release",
    "wiki_key": "design/2026-07-27_v0.17.0-release-design-doc"
   },
   {
@@ -639,6 +641,7 @@
    "status": "active",
    "title": "Clear post-v0.17.0 drift and fix the prefix-ULID log corruption",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-post-v017-drift-and-prefix-resolution",
    "wiki_key": "plan/2026-07-27-post-v017-drift-and-prefix-resolution"
   },
   {
