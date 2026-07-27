@@ -413,6 +413,25 @@ class TestPlanCapturePR(unittest.TestCase):
         self.assertFalse(
             os.path.exists(os.path.join(sb.dir, f"docs/plans/{today}-demo.md")))
 
+    def test_plan_capture_does_not_false_positive_on_a_suffix_match(self):
+        """A raw `*-<slug>.md` glob matches by suffix, not by field boundary:
+        searching for slug "migration" would also match an existing
+        "database-migration" plan, since that filename also ends in
+        "-migration.md". That must NOT refuse a genuinely new, different slug.
+        """
+        sb = make_sandbox(self)
+        os.makedirs(os.path.join(sb.dir, "docs/plans"), exist_ok=True)
+        sb.write("docs/plans/2026-07-01-database-migration.md",
+                 "# An unrelated plan with a longer slug\n")
+        sb.write("draft.md", "# Migration\n\n## Tasks\n\n- [ ] (P1) A task\n")
+
+        sb.worklog("plan-capture", "--slug", "migration", "--title", "Migration",
+                   "--file", "draft.md")
+
+        today = time.strftime("%Y-%m-%d", time.gmtime())
+        self.assertTrue(
+            os.path.exists(os.path.join(sb.dir, f"docs/plans/{today}-migration.md")))
+
     def test_two_plan_prs_merge_cleanly(self):
         sb = make_sandbox(self)
         for n, branch in (("one", "feat-one"), ("two", "feat-two")):

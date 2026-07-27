@@ -587,6 +587,7 @@
    "status": "completed",
    "title": "Declare wiki_ticket_sdd as a Graph Engineering system",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-declare-graph-engineering",
    "wiki_key": "plan/2026-07-26-declare-graph-engineering"
   },
   {
@@ -789,10 +790,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-26T18:11:56Z",
+   "generated_at": "2026-07-27T03:55:47Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "2cb98973",
+   "source_hash": "80ca2971",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
