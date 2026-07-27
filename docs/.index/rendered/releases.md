@@ -7,6 +7,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 - Design: [[Code-Walkthrough-2026-07-27_v0.17.0-release]]
 - Design: [[Design-Doc-2026-07-27_v0.17.0-release]]
 - Roadmap snapshot: [[Roadmap-2026-07-27_v0.17.0-release]]
+- Shipped: Release v0.17.0 (#203)
 
 ## v0.16.1 — 2026-07-26
 

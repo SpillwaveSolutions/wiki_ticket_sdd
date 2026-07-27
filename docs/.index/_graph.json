@@ -1917,6 +1917,11 @@
   },
   {
    "from": "item/01KYJGF6GN93GA3FMP5EW5A7S2",
+   "to": "ticket/github#203",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYJGF6GN93GA3FMP5EW5A7S2",
    "to": "release/v0.17.0",
    "type": "targets"
   },
@@ -4332,7 +4337,7 @@
   },
   "item/01KYJGF6GN93GA3FMP5EW5A7S2": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Release v0.17.0"
   },
   "plan/2026-07-17_worklog-core_plan": {
@@ -5000,6 +5005,10 @@
   "ticket/github#200": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/200"
+  },
+  "ticket/github#203": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/203"
   },
   "ticket/github#23": {
    "doc_type": "ticket",

@@ -822,10 +822,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-27T19:22:46Z",
+   "generated_at": "2026-07-27T19:38:10Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "78214b62",
+   "source_hash": "8bc1d93c",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
@@ -994,6 +994,7 @@
    "supersedes": "roadmap-snapshot/2026-07-26_v0.16.1-release",
    "title": "Roadmap",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-27_v0.17.0-release",
    "wiki_key": "roadmap-snapshot/2026-07-27_v0.17.0-release"
   },
   {

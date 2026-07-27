@@ -3,7 +3,8 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Release v0.17.0
-`01KYJGF6GN93GA3FMP5EW5A7S2` · status: todo
+`01KYJGF6GN93GA3FMP5EW5A7S2` · status: done
+- references: [github#203](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/203)
 - targets: release/v0.17.0
 
 ### Glob boundary bug in the new slug guard causes false-positive refusal
