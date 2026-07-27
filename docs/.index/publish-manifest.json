@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "888e433bd889",
+   "render_hash": "7fa5b305ada2",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -149,6 +149,16 @@
    "title": "PR #179",
    "truth_state": "not tracked",
    "wiki_key": "pr/179"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-198",
+   "render": "as-is",
+   "render_hash": "8be806644903",
+   "source": "docs/.index/rendered/prs/198.md",
+   "title": "PR #198",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/198"
   },
   {
    "frozen": false,
@@ -2584,20 +2594,20 @@
    "frozen": false,
    "page_name": "Ticket-01KYGVDKEWT513AGM0ZTY3SZP0",
    "render": "as-is",
-   "render_hash": "7057c8ca4646",
+   "render_hash": "c80a005e597b",
    "source": "docs/.index/rendered/tickets/01KYGVDKEWT513AGM0ZTY3SZP0.md",
    "title": "Fix plan-capture slug-scoped duplicate guard (PR #198)",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYGVDKEWT513AGM0ZTY3SZP0"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYGVDTXNEER6AQNEVWVRDEY4",
    "render": "as-is",
-   "render_hash": "f0817e4e5517",
+   "render_hash": "51af21b2ae3b",
    "source": "docs/.index/rendered/tickets/01KYGVDTXNEER6AQNEVWVRDEY4.md",
    "title": "Glob boundary bug in the new slug guard causes false-positive refusal",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYGVDTXNEER6AQNEVWVRDEY4"
   },
   {
@@ -3030,11 +3040,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-27T03:55:47Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-27T04:08:49Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "4c92ea8ce692",
+   "render_hash": "d277de254881",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
