@@ -1827,6 +1827,11 @@
   },
   {
    "from": "item/01KYFSRNDMMPY0E54PQ9QSWJWK",
+   "to": "pr/197",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYFSRNDMMPY0E54PQ9QSWJWK",
    "to": "ticket/github#192",
    "type": "references"
   },
@@ -1834,6 +1839,11 @@
    "from": "item/01KYFSRNDMSMEXKT7PV0F9X54M",
    "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYFSRNDMSMEXKT7PV0F9X54M",
+   "to": "pr/197",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYFSRNDMSMEXKT7PV0F9X54M",
@@ -1847,8 +1857,18 @@
   },
   {
    "from": "item/01KYFSRNDMYBVMWXJFEK2AJWJJ",
+   "to": "pr/197",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYFSRNDMYBVMWXJFEK2AJWJJ",
    "to": "ticket/github#194",
    "type": "references"
+  },
+  {
+   "from": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "to": "pr/197",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
@@ -1874,6 +1894,11 @@
    "from": "item/01KYGVDTXNEER6AQNEVWVRDEY4",
    "to": "ticket/github#200",
    "type": "references"
+  },
+  {
+   "from": "item/01KYJGF6GN93GA3FMP5EW5A7S2",
+   "to": "release/v0.17.0",
+   "type": "targets"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -2883,6 +2908,21 @@
   {
    "from": "roadmap-snapshot/2026-07-26_v0.16.1-release",
    "to": "release/v0.16.1",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-27_v0.17.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-27_v0.17.0-release",
+   "to": "roadmap-snapshot/2026-07-26_v0.16.1-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-27_v0.17.0-release",
+   "to": "release/v0.17.0",
    "type": "targets"
   },
   {
@@ -4258,6 +4298,11 @@
    "status": "done",
    "title": "Glob boundary bug in the new slug guard causes false-positive refusal"
   },
+  "item/01KYJGF6GN93GA3FMP5EW5A7S2": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Release v0.17.0"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -4402,6 +4447,9 @@
   "pr/179": {
    "doc_type": "pr"
   },
+  "pr/197": {
+   "doc_type": "pr"
+  },
   "pr/198": {
    "doc_type": "pr"
   },
@@ -4433,6 +4481,9 @@
    "doc_type": "release"
   },
   "release/v0.16.1": {
+   "doc_type": "release"
+  },
+  "release/v0.17.0": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
@@ -4507,6 +4558,12 @@
   "roadmap-snapshot/2026-07-26_v0.16.1-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-07-26_v0.16.1-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-27_v0.17.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-27_v0.17.0-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

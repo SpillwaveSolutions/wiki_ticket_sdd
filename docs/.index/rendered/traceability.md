@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Release v0.17.0
+`01KYJGF6GN93GA3FMP5EW5A7S2` · status: todo
+- targets: release/v0.17.0
+
 ### Glob boundary bug in the new slug guard causes false-positive refusal
 `01KYGVDTXNEER6AQNEVWVRDEY4` · status: done
 - lands-in: pr/198
@@ -14,6 +18,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Declare wiki_ticket_sdd as a Graph Engineering system
 `01KYFSRNDMYCTQ1XTMXFWEVBWT` · status: done
+- lands-in: pr/197
 - references: [github#195](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/195)
 - contains: Add a graph-engineering callout to README.md
 - contains: Verify accuracy and scope boundaries
@@ -23,18 +28,21 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Write docs/graph-engineering.md
 `01KYFSRNDMYBVMWXJFEK2AJWJJ` · status: done
 - belongs-to: Declare wiki_ticket_sdd as a Graph Engineering system
+- lands-in: pr/197
 - references: [github#194](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/194)
 - produced-by: [[Plan-declare-graph-engineering]]
 
 ### Verify accuracy and scope boundaries
 `01KYFSRNDMSMEXKT7PV0F9X54M` · status: done
 - belongs-to: Declare wiki_ticket_sdd as a Graph Engineering system
+- lands-in: pr/197
 - references: [github#193](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/193)
 - produced-by: [[Plan-declare-graph-engineering]]
 
 ### Add a graph-engineering callout to README.md
 `01KYFSRNDMMPY0E54PQ9QSWJWK` · status: done
 - belongs-to: Declare wiki_ticket_sdd as a Graph Engineering system
+- lands-in: pr/197
 - references: [github#192](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/192)
 - produced-by: [[Plan-declare-graph-engineering]]
 

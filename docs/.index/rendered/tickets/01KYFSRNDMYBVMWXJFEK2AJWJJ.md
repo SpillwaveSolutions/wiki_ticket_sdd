@@ -14,6 +14,10 @@ external sources only.
 
 - epic: [[Ticket-01KYFSRNDMYCTQ1XTMXFWEVBWT]] Declare wiki_ticket_sdd as a Graph Engineering system — Add a new docs/graph-engineering.md declaring and documenting how wiki_ticket_sdd already embodies the graph engineering pattern (nodes, typed edges, persistent state, index/router), backed by real code citations, plus a short README callout linking to it.
 
+## Linked PRs
+
+- [[PR-197]]
+
 ## Related tickets
 
 - [github #194](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/194)

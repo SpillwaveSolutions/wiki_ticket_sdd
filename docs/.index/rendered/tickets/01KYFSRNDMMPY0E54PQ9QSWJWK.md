@@ -10,6 +10,10 @@ README's existing bolded-lead-phrase style and vocabulary it already uses.
 
 - epic: [[Ticket-01KYFSRNDMYCTQ1XTMXFWEVBWT]] Declare wiki_ticket_sdd as a Graph Engineering system — Add a new docs/graph-engineering.md declaring and documenting how wiki_ticket_sdd already embodies the graph engineering pattern (nodes, typed edges, persistent state, index/router), backed by real code citations, plus a short README callout linking to it.
 
+## Linked PRs
+
+- [[PR-197]]
+
 ## Related tickets
 
 - [github #192](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/192)

@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.17.0 — 2026-07-27
+
+- **New**: `docs/graph-engineering.md` — declares and evidences (real
+  file:line citations, not marketing copy) that this repo already has the
+  four "graph engineering" primitives: ULID node identity, `ia_graph.py`'s
+  typed edges, `fold.py`'s event-sourced persistent state, and a modest
+  inventory/publish-manifest index. Two diagrams, a short forward-looking
+  section, and a matching README callout.
+- **Fix** (`bin/worklog plan-capture`): the overwrite guard checked only
+  `docs/plans/<today-UTC>-<slug>.md`, so it enforced "plans are never
+  rewritten" only when the dates happened to line up — a plan captured in
+  the evening from a timezone behind UTC could silently duplicate under
+  tomorrow's date. The guard is now slug-scoped across all dates. Found and
+  fixed upstream from a real incident in a downstream repo (PR #198).
+- **Fix**: the slug-scoped guard's first pass used a bare `*-<slug>.md`
+  glob, which matched by suffix rather than field boundary (a search for
+  slug `migration` would also match `database-migration`) — caught in
+  review before merging PR #198, now anchored on the fixed date shape.
+- **Fix**: generated wiki Home linked `[[Design-Doc]]` but not its
+  `[[Code-Walkthrough]]` pair, leaving walkthroughs unreachable from Home.
+
 ## 0.16.1 — 2026-07-26
 
 Post-tag doc sync and a real bug fix for v0.16.0, landed on `main` after the
