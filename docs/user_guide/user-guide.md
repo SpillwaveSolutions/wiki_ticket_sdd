@@ -164,8 +164,10 @@ The plan file needs a `## Tasks` section with checkbox tasks:
 
 This writes `docs/plans/<date>-auth-refactor.md` (front matter links it to
 its items), creates an epic plus one item per task, and prints the epic's
-ULID. Plans are frozen: a second capture with the same date and slug is
-refused. Design changed? Write a new plan that supersedes the old one.
+ULID. Plans are frozen: a second capture with the same slug is refused
+regardless of date — the guard scans every existing plan file for that slug,
+not just today's. Design changed? Write a new plan that supersedes the old
+one.
 
 ### 2. Start work
 
