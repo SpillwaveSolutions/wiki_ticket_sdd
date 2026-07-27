@@ -24,7 +24,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "a6d0b44b17c3",
+   "render_hash": "d4f8b9f4f887",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "5a4fea9b4170",
+   "render_hash": "83ad410cd84f",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -149,6 +149,16 @@
    "title": "PR #179",
    "truth_state": "not tracked",
    "wiki_key": "pr/179"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-197",
+   "render": "as-is",
+   "render_hash": "903e499675c7",
+   "source": "docs/.index/rendered/prs/197.md",
+   "title": "PR #197",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/197"
   },
   {
    "frozen": false,
@@ -259,6 +269,16 @@
    "title": "Release v0.16.1",
    "truth_state": "shipped",
    "wiki_key": "release/v0.16.1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.17.0",
+   "render": "as-is",
+   "render_hash": "99a2f6fc2fb2",
+   "source": "docs/.index/rendered/releases/v0.17.0.md",
+   "title": "Release v0.17.0",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.17.0"
   },
   {
    "frozen": false,
@@ -2554,7 +2574,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYFSRNDMMPY0E54PQ9QSWJWK",
    "render": "as-is",
-   "render_hash": "c469ae29978e",
+   "render_hash": "95e310c50752",
    "source": "docs/.index/rendered/tickets/01KYFSRNDMMPY0E54PQ9QSWJWK.md",
    "title": "Add a graph-engineering callout to README.md",
    "truth_state": "done",
@@ -2564,7 +2584,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYFSRNDMSMEXKT7PV0F9X54M",
    "render": "as-is",
-   "render_hash": "a4bf51319856",
+   "render_hash": "534412e59a09",
    "source": "docs/.index/rendered/tickets/01KYFSRNDMSMEXKT7PV0F9X54M.md",
    "title": "Verify accuracy and scope boundaries",
    "truth_state": "done",
@@ -2574,7 +2594,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYFSRNDMYBVMWXJFEK2AJWJJ",
    "render": "as-is",
-   "render_hash": "8055a30c7591",
+   "render_hash": "3dd786c055ba",
    "source": "docs/.index/rendered/tickets/01KYFSRNDMYBVMWXJFEK2AJWJJ.md",
    "title": "Write docs/graph-engineering.md",
    "truth_state": "done",
@@ -2584,7 +2604,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYFSRNDMYCTQ1XTMXFWEVBWT",
    "render": "as-is",
-   "render_hash": "ab57c156201d",
+   "render_hash": "b407f3bd36a8",
    "source": "docs/.index/rendered/tickets/01KYFSRNDMYCTQ1XTMXFWEVBWT.md",
    "title": "Declare wiki_ticket_sdd as a Graph Engineering system",
    "truth_state": "done",
@@ -2609,6 +2629,16 @@
    "title": "Glob boundary bug in the new slug guard causes false-positive refusal",
    "truth_state": "done",
    "wiki_key": "item/01KYGVDTXNEER6AQNEVWVRDEY4"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYJGF6GN93GA3FMP5EW5A7S2",
+   "render": "as-is",
+   "render_hash": "6eeabbaa9429",
+   "source": "docs/.index/rendered/tickets/01KYJGF6GN93GA3FMP5EW5A7S2.md",
+   "title": "Release v0.17.0",
+   "truth_state": "open",
+   "wiki_key": "item/01KYJGF6GN93GA3FMP5EW5A7S2"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -3040,11 +3070,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-27T04:09:27Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-27T19:22:46Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "f7e278a0f14e",
+   "render_hash": "47436731cd74",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -3148,6 +3178,17 @@
    "title": "Roadmap",
    "truth_state": "snapshot",
    "wiki_key": "roadmap-snapshot/2026-07-26_v0.16.1-release"
+  },
+  {
+   "banner": "> **Snapshot** of release v0.17.0 (2026-07-27) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-07-27_v0.17.0-release",
+   "render": "doc+banner",
+   "render_hash": "8c220dd9b10c",
+   "source": "docs/roadmap/2026-07-27_v0.17.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-07-27_v0.17.0-release"
   },
   {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
@@ -3283,7 +3324,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "ff51a1e8efda",
+  "render_hash": "57fb916fe384",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1
