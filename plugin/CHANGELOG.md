@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.17.1 — unreleased
+
+- **Fix** (`bin/worklog`): `close`, `update` and `link` wrote their event under
+  whatever id string the caller passed. Handed the 8-character prefix that
+  `worklog show` and `worklog list` themselves print — the form the docs
+  recommend — they appended an event under that short id, which folds into a
+  brand-new phantom item while the real one goes untouched. `update` was worse:
+  its current-state lookup returned `{}` for a prefix, so the taxonomy rules ran
+  against `level=None` and the "closed items need `reopen`" guard never fired.
+  All three now resolve through one shared `_resolve()` — the same lookup
+  `reopen`/`resolve`/`show` already used — and an ambiguous prefix errors with
+  the candidate ids instead of silently taking the first match. This repo's own
+  log carries the scar: `01KYA8MD` is a ghost item minted exactly this way, and
+  `trace-check`/`sync` have been skipping it as orphan drift ever since.
+- **Fix**: the session-start doctor compared `core.hooksPath` against the
+  literal string `hooks`, so a repo wired with the absolute path — the form that
+  actually works from a git worktree, where a relative path resolves against the
+  wrong CWD — was reported broken at the top of every session. Both doctors now
+  accept any path resolving to the repo's own `hooks/`.
+
 ## 0.17.0 — 2026-07-27
 
 - **New**: `docs/graph-engineering.md` — declares and evidences (real

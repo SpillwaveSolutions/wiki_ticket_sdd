@@ -1,6 +1,6 @@
 # Remove two abandoned git worktrees
 
-`01KYJYG4PYJRAFEHJCP51XVCRA` · task/ops · **open**
+`01KYJYG4PYJRAFEHJCP51XVCRA` · task/ops · **done**
 
 Two worktrees left over from earlier agent runs sit in the repo; both of
 their branches are already merged.

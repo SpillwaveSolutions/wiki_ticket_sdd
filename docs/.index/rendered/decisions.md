@@ -14,7 +14,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 
 | Plan | Lifecycle | Truth | Date |
 |---|---|---|---|
-| [[Plan-post-v017-drift-and-prefix-resolution]] Clear post-v0.17.0 drift and fix the prefix-ULID log corruption | active | current | 2026-07-27 |
+| [[Plan-post-v017-drift-and-prefix-resolution]] Clear post-v0.17.0 drift and fix the prefix-ULID log corruption | completed | current | 2026-07-27 |
 | [[Plan-declare-graph-engineering]] Declare wiki_ticket_sdd as a Graph Engineering system | completed | current | 2026-07-26 |
 | [[Plan-wiki-driven-integration-guides]] Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems | completed | current | 2026-07-25 |
 | [[Plan-branch-discipline-hooks]] Branch-discipline hooks: never commit on main, always reference work | completed | current | 2026-07-25 |

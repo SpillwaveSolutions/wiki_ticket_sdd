@@ -112,16 +112,33 @@ def _require_item(item):
         sys.exit("worklog: empty item id")
 
 
+def _resolve(item):
+    """Resolve a full ULID or an unambiguous prefix to the real item
+    (worklog 01KYA99TVC). Every command that names an existing item goes
+    through here: close/update used to write events under the raw string, so
+    the short id that `show`/`list` print minted a phantom orphan item instead
+    of touching the real one, and update's taxonomy/closed-status guards ran
+    against an empty dict."""
+    _require_item(item)
+    r = fold([LOG, ".work/done.jsonl"])
+    match = [i for k, i in r.items.items() if k.startswith(item)]
+    if not match:
+        sys.exit(f"worklog: no item matching {item}")
+    if len(match) > 1:
+        ids = ", ".join(sorted(i["id"] for i in match))
+        sys.exit(f"worklog: {item} is ambiguous — matches {ids}")
+    return match[0]
+
+
 def cmd_update(a):
-    _require_item(a.item)
+    cur = _resolve(a.item)
     if a.kind is not None or a.milestone is not None or a.status is not None:
-        cur = fold([LOG, ".work/done.jsonl"]).items.get(a.item, {})
         # §2 rules hold on update too, against the item's current level.
         check_taxonomy(cur.get("level"), a.kind, a.milestone)
         if a.status is not None and cur.get("status") in CLOSED_STATUSES:
-            sys.exit(f"worklog: {a.item} is closed; use `worklog reopen` — "
+            sys.exit(f"worklog: {cur['id']} is closed; use `worklog reopen` — "
                      "update --status would leave the stale resolution behind")
-    ev = base(a.item, "update", a.actor)
+    ev = base(cur["id"], "update", a.actor)
     ev["set"] = {k: v for k, v in
                  {"status": a.status, "priority": a.priority, "title": a.title,
                   "body": a.body,
@@ -137,8 +154,8 @@ def cmd_update(a):
 
 
 def cmd_close(a):
-    _require_item(a.item)
-    ev = base(a.item, "close", a.actor)
+    item = _resolve(a.item)
+    ev = base(item["id"], "close", a.actor)
     ev["set"] = {"status": a.status}
     if a.resolution:
         ev["set"]["resolution"] = a.resolution
@@ -148,12 +165,7 @@ def cmd_close(a):
 def cmd_reopen(a):
     """Emit the reopen op (spec §7): fold moves the item back to todo and
     drops the stale resolution — the pair `update --status todo` leaks."""
-    _require_item(a.item)
-    r = fold([LOG, ".work/done.jsonl"])
-    match = [i for k, i in r.items.items() if k.startswith(a.item)]
-    if not match:
-        sys.exit(f"worklog: no item matching {a.item}")
-    item = match[0]
+    item = _resolve(a.item)
     if item.get("status") not in CLOSED_STATUSES:
         sys.exit(f"worklog: {item['id']} is not closed "
                  f"(status {item.get('status')!r}); nothing to reopen")
@@ -162,8 +174,9 @@ def cmd_reopen(a):
 
 
 def cmd_link(a):
-    _require_item(a.item)
-    ev = base(a.item, "link", a.actor)
+    # Same phantom-item hazard as close/update: a link event under a prefix
+    # mints an orphan carrying a real external key, which sync then pushes.
+    ev = base(_resolve(a.item)["id"], "link", a.actor)
     ev["set"] = {"external": {k: v for k, v in {
         "system": a.system, "key": a.key, "url": a.url, "rev": a.rev,
         "hash": a.hash,
@@ -229,12 +242,7 @@ def cmd_conflict(a):
 def cmd_resolve(a):
     """Resolve the last open conflict on a field with a normal update event.
     The update outsorts the conflict, so the fold clears it (section 10.6)."""
-    _require_item(a.item)
-    r = fold([LOG, ".work/done.jsonl"])
-    match = [i for k, i in r.items.items() if k.startswith(a.item)]
-    if not match:
-        sys.exit(f"worklog: no item matching {a.item}")
-    item = match[0]
+    item = _resolve(a.item)
     open_c = [c for c in item.get("_conflicts", []) if c.get("field") == a.field]
     if not open_c:
         sys.exit(f"worklog: no open conflict on {a.field} for {a.item}")
@@ -288,12 +296,7 @@ def cmd_list(a):
 
 
 def cmd_show(a):
-    _require_item(a.item)
-    r = fold([LOG, ".work/done.jsonl"])
-    match = [i for k, i in r.items.items() if k.startswith(a.item)]
-    if not match:
-        sys.exit(f"worklog: no item matching {a.item}")
-    print(json.dumps(match[0], indent=2))
+    print(json.dumps(_resolve(a.item), indent=2))
 
 
 def cmd_fold(a):

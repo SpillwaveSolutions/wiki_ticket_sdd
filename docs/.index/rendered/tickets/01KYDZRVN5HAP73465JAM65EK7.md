@@ -1,6 +1,6 @@
 # Release v0.16.0
 
-`01KYDZRVN5HAP73465JAM65EK7` · task/ops · **open**
+`01KYDZRVN5HAP73465JAM65EK7` · task/ops · **done**
 
 Cut v0.16.0: stamp changelog for the integration-guide feature, snapshot roadmap, tag, create GitHub release, sync docs.
 

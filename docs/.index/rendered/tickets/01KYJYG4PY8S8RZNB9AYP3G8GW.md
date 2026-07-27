@@ -1,6 +1,6 @@
 # Regression tests for id-prefix resolution
 
-`01KYJYG4PY8S8RZNB9AYP3G8GW` · task/bug · **open**
+`01KYJYG4PY8S8RZNB9AYP3G8GW` · task/bug · **done**
 
 Cover the cases that were broken: closing by short id updates the real item
 and creates no phantom, updating a closed item by short id is refused, an

@@ -4,7 +4,7 @@
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "21ed5958432e",
+   "render_hash": "c8172fe5ca77",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "0fdd4faa893e",
+   "render_hash": "b55fe9501810",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -24,7 +24,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "fa5f6b36e1b7",
+   "render_hash": "f8968900b9cf",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "6d4c0b53da9d",
+   "render_hash": "ed645b695090",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -254,7 +254,7 @@
    "frozen": false,
    "page_name": "Release-v0.16.0",
    "render": "as-is",
-   "render_hash": "f41d5d90a10e",
+   "render_hash": "660cbfdb87f4",
    "source": "docs/.index/rendered/releases/v0.16.0.md",
    "title": "Release v0.16.0",
    "truth_state": "shipped",
@@ -2034,10 +2034,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYA99TVCGX79HFNHN1DVT7Y6",
    "render": "as-is",
-   "render_hash": "636790ebe8bd",
+   "render_hash": "2d863370f2d0",
    "source": "docs/.index/rendered/tickets/01KYA99TVCGX79HFNHN1DVT7Y6.md",
    "title": "close/update silently corrupt log when given an item-id prefix instead of the full ULID",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01KYA99TVCGX79HFNHN1DVT7Y6"
   },
   {
@@ -2234,10 +2234,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYJVNHX698WR1JD96YC",
    "render": "as-is",
-   "render_hash": "83cf36d7adba",
+   "render_hash": "bf5d37d2ebef",
    "source": "docs/.index/rendered/tickets/01KYBD2HYJVNHX698WR1JD96YC.md",
    "title": "Branch-discipline hooks: never commit on main, always reference work",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYBD2HYJVNHX698WR1JD96YC"
   },
   {
@@ -2544,10 +2544,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYDZRVN5HAP73465JAM65EK7",
    "render": "as-is",
-   "render_hash": "005afbb50f65",
+   "render_hash": "760462f617e2",
    "source": "docs/.index/rendered/tickets/01KYDZRVN5HAP73465JAM65EK7.md",
    "title": "Release v0.16.0",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYDZRVN5HAP73465JAM65EK7"
   },
   {
@@ -2644,30 +2644,30 @@
    "frozen": false,
    "page_name": "Ticket-01KYJYG4PX7NVTS1CZQ8MPES7T",
    "render": "as-is",
-   "render_hash": "2f4a8a94b2f5",
+   "render_hash": "c5da26597dcd",
    "source": "docs/.index/rendered/tickets/01KYJYG4PX7NVTS1CZQ8MPES7T.md",
    "title": "Clear post-v0.17.0 drift and fix the prefix-ULID log corruption",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYJYG4PX7NVTS1CZQ8MPES7T"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYJYG4PY6TE6ZTZMF8CV2VFT",
    "render": "as-is",
-   "render_hash": "6290767b6375",
+   "render_hash": "e2ce3b0a8a3d",
    "source": "docs/.index/rendered/tickets/01KYJYG4PY6TE6ZTZMF8CV2VFT.md",
    "title": "Accept an absolute core.hooksPath in the doctor checks",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYJYG4PY6TE6ZTZMF8CV2VFT"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYJYG4PY8S8RZNB9AYP3G8GW",
    "render": "as-is",
-   "render_hash": "ec19360dcc9e",
+   "render_hash": "8ee7a345b827",
    "source": "docs/.index/rendered/tickets/01KYJYG4PY8S8RZNB9AYP3G8GW.md",
    "title": "Regression tests for id-prefix resolution",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYJYG4PY8S8RZNB9AYP3G8GW"
   },
   {
@@ -2684,20 +2684,20 @@
    "frozen": false,
    "page_name": "Ticket-01KYJYG4PYFFTK74AZ7RW90M7R",
    "render": "as-is",
-   "render_hash": "54710563256a",
+   "render_hash": "f9aeae6e70ca",
    "source": "docs/.index/rendered/tickets/01KYJYG4PYFFTK74AZ7RW90M7R.md",
    "title": "Close out stale work-log bookkeeping",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYJYG4PYFFTK74AZ7RW90M7R"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYJYG4PYJRAFEHJCP51XVCRA",
    "render": "as-is",
-   "render_hash": "c57c7f2bd1a2",
+   "render_hash": "b049685f80b3",
    "source": "docs/.index/rendered/tickets/01KYJYG4PYJRAFEHJCP51XVCRA.md",
    "title": "Remove two abandoned git worktrees",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYJYG4PYJRAFEHJCP51XVCRA"
   },
   {
@@ -3163,11 +3163,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-27T23:29:36Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-27T23:35:31Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "1ba285692c82",
+   "render_hash": "bc9981c5c3ac",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -3417,7 +3417,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "3ea999a51c94",
+  "render_hash": "57fb916fe384",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

@@ -1,6 +1,6 @@
 # Accept an absolute core.hooksPath in the doctor checks
 
-`01KYJYG4PY6TE6ZTZMF8CV2VFT` · task/bug · **open**
+`01KYJYG4PY6TE6ZTZMF8CV2VFT` · task/bug · **done**
 
 The session-start health check compares the configured git hooks path
 against the literal string "hooks", so a repo wired with the full absolute

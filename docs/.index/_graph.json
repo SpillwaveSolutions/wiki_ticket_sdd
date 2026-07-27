@@ -4117,7 +4117,7 @@
   },
   "item/01KYA99TVCGX79HFNHN1DVT7Y6": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "close/update silently corrupt log when given an item-id prefix instead of the full ULID"
   },
   "item/01KYABYEQP3YCB9AVHRPCTCMRS": {
@@ -4217,7 +4217,7 @@
   },
   "item/01KYBD2HYJVNHX698WR1JD96YC": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Branch-discipline hooks: never commit on main, always reference work"
   },
   "item/01KYBD2HYK196RQN7JNCMV6PDS": {
@@ -4372,7 +4372,7 @@
   },
   "item/01KYDZRVN5HAP73465JAM65EK7": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Release v0.16.0"
   },
   "item/01KYFJVN7Y30B50D8A9RG60CJS": {
@@ -4422,17 +4422,17 @@
   },
   "item/01KYJYG4PX7NVTS1CZQ8MPES7T": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Clear post-v0.17.0 drift and fix the prefix-ULID log corruption"
   },
   "item/01KYJYG4PY6TE6ZTZMF8CV2VFT": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Accept an absolute core.hooksPath in the doctor checks"
   },
   "item/01KYJYG4PY8S8RZNB9AYP3G8GW": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Regression tests for id-prefix resolution"
   },
   "item/01KYJYG4PYDA4H10JXXRDRCXPZ": {
@@ -4442,12 +4442,12 @@
   },
   "item/01KYJYG4PYFFTK74AZ7RW90M7R": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Close out stale work-log bookkeeping"
   },
   "item/01KYJYG4PYJRAFEHJCP51XVCRA": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Remove two abandoned git worktrees"
   },
   "plan/2026-07-17_worklog-core_plan": {

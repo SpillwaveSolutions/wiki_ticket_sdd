@@ -1,6 +1,6 @@
 # Close out stale work-log bookkeeping
 
-`01KYJYG4PYFFTK74AZ7RW90M7R` · task/ops · **open**
+`01KYJYG4PYFFTK74AZ7RW90M7R` · task/ops · **done**
 
 Two items no longer reflect reality: a release task for a version that
 shipped three releases ago, and an epic whose every child is finished but

@@ -222,8 +222,16 @@ class TestCloseNeverPushed(Sandbox):
 
 class TestOrphanNeverPushed(Sandbox):
     def test_orphan_and_titleless_items_are_drift_not_tickets(self):
-        # a typo'd update creates a fold orphan: an event whose item has no create
-        self.wl("update", "01ZZZZZZZZZZZZZZZZZZZZZZZZ", "--add-label", "oops")
+        # A fold orphan is an event whose item has no create. The CLI can no
+        # longer mint one (worklog 01KYA99TVC gave update/close prefix
+        # resolution), but a git merge still can: an update event arriving
+        # from another machine ahead of its create. Write that event raw.
+        with open(os.path.join(self.dir, ".work", "todo.jsonl"), "a",
+                  encoding="utf-8") as fh:
+            fh.write(json.dumps({
+                "ev": "01ZZZZZZZZZZZZZZZZZZZZZZZY", "ts": "2026-07-27T00:00:00Z",
+                "actor": "other-machine", "item": "01ZZZZZZZZZZZZZZZZZZZZZZZZ",
+                "op": "update", "add": {"labels": ["oops"]}}) + "\n")
         out = self.sync("--push-only")
         self.assertEqual(self.fake("_count"), "0", out)
         self.assertIn("orphan/untitled item skipped", out)
