@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "b1b912f57759",
+   "render_hash": "b55fe9501810",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -24,7 +24,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "fa5f6b36e1b7",
+   "render_hash": "f8968900b9cf",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "2161a5dd1959",
+   "render_hash": "ed645b695090",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -254,7 +254,7 @@
    "frozen": false,
    "page_name": "Release-v0.16.0",
    "render": "as-is",
-   "render_hash": "f41d5d90a10e",
+   "render_hash": "660cbfdb87f4",
    "source": "docs/.index/rendered/releases/v0.16.0.md",
    "title": "Release v0.16.0",
    "truth_state": "shipped",
@@ -2034,10 +2034,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYA99TVCGX79HFNHN1DVT7Y6",
    "render": "as-is",
-   "render_hash": "da03c1105f8d",
+   "render_hash": "2d863370f2d0",
    "source": "docs/.index/rendered/tickets/01KYA99TVCGX79HFNHN1DVT7Y6.md",
    "title": "close/update silently corrupt log when given an item-id prefix instead of the full ULID",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYA99TVCGX79HFNHN1DVT7Y6"
   },
   {
@@ -2234,10 +2234,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYBD2HYJVNHX698WR1JD96YC",
    "render": "as-is",
-   "render_hash": "83cf36d7adba",
+   "render_hash": "bf5d37d2ebef",
    "source": "docs/.index/rendered/tickets/01KYBD2HYJVNHX698WR1JD96YC.md",
    "title": "Branch-discipline hooks: never commit on main, always reference work",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYBD2HYJVNHX698WR1JD96YC"
   },
   {
@@ -2544,10 +2544,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYDZRVN5HAP73465JAM65EK7",
    "render": "as-is",
-   "render_hash": "005afbb50f65",
+   "render_hash": "760462f617e2",
    "source": "docs/.index/rendered/tickets/01KYDZRVN5HAP73465JAM65EK7.md",
    "title": "Release v0.16.0",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYDZRVN5HAP73465JAM65EK7"
   },
   {
@@ -2639,6 +2639,66 @@
    "title": "Release v0.17.0",
    "truth_state": "done",
    "wiki_key": "item/01KYJGF6GN93GA3FMP5EW5A7S2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYJYG4PX7NVTS1CZQ8MPES7T",
+   "render": "as-is",
+   "render_hash": "c5da26597dcd",
+   "source": "docs/.index/rendered/tickets/01KYJYG4PX7NVTS1CZQ8MPES7T.md",
+   "title": "Clear post-v0.17.0 drift and fix the prefix-ULID log corruption",
+   "truth_state": "done",
+   "wiki_key": "item/01KYJYG4PX7NVTS1CZQ8MPES7T"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYJYG4PY6TE6ZTZMF8CV2VFT",
+   "render": "as-is",
+   "render_hash": "e2ce3b0a8a3d",
+   "source": "docs/.index/rendered/tickets/01KYJYG4PY6TE6ZTZMF8CV2VFT.md",
+   "title": "Accept an absolute core.hooksPath in the doctor checks",
+   "truth_state": "done",
+   "wiki_key": "item/01KYJYG4PY6TE6ZTZMF8CV2VFT"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYJYG4PY8S8RZNB9AYP3G8GW",
+   "render": "as-is",
+   "render_hash": "8ee7a345b827",
+   "source": "docs/.index/rendered/tickets/01KYJYG4PY8S8RZNB9AYP3G8GW.md",
+   "title": "Regression tests for id-prefix resolution",
+   "truth_state": "done",
+   "wiki_key": "item/01KYJYG4PY8S8RZNB9AYP3G8GW"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYJYG4PYDA4H10JXXRDRCXPZ",
+   "render": "as-is",
+   "render_hash": "fff037b81959",
+   "source": "docs/.index/rendered/tickets/01KYJYG4PYDA4H10JXXRDRCXPZ.md",
+   "title": "Resolve work-item id prefixes in close and update",
+   "truth_state": "done",
+   "wiki_key": "item/01KYJYG4PYDA4H10JXXRDRCXPZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYJYG4PYFFTK74AZ7RW90M7R",
+   "render": "as-is",
+   "render_hash": "f9aeae6e70ca",
+   "source": "docs/.index/rendered/tickets/01KYJYG4PYFFTK74AZ7RW90M7R.md",
+   "title": "Close out stale work-log bookkeeping",
+   "truth_state": "done",
+   "wiki_key": "item/01KYJYG4PYFFTK74AZ7RW90M7R"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYJYG4PYJRAFEHJCP51XVCRA",
+   "render": "as-is",
+   "render_hash": "b049685f80b3",
+   "source": "docs/.index/rendered/tickets/01KYJYG4PYJRAFEHJCP51XVCRA.md",
+   "title": "Remove two abandoned git worktrees",
+   "truth_state": "done",
+   "wiki_key": "item/01KYJYG4PYJRAFEHJCP51XVCRA"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -2995,6 +3055,17 @@
   {
    "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
    "frozen": true,
+   "page_name": "Plan-post-v017-drift-and-prefix-resolution",
+   "render": "doc+banner",
+   "render_hash": "a3d2d17502f0",
+   "source": "docs/plans/2026-07-27-post-v017-drift-and-prefix-resolution.md",
+   "title": "Clear post-v0.17.0 drift and fix the prefix-ULID log corruption",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-27-post-v017-drift-and-prefix-resolution"
+  },
+  {
+   "banner": "> **Current** \u2014 the latest status report. Reports freeze once published; corrections appear in later reports.",
+   "frozen": true,
    "page_name": "Plan-design-docs-release-sync",
    "render": "doc+banner",
    "render_hash": "9f3a72d1e016",
@@ -3092,11 +3163,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-27T19:38:10Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-27T23:35:31Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "c944af0bd739",
+   "render_hash": "bc9981c5c3ac",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

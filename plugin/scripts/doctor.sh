@@ -58,11 +58,14 @@ for f in pre-commit pre-merge-commit commit-msg; do
 done
 
 # hook wiring
+# An absolute path to this repo's hooks/ is as wired as the relative "hooks"
+# init writes — and is the form that survives a git worktree checkout.
 hookspath=$(git config core.hooksPath 2>/dev/null || true)
-if [ "$hookspath" = "hooks" ]; then
-  ok "core.hooksPath = hooks"
+if [ "$hookspath" = "hooks" ] ||
+   [ "$(cd "${hookspath:-/nonexistent}" 2>/dev/null && pwd -P)" = "$(pwd -P)/hooks" ]; then
+  ok "core.hooksPath = ${hookspath}"
 else
-  bad "core.hooksPath is '${hookspath:-unset}', expected 'hooks'"
+  bad "core.hooksPath is '${hookspath:-unset}', expected this repo's hooks/"
 fi
 
 # invariants: run the pre-commit checks (newline, schema, roadmap freshness)

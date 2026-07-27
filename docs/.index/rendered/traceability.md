@@ -2,6 +2,45 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Remove two abandoned git worktrees
+`01KYJYG4PYJRAFEHJCP51XVCRA` · status: done
+- belongs-to: Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+- references: [github#212](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/212)
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
+### Close out stale work-log bookkeeping
+`01KYJYG4PYFFTK74AZ7RW90M7R` · status: done
+- belongs-to: Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+- references: [github#211](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/211)
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
+### Resolve work-item id prefixes in close and update
+`01KYJYG4PYDA4H10JXXRDRCXPZ` · status: done
+- belongs-to: Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
+### Regression tests for id-prefix resolution
+`01KYJYG4PY8S8RZNB9AYP3G8GW` · status: done
+- belongs-to: Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+- references: [github#210](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/210)
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
+### Accept an absolute core.hooksPath in the doctor checks
+`01KYJYG4PY6TE6ZTZMF8CV2VFT` · status: done
+- belongs-to: Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+- references: [github#209](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/209)
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
+### Clear post-v0.17.0 drift and fix the prefix-ULID log corruption
+`01KYJYG4PX7NVTS1CZQ8MPES7T` · status: done
+- references: [github#208](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/208)
+- contains: Accept an absolute core.hooksPath in the doctor checks
+- contains: Regression tests for id-prefix resolution
+- contains: Resolve work-item id prefixes in close and update
+- contains: Close out stale work-log bookkeeping
+- contains: Remove two abandoned git worktrees
+- produced-by: [[Plan-post-v017-drift-and-prefix-resolution]]
+
 ### Release v0.17.0
 `01KYJGF6GN93GA3FMP5EW5A7S2` · status: done
 - references: [github#203](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/203)
@@ -57,7 +96,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.16.0
 
 ### Release v0.16.0
-`01KYDZRVN5HAP73465JAM65EK7` · status: todo
+`01KYDZRVN5HAP73465JAM65EK7` · status: done
 - references: [github#184](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/184)
 - targets: release/v0.16.0
 
@@ -284,7 +323,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-branch-discipline-hooks]]
 
 ### Branch-discipline hooks: never commit on main, always reference work
-`01KYBD2HYJVNHX698WR1JD96YC` · status: todo
+`01KYBD2HYJVNHX698WR1JD96YC` · status: done
 - references: [github#144](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/144)
 - contains: Add WORKLOG_SKIP_BRANCH_GUARD to the three bare pre-commit call sites
 - contains: Wire commit-msg into install/uninstall/doctor/CANON
@@ -411,7 +450,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### close/update silently corrupt log when given an item-id prefix instead of the full ULID
-`01KYA99TVCGX79HFNHN1DVT7Y6` · status: todo
+`01KYA99TVCGX79HFNHN1DVT7Y6` · status: done
 - references: [github#123](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/123)
 
 ### Give kind:ops release items a GitHub issue going forward

@@ -9,8 +9,13 @@ if [ ! -f CLAUDE.md ] || ! grep -qE 'worklog:policy:start|Work tracking policy' 
   fails+=("CLAUDE.md is missing the worklog policy block — run /worklog:init to repair")
 fi
 
-if [ "$(git config core.hooksPath 2>/dev/null)" != "hooks" ]; then
-  fails+=("git core.hooksPath is not 'hooks' — run /worklog:init to repair")
+# init sets the relative "hooks", but an absolute path to the same directory is
+# equally wired — and is what actually works from a git worktree, where a
+# relative hooksPath resolves against the wrong CWD. Accept both.
+hookspath=$(git config core.hooksPath 2>/dev/null || true)
+if [ "$hookspath" != "hooks" ] &&
+   [ "$(cd "${hookspath:-/nonexistent}" 2>/dev/null && pwd -P)" != "$(pwd -P)/hooks" ]; then
+  fails+=("git core.hooksPath is '${hookspath:-unset}', not this repo's hooks/ — run /worklog:init to repair")
 fi
 
 installed=""

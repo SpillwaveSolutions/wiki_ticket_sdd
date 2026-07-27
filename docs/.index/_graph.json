@@ -1926,6 +1926,56 @@
    "type": "targets"
   },
   {
+   "from": "item/01KYJYG4PX7NVTS1CZQ8MPES7T",
+   "to": "ticket/github#208",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYJYG4PY6TE6ZTZMF8CV2VFT",
+   "to": "item/01KYJYG4PX7NVTS1CZQ8MPES7T",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYJYG4PY6TE6ZTZMF8CV2VFT",
+   "to": "ticket/github#209",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYJYG4PY8S8RZNB9AYP3G8GW",
+   "to": "item/01KYJYG4PX7NVTS1CZQ8MPES7T",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYJYG4PY8S8RZNB9AYP3G8GW",
+   "to": "ticket/github#210",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYJYG4PYDA4H10JXXRDRCXPZ",
+   "to": "item/01KYJYG4PX7NVTS1CZQ8MPES7T",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYJYG4PYFFTK74AZ7RW90M7R",
+   "to": "item/01KYJYG4PX7NVTS1CZQ8MPES7T",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYJYG4PYFFTK74AZ7RW90M7R",
+   "to": "ticket/github#211",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYJYG4PYJRAFEHJCP51XVCRA",
+   "to": "item/01KYJYG4PX7NVTS1CZQ8MPES7T",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYJYG4PYJRAFEHJCP51XVCRA",
+   "to": "ticket/github#212",
+   "type": "references"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -2368,6 +2418,36 @@
   {
    "from": "plan/2026-07-26-declare-graph-engineering",
    "to": "item/01KYFSRNDMYCTQ1XTMXFWEVBWT",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-27-post-v017-drift-and-prefix-resolution",
+   "to": "item/01KYJYG4PX7NVTS1CZQ8MPES7T",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-27-post-v017-drift-and-prefix-resolution",
+   "to": "item/01KYJYG4PY6TE6ZTZMF8CV2VFT",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-27-post-v017-drift-and-prefix-resolution",
+   "to": "item/01KYJYG4PY8S8RZNB9AYP3G8GW",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-27-post-v017-drift-and-prefix-resolution",
+   "to": "item/01KYJYG4PYDA4H10JXXRDRCXPZ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-27-post-v017-drift-and-prefix-resolution",
+   "to": "item/01KYJYG4PYFFTK74AZ7RW90M7R",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-27-post-v017-drift-and-prefix-resolution",
+   "to": "item/01KYJYG4PYJRAFEHJCP51XVCRA",
    "type": "produces"
   },
   {
@@ -4037,7 +4117,7 @@
   },
   "item/01KYA99TVCGX79HFNHN1DVT7Y6": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "close/update silently corrupt log when given an item-id prefix instead of the full ULID"
   },
   "item/01KYABYEQP3YCB9AVHRPCTCMRS": {
@@ -4137,7 +4217,7 @@
   },
   "item/01KYBD2HYJVNHX698WR1JD96YC": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Branch-discipline hooks: never commit on main, always reference work"
   },
   "item/01KYBD2HYK196RQN7JNCMV6PDS": {
@@ -4292,7 +4372,7 @@
   },
   "item/01KYDZRVN5HAP73465JAM65EK7": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Release v0.16.0"
   },
   "item/01KYFJVN7Y30B50D8A9RG60CJS": {
@@ -4339,6 +4419,36 @@
    "doc_type": "item",
    "status": "done",
    "title": "Release v0.17.0"
+  },
+  "item/01KYJYG4PX7NVTS1CZQ8MPES7T": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Clear post-v0.17.0 drift and fix the prefix-ULID log corruption"
+  },
+  "item/01KYJYG4PY6TE6ZTZMF8CV2VFT": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Accept an absolute core.hooksPath in the doctor checks"
+  },
+  "item/01KYJYG4PY8S8RZNB9AYP3G8GW": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Regression tests for id-prefix resolution"
+  },
+  "item/01KYJYG4PYDA4H10JXXRDRCXPZ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Resolve work-item id prefixes in close and update"
+  },
+  "item/01KYJYG4PYFFTK74AZ7RW90M7R": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Close out stale work-log bookkeeping"
+  },
+  "item/01KYJYG4PYJRAFEHJCP51XVCRA": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Remove two abandoned git worktrees"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
@@ -4398,6 +4508,12 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-07-26-declare-graph-engineering.md",
    "title": "Declare wiki_ticket_sdd as a Graph Engineering system",
+   "truth_state": "current"
+  },
+  "plan/2026-07-27-post-v017-drift-and-prefix-resolution": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-27-post-v017-drift-and-prefix-resolution.md",
+   "title": "Clear post-v0.17.0 drift and fix the prefix-ULID log corruption",
    "truth_state": "current"
   },
   "plan/design-docs-release-sync": {
@@ -5009,6 +5125,26 @@
   "ticket/github#203": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/203"
+  },
+  "ticket/github#208": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/208"
+  },
+  "ticket/github#209": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/209"
+  },
+  "ticket/github#210": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/210"
+  },
+  "ticket/github#211": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/211"
+  },
+  "ticket/github#212": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/212"
   },
   "ticket/github#23": {
    "doc_type": "ticket",
