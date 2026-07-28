@@ -2,6 +2,42 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Log compaction is silently undone by any branch that spans it
+`01KYNHEW47G49CWZ9SS9ABQ2VG` · status: todo
+- references: [github#243](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/243)
+
+### Warn at plan capture when a task title references a ticket number
+`01KYNHEVZSBJ43P0CE2EBXT7Y0` · status: todo
+- references: [github#242](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/242)
+
+### A ticket that no longer exists remotely retries forever
+`01KYNHEVVG57D20ZG5EJ3F36J3` · status: todo
+- references: [github#241](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/241)
+
+### Conflict and resolve accept any field name, including ones that break sync
+`01KYNHEVPZJZFB9HPHA68K2XBZ` · status: todo
+- references: [github#240](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/240)
+
+### Restrict a ticket to one item when forcing keys into scope
+`01KYNHEVJNZTGEJ2EW5A9C9A7C` · status: todo
+- references: [github#239](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/239)
+
+### Sync should say which ticket fields it is about to overwrite
+`01KYNHEVDSD4BTASXCTV88Q80Q` · status: todo
+- references: [github#238](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/238)
+
+### Catch duplicate ticket ownership at merge time, not just at sync
+`01KYNHEV9M01PQJZQ5QRZQ3C8J` · status: todo
+- references: [github#237](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/237)
+
+### Concurrent sessions in one working directory corrupt each other's work
+`01KYNHEV5GCR1MDNECAXFT0GK2` · status: todo
+- references: [github#236](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/236)
+
+### GitHub adapter can file duplicate issues when rate-limited mid-create
+`01KYNHEV1BJ48RKWHTXCJYVRAF` · status: todo
+- references: [github#235](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/235)
+
 ### Add a command to undo a link
 `01KYND4SNPXVR1W4GQA453VB4G` · status: done
 - belongs-to: One local owner per remote ticket (#226)
