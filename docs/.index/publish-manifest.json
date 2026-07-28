@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "ed645b695090",
+   "render_hash": "e71a29016cd5",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -149,6 +149,16 @@
    "title": "PR #179",
    "truth_state": "not tracked",
    "wiki_key": "pr/179"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-188",
+   "render": "as-is",
+   "render_hash": "388c8c256e63",
+   "source": "docs/.index/rendered/prs/188.md",
+   "title": "PR #188",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/188"
   },
   {
    "frozen": false,
@@ -2224,10 +2234,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYAKH389T1ZKKBP94WH2HK94",
    "render": "as-is",
-   "render_hash": "75a6efacd0f2",
+   "render_hash": "70bef0ffad97",
    "source": "docs/.index/rendered/tickets/01KYAKH389T1ZKKBP94WH2HK94.md",
    "title": "sync_dispatch push_items KeyError on ext['key'] when forcing a never-remote closed item into scope via --keys",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYAKH389T1ZKKBP94WH2HK94"
   },
   {
@@ -3163,11 +3173,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-27T23:35:31Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-28T02:19:51Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "bc9981c5c3ac",
+   "render_hash": "5fd410e9fd2f",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
