@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "dc83896eaf32",
+   "render_hash": "c2ba9499e4cb",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2861,6 +2861,96 @@
    "wiki_key": "item/01KYND4SNPXVR1W4GQA453VB4G"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KYNHEV1BJ48RKWHTXCJYVRAF",
+   "render": "as-is",
+   "render_hash": "b4a9174243b3",
+   "source": "docs/.index/rendered/tickets/01KYNHEV1BJ48RKWHTXCJYVRAF.md",
+   "title": "GitHub adapter can file duplicate issues when rate-limited mid-create",
+   "truth_state": "open",
+   "wiki_key": "item/01KYNHEV1BJ48RKWHTXCJYVRAF"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYNHEV5GCR1MDNECAXFT0GK2",
+   "render": "as-is",
+   "render_hash": "0b7a8d38f14e",
+   "source": "docs/.index/rendered/tickets/01KYNHEV5GCR1MDNECAXFT0GK2.md",
+   "title": "Concurrent sessions in one working directory corrupt each other's work",
+   "truth_state": "open",
+   "wiki_key": "item/01KYNHEV5GCR1MDNECAXFT0GK2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYNHEV9M01PQJZQ5QRZQ3C8J",
+   "render": "as-is",
+   "render_hash": "fb85cf91f312",
+   "source": "docs/.index/rendered/tickets/01KYNHEV9M01PQJZQ5QRZQ3C8J.md",
+   "title": "Catch duplicate ticket ownership at merge time, not just at sync",
+   "truth_state": "open",
+   "wiki_key": "item/01KYNHEV9M01PQJZQ5QRZQ3C8J"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYNHEVDSD4BTASXCTV88Q80Q",
+   "render": "as-is",
+   "render_hash": "abd6ca7ccfb4",
+   "source": "docs/.index/rendered/tickets/01KYNHEVDSD4BTASXCTV88Q80Q.md",
+   "title": "Sync should say which ticket fields it is about to overwrite",
+   "truth_state": "open",
+   "wiki_key": "item/01KYNHEVDSD4BTASXCTV88Q80Q"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYNHEVJNZTGEJ2EW5A9C9A7C",
+   "render": "as-is",
+   "render_hash": "7569f887238a",
+   "source": "docs/.index/rendered/tickets/01KYNHEVJNZTGEJ2EW5A9C9A7C.md",
+   "title": "Restrict a ticket to one item when forcing keys into scope",
+   "truth_state": "open",
+   "wiki_key": "item/01KYNHEVJNZTGEJ2EW5A9C9A7C"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYNHEVPZJZFB9HPHA68K2XBZ",
+   "render": "as-is",
+   "render_hash": "061d37f7b9b5",
+   "source": "docs/.index/rendered/tickets/01KYNHEVPZJZFB9HPHA68K2XBZ.md",
+   "title": "Conflict and resolve accept any field name, including ones that break sync",
+   "truth_state": "open",
+   "wiki_key": "item/01KYNHEVPZJZFB9HPHA68K2XBZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYNHEVVG57D20ZG5EJ3F36J3",
+   "render": "as-is",
+   "render_hash": "76f1584f5ec7",
+   "source": "docs/.index/rendered/tickets/01KYNHEVVG57D20ZG5EJ3F36J3.md",
+   "title": "A ticket that no longer exists remotely retries forever",
+   "truth_state": "open",
+   "wiki_key": "item/01KYNHEVVG57D20ZG5EJ3F36J3"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYNHEVZSBJ43P0CE2EBXT7Y0",
+   "render": "as-is",
+   "render_hash": "7aff21fd4e44",
+   "source": "docs/.index/rendered/tickets/01KYNHEVZSBJ43P0CE2EBXT7Y0.md",
+   "title": "Warn at plan capture when a task title references a ticket number",
+   "truth_state": "open",
+   "wiki_key": "item/01KYNHEVZSBJ43P0CE2EBXT7Y0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYNHEW47G49CWZ9SS9ABQ2VG",
+   "render": "as-is",
+   "render_hash": "79d6d884cdfa",
+   "source": "docs/.index/rendered/tickets/01KYNHEW47G49CWZ9SS9ABQ2VG.md",
+   "title": "Log compaction is silently undone by any branch that spans it",
+   "truth_state": "open",
+   "wiki_key": "item/01KYNHEW47G49CWZ9SS9ABQ2VG"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -3356,11 +3446,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-28T22:36:11Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-28T23:38:44Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "dab2b3c1991d",
+   "render_hash": "2a8e80e41286",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
