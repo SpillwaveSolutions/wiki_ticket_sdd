@@ -1211,6 +1211,11 @@
    "type": "references"
   },
   {
+   "from": "item/01KYA99TVCGX79HFNHN1DVT7Y6",
+   "to": "release/v0.17.1",
+   "type": "targets"
+  },
+  {
    "from": "item/01KYABYEQP3YCB9AVHRPCTCMRS",
    "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
    "type": "belongs-to"
@@ -1946,6 +1951,11 @@
    "type": "references"
   },
   {
+   "from": "item/01KYJYG4PY6TE6ZTZMF8CV2VFT",
+   "to": "release/v0.17.1",
+   "type": "targets"
+  },
+  {
    "from": "item/01KYJYG4PY8S8RZNB9AYP3G8GW",
    "to": "item/01KYJYG4PX7NVTS1CZQ8MPES7T",
    "type": "belongs-to"
@@ -1956,9 +1966,19 @@
    "type": "references"
   },
   {
+   "from": "item/01KYJYG4PY8S8RZNB9AYP3G8GW",
+   "to": "release/v0.17.1",
+   "type": "targets"
+  },
+  {
    "from": "item/01KYJYG4PYDA4H10JXXRDRCXPZ",
    "to": "item/01KYJYG4PX7NVTS1CZQ8MPES7T",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYJYG4PYDA4H10JXXRDRCXPZ",
+   "to": "release/v0.17.1",
+   "type": "targets"
   },
   {
    "from": "item/01KYJYG4PYFFTK74AZ7RW90M7R",
@@ -1971,6 +1991,11 @@
    "type": "references"
   },
   {
+   "from": "item/01KYJYG4PYFFTK74AZ7RW90M7R",
+   "to": "release/v0.17.1",
+   "type": "targets"
+  },
+  {
    "from": "item/01KYJYG4PYJRAFEHJCP51XVCRA",
    "to": "item/01KYJYG4PX7NVTS1CZQ8MPES7T",
    "type": "belongs-to"
@@ -1979,6 +2004,16 @@
    "from": "item/01KYJYG4PYJRAFEHJCP51XVCRA",
    "to": "ticket/github#212",
    "type": "references"
+  },
+  {
+   "from": "item/01KYJYG4PYJRAFEHJCP51XVCRA",
+   "to": "release/v0.17.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KYKATVGM10E5HVZHVPA1C5J0",
+   "to": "release/v0.17.1",
+   "type": "targets"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -3033,6 +3068,21 @@
   {
    "from": "roadmap-snapshot/2026-07-27_v0.17.0-release",
    "to": "release/v0.17.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-28_v0.17.1-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-28_v0.17.1-release",
+   "to": "roadmap-snapshot/2026-07-27_v0.17.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-28_v0.17.1-release",
+   "to": "release/v0.17.1",
    "type": "targets"
   },
   {
@@ -4455,6 +4505,11 @@
    "status": "done",
    "title": "Remove two abandoned git worktrees"
   },
+  "item/01KYKATVGM10E5HVZHVPA1C5J0": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Release v0.17.1"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -4647,6 +4702,9 @@
   "release/v0.17.0": {
    "doc_type": "release"
   },
+  "release/v0.17.1": {
+   "doc_type": "release"
+  },
   "release/v0.5.0": {
    "doc_type": "release"
   },
@@ -4725,6 +4783,12 @@
   "roadmap-snapshot/2026-07-27_v0.17.0-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-07-27_v0.17.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-28_v0.17.1-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-28_v0.17.1-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

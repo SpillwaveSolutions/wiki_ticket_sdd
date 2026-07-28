@@ -2,6 +2,16 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
+## v0.17.1 — 2026-07-28
+
+- Roadmap snapshot: [[Roadmap-2026-07-28_v0.17.1-release]]
+- Shipped: close/update silently corrupt log when given an item-id prefix instead of the full ULID (#123)
+- Shipped: Accept an absolute core.hooksPath in the doctor checks (#209)
+- Shipped: Regression tests for id-prefix resolution (#210)
+- Shipped: Resolve work-item id prefixes in close and update
+- Shipped: Close out stale work-log bookkeeping (#211)
+- Shipped: Remove two abandoned git worktrees (#212)
+
 ## v0.17.0 — 2026-07-27
 
 - Design: [[Code-Walkthrough-2026-07-27_v0.17.0-release]]
