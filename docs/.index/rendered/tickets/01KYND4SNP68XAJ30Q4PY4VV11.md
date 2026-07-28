@@ -12,3 +12,7 @@ and the exact repair, and exit non-zero so the failure cannot be missed.
 ## Release
 
 - [[Release-v0.18.0]]
+
+## Related tickets
+
+- [github #228](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/228)

@@ -12,3 +12,7 @@ is a sharp edge in a log designed so that mistakes are corrected by appending.
 ## Release
 
 - [[Release-v0.18.0]]
+
+## Related tickets
+
+- [github #233](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/233)

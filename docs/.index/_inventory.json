@@ -697,6 +697,7 @@
    "status": "planned",
    "title": "One local owner per remote ticket (#226)",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-one-owner-per-external-key",
    "wiki_key": "plan/2026-07-28-one-owner-per-external-key"
   },
   {
@@ -899,10 +900,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-28T22:22:47Z",
+   "generated_at": "2026-07-28T22:24:08Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "084a3696",
+   "source_hash": "ba028c4f",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

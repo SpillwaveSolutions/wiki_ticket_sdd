@@ -12,3 +12,7 @@ the corruption.
 ## Release
 
 - [[Release-v0.18.0]]
+
+## Related tickets
+
+- [github #230](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/230)

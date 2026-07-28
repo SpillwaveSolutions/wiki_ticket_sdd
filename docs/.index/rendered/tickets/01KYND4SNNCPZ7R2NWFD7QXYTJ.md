@@ -13,3 +13,7 @@ instead of each growing its own copy.
 ## Release
 
 - [[Release-v0.18.0]]
+
+## Related tickets
+
+- [github #227](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/227)

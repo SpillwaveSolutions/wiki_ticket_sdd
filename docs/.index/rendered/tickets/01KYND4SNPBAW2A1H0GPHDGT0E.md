@@ -11,3 +11,7 @@ The command scripts ship in two places that must stay byte-identical.
 ## Release
 
 - [[Release-v0.18.0]]
+
+## Related tickets
+
+- [github #229](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/229)

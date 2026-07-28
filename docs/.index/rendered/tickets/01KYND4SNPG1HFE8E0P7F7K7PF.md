@@ -11,3 +11,7 @@ Sync records the ticket key right after creating the ticket.
 ## Release
 
 - [[Release-v0.18.0]]
+
+## Related tickets
+
+- [github #231](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/231)
