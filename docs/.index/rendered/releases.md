@@ -4,6 +4,8 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 
 ## v0.17.1 — 2026-07-28
 
+- Design: [[Code-Walkthrough-2026-07-28_v0.17.1-release]]
+- Design: [[Design-Doc-2026-07-28_v0.17.1-release]]
 - Roadmap snapshot: [[Roadmap-2026-07-28_v0.17.1-release]]
 - Shipped: close/update silently corrupt log when given an item-id prefix instead of the full ULID (#123)
 - Shipped: Accept an absolute core.hooksPath in the doctor checks (#209)
