@@ -362,6 +362,7 @@
    "tag": "v0.17.1",
    "title": "Worklog \u2014 Code Walkthrough",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-07-28_v0.17.1-release",
    "wiki_key": "design/2026-07-28_v0.17.1-release-code-walkthrough"
   },
   {
@@ -378,6 +379,7 @@
    "tag": "v0.17.1",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-07-28_v0.17.1-release",
    "wiki_key": "design/2026-07-28_v0.17.1-release-design-doc"
   },
   {
