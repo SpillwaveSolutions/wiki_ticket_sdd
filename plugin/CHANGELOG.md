@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.17.1 — unreleased
+## 0.17.1 — 2026-07-28
 
 - **Fix** (`bin/worklog`): `close`, `update` and `link` wrote their event under
   whatever id string the caller passed. Handed the 8-character prefix that

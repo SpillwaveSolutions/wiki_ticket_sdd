@@ -24,7 +24,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "f8968900b9cf",
+   "render_hash": "50a112878add",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "e71a29016cd5",
+   "render_hash": "9c42cbf0398a",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -289,6 +289,16 @@
    "title": "Release v0.17.0",
    "truth_state": "shipped",
    "wiki_key": "release/v0.17.0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.17.1",
+   "render": "as-is",
+   "render_hash": "f6674dd915ae",
+   "source": "docs/.index/rendered/releases/v0.17.1.md",
+   "title": "Release v0.17.1",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.17.1"
   },
   {
    "frozen": false,
@@ -2044,7 +2054,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYA99TVCGX79HFNHN1DVT7Y6",
    "render": "as-is",
-   "render_hash": "2d863370f2d0",
+   "render_hash": "55247a48e23e",
    "source": "docs/.index/rendered/tickets/01KYA99TVCGX79HFNHN1DVT7Y6.md",
    "title": "close/update silently corrupt log when given an item-id prefix instead of the full ULID",
    "truth_state": "done",
@@ -2664,7 +2674,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYJYG4PY6TE6ZTZMF8CV2VFT",
    "render": "as-is",
-   "render_hash": "e2ce3b0a8a3d",
+   "render_hash": "241c45154c09",
    "source": "docs/.index/rendered/tickets/01KYJYG4PY6TE6ZTZMF8CV2VFT.md",
    "title": "Accept an absolute core.hooksPath in the doctor checks",
    "truth_state": "done",
@@ -2674,7 +2684,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYJYG4PY8S8RZNB9AYP3G8GW",
    "render": "as-is",
-   "render_hash": "8ee7a345b827",
+   "render_hash": "4c973a3b13df",
    "source": "docs/.index/rendered/tickets/01KYJYG4PY8S8RZNB9AYP3G8GW.md",
    "title": "Regression tests for id-prefix resolution",
    "truth_state": "done",
@@ -2684,7 +2694,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYJYG4PYDA4H10JXXRDRCXPZ",
    "render": "as-is",
-   "render_hash": "fff037b81959",
+   "render_hash": "de23ddc82370",
    "source": "docs/.index/rendered/tickets/01KYJYG4PYDA4H10JXXRDRCXPZ.md",
    "title": "Resolve work-item id prefixes in close and update",
    "truth_state": "done",
@@ -2694,7 +2704,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYJYG4PYFFTK74AZ7RW90M7R",
    "render": "as-is",
-   "render_hash": "f9aeae6e70ca",
+   "render_hash": "40909fe98660",
    "source": "docs/.index/rendered/tickets/01KYJYG4PYFFTK74AZ7RW90M7R.md",
    "title": "Close out stale work-log bookkeeping",
    "truth_state": "done",
@@ -2704,11 +2714,21 @@
    "frozen": false,
    "page_name": "Ticket-01KYJYG4PYJRAFEHJCP51XVCRA",
    "render": "as-is",
-   "render_hash": "b049685f80b3",
+   "render_hash": "5dc3bd3b6505",
    "source": "docs/.index/rendered/tickets/01KYJYG4PYJRAFEHJCP51XVCRA.md",
    "title": "Remove two abandoned git worktrees",
    "truth_state": "done",
    "wiki_key": "item/01KYJYG4PYJRAFEHJCP51XVCRA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYKATVGM10E5HVZHVPA1C5J0",
+   "render": "as-is",
+   "render_hash": "2675112e6f7c",
+   "source": "docs/.index/rendered/tickets/01KYKATVGM10E5HVZHVPA1C5J0.md",
+   "title": "Release v0.17.1",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01KYKATVGM10E5HVZHVPA1C5J0"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -3173,11 +3193,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-28T02:19:51Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-28T03:08:20Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "5fd410e9fd2f",
+   "render_hash": "3389df64301c",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -3292,6 +3312,17 @@
    "title": "Roadmap",
    "truth_state": "snapshot",
    "wiki_key": "roadmap-snapshot/2026-07-27_v0.17.0-release"
+  },
+  {
+   "banner": "> **Snapshot** of release v0.17.1 (2026-07-28) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-07-28_v0.17.1-release",
+   "render": "doc+banner",
+   "render_hash": "242f81a15cf0",
+   "source": "docs/roadmap/2026-07-28_v0.17.1-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-07-28_v0.17.1-release"
   },
   {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
@@ -3427,7 +3458,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "57fb916fe384",
+  "render_hash": "34abe36c13ae",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1
