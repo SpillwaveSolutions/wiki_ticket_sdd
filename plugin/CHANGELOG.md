@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.18.0 — unreleased
+
+- **Fix** (github#226): two local items were allowed to own the same external
+  ticket key, and `worklog sync` then overwrote that ticket with whichever item
+  changed last — forever. The correctly linked item is hash-clean, so it is
+  skipped and never repairs the damage, while the wrong one keeps re-pushing. In
+  the reported case a cancelled duplicate marked a live P0 ticket **Done**, and
+  hand-repairing the ticket did not hold because the next sync rewrote it. The
+  failure was invisible from the log: `worklog fold` showed two items each with a
+  perfectly valid `external` block. Three changes close it:
+  - `worklog link` refuses a key another item already owns, naming that item and
+    its title, and printing the two commands that move the ticket deliberately.
+    The check is status-blind — a *cancelled* owner is among the most dangerous,
+    because sync pushes a full update against its key and then closes the ticket.
+    `--force` skips the check.
+  - **New: `worklog unlink <item>`.** A mistaken `link` previously could not be
+    undone through any supported command, which is a sharp edge in a log whose
+    whole design is that mistakes are corrected by appending. It writes an empty
+    `external` through the existing `link` op, so no fold change is needed and an
+    un-upgraded clone applies it correctly too.
+  - `worklog sync` refuses to push any ticket that more than one item claims. It
+    skips just those items — corruption needs both pushed — so the rest of the
+    run still syncs, prints the claimants and the repair as its own block rather
+    than a `drift:` line, and exits non-zero. It fires under `--dry-run` too,
+    since "0 creates on a dry run" is the documented migration acceptance gate.
+- **Fix**: sync now records which ticket it last pushed an item to, not just the
+  content hash. `external` is not part of that hash, so unlinking or re-pointing
+  an item was previously a silent no-op at sync time and the damaged ticket was
+  never repaired. Guarded so clones that predate the field do not re-push
+  everything once.
+- **Fix**: sync's automatic link after creating a ticket can no longer abort the
+  run. It ran between "remote ticket created" and "link recorded", and since
+  create-vs-update is decided purely by whether the item carries a key, dying
+  there meant the next run filed a *second* live ticket.
+- **Fix**: `worklog list` no longer raises on an item whose `external` is null,
+  which a git merge or a hand edit can already produce.
+
 ## 0.17.1 — 2026-07-28
 
 - **Fix** (`bin/worklog`): `close`, `update` and `link` wrote their event under

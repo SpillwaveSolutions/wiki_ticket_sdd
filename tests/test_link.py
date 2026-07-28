@@ -55,6 +55,102 @@ class TestLink(Sandbox):
         self.assertNotEqual(p.returncode, 0)
 
 
+class TestOneOwnerPerKey(Sandbox):
+    """github#226: `link` accepted a key another item already owned, sync
+    pushed both, and a cancelled duplicate marked a live ticket Done."""
+
+    def log(self):
+        with open(os.path.join(self.dir, ".work", "todo.jsonl"),
+                  encoding="utf-8") as fh:
+            return fh.read()
+
+    def test_refuses_a_key_owned_by_another_item(self):
+        a = self.wl("add", "The real one")
+        b = self.wl("add", "The phantom duplicate")
+        self.wl("link", a, "--system", "ado", "--key", "294")
+        before = self.log()
+        p = self.run_wl("link", b, "--system", "ado", "--key", "294")
+        self.assertNotEqual(p.returncode, 0)
+        out = p.stdout + p.stderr
+        self.assertIn(a, out)                 # names the other owner...
+        self.assertIn("The real one", out)    # ...and its title, the tell
+        self.assertIn("worklog unlink", out)  # and the repair
+        self.assertEqual(self.log(), before, "refused link still wrote an event")
+        self.assertNotIn("external", json.loads(self.wl("show", b)))
+
+    def test_refuses_when_the_other_owner_is_closed(self):
+        """The repro with the operations reordered. A cancelled owner is the
+        MOST dangerous: sync pushes a full update against its key and then
+        closes the ticket. An open-items-only guard would wave this through."""
+        a = self.wl("add", "Cancelled duplicate")
+        b = self.wl("add", "The real one")
+        self.wl("link", a, "--system", "ado", "--key", "294")
+        self.wl("close", a, "--status", "cancelled")
+        p = self.run_wl("link", b, "--system", "ado", "--key", "294")
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn(a, p.stdout + p.stderr)
+
+    def test_relinking_the_same_item_is_allowed(self):
+        # Refreshing --url/--rev, re-running a partial bulk migration, and
+        # sync's own auto-link after a create all depend on this.
+        item = self.wl("add", "Push me")
+        self.wl("link", item, "--system", "ado", "--key", "294")
+        self.wl("link", item, "--system", "ado", "--key", "294",
+                "--url", "https://ado/294")
+        self.assertEqual(json.loads(self.wl("show", item))["external"]["url"],
+                         "https://ado/294")
+
+    def test_same_key_on_a_different_system_is_allowed(self):
+        # ado:294 and github:294 are unrelated tickets; a mid-migration repo
+        # legitimately holds both.
+        a = self.wl("add", "In ADO")
+        b = self.wl("add", "In GitHub")
+        self.wl("link", a, "--system", "ado", "--key", "294")
+        self.wl("link", b, "--system", "github", "--key", "294")
+        self.assertEqual(json.loads(self.wl("show", b))["external"]["key"], "294")
+
+    def test_force_bypasses_the_guard(self):
+        a = self.wl("add", "First")
+        b = self.wl("add", "Second")
+        self.wl("link", a, "--system", "ado", "--key", "294")
+        self.wl("link", b, "--system", "ado", "--key", "294", "--force")
+        self.assertEqual(json.loads(self.wl("show", b))["external"]["key"], "294")
+
+
+class TestUnlink(Sandbox):
+    def test_unlink_clears_external_and_list_still_works(self):
+        item = self.wl("add", "Mislinked")
+        self.wl("link", item, "--system", "ado", "--key", "294")
+        self.wl("unlink", item)
+        # {} not null: cmd_list's `.get("external", {})` default never fires
+        # when the key exists, so a null would break `list` for the whole repo.
+        self.assertEqual(json.loads(self.wl("show", item))["external"], {})
+        self.assertIn("-", self.wl("list"))
+
+    def test_unlink_frees_the_key_for_another_item(self):
+        a = self.wl("add", "First owner")
+        b = self.wl("add", "New owner")
+        self.wl("link", a, "--system", "ado", "--key", "294")
+        self.assertNotEqual(
+            self.run_wl("link", b, "--system", "ado", "--key", "294").returncode, 0)
+        self.wl("unlink", a)
+        self.wl("link", b, "--system", "ado", "--key", "294")
+        self.assertEqual(json.loads(self.wl("show", b))["external"]["key"], "294")
+
+    def test_unlink_warns_the_tracker_may_still_carry_the_marker(self):
+        item = self.wl("add", "Mislinked")
+        self.wl("link", item, "--system", "ado", "--key", "294")
+        p = self.run_wl("unlink", item)
+        self.assertIn("marker", p.stderr)
+        self.assertIn(item, p.stderr)
+
+    def test_unlink_without_a_link_exits_nonzero(self):
+        item = self.wl("add", "Never linked")
+        p = self.run_wl("unlink", item)
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn("nothing to unlink", p.stdout + p.stderr)
+
+
 class TestWikiAdd(Sandbox):
     def setUp(self):
         super().setUp()

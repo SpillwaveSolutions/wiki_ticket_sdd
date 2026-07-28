@@ -14,7 +14,7 @@ import tempfile
 import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin"))
-from fold import fold  # noqa: E402
+from fold import fold, external_owners  # noqa: E402
 
 
 def write_log(lines):
@@ -308,6 +308,36 @@ class TestPartitions(unittest.TestCase):
         r = fold([path])
         self.assertEqual(sorted(i["id"] for i in r.open_items()), ["A", "B"])
         self.assertEqual([i["id"] for i in r.closed_items()], ["C"])
+
+
+class TestExternalOwners(unittest.TestCase):
+    """github#226: two items owning one ticket is invisible from the log --
+    every item looks valid on its own. This is the predicate that sees it."""
+
+    def test_groups_by_system_and_key_normalizing_the_key(self):
+        owners = external_owners([
+            {"id": "A", "external": {"system": "ado", "key": 294}},   # int
+            {"id": "B", "external": {"system": "ado", "key": "294"}},  # str
+            {"id": "C", "external": {"system": "github", "key": "294"}},
+            {"id": "D", "external": {}},        # unlinked
+            {"id": "E"},                        # never linked
+            {"id": "F", "external": None},      # merge/hand-edit debris
+        ])
+        # An adapter returning 294 must not be a different ticket from "294".
+        self.assertEqual(owners[("ado", "294")], ["A", "B"])
+        # Different tracker, same number: unrelated tickets.
+        self.assertEqual(owners[("github", "294")], ["C"])
+        # Keyless items are not in the index at all.
+        self.assertEqual(len(owners), 2)
+
+    def test_ids_are_sorted_so_the_newest_link_is_last(self):
+        # The refusal messages point at ids[-1] as "usually the mistake";
+        # ULID order is creation order, so that has to hold.
+        owners = external_owners([
+            {"id": "01Z", "external": {"system": "ado", "key": "1"}},
+            {"id": "01A", "external": {"system": "ado", "key": "1"}},
+        ])
+        self.assertEqual(owners[("ado", "1")], ["01A", "01Z"])
 
 
 if __name__ == "__main__":

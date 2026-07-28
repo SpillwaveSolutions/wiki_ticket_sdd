@@ -679,6 +679,28 @@
    "wiki_key": "plan/2026-07-27-post-v017-drift-and-prefix-resolution"
   },
   {
+   "canonical_key": "plan/2026-07-28-one-owner-per-external-key",
+   "date": "2026-07-28",
+   "doc_type": "plan",
+   "epic": "01KYND4SNNVYRAEQ958HK83W72",
+   "items": [
+    "01KYND4SNNCPZ7R2NWFD7QXYTJ",
+    "01KYND4SNPF2DYKSMDG4NJ39CF",
+    "01KYND4SNPXVR1W4GQA453VB4G",
+    "01KYND4SNP68XAJ30Q4PY4VV11",
+    "01KYND4SNPH307DFDEE9BJ0ZZ4",
+    "01KYND4SNPG1HFE8E0P7F7K7PF",
+    "01KYND4SNPBAW2A1H0GPHDGT0E"
+   ],
+   "slug": "one-owner-per-external-key",
+   "source": "docs/plans/2026-07-28-one-owner-per-external-key.md",
+   "status": "completed",
+   "title": "One local owner per remote ticket (#226)",
+   "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-one-owner-per-external-key",
+   "wiki_key": "plan/2026-07-28-one-owner-per-external-key"
+  },
+  {
    "aliases": [
     "plan/design-docs-release-sync"
    ],
@@ -878,10 +900,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-28T03:54:19Z",
+   "generated_at": "2026-07-28T22:36:11Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "5edf0657",
+   "source_hash": "68ba457f",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

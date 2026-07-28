@@ -270,6 +270,8 @@ Each line of `todo.jsonl` is one immutable event. State is a **fold** over event
 
 **On IDs:** the ULID is the key. Never key on `external.key` — items exist locally before they exist remotely, and remote keys don't survive a system migration.
 
+**One owner per remote ticket:** a given `(external.system, external.key)` pair belongs to at most one item. This is *not* a contradiction of the rule above — that rule is about identity, and no lookup is ever done by external key; this is a uniqueness constraint on a nullable secondary attribute, the way a `UNIQUE` index coexists with a surrogate primary key. It exists because two owners silently corrupt the remote: every sync overwrites the ticket with whichever item changed last, the correctly linked item is hash-clean so it never repairs the damage, and the wrong one keeps re-pushing (github#226). `link` refuses a taken key (`--force` overrides), `unlink` frees one, and `sync` refuses to push any contested ticket. Items with no key are not in the index at all.
+
 ### 5.5 Set-valued fields
 
 `labels` and `depends_on` use `add`/`del`, not `set`, so two devs adding different labels don't clobber each other:

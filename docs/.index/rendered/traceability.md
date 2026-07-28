@@ -2,6 +2,67 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Add a command to undo a link
+`01KYND4SNPXVR1W4GQA453VB4G` · status: done
+- belongs-to: One local owner per remote ticket (#226)
+- references: [github#233](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/233)
+- targets: release/v0.18.0
+- produced-by: [[Plan-one-owner-per-external-key]]
+
+### Make undoing or moving a link actually re-push
+`01KYND4SNPH307DFDEE9BJ0ZZ4` · status: done
+- belongs-to: One local owner per remote ticket (#226)
+- references: [github#232](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/232)
+- targets: release/v0.18.0
+- produced-by: [[Plan-one-owner-per-external-key]]
+
+### Keep sync's automatic linking from ever aborting a run
+`01KYND4SNPG1HFE8E0P7F7K7PF` · status: done
+- belongs-to: One local owner per remote ticket (#226)
+- references: [github#231](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/231)
+- targets: release/v0.18.0
+- produced-by: [[Plan-one-owner-per-external-key]]
+
+### Refuse a duplicate external key when linking
+`01KYND4SNPF2DYKSMDG4NJ39CF` · status: done
+- belongs-to: One local owner per remote ticket (#226)
+- references: [github#230](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/230)
+- targets: release/v0.18.0
+- produced-by: [[Plan-one-owner-per-external-key]]
+
+### Update the mirrored copies, the docs and the changelog
+`01KYND4SNPBAW2A1H0GPHDGT0E` · status: done
+- belongs-to: One local owner per remote ticket (#226)
+- references: [github#229](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/229)
+- targets: release/v0.18.0
+- produced-by: [[Plan-one-owner-per-external-key]]
+
+### Stop sync from pushing a ticket that two items claim
+`01KYND4SNP68XAJ30Q4PY4VV11` · status: done
+- belongs-to: One local owner per remote ticket (#226)
+- references: [github#228](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/228)
+- targets: release/v0.18.0
+- produced-by: [[Plan-one-owner-per-external-key]]
+
+### One local owner per remote ticket (#226)
+`01KYND4SNNVYRAEQ958HK83W72` · status: done
+- references: [github#226](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/226)
+- contains: Add an external-key ownership map to the fold
+- contains: Stop sync from pushing a ticket that two items claim
+- contains: Update the mirrored copies, the docs and the changelog
+- contains: Refuse a duplicate external key when linking
+- contains: Keep sync's automatic linking from ever aborting a run
+- contains: Make undoing or moving a link actually re-push
+- contains: Add a command to undo a link
+- produced-by: [[Plan-one-owner-per-external-key]]
+
+### Add an external-key ownership map to the fold
+`01KYND4SNNCPZ7R2NWFD7QXYTJ` · status: done
+- belongs-to: One local owner per remote ticket (#226)
+- references: [github#227](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/227)
+- targets: release/v0.18.0
+- produced-by: [[Plan-one-owner-per-external-key]]
+
 ### Release procedure omits the re-index required after publishing to the wiki
 `01KYKDGW7HJMRQ2KKF02M8CAAW` · status: todo
 - references: [github#224](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/224)
