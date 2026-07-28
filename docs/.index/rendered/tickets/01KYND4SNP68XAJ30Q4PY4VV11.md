@@ -1,6 +1,6 @@
 # Stop sync from pushing a ticket that two items claim
 
-`01KYND4SNP68XAJ30Q4PY4VV11` · task/bug · **open**
+`01KYND4SNP68XAJ30Q4PY4VV11` · task/bug · **done**
 
 Skip every item in a contested set, print a prominent block naming all claimants
 and the exact repair, and exit non-zero so the failure cannot be missed.

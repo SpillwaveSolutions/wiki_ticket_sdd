@@ -95,6 +95,35 @@ class FoldResult:
         return out
 
 
+def external_owners(items: Iterable[Dict[str, Any]]) -> Dict[Tuple[Any, str], List[str]]:
+    """(system, key) -> sorted ids of every item claiming that remote ticket.
+
+    One remote ticket has exactly one local owner. Two owners and every sync
+    overwrites the ticket with whichever item changed last: the correctly
+    linked item is hash-clean so it is skipped forever and never repairs the
+    damage, while the wrong one keeps re-pushing (github#226).
+
+    Not a violation of spec section 9.2's "never key on external.key" -- that
+    rule is about IDENTITY, and the ULID is still the only primary key; no
+    lookup here is ever done by external key. This is a uniqueness constraint
+    on a nullable secondary attribute.
+
+    (system, key), never key alone: ado:294 and github:294 are unrelated
+    tickets, and a mid-migration repo legitimately holds both. str() the key
+    because adapters return ints -- 294 must not be a different ticket from
+    "294".
+
+    Returns every owner, not just the duplicates: `link` needs "who else owns
+    this", `sync` needs "which keys have more than one". One filter each.
+    """
+    owners: Dict[Tuple[Any, str], List[str]] = {}
+    for i in items:
+        ext = i.get("external") or {}
+        if ext.get("key"):
+            owners.setdefault((ext.get("system"), str(ext["key"])), []).append(i["id"])
+    return {k: sorted(v) for k, v in owners.items()}
+
+
 def read_lines(paths: Iterable[str], result: FoldResult) -> List[Dict[str, Any]]:
     """Step 1: parse. A bad line is reported and skipped -- never fatal.
 

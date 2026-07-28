@@ -237,6 +237,117 @@ class TestOrphanNeverPushed(Sandbox):
         self.assertIn("orphan/untitled item skipped", out)
 
 
+class TestOneOwnerPerKey(Sandbox):
+    """github#226: two items owned one ticket, sync pushed both, and the
+    cancelled duplicate marked a live P0 ticket Done. Hand-repairing the
+    ticket did not hold because the next sync rewrote the damage."""
+
+    def link_dup(self, item, key, system="fake"):
+        """Manufacture the duplicate. `link` refuses it now, so go through
+        --force — which is also how a git union merge of two branches that
+        each linked the same key ends up looking.
+
+        Deliberately NOT a hand-written JSONL line with a fabricated `ev`:
+        the fold orders by `ev`, so a synthetic high one sorts after a real
+        later `unlink` and silently swallows it."""
+        self.wl("link", item, "--system", system, "--key", key, "--force")
+
+    def tickets(self):
+        with open(self.fake_state, encoding="utf-8") as fh:
+            return json.load(fh)["tickets"]
+
+    def contested(self):
+        """Item A owns a real ticket; B is then pointed at the same key.
+
+        B is added AFTER the sync so it never files a ticket of its own —
+        that is the reported shape: a plan-capture phantom that someone
+        'fixes' by linking it to the ticket it appears to duplicate."""
+        a = self.wl("add", "The real ticket", "--priority", "P1").strip()
+        self.sync("--push-only")                       # A creates FAKE#1
+        b = self.wl("add", "The phantom duplicate", "--priority", "P1").strip()
+        self.link_dup(b, "FAKE#1")
+        return a, b
+
+    def test_contested_ticket_is_never_pushed(self):
+        a, b = self.contested()
+        # B's title would otherwise overwrite the ticket's.
+        self.wl("update", b, "--priority", "P0")
+        p = self.run_wl("sync", "--retry-base-delay", "0", "--push-only")
+        self.assertEqual(p.returncode, 1, p.stdout + p.stderr)
+        out = p.stdout + p.stderr
+        self.assertIn(a, out)
+        self.assertIn(b, out)
+        self.assertIn("worklog unlink", out)
+        self.assertEqual(json.loads(self.fake("_counters"))["updates"], 0)
+        self.assertEqual(self.tickets()["FAKE#1"]["item"]["title"],
+                         "The real ticket")
+
+    def test_contested_ticket_is_not_closed_by_a_cancelled_claimant(self):
+        """The exact #226 damage. The closed branch is separate code from the
+        create/update path, so a guard at the discriminator would miss it."""
+        a, b = self.contested()
+        self.wl("close", b, "--status", "cancelled", "--resolution", "duplicate")
+        p = self.run_wl("sync", "--retry-base-delay", "0", "--push-only")
+        self.assertEqual(p.returncode, 1, p.stdout + p.stderr)
+        self.assertFalse(self.tickets()["FAKE#1"]["closed"],
+                         "a cancelled duplicate closed the real ticket")
+        self.assertEqual(json.loads(self.fake("_counters"))["closes"], 0)
+
+    def test_healthy_items_in_the_same_run_still_push(self):
+        # Skip-the-colliders, not refuse-the-run: a repo with one bad pair is
+        # not hard-blocked.
+        self.contested()
+        self.wl("add", "Unrelated work", "--priority", "P1")
+        p = self.run_wl("sync", "--retry-base-delay", "0", "--push-only")
+        self.assertEqual(p.returncode, 1)
+        self.assertEqual(self.fake("_count"), "2", p.stdout + p.stderr)
+
+    def test_dry_run_also_fails(self):
+        # `--dry-run` reporting 0 creates is the documented migration
+        # acceptance gate; a gate that cannot see a duplicate is not a gate.
+        self.contested()
+        p = self.run_wl("sync", "--retry-base-delay", "0", "--push-only",
+                        "--dry-run")
+        self.assertEqual(p.returncode, 1, p.stdout + p.stderr)
+        self.assertIn("claimed by more than one item", p.stdout + p.stderr)
+
+    def test_unlink_frees_the_ticket_and_the_survivor_repushes(self):
+        """The repair, end to end — and the reason last_pushed_key exists:
+        `external` is not in HASH_FIELDS, so nothing here is content-dirty."""
+        a, b = self.contested()
+        self.wl("close", b, "--status", "cancelled", "--resolution", "duplicate")
+        self.wl("unlink", b)
+        out = self.sync("--push-only")            # exits 0 again
+        self.assertEqual(self.fake("_count"), "1", out)   # b filed no ticket
+        self.assertFalse(self.tickets()["FAKE#1"]["closed"])
+
+    def test_unlinked_open_item_re_enters_scope(self):
+        """Without last_pushed_key an unlink is a silent no-op at sync time:
+        the content hash is unchanged, so the item stays out of scope."""
+        item = self.wl("add", "Mislinked", "--priority", "P1").strip()
+        self.sync("--push-only")
+        self.assertEqual(self.fake("_count"), "1")
+        self.wl("unlink", item)
+        out = self.sync("--push-only")            # no field edits at all
+        self.assertEqual(self.fake("_count"), "2", out)
+
+    def test_auto_link_after_create_is_never_blocked(self):
+        """The dispatcher records a key the tracker just minted. If the guard
+        could stop it, sync would die between "remote created" and "link
+        recorded" — and the next run would file a SECOND live ticket."""
+        squatter = self.wl("add", "Squatting on FAKE#1", "--priority", "P1").strip()
+        self.link_dup(squatter, "FAKE#1")
+        self.wl("add", "Files the real FAKE#1", "--priority", "P1")
+        p = self.run_wl("sync", "--retry-base-delay", "0", "--push-only")
+        self.assertNotIn("Traceback", p.stdout + p.stderr)
+        self.assertEqual(self.fake("_count"), "1", p.stdout + p.stderr)
+        # The link was recorded, so the next run updates rather than
+        # re-creating. Two owners now, which the next run refuses — loudly.
+        linked = [i for i in json.loads(self.wl("fold"))
+                  if (i.get("external") or {}).get("key") == "FAKE#1"]
+        self.assertEqual(len(linked), 2, "created a ticket without recording it")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
 

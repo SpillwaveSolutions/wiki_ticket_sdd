@@ -21,6 +21,7 @@ import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from canonical import HASH_FIELDS, canonical_hash
+from fold import external_owners
 
 BIN = os.path.dirname(os.path.abspath(__file__))
 SYNC_STATE = ".work/sync-state.json"
@@ -141,6 +142,7 @@ class Dispatcher:
         self.dry_run = dry_run
         self.counts = dict.fromkeys(self.COUNT_KEYS, 0)
         self.drift = []
+        self.collisions = {}
         self.state = self._load_state()
 
     # --- state (.work/sync-state.json, per-clone) ---
@@ -166,6 +168,27 @@ class Dispatcher:
     def last_pushed(self, iid):
         return self.state.get("items", {}).get(iid, {}).get("last_pushed_hash")
 
+    def is_dirty(self, iid, h, ext):
+        """Content changed, OR the ticket this item points at changed.
+
+        `external` is not in HASH_FIELDS, so the content hash alone can never
+        notice an unlink or a re-link — which made `worklog unlink` a silent
+        no-op at sync time and left github#226's damaged ticket unrepaired.
+
+        Only compares when a key was actually recorded before: clones that
+        predate last_pushed_key must not see every item go dirty at once.
+        """
+        st = self.state.get("items", {}).get(iid, {})
+        if h != st.get("last_pushed_hash"):
+            return True
+        prev = st.get("last_pushed_key")
+        now = str(ext["key"]) if ext.get("key") else None
+        return prev is not None and prev != now
+
+    def record_push(self, iid, h, key):
+        self.item_state(iid).update({"last_pushed_hash": h,
+                                     "last_pushed_key": str(key) if key else None})
+
     # --- process seams ---
 
     def run_adapter(self, *args, stdin=None):
@@ -186,6 +209,26 @@ class Dispatcher:
             self.note("worklog %s failed: %s" % (args[0], p.stderr.strip()))
             return None
         return p.stdout
+
+    def record_link(self, iid, system, key, resp):
+        """Record the key the tracker just minted. Must never abort the run.
+
+        The ticket already exists remotely at this point, and create-vs-update
+        is decided purely by `external.key` presence — so exiting here leaves a
+        live ticket with no local link, and the NEXT run files a second one.
+        Hence --force (the one-owner check cannot apply to a key the remote
+        just handed us) and fatal=False (no link failure may kill a run
+        mid-create). A failure is real drift, not a reason to stop.
+        """
+        link = ["link", iid, "--system", system, "--key", str(key), "--force"]
+        if resp.get("url"):
+            link += ["--url", resp["url"]]
+        if resp.get("rev"):
+            link += ["--rev", resp["rev"]]
+        if self.worklog(*link, fatal=False) is None:
+            self.note("%s: created %s:%s but could not record the link — "
+                      "link it by hand before the next sync, or it will be "
+                      "created again" % (iid[:8], system, key))
 
     def fold_items(self):
         return json.loads(self.worklog("fold"))
@@ -292,7 +335,39 @@ class Dispatcher:
                              "--remote-rev", rev, fatal=False)
                 self.counts["conflicts"] += 1
 
+    def report_collisions(self, items):
+        """Print the contested tickets as their own block, not a drift line.
+
+        Drift is what operators skim — burying a live-data-corruption warning
+        there would reproduce github#226's silent-failure mode in a new
+        costume. The report ends with the full repair including the step
+        people otherwise miss: `external` is not in HASH_FIELDS, so unlinking
+        the impostor does NOT make the surviving owner dirty, and the damaged
+        ticket stays wrong until it is forced back into scope.
+        """
+        titles = {i["id"]: i.get("title", "") for i in items}
+        print("sync: %d ticket(s) claimed by more than one item — NOT pushed "
+              "(github#226)" % len(self.collisions), file=sys.stderr)
+        for (system, key), ids in sorted(self.collisions.items(),
+                                         key=lambda kv: (str(kv[0][0]), kv[0][1])):
+            print("  %s:%s" % (system, key), file=sys.stderr)
+            for i in ids:
+                print("    <- %s  %s" % (i, titles.get(i, "")), file=sys.stderr)
+            # ids are ULID-sorted, so the last is the newest link — usually the
+            # mistake. Said as a heuristic, not asserted as fact.
+            print("  the later link is usually the mistake:", file=sys.stderr)
+            print("    worklog unlink %s" % ids[-1], file=sys.stderr)
+            print("    worklog sync --keys %s   # re-push the surviving owner "
+                  "over the damage" % key, file=sys.stderr)
+
     def push_items(self, items, caps, keys):
+        # Collection-level gate: inside the loop every item looks perfectly
+        # valid, which is exactly why github#226 was invisible from the log.
+        self.collisions = {k: v for k, v in external_owners(items).items()
+                           if len(v) > 1}
+        if self.collisions:
+            self.report_collisions(items)
+        blocked = {i for ids in self.collisions.values() for i in ids}
         for item in items:
             iid = item["id"]
             ext = item.get("external") or {}
@@ -302,11 +377,17 @@ class Dispatcher:
             if item.get("_orphan") or not item.get("title"):
                 self.drift.append(f"{iid[:8]}: orphan/untitled item skipped — not pushed")
                 continue
+            # Before `closed` is computed, so the update-then-close branch is
+            # covered too — that is the path that marked the reported ticket
+            # Done. Corruption needs BOTH claimants pushed, so skipping the
+            # set removes it entirely; the rest of the run proceeds.
+            if iid in blocked:
+                continue
             closed = item.get("status") in CLOSED_STATUSES
             payload_item = self.outbound(item, caps)
             h = canonical_hash(payload_item)
             forced = bool(keys) and (iid in keys or ext.get("key") in keys)
-            dirty = h != self.last_pushed(iid)
+            dirty = self.is_dirty(iid, h, ext)
             # Scope (spec §10.5): open ∪ hash-dirty ∪ --keys. A closed item
             # that never went remote is inert — pushing it would file tickets
             # for long-dead work.
@@ -352,13 +433,7 @@ class Dispatcher:
                         self.note("push %s: response missing key; not linked"
                                   % iid[:8])
                         continue
-                    link = ["link", iid, "--system", caps["system"],
-                            "--key", str(key)]
-                    if resp.get("url"):
-                        link += ["--url", resp["url"]]
-                    if resp.get("rev"):
-                        link += ["--rev", resp["rev"]]
-                    self.worklog(*link)
+                    self.record_link(iid, caps["system"], key, resp)
                     self.counts["created"] += 1
                 else:
                     if self.dry_run:
@@ -379,7 +454,7 @@ class Dispatcher:
                 p = self.run_adapter("close", str(key),
                                      item.get("resolution") or item["status"])
                 if self.handle_exit(item, p):
-                    self.item_state(iid)["last_pushed_hash"] = h
+                    self.record_push(iid, h, key)
                     self.counts["closed"] += 1
                 continue
 
@@ -399,21 +474,17 @@ class Dispatcher:
             except json.JSONDecodeError:
                 self.note("push %s: adapter returned non-JSON; not recorded" % iid[:8])
                 continue
+            pushed_key = ext.get("key")
             if op == "create":
                 if not resp.get("key"):
                     self.note("push %s: response missing key; not linked" % iid[:8])
                     continue
-                link = ["link", iid, "--system", caps["system"],
-                        "--key", str(resp["key"])]
-                if resp.get("url"):
-                    link += ["--url", resp["url"]]
-                if resp.get("rev"):
-                    link += ["--rev", resp["rev"]]
-                self.worklog(*link)
+                pushed_key = resp["key"]
+                self.record_link(iid, caps["system"], pushed_key, resp)
                 self.counts["created"] += 1
             else:
                 self.counts["updated"] += 1
-            self.item_state(iid)["last_pushed_hash"] = h
+            self.record_push(iid, h, pushed_key)
 
     # --- pull side ---
 
@@ -509,7 +580,9 @@ class Dispatcher:
             self.pull(caps, self.fold_items(), keys or [])
         self._save_state()
         self.report()
-        return 0
+        # Non-zero so a contested ticket cannot pass unnoticed in CI. The run
+        # still did everything that was safe to do.
+        return 1 if self.collisions else 0
 
     def report(self):
         print("sync report: " + " ".join("%s=%d" % (k, self.counts[k])

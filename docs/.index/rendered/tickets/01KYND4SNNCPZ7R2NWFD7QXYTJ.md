@@ -1,6 +1,6 @@
 # Add an external-key ownership map to the fold
 
-`01KYND4SNNCPZ7R2NWFD7QXYTJ` · task/bug · **open**
+`01KYND4SNNCPZ7R2NWFD7QXYTJ` · task/bug · **done**
 
 One shared helper that answers "which items claim this remote ticket", so the
 link command and the sync dispatcher enforce the same rule from the same place

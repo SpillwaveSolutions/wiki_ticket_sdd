@@ -1,6 +1,6 @@
 # Make undoing or moving a link actually re-push
 
-`01KYND4SNPH307DFDEE9BJ0ZZ4` · task/bug · **open**
+`01KYND4SNPH307DFDEE9BJ0ZZ4` · task/bug · **done**
 
 The change detection only looks at an item's content, so unlinking or re-pointing
 it is silently a no-op and the damaged ticket is never repaired.

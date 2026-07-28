@@ -21,7 +21,7 @@ the [User Guide](user-guide.md); for the Claude Code plugin, see the
 ## Item ids
 
 Every command that names an existing item — `update`, `close`, `link`,
-`reopen`, `resolve`, `show` — accepts either the full 26-char ULID or any
+`unlink`, `reopen`, `resolve`, `show` — accepts either the full 26-char ULID or any
 **unambiguous prefix**, such as the short id `list` and `show` print. The
 prefix is resolved to the real item before anything is written: an ambiguous
 prefix is refused and the matching ids are named
@@ -131,6 +131,49 @@ bin/worklog link 01J8X0M2QQ --system github --key "owner/repo#412" --url <url>
 ```
 
 `--system` and `--key` are required; `--url`, `--rev`, `--hash` optional.
+
+**One item per ticket.** `link` refuses a key another item already owns, and
+names that item so you can see which one is real:
+
+```
+worklog: ado:294 already belongs to 01KYA99TVCGX79HFNHN1DVT7Y6
+  ('T1.4 Mike MVP page list') — two items owning one ticket makes every sync
+  overwrite it with whichever changed last (github#226).
+```
+
+The check ignores status: a *cancelled* owner still counts, because sync pushes
+a full update against its key and then closes the ticket — that is how a
+duplicate marked a live ticket Done. Re-linking an item to the key it already
+owns is fine (that is how you add a `--url` later).
+
+`--force` skips the check. Prefer `unlink` then `link` for a deliberate move:
+after `--force` the previous owner still holds the key, so sync will skip both
+until you unlink it.
+
+### unlink
+
+Retract a link. Use it when an item was pointed at the wrong ticket — this is
+the supported undo for `link`.
+
+```bash
+bin/worklog unlink 01J8X0M2QQ
+```
+
+The item stops owning the ticket, which frees the key for another item. What
+happens on the next sync:
+
+| The unlinked item is… | Next sync |
+|---|---|
+| open | files a **new** ticket for it — it genuinely owns none now |
+| closed or cancelled | inert; never pushed, never re-created |
+
+Repairing the log does not repair the tracker. Two things to do by hand:
+
+- the ticket may still carry the `worklog:<ulid>` marker (trackers that merge
+  tags rather than overwrite keep both), so remove it there;
+- run `bin/worklog sync --keys <key>` to push the surviving owner back over the
+  damage. Nothing else will: an item's change detection is content-based, and
+  the surviving owner's content never changed.
 
 ### ingest
 
@@ -289,6 +332,25 @@ sync report: created=1 updated=2 closed=1 skipped=14 pulled=1 conflicts=0 deferr
 drift:
   - fields not synced on github: depends_on
 ```
+
+**Contested tickets are never pushed.** If more than one item claims the same
+ticket, sync skips *those items* — the corruption needs both of them pushed —
+finishes the rest of the run, and exits non-zero. It prints as its own block,
+not a `drift:` line, and `--dry-run` fails the same way:
+
+```
+sync: 1 ticket(s) claimed by more than one item — NOT pushed (github#226)
+  ado:294
+    <- 01KYA99TVCGX79HFNHN1DVT7Y6  T1.4 Mike MVP page list
+    <- 01KYMYTNJAWW89RB418CVSE049  AB#294 — MVP page-list sign-off
+  the later link is usually the mistake:
+    worklog unlink 01KYMYTNJAWW89RB418CVSE049
+    worklog sync --keys 294   # re-push the surviving owner over the damage
+```
+
+Do run that last command. Unlinking the impostor does not by itself repair the
+ticket: change detection is content-based and the surviving owner's content
+never changed, so it stays out of scope until `--keys` forces it in.
 
 ### adapter
 

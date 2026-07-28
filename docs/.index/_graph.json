@@ -4734,42 +4734,42 @@
   },
   "item/01KYND4SNNCPZ7R2NWFD7QXYTJ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Add an external-key ownership map to the fold"
   },
   "item/01KYND4SNNVYRAEQ958HK83W72": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "One local owner per remote ticket (#226)"
   },
   "item/01KYND4SNP68XAJ30Q4PY4VV11": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Stop sync from pushing a ticket that two items claim"
   },
   "item/01KYND4SNPBAW2A1H0GPHDGT0E": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Update the mirrored copies, the docs and the changelog"
   },
   "item/01KYND4SNPF2DYKSMDG4NJ39CF": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Refuse a duplicate external key when linking"
   },
   "item/01KYND4SNPG1HFE8E0P7F7K7PF": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Keep sync's automatic linking from ever aborting a run"
   },
   "item/01KYND4SNPH307DFDEE9BJ0ZZ4": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Make undoing or moving a link actually re-push"
   },
   "item/01KYND4SNPXVR1W4GQA453VB4G": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Add a command to undo a link"
   },
   "plan/2026-07-17_worklog-core_plan": {

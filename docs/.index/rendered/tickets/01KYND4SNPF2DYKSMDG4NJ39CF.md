@@ -1,6 +1,6 @@
 # Refuse a duplicate external key when linking
 
-`01KYND4SNPF2DYKSMDG4NJ39CF` · task/bug · **open**
+`01KYND4SNPF2DYKSMDG4NJ39CF` · task/bug · **done**
 
 Linking an item to a ticket another item already owns is the mistake that causes
 the corruption.

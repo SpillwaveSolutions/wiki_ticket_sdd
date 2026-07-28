@@ -23,13 +23,13 @@ Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
 import argparse, glob, json, os, re, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ulid
-from fold import (fold, FoldResult, read_lines, dedupe_and_sort,
+from fold import (fold, FoldResult, read_lines, dedupe_and_sort, external_owners,
                   OPEN_STATUSES, CLOSED_STATUSES, LEGACY_TYPE_MAP)
 
 LOG = ".work/todo.jsonl"
 PATHS = (".work/todo.jsonl", ".work/done.jsonl")
 MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
-VERSION = "0.17.1"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+VERSION = "0.18.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
 def append(event):
@@ -112,15 +112,19 @@ def _require_item(item):
         sys.exit("worklog: empty item id")
 
 
-def _resolve(item):
+def _resolve(item, r=None):
     """Resolve a full ULID or an unambiguous prefix to the real item
     (worklog 01KYA99TVC). Every command that names an existing item goes
     through here: close/update used to write events under the raw string, so
     the short id that `show`/`list` print minted a phantom orphan item instead
     of touching the real one, and update's taxonomy/closed-status guards ran
-    against an empty dict."""
+    against an empty dict.
+
+    `r` lets a caller that needs the whole fold anyway (link's one-owner
+    check) hand it in rather than folding the log twice -- the documented
+    bulk-migration workflow links hundreds of items in a loop."""
     _require_item(item)
-    r = fold([LOG, ".work/done.jsonl"])
+    r = r or fold([LOG, ".work/done.jsonl"])
     match = [i for k, i in r.items.items() if k.startswith(item)]
     if not match:
         sys.exit(f"worklog: no item matching {item}")
@@ -176,13 +180,63 @@ def cmd_reopen(a):
 def cmd_link(a):
     # Same phantom-item hazard as close/update: a link event under a prefix
     # mints an orphan carrying a real external key, which sync then pushes.
-    ev = base(_resolve(a.item)["id"], "link", a.actor)
+    r = fold([LOG, ".work/done.jsonl"])
+    cur = _resolve(a.item, r)
+    # One remote ticket, one local owner (github#226). Status-blind on purpose:
+    # a CLOSED owner is among the most dangerous, because sync pushes a full
+    # update against its key and then closes the ticket -- that is what marked
+    # the reported ticket Done. Guarding only open items would wave the same
+    # bug through with the two commands reordered (cancel first, then link).
+    # Self-excluded: re-linking an item to the key it already owns is normal
+    # (refreshing --url/--rev, re-running a partial migration, sync's own
+    # auto-link after a create).
+    if not a.force:
+        others = [i for i in external_owners(r.items.values())
+                  .get((a.system, str(a.key)), []) if i != cur["id"]]
+        if others:
+            owner = r.items[others[0]]
+            sys.exit(
+                f"worklog: {a.system}:{a.key} already belongs to {owner['id']}\n"
+                f"  ({owner.get('title', '')!r}) — two items owning one ticket makes "
+                "every sync\n  overwrite it with whichever changed last (github#226).\n"
+                "To move it:\n"
+                f"  worklog unlink {owner['id']}\n"
+                f"  worklog link {cur['id']} --system {a.system} --key {a.key}")
+    ev = base(cur["id"], "link", a.actor)
     ev["set"] = {"external": {k: v for k, v in {
         "system": a.system, "key": a.key, "url": a.url, "rev": a.rev,
         "hash": a.hash,
         "synced_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }.items() if v is not None}}
     append(ev)
+
+
+def cmd_unlink(a):
+    """Retract a link, so a mistaken one is correctable by appending -- which
+    is the whole point of an append-only log, and the one case where it was
+    not possible (github#226).
+
+    No new fold op: `link` already falls through to _apply_mutations, which
+    does whole-field last-writer-wins on `external`, so an EMPTY external is
+    the retraction. A clone running an older fold applies it correctly too.
+
+    {} and never null: cmd_list's reader is `.get("external", {})`, whose
+    default never fires when the key exists with a None value -- null there
+    would raise AttributeError for every `worklog list` in the repo.
+    """
+    cur = _resolve(a.item)
+    ext = cur.get("external") or {}
+    if not ext.get("key"):
+        sys.exit(f"worklog: {cur['id']} has no external link; nothing to unlink")
+    ev = base(cur["id"], "link", a.actor)
+    ev["set"] = {"external": {}}
+    append(ev)
+    print(f"unlinked {cur['id']} from {ext.get('system')}:{ext['key']}")
+    # The log is only half of it: trackers that merge rather than overwrite
+    # (ADO tags) leave the marker behind, and the next pull can still attribute
+    # a remote change to this ULID.
+    print(f"note: {ext.get('system')}:{ext['key']} may still carry the marker "
+          f"worklog:{cur['id']} — remove it in the tracker", file=sys.stderr)
 
 
 INGEST_FIELDS = ("title", "body", "status", "priority", "assignee", "type",
@@ -287,7 +341,9 @@ def cmd_list(a):
     r = fold([LOG, ".work/done.jsonl"])
     items = r.open_items() if not a.all else list(r.items.values())
     for i in sorted(items, key=lambda x: (x.get("priority", "P9"), x["id"])):
-        ext = i.get("external", {}).get("key", "-")
+        # `or {}` not a .get default: unlink writes {} and a merge can leave a
+        # null, and the default never fires when the key exists.
+        ext = (i.get("external") or {}).get("key", "-")
         print(f"{i['id'][:8]}  {i.get('priority','--'):3}  {i.get('status','?'):12} "
               f"{ext:10} {i.get('title','')}")
     if r.conflicts():
@@ -1022,6 +1078,15 @@ lk.add_argument("item")
 lk.add_argument("--system", required=True)
 lk.add_argument("--key", required=True)
 lk.add_argument("--url"); lk.add_argument("--rev"); lk.add_argument("--hash")
+lk.add_argument("--force", action="store_true",
+                help="skip the one-owner-per-ticket check. Sync uses this to "
+                     "record a key the tracker just minted; for a deliberate "
+                     "move prefer `unlink` then `link`, because after --force "
+                     "the previous owner still holds the key and sync will "
+                     "skip both until it is unlinked")
+
+ul = sub.add_parser("unlink"); ul.set_defaults(fn=cmd_unlink)
+ul.add_argument("item")
 
 ig = sub.add_parser("ingest"); ig.set_defaults(fn=cmd_ingest)
 ig.add_argument("item")

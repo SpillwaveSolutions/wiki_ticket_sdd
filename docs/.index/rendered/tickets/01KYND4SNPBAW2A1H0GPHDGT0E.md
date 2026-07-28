@@ -1,6 +1,6 @@
 # Update the mirrored copies, the docs and the changelog
 
-`01KYND4SNPBAW2A1H0GPHDGT0E` · task/ops · **open**
+`01KYND4SNPBAW2A1H0GPHDGT0E` · task/ops · **done**
 
 The command scripts ship in two places that must stay byte-identical.
 

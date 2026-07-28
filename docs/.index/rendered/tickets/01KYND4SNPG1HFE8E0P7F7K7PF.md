@@ -1,6 +1,6 @@
 # Keep sync's automatic linking from ever aborting a run
 
-`01KYND4SNPG1HFE8E0P7F7K7PF` · task/bug · **open**
+`01KYND4SNPG1HFE8E0P7F7K7PF` · task/bug · **done**
 
 Sync records the ticket key right after creating the ticket.
 
