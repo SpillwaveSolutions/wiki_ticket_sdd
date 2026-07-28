@@ -13,6 +13,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 - Shipped: Resolve work-item id prefixes in close and update
 - Shipped: Close out stale work-log bookkeeping (#211)
 - Shipped: Remove two abandoned git worktrees (#212)
+- Shipped: Release v0.17.1
 
 ## v0.17.0 — 2026-07-27
 

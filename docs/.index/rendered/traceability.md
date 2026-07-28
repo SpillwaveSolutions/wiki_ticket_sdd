@@ -3,7 +3,7 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Release v0.17.1
-`01KYKATVGM10E5HVZHVPA1C5J0` · status: in_progress
+`01KYKATVGM10E5HVZHVPA1C5J0` · status: done
 - targets: release/v0.17.1
 
 ### Remove two abandoned git worktrees

@@ -836,3 +836,4 @@
 {"actor":"richardhightower","ev":"01KYKB3N2GCK8M6QDD0444383H","item":"01KYJYG4PYDA4H10JXXRDRCXPZ","op":"update","set":{"milestone":"v0.17.1"},"ts":"2026-07-28T03:08:19Z"}
 {"actor":"richardhightower","ev":"01KYKB3N7794BWSG75Z7Y4YBXE","item":"01KYJYG4PYFFTK74AZ7RW90M7R","op":"update","set":{"milestone":"v0.17.1"},"ts":"2026-07-28T03:08:20Z"}
 {"actor":"richardhightower","ev":"01KYKB3NCHYSB3WVAS252BAB77","item":"01KYJYG4PYJRAFEHJCP51XVCRA","op":"update","set":{"milestone":"v0.17.1"},"ts":"2026-07-28T03:08:20Z"}
+{"actor":"richardhightower","ev":"01KYKD307KZAK5DVJWTRR15D70","item":"01KYKATVGM10E5HVZHVPA1C5J0","op":"close","set":{"resolution":"v0.17.1 tagged at b71e5e4 and released on GitHub; changelog dated, roadmap snapshot frozen, design docs + user guide regenerated and published (PRs #215, #216, #217, #218, #219)","status":"done"},"ts":"2026-07-28T03:42:55Z"}
