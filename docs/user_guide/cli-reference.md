@@ -18,6 +18,19 @@ the [User Guide](user-guide.md); for the Claude Code plugin, see the
 | `--actor <name>` | Who caused the event (defaults to `$USER`). Recorded on every event; goes **before** the subcommand: `bin/worklog --actor alice update …` |
 | `--version` | Print the CLI version and exit |
 
+## Item ids
+
+Every command that names an existing item — `update`, `close`, `link`,
+`reopen`, `resolve`, `show` — accepts either the full 26-char ULID or any
+**unambiguous prefix**, such as the short id `list` and `show` print. The
+prefix is resolved to the real item before anything is written: an ambiguous
+prefix is refused and the matching ids are named
+(`worklog: 01KY is ambiguous — matches …`), and a prefix that matches nothing
+is refused (`worklog: no item matching …`) with no event appended.
+
+The machine-facing `ingest` and `conflict` subcommands still take the full
+ULID — the sync dispatcher passes ids it already resolved.
+
 ## Subcommands
 
 ### add
@@ -71,7 +84,7 @@ bin/worklog update 01J8X0M2QQ --body "What and why a junior dev/PM can read"
 
 | Flag | Values |
 |---|---|
-| `<item>` | positional ULID, required |
+| `<item>` | positional ULID or unambiguous prefix, required |
 | `--status` | `todo` `in_progress` `blocked` |
 | `--priority` | `P0`–`P3` |
 | `--title` | new title |
@@ -101,8 +114,8 @@ free text. Closing is just an event — nothing moves files at runtime.
 ### reopen
 
 Reopen a closed item: moves it back to `todo` and drops the stale
-`resolution` in one event. Accepts a unique id prefix; prints the full
-ULID. Refuses items that aren't closed.
+`resolution` in one event. Prints the full ULID. Refuses items that aren't
+closed.
 
 ```bash
 bin/worklog reopen 01J8X0M2QQ
@@ -174,7 +187,7 @@ warning to stderr if any items carry unresolved sync conflicts.
 
 ### show
 
-Print one item's full folded state as JSON. Accepts a unique id prefix.
+Print one item's full folded state as JSON.
 
 ```bash
 bin/worklog show 01J8X0M2
@@ -465,7 +478,9 @@ bin/worklog trace-check --strict
 ## Git hooks
 
 Installed via `git config core.hooksPath hooks` (done for you by
-`/worklog:init`).
+`/worklog:init`). An absolute path to the same directory is equally valid and
+is what a **git worktree** needs — a relative `hooks` resolves against the
+worktree's own root. The session doctor accepts either form.
 
 - **`hooks/pre-commit`** — on every commit:
   1. Every `.work/*.jsonl` file ends with a trailing newline (the invariant

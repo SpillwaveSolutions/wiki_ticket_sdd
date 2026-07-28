@@ -62,6 +62,12 @@ the fold is a plain string sort, deterministic on every machine. The ULID is
 the item's primary key forever; external ticket keys (like `PROJ-412`) are
 just linked identity.
 
+You rarely type all 26 characters. Every command that names an existing item
+(`update`, `close`, `link`, `reopen`, `resolve`, `show`) takes any unambiguous
+prefix — paste the short id `worklog list` and `worklog show` print. A prefix
+that matches two items is refused and the candidates are named; a prefix that
+matches nothing is refused and nothing is written.
+
 ### Union merge: concurrent teammates don't conflict
 
 `.gitattributes` marks the log files `merge=union`: a merge takes both sides,

@@ -186,7 +186,7 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | `docs/user_guide/` | User guide, CLI reference, plugin guide |
 | `docs/integrations/` | Living per-system setup guides (11 SDD tools + ticket/wiki systems), published to the wiki and used as the `integration-guide` skill's offline fallback |
 | `hooks/` | `pre-commit`, `pre-merge-commit`, `commit-msg`, `exit-plan-capture.sh` |
-| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.16.0** |
+| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.17.1** |
 | `tests/` | Unit and integration tests |
 
 ## Testing
