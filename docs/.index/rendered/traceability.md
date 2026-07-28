@@ -2,6 +2,22 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Release procedure omits the re-index required after publishing to the wiki
+`01KYKDGW7HJMRQ2KKF02M8CAAW` · status: todo
+- references: [github#224](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/224)
+
+### Version lockstep check does not cover the README version marker
+`01KYKDGW3DFDEQ1DEDFR6N45SM` · status: todo
+- references: [github#223](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/223)
+
+### Roadmap hides epics whose children are all closed but which are still open
+`01KYKDGVZ4C7FSCY7GJNGPV0Q5` · status: todo
+- references: [github#222](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/222)
+
+### roadmap-snapshot freezes whatever is on disk instead of rendering first
+`01KYKDGVTYMZ0E84BVBC29FTJY` · status: todo
+- references: [github#221](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/221)
+
 ### Release v0.17.1
 `01KYKATVGM10E5HVZHVPA1C5J0` · status: done
 - targets: release/v0.17.1
