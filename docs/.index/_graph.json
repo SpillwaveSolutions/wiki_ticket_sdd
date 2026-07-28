@@ -1367,6 +1367,11 @@
   },
   {
    "from": "item/01KYAKH389T1ZKKBP94WH2HK94",
+   "to": "pr/188",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYAKH389T1ZKKBP94WH2HK94",
    "to": "ticket/github#143",
    "type": "references"
   },
@@ -4212,7 +4217,7 @@
   },
   "item/01KYAKH389T1ZKKBP94WH2HK94": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "sync_dispatch push_items KeyError on ext['key'] when forcing a never-remote closed item into scope via --keys"
   },
   "item/01KYBD2HYJVNHX698WR1JD96YC": {
@@ -4598,6 +4603,9 @@
    "doc_type": "pr"
   },
   "pr/179": {
+   "doc_type": "pr"
+  },
+  "pr/188": {
    "doc_type": "pr"
   },
   "pr/197": {

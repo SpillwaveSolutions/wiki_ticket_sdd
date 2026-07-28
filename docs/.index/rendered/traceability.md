@@ -337,7 +337,8 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-branch-discipline-hooks]]
 
 ### sync_dispatch push_items KeyError on ext['key'] when forcing a never-remote closed item into scope via --keys
-`01KYAKH389T1ZKKBP94WH2HK94` · status: todo
+`01KYAKH389T1ZKKBP94WH2HK94` · status: done
+- lands-in: pr/188
 - references: [github#143](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/143)
 
 ### ia_graph build_graph() ignores commit-only sidecar code links (lands-in only honors code.pr)
