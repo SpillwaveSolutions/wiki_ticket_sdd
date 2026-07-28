@@ -2036,6 +2036,26 @@
    "type": "targets"
   },
   {
+   "from": "item/01KYKDGVTYMZ0E84BVBC29FTJY",
+   "to": "ticket/github#221",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYKDGVZ4C7FSCY7GJNGPV0Q5",
+   "to": "ticket/github#222",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYKDGW3DFDEQ1DEDFR6N45SM",
+   "to": "ticket/github#223",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYKDGW7HJMRQ2KKF02M8CAAW",
+   "to": "ticket/github#224",
+   "type": "references"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -4542,6 +4562,26 @@
    "status": "done",
    "title": "Release v0.17.1"
   },
+  "item/01KYKDGVTYMZ0E84BVBC29FTJY": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "roadmap-snapshot freezes whatever is on disk instead of rendering first"
+  },
+  "item/01KYKDGVZ4C7FSCY7GJNGPV0Q5": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Roadmap hides epics whose children are all closed but which are still open"
+  },
+  "item/01KYKDGW3DFDEQ1DEDFR6N45SM": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Version lockstep check does not cover the README version marker"
+  },
+  "item/01KYKDGW7HJMRQ2KKF02M8CAAW": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Release procedure omits the re-index required after publishing to the wiki"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -5249,6 +5289,22 @@
   "ticket/github#212": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/212"
+  },
+  "ticket/github#221": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/221"
+  },
+  "ticket/github#222": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/222"
+  },
+  "ticket/github#223": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/223"
+  },
+  "ticket/github#224": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/224"
   },
   "ticket/github#23": {
    "doc_type": "ticket",

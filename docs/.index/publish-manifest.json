@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "4fe5fb5e9bf5",
+   "render_hash": "38e5734499ca",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2731,6 +2731,46 @@
    "wiki_key": "item/01KYKATVGM10E5HVZHVPA1C5J0"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KYKDGVTYMZ0E84BVBC29FTJY",
+   "render": "as-is",
+   "render_hash": "47f8ef33275c",
+   "source": "docs/.index/rendered/tickets/01KYKDGVTYMZ0E84BVBC29FTJY.md",
+   "title": "roadmap-snapshot freezes whatever is on disk instead of rendering first",
+   "truth_state": "open",
+   "wiki_key": "item/01KYKDGVTYMZ0E84BVBC29FTJY"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYKDGVZ4C7FSCY7GJNGPV0Q5",
+   "render": "as-is",
+   "render_hash": "a0a8c57f83bd",
+   "source": "docs/.index/rendered/tickets/01KYKDGVZ4C7FSCY7GJNGPV0Q5.md",
+   "title": "Roadmap hides epics whose children are all closed but which are still open",
+   "truth_state": "open",
+   "wiki_key": "item/01KYKDGVZ4C7FSCY7GJNGPV0Q5"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYKDGW3DFDEQ1DEDFR6N45SM",
+   "render": "as-is",
+   "render_hash": "f103265bd048",
+   "source": "docs/.index/rendered/tickets/01KYKDGW3DFDEQ1DEDFR6N45SM.md",
+   "title": "Version lockstep check does not cover the README version marker",
+   "truth_state": "open",
+   "wiki_key": "item/01KYKDGW3DFDEQ1DEDFR6N45SM"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYKDGW7HJMRQ2KKF02M8CAAW",
+   "render": "as-is",
+   "render_hash": "1fa0e3779ea9",
+   "source": "docs/.index/rendered/tickets/01KYKDGW7HJMRQ2KKF02M8CAAW.md",
+   "title": "Release procedure omits the re-index required after publishing to the wiki",
+   "truth_state": "open",
+   "wiki_key": "item/01KYKDGW7HJMRQ2KKF02M8CAAW"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -3215,11 +3255,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-28T03:42:55Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-28T03:54:19Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "2643d57f7d82",
+   "render_hash": "9c8ede5850e4",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
