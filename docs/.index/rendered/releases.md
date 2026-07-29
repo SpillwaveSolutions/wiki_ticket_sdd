@@ -2,6 +2,18 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
+## v0.18.0 — 2026-07-29
+
+- Roadmap snapshot: [[Roadmap-2026-07-29_v0.18.0-release]]
+- Shipped: Add an external-key ownership map to the fold (#227)
+- Shipped: Stop sync from pushing a ticket that two items claim (#228)
+- Shipped: Update the mirrored copies, the docs and the changelog (#229)
+- Shipped: Refuse a duplicate external key when linking (#230)
+- Shipped: Keep sync's automatic linking from ever aborting a run (#231)
+- Shipped: Make undoing or moving a link actually re-push (#232)
+- Shipped: Add a command to undo a link (#233)
+- Shipped: GitHub adapter can file duplicate issues when rate-limited mid-create (#235)
+
 ## v0.17.1 — 2026-07-28
 
 - Design: [[Code-Walkthrough-2026-07-28_v0.17.1-release]]

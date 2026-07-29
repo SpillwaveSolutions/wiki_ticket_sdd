@@ -2216,6 +2216,11 @@
    "type": "references"
   },
   {
+   "from": "item/01KYNKBCNS8WY5BH2B7EDBHMF1",
+   "to": "release/v0.18.0",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -3323,6 +3328,21 @@
   {
    "from": "roadmap-snapshot/2026-07-28_v0.17.1-release",
    "to": "release/v0.17.1",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-29_v0.18.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-29_v0.18.0-release",
+   "to": "roadmap-snapshot/2026-07-28_v0.17.1-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-07-29_v0.18.0-release",
+   "to": "release/v0.18.0",
    "type": "targets"
   },
   {
@@ -4867,6 +4887,11 @@
    "status": "todo",
    "title": "Log compaction is silently undone by any branch that spans it"
   },
+  "item/01KYNKBCNS8WY5BH2B7EDBHMF1": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Release v0.18.0"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -5155,6 +5180,12 @@
   "roadmap-snapshot/2026-07-28_v0.17.1-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-07-28_v0.17.1-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-07-29_v0.18.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-07-29_v0.18.0-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },
