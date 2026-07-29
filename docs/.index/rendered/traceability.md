@@ -3,7 +3,7 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Release v0.18.0
-`01KYNKBCNS8WY5BH2B7EDBHMF1` · status: in_progress
+`01KYNKBCNS8WY5BH2B7EDBHMF1` · status: done
 - targets: release/v0.18.0
 
 ### Log compaction is silently undone by any branch that spans it

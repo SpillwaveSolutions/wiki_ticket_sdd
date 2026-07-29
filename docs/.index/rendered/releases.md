@@ -15,6 +15,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 - Shipped: Make undoing or moving a link actually re-push (#232)
 - Shipped: Add a command to undo a link (#233)
 - Shipped: GitHub adapter can file duplicate issues when rate-limited mid-create (#235)
+- Shipped: Release v0.18.0
 
 ## v0.17.1 — 2026-07-28
 
