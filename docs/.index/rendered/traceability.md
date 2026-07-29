@@ -35,8 +35,9 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#236](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/236)
 
 ### GitHub adapter can file duplicate issues when rate-limited mid-create
-`01KYNHEV1BJ48RKWHTXCJYVRAF` · status: todo
+`01KYNHEV1BJ48RKWHTXCJYVRAF` · status: done
 - references: [github#235](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/235)
+- targets: release/v0.18.0
 
 ### Add a command to undo a link
 `01KYND4SNPXVR1W4GQA453VB4G` · status: done

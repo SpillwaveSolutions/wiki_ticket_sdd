@@ -88,6 +88,29 @@ def issue_rev(repo, key):
     return json.loads(out)["updatedAt"]
 
 
+def create_issue(repo, title, body, labels):
+    """File the issue and read its revision in ONE call (worklog #235).
+
+    `gh issue create` prints only the new URL, so the `rev` the contract
+    requires needed a second `gh issue view` — and that read happens AFTER
+    the issue exists. A rate limit there exits 4, the dispatcher retries the
+    whole push, and `op` is still "create", so every retry files another
+    issue: one transient failure, up to four live duplicates.
+
+    Nothing may fail retryably between mutating the remote and reporting
+    what was mutated. The REST create returns `number`, `html_url` and
+    `updated_at` together, so there is no window left to fail in. The update
+    path keeps the second read on purpose: re-editing the same issue is
+    idempotent, so a retry there costs a call, not a duplicate.
+    """
+    args = ["api", f"repos/{repo}/issues",
+            "-f", f"title={title}", "-f", f"body={body}"]
+    for lab in labels:
+        args += ["-f", f"labels[]={lab}"]
+    issue = json.loads(gh(args))
+    return str(issue["number"]), issue["html_url"], issue["updated_at"]
+
+
 def taxonomy(item):
     """(level, kind) from the item; deprecated `type` alias tolerated."""
     level, kind = item.get("level"), item.get("kind")
@@ -195,14 +218,10 @@ def cmd_push():
     for lab in labels:
         ensure_label(repo, lab)
 
+    rev = None
     if op == "create":
-        args = ["issue", "create", "-R", repo,
-                "--title", item.get("title") or "(untitled)",
-                "--body", build_body(marker, item)]
-        for lab in labels:
-            args += ["--label", lab]
-        url = gh(args).strip().splitlines()[-1]
-        key = url.rstrip("/").rsplit("/", 1)[-1]
+        key, url, rev = create_issue(repo, item.get("title") or "(untitled)",
+                                     build_body(marker, item), labels)
     elif op == "update":
         if key is None:
             die(1, "push op=update with null key: dispatcher bug")
@@ -223,8 +242,10 @@ def cmd_push():
     if item.get("milestone"):
         set_milestone(repo, key, item["milestone"])
 
+    # create already has the rev from the call that made the issue; only the
+    # (idempotent) update path pays for a second read.
     print(json.dumps({"key": str(key), "url": url,
-                      "rev": issue_rev(repo, key), "hash": None}))
+                      "rev": rev or issue_rev(repo, key), "hash": None}))
 
 
 def cmd_pull(argv):
