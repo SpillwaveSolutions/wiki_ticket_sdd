@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.18.0 — unreleased
+## 0.18.0 — 2026-07-29
 
 - **Fix** (github#226): two local items were allowed to own the same external
   ticket key, and `worklog sync` then overwrote that ticket with whichever item
