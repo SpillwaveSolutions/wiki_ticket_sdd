@@ -60,11 +60,13 @@ Every event and every item gets a ULID — a sortable, timestamp-prefixed
 unique ID like `01J8X0M2QQ...`. Sorting events by ULID sorts them by time, so
 the fold is a plain string sort, deterministic on every machine. The ULID is
 the item's primary key forever; external ticket keys (like `PROJ-412`) are
-just linked identity.
+just linked identity — and that link runs one way only: **one remote ticket
+has exactly one local owner.** `link` refuses a key another item already
+holds (even a cancelled one), and `unlink` is the supported undo.
 
 You rarely type all 26 characters. Every command that names an existing item
-(`update`, `close`, `link`, `reopen`, `resolve`, `show`) takes any unambiguous
-prefix — paste the short id `worklog list` and `worklog show` print. A prefix
+(`update`, `close`, `link`, `unlink`, `reopen`, `resolve`, `show`) takes any
+unambiguous prefix — paste the short id `worklog list` and `worklog show` print. A prefix
 that matches two items is refused and the candidates are named; a prefix that
 matches nothing is refused and nothing is written.
 
@@ -373,9 +375,10 @@ never fails a command.
 ## Sync in depth
 
 Ticket sync (`bin/worklog sync`) runs through a typed adapter contract. The
-dispatcher (`bin/sync_dispatch.py`) owns every invariant — scope, canonical
-hash-skip, create-vs-update, idempotency markers, echo suppression on pull,
-conflict detection — and a per-system adapter is a generated dumb
+dispatcher (`bin/sync_dispatch.py`) owns every invariant — scope, change
+detection (the canonical hash *and* the ticket the item last pushed to),
+one-owner-per-ticket, create-vs-update, idempotency markers, echo suppression
+on pull, conflict detection — and a per-system adapter is a generated dumb
 translator that just maps canonical JSON to the platform's API and back.
 `worklog adapter check` gates any adapter: nothing activates until it
 validates green against the contract, and a missing adapter means the
@@ -384,6 +387,14 @@ drift report — counts plus anything a human should see (conflicts,
 unsupported fields, deferred items). That report is the sync's voice; read
 it. Conflicts it detects are resolved with
 `bin/worklog resolve <item> --field <f> --take local|remote`.
+
+One thing does not go in the drift report: a ticket claimed by more than one
+item. Sync refuses to push *those* items (corruption needs both of them
+pushed), finishes the rest of the run, prints the claimants and the repair as
+its own block, and **exits non-zero** — under `--dry-run` too. The repair
+ends with `worklog sync --keys <key>`, because unlinking the impostor does not
+by itself make the surviving owner dirty enough to re-push over the damage.
+See the [CLI Reference](cli-reference.md#unlink).
 
 Remote ticket **bodies** are composed from the local source via
 `bin/worklog ticket-body <ulid>` (issue-description skill): summary,
