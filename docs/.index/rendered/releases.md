@@ -4,6 +4,8 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 
 ## v0.18.0 — 2026-07-29
 
+- Design: [[Code-Walkthrough-2026-07-29_v0.18.0-release]]
+- Design: [[Design-Doc-2026-07-29_v0.18.0-release]]
 - Roadmap snapshot: [[Roadmap-2026-07-29_v0.18.0-release]]
 - Shipped: Add an external-key ownership map to the fold (#227)
 - Shipped: Stop sync from pushing a ticket that two items claim (#228)
