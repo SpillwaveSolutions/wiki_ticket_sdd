@@ -2171,6 +2171,11 @@
    "type": "references"
   },
   {
+   "from": "item/01KYNHEV1BJ48RKWHTXCJYVRAF",
+   "to": "release/v0.18.0",
+   "type": "targets"
+  },
+  {
    "from": "item/01KYNHEV5GCR1MDNECAXFT0GK2",
    "to": "ticket/github#236",
    "type": "references"
@@ -4819,7 +4824,7 @@
   },
   "item/01KYNHEV1BJ48RKWHTXCJYVRAF": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "GitHub adapter can file duplicate issues when rate-limited mid-create"
   },
   "item/01KYNHEV5GCR1MDNECAXFT0GK2": {

@@ -36,6 +36,16 @@
   there meant the next run filed a *second* live ticket.
 - **Fix**: `worklog list` no longer raises on an item whose `external` is null,
   which a git merge or a hand edit can already produce.
+- **Fix** (github#235): the GitHub adapter created an issue with `gh issue
+  create`, which prints only the new URL, and then made a *second* call to read
+  back the revision the contract requires. That read happens after the issue
+  exists — so a rate limit there exited with the "transient, retry me" code, the
+  dispatcher retried the whole push with `op` still `create`, and **each retry
+  filed another issue**: one transient failure, up to four live duplicates.
+  Create now goes through the REST endpoint, which returns the number, URL and
+  revision together, leaving no window to fail in. The update path keeps its
+  read-back deliberately — re-editing the same issue is idempotent, so a retry
+  there costs a call, not a duplicate.
 
 ## 0.17.1 — 2026-07-28
 
