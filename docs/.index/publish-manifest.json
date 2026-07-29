@@ -3724,7 +3724,7 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "fa53af628677",
+   "render_hash": "96c2837e200f",
    "source": "docs/user_guide/user-guide.md",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",
