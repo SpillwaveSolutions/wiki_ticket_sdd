@@ -2321,6 +2321,121 @@
    "type": "references"
   },
   {
+   "from": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "to": "ticket/github#255",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYTJGK2X700NYTZHB0JDE6Q1",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYTJGK2X700NYTZHB0JDE6Q1",
+   "to": "ticket/github#256",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYTJGK2X7FC4PTAMH60ECY36",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYTJGK2X7FC4PTAMH60ECY36",
+   "to": "ticket/github#257",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYTJGK2X7FFZC5BCYF2BPSSF",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYTJGK2X7FFZC5BCYF2BPSSF",
+   "to": "ticket/github#258",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYTJGK2X98H9T7VVR879B0XC",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYTJGK2X98H9T7VVR879B0XC",
+   "to": "ticket/github#259",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYTJGK2XDQVAZ85ZEH92NGGW",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYTJGK2XDQVAZ85ZEH92NGGW",
+   "to": "ticket/github#260",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYTJGK2XDTKNHGH8QTHBHCTY",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYTJGK2XDTKNHGH8QTHBHCTY",
+   "to": "ticket/github#261",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYTJGK2XJD516RXMZ52PDZP1",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYTJGK2XJD516RXMZ52PDZP1",
+   "to": "ticket/github#262",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYTJGK2XJSCMJ9K16YDXXMD2",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYTJGK2XJSCMJ9K16YDXXMD2",
+   "to": "ticket/github#263",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYTJGK2XMY73EJMZ026Q573G",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYTJGK2XMY73EJMZ026Q573G",
+   "to": "ticket/github#264",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYTJGK2XSA2C4H72SKP8F34D",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYTJGK2XSA2C4H72SKP8F34D",
+   "to": "ticket/github#265",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYTJGK2XYHW1BT3Y1XH1YNP7",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYTJGK2XYHW1BT3Y1XH1YNP7",
+   "to": "ticket/github#266",
+   "type": "references"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -2833,6 +2948,66 @@
   {
    "from": "plan/2026-07-28-one-owner-per-external-key",
    "to": "item/01KYND4SNPXVR1W4GQA453VB4G",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2X700NYTZHB0JDE6Q1",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2X7FC4PTAMH60ECY36",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2X7FFZC5BCYF2BPSSF",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2X98H9T7VVR879B0XC",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2XDQVAZ85ZEH92NGGW",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2XDTKNHGH8QTHBHCTY",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2XJD516RXMZ52PDZP1",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2XJSCMJ9K16YDXXMD2",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2XMY73EJMZ026Q573G",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2XSA2C4H72SKP8F34D",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "to": "item/01KYTJGK2XYHW1BT3Y1XH1YNP7",
    "type": "produces"
   },
   {
@@ -5043,6 +5218,66 @@
    "status": "done",
    "title": "Settled orphan debris is reported as drift on every sync run"
   },
+  "item/01KYTJGK2WMX6PNMYQDFFFPGTP": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Close both P1 epics, settle the merge-strategy and GONE questions"
+  },
+  "item/01KYTJGK2X700NYTZHB0JDE6Q1": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Expose the two item fields the specification already declares"
+  },
+  "item/01KYTJGK2X7FC4PTAMH60ECY36": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Bring skill copies under the byte-for-byte sync check"
+  },
+  "item/01KYTJGK2X7FFZC5BCYF2BPSSF": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Record the decision that clearing a dead ticket link stays manual"
+  },
+  "item/01KYTJGK2X98H9T7VVR879B0XC": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Remove the unreachable sort tiebreak in the fold"
+  },
+  "item/01KYTJGK2XDQVAZ85ZEH92NGGW": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Split the phase-five container into a new epic"
+  },
+  "item/01KYTJGK2XDTKNHGH8QTHBHCTY": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Add the merge-guard tests to the integration test list"
+  },
+  "item/01KYTJGK2XJD516RXMZ52PDZP1": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Run the log merge guard in continuous integration"
+  },
+  "item/01KYTJGK2XJSCMJ9K16YDXXMD2": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Fix the fused version fence in every shipped skill"
+  },
+  "item/01KYTJGK2XMY73EJMZ026Q573G": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Forget the gone marker once a ticket answers again"
+  },
+  "item/01KYTJGK2XSA2C4H72SKP8F34D": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Abort the run when the whole project is unreachable"
+  },
+  "item/01KYTJGK2XYHW1BT3Y1XH1YNP7": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Record the decision not to build a custom merge driver"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -5113,6 +5348,12 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-07-28-one-owner-per-external-key.md",
    "title": "One local owner per remote ticket (#226)",
+   "truth_state": "current"
+  },
+  "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions.md",
+   "title": "Close both P1 epics, settle the merge-strategy and GONE questions",
    "truth_state": "current"
   },
   "plan/design-docs-release-sync": {
@@ -5861,6 +6102,54 @@
   "ticket/github#253": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/253"
+  },
+  "ticket/github#255": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/255"
+  },
+  "ticket/github#256": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/256"
+  },
+  "ticket/github#257": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/257"
+  },
+  "ticket/github#258": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/258"
+  },
+  "ticket/github#259": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/259"
+  },
+  "ticket/github#260": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/260"
+  },
+  "ticket/github#261": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/261"
+  },
+  "ticket/github#262": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/262"
+  },
+  "ticket/github#263": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/263"
+  },
+  "ticket/github#264": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/264"
+  },
+  "ticket/github#265": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/265"
+  },
+  "ticket/github#266": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/266"
   },
   "ticket/github#29": {
    "doc_type": "ticket",

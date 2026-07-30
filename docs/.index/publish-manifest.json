@@ -4,7 +4,7 @@
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "c8172fe5ca77",
+   "render_hash": "e0a74b5ffa52",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "2a2e3f59a202",
+   "render_hash": "6335d5744eb2",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "7a99941e8aed",
+   "render_hash": "017bd9bad2de",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2991,6 +2991,126 @@
    "wiki_key": "item/01KYTGNS76Z1YRA64QMARYSWJM"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "render": "as-is",
+   "render_hash": "30924d99a3cd",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2WMX6PNMYQDFFFPGTP.md",
+   "title": "Close both P1 epics, settle the merge-strategy and GONE questions",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2WMX6PNMYQDFFFPGTP"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2X700NYTZHB0JDE6Q1",
+   "render": "as-is",
+   "render_hash": "90f57e7703ba",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2X700NYTZHB0JDE6Q1.md",
+   "title": "Expose the two item fields the specification already declares",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2X700NYTZHB0JDE6Q1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2X7FC4PTAMH60ECY36",
+   "render": "as-is",
+   "render_hash": "c3eb4065cafb",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2X7FC4PTAMH60ECY36.md",
+   "title": "Bring skill copies under the byte-for-byte sync check",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2X7FC4PTAMH60ECY36"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2X7FFZC5BCYF2BPSSF",
+   "render": "as-is",
+   "render_hash": "713c2c9ea455",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2X7FFZC5BCYF2BPSSF.md",
+   "title": "Record the decision that clearing a dead ticket link stays manual",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2X7FFZC5BCYF2BPSSF"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2X98H9T7VVR879B0XC",
+   "render": "as-is",
+   "render_hash": "700ff6209adf",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2X98H9T7VVR879B0XC.md",
+   "title": "Remove the unreachable sort tiebreak in the fold",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2X98H9T7VVR879B0XC"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2XDQVAZ85ZEH92NGGW",
+   "render": "as-is",
+   "render_hash": "b84220c5ac8e",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2XDQVAZ85ZEH92NGGW.md",
+   "title": "Split the phase-five container into a new epic",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2XDQVAZ85ZEH92NGGW"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2XDTKNHGH8QTHBHCTY",
+   "render": "as-is",
+   "render_hash": "4956423f0882",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2XDTKNHGH8QTHBHCTY.md",
+   "title": "Add the merge-guard tests to the integration test list",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2XDTKNHGH8QTHBHCTY"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2XJD516RXMZ52PDZP1",
+   "render": "as-is",
+   "render_hash": "38cb3738ce36",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2XJD516RXMZ52PDZP1.md",
+   "title": "Run the log merge guard in continuous integration",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2XJD516RXMZ52PDZP1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2XJSCMJ9K16YDXXMD2",
+   "render": "as-is",
+   "render_hash": "3bda40c18750",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2XJSCMJ9K16YDXXMD2.md",
+   "title": "Fix the fused version fence in every shipped skill",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2XJSCMJ9K16YDXXMD2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2XMY73EJMZ026Q573G",
+   "render": "as-is",
+   "render_hash": "cf8d739012ef",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2XMY73EJMZ026Q573G.md",
+   "title": "Forget the gone marker once a ticket answers again",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2XMY73EJMZ026Q573G"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2XSA2C4H72SKP8F34D",
+   "render": "as-is",
+   "render_hash": "91c4470a305d",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2XSA2C4H72SKP8F34D.md",
+   "title": "Abort the run when the whole project is unreachable",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2XSA2C4H72SKP8F34D"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYTJGK2XYHW1BT3Y1XH1YNP7",
+   "render": "as-is",
+   "render_hash": "27015323a2b2",
+   "source": "docs/.index/rendered/tickets/01KYTJGK2XYHW1BT3Y1XH1YNP7.md",
+   "title": "Record the decision not to build a custom merge driver",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTJGK2XYHW1BT3Y1XH1YNP7"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -3411,6 +3531,17 @@
   {
    "banner": "> **Current** \u2014 the current plan; plans are frozen once written, a changed design gets a new plan.",
    "frozen": true,
+   "page_name": "Plan-close-p1-epics-and-settle-merge-and-gone-questions",
+   "render": "doc+banner",
+   "render_hash": "1f38da4f4642",
+   "source": "docs/plans/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions.md",
+   "title": "Close both P1 epics, settle the merge-strategy and GONE questions",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions"
+  },
+  {
+   "banner": "> **Current** \u2014 the current plan; plans are frozen once written, a changed design gets a new plan.",
+   "frozen": true,
    "page_name": "Plan-design-docs-release-sync",
    "render": "doc+banner",
    "render_hash": "3edc847881ac",
@@ -3508,11 +3639,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-30T22:03:16Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-30T22:33:11Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "3f5d61262003",
+   "render_hash": "5fec2877a9e8",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -3784,7 +3915,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "4ffd66168704",
+  "render_hash": "de566e440dd2",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

@@ -2,6 +2,7 @@
 
 - [[Roadmap]]
 - [[Design-Doc]] · [[Code-Walkthrough]]
+- Plan: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 - Plan: [[Plan-ia-content-model]]
 - Plan: [[Plan-ticket-sync-and-init-detection]]
 - [[ADR-0001-event-log-fold-union-merge]]
