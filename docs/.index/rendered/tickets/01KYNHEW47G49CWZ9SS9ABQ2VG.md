@@ -1,6 +1,6 @@
 # Log compaction is silently undone by any branch that spans it
 
-`01KYNHEW47G49CWZ9SS9ABQ2VG` · task/bug · **open**
+`01KYNHEW47G49CWZ9SS9ABQ2VG` · task/bug · **done**
 
 The work log is compacted on a nightly schedule, and branches merge their logs by taking every line from both sides.
 

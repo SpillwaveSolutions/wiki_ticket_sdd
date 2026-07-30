@@ -19,6 +19,10 @@ story/feature/epic) for upward/downward hierarchy sections, wired into
 
 Progress: 3/3 done
 
+## Linked PRs
+
+- [[PR-dd6da53]]
+
 ## Related tickets
 
 - [github #130](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/130)

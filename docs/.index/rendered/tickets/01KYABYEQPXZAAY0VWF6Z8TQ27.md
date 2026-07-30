@@ -11,6 +11,10 @@ item/PR/release gets a manifest slot.
 
 - epic: [[Ticket-01KYABYEQP8ANXGYPBCV2T20D8]] Extend IA to tickets, PRs, and releases (artifact pages) — Give every ticket, PR, and release its own generated wiki page reusing the IA content model's wiki_key/truth_state/traceability-graph machinery already built for docs — so a reader sees hierarchy, related artifacts, and traceability in one place instead of hunting indexes/logs.
 
+## Linked PRs
+
+- [[PR-cab8952]]
+
 ## Related tickets
 
 - [github #135](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/135)

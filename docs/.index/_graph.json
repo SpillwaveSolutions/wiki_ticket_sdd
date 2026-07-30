@@ -831,6 +831,11 @@
    "type": "references"
   },
   {
+   "from": "item/01KY5D79CY0DPSDAQ09QZFW694",
+   "to": "commit/c7dca2b",
+   "type": "lands-in"
+  },
+  {
    "from": "item/01KY5F6QA220S0K7RRK2Q80XR8",
    "to": "ticket/github#80",
    "type": "references"
@@ -1231,6 +1236,21 @@
    "type": "references"
   },
   {
+   "from": "item/01KY5ZY3ZX2Z4F73Y0BT0M0NR5",
+   "to": "commit/cb8d316",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KY6037BN94086PR1QP0CM7XC",
+   "to": "commit/cb8d316",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KY69K4ZJMYJ1HWMWXMQ4J7BA",
+   "to": "commit/4bf033c",
+   "type": "lands-in"
+  },
+  {
    "from": "item/01KY8KQ8WW4A4RJ07YC4QVE7HB",
    "to": "pr/122",
    "type": "lands-in"
@@ -1262,6 +1282,11 @@
   },
   {
    "from": "item/01KYABYEQP3YCB9AVHRPCTCMRS",
+   "to": "commit/cab8952",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYABYEQP3YCB9AVHRPCTCMRS",
    "to": "ticket/github#124",
    "type": "references"
   },
@@ -1277,6 +1302,11 @@
   },
   {
    "from": "item/01KYABYEQP9FDY8THDV79F324G",
+   "to": "commit/dd6da53",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYABYEQP9FDY8THDV79F324G",
    "to": "ticket/github#126",
    "type": "references"
   },
@@ -1284,6 +1314,11 @@
    "from": "item/01KYABYEQPAFJM7WC3XZV6YY76",
    "to": "item/01KYABYEQPK6PV87WNZXEYRB12",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPAFJM7WC3XZV6YY76",
+   "to": "commit/dd6da53",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYABYEQPAFJM7WC3XZV6YY76",
@@ -1297,6 +1332,11 @@
   },
   {
    "from": "item/01KYABYEQPDS2VFQKQ7B6YXZVR",
+   "to": "commit/5b21a0f",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYABYEQPDS2VFQKQ7B6YXZVR",
    "to": "ticket/github#128",
    "type": "references"
   },
@@ -1304,6 +1344,11 @@
    "from": "item/01KYABYEQPF8N2K26ENRKREE0W",
    "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPF8N2K26ENRKREE0W",
+   "to": "commit/1b567da",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYABYEQPF8N2K26ENRKREE0W",
@@ -1317,6 +1362,11 @@
   },
   {
    "from": "item/01KYABYEQPK6PV87WNZXEYRB12",
+   "to": "commit/dd6da53",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYABYEQPK6PV87WNZXEYRB12",
    "to": "ticket/github#130",
    "type": "references"
   },
@@ -1324,6 +1374,11 @@
    "from": "item/01KYABYEQPNK7HHH5CMAR2V1JG",
    "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPNK7HHH5CMAR2V1JG",
+   "to": "commit/5b21a0f",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYABYEQPNK7HHH5CMAR2V1JG",
@@ -1337,6 +1392,11 @@
   },
   {
    "from": "item/01KYABYEQPP82DJEN19F43YRAE",
+   "to": "commit/4ab20d3",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYABYEQPP82DJEN19F43YRAE",
    "to": "ticket/github#132",
    "type": "references"
   },
@@ -1344,6 +1404,11 @@
    "from": "item/01KYABYEQPRM8308SYFPR8X437",
    "to": "item/01KYABYEQPK6PV87WNZXEYRB12",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPRM8308SYFPR8X437",
+   "to": "commit/dd6da53",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYABYEQPRM8308SYFPR8X437",
@@ -1357,6 +1422,11 @@
   },
   {
    "from": "item/01KYABYEQPW8Q2RGGTNP71W88E",
+   "to": "commit/4ab20d3",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYABYEQPW8Q2RGGTNP71W88E",
    "to": "ticket/github#134",
    "type": "references"
   },
@@ -1364,6 +1434,11 @@
    "from": "item/01KYABYEQPXZAAY0VWF6Z8TQ27",
    "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYABYEQPXZAAY0VWF6Z8TQ27",
+   "to": "commit/cab8952",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYABYEQPXZAAY0VWF6Z8TQ27",
@@ -3491,6 +3566,30 @@
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current"
   },
+  "commit/1b567da": {
+   "doc_type": "commit"
+  },
+  "commit/4ab20d3": {
+   "doc_type": "commit"
+  },
+  "commit/4bf033c": {
+   "doc_type": "commit"
+  },
+  "commit/5b21a0f": {
+   "doc_type": "commit"
+  },
+  "commit/c7dca2b": {
+   "doc_type": "commit"
+  },
+  "commit/cab8952": {
+   "doc_type": "commit"
+  },
+  "commit/cb8d316": {
+   "doc_type": "commit"
+  },
+  "commit/dd6da53": {
+   "doc_type": "commit"
+  },
   "design/2026-07-19_v0.11.0-release-code-walkthrough": {
    "doc_type": "design",
    "source": "docs/designs/2026-07-19_v0.11.0-release_code_walkthrough.md",
@@ -4551,7 +4650,7 @@
   },
   "item/01KYACFJA0SQSF4C83BJZXB5MY": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "banner() mislabels frozen 'current' plans as status reports"
   },
   "item/01KYADGT9Q48EKJZVQQSH4HXWZ": {
@@ -4561,7 +4660,7 @@
   },
   "item/01KYAGZ8KK46SQF1MKHAHVCTJV": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "worklog sync --pull can never bootstrap: cursor-less pull calls the adapter with no --since, which it requires"
   },
   "item/01KYAH3VHPSEK2RY63J7Y109FR": {
@@ -4571,7 +4670,7 @@
   },
   "item/01KYAHAB3T2QXGMN4SQT4ZNZGW": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "ia_graph build_graph() ignores commit-only sidecar code links (lands-in only honors code.pr)"
   },
   "item/01KYAKH389T1ZKKBP94WH2HK94": {
@@ -4821,12 +4920,12 @@
   },
   "item/01KYKDGVTYMZ0E84BVBC29FTJY": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "roadmap-snapshot freezes whatever is on disk instead of rendering first"
   },
   "item/01KYKDGVZ4C7FSCY7GJNGPV0Q5": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Roadmap hides epics whose children are all closed but which are still open"
   },
   "item/01KYKDGW3DFDEQ1DEDFR6N45SM": {
@@ -4891,7 +4990,7 @@
   },
   "item/01KYNHEV9M01PQJZQ5QRZQ3C8J": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Catch duplicate ticket ownership at merge time, not just at sync"
   },
   "item/01KYNHEVDSD4BTASXCTV88Q80Q": {
@@ -4901,17 +5000,17 @@
   },
   "item/01KYNHEVJNZTGEJ2EW5A9C9A7C": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Restrict a ticket to one item when forcing keys into scope"
   },
   "item/01KYNHEVPZJZFB9HPHA68K2XBZ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Conflict and resolve accept any field name, including ones that break sync"
   },
   "item/01KYNHEVVG57D20ZG5EJ3F36J3": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "A ticket that no longer exists remotely retries forever"
   },
   "item/01KYNHEVZSBJ43P0CE2EBXT7Y0": {
@@ -4921,7 +5020,7 @@
   },
   "item/01KYNHEW47G49CWZ9SS9ABQ2VG": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Log compaction is silently undone by any branch that spans it"
   },
   "item/01KYNKBCNS8WY5BH2B7EDBHMF1": {
@@ -4936,8 +5035,13 @@
   },
   "item/01KYTDN3W67ZFFDE1F60M2ST6T": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Priority change leaves the old priority label on the ticket"
+  },
+  "item/01KYTGNS76Z1YRA64QMARYSWJM": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Settled orphan debris is reported as drift on every sync run"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

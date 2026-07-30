@@ -1,6 +1,6 @@
 # Roadmap hides epics whose children are all closed but which are still open
 
-`01KYKDGVZ4C7FSCY7GJNGPV0Q5` · task/bug · **open**
+`01KYKDGVZ4C7FSCY7GJNGPV0Q5` · task/bug · **done**
 
 The generated roadmap only shows an epic when at least one of its children is still open.
 

@@ -2,8 +2,11 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Settled orphan debris is reported as drift on every sync run
+`01KYTGNS76Z1YRA64QMARYSWJM` · status: done
+
 ### Priority change leaves the old priority label on the ticket
-`01KYTDN3W67ZFFDE1F60M2ST6T` · status: todo
+`01KYTDN3W67ZFFDE1F60M2ST6T` · status: done
 - references: [github#253](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/253)
 
 ### Prune merged branches and orphaned worktrees after v0.18.0
@@ -14,7 +17,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.18.0
 
 ### Log compaction is silently undone by any branch that spans it
-`01KYNHEW47G49CWZ9SS9ABQ2VG` · status: todo
+`01KYNHEW47G49CWZ9SS9ABQ2VG` · status: done
 - references: [github#243](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/243)
 
 ### Warn at plan capture when a task title references a ticket number
@@ -22,15 +25,15 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#242](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/242)
 
 ### A ticket that no longer exists remotely retries forever
-`01KYNHEVVG57D20ZG5EJ3F36J3` · status: todo
+`01KYNHEVVG57D20ZG5EJ3F36J3` · status: done
 - references: [github#241](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/241)
 
 ### Conflict and resolve accept any field name, including ones that break sync
-`01KYNHEVPZJZFB9HPHA68K2XBZ` · status: todo
+`01KYNHEVPZJZFB9HPHA68K2XBZ` · status: done
 - references: [github#240](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/240)
 
 ### Restrict a ticket to one item when forcing keys into scope
-`01KYNHEVJNZTGEJ2EW5A9C9A7C` · status: todo
+`01KYNHEVJNZTGEJ2EW5A9C9A7C` · status: done
 - references: [github#239](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/239)
 
 ### Sync should say which ticket fields it is about to overwrite
@@ -38,7 +41,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#238](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/238)
 
 ### Catch duplicate ticket ownership at merge time, not just at sync
-`01KYNHEV9M01PQJZQ5QRZQ3C8J` · status: todo
+`01KYNHEV9M01PQJZQ5QRZQ3C8J` · status: done
 - references: [github#237](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/237)
 
 ### Concurrent sessions in one working directory corrupt each other's work
@@ -120,11 +123,11 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#223](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/223)
 
 ### Roadmap hides epics whose children are all closed but which are still open
-`01KYKDGVZ4C7FSCY7GJNGPV0Q5` · status: todo
+`01KYKDGVZ4C7FSCY7GJNGPV0Q5` · status: done
 - references: [github#222](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/222)
 
 ### roadmap-snapshot freezes whatever is on disk instead of rendering first
-`01KYKDGVTYMZ0E84BVBC29FTJY` · status: todo
+`01KYKDGVTYMZ0E84BVBC29FTJY` · status: done
 - references: [github#221](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/221)
 
 ### Release v0.17.1
@@ -476,7 +479,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#143](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/143)
 
 ### ia_graph build_graph() ignores commit-only sidecar code links (lands-in only honors code.pr)
-`01KYAHAB3T2QXGMN4SQT4ZNZGW` · status: todo
+`01KYAHAB3T2QXGMN4SQT4ZNZGW` · status: done
 - references: [github#142](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/142)
 
 ### Cut v0.14.0 release
@@ -485,7 +488,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.14.0
 
 ### worklog sync --pull can never bootstrap: cursor-less pull calls the adapter with no --since, which it requires
-`01KYAGZ8KK46SQF1MKHAHVCTJV` · status: todo
+`01KYAGZ8KK46SQF1MKHAHVCTJV` · status: done
 - references: [github#141](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/141)
 
 ### worklog pr-sync: fetch live PR metadata (files, review/CI status)
@@ -494,7 +497,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#138](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/138)
 
 ### banner() mislabels frozen 'current' plans as status reports
-`01KYACFJA0SQSF4C83BJZXB5MY` · status: todo
+`01KYACFJA0SQSF4C83BJZXB5MY` · status: done
 - references: [github#137](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/137)
 
 ### Auto-draft the release CHANGELOG unreleased section from git log
@@ -504,36 +507,42 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Phase 0: add item/release page-name helpers and extend build_manifest()
 `01KYABYEQPXZAAY0VWF6Z8TQ27` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- lands-in: commit/cab8952
 - references: [github#135](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/135)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 2: render PR pages
 `01KYABYEQPW8Q2RGGTNP71W88E` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- lands-in: commit/4ab20d3
 - references: [github#134](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/134)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Aggregate progress rollup for Story/Feature/Epic pages
 `01KYABYEQPRM8308SYFPR8X437` · status: done
 - belongs-to: Phase 1: render ticket pages for all four levels
+- lands-in: commit/dd6da53
 - references: [github#133](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/133)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 2: render release pages with graph-derived Change Log
 `01KYABYEQPP82DJEN19F43YRAE` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- lands-in: commit/4ab20d3
 - references: [github#132](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/132)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 4: extend tests/test_ia.py for the new page shapes
 `01KYABYEQPNK7HHH5CMAR2V1JG` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- lands-in: commit/5b21a0f
 - references: [github#131](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/131)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 1: render ticket pages for all four levels
 `01KYABYEQPK6PV87WNZXEYRB12` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- lands-in: commit/dd6da53
 - references: [github#130](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/130)
 - contains: One-line summary derivation from body's first sentence (no cache)
 - contains: `ia-ticket <ULID>` preview subcommand on `bin/worklog`
@@ -543,24 +552,28 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Phase 3: file PR live-metadata follow-up item
 `01KYABYEQPF8N2K26ENRKREE0W` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- lands-in: commit/1b567da
 - references: [github#129](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/129)
 - produced-by: [[Plan-artifact-pages]]
 
 ### Phase 4: regenerate all pages and confirm coverage gate holds
 `01KYABYEQPDS2VFQKQ7B6YXZVR` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- lands-in: commit/5b21a0f
 - references: [github#128](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/128)
 - produced-by: [[Plan-artifact-pages]]
 
 ### `ia-ticket <ULID>` preview subcommand on `bin/worklog`
 `01KYABYEQPAFJM7WC3XZV6YY76` · status: done
 - belongs-to: Phase 1: render ticket pages for all four levels
+- lands-in: commit/dd6da53
 - references: [github#127](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/127)
 - produced-by: [[Plan-artifact-pages]]
 
 ### One-line summary derivation from body's first sentence (no cache)
 `01KYABYEQP9FDY8THDV79F324G` · status: done
 - belongs-to: Phase 1: render ticket pages for all four levels
+- lands-in: commit/dd6da53
 - references: [github#126](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/126)
 - produced-by: [[Plan-artifact-pages]]
 
@@ -581,6 +594,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Phase 0: add item_links() graph helper
 `01KYABYEQP3YCB9AVHRPCTCMRS` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- lands-in: commit/cab8952
 - references: [github#124](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/124)
 - produced-by: [[Plan-artifact-pages]]
 
@@ -606,12 +620,15 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Add MIT LICENSE (repo was public with no license)
 `01KY69K4ZJMYJ1HWMWXMQ4J7BA` · status: done
+- lands-in: commit/4bf033c
 
 ### ia.classify treats README.md inside docs/plans|status|adr dirs as a doc of that type — generic repos with folder READMEs fail inventory
 `01KY6037BN94086PR1QP0CM7XC` · status: done
+- lands-in: commit/cb8d316
 
 ### init.sh copy list missing IA modules (ia.py, ia_render.py, ia_graph.py, canonical.py, sync_dispatch.py) — fresh repos get worklog with broken ia-* commands
 `01KY5ZY3ZX2Z4F73Y0BT0M0NR5` · status: done
+- lands-in: commit/cb8d316
 
 ### Panels wave 1: Overview, Board, Roadmap (Mermaid), Activity feed
 `01KY5VY0TEWBMZK5W6YJN5FQ9D` · status: cancelled
@@ -876,6 +893,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Ignore tmp/ scratch dir in .gitignore (onboarding notes live there untracked)
 `01KY5D79CY0DPSDAQ09QZFW694` · status: done
+- lands-in: commit/c7dca2b
 
 ### Scrub inputs/ from main history (drop d538d15 + revert f97626a via rebase, force-with-lease) and delete local copies
 `01KY2KHHF43KAZ54F57BQW71TD` · status: done

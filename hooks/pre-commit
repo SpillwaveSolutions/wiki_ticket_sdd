@@ -75,6 +75,17 @@ sys.exit(0 if ok else 1)
 PY
 done
 
+# Merge integrity guard (#243 + #237): a union merge can resurrect the very
+# lines a compaction just deleted, or land two branches that each claimed the
+# same external ticket. Only meaningful when a merge is in flight -- same
+# signal the branch guard above uses (WORKLOG_MERGE_COMMIT for a fresh `git
+# merge`, MERGE_HEAD for a resumed one).
+if { [ -n "${WORKLOG_MERGE_COMMIT:-}" ] || [ -f "$(git rev-parse --git-path MERGE_HEAD)" ]; } \
+   && [ -f bin/compact.py ]; then
+  python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl || \
+    fail "merge integrity check failed (see above) -- resolve manually, then git merge --continue, or git merge --abort"
+fi
+
 # Invariant 15.7: the roadmap is generated. Regenerate and diff.
 # mktemp, not a fixed path: two checkouts running this concurrently must not
 # race on the same scratch file.

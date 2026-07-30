@@ -12,6 +12,10 @@ story/feature/epic) for upward/downward hierarchy sections, wired into
 `render_all()`.
 - epic: [[Ticket-01KYABYEQP8ANXGYPBCV2T20D8]] Extend IA to tickets, PRs, and releases (artifact pages) — Give every ticket, PR, and release its own generated wiki page reusing the IA content model's wiki_key/truth_state/traceability-graph machinery already built for docs — so a reader sees hierarchy, related artifacts, and traceability in one place instead of hunting indexes/logs.
 
+## Linked PRs
+
+- [[PR-dd6da53]]
+
 ## Related tickets
 
 - [github #133](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/133)

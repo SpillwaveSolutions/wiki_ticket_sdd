@@ -82,11 +82,22 @@ def banner(rec, by_key):
     """Reader-visible truth banner (§6.1), one blockquote line."""
     ts = rec["truth_state"]
     if ts == "current" and ia.is_frozen(rec):
-        # e.g. the newest status report: current truth, but frozen — it will
-        # be archived by its successor, never regenerated
-        return ("> **Current** — the latest %s report. Reports freeze once "
-                "published; corrections appear in later reports."
-                % rec.get("kind", "status"))
+        # is_frozen() covers plan/roadmap-snapshot/status/dated-design (#137)
+        # — only status is a "report"; the rest need their own wording.
+        if rec["doc_type"] == "status":
+            # e.g. the newest status report: current truth, but frozen — it
+            # will be archived by its successor, never regenerated
+            return ("> **Current** — the latest %s report. Reports freeze "
+                    "once published; corrections appear in later reports."
+                    % rec.get("kind", "status"))
+        if rec["doc_type"] == "plan":
+            return ("> **Current** — the current plan; plans are frozen "
+                    "once written, a changed design gets a new plan.")
+        if rec["doc_type"] == "roadmap-snapshot":
+            return ("> **Current** — the current roadmap snapshot; frozen "
+                    "once published, a new snapshot supersedes it.")
+        return ("> **Current** — the current design record; frozen once "
+                "written, an updated design gets a new dated copy.")
     if ts == "current":
         gen = rec.get("generated_at")
         src = " regenerated at %s" % gen if gen else ""

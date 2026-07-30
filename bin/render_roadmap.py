@@ -17,7 +17,7 @@ import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ulid
-from fold import fold, CLOSED_STATUSES
+from fold import fold, CLOSED_STATUSES, OPEN_STATUSES
 
 PATHS = (".work/todo.jsonl", ".work/done.jsonl")
 KINDS = ("feature", "bug", "ops", "triage")  # fixed order: deterministic mix
@@ -228,6 +228,16 @@ def render(paths=PATHS, viz="deps,hierarchy"):
             f"--take local|remote`.")
     for iid in sorted(set(r.orphans)):
         attention.append(f"- Orphan events for `{iid[:8]}` — no create/snapshot yet.")
+    # Bug 222: an open epic whose children are all closed (or has none) never
+    # lands in Now/Next/Later -- those buckets are built from open children,
+    # not epics. Surface it here instead so it doesn't rot invisibly.
+    stale_epics = sorted(
+        (i for i in items.values() if i.get("level") == "epic"
+         and i.get("status") in OPEN_STATUSES
+         and not any(m.get("status") in OPEN_STATUSES for m in epic_members(i["id"], items))),
+        key=lambda i: i["id"])
+    for e in stale_epics:
+        attention.append(f"- **{ref(e)}** {e.get('title', '')} — no open children left; close the epic.")
     if attention:
         lines += ["", "## Needs attention", ""] + attention
 

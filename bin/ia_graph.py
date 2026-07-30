@@ -92,10 +92,16 @@ def build_graph(records=None, items=None):
             edge(key, "references", tkey)
         side = item_sidecar(iid)
         for c in side.get("code") or []:
-            if isinstance(c, dict) and c.get("pr") is not None:
+            if not isinstance(c, dict):
+                continue
+            if c.get("pr") is not None:
                 pkey = "pr/%s" % c["pr"]
                 nodes[pkey] = {"doc_type": "pr"}
                 edge(key, "lands-in", pkey)
+            elif c.get("commit"):
+                ckey = "commit/%s" % c["commit"]
+                nodes[ckey] = {"doc_type": "commit"}
+                edge(key, "lands-in", ckey)
         for e in side.get("relates_to") or []:
             if isinstance(e, dict) and e.get("type") in REVERSE:
                 edge(key, e["type"], str(e.get("target")))
