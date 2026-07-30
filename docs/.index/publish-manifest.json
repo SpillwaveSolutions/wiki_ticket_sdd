@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "dcaeecc6e00b",
+   "render_hash": "0eaec39609f1",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2971,6 +2971,16 @@
    "wiki_key": "item/01KYT66K7YA68DB5WF3B0P625B"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KYTDN3W67ZFFDE1F60M2ST6T",
+   "render": "as-is",
+   "render_hash": "6ebcd66b702b",
+   "source": "docs/.index/rendered/tickets/01KYTDN3W67ZFFDE1F60M2ST6T.md",
+   "title": "Priority change leaves the old priority label on the ticket",
+   "truth_state": "open",
+   "wiki_key": "item/01KYTDN3W67ZFFDE1F60M2ST6T"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -3488,11 +3498,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-30T21:05:38Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-30T21:07:44Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "2ec573adbb3b",
+   "render_hash": "067af4f63991",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

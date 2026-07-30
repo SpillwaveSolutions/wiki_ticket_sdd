@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Priority change leaves the old priority label on the ticket
+`01KYTDN3W67ZFFDE1F60M2ST6T` · status: todo
+- references: [github#253](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/253)
+
 ### Prune merged branches and orphaned worktrees after v0.18.0
 `01KYT66K7YA68DB5WF3B0P625B` · status: done
 
