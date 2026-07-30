@@ -134,6 +134,37 @@ def item_labels(item):
     return labels
 
 
+def label_group(name):
+    """Which single-valued group a label belongs to, or None if the tooling
+    doesn't own it. Priority/level/kind are single-valued by definition
+    (worklog #253): a push must replace the group, not add to it."""
+    if name in ("P0", "P1", "P2", "P3"):
+        return "priority"
+    if name.startswith("level:"):
+        return "level"
+    if name.startswith("kind:"):
+        return "kind"
+    return None
+
+
+def stale_labels(repo, key, new_labels):
+    """Owned labels on the current issue that the new push no longer wants.
+
+    Only labels the tooling itself would have applied are ever removed --
+    anything unrecognized (human-applied, e.g. "needs-design") is left
+    alone. The native "bug" label is treated as part of the kind group, but
+    only when the issue already carries "kind:bug" -- i.e. the tooling put
+    it there itself, rather than a human applying "bug" on its own.
+    """
+    old = fetch_issue(repo, key).get("labels") or []
+    old_names = [l.get("name") if isinstance(l, dict) else l for l in old]
+    new_set = set(new_labels)
+    stale = [n for n in old_names if label_group(n) and n not in new_set]
+    if "kind:bug" in old_names and "bug" not in new_set:
+        stale.append("bug")
+    return stale
+
+
 def set_milestone(repo, key, milestone):
     # ponytail: best-effort translation — create the milestone if absent,
     # attach it; every failure goes to stderr, none is fatal.
@@ -232,6 +263,8 @@ def cmd_push():
                 "--body", build_body(marker, item)]
         if item.get("title"):
             args += ["--title", item["title"]]
+        for lab in stale_labels(repo, key, labels):
+            args += ["--remove-label", lab]
         for lab in labels:
             args += ["--add-label", lab]
         gh(args)

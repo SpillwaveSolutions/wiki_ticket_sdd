@@ -1,6 +1,6 @@
 # Conflict and resolve accept any field name, including ones that break sync
 
-`01KYNHEVPZJZFB9HPHA68K2XBZ` · task/bug · **open**
+`01KYNHEVPZJZFB9HPHA68K2XBZ` · task/bug · **done**
 
 Both commands take a free-text field name.
 

@@ -28,7 +28,7 @@ import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ulid  # noqa: E402
-from fold import fold, CLOSED_STATUSES  # noqa: E402
+from fold import fold, CLOSED_STATUSES, external_owners  # noqa: E402
 from render_roadmap import max_ev  # noqa: E402
 
 
@@ -186,7 +186,76 @@ def compact(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
     return watermark
 
 
+def _merge_watermark(raw_by_path):
+    """Highest `through` recorded by any compact line across the given raw
+    lines -- the same value fold()'s own apply_watermark computes when it
+    reads both files together. None if neither file has ever been compacted."""
+    marks = [e.get("through") for raw in raw_by_path.values() for _line, e in raw
+             if e is not None and e.get("op") == "compact" and e.get("through")]
+    return max(marks) if marks else None
+
+
+def check_resurrection(todo_path, done_path):
+    """Bug #243: fold.apply_watermark already drops any raw event at/below a
+    compact watermark, so a union merge that resurrects those lines corrupts
+    no state the fold reports -- only the file shrinks back to its
+    pre-compaction size, silently. Flag any such line instead of losing the
+    size win with no warning.
+
+    Returns a list of problem strings; empty means clean."""
+    raw = {p: _raw_lines(p) for p in (todo_path, done_path)}
+    wm = _merge_watermark(raw)
+    if wm is None:
+        return []  # never compacted -- nothing to resurrect
+    problems = []
+    for path, lines in raw.items():
+        bad = [line for line, e in lines
+               if e is not None and e.get("op") not in ("compact", "snapshot")
+               and e.get("ev", "") <= wm]
+        if bad:
+            problems.append(
+                f"{path}: {len(bad)} event(s) at/below compact watermark {wm} "
+                f"are back (e.g. {bad[0]!r}) -- a union merge resurrected lines "
+                f"a compaction already removed. Run: python3 bin/compact.py "
+                f"{todo_path} {done_path} to recompact.")
+    return problems
+
+
+def check_duplicate_ownership(todo_path, done_path):
+    """Bug #237: `worklog link` already refuses a ticket another item owns
+    (fold.external_owners), but a merge of two branches that each claimed the
+    same ticket bypasses that check -- sync catches it later, but a merge is
+    the earliest point, and it happens on every machine.
+
+    Returns a list of problem strings; empty means clean."""
+    r = fold([todo_path, done_path])
+    problems = []
+    for (system, key), owners in external_owners(r.items.values()).items():
+        if len(owners) > 1:
+            problems.append(
+                f"{system}:{key} is claimed by {len(owners)} items after merge: "
+                f"{', '.join(owners)} -- keep one: worklog unlink <id-to-drop>")
+    return problems
+
+
+def merge_check(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
+    """Run both merge-time integrity guards (#243, #237). Prints and returns
+    False on any problem; never raises -- the merge-commit hook decides
+    whether that means blocking the commit."""
+    problems = (check_resurrection(todo_path, done_path)
+                + check_duplicate_ownership(todo_path, done_path))
+    if not problems:
+        return True
+    print("compact: merge integrity check failed", file=sys.stderr)
+    for p in problems:
+        print(f"  {p}", file=sys.stderr)
+    return False
+
+
 def main(argv):
+    if argv[1:2] == ["--merge-check"]:
+        paths = argv[2:] or [".work/todo.jsonl", ".work/done.jsonl"]
+        return 0 if merge_check(*paths) else 1
     paths = argv[1:] or [".work/todo.jsonl", ".work/done.jsonl"]
     wm = compact(*paths)
     print(f"compacted through {wm}" if wm else "nothing to compact")

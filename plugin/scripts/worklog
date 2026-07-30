@@ -283,10 +283,21 @@ def cmd_ingest(a):
     print(ev["ev"])
 
 
+def _check_conflictable_field(field):
+    """#240: `id` is identity, not data, and `external` is a structured link
+    (system/key/url/rev), not a string -- writing either through conflict/
+    resolve corrupts the next sync. Reuse INGEST_FIELDS: it is already the
+    set of fields a remote is allowed to disagree about."""
+    if field not in INGEST_FIELDS:
+        sys.exit(f"worklog: field {field!r} cannot be used with conflict/resolve "
+                 f"(allowed: {', '.join(INGEST_FIELDS)})")
+
+
 def cmd_conflict(a):
     """Record a both-sides-changed field (section 10.6). State never changes;
     the fold files it under _conflicts until a later write clears it."""
     _require_item(a.item)
+    _check_conflictable_field(a.field)
     ev = base(a.item, "conflict", "sync")
     ev["set"] = {"field": a.field, "local": a.local, "remote": a.remote,
                  "remote_rev": a.remote_rev}
@@ -296,6 +307,7 @@ def cmd_conflict(a):
 def cmd_resolve(a):
     """Resolve the last open conflict on a field with a normal update event.
     The update outsorts the conflict, so the fold clears it (section 10.6)."""
+    _check_conflictable_field(a.field)
     item = _resolve(a.item)
     open_c = [c for c in item.get("_conflicts", []) if c.get("field") == a.field]
     if not open_c:
@@ -372,9 +384,26 @@ def cmd_roadmap_render(a):
 
 
 def cmd_roadmap_snapshot(a):
+    import re
     import shutil
     if not os.path.exists("docs/roadmap.md"):
         sys.exit("worklog: docs/roadmap.md not found; run roadmap-render first")
+    with open("docs/roadmap.md", encoding="utf-8") as fh:
+        on_disk = fh.read()
+    # #221: a snapshot freezes docs/roadmap.md forever, so a stale copy stays
+    # wrong forever. render() is a pure/deterministic function of the log
+    # (render_roadmap.py docstring), so regenerating is a no-op when the file
+    # is already fresh and self-healing when the log moved on since the last
+    # `roadmap-render`. Only do this for a file that carries our own
+    # source_hash marker -- anything else was never ours to regenerate.
+    m = re.search(r"^source_hash: (\S+)$", on_disk, re.MULTILINE)
+    if m:
+        import render_roadmap
+        fresh = render_roadmap.render()
+        fresh_hash = re.search(r"^source_hash: (\S+)$", fresh, re.MULTILINE).group(1)
+        if fresh_hash != m.group(1):
+            with open("docs/roadmap.md", "w", encoding="utf-8") as fh:
+                fh.write(fresh)
     date = time.strftime("%Y-%m-%d", time.gmtime())
     name = f"{date}_{a.name}" if a.name else date
     path = f"docs/roadmap/{name}.md"

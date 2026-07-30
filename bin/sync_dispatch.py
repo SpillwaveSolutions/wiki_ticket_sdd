@@ -30,6 +30,8 @@ INGEST_FIELDS = ("title", "body", "status", "priority", "assignee", "type",
 CLOSED_STATUSES = ("done", "cancelled")
 LOCAL_ONLY = ("worklog sync: no adapter configured — local-only "
               "(set WORKLOG_TICKET_ADAPTER or run worklog adapter check)")
+LOG_PATHS = (".work/todo.jsonl", ".work/done.jsonl")
+EPOCH = "1970-01-01T00:00:00Z"  # ponytail: fallback --since for an empty log
 
 # Mirror of schema/capabilities.schema.json — embedded because installed repos
 # ship bin/ without schema/. tests/test_dispatch.py asserts the two are identical.
@@ -119,6 +121,34 @@ def rev_to_ms(rev):
             rev.replace("Z", "+00:00")).timestamp() * 1000)
     except (ValueError, AttributeError):
         return int(time.time() * 1000)  # ponytail: unparseable rev -> now
+
+
+def earliest_event_ts(paths=LOG_PATHS):
+    """Earliest `ts` across the local event log.
+
+    Seeds --since on a cursor-less first pull (worklog#141): the adapter
+    contract requires one of --since/--keys, so a repo that has never pulled
+    before must not call it with neither. Bad JSON or a missing file is
+    skipped, same leniency as fold.py's own log reader.
+    """
+    earliest = None
+    for path in paths:
+        try:
+            fh = open(path, encoding="utf-8")
+        except FileNotFoundError:
+            continue
+        with fh:
+            for line in fh:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    ts = json.loads(line).get("ts")
+                except json.JSONDecodeError:
+                    continue
+                if ts and (earliest is None or ts < earliest):
+                    earliest = ts
+    return earliest
 
 
 def resolve_adapter():
@@ -297,10 +327,19 @@ class Dispatcher:
             sys.exit("worklog sync: adapter auth failure — re-authenticate "
                      "with the tracker and re-run. Nothing further was pushed.")
         if rc == 3:
+            # GONE (definite not-found), not a transient failure. The adapter
+            # contract says to clear `external` so the item files afresh, but
+            # doing that automatically here cannot tell a real deletion from
+            # a flaky 404 -- and auto-clearing on a transient error would
+            # file a duplicate. Deliberately conservative (worklog#241): stop
+            # retrying this item every run and hand the decision to a human,
+            # instead of popping last_pushed_hash and hammering the same
+            # dead key forever.
             key = (item.get("external") or {}).get("key")
-            self.note("key %s gone remotely; will re-push %s next run"
-                      % (key, iid[:8]))
-            self.item_state(iid).pop("last_pushed_hash", None)
+            self.item_state(iid)["gone_key"] = key
+            self.note("%s: ticket %s reported gone remotely — not retried "
+                      "automatically; run `worklog unlink %s` to clear the "
+                      "link and file a fresh one" % (iid[:8], key, iid))
             self.counts["deferred"] += 1
         elif rc == 4:
             self.note("rate limited on %s; deferred after 3 retries" % iid[:8])
@@ -360,7 +399,27 @@ class Dispatcher:
             print("    worklog sync --keys %s   # re-push the surviving owner "
                   "over the damage" % key, file=sys.stderr)
 
+    def refuse_ambiguous_keys(self, items, keys):
+        """--keys accepts a ticket number as well as an item ULID. A number
+        more than one item claims must be refused outright, not drag every
+        claimant into scope -- that is exactly the reflex an operator reaches
+        for while repairing a duplicate (github#226), and precisely wrong
+        then (worklog#239). Unlike the collision guard below (which skips the
+        colliders and keeps the rest of the run going), an ambiguous forced
+        key stops the run before anything is pushed -- the operator asked for
+        one specific ticket and got a fork in the road instead.
+        """
+        for key in keys:
+            owners = sorted(i["id"] for i in items
+                            if (i.get("external") or {}).get("key") == key)
+            if len(owners) > 1:
+                sys.exit("worklog sync: --keys %r is ambiguous — claimed by "
+                         "%d items: %s (worklog unlink the wrong one first)"
+                         % (key, len(owners), ", ".join(owners)))
+
     def push_items(self, items, caps, keys):
+        if keys:
+            self.refuse_ambiguous_keys(items, keys)
         # Collection-level gate: inside the loop every item looks perfectly
         # valid, which is exactly why github#226 was invisible from the log.
         self.collisions = {k: v for k, v in external_owners(items).items()
@@ -375,13 +434,29 @@ class Dispatcher:
             # titleless items are fold debris, not work — report, never push.
             # Pushing one files an "(untitled)" ticket remotely.
             if item.get("_orphan") or not item.get("title"):
-                self.drift.append(f"{iid[:8]}: orphan/untitled item skipped — not pushed")
+                # Once it is closed the debris is settled: it can never be
+                # pushed and there is nothing to act on, so repeating it every
+                # run only teaches readers to skim drift (01KYTGNS76).
+                if item.get("status") not in CLOSED_STATUSES:
+                    self.drift.append(
+                        f"{iid[:8]}: orphan/untitled item skipped — not pushed")
                 continue
             # Before `closed` is computed, so the update-then-close branch is
             # covered too — that is the path that marked the reported ticket
             # Done. Corruption needs BOTH claimants pushed, so skipping the
             # set removes it entirely; the rest of the run proceeds.
             if iid in blocked:
+                continue
+            # A ticket reported gone (rc 3) on a prior run: don't retry it
+            # every run (worklog#241) -- surface the remedy again so it isn't
+            # forgotten. `worklog unlink` clears `external`, so ext["key"]
+            # then mismatches gone_key and the item re-enters scope normally.
+            gone_key = self.state.get("items", {}).get(iid, {}).get("gone_key")
+            if gone_key is not None and gone_key == ext.get("key"):
+                self.note("%s: ticket %s reported gone remotely — not "
+                          "retried automatically; run `worklog unlink %s` "
+                          "to clear the link and file a fresh one"
+                          % (iid[:8], gone_key, iid))
                 continue
             closed = item.get("status") in CLOSED_STATUSES
             payload_item = self.outbound(item, caps)
@@ -493,8 +568,12 @@ class Dispatcher:
             self.note("adapter does not support pull; local log may lag remote")
             return
         system = caps["system"]
-        cursor = self.state.get("cursors", {}).get(system)
-        args = ["pull"] + (["--since", cursor] if cursor else [])
+        # No cursor yet (first pull for this system) -> the adapter contract
+        # still requires --since or --keys, so seed one from the earliest
+        # local event instead of calling with neither (worklog#141).
+        cursor = (self.state.get("cursors", {}).get(system)
+                 or earliest_event_ts() or EPOCH)
+        args = ["pull", "--since", cursor]
         p = self.run_adapter(*args)
         if p.returncode == 2:
             sys.exit("worklog sync: adapter auth failure on pull — "
