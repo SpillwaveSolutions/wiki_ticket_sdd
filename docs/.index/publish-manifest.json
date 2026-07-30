@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "90ec49edcfff",
+   "render_hash": "dcaeecc6e00b",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2961,6 +2961,16 @@
    "wiki_key": "item/01KYNKBCNS8WY5BH2B7EDBHMF1"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KYT66K7YA68DB5WF3B0P625B",
+   "render": "as-is",
+   "render_hash": "91da6be7dd2f",
+   "source": "docs/.index/rendered/tickets/01KYT66K7YA68DB5WF3B0P625B.md",
+   "title": "Prune merged branches and orphaned worktrees after v0.18.0",
+   "truth_state": "done",
+   "wiki_key": "item/01KYT66K7YA68DB5WF3B0P625B"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -3478,11 +3488,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-29T00:44:51Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-30T21:05:38Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "b1b577d6a197",
+   "render_hash": "2ec573adbb3b",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Prune merged branches and orphaned worktrees after v0.18.0
+`01KYT66K7YA68DB5WF3B0P625B` · status: done
+
 ### Release v0.18.0
 `01KYNKBCNS8WY5BH2B7EDBHMF1` · status: done
 - targets: release/v0.18.0

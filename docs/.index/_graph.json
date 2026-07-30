@@ -4924,6 +4924,11 @@
    "status": "done",
    "title": "Release v0.18.0"
   },
+  "item/01KYT66K7YA68DB5WF3B0P625B": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Prune merged branches and orphaned worktrees after v0.18.0"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
