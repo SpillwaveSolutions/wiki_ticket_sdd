@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "9ccf61dc075b",
+   "render_hash": "e79f6d19942f",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -179,6 +179,16 @@
    "title": "PR #198 \u2014 fix(plan-capture): enforce invariant 15.8 by slug, not by filename",
    "truth_state": "merged",
    "wiki_key": "pr/198"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-268",
+   "render": "as-is",
+   "render_hash": "8107d862f475",
+   "source": "docs/.index/rendered/prs/268.md",
+   "title": "PR #268",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/268"
   },
   {
    "frozen": false,
@@ -2084,7 +2094,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYABYEQP8ANXGYPBCV2T20D8",
    "render": "as-is",
-   "render_hash": "f217292cec93",
+   "render_hash": "c42532957635",
    "source": "docs/.index/rendered/tickets/01KYABYEQP8ANXGYPBCV2T20D8.md",
    "title": "Extend IA to tickets, PRs, and releases (artifact pages)",
    "truth_state": "done",
@@ -2214,7 +2224,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYADGT9Q48EKJZVQQSH4HXWZ",
    "render": "as-is",
-   "render_hash": "4d35ba680f4b",
+   "render_hash": "d8729d523021",
    "source": "docs/.index/rendered/tickets/01KYADGT9Q48EKJZVQQSH4HXWZ.md",
    "title": "worklog pr-sync: fetch live PR metadata (files, review/CI status)",
    "truth_state": "done",

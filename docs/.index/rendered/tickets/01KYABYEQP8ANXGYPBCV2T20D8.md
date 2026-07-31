@@ -35,6 +35,10 @@ item/PR/release gets a manifest slot. (done)
 
 Progress: 9/9 done
 
+## Linked PRs
+
+- [[PR-268]]
+
 ## Related tickets
 
 - [github #125](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/125)
