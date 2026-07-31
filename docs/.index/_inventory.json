@@ -64,6 +64,46 @@
    "wiki_key": "adr/0003-green-gates-merge"
   },
   {
+   "canonical_key": "adr/0004-clearing-a-dead-ticket-link-stays-a-huma",
+   "date": "2026-07-31",
+   "deciders": [
+    "rick",
+    "claude"
+   ],
+   "doc_type": "adr",
+   "id": 4,
+   "slug": "clearing-a-dead-ticket-link-stays-a-huma",
+   "source": "docs/adr/0004-clearing-a-dead-ticket-link-stays-a-huma.md",
+   "status": "accepted",
+   "tags": [
+    "sync",
+    "adapters"
+   ],
+   "title": "Clearing a dead ticket link stays a human action",
+   "truth_state": "current",
+   "wiki_key": "adr/0004-clearing-a-dead-ticket-link-stays-a-huma"
+  },
+  {
+   "canonical_key": "adr/0005-no-custom-merge-driver-for-the-event-log",
+   "date": "2026-07-31",
+   "deciders": [
+    "rick",
+    "claude"
+   ],
+   "doc_type": "adr",
+   "id": 5,
+   "slug": "no-custom-merge-driver-for-the-event-log",
+   "source": "docs/adr/0005-no-custom-merge-driver-for-the-event-log.md",
+   "status": "accepted",
+   "tags": [
+    "core",
+    "git"
+   ],
+   "title": "No custom merge driver for the event log",
+   "truth_state": "current",
+   "wiki_key": "adr/0005-no-custom-merge-driver-for-the-event-log"
+  },
+  {
    "aliases": [
     "cli-reference"
    ],
@@ -959,10 +999,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-31T16:38:34Z",
+   "generated_at": "2026-07-31T16:55:23Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "3cd92498",
+   "source_hash": "7ed54ab5",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

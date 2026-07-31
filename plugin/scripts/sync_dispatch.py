@@ -165,6 +165,11 @@ def resolve_adapter():
 class Dispatcher:
     COUNT_KEYS = ("created", "updated", "closed", "skipped", "pulled",
                   "conflicts", "deferred")
+    # How many not-founds, with nothing succeeding, before we stop believing
+    # the tickets and start suspecting the project. Three rather than one so a
+    # genuinely-deleted first ticket does not abort a healthy run; low enough
+    # that a bad project setting cannot walk the whole log (ADR-0004).
+    GONE_ABORT = 3
 
     def __init__(self, adapter, retry_base_delay=0.5, dry_run=False):
         self.adapter = adapter
@@ -174,6 +179,14 @@ class Dispatcher:
         self.drift = []
         self.collisions = {}
         self.state = self._load_state()
+        # GONE bookkeeping (ADR-0004). Exit code 3 cannot separate a deleted
+        # ticket from an unreachable project — both are 404 — so the guard is
+        # on SCALE, not on any per-ticket judgement: a run that has proved
+        # nothing may condemn at most GONE_ABORT-1 items before it aborts.
+        # `adapter_ok` is what disarms that, and the marks are buffered so the
+        # abort can leave nothing behind.
+        self.adapter_ok = False
+        self.pending_gone = {}
 
     # --- state (.work/sync-state.json, per-clone) ---
 
@@ -320,6 +333,12 @@ class Dispatcher:
         """§3.6 exit-code table. True = success, carry on with the item."""
         rc = p.returncode
         if rc == 0:
+            # Reachability is proven, and this key answers — so any gone mark
+            # from an earlier run is stale. Without this, a ticket restored
+            # from the tracker's trash stays skipped forever, because the mark
+            # is only outgrown when the key itself changes (ADR-0004).
+            self.adapter_ok = True
+            self.item_state(item["id"]).pop("gone_key", None)
             return True
         iid = item["id"]
         if rc == 2:
@@ -336,7 +355,15 @@ class Dispatcher:
             # instead of popping last_pushed_hash and hammering the same
             # dead key forever.
             key = (item.get("external") or {}).get("key")
-            self.item_state(iid)["gone_key"] = key
+            self.pending_gone[iid] = key
+            if not self.adapter_ok and len(self.pending_gone) >= self.GONE_ABORT:
+                self._save_state()   # deliberately WITHOUT the pending marks
+                sys.exit(
+                    "worklog sync: %d tickets reported gone and not one "
+                    "adapter call has succeeded — the project itself is "
+                    "probably unreachable, not the tickets. Nothing was "
+                    "changed. Check WORKLOG_TICKET_PROJECT and the tracker "
+                    "credentials, then re-run." % len(self.pending_gone))
             self.note("%s: ticket %s reported gone remotely — not retried "
                       "automatically; run `worklog unlink %s` to clear the "
                       "link and file a fresh one" % (iid[:8], key, iid))
@@ -560,6 +587,9 @@ class Dispatcher:
             else:
                 self.counts["updated"] += 1
             self.record_push(iid, h, pushed_key)
+        # The push loop is over, so the abort can no longer fire: whatever is
+        # still buffered is what this run really means to record.
+        self.commit_gone()
 
     # --- pull side ---
 
@@ -581,6 +611,7 @@ class Dispatcher:
         if p.returncode != 0:
             self.note("pull failed (exit %d); cursor not advanced" % p.returncode)
             return
+        self.adapter_ok = True   # a clean pull proves the project is reachable
         by_id = {i["id"]: i for i in items}
         max_rev = cursor
         for raw in p.stdout.splitlines():
@@ -643,6 +674,19 @@ class Dispatcher:
                     self.counts["pulled"] += 1
         if max_rev and not self.dry_run:
             self.state.setdefault("cursors", {})[system] = max_rev
+
+    def commit_gone(self):
+        """Flush the run's buffered gone marks into state.
+
+        Buffering is not a second safety rule — GONE_ABORT is the rule, and it
+        has already fired if this run was going to condemn items at scale. What
+        buffering buys is that the abort leaves nothing behind: marks written
+        item-by-item would survive the exit that was supposed to change
+        nothing (ADR-0004).
+        """
+        for iid, key in self.pending_gone.items():
+            self.item_state(iid)["gone_key"] = key
+        self.pending_gone.clear()
 
     # --- the run ---
 

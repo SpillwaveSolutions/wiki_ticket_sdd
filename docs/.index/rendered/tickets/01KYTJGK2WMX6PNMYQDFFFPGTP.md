@@ -15,28 +15,28 @@ other carries a release note the first lacks. (open)
 - [[Ticket-01KYTJGK2X7FFZC5BCYF2BPSSF]] Record the decision that clearing a dead ticket link stays manual — Write the architecture decision record explaining why automation is unsafe: the gone
 signal is a substring match that cannot separate a deleted ticket from one you lack
 permission to read, and clearing a link leaves the remote marker in place so a later
-pull can re-attribute the old ticket. (open)
+pull can re-attribute the old ticket. (done)
 - [[Ticket-01KYTJGK2X98H9T7VVR879B0XC]] Remove the unreachable sort tiebreak in the fold — Deduplication by event id happens before the sort, so the secondary sort key can never
 be reached. (open)
 - [[Ticket-01KYTJGK2XDQVAZ85ZEH92NGGW]] Split the phase-five container into a new epic — Close the container on the gate promotion and refile what remains: the rendering
 adapter seam, one item per wiki platform to be filed only when that platform has a
 user, the document search command, and the optional glossary. (done)
 - [[Ticket-01KYTJGK2XDTKNHGH8QTHBHCTY]] Add the merge-guard tests to the integration test list — The test file that covers both merge guards was never added to the workflow's test
-list, so the protection built for them has no automated coverage. (open)
+list, so the protection built for them has no automated coverage. (done)
 - [[Ticket-01KYTJGK2XJD516RXMZ52PDZP1]] Run the log merge guard in continuous integration — The guard added for the resurrection bug is gated on a merge being in progress, which
 is never true in a continuous-integration checkout, so it protects only developer
-machines today. (open)
+machines today. (done)
 - [[Ticket-01KYTJGK2XJSCMJ9K16YDXXMD2]] Fix the fused version fence in every shipped skill — Each shipped skill's front matter runs the version straight into the closing fence with
 no newline between them, so the block is malformed. (open)
 - [[Ticket-01KYTJGK2XMY73EJMZ026Q573G]] Forget the gone marker once a ticket answers again — The marker recording that a ticket was reported missing is written but never cleared;
-it is only outgrown when the key itself changes. (open)
+it is only outgrown when the key itself changes. (done)
 - [[Ticket-01KYTJGK2XSA2C4H72SKP8F34D]] Abort the run when the whole project is unreachable — A failure to resolve the project itself produces the same gone signal as a single
 missing ticket, once per item, so one mistyped project setting would mark every linked
-item gone in a single run. (open)
+item gone in a single run. (done)
 - [[Ticket-01KYTJGK2XYHW1BT3Y1XH1YNP7]] Record the decision not to build a custom merge driver — Supersede the existing record rather than editing it, since an accepted record's body
-is written once. (open)
+is written once. (done)
 
-Progress: 1/11 done
+Progress: 7/11 done
 
 ## Related tickets
 

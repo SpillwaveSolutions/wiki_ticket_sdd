@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "f829f8129e06",
+   "render_hash": "6ec2becbb684",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "7533637c6448",
+   "render_hash": "b686d592b163",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3004,7 +3004,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2WMX6PNMYQDFFFPGTP",
    "render": "as-is",
-   "render_hash": "40fa2c6d2c62",
+   "render_hash": "9935e125127b",
    "source": "docs/.index/rendered/tickets/01KYTJGK2WMX6PNMYQDFFFPGTP.md",
    "title": "Close both P1 epics, settle the merge-strategy and GONE questions",
    "truth_state": "open",
@@ -3034,10 +3034,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2X7FFZC5BCYF2BPSSF",
    "render": "as-is",
-   "render_hash": "713c2c9ea455",
+   "render_hash": "be40604bab3a",
    "source": "docs/.index/rendered/tickets/01KYTJGK2X7FFZC5BCYF2BPSSF.md",
    "title": "Record the decision that clearing a dead ticket link stays manual",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2X7FFZC5BCYF2BPSSF"
   },
   {
@@ -3064,20 +3064,20 @@
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2XDTKNHGH8QTHBHCTY",
    "render": "as-is",
-   "render_hash": "4956423f0882",
+   "render_hash": "106f8f15f0db",
    "source": "docs/.index/rendered/tickets/01KYTJGK2XDTKNHGH8QTHBHCTY.md",
    "title": "Add the merge-guard tests to the integration test list",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2XDTKNHGH8QTHBHCTY"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2XJD516RXMZ52PDZP1",
    "render": "as-is",
-   "render_hash": "38cb3738ce36",
+   "render_hash": "f4daf44c9a61",
    "source": "docs/.index/rendered/tickets/01KYTJGK2XJD516RXMZ52PDZP1.md",
    "title": "Run the log merge guard in continuous integration",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2XJD516RXMZ52PDZP1"
   },
   {
@@ -3094,30 +3094,30 @@
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2XMY73EJMZ026Q573G",
    "render": "as-is",
-   "render_hash": "cf8d739012ef",
+   "render_hash": "9fb7c31a5d15",
    "source": "docs/.index/rendered/tickets/01KYTJGK2XMY73EJMZ026Q573G.md",
    "title": "Forget the gone marker once a ticket answers again",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2XMY73EJMZ026Q573G"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2XSA2C4H72SKP8F34D",
    "render": "as-is",
-   "render_hash": "91c4470a305d",
+   "render_hash": "427e66a83c47",
    "source": "docs/.index/rendered/tickets/01KYTJGK2XSA2C4H72SKP8F34D.md",
    "title": "Abort the run when the whole project is unreachable",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2XSA2C4H72SKP8F34D"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2XYHW1BT3Y1XH1YNP7",
    "render": "as-is",
-   "render_hash": "27015323a2b2",
+   "render_hash": "2d3ab6e883fc",
    "source": "docs/.index/rendered/tickets/01KYTJGK2XYHW1BT3Y1XH1YNP7.md",
    "title": "Record the decision not to build a custom merge driver",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2XYHW1BT3Y1XH1YNP7"
   },
   {
@@ -3192,6 +3192,28 @@
    "title": "PRs merge only when every quality gate is green",
    "truth_state": "current",
    "wiki_key": "adr/0003-green-gates-merge"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "ADR-0004-clearing-a-dead-ticket-link-stays-a-huma",
+   "render": "doc+banner",
+   "render_hash": "0b49f4950065",
+   "source": "docs/adr/0004-clearing-a-dead-ticket-link-stays-a-huma.md",
+   "title": "Clearing a dead ticket link stays a human action",
+   "truth_state": "current",
+   "wiki_key": "adr/0004-clearing-a-dead-ticket-link-stays-a-huma"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "ADR-0005-no-custom-merge-driver-for-the-event-log",
+   "render": "doc+banner",
+   "render_hash": "9d529b2c4e81",
+   "source": "docs/adr/0005-no-custom-merge-driver-for-the-event-log.md",
+   "title": "No custom merge driver for the event log",
+   "truth_state": "current",
+   "wiki_key": "adr/0005-no-custom-merge-driver-for-the-event-log"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -3689,11 +3711,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-31T16:38:34Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-31T16:55:23Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "15d3dffd23ce",
+   "render_hash": "292e912873bf",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -3965,7 +3987,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "ae85d8c17060",
+  "render_hash": "1ebdfb43e8bc",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

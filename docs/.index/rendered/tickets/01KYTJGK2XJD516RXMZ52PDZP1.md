@@ -1,6 +1,6 @@
 # Run the log merge guard in continuous integration
 
-`01KYTJGK2XJD516RXMZ52PDZP1` · task/feature · **open**
+`01KYTJGK2XJD516RXMZ52PDZP1` · task/feature · **done**
 
 The guard added for the resurrection bug is gated on a merge being in progress, which
 is never true in a continuous-integration checkout, so it protects only developer

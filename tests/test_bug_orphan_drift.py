@@ -22,6 +22,8 @@ class _Probe(sync_dispatch.Dispatcher):
         self.drift = []
         self.state = {"items": {}, "cursors": {}}
         self.pushed = []
+        self.adapter_ok = False   # GONE bookkeeping (ADR-0004)
+        self.pending_gone = {}
 
     def run_adapter(self, *a, **kw):
         self.pushed.append(a)
