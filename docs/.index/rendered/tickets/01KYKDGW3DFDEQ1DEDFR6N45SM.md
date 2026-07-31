@@ -1,6 +1,6 @@
 # Version lockstep check does not cover the README version marker
 
-`01KYKDGW3DFDEQ1DEDFR6N45SM` · task/ops · **open**
+`01KYKDGW3DFDEQ1DEDFR6N45SM` · task/ops · **done**
 
 A test enforces that the plugin manifest, the CLI's reported version, and every skill's declared version all agree.
 

@@ -1,6 +1,6 @@
 # Fix the fused version fence in every shipped skill
 
-`01KYTJGK2XJSCMJ9K16YDXXMD2` · task/feature · **open**
+`01KYTJGK2XJSCMJ9K16YDXXMD2` · task/feature · **done**
 
 Each shipped skill's front matter runs the version straight into the closing fence with
 no newline between them, so the block is malformed.

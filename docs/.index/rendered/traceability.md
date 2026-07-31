@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Fix the thing from #98
+`01KYWJ6YGQMMHQ58G9CNAF6F00` · status: cancelled
+
 ### worklog find: search the generated inventory and graph from the CLI
 `01KYWGM3W958F3QK4HB52X1Q1X` · status: todo
 - belongs-to: IA reader plane: platform-portable rendering and document search
@@ -41,7 +44,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 
 ### Fix the fused version fence in every shipped skill
-`01KYTJGK2XJSCMJ9K16YDXXMD2` · status: todo
+`01KYTJGK2XJSCMJ9K16YDXXMD2` · status: done
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
 - references: [github#263](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/263)
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
@@ -77,7 +80,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 
 ### Bring skill copies under the byte-for-byte sync check
-`01KYTJGK2X7FC4PTAMH60ECY36` · status: todo
+`01KYTJGK2X7FC4PTAMH60ECY36` · status: done
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
 - references: [github#257](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/257)
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
@@ -123,7 +126,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#243](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/243)
 
 ### Warn at plan capture when a task title references a ticket number
-`01KYNHEVZSBJ43P0CE2EBXT7Y0` · status: todo
+`01KYNHEVZSBJ43P0CE2EBXT7Y0` · status: done
 - references: [github#242](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/242)
 
 ### A ticket that no longer exists remotely retries forever
@@ -217,11 +220,11 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-one-owner-per-external-key]]
 
 ### Release procedure omits the re-index required after publishing to the wiki
-`01KYKDGW7HJMRQ2KKF02M8CAAW` · status: todo
+`01KYKDGW7HJMRQ2KKF02M8CAAW` · status: done
 - references: [github#224](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/224)
 
 ### Version lockstep check does not cover the README version marker
-`01KYKDGW3DFDEQ1DEDFR6N45SM` · status: todo
+`01KYKDGW3DFDEQ1DEDFR6N45SM` · status: done
 - references: [github#223](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/223)
 
 ### Roadmap hides epics whose children are all closed but which are still open

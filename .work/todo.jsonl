@@ -49,3 +49,10 @@
 {"actor":"richardhightower","ev":"01KYWHM68TTEW0MHTQQ917NZSG","item":"01KYTJGK2XYHW1BT3Y1XH1YNP7","op":"close","set":{"status":"done"},"ts":"2026-07-31T16:55:23Z"}
 {"actor":"richardhightower","ev":"01KYWHM6DKGHTHK5RX1CNFMMMA","item":"01KYTJGK2XJD516RXMZ52PDZP1","op":"close","set":{"status":"done"},"ts":"2026-07-31T16:55:23Z"}
 {"actor":"richardhightower","ev":"01KYWHM6JFSCSFFSE5YPVZG2B1","item":"01KYTJGK2XDTKNHGH8QTHBHCTY","op":"close","set":{"status":"done"},"ts":"2026-07-31T16:55:23Z"}
+{"actor":"richardhightower","ev":"01KYWJ6YGQYYGC728W8J8SVJWT","item":"01KYWJ6YGQMMHQ58G9CNAF6F00","op":"create","set":{"kind":"ops","level":"task","priority":"P3","status":"todo","title":"Fix the thing from #98"},"ts":"2026-07-31T17:05:37Z"}
+{"actor":"richardhightower","ev":"01KYWJ7PD1K9EGFF9FNKMB8E53","item":"01KYWJ6YGQMMHQ58G9CNAF6F00","op":"close","set":{"resolution":"probe item: verified the #242 warning fires without refusing the write","status":"cancelled"},"ts":"2026-07-31T17:06:02Z"}
+{"actor":"richardhightower","ev":"01KYWJC17KW4WEDDKPFBSK4MJA","item":"01KYKDGW3DFDEQ1DEDFR6N45SM","op":"close","set":{"status":"done"},"ts":"2026-07-31T17:08:24Z"}
+{"actor":"richardhightower","ev":"01KYWJC1CMFNK63P9ZZZTWF6DZ","item":"01KYKDGW7HJMRQ2KKF02M8CAAW","op":"close","set":{"status":"done"},"ts":"2026-07-31T17:08:24Z"}
+{"actor":"richardhightower","ev":"01KYWJC1HJC14W7DJWQ91JJ1G7","item":"01KYNHEVZSBJ43P0CE2EBXT7Y0","op":"close","set":{"status":"done"},"ts":"2026-07-31T17:08:24Z"}
+{"actor":"richardhightower","ev":"01KYWJC1PR5TN0YK79WNFJP4F1","item":"01KYTJGK2X7FC4PTAMH60ECY36","op":"close","set":{"status":"done"},"ts":"2026-07-31T17:08:24Z"}
+{"actor":"richardhightower","ev":"01KYWJC1W8W98NAASGKERRZNEN","item":"01KYTJGK2XJSCMJ9K16YDXXMD2","op":"close","set":{"status":"done"},"ts":"2026-07-31T17:08:25Z"}

@@ -12,6 +12,7 @@ import glob
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -68,6 +69,28 @@ def read(d, rel):
         return fh.read()
 
 
+def front_matter(path):
+    """The frontmatter block, parsed the way a real consumer parses it.
+
+    Deliberately NOT `text.split("---")[1]`, which is what this file used to
+    do: splitting on the SUBSTRING happily swallows a malformed
+    `version: 0.18.0---` fence, so twelve shipped skills carried broken
+    frontmatter for a release cycle while the test stayed green (#263). Every
+    real reader scans for a LINE that is exactly `---`; so does this.
+    """
+    lines = open(path, encoding="utf-8").read().split("\n")
+    if not lines or lines[0].strip() != "---":
+        raise AssertionError(f"{path}: no opening frontmatter fence")
+    try:
+        end = lines.index("---", 1)
+    except ValueError:
+        raise AssertionError(
+            f"{path}: frontmatter is never closed by a line that is exactly "
+            f"'---' — check for a value fused to the fence, e.g. "
+            f"'version: 1.2.3---'")
+    return lines[1:end]
+
+
 class TestCanonSync(unittest.TestCase):
     def test_repo_files_match_plugin_scripts(self):
         for rel in CANON:
@@ -76,6 +99,27 @@ class TestCanonSync(unittest.TestCase):
             self.assertTrue(
                 filecmp.cmp(src, dst, shallow=False),
                 f"{rel} differs from plugin copy — run: cp {rel} plugin/scripts/")
+
+    def test_skill_trees_match(self):
+        """#257: skills existed as two unlinked copies and had drifted in both
+        directions — one carried a pre-release gate the other lacked, the
+        other a release note the first lacked. CANON covered scripts and
+        hooks but not skills, so nothing failed while they diverged."""
+        shipped = os.path.join(PLUGIN, "skills")
+        local = os.path.join(ROOT, ".claude", "skills")
+        names = sorted(os.listdir(shipped))
+        self.assertGreaterEqual(len(names), 3)
+        self.assertEqual(names, sorted(os.listdir(local)),
+                         "a skill exists in one tree but not the other")
+        for rel in sorted(glob.glob(os.path.join(shipped, "**", "*.md"),
+                                    recursive=True)):
+            other = rel.replace(shipped, local, 1)
+            self.assertTrue(
+                os.path.exists(other), f"{other} is missing")
+            self.assertTrue(
+                filecmp.cmp(rel, other, shallow=False),
+                f"{os.path.relpath(rel, ROOT)} differs from the .claude copy "
+                f"— skills ship from plugin/skills; copy that side over")
 
 
 class TestVersionSync(unittest.TestCase):
@@ -86,12 +130,23 @@ class TestVersionSync(unittest.TestCase):
         skills = sorted(glob.glob(os.path.join(PLUGIN, "skills", "*", "SKILL.md")))
         self.assertGreaterEqual(len(skills), 3)  # every skill dir must carry SKILL.md
         for path in skills:
-            with open(path, encoding="utf-8") as fh:
-                frontmatter = fh.read().split("---")[1]
             versions = [l.split(":", 1)[1].strip()
-                        for l in frontmatter.splitlines()
+                        for l in front_matter(path)
                         if l.startswith("version:")]
             self.assertEqual(versions, [v], f"{path} version != plugin.json")
+
+    def test_readme_version_marker_agrees(self):
+        """#223: the README carries the shipped version too, and nothing
+        checked it — so a release could bump the manifest, the CLI and every
+        skill and still leave the front door advertising the old one."""
+        v = plugin_version()
+        with open(os.path.join(ROOT, "README.md"), encoding="utf-8") as fh:
+            readme = fh.read()
+        found = re.findall(r"\*\*v(\d+\.\d+\.\d+)\*\*", readme)
+        self.assertTrue(found, "README.md has no **vX.Y.Z** version marker")
+        self.assertEqual(set(found), {v},
+                         f"README.md advertises {sorted(set(found))}, "
+                         f"plugin.json says {v}")
 
 
 class TestPackaging(unittest.TestCase):
