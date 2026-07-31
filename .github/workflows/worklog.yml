@@ -44,6 +44,7 @@ jobs:
           python3 tests/test_pr_sync.py
           python3 tests/test_gone_policy.py
           python3 tests/test_ticket_ref_warning.py
+          python3 tests/test_item_fields.py
       # PR simulations: real git repos, branches, union merges, hook gates
       - name: integration tests
         run: |

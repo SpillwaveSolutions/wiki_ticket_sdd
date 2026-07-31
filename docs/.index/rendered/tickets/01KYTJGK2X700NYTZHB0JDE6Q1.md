@@ -1,6 +1,6 @@
 # Expose the two item fields the specification already declares
 
-`01KYTJGK2X700NYTZHB0JDE6Q1` · task/feature · **open**
+`01KYTJGK2X700NYTZHB0JDE6Q1` · task/feature · **done**
 
 Estimate and dependencies are normative in the specification, and the roadmap renderer
 already reads dependencies to compute blockers, but neither can be set from the command

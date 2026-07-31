@@ -5272,12 +5272,12 @@
   },
   "item/01KYTJGK2WMX6PNMYQDFFFPGTP": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Close both P1 epics, settle the merge-strategy and GONE questions"
   },
   "item/01KYTJGK2X700NYTZHB0JDE6Q1": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Expose the two item fields the specification already declares"
   },
   "item/01KYTJGK2X7FC4PTAMH60ECY36": {
@@ -5292,7 +5292,7 @@
   },
   "item/01KYTJGK2X98H9T7VVR879B0XC": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Remove the unreachable sort tiebreak in the fold"
   },
   "item/01KYTJGK2XDQVAZ85ZEH92NGGW": {

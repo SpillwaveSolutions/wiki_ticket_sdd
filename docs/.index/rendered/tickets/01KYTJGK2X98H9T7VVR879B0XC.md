@@ -1,6 +1,6 @@
 # Remove the unreachable sort tiebreak in the fold
 
-`01KYTJGK2X98H9T7VVR879B0XC` · task/feature · **open**
+`01KYTJGK2X98H9T7VVR879B0XC` · task/feature · **done**
 
 Deduplication by event id happens before the sort, so the secondary sort key can never
 be reached.
