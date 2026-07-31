@@ -1,6 +1,6 @@
 # Phase 5: promote gates to hard fail; platform render adapters (GitLab/ADO/Confluence); /worklog:find + glossary
 
-`01KY5G9ZW0RABXWHEMEP1FAV2G` · task/feature · **open**
+`01KY5G9ZW0RABXWHEMEP1FAV2G` · task/feature · **done**
 
 Turn the remaining warnings into hard CI failures, add sidebar/navigation rendering for GitLab, Azure DevOps, and Confluence wikis, and add a search command over the doc inventory.
 

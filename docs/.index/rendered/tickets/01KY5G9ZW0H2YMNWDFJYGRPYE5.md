@@ -1,6 +1,6 @@
 # IA & content model (supersedes wiki-information-architecture)
 
-`01KY5G9ZW0H2YMNWDFJYGRPYE5` · epic/feature · **open**
+`01KY5G9ZW0H2YMNWDFJYGRPYE5` · epic/feature · **done**
 
 Reorganize the project wiki so anyone — a new developer, a PM, an auditor — can find the right page and know whether it is current or historical.
 
@@ -12,11 +12,11 @@ Reorganize the project wiki so anyone — a new developer, a PM, an auditor — 
 - [[Ticket-01KY5G9ZW0PBXTBKRJJ70QHR5P]] Phase 0: schema/doc.schema.json unified frontmatter schema + stdlib validator (adr.schema.json pattern) — Define one frontmatter schema that every doc type validates against, with per-type required fields, plus a small validator. (done)
 - [[Ticket-01KY5G9ZW0PEZK9PTM3NG0PYX7]] Phase 2: extend wiki-publish to consume publish-manifest.json; replace hand-maintained wiki-home.md with generated Home — The wiki publisher reads a generated manifest that says exactly which pages belong on the wiki and how each renders, replacing the implicit publish list. (done)
 - [[Ticket-01KY5G9ZW0PNKDDEK5TM8GS2J6]] Phase 1: CI gates — wiki_key present/unique, schema-valid frontmatter (warn one cycle, then hard) — CI checks that every doc has an identity key, no two docs share one, and frontmatter matches the schema. (done)
-- [[Ticket-01KY5G9ZW0RABXWHEMEP1FAV2G]] Phase 5: promote gates to hard fail; platform render adapters (GitLab/ADO/Confluence); /worklog:find + glossary — Turn the remaining warnings into hard CI failures, add sidebar/navigation rendering for GitLab, Azure DevOps, and Confluence wikis, and add a search command over the doc inventory. (open)
+- [[Ticket-01KY5G9ZW0RABXWHEMEP1FAV2G]] Phase 5: promote gates to hard fail; platform render adapters (GitLab/ADO/Confluence); /worklog:find + glossary — Turn the remaining warnings into hard CI failures, add sidebar/navigation rendering for GitLab, Azure DevOps, and Confluence wikis, and add a search command over the doc inventory. (done)
 - [[Ticket-01KY5G9ZW0X5F3K7KHP1SXFM3Q]] Phase 2: worklog ia-render + ia-manifest — generated Home, Sidebar, publish-time truth banners in docs/.index/rendered/ — Generate the reader-facing wiki pages: a question-driven Home, a sidebar grouped into Current Truth vs History, and a banner on every page saying whether it is current, a snapshot, or superseded. (done)
 - [[Ticket-01KY5G9ZW0Z6JFMVTAFC54RM36]] Phase 4: ia-graph typed-edge taxonomy + link-pr + trace-check + Traceability Index; propose-only edge seeding via suggestions.jsonl — Build the traceability graph linking plans to work items to tickets, code changes, tests, and releases — browsable as a wiki page and validated by a checker that reports released work missing its evidence links. (done)
 
-Progress: 8/9 done
+Progress: 9/9 done
 
 ## Related tickets
 

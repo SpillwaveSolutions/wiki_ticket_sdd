@@ -2,6 +2,26 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### worklog find: search the generated inventory and graph from the CLI
+`01KYWGM3W958F3QK4HB52X1Q1X` · status: todo
+- belongs-to: IA reader plane: platform-portable rendering and document search
+- references: [github#272](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/272)
+
+### Extract a render adapter seam so page naming is not hardcoded to Gollum
+`01KYWGM3R13Q33YZ3PJA3V7QMD` · status: todo
+- belongs-to: IA reader plane: platform-portable rendering and document search
+- references: [github#271](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/271)
+
+### IA reader plane: platform-portable rendering and document search
+`01KYWGM3KPNQNSWV03FRG23ADB` · status: todo
+- references: [github#270](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/270)
+- contains: Extract a render adapter seam so page naming is not hardcoded to Gollum
+- contains: worklog find: search the generated inventory and graph from the CLI
+
+### Merge guard's printed remedy cannot be run from the state it creates
+`01KYWGJD1QCQRM6V6S0MWN5SCW` · status: todo
+- references: [github#269](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/269)
+
 ### Record the decision not to build a custom merge driver
 `01KYTJGK2XYHW1BT3Y1XH1YNP7` · status: todo
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
@@ -39,7 +59,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 
 ### Split the phase-five container into a new epic
-`01KYTJGK2XDQVAZ85ZEH92NGGW` · status: todo
+`01KYTJGK2XDQVAZ85ZEH92NGGW` · status: done
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
 - references: [github#260](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/260)
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
@@ -839,7 +859,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-ia-content-model]]
 
 ### Phase 5: promote gates to hard fail; platform render adapters (GitLab/ADO/Confluence); /worklog:find + glossary
-`01KY5G9ZW0RABXWHEMEP1FAV2G` · status: todo
+`01KY5G9ZW0RABXWHEMEP1FAV2G` · status: done
 - belongs-to: IA & content model (supersedes wiki-information-architecture)
 - references: [github#98](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/98)
 - produced-by: [[Plan-ia-content-model]]
@@ -873,7 +893,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-ia-content-model]]
 
 ### IA & content model (supersedes wiki-information-architecture)
-`01KY5G9ZW0H2YMNWDFJYGRPYE5` · status: todo
+`01KY5G9ZW0H2YMNWDFJYGRPYE5` · status: done
 - references: [github#93](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/93)
 - contains: Phase 0: worklog wiki-key + worklog ia-inventory (read-only) + migration record docs/migrations/0002-ia-content-model.md
 - contains: Phase 1: worklog ia-normalize — sidecars for frozen docs, in-place for sanctioned-live; backfill wiki_key (ledger-seeded) + truth_state

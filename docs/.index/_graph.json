@@ -2446,6 +2446,36 @@
    "type": "references"
   },
   {
+   "from": "item/01KYWGJD1QCQRM6V6S0MWN5SCW",
+   "to": "ticket/github#269",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYWGM3KPNQNSWV03FRG23ADB",
+   "to": "ticket/github#270",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYWGM3R13Q33YZ3PJA3V7QMD",
+   "to": "item/01KYWGM3KPNQNSWV03FRG23ADB",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYWGM3R13Q33YZ3PJA3V7QMD",
+   "to": "ticket/github#271",
+   "type": "references"
+  },
+  {
+   "from": "item/01KYWGM3W958F3QK4HB52X1Q1X",
+   "to": "item/01KYWGM3KPNQNSWV03FRG23ADB",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYWGM3W958F3QK4HB52X1Q1X",
+   "to": "ticket/github#272",
+   "type": "references"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -4590,7 +4620,7 @@
   },
   "item/01KY5G9ZW0H2YMNWDFJYGRPYE5": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "IA & content model (supersedes wiki-information-architecture)"
   },
   "item/01KY5G9ZW0MQD9335S641DC7ZG": {
@@ -4615,7 +4645,7 @@
   },
   "item/01KY5G9ZW0RABXWHEMEP1FAV2G": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Phase 5: promote gates to hard fail; platform render adapters (GitLab/ADO/Confluence); /worklog:find + glossary"
   },
   "item/01KY5G9ZW0X5F3K7KHP1SXFM3Q": {
@@ -5255,7 +5285,7 @@
   },
   "item/01KYTJGK2XDQVAZ85ZEH92NGGW": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Split the phase-five container into a new epic"
   },
   "item/01KYTJGK2XDTKNHGH8QTHBHCTY": {
@@ -5287,6 +5317,26 @@
    "doc_type": "item",
    "status": "todo",
    "title": "Record the decision not to build a custom merge driver"
+  },
+  "item/01KYWGJD1QCQRM6V6S0MWN5SCW": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Merge guard's printed remedy cannot be run from the state it creates"
+  },
+  "item/01KYWGM3KPNQNSWV03FRG23ADB": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "IA reader plane: platform-portable rendering and document search"
+  },
+  "item/01KYWGM3R13Q33YZ3PJA3V7QMD": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Extract a render adapter seam so page naming is not hardcoded to Gollum"
+  },
+  "item/01KYWGM3W958F3QK4HB52X1Q1X": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "worklog find: search the generated inventory and graph from the CLI"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
@@ -6163,6 +6213,22 @@
   "ticket/github#266": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/266"
+  },
+  "ticket/github#269": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/269"
+  },
+  "ticket/github#270": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/270"
+  },
+  "ticket/github#271": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/271"
+  },
+  "ticket/github#272": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/272"
   },
   "ticket/github#29": {
    "doc_type": "ticket",

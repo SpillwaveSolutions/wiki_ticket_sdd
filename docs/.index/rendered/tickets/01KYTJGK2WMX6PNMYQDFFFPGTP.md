@@ -20,7 +20,7 @@ pull can re-attribute the old ticket. (open)
 be reached. (open)
 - [[Ticket-01KYTJGK2XDQVAZ85ZEH92NGGW]] Split the phase-five container into a new epic — Close the container on the gate promotion and refile what remains: the rendering
 adapter seam, one item per wiki platform to be filed only when that platform has a
-user, the document search command, and the optional glossary. (open)
+user, the document search command, and the optional glossary. (done)
 - [[Ticket-01KYTJGK2XDTKNHGH8QTHBHCTY]] Add the merge-guard tests to the integration test list — The test file that covers both merge guards was never added to the workflow's test
 list, so the protection built for them has no automated coverage. (open)
 - [[Ticket-01KYTJGK2XJD516RXMZ52PDZP1]] Run the log merge guard in continuous integration — The guard added for the resurrection bug is gated on a merge being in progress, which
@@ -36,7 +36,7 @@ item gone in a single run. (open)
 - [[Ticket-01KYTJGK2XYHW1BT3Y1XH1YNP7]] Record the decision not to build a custom merge driver — Supersede the existing record rather than editing it, since an accepted record's body
 is written once. (open)
 
-Progress: 0/11 done
+Progress: 1/11 done
 
 ## Related tickets
 

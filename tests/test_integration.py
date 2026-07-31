@@ -528,5 +528,67 @@ class TestCommitMsgReference(unittest.TestCase):
         sb.merge("feature/x")  # default merge message, must not raise
 
 
+class TestIAGatesAreHard(unittest.TestCase):
+    """#98: the IA gates spent a release cycle as warnings; they now fail.
+
+    A promotion is only real if something proves it fails. These build the
+    two repos that matter — one that has opted into the IA and one that
+    never has — and assert opposite outcomes for each.
+    """
+
+    def _armed(self, sb):
+        """A sandbox with a generated, committed IA index."""
+        sb.branch("feature/ia")
+        sb.worklog("ia-inventory")
+        sb.worklog("ia-render")
+        sb.commit_all("chore: generate the IA index (#98)")
+        self.assertTrue(os.path.isdir(os.path.join(sb.dir, "docs/.index")))
+
+    def _hook(self, sb):
+        return sh(sb.dir, "env", "WORKLOG_SKIP_BRANCH_GUARD=1",
+                  "hooks/pre-commit", check=False)
+
+    def test_scaffolded_repo_without_an_index_is_not_blocked(self):
+        """The guard's whole point: a repo that got bin/ from the plugin but
+        has never generated an index must still be able to commit."""
+        sb = make_sandbox(self)
+        self.assertFalse(os.path.isdir(os.path.join(sb.dir, "docs/.index")))
+        self.assertEqual(self._hook(sb).returncode, 0)
+
+    def test_armed_repo_passes_when_the_index_is_fresh(self):
+        sb = make_sandbox(self)
+        self._armed(sb)
+        self.assertEqual(self._hook(sb).returncode, 0)
+
+    def test_stale_rendered_page_now_fails_instead_of_warning(self):
+        sb = make_sandbox(self)
+        self._armed(sb)
+        sb.write("docs/.index/rendered/home.md", "# tampered\n")
+        r = self._hook(sb)
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("rendered pages/manifest stale", r.stderr)
+        self.assertNotIn("WARNING", r.stderr)
+
+    def test_deleting_one_generated_file_still_fails(self):
+        """The guard keys on the directory, not the file — so removing the
+        inventory cannot silence the gate that checks it."""
+        sb = make_sandbox(self)
+        self._armed(sb)
+        os.remove(os.path.join(sb.dir, "docs/.index/_inventory.json"))
+        r = self._hook(sb)
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("inventory stale/invalid", r.stderr)
+
+    def test_trace_check_stays_a_warning(self):
+        """Deliberately NOT promoted: unlinked evidence is a release-time
+        concern, and --strict already covers it there."""
+        with open(os.path.join(ROOT, "hooks", "pre-commit")) as fh:
+            hook = fh.read()
+        self.assertIn("trace-check stays warn-level here forever", hook)
+        trace_line = next(ln for ln in hook.splitlines()
+                          if "worklog trace-check >/dev/null" in ln)
+        self.assertNotIn("fail ", trace_line)
+
+
 if __name__ == "__main__":
     unittest.main()
