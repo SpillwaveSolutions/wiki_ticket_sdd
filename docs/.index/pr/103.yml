@@ -1,0 +1,8 @@
+checks: passing
+files: [bin/fold.py, plugin/scripts/fold.py, tests/test_compact.py]
+merged_at: 2026-07-22T19:00:59Z
+number: 103
+review: none
+state: merged
+title: fix(compact): closed orphan aborts nightly compaction (verify mismatch)
+url: https://github.com/SpillwaveSolutions/wiki_ticket_sdd/pull/103

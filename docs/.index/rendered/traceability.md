@@ -574,8 +574,9 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#141](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/141)
 
 ### worklog pr-sync: fetch live PR metadata (files, review/CI status)
-`01KYADGT9Q48EKJZVQQSH4HXWZ` · status: todo
+`01KYADGT9Q48EKJZVQQSH4HXWZ` · status: done
 - belongs-to: Extend IA to tickets, PRs, and releases (artifact pages)
+- lands-in: pr/268
 - references: [github#138](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/138)
 
 ### banner() mislabels frozen 'current' plans as status reports
@@ -660,7 +661,8 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-artifact-pages]]
 
 ### Extend IA to tickets, PRs, and releases (artifact pages)
-`01KYABYEQP8ANXGYPBCV2T20D8` · status: todo
+`01KYABYEQP8ANXGYPBCV2T20D8` · status: done
+- lands-in: pr/268
 - references: [github#125](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/125)
 - contains: Phase 0: add item_links() graph helper
 - contains: Phase 4: regenerate all pages and confirm coverage gate holds

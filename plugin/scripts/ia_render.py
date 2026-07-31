@@ -509,16 +509,35 @@ def render_release_page(tag, items, fwd, back):
 
 def render_pr_page(pr_num, items, fwd, back):
     """A PR page (§ artifact-pages plan): linked tickets + related release
-    from existing graph edges; no live GitHub data exists anywhere in this
-    repo today (no `gh pr view` integration), so files-changed/review/CI
-    status render as 'not tracked' pending a separately-scoped follow-up."""
+    from existing graph edges, plus live state/files/review from the
+    `pr/<N>` sidecar that `worklog pr-sync` writes. The sidecar is a
+    committed file, so this stays a pure function of the working tree; a PR
+    that has never been synced degrades to the original 'not tracked'."""
     pr_key = "pr/%s" % pr_num
+    meta = ia.read_sidecar(pr_key)
     linked = sorted(frm.split("/", 1)[1] for typ, frm in back.get(pr_key, [])
                     if typ == "delivers")
-    lines = ["# PR #%s" % pr_num, "",
-             "`%s` · status: **not tracked**" % pr_key, "",
-             "Changed files: not tracked. Test/Review status: not tracked "
-             "(see the deferred PR live-metadata sync item).", ""]
+    title = meta.get("title")
+    lines = ["# PR #%s%s" % (pr_num, " — %s" % title if title else ""), ""]
+    if meta:
+        lines += ["`%s` · status: **%s**" % (pr_key, meta.get("state", "?")),
+                  "",
+                  "- Review: %s" % meta.get("review", "none"),
+                  "- Checks: %s" % meta.get("checks", "none")]
+        if meta.get("merged_at"):
+            lines.append("- Merged: %s" % meta["merged_at"])
+        if meta.get("url"):
+            lines.append("- Source: %s" % meta["url"])
+        lines += [""]
+        files = [f for f in meta.get("files") or [] if f]
+        lines += ["## Changed Files", ""]
+        lines += ["- `%s`" % f for f in files] if files else \
+                 ["_No files recorded._"]
+        lines += [""]
+    else:
+        lines += ["`%s` · status: **not tracked**" % pr_key, "",
+                  "Changed files: not tracked. Test/Review status: not "
+                  "tracked — run `worklog pr-sync %s`." % pr_num, ""]
 
     if linked:
         lines += ["## Linked Tickets", ""]
@@ -592,7 +611,10 @@ def build_manifest(records, rendered, items=None):
         elif fname.startswith("prs/"):
             num = fname[len("prs/"):-3]
             wiki_key, pname = "pr/" + num, pr_page_name(num)
-            title, ts = "PR #%s" % num, "not tracked"
+            meta = ia.read_sidecar(wiki_key)
+            title = "PR #%s%s" % (num, " — %s" % meta["title"]
+                                  if meta.get("title") else "")
+            ts = meta.get("state") or "not tracked"
         else:
             continue
         pages.append({"wiki_key": wiki_key,

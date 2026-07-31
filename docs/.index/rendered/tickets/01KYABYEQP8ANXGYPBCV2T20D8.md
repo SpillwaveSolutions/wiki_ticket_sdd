@@ -1,6 +1,6 @@
 # Extend IA to tickets, PRs, and releases (artifact pages)
 
-`01KYABYEQP8ANXGYPBCV2T20D8` · epic/feature · **open**
+`01KYABYEQP8ANXGYPBCV2T20D8` · epic/feature · **done**
 
 Give every ticket, PR, and release its own generated wiki page reusing the IA content model's wiki_key/truth_state/traceability-graph machinery already built for docs — so a reader sees hierarchy, related artifacts, and traceability in one place instead of hunting indexes/logs.
 
@@ -31,9 +31,13 @@ status render as "not tracked" pending the Phase 3 follow-up. (done)
 `bin/ia_render.py` next to `page_name()`, and extend `build_manifest()` to
 loop work items and release tags in addition to doc records, so every
 item/PR/release gets a manifest slot. (done)
-- [[Ticket-01KYADGT9Q48EKJZVQQSH4HXWZ]] worklog pr-sync: fetch live PR metadata (files, review/CI status) — PR pages (docs/.index/rendered/prs/<N>.md, from render_pr_page() in bin/ia_render.py) currently show files-changed and test/review status as 'not tracked' -- deliberately deferred out of the artifact-pages epic since no code in this repo fetches gh pr view data today. (open)
+- [[Ticket-01KYADGT9Q48EKJZVQQSH4HXWZ]] worklog pr-sync: fetch live PR metadata (files, review/CI status) — PR pages (docs/.index/rendered/prs/<N>.md, from render_pr_page() in bin/ia_render.py) currently show files-changed and test/review status as 'not tracked' -- deliberately deferred out of the artifact-pages epic since no code in this repo fetches gh pr view data today. (done)
 
-Progress: 8/9 done
+Progress: 9/9 done
+
+## Linked PRs
+
+- [[PR-268]]
 
 ## Related tickets
 

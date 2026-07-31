@@ -1,0 +1,8 @@
+checks: passing
+files: [.work/todo.jsonl, docs/.index/_graph.json, docs/.index/_inventory.json, docs/.index/publish-manifest.json, docs/.index/rendered/tickets/01KYDKDJFCJTDVFZJ27Q9Y08TV.md, docs/.index/rendered/traceability.md, docs/roadmap.md, docs/user_guide/user-guide.md]
+merged_at: 2026-07-25T21:50:05Z
+number: 160
+review: none
+state: merged
+title: docs: fix branch-discipline hook count in user-guide
+url: https://github.com/SpillwaveSolutions/wiki_ticket_sdd/pull/160

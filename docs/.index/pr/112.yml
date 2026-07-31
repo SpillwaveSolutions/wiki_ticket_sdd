@@ -1,0 +1,8 @@
+checks: passing
+files: [bin/ia.py, plugin/scripts/ia.py, schema/doc.schema.json, schema/entity.schema.json, tests/test_ia.py]
+merged_at: 2026-07-22T20:46:58Z
+number: 112
+review: none
+state: merged
+title: #111: split document schema from entity schema — boundary refactor, zero behavior change
+url: https://github.com/SpillwaveSolutions/wiki_ticket_sdd/pull/112

@@ -1292,6 +1292,11 @@
   },
   {
    "from": "item/01KYABYEQP8ANXGYPBCV2T20D8",
+   "to": "pr/268",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYABYEQP8ANXGYPBCV2T20D8",
    "to": "ticket/github#125",
    "type": "references"
   },
@@ -1459,6 +1464,11 @@
    "from": "item/01KYADGT9Q48EKJZVQQSH4HXWZ",
    "to": "item/01KYABYEQP8ANXGYPBCV2T20D8",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KYADGT9Q48EKJZVQQSH4HXWZ",
+   "to": "pr/268",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYADGT9Q48EKJZVQQSH4HXWZ",
@@ -4765,7 +4775,7 @@
   },
   "item/01KYABYEQP8ANXGYPBCV2T20D8": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Extend IA to tickets, PRs, and releases (artifact pages)"
   },
   "item/01KYABYEQP9FDY8THDV79F324G": {
@@ -4830,7 +4840,7 @@
   },
   "item/01KYADGT9Q48EKJZVQQSH4HXWZ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "worklog pr-sync: fetch live PR metadata (files, review/CI status)"
   },
   "item/01KYAGZ8KK46SQF1MKHAHVCTJV": {
@@ -5447,6 +5457,9 @@
    "doc_type": "pr"
   },
   "pr/198": {
+   "doc_type": "pr"
+  },
+  "pr/268": {
    "doc_type": "pr"
   },
   "release/v0.10.0": {
