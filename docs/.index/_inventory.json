@@ -735,6 +735,31 @@
    "wiki_key": "plan/2026-07-28-one-owner-per-external-key"
   },
   {
+   "canonical_key": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+   "date": "2026-07-30",
+   "doc_type": "plan",
+   "epic": "01KYTJGK2WMX6PNMYQDFFFPGTP",
+   "items": [
+    "01KYTJGK2XJD516RXMZ52PDZP1",
+    "01KYTJGK2XDTKNHGH8QTHBHCTY",
+    "01KYTJGK2X7FFZC5BCYF2BPSSF",
+    "01KYTJGK2XSA2C4H72SKP8F34D",
+    "01KYTJGK2XMY73EJMZ026Q573G",
+    "01KYTJGK2XYHW1BT3Y1XH1YNP7",
+    "01KYTJGK2XDQVAZ85ZEH92NGGW",
+    "01KYTJGK2XJSCMJ9K16YDXXMD2",
+    "01KYTJGK2X7FC4PTAMH60ECY36",
+    "01KYTJGK2X700NYTZHB0JDE6Q1",
+    "01KYTJGK2X98H9T7VVR879B0XC"
+   ],
+   "slug": "close-p1-epics-and-settle-merge-and-gone-questions",
+   "source": "docs/plans/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions.md",
+   "status": "planned",
+   "title": "Close both P1 epics, settle the merge-strategy and GONE questions",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions"
+  },
+  {
    "aliases": [
     "plan/design-docs-release-sync"
    ],
@@ -934,10 +959,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-30T22:03:16Z",
+   "generated_at": "2026-07-30T22:33:11Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "7fa17d9e",
+   "source_hash": "0de66e59",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
