@@ -4,7 +4,7 @@
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "17a9063bd202",
+   "render_hash": "71ae31aaad74",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "6ec2becbb684",
+   "render_hash": "731fe4f82285",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "5ad0282d730d",
+   "render_hash": "4df79d448e14",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3004,20 +3004,20 @@
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2WMX6PNMYQDFFFPGTP",
    "render": "as-is",
-   "render_hash": "18c205e62550",
+   "render_hash": "00759ec785e8",
    "source": "docs/.index/rendered/tickets/01KYTJGK2WMX6PNMYQDFFFPGTP.md",
    "title": "Close both P1 epics, settle the merge-strategy and GONE questions",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2WMX6PNMYQDFFFPGTP"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2X700NYTZHB0JDE6Q1",
    "render": "as-is",
-   "render_hash": "90f57e7703ba",
+   "render_hash": "23fcee3a55af",
    "source": "docs/.index/rendered/tickets/01KYTJGK2X700NYTZHB0JDE6Q1.md",
    "title": "Expose the two item fields the specification already declares",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2X700NYTZHB0JDE6Q1"
   },
   {
@@ -3044,10 +3044,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2X98H9T7VVR879B0XC",
    "render": "as-is",
-   "render_hash": "700ff6209adf",
+   "render_hash": "49aae8c74bb1",
    "source": "docs/.index/rendered/tickets/01KYTJGK2X98H9T7VVR879B0XC.md",
    "title": "Remove the unreachable sort tiebreak in the fold",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2X98H9T7VVR879B0XC"
   },
   {
@@ -3230,7 +3230,7 @@
    "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "b67816e144f3",
+   "render_hash": "1800d40b6c05",
    "source": "docs/user_guide/cli-reference.md",
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current",
@@ -3721,11 +3721,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-31T17:08:25Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-31T17:20:48Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "0987731f8c93",
+   "render_hash": "7d39646b125e",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -3997,7 +3997,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "1ebdfb43e8bc",
+  "render_hash": "4db720fc83c9",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

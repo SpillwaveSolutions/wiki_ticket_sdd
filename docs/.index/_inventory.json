@@ -794,7 +794,7 @@
    ],
    "slug": "close-p1-epics-and-settle-merge-and-gone-questions",
    "source": "docs/plans/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions.md",
-   "status": "active",
+   "status": "completed",
    "title": "Close both P1 epics, settle the merge-strategy and GONE questions",
    "truth_state": "current",
    "wiki_key": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions"
@@ -999,10 +999,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-07-31T17:08:25Z",
+   "generated_at": "2026-07-31T17:20:48Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "d178d667",
+   "source_hash": "93f3aacf",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

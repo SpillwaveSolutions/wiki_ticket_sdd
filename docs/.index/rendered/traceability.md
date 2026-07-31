@@ -68,7 +68,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 
 ### Remove the unreachable sort tiebreak in the fold
-`01KYTJGK2X98H9T7VVR879B0XC` · status: todo
+`01KYTJGK2X98H9T7VVR879B0XC` · status: done
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
 - references: [github#259](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/259)
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
@@ -86,13 +86,13 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 
 ### Expose the two item fields the specification already declares
-`01KYTJGK2X700NYTZHB0JDE6Q1` · status: todo
+`01KYTJGK2X700NYTZHB0JDE6Q1` · status: done
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
 - references: [github#256](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/256)
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 
 ### Close both P1 epics, settle the merge-strategy and GONE questions
-`01KYTJGK2WMX6PNMYQDFFFPGTP` · status: todo
+`01KYTJGK2WMX6PNMYQDFFFPGTP` · status: done
 - references: [github#255](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/255)
 - contains: Expose the two item fields the specification already declares
 - contains: Bring skill copies under the byte-for-byte sync check

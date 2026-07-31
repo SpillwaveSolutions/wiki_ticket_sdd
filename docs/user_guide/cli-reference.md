@@ -55,6 +55,14 @@ bin/worklog add "Extract auth middleware" --level task --kind feature \
 | `--labels a,b` | comma-separated | none |
 | `--unplanned` | flag; requires `--discovered-during` | — |
 | `--discovered-during <ulid>` | what the unplanned work interrupted | — |
+| `--estimate` | `XS` `S` `M` `L` `XL` | omitted — an unsized item looks unsized |
+| `--depends-on a,b` | comma-separated ULIDs that block this item | none |
+
+`--depends-on` is scheduling, not hierarchy — use `--parent` for the tree. The
+roadmap renders these in its **Blocked by** column and counts the item as
+blocked. ULID shape is validated but existence is not: an append-only log has
+to stay writable when the blocker is filed a minute later. An item may not
+depend on itself.
 
 Taxonomy rules are checked at write time
 (see [the work taxonomy](user-guide.md#the-work-taxonomy)):
@@ -74,8 +82,8 @@ Taxonomy rules are checked at write time
 
 ### update
 
-Change status, priority, title, kind, milestone, body, or labels on an open
-item.
+Change status, priority, title, kind, milestone, body, estimate, labels, or
+dependencies on an open item.
 
 ```bash
 bin/worklog update 01J8X0M2QQ --status in_progress --kind bug --add-label urgent
@@ -92,6 +100,12 @@ bin/worklog update 01J8X0M2QQ --body "What and why a junior dev/PM can read"
 | `--milestone <m>` | free string |
 | `--body` | human-readable description (what/why; no ULIDs — spec §13.4) |
 | `--add-label a,b` / `--del-label a,b` | comma-separated |
+| `--estimate` | `XS` `S` `M` `L` `XL` |
+| `--add-depends-on a,b` / `--del-depends-on a,b` | comma-separated ULIDs |
+
+Dependencies take the same add/remove shape as labels rather than whole-field
+replacement, and for the same reason: the fold treats both as set-valued, so
+two branches that each add a blocker both survive a union merge.
 
 At least one change flag is required. `--kind`/`--milestone` are validated
 against the item's current level with the same taxonomy rules (and error

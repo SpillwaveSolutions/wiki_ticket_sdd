@@ -1,6 +1,6 @@
 # Close both P1 epics, settle the merge-strategy and GONE questions
 
-`01KYTJGK2WMX6PNMYQDFFFPGTP` · epic/feature · **open**
+`01KYTJGK2WMX6PNMYQDFFFPGTP` · epic/feature · **done**
 
 Follow-on session after the 2026-07-30 bug sweep cleared every defect in the tracker.
 
@@ -8,7 +8,7 @@ Follow-on session after the 2026-07-30 bug sweep cleared every defect in the tra
 
 - [[Ticket-01KYTJGK2X700NYTZHB0JDE6Q1]] Expose the two item fields the specification already declares — Estimate and dependencies are normative in the specification, and the roadmap renderer
 already reads dependencies to compute blockers, but neither can be set from the command
-line. (open)
+line. (done)
 - [[Ticket-01KYTJGK2X7FC4PTAMH60ECY36]] Bring skill copies under the byte-for-byte sync check — Skills exist as two unlinked copies, shipped and development-local, and they have
 already drifted in both directions: one carries a pre-release gate the other lacks, the
 other carries a release note the first lacks. (done)
@@ -17,7 +17,7 @@ signal is a substring match that cannot separate a deleted ticket from one you l
 permission to read, and clearing a link leaves the remote marker in place so a later
 pull can re-attribute the old ticket. (done)
 - [[Ticket-01KYTJGK2X98H9T7VVR879B0XC]] Remove the unreachable sort tiebreak in the fold — Deduplication by event id happens before the sort, so the secondary sort key can never
-be reached. (open)
+be reached. (done)
 - [[Ticket-01KYTJGK2XDQVAZ85ZEH92NGGW]] Split the phase-five container into a new epic — Close the container on the gate promotion and refile what remains: the rendering
 adapter seam, one item per wiki platform to be filed only when that platform has a
 user, the document search command, and the optional glossary. (done)
@@ -36,7 +36,7 @@ item gone in a single run. (done)
 - [[Ticket-01KYTJGK2XYHW1BT3Y1XH1YNP7]] Record the decision not to build a custom merge driver — Supersede the existing record rather than editing it, since an accepted record's body
 is written once. (done)
 
-Progress: 9/11 done
+Progress: 11/11 done
 
 ## Related tickets
 

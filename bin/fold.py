@@ -27,7 +27,6 @@ design: the fold never crashes on a bad pair; hard validation lives at write
 time (CLI) and in the hook/CI check.
 """
 
-import hashlib
 import json
 import sys
 from typing import Any, Dict, Iterable, List, Optional, Tuple
@@ -166,8 +165,12 @@ def dedupe_and_sort(events: List[Dict[str, Any]], result: FoldResult) -> List[Di
 
     Union merge duplicates lines and scrambles their order, so both of these are
     load-bearing. ULIDs sort lexicographically by time, so this is a string sort.
-    Ties break on actor then line hash, which makes the result identical on every
-    machine -- two devs folding the same log must get the same answer.
+
+    `ev` alone is a total order here, and deliberately: dedupe runs FIRST and is
+    keyed on `ev`, so no two events reaching the sort can share one. This used
+    to carry an (actor, line-hash) tiebreak for determinism across machines --
+    unreachable by construction, and worse than silence, because it advertised
+    a guarantee that came from the dedupe above it (worklog#259).
     """
     seen: Dict[str, Dict[str, Any]] = {}
     for ev in events:
@@ -176,14 +179,7 @@ def dedupe_and_sort(events: List[Dict[str, Any]], result: FoldResult) -> List[Di
             result.deduped += 1
             continue
         seen[key] = ev
-    return sorted(
-        seen.values(),
-        key=lambda e: (
-            e["ev"],
-            e.get("actor", ""),
-            hashlib.sha256(e["_line"].encode()).hexdigest(),
-        ),
-    )
+    return sorted(seen.values(), key=lambda e: e["ev"])
 
 
 def apply_watermark(events: List[Dict[str, Any]], result: FoldResult) -> List[Dict[str, Any]]:

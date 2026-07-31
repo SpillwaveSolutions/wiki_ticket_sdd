@@ -78,6 +78,37 @@ def check_taxonomy(level, kind, milestone):
                      "derived (taxonomy §2.5)")
 
 
+ULID_RE = re.compile(r"^[0-9A-HJKMNP-TV-Z]{26}$")
+ESTIMATES = ("XS", "S", "M", "L", "XL")
+
+
+def parse_depends_on(raw, self_id=None):
+    """Comma-separated ULIDs -> sorted list (worklog#256, spec §3.3).
+
+    Shape is validated, existence is NOT: --parent does not check either, and
+    an append-only log must stay writable when the thing you depend on is
+    filed a minute later. Shape still matters -- five readers resolve these to
+    titles, and a typo would render as a silent missing blocker rather than an
+    error.
+
+    Self-dependency IS rejected: an item that blocks itself can never be
+    scheduled, and no ordering of the log makes it true later.
+    """
+    if not raw:
+        return []
+    out = []
+    for tok in (t.strip() for t in raw.split(",")):
+        if not tok:
+            continue
+        if not ULID_RE.match(tok):
+            sys.exit(f"worklog: --depends-on {tok!r} is not a 26-char ULID; "
+                     "dependencies are item ids, not ticket numbers or titles")
+        if self_id and tok == self_id:
+            sys.exit(f"worklog: {tok} cannot depend on itself")
+        out.append(tok)
+    return sorted(set(out))
+
+
 def warn_ticket_refs(title):
     """Advisory only (worklog#242): a title cannot know its own ticket number
     -- the tracker mints that at the next sync -- so a `#123` in one is either
@@ -113,7 +144,11 @@ def cmd_add(a):
         "parent": a.parent, "plan": a.plan,
         "unplanned": True if a.unplanned else None,
         "discovered_during": a.discovered_during,
+        "estimate": a.estimate,
     }.items() if v is not None}
+    deps = parse_depends_on(a.depends_on)
+    if deps:
+        ev["set"]["depends_on"] = deps
     if a.labels:
         ev["set"]["labels"] = a.labels.split(",")
     append(ev)
@@ -160,12 +195,24 @@ def cmd_update(a):
     ev["set"] = {k: v for k, v in
                  {"status": a.status, "priority": a.priority, "title": a.title,
                   "body": a.body,
-                  "kind": a.kind, "milestone": a.milestone}.items()
+                  "kind": a.kind, "milestone": a.milestone,
+                  "estimate": a.estimate}.items()
                  if v is not None}
-    if a.add_label:
-        ev["add"] = {"labels": a.add_label.split(",")}
-    if a.del_label:
-        ev["del"] = {"labels": a.del_label.split(",")}
+    # depends_on is SET_VALUED in the fold, exactly like labels, so it takes
+    # the same add/del shape rather than whole-field replacement -- two
+    # branches each adding a blocker must both survive a union merge.
+    add = {k: v for k, v in {
+        "labels": a.add_label.split(",") if a.add_label else None,
+        "depends_on": parse_depends_on(a.add_depends_on, cur["id"]) or None,
+    }.items() if v}
+    dele = {k: v for k, v in {
+        "labels": a.del_label.split(",") if a.del_label else None,
+        "depends_on": parse_depends_on(a.del_depends_on, None) or None,
+    }.items() if v}
+    if add:
+        ev["add"] = add
+    if dele:
+        ev["del"] = dele
     if not (ev.get("set") or ev.get("add") or ev.get("del")):
         sys.exit("worklog: nothing to update")
     append(ev)
@@ -1107,6 +1154,11 @@ a.add_argument("--body", help="description readable by a junior dev/PM: what "
                               "and why, no ULIDs (spec §13.4)")
 a.add_argument("--unplanned", action="store_true")
 a.add_argument("--discovered-during", dest="discovered_during")
+a.add_argument("--estimate", choices=list(ESTIMATES),
+               help="relative size (spec §3.3)")
+a.add_argument("--depends-on", dest="depends_on", metavar="ULID[,ULID...]",
+               help="items that block this one — scheduling, not hierarchy "
+                    "(spec §3.3); the roadmap renders these as blockers")
 
 u = sub.add_parser("update"); u.set_defaults(fn=cmd_update)
 u.add_argument("item")
@@ -1119,6 +1171,12 @@ u.add_argument("--body", help="description readable by a junior dev/PM: what "
                               "and why, no ULIDs (spec §13.4)")
 u.add_argument("--add-label", dest="add_label")
 u.add_argument("--del-label", dest="del_label")
+u.add_argument("--estimate", choices=list(ESTIMATES),
+               help="relative size (spec §3.3)")
+u.add_argument("--add-depends-on", dest="add_depends_on",
+               metavar="ULID[,ULID...]", help="add blocking items")
+u.add_argument("--del-depends-on", dest="del_depends_on",
+               metavar="ULID[,ULID...]", help="remove blocking items")
 
 c = sub.add_parser("close"); c.set_defaults(fn=cmd_close)
 c.add_argument("item")
