@@ -78,6 +78,19 @@ def check_taxonomy(level, kind, milestone):
                      "derived (taxonomy §2.5)")
 
 
+def warn_ticket_refs(title):
+    """Advisory only (worklog#242): a title cannot know its own ticket number
+    -- the tracker mints that at the next sync -- so a `#123` in one is either
+    a reference to a different ticket or a guess that will be wrong. Never a
+    refusal: legitimate titles do cite other tickets."""
+    import plan_capture
+    refs = plan_capture.ticket_refs(title)
+    if refs:
+        print("worklog: WARNING — title cites %s; this item's own ticket "
+              "number is assigned at sync, so cite the ULID instead if you "
+              "meant this item" % ", ".join(refs), file=sys.stderr)
+
+
 def cmd_add(a):
     if a.unplanned and not a.discovered_during:
         sys.exit("worklog: --unplanned requires --discovered-during (section 5.4)")
@@ -88,6 +101,7 @@ def cmd_add(a):
         lvl, knd = LEGACY_TYPE_MAP[a.legacy_type]
         a.level, a.kind = lvl, a.kind or knd
     check_taxonomy(a.level, a.kind, a.milestone)
+    warn_ticket_refs(a.title)
     item = ulid.new()
     ev = base(item, "create", a.actor)
     # kind is only written when given: an omitted kind folds to triage (§2.3),
@@ -430,6 +444,8 @@ def cmd_plan_capture(a):
     tasks = plan_capture.parse_tasks(draft)
     if not tasks:
         sys.exit("worklog: no '- [ ]' tasks found under a '## Tasks' heading")
+    for t in tasks:
+        warn_ticket_refs(t["title"])
     date = time.strftime("%Y-%m-%d", time.gmtime())
     path = f"docs/plans/{date}-{a.slug}.md"
     # Invariant 15.8 is about the SLUG, not the filename: "pick a new slug to

@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "b686d592b163",
+   "render_hash": "5ad0282d730d",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2774,20 +2774,20 @@
    "frozen": false,
    "page_name": "Ticket-01KYKDGW3DFDEQ1DEDFR6N45SM",
    "render": "as-is",
-   "render_hash": "f103265bd048",
+   "render_hash": "c9e68f3538f7",
    "source": "docs/.index/rendered/tickets/01KYKDGW3DFDEQ1DEDFR6N45SM.md",
    "title": "Version lockstep check does not cover the README version marker",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYKDGW3DFDEQ1DEDFR6N45SM"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYKDGW7HJMRQ2KKF02M8CAAW",
    "render": "as-is",
-   "render_hash": "1fa0e3779ea9",
+   "render_hash": "ed2ec7d27a24",
    "source": "docs/.index/rendered/tickets/01KYKDGW7HJMRQ2KKF02M8CAAW.md",
    "title": "Release procedure omits the re-index required after publishing to the wiki",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYKDGW7HJMRQ2KKF02M8CAAW"
   },
   {
@@ -2944,10 +2944,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYNHEVZSBJ43P0CE2EBXT7Y0",
    "render": "as-is",
-   "render_hash": "7aff21fd4e44",
+   "render_hash": "7a53809ca581",
    "source": "docs/.index/rendered/tickets/01KYNHEVZSBJ43P0CE2EBXT7Y0.md",
    "title": "Warn at plan capture when a task title references a ticket number",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYNHEVZSBJ43P0CE2EBXT7Y0"
   },
   {
@@ -3004,7 +3004,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2WMX6PNMYQDFFFPGTP",
    "render": "as-is",
-   "render_hash": "9935e125127b",
+   "render_hash": "18c205e62550",
    "source": "docs/.index/rendered/tickets/01KYTJGK2WMX6PNMYQDFFFPGTP.md",
    "title": "Close both P1 epics, settle the merge-strategy and GONE questions",
    "truth_state": "open",
@@ -3024,10 +3024,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2X7FC4PTAMH60ECY36",
    "render": "as-is",
-   "render_hash": "c3eb4065cafb",
+   "render_hash": "a208d52e0cb0",
    "source": "docs/.index/rendered/tickets/01KYTJGK2X7FC4PTAMH60ECY36.md",
    "title": "Bring skill copies under the byte-for-byte sync check",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2X7FC4PTAMH60ECY36"
   },
   {
@@ -3084,10 +3084,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2XJSCMJ9K16YDXXMD2",
    "render": "as-is",
-   "render_hash": "3bda40c18750",
+   "render_hash": "74775feaa664",
    "source": "docs/.index/rendered/tickets/01KYTJGK2XJSCMJ9K16YDXXMD2.md",
    "title": "Fix the fused version fence in every shipped skill",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2XJSCMJ9K16YDXXMD2"
   },
   {
@@ -3159,6 +3159,16 @@
    "title": "worklog find: search the generated inventory and graph from the CLI",
    "truth_state": "open",
    "wiki_key": "item/01KYWGM3W958F3QK4HB52X1Q1X"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYWJ6YGQMMHQ58G9CNAF6F00",
+   "render": "as-is",
+   "render_hash": "66fa61496217",
+   "source": "docs/.index/rendered/tickets/01KYWJ6YGQMMHQ58G9CNAF6F00.md",
+   "title": "Fix the thing from #98",
+   "truth_state": "done",
+   "wiki_key": "item/01KYWJ6YGQMMHQ58G9CNAF6F00"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -3711,11 +3721,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-31T16:55:23Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-31T17:08:25Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "292e912873bf",
+   "render_hash": "0987731f8c93",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

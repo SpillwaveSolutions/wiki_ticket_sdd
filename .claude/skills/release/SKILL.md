@@ -1,6 +1,7 @@
 ---
 name: release
 description: Cut a versioned release — stamp the changelog, snapshot the roadmap, tag, create the platform release, publish, and sync. Use when asked to "cut a release", "ship vX.Y.Z", "tag a version", or when an unreleased changelog section is ready to go out.
+version: 0.18.0
 ---
 
 # Release
@@ -76,7 +77,18 @@ the contract, not this prose.
 - wiki-publish: the updated Roadmap and the release snapshot page; link the
   snapshot from Home.
 - ticket-sync: close the release work item(s); anything shipped-and-closed
-  reconciles with the tracker.
+  reconciles with the tracker. Release items are local-only by convention —
+  no external ticket is filed for them, so this step is a no-op for the
+  release item itself. That's intentional, not a gap: the tag and platform
+  release already give the release public visibility; don't file a
+  redundant issue just to have something for ticket-sync to close.
+- **Re-index after publishing, and commit the result.** Publishing writes the
+  page's live wiki location back into the ledger, so the generated inventory
+  is stale the moment the last page lands. Run `bin/worklog ia-index` and
+  commit `docs/.index/` — the IA gates are hard now, and the next commit fails
+  otherwise. One pass is enough: publishing adds only the wiki location to a
+  record, which is not part of the render hash, so re-indexing never makes
+  another page need republishing.
 
 ## 7. After
 

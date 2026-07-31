@@ -5157,12 +5157,12 @@
   },
   "item/01KYKDGW3DFDEQ1DEDFR6N45SM": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Version lockstep check does not cover the README version marker"
   },
   "item/01KYKDGW7HJMRQ2KKF02M8CAAW": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Release procedure omits the re-index required after publishing to the wiki"
   },
   "item/01KYND4SNNCPZ7R2NWFD7QXYTJ": {
@@ -5242,7 +5242,7 @@
   },
   "item/01KYNHEVZSBJ43P0CE2EBXT7Y0": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Warn at plan capture when a task title references a ticket number"
   },
   "item/01KYNHEW47G49CWZ9SS9ABQ2VG": {
@@ -5282,7 +5282,7 @@
   },
   "item/01KYTJGK2X7FC4PTAMH60ECY36": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Bring skill copies under the byte-for-byte sync check"
   },
   "item/01KYTJGK2X7FFZC5BCYF2BPSSF": {
@@ -5312,7 +5312,7 @@
   },
   "item/01KYTJGK2XJSCMJ9K16YDXXMD2": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Fix the fused version fence in every shipped skill"
   },
   "item/01KYTJGK2XMY73EJMZ026Q573G": {
@@ -5349,6 +5349,11 @@
    "doc_type": "item",
    "status": "todo",
    "title": "worklog find: search the generated inventory and graph from the CLI"
+  },
+  "item/01KYWJ6YGQMMHQ58G9CNAF6F00": {
+   "doc_type": "item",
+   "status": "cancelled",
+   "title": "Fix the thing from #98"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

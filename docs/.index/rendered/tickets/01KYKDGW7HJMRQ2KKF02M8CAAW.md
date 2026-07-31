@@ -1,6 +1,6 @@
 # Release procedure omits the re-index required after publishing to the wiki
 
-`01KYKDGW7HJMRQ2KKF02M8CAAW` · task/ops · **open**
+`01KYKDGW7HJMRQ2KKF02M8CAAW` · task/ops · **done**
 
 Publishing records each page's wiki URL, and the document inventory carries those URLs -- so the index must be rebuilt after publishing, not only before.
 

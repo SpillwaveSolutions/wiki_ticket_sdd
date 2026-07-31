@@ -1,6 +1,6 @@
 # Bring skill copies under the byte-for-byte sync check
 
-`01KYTJGK2X7FC4PTAMH60ECY36` · task/feature · **open**
+`01KYTJGK2X7FC4PTAMH60ECY36` · task/feature · **done**
 
 Skills exist as two unlinked copies, shipped and development-local, and they have
 already drifted in both directions: one carries a pre-release gate the other lacks, the

@@ -1,7 +1,8 @@
 ---
 name: plan-capture
 description: Capture an approved plan as tracked work items. Use when exiting plan mode, when the user approves a plan, or says "capture this plan". Writes docs/plans/<date>-<slug>.md and appends the plan's tasks to .work/todo.jsonl via bin/worklog.
-version: 0.18.0---
+version: 0.18.0
+---
 
 # Plan capture
 
@@ -17,8 +18,8 @@ version: 0.18.0---
 
    Priority token `(P0)`–`(P3)` optional, default P2. **Every task gets a
    description line** — a marker-only ticket body is a policy violation
-   (§13.4). Prose (the *why*) goes
-   in other sections and is preserved verbatim in the plan doc.
+   (§13.4). Plan-level prose (the *why*) goes in other sections and is
+   preserved verbatim in the plan doc.
 
    Captured items are `kind:feature` by design — a plan's tasks deliver
    planned value. If a captured task is really a defect, retag it after
@@ -41,7 +42,12 @@ version: 0.18.0---
    immediately — do NOT wait for the subagent; fold its result in when the
    notification arrives. If background agents are unavailable in the harness,
    run the two publishes inline after the first implementation commit
-   instead — visibility may lag but never blocks.
+   instead — visibility may lag but never blocks. Whichever way it runs, the
+   publishing step ends by re-running `bin/worklog ia-index` and committing
+   `docs/.index/`: publishing writes each page's live wiki location back into
+   the ledger, which leaves the generated inventory stale, and the IA gates
+   are hard — the next commit fails otherwise. One pass converges, because a
+   wiki location is not part of the render hash.
 
 Never append to `.work/*.jsonl` directly (invariant 15.4). Never overwrite an
 existing plan (invariant 15.8) — a changed design gets a NEW plan that
