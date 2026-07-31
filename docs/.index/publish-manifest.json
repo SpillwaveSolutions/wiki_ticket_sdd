@@ -4,7 +4,7 @@
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "e0a74b5ffa52",
+   "render_hash": "17a9063bd202",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "6335d5744eb2",
+   "render_hash": "f829f8129e06",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "e79f6d19942f",
+   "render_hash": "7533637c6448",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -1724,10 +1724,10 @@
    "frozen": false,
    "page_name": "Ticket-01KY5G9ZW0H2YMNWDFJYGRPYE5",
    "render": "as-is",
-   "render_hash": "57e1b6f0ba3d",
+   "render_hash": "e7d949fffe51",
    "source": "docs/.index/rendered/tickets/01KY5G9ZW0H2YMNWDFJYGRPYE5.md",
    "title": "IA & content model (supersedes wiki-information-architecture)",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5"
   },
   {
@@ -1774,10 +1774,10 @@
    "frozen": false,
    "page_name": "Ticket-01KY5G9ZW0RABXWHEMEP1FAV2G",
    "render": "as-is",
-   "render_hash": "a2343717e31a",
+   "render_hash": "14b775cd14bc",
    "source": "docs/.index/rendered/tickets/01KY5G9ZW0RABXWHEMEP1FAV2G.md",
    "title": "Phase 5: promote gates to hard fail; platform render adapters (GitLab/ADO/Confluence); /worklog:find + glossary",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KY5G9ZW0RABXWHEMEP1FAV2G"
   },
   {
@@ -3004,7 +3004,7 @@
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2WMX6PNMYQDFFFPGTP",
    "render": "as-is",
-   "render_hash": "30924d99a3cd",
+   "render_hash": "40fa2c6d2c62",
    "source": "docs/.index/rendered/tickets/01KYTJGK2WMX6PNMYQDFFFPGTP.md",
    "title": "Close both P1 epics, settle the merge-strategy and GONE questions",
    "truth_state": "open",
@@ -3054,10 +3054,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYTJGK2XDQVAZ85ZEH92NGGW",
    "render": "as-is",
-   "render_hash": "b84220c5ac8e",
+   "render_hash": "fa1df5c327e3",
    "source": "docs/.index/rendered/tickets/01KYTJGK2XDQVAZ85ZEH92NGGW.md",
    "title": "Split the phase-five container into a new epic",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYTJGK2XDQVAZ85ZEH92NGGW"
   },
   {
@@ -3119,6 +3119,46 @@
    "title": "Record the decision not to build a custom merge driver",
    "truth_state": "open",
    "wiki_key": "item/01KYTJGK2XYHW1BT3Y1XH1YNP7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYWGJD1QCQRM6V6S0MWN5SCW",
+   "render": "as-is",
+   "render_hash": "bc7d7ac8fa1f",
+   "source": "docs/.index/rendered/tickets/01KYWGJD1QCQRM6V6S0MWN5SCW.md",
+   "title": "Merge guard's printed remedy cannot be run from the state it creates",
+   "truth_state": "open",
+   "wiki_key": "item/01KYWGJD1QCQRM6V6S0MWN5SCW"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYWGM3KPNQNSWV03FRG23ADB",
+   "render": "as-is",
+   "render_hash": "f901b06f91ea",
+   "source": "docs/.index/rendered/tickets/01KYWGM3KPNQNSWV03FRG23ADB.md",
+   "title": "IA reader plane: platform-portable rendering and document search",
+   "truth_state": "open",
+   "wiki_key": "item/01KYWGM3KPNQNSWV03FRG23ADB"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYWGM3R13Q33YZ3PJA3V7QMD",
+   "render": "as-is",
+   "render_hash": "620ceafaa3d5",
+   "source": "docs/.index/rendered/tickets/01KYWGM3R13Q33YZ3PJA3V7QMD.md",
+   "title": "Extract a render adapter seam so page naming is not hardcoded to Gollum",
+   "truth_state": "open",
+   "wiki_key": "item/01KYWGM3R13Q33YZ3PJA3V7QMD"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYWGM3W958F3QK4HB52X1Q1X",
+   "render": "as-is",
+   "render_hash": "537a1e40a162",
+   "source": "docs/.index/rendered/tickets/01KYWGM3W958F3QK4HB52X1Q1X.md",
+   "title": "worklog find: search the generated inventory and graph from the CLI",
+   "truth_state": "open",
+   "wiki_key": "item/01KYWGM3W958F3QK4HB52X1Q1X"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -3649,11 +3689,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-31T16:30:49Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-31T16:38:34Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "7d9ecc5c93e5",
+   "render_hash": "15d3dffd23ce",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -3925,7 +3965,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "de566e440dd2",
+  "render_hash": "ae85d8c17060",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

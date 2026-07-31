@@ -106,15 +106,22 @@ fi
 [ ! -d docs/adr ] || [ ! -x bin/worklog ] || python3 bin/worklog adr check >/dev/null || fail "ADR validation failed — run: worklog adr check"
 
 # IA gates (plan ia-content-model, migration 0002): wiki_key present/unique,
-# schema-valid frontmatter, fresh inventory. WARN-ONLY for one release cycle,
-# then promoted to hard fail. Guarded like the fold tests.
-if [ -f bin/ia.py ] && [ -x bin/worklog ]; then
+# schema-valid frontmatter, fresh inventory. The warn-only release cycle is
+# over — these are hard now (#98).
+#
+# The extra `-d docs/.index` guard is what makes promotion safe: it asks "has
+# this repo opted INTO the IA?", where the bin/ia.py guard only asks "does it
+# have the code?". A scaffolded repo gets bin/ from the plugin but has never
+# generated an index, and must not be blocked from its first commit. A repo
+# that HAS an index stays fully enforced — deleting any single generated file
+# inside it still fails, because the directory is still there.
+if [ -f bin/ia.py ] && [ -x bin/worklog ] && [ -d docs/.index ]; then
   python3 bin/worklog ia-normalize --check >/dev/null 2>&1 || \
-    echo "worklog: WARNING (soon a hard gate) — doc metadata drift; run: worklog ia-normalize" >&2
+    fail "doc metadata drift; run: worklog ia-normalize"
   python3 bin/worklog ia-inventory --check >/dev/null 2>&1 || \
-    echo "worklog: WARNING (soon a hard gate) — inventory stale/invalid; run: worklog ia-inventory" >&2
+    fail "inventory stale/invalid; run: worklog ia-inventory"
   [ ! -f bin/ia_render.py ] || python3 bin/worklog ia-render --check >/dev/null 2>&1 || \
-    echo "worklog: WARNING (soon a hard gate) — rendered pages/manifest stale; run: worklog ia-render" >&2
+    fail "rendered pages/manifest stale; run: worklog ia-render"
   # trace-check stays warn-level here forever; --strict runs at release time
   [ ! -f bin/ia_graph.py ] || python3 bin/worklog trace-check >/dev/null 2>&1 || \
     echo "worklog: WARNING — unlinked evidence; run: worklog trace-check" >&2

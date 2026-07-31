@@ -14,7 +14,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 
 | Plan | Lifecycle | Truth | Date |
 |---|---|---|---|
-| [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]] Close both P1 epics, settle the merge-strategy and GONE questions | planned | current | 2026-07-30 |
+| [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]] Close both P1 epics, settle the merge-strategy and GONE questions | active | current | 2026-07-30 |
 | [[Plan-one-owner-per-external-key]] One local owner per remote ticket (#226) | completed | current | 2026-07-28 |
 | [[Plan-post-v017-drift-and-prefix-resolution]] Clear post-v0.17.0 drift and fix the prefix-ULID log corruption | completed | current | 2026-07-27 |
 | [[Plan-declare-graph-engineering]] Declare wiki_ticket_sdd as a Graph Engineering system | completed | current | 2026-07-26 |
@@ -23,7 +23,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 | [[Plan-artifact-pages]] Extend IA to tickets, PRs, and releases (artifact pages) | completed | current | 2026-07-24 |
 | [[Plan-wiki-ticket-ui-ia]] WikiTicket UI — IA-aware dashboard (supersedes wiki-ticket-ui) | completed | current | 2026-07-22 |
 | [[Plan-wiki-information-architecture]] Wiki information architecture | superseded → superseded by [[Plan-ia-content-model]] | superseded | 2026-07-22 |
-| [[Plan-ia-content-model]] IA & content model (supersedes wiki-information-architecture) | active | current | 2026-07-22 |
+| [[Plan-ia-content-model]] IA & content model (supersedes wiki-information-architecture) | completed | current | 2026-07-22 |
 | [[Plan-grok-viz-background-execution]] Grok viz — background-subagent execution rule (amendment record) | completed | current | 2026-07-22 |
 | [[Plan-wiki-ticket-ui]] WikiTicket UI — project status dashboard (wiki_ticket_sdd_ui) | superseded → superseded by [[Plan-wiki-ticket-ui-ia]] | superseded | 2026-07-21 |
 | [[Plan-grok-compat-and-mermaid-viz]] Grok Build compatibility statement + Mermaid roadmap visualization | planned — not yet scheduled | current | 2026-07-19 |

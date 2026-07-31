@@ -1,6 +1,6 @@
 # Split the phase-five container into a new epic
 
-`01KYTJGK2XDQVAZ85ZEH92NGGW` · task/feature · **open**
+`01KYTJGK2XDQVAZ85ZEH92NGGW` · task/feature · **done**
 
 Close the container on the gate promotion and refile what remains: the rendering
 adapter seam, one item per wiki platform to be filed only when that platform has a
