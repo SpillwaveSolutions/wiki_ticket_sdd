@@ -1,6 +1,6 @@
 # worklog pr-sync: fetch live PR metadata (files, review/CI status)
 
-`01KYADGT9Q48EKJZVQQSH4HXWZ` · task/feature · **open**
+`01KYADGT9Q48EKJZVQQSH4HXWZ` · task/feature · **done**
 
 PR pages (docs/.index/rendered/prs/<N>.md, from render_pr_page() in bin/ia_render.py) currently show files-changed and test/review status as 'not tracked' -- deliberately deferred out of the artifact-pages epic since no code in this repo fetches gh pr view data today.
 

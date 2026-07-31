@@ -1,0 +1,8 @@
+checks: passing
+files: [.claude/skills/plan-capture/SKILL.md, .claude/skills/work-track/SKILL.md, adapters/github/adapter, bin/plan_capture.py, bin/worklog, docs/worklog-spec.md, plugin/scripts/plan_capture.py, plugin/scripts/worklog, plugin/skills/plan-capture/SKILL.md, plugin/skills/work-track/SKILL.md, tests/test_plan_capture.py]
+merged_at: 2026-07-22T18:52:01Z
+number: 102
+review: none
+state: merged
+title: fix: ticket bodies readable by junior dev/PM (spec §13.4)
+url: https://github.com/SpillwaveSolutions/wiki_ticket_sdd/pull/102

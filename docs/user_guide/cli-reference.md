@@ -502,6 +502,27 @@ bin/worklog link-pr 01J8X0M2QQ --pr 104
 bin/worklog link-pr 01J8X0M2QQ --commit abcdef1
 ```
 
+### pr-sync
+
+Fetch live PR metadata — state, review decision, a one-word check rollup,
+merge time, and the changed-file list — into `docs/.index/pr/<N>.yml`, which
+`ia-render` then reads when it writes the PR page. A PR that has never been
+synced still renders, saying `not tracked`.
+
+This is the **only** network step in the IA pipeline, and that is deliberate.
+`ia-render --check` regenerates every page and byte-compares it, so a
+renderer that called GitHub would flap against whatever the remote said that
+minute. Fetch writes a committed file; render reads it.
+
+```bash
+bin/worklog pr-sync 104
+bin/worklog ia-render          # the page now carries real state
+```
+
+Re-running overwrites the sidecar, so sync again after a PR merges to
+capture its final state. The `--json` fields come straight from `gh pr view`,
+so `gh` must be authenticated.
+
 ### ticket-body
 
 Print the rich issue body for an item — summary, epic/plan/milestone

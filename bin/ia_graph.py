@@ -4,7 +4,10 @@ over docs + work items, PR/commit linking, and the unlinked-evidence check.
 Forward edges only are stored; reverse edges are DERIVED (§9.4) — the graph
 builder inverts `relates_to` plus the fields the log already carries
 (`parent`, `plan`, `milestone`, `external`, `supersedes`). Deterministic:
-pure function of records + fold; no git or network calls.
+pure function of records + fold; no git or network calls. `pr_sync` is the
+one exception and is deliberately not on that path — it is an explicit
+command that writes a sidecar, so the builder and the renderer keep reading
+committed files only.
 
 Item metadata stays overlay-only: an item sidecar
 (docs/.index/item/<ULID>.yml) holds ONLY what the event log cannot represent
@@ -164,6 +167,84 @@ def link_pr(ulid_, pr=None, commit=None):
                                                str(c.get("commit", ""))))
     ia.write_sidecar(item_key(ulid_), side)
     return entry
+
+
+# ------------------------------------------------------------- PR sync
+
+PR_FIELDS = ("title", "url", "state", "files", "reviewDecision",
+             "statusCheckRollup", "mergedAt")
+
+# gh reports one row per check; a page shows one word. Worst state wins —
+# a page that says "passing" while a gate is red is worse than no page.
+_CHECK_BAD = ("FAILURE", "TIMED_OUT", "CANCELLED", "ACTION_REQUIRED",
+              "ERROR", "STARTUP_FAILURE")
+_CHECK_WAIT = ("PENDING", "IN_PROGRESS", "QUEUED", "WAITING", "REQUESTED",
+               "EXPECTED")
+
+
+def rollup_checks(rows):
+    """statusCheckRollup rows -> passing|failing|pending|mixed|none."""
+    states = set()
+    for c in rows or []:
+        if not isinstance(c, dict):
+            continue
+        # A finished check run carries `conclusion`; a running one carries
+        # only `status`. Commit statuses use `state`.
+        s = (c.get("conclusion") or c.get("state") or c.get("status") or "")
+        if s:
+            states.add(s.upper())
+    if not states:
+        return "none"
+    if states & set(_CHECK_BAD):
+        return "failing"
+    if states & set(_CHECK_WAIT):
+        return "pending"
+    if states <= {"SUCCESS", "NEUTRAL", "SKIPPED", "COMPLETED"}:
+        return "passing"
+    return "mixed"
+
+
+def _gh_pr_view(num):
+    import subprocess
+    p = subprocess.run(["gh", "pr", "view", str(num),
+                        "--json", ",".join(PR_FIELDS)],
+                       capture_output=True, text=True)
+    if p.returncode != 0:
+        raise ValueError("gh pr view %s failed: %s"
+                         % (num, (p.stderr or "").strip()))
+    return json.loads(p.stdout or "{}")
+
+
+def pr_sync(num, fetch=None):
+    """Live PR metadata -> the pr/<num> sidecar. -> the sidecar dict.
+
+    The network call lives HERE and never in the renderer: `ia-render
+    --check` regenerates and byte-diffs, so a renderer that reached the
+    network would flap against mutable remote state. Same split as link_pr:
+    a command writes a committed file, render reads it off disk.
+
+    Files are flattened to paths — the sidecar's YAML subset inlines lists
+    on one line, and a comma inside an inline `{...}` would not round-trip.
+    """
+    raw = (fetch or _gh_pr_view)(int(num))
+    meta = {
+        "number": int(num),
+        "title": raw.get("title") or "",
+        "url": raw.get("url") or "",
+        "state": (raw.get("state") or "unknown").lower(),
+        "review": (raw.get("reviewDecision") or "none").lower(),
+        "checks": rollup_checks(raw.get("statusCheckRollup")),
+        "merged_at": raw.get("mergedAt") or None,
+        "files": sorted(f.get("path") for f in raw.get("files") or []
+                        if isinstance(f, dict) and f.get("path")),
+    }
+    ia.write_sidecar("pr/%s" % int(num), meta)
+    return meta
+
+
+def pr_meta(num):
+    """The pr/<num> sidecar, or {} when pr-sync has never run for it."""
+    return ia.read_sidecar("pr/%s" % num)
 
 
 def trace_check(graph=None, items=None, strict=False):

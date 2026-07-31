@@ -1,0 +1,8 @@
+checks: passing
+files: [.work/todo.jsonl, bin/ia_render.py, bin/worklog, docs/.index/_graph.json, docs/.index/_inventory.json, docs/.index/publish-manifest.json, docs/.index/rendered/home.md, docs/.index/rendered/tickets/01KYGVDKEWT513AGM0ZTY3SZP0.md, docs/.index/rendered/tickets/01KYGVDTXNEER6AQNEVWVRDEY4.md, docs/.index/rendered/traceability.md, docs/roadmap.md, plugin/scripts/ia_render.py, plugin/scripts/worklog, tests/test_integration.py]
+merged_at: 2026-07-27T04:08:24Z
+number: 198
+review: none
+state: merged
+title: fix(plan-capture): enforce invariant 15.8 by slug, not by filename
+url: https://github.com/SpillwaveSolutions/wiki_ticket_sdd/pull/198

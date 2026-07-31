@@ -688,6 +688,16 @@ def cmd_link_pr(a):
     print(f"linked {a.item} -> {entry}")
 
 
+def cmd_pr_sync(a):
+    import ia_graph
+    try:
+        meta = ia_graph.pr_sync(a.pr)
+    except ValueError as e:
+        sys.exit(f"worklog: {e}")
+    print(f"pr/{meta['number']}: {meta['state']} · review {meta['review']} "
+          f"· checks {meta['checks']} · {len(meta['files'])} file(s)")
+
+
 def cmd_trace_check(a):
     import ia_graph
     gaps = ia_graph.trace_check(strict=a.strict)
@@ -1282,6 +1292,14 @@ lp.set_defaults(fn=cmd_link_pr)
 lp.add_argument("item")
 lp.add_argument("--pr", type=int)
 lp.add_argument("--commit")
+
+ps = sub.add_parser(
+    "pr-sync",
+    description="Fetch live PR metadata (state, files, review, checks) into "
+                "the pr/<N> sidecar. The one network step in the IA "
+                "pipeline — render stays offline and reads the sidecar.")
+ps.set_defaults(fn=cmd_pr_sync)
+ps.add_argument("pr", type=int)
 
 tc = sub.add_parser(
     "trace-check",
