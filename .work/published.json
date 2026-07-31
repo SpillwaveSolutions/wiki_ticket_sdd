@@ -35,6 +35,28 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0003-green-gates-merge",
     "wiki_key": "adr/0003-green-gates-merge"
   },
+  "adr/0004-clearing-a-dead-ticket-link-stays-a-huma": {
+    "canonical_key": "adr/0004-clearing-a-dead-ticket-link-stays-a-huma",
+    "doc_type": "adr",
+    "rev": null,
+    "source": "docs/adr/0004-clearing-a-dead-ticket-link-stays-a-huma.md",
+    "source_hash": null,
+    "title": "ADR-0004-clearing-a-dead-ticket-link-stays-a-huma",
+    "truth_state": "current",
+    "url": null,
+    "wiki_key": "adr/0004-clearing-a-dead-ticket-link-stays-a-huma"
+  },
+  "adr/0005-no-custom-merge-driver-for-the-event-log": {
+    "canonical_key": "adr/0005-no-custom-merge-driver-for-the-event-log",
+    "doc_type": "adr",
+    "rev": null,
+    "source": "docs/adr/0005-no-custom-merge-driver-for-the-event-log.md",
+    "source_hash": null,
+    "title": "ADR-0005-no-custom-merge-driver-for-the-event-log",
+    "truth_state": "current",
+    "url": null,
+    "wiki_key": "adr/0005-no-custom-merge-driver-for-the-event-log"
+  },
   "cli-reference": {
     "aliases": [
       "cli-reference"

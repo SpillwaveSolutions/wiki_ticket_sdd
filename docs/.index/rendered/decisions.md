@@ -9,6 +9,8 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 | [[ADR-0001-event-log-fold-union-merge]] Append-only event log with fold-derived state and git union merge | accepted | 2026-07-19 | — |
 | [[ADR-0002-skill-based-edges-typed-contract]] Edge integration as skills, hardened by a typed adapter contract | accepted | 2026-07-19 | — |
 | [[ADR-0003-green-gates-merge]] PRs merge only when every quality gate is green | accepted | 2026-07-19 | — |
+| [[ADR-0004-clearing-a-dead-ticket-link-stays-a-huma]] Clearing a dead ticket link stays a human action | accepted | 2026-07-31 | — |
+| [[ADR-0005-no-custom-merge-driver-for-the-event-log]] No custom merge driver for the event log | accepted | 2026-07-31 | — |
 
 ## Plans
 

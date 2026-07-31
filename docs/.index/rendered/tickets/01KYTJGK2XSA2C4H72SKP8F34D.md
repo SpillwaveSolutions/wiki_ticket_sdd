@@ -1,6 +1,6 @@
 # Abort the run when the whole project is unreachable
 
-`01KYTJGK2XSA2C4H72SKP8F34D` · task/feature · **open**
+`01KYTJGK2XSA2C4H72SKP8F34D` · task/feature · **done**
 
 A failure to resolve the project itself produces the same gone signal as a single
 missing ticket, once per item, so one mistyped project setting would mark every linked

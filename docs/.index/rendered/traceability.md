@@ -23,19 +23,19 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#269](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/269)
 
 ### Record the decision not to build a custom merge driver
-`01KYTJGK2XYHW1BT3Y1XH1YNP7` · status: todo
+`01KYTJGK2XYHW1BT3Y1XH1YNP7` · status: done
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
 - references: [github#266](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/266)
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 
 ### Abort the run when the whole project is unreachable
-`01KYTJGK2XSA2C4H72SKP8F34D` · status: todo
+`01KYTJGK2XSA2C4H72SKP8F34D` · status: done
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
 - references: [github#265](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/265)
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 
 ### Forget the gone marker once a ticket answers again
-`01KYTJGK2XMY73EJMZ026Q573G` · status: todo
+`01KYTJGK2XMY73EJMZ026Q573G` · status: done
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
 - references: [github#264](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/264)
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
@@ -47,13 +47,13 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 
 ### Run the log merge guard in continuous integration
-`01KYTJGK2XJD516RXMZ52PDZP1` · status: todo
+`01KYTJGK2XJD516RXMZ52PDZP1` · status: done
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
 - references: [github#262](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/262)
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 
 ### Add the merge-guard tests to the integration test list
-`01KYTJGK2XDTKNHGH8QTHBHCTY` · status: todo
+`01KYTJGK2XDTKNHGH8QTHBHCTY` · status: done
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
 - references: [github#261](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/261)
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
@@ -71,7 +71,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]
 
 ### Record the decision that clearing a dead ticket link stays manual
-`01KYTJGK2X7FFZC5BCYF2BPSSF` · status: todo
+`01KYTJGK2X7FFZC5BCYF2BPSSF` · status: done
 - belongs-to: Close both P1 epics, settle the merge-strategy and GONE questions
 - references: [github#258](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/258)
 - produced-by: [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]]

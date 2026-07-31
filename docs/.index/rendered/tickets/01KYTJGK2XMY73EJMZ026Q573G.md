@@ -1,6 +1,6 @@
 # Forget the gone marker once a ticket answers again
 
-`01KYTJGK2XMY73EJMZ026Q573G` · task/feature · **open**
+`01KYTJGK2XMY73EJMZ026Q573G` · task/feature · **done**
 
 The marker recording that a ticket was reported missing is written but never cleared;
 it is only outgrown when the key itself changes.

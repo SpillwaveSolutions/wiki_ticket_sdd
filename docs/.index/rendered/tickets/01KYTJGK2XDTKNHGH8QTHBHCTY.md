@@ -1,6 +1,6 @@
 # Add the merge-guard tests to the integration test list
 
-`01KYTJGK2XDTKNHGH8QTHBHCTY` · task/feature · **open**
+`01KYTJGK2XDTKNHGH8QTHBHCTY` · task/feature · **done**
 
 The test file that covers both merge guards was never added to the workflow's test
 list, so the protection built for them has no automated coverage.

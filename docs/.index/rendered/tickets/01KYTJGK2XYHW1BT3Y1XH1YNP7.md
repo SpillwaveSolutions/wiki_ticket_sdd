@@ -1,6 +1,6 @@
 # Record the decision not to build a custom merge driver
 
-`01KYTJGK2XYHW1BT3Y1XH1YNP7` · task/feature · **open**
+`01KYTJGK2XYHW1BT3Y1XH1YNP7` · task/feature · **done**
 
 Supersede the existing record rather than editing it, since an accepted record's body
 is written once.

@@ -1,6 +1,6 @@
 # Record the decision that clearing a dead ticket link stays manual
 
-`01KYTJGK2X7FFZC5BCYF2BPSSF` · task/feature · **open**
+`01KYTJGK2X7FFZC5BCYF2BPSSF` · task/feature · **done**
 
 Write the architecture decision record explaining why automation is unsafe: the gone
 signal is a substring match that cannot separate a deleted ticket from one you lack

@@ -15,6 +15,15 @@ jobs:
       # the branch guard only makes sense for an actual `git commit`.
       - name: log invariants
         run: WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
+      # The merge guards run again here, standalone (ADR-0005, #262). Inside
+      # the hook they are gated on a merge being IN FLIGHT -- WORKLOG_MERGE_
+      # COMMIT or an on-disk MERGE_HEAD -- and neither exists in a CI
+      # checkout, so that path protects developer machines only. The check
+      # itself needs no merge in flight: it is a pure function of the two
+      # files, and for a pull_request GitHub checks out the merge result, so
+      # this sees exactly what the hook would have seen locally.
+      - name: merge integrity (resurrection + duplicate ownership)
+        run: python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
       # commit-msg's own MERGE_HEAD check doesn't exist post-hoc in a CI
       # checkout, so re-derive "was this a merge" via --no-merges instead.
       - name: commit messages reference a worklog item or ticket
@@ -33,6 +42,7 @@ jobs:
           python3 tests/test_plan_capture.py
           python3 tests/test_ia.py
           python3 tests/test_pr_sync.py
+          python3 tests/test_gone_policy.py
       # PR simulations: real git repos, branches, union merges, hook gates
       - name: integration tests
         run: |
@@ -40,6 +50,9 @@ jobs:
           python3 tests/test_plugin.py
           python3 tests/test_adapter_contract.py
           python3 tests/test_dispatch.py
+          # Builds throwaway repos and runs real union merges across a
+          # compaction, so it belongs here rather than in the fast step (#261).
+          python3 tests/test_bug_merge.py
 
   coverage:
     runs-on: ubuntu-latest

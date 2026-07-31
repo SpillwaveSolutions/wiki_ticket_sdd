@@ -3775,6 +3775,18 @@
    "title": "PRs merge only when every quality gate is green",
    "truth_state": "current"
   },
+  "adr/0004-clearing-a-dead-ticket-link-stays-a-huma": {
+   "doc_type": "adr",
+   "source": "docs/adr/0004-clearing-a-dead-ticket-link-stays-a-huma.md",
+   "title": "Clearing a dead ticket link stays a human action",
+   "truth_state": "current"
+  },
+  "adr/0005-no-custom-merge-driver-for-the-event-log": {
+   "doc_type": "adr",
+   "source": "docs/adr/0005-no-custom-merge-driver-for-the-event-log.md",
+   "title": "No custom merge driver for the event log",
+   "truth_state": "current"
+  },
   "cli-reference": {
    "doc_type": "guide",
    "source": "docs/user_guide/cli-reference.md",
@@ -5275,7 +5287,7 @@
   },
   "item/01KYTJGK2X7FFZC5BCYF2BPSSF": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Record the decision that clearing a dead ticket link stays manual"
   },
   "item/01KYTJGK2X98H9T7VVR879B0XC": {
@@ -5290,12 +5302,12 @@
   },
   "item/01KYTJGK2XDTKNHGH8QTHBHCTY": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Add the merge-guard tests to the integration test list"
   },
   "item/01KYTJGK2XJD516RXMZ52PDZP1": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Run the log merge guard in continuous integration"
   },
   "item/01KYTJGK2XJSCMJ9K16YDXXMD2": {
@@ -5305,17 +5317,17 @@
   },
   "item/01KYTJGK2XMY73EJMZ026Q573G": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Forget the gone marker once a ticket answers again"
   },
   "item/01KYTJGK2XSA2C4H72SKP8F34D": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Abort the run when the whole project is unreachable"
   },
   "item/01KYTJGK2XYHW1BT3Y1XH1YNP7": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Record the decision not to build a custom merge driver"
   },
   "item/01KYWGJD1QCQRM6V6S0MWN5SCW": {
