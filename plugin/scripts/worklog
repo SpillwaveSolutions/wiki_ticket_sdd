@@ -802,6 +802,11 @@ def cmd_compact(a):
     print(f"compacted through {wm}" if wm else "nothing to compact")
 
 
+def cmd_merge_rescue(a):
+    import compact
+    compact.report_rescue(*compact.merge_rescue())
+
+
 def _rfc3339(ms):
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(ms / 1000))
 
@@ -1255,6 +1260,14 @@ rs = sub.add_parser("roadmap-snapshot"); rs.set_defaults(fn=cmd_roadmap_snapshot
 rs.add_argument("--name")
 co = sub.add_parser("compact"); co.set_defaults(fn=cmd_compact)
 co.add_argument("--yes", action="store_true")
+
+sub.add_parser(
+    "merge-rescue",
+    description="Resolve a merge the resurrection guard blocked: keep the "
+                "compacted side's log and re-apply this branch's own events "
+                "above the watermark, so none are dropped on read. Run it "
+                "from the blocked merge (ADR-0005).").set_defaults(
+    fn=cmd_merge_rescue)
 
 pm = sub.add_parser(
     "promote",

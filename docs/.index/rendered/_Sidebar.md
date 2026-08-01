@@ -8,6 +8,7 @@
 - [[ADR-0003-green-gates-merge]]
 - [[ADR-0004-clearing-a-dead-ticket-link-stays-a-huma]]
 - [[ADR-0005-no-custom-merge-driver-for-the-event-log]]
+- [[ADR-0006-resurrected-events-are-not-always-cosmet]]
 
 ### History
 
