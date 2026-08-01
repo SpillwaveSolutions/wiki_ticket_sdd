@@ -21,7 +21,9 @@ BIN = os.path.join(ROOT, "bin")
 HOOKS = os.path.join(ROOT, "hooks")
 
 sys.path.insert(0, BIN)
-from compact import compact, check_resurrection, check_duplicate_ownership  # noqa: E402
+from compact import (compact, check_resurrection, check_duplicate_ownership,  # noqa: E402
+                     merge_check, merge_rescue)
+from fold import fold  # noqa: E402
 
 
 def sh(cwd, *args, check=True, env=None):
@@ -223,6 +225,96 @@ class TestDuplicateOwnershipMerge(GitRepo):
         merged = self._merge("branchA")
         self.assertEqual(merged.returncode, 0, merged.stderr)
         self.assertEqual(check_duplicate_ownership(self.todo, self.done), [])
+
+
+class TestSubWatermarkEventsAreLost(GitRepo):
+    """#269 and the data-loss class it uncovered.
+
+    ADR-0005 called check_resurrection a hygiene guard on the grounds that
+    "the fold discards resurrected events on read, so no state is ever
+    corrupted". That holds only for events the compaction actually folded.
+    An event created on a branch BEFORE a compaction ran on main was never
+    folded into any snapshot, yet it still sorts below the watermark -- so
+    the fold discards it and the work is gone. These tests pin that down and
+    prove `merge-rescue` gets it back.
+
+    Hooks are wired because the rescue needs a merge left IN PROGRESS, which
+    is exactly what the guard blocking the merge commit produces.
+    """
+
+    WIRE_HOOKS = True
+
+    def _fork_compact_merge(self):
+        """The live 2026-07-31 sequence: branch forks, does work, nightly
+        compaction lands on main while the PR is open, branch pulls main."""
+        write_jsonl(self.todo, [ev(i, f"I{i}", set={"status": "todo"})
+                                for i in range(1, 6)])
+        self._commit("seed")
+
+        self._checkout("feature", new=True)
+        # Two events, so ordering between rescued events is testable.
+        append_jsonl(self.todo, [
+            ev(10, "BRANCHWORK", set={"status": "todo", "title": "branch work"}),
+            ev(11, "BRANCHWORK", op="update", set={"status": "in_progress"})])
+        self._commit("branch does its own work")
+
+        self._checkout(self.trunk)
+        append_jsonl(self.todo, [ev(20, "MAINLATER", set={"status": "todo"})])
+        self._commit("unrelated work lands on main")
+        compact(self.todo, self.done)          # watermark lands ABOVE ev 10/11
+        self._commit("nightly compaction")
+
+        self._checkout("feature")
+        return self._merge(self.trunk)
+
+    def test_branch_events_below_the_watermark_are_dropped_by_the_fold(self):
+        """The bug itself: this is data loss, not lost disk-space savings."""
+        merged = self._fork_compact_merge()
+        self.assertNotEqual(merged.returncode, 0, "guard should block this merge")
+
+        items = fold([self.todo, self.done]).items
+        self.assertIn("MAINLATER", items)      # main's event survived
+        self.assertNotIn(
+            "BRANCHWORK", items,
+            "expected the branch's own event to be silently dropped -- if this "
+            "now passes, the watermark rule was fixed and this test should "
+            "become the regression test for that fix")
+
+    def test_merge_rescue_restores_them_and_clears_the_guard(self):
+        merged = self._fork_compact_merge()
+        self.assertNotEqual(merged.returncode, 0)
+
+        rescued, dropped = merge_rescue(self.todo, self.done)
+
+        self.assertEqual(len(rescued), 2, f"both branch events re-applied: {rescued}")
+        self.assertGreater(dropped, 0, "already-compacted lines should be dropped")
+
+        items = fold([self.todo, self.done]).items
+        self.assertIn("BRANCHWORK", items, "the branch's work must come back")
+        self.assertIn("MAINLATER", items, "main's work must not be clobbered")
+        for n in range(1, 6):
+            self.assertIn(f"I{n}", items, "pre-fork history must survive")
+        # Order preserved: create then update, so status is the LATER value.
+        self.assertEqual(items["BRANCHWORK"].get("status"), "in_progress")
+        self.assertEqual(items["BRANCHWORK"].get("title"), "branch work")
+
+        # The whole point: the guard now passes, so the merge can be committed.
+        self.assertEqual(check_resurrection(self.todo, self.done), [])
+        self.assertTrue(merge_check(self.todo, self.done))
+
+    def test_rescued_events_keep_provenance(self):
+        self._fork_compact_merge()
+        merge_rescue(self.todo, self.done)
+        origins = [json.loads(ln).get("rescued_from")
+                   for ln in open(self.todo) if ln.strip()]
+        self.assertEqual(sorted(o for o in origins if o), ["01A0010", "01A0011"],
+                         "a rescued event must name the id it replaced")
+
+    def test_refuses_when_no_merge_is_in_progress(self):
+        write_jsonl(self.todo, [ev(1, "I1", set={"status": "todo"})])
+        self._commit("seed")
+        with self.assertRaises(SystemExit):
+            merge_rescue(self.todo, self.done)
 
 
 if __name__ == "__main__":

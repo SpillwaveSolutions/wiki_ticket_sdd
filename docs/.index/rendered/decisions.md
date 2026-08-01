@@ -11,6 +11,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 | [[ADR-0003-green-gates-merge]] PRs merge only when every quality gate is green | accepted | 2026-07-19 | — |
 | [[ADR-0004-clearing-a-dead-ticket-link-stays-a-huma]] Clearing a dead ticket link stays a human action | accepted | 2026-07-31 | — |
 | [[ADR-0005-no-custom-merge-driver-for-the-event-log]] No custom merge driver for the event log | accepted | 2026-07-31 | — |
+| [[ADR-0006-resurrected-events-are-not-always-cosmet]] Resurrected events are not always cosmetic | accepted | 2026-08-01 | — |
 
 ## Plans
 

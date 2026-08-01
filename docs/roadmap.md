@@ -2,7 +2,7 @@
 wiki_key: roadmap
 doc_type: roadmap
 truth_state: current
-source_hash: 0d64ed01
+source_hash: bb02913e
 generated_at: 2026-08-01T17:46:54Z
 ---
 
@@ -25,8 +25,8 @@ _Nothing here._
 
 | # | Item | Type | Priority | Status | Blocked by |
 |---|---|---|---|---|---|
+| 01KYZ5CY | Compaction watermark can silently drop branch-local events the snapshot never folded | task | P1 | todo | — |
 | [236](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/236) | Concurrent sessions in one working directory corrupt each other's work | task | P2 | todo | — |
-| [269](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/269) | Merge guard's printed remedy cannot be run from the state it creates | task | P2 | todo | — |
 
 ## Later
 
@@ -54,14 +54,14 @@ graph TD
     01KY5NE0ZYGBWG44N0KPEBFCZ8["📦 Configurable work-item field m"]
     01KYNHEV5GCR1MDNECAXFT0GK2["🔧 Concurrent sessions in one wor"]
     01KYNHEVDSD4BTASXCTV88Q80Q["📦 Sync should say which ticket f"]
-    01KYWGJD1QCQRM6V6S0MWN5SCW["🐛 Merge guard's printed remedy c"]
     01KYWGM3KPNQNSWV03FRG23ADB["📦 IA reader plane platform-porta"]
     01KYWGM3R13Q33YZ3PJA3V7QMD["📦 Extract a render adapter seam"]
     01KYWGM3W958F3QK4HB52X1Q1X["📦 worklog find search the genera"]
+    01KYZ5CY9PS60BYH1E07DF5C9P["🐛 Compaction watermark can silen"]
     01KYWGM3KPNQNSWV03FRG23ADB --> 01KYWGM3R13Q33YZ3PJA3V7QMD
     01KYWGM3KPNQNSWV03FRG23ADB --> 01KYWGM3W958F3QK4HB52X1Q1X
     classDef todo fill:#f4f4f4,stroke:#999999
-    class 01KY5NE0ZYGBWG44N0KPEBFCZ8,01KYNHEV5GCR1MDNECAXFT0GK2,01KYNHEVDSD4BTASXCTV88Q80Q,01KYWGJD1QCQRM6V6S0MWN5SCW,01KYWGM3KPNQNSWV03FRG23ADB,01KYWGM3R13Q33YZ3PJA3V7QMD,01KYWGM3W958F3QK4HB52X1Q1X todo
+    class 01KY5NE0ZYGBWG44N0KPEBFCZ8,01KYNHEV5GCR1MDNECAXFT0GK2,01KYNHEVDSD4BTASXCTV88Q80Q,01KYWGM3KPNQNSWV03FRG23ADB,01KYWGM3R13Q33YZ3PJA3V7QMD,01KYWGM3W958F3QK4HB52X1Q1X,01KYZ5CY9PS60BYH1E07DF5C9P todo
 ```
 
 ### Hierarchy
@@ -71,10 +71,10 @@ graph TD
     01KY5NE0ZYGBWG44N0KPEBFCZ8["📦 Configurable work-item field m"]
     01KYNHEV5GCR1MDNECAXFT0GK2["🔧 Concurrent sessions in one wor"]
     01KYNHEVDSD4BTASXCTV88Q80Q["📦 Sync should say which ticket f"]
-    01KYWGJD1QCQRM6V6S0MWN5SCW["🐛 Merge guard's printed remedy c"]
     01KYWGM3KPNQNSWV03FRG23ADB["📦 IA reader plane platform-porta"]
     01KYWGM3R13Q33YZ3PJA3V7QMD["📦 Extract a render adapter seam"]
     01KYWGM3W958F3QK4HB52X1Q1X["📦 worklog find search the genera"]
+    01KYZ5CY9PS60BYH1E07DF5C9P["🐛 Compaction watermark can silen"]
     01KYWGM3KPNQNSWV03FRG23ADB --> 01KYWGM3R13Q33YZ3PJA3V7QMD
     01KYWGM3KPNQNSWV03FRG23ADB --> 01KYWGM3W958F3QK4HB52X1Q1X
 ```

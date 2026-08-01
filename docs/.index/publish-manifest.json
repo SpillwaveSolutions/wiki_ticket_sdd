@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "731fe4f82285",
+   "render_hash": "f727548557b3",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "b5e102edfe03",
+   "render_hash": "05bf0cd94699",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3124,10 +3124,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYWGJD1QCQRM6V6S0MWN5SCW",
    "render": "as-is",
-   "render_hash": "bc7d7ac8fa1f",
+   "render_hash": "d38b8afcafef",
    "source": "docs/.index/rendered/tickets/01KYWGJD1QCQRM6V6S0MWN5SCW.md",
    "title": "Merge guard's printed remedy cannot be run from the state it creates",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYWGJD1QCQRM6V6S0MWN5SCW"
   },
   {
@@ -3169,6 +3169,16 @@
    "title": "Fix the thing from #98",
    "truth_state": "done",
    "wiki_key": "item/01KYWJ6YGQMMHQ58G9CNAF6F00"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYZ5CY9PS60BYH1E07DF5C9P",
+   "render": "as-is",
+   "render_hash": "64782e4fbc42",
+   "source": "docs/.index/rendered/tickets/01KYZ5CY9PS60BYH1E07DF5C9P.md",
+   "title": "Compaction watermark can silently drop branch-local events the snapshot never folded",
+   "truth_state": "open",
+   "wiki_key": "item/01KYZ5CY9PS60BYH1E07DF5C9P"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -3224,6 +3234,17 @@
    "title": "No custom merge driver for the event log",
    "truth_state": "current",
    "wiki_key": "adr/0005-no-custom-merge-driver-for-the-event-log"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "ADR-0006-resurrected-events-are-not-always-cosmet",
+   "render": "doc+banner",
+   "render_hash": "9306571ab119",
+   "source": "docs/adr/0006-resurrected-events-are-not-always-cosmet.md",
+   "title": "Resurrected events are not always cosmetic",
+   "truth_state": "current",
+   "wiki_key": "adr/0006-resurrected-events-are-not-always-cosmet"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -3725,7 +3746,7 @@
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "0c09f29cba49",
+   "render_hash": "b22b6818a9f8",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -3997,7 +4018,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "4db720fc83c9",
+  "render_hash": "2cc64112587a",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

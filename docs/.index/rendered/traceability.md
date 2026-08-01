@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Compaction watermark can silently drop branch-local events the snapshot never folded
+`01KYZ5CY9PS60BYH1E07DF5C9P` · status: todo
+
 ### Fix the thing from #98
 `01KYWJ6YGQMMHQ58G9CNAF6F00` · status: cancelled
 
@@ -22,7 +25,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - contains: worklog find: search the generated inventory and graph from the CLI
 
 ### Merge guard's printed remedy cannot be run from the state it creates
-`01KYWGJD1QCQRM6V6S0MWN5SCW` · status: todo
+`01KYWGJD1QCQRM6V6S0MWN5SCW` · status: done
 - references: [github#269](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/269)
 
 ### Record the decision not to build a custom merge driver

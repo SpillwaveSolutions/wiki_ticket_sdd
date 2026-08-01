@@ -809,6 +809,11 @@ def cmd_changelog_draft(a):
                             + (["--since", a.since] if a.since else [])))
 
 
+def cmd_merge_rescue(a):
+    import compact
+    compact.report_rescue(*compact.merge_rescue())
+
+
 def _rfc3339(ms):
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(ms / 1000))
 
@@ -1272,6 +1277,14 @@ cd = sub.add_parser(
 cd.set_defaults(fn=cmd_changelog_draft)
 cd.add_argument("--version", help="version for the heading (default: X.Y.Z)")
 cd.add_argument("--since", metavar="REF", help="default: the last tag")
+
+sub.add_parser(
+    "merge-rescue",
+    description="Resolve a merge the resurrection guard blocked: keep the "
+                "compacted side's log and re-apply this branch's own events "
+                "above the watermark, so none are dropped on read. Run it "
+                "from the blocked merge (ADR-0005).").set_defaults(
+    fn=cmd_merge_rescue)
 
 pm = sub.add_parser(
     "promote",
