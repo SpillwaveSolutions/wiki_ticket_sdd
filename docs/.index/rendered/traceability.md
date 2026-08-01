@@ -9,12 +9,12 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 `01KYWJ6YGQMMHQ58G9CNAF6F00` · status: cancelled
 
 ### worklog find: search the generated inventory and graph from the CLI
-`01KYWGM3W958F3QK4HB52X1Q1X` · status: todo
+`01KYWGM3W958F3QK4HB52X1Q1X` · status: done
 - belongs-to: IA reader plane: platform-portable rendering and document search
 - references: [github#272](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/272)
 
 ### Extract a render adapter seam so page naming is not hardcoded to Gollum
-`01KYWGM3R13Q33YZ3PJA3V7QMD` · status: todo
+`01KYWGM3R13Q33YZ3PJA3V7QMD` · status: done
 - belongs-to: IA reader plane: platform-portable rendering and document search
 - references: [github#271](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/271)
 
@@ -145,7 +145,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#239](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/239)
 
 ### Sync should say which ticket fields it is about to overwrite
-`01KYNHEVDSD4BTASXCTV88Q80Q` · status: todo
+`01KYNHEVDSD4BTASXCTV88Q80Q` · status: done
 - references: [github#238](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/238)
 
 ### Catch duplicate ticket ownership at merge time, not just at sync

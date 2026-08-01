@@ -839,6 +839,12 @@ def cmd_merge_rescue(a):
     compact.report_rescue(*compact.merge_rescue())
 
 
+def cmd_find(a):
+    import ia_graph
+    sys.exit(ia_graph.find(query=a.query, doc_type=a.type, truth=a.truth,
+                           links=a.links, edge=a.edge, as_json=a.json))
+
+
 def _rfc3339(ms):
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(ms / 1000))
 
@@ -1290,6 +1296,21 @@ rs = sub.add_parser("roadmap-snapshot"); rs.set_defaults(fn=cmd_roadmap_snapshot
 rs.add_argument("--name")
 co = sub.add_parser("compact"); co.set_defaults(fn=cmd_compact)
 co.add_argument("--yes", action="store_true")
+
+fd = sub.add_parser(
+    "find",
+    description="Search the generated inventory and graph: documents by "
+                "text/type/truth-state, a node's edges in both directions, "
+                "or every edge of one type. Read-only, no network (#272).")
+fd.set_defaults(fn=cmd_find)
+fd.add_argument("query", nargs="?", help="case-insensitive substring")
+fd.add_argument("--type", help="doc_type filter, e.g. plan, adr, item, pr")
+fd.add_argument("--truth", help="truth_state filter, e.g. current, frozen")
+fd.add_argument("--links", metavar="KEY",
+                help="show edges into and out of one node")
+fd.add_argument("--edge", metavar="TYPE",
+                help="list every edge of one type, e.g. supersedes")
+fd.add_argument("--json", action="store_true")
 
 sub.add_parser(
     "fields",

@@ -2,7 +2,7 @@
 wiki_key: roadmap
 doc_type: roadmap
 truth_state: current
-source_hash: 34090a09
+source_hash: 79d023b9
 generated_at: 2026-08-01T18:19:11Z
 ---
 
@@ -13,7 +13,7 @@ generated_at: 2026-08-01T18:19:11Z
 
 # Roadmap
 
-_1 epic(s) in flight, 5 open item(s), 0 blocked, 0 unclassified._
+_0 epic(s) in flight, 2 open item(s), 0 blocked, 0 unclassified._
 
 ## Now
 
@@ -30,19 +30,11 @@ _Nothing here._
 
 ## Later
 
-### IA reader plane: platform-portable rendering and document search  ·  P3  ·  0 of 2 done
-What is left of the IA content model after Phase 5's gate promotion shipped. The phase-5 ticket bundled three unrelated things: promoting the CI gates to hard failures (done, and the item on the design docs' extension roadmap), a rendering port to other wiki platforms, and a document-search command. Only the first had a user. This epic holds the rest so the parent epic can close on the value that actually shipped rather than being held open by work nobody has planned. Deliberately NOT filed here: one item per wiki platform (GitLab, Azure DevOps, Confluence). The config names github-wiki and no one has asked for another; those get filed when a platform has a user, not before. Also dropped: the glossary page, which its own plan marks optional.
+_Nothing here._
 
-| # | Item | Type | Priority | Status | Blocked by |
-|---|---|---|---|---|---|
-| [271](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/271) | Extract a render adapter seam so page naming is not hardcoded to Gollum | task | P3 | todo | — |
-| [272](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/272) | worklog find: search the generated inventory and graph from the CLI | task | P3 | todo | — |
+## Needs attention
 
-### (no epic)
-
-| # | Item | Type | Priority | Status | Blocked by |
-|---|---|---|---|---|---|
-| [238](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/238) | Sync should say which ticket fields it is about to overwrite | task | P3 | todo | — |
+- **[270](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/270)** IA reader plane: platform-portable rendering and document search — no open children left; close the epic.
 
 ## Visual roadmap
 
@@ -51,15 +43,10 @@ What is left of the IA content model after Phase 5's gate promotion shipped. The
 ```mermaid
 graph TD
     01KYAC0AC01R4C6W7YY1X8NVRV["📦 Auto-draft the release CHANGEL"]
-    01KYNHEVDSD4BTASXCTV88Q80Q["📦 Sync should say which ticket f"]
     01KYWGM3KPNQNSWV03FRG23ADB["📦 IA reader plane platform-porta"]
-    01KYWGM3R13Q33YZ3PJA3V7QMD["📦 Extract a render adapter seam"]
-    01KYWGM3W958F3QK4HB52X1Q1X["📦 worklog find search the genera"]
     01KYZ5CY9PS60BYH1E07DF5C9P["🐛 Compaction watermark can silen"]
-    01KYWGM3KPNQNSWV03FRG23ADB --> 01KYWGM3R13Q33YZ3PJA3V7QMD
-    01KYWGM3KPNQNSWV03FRG23ADB --> 01KYWGM3W958F3QK4HB52X1Q1X
     classDef todo fill:#f4f4f4,stroke:#999999
-    class 01KYAC0AC01R4C6W7YY1X8NVRV,01KYNHEVDSD4BTASXCTV88Q80Q,01KYWGM3KPNQNSWV03FRG23ADB,01KYWGM3R13Q33YZ3PJA3V7QMD,01KYWGM3W958F3QK4HB52X1Q1X,01KYZ5CY9PS60BYH1E07DF5C9P todo
+    class 01KYAC0AC01R4C6W7YY1X8NVRV,01KYWGM3KPNQNSWV03FRG23ADB,01KYZ5CY9PS60BYH1E07DF5C9P todo
 ```
 
 ### Hierarchy
@@ -67,11 +54,6 @@ graph TD
 ```mermaid
 graph TD
     01KYAC0AC01R4C6W7YY1X8NVRV["📦 Auto-draft the release CHANGEL"]
-    01KYNHEVDSD4BTASXCTV88Q80Q["📦 Sync should say which ticket f"]
     01KYWGM3KPNQNSWV03FRG23ADB["📦 IA reader plane platform-porta"]
-    01KYWGM3R13Q33YZ3PJA3V7QMD["📦 Extract a render adapter seam"]
-    01KYWGM3W958F3QK4HB52X1Q1X["📦 worklog find search the genera"]
     01KYZ5CY9PS60BYH1E07DF5C9P["🐛 Compaction watermark can silen"]
-    01KYWGM3KPNQNSWV03FRG23ADB --> 01KYWGM3R13Q33YZ3PJA3V7QMD
-    01KYWGM3KPNQNSWV03FRG23ADB --> 01KYWGM3W958F3QK4HB52X1Q1X
 ```
