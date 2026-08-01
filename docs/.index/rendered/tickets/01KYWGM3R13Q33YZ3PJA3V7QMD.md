@@ -1,6 +1,6 @@
 # Extract a render adapter seam so page naming is not hardcoded to Gollum
 
-`01KYWGM3R13Q33YZ3PJA3V7QMD` · task/feature · **open**
+`01KYWGM3R13Q33YZ3PJA3V7QMD` · task/feature · **done**
 
 The renderer never reads the wiki system from config.
 
