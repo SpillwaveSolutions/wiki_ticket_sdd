@@ -2,14 +2,24 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### link-pr and pr-sync accept an id prefix and write a phantom sidecar
+`01KYZFMZ5CF79DAYHMNKXSAZ5K` · status: done
+
+### Cut release v0.19.0
+`01KYZFF99YF79DAN4V33HXC7AE` · status: in_progress
+- targets: release/v0.19.0
+
 ### Stamp generated ULIDs with the short git hash so concurrent branches diverge
 `01KYZER08G7NSQ6CFQ9QWFZFTJ` · status: done
+- lands-in: pr/286
 
 ### Conflict markers can reach a commit: the merge exemption plus unparsed tests
 `01KYZEC0C1MGQXQSH61ZPDD0YZ` · status: done
+- lands-in: pr/286
 
 ### Compaction watermark can silently drop branch-local events the snapshot never folded
 `01KYZ5CY9PS60BYH1E07DF5C9P` · status: done
+- lands-in: pr/286
 - references: [github#284](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/284)
 
 ### Fix the thing from #98
@@ -18,21 +28,25 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### worklog find: search the generated inventory and graph from the CLI
 `01KYWGM3W958F3QK4HB52X1Q1X` · status: done
 - belongs-to: IA reader plane: platform-portable rendering and document search
+- lands-in: pr/281
 - references: [github#272](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/272)
 
 ### Extract a render adapter seam so page naming is not hardcoded to Gollum
 `01KYWGM3R13Q33YZ3PJA3V7QMD` · status: done
 - belongs-to: IA reader plane: platform-portable rendering and document search
+- lands-in: pr/282
 - references: [github#271](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/271)
 
 ### IA reader plane: platform-portable rendering and document search
 `01KYWGM3KPNQNSWV03FRG23ADB` · status: done
+- lands-in: pr/283
 - references: [github#270](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/270)
 - contains: Extract a render adapter seam so page naming is not hardcoded to Gollum
 - contains: worklog find: search the generated inventory and graph from the CLI
 
 ### Merge guard's printed remedy cannot be run from the state it creates
 `01KYWGJD1QCQRM6V6S0MWN5SCW` · status: done
+- lands-in: pr/277
 - references: [github#269](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/269)
 
 ### Record the decision not to build a custom merge driver
@@ -153,6 +167,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Sync should say which ticket fields it is about to overwrite
 `01KYNHEVDSD4BTASXCTV88Q80Q` · status: done
+- lands-in: pr/280
 - references: [github#238](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/238)
 
 ### Catch duplicate ticket ownership at merge time, not just at sync
@@ -161,6 +176,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Concurrent sessions in one working directory corrupt each other's work
 `01KYNHEV5GCR1MDNECAXFT0GK2` · status: done
+- lands-in: pr/278
 - references: [github#236](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/236)
 
 ### GitHub adapter can file duplicate issues when rate-limited mid-create
@@ -618,6 +634,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Auto-draft the release CHANGELOG unreleased section from git log
 `01KYAC0AC01R4C6W7YY1X8NVRV` · status: done
+- lands-in: pr/279
 - references: [github#136](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/136)
 
 ### Phase 0: add item/release page-name helpers and extend build_manifest()
@@ -834,6 +851,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config
 `01KY5NE0ZYGBWG44N0KPEBFCZ8` · status: done
+- lands-in: pr/283
 - references: [github#108](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/108)
 - produced-by: [[Plan-configurable-item-fields]]
 

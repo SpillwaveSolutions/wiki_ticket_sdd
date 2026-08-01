@@ -4,6 +4,10 @@
 
 Extend the item model beyond the fixed core (id/title/status/level/kind/milestone/priority) with a configurable optional-field set, so lightweight and heavyweight processes share one log.
 
+## Linked PRs
+
+- [[PR-283]]
+
 ## Related tickets
 
 - [github #108](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/108)

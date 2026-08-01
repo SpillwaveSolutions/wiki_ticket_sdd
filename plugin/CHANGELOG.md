@@ -1,5 +1,140 @@
 # Changelog
 
+## 0.19.0 — 2026-08-01
+
+### Upgrading from 0.18.0 or earlier
+
+**Run `/worklog:init` in each repo.** Init is the upgrade path: it re-copies
+`bin/` and `hooks/`, and this release adds four new `bin/` modules
+(`session.py`, `changelog.py`, `item_fields.py`, `wiki_flavor.py`) plus a new
+harness hook. A repo that skips this keeps working on the old code — nothing
+breaks — but none of the features below exist until it runs.
+
+**The event-log format changed additively, and mixed versions are safe in
+both directions.** Compaction now writes a per-item `through` on each
+snapshot (see *Fix* below). You do **not** need to upgrade every clone before
+the next nightly compaction:
+
+- An **old** reader on a **new** log ignores the unknown `through` field and
+  applies the previous global-watermark rule. That is strictly more
+  conservative — it can drop a branch-local event, exactly as it did before,
+  but it never invents state.
+- A **new** reader on an **old** log finds no `through` and falls back to the
+  global mark for ordering, while still applying the new "an item with no
+  snapshot never loses events" rule — which can only *restore* data.
+
+No migration, no backfill, no coordinated cutover. Existing snapshots gain
+the field naturally at the next compaction.
+
+**Three things to do by hand after init:**
+
+1. **Wire the `SessionEnd` hook** if you keep a project `.claude/settings.json`:
+   ```json
+   "SessionEnd": [{"hooks": [{"type": "command",
+     "command": "\"$CLAUDE_PROJECT_DIR\"/hooks/session-end.sh"}]}]
+   ```
+   Without it the concurrent-session advisory still works, but a finished
+   session keeps looking alive for an hour and warns the next one.
+2. **Add `.work/.sessions` to `.gitignore`.** It is local advisory state and
+   must never be committed.
+3. **Re-check `core.hooksPath`** points at this repo's `hooks/`
+   (`worklog doctor` reports it). The pre-commit hook gained a
+   conflict-marker check that only runs if the hooks are wired.
+
+**Behaviour changes worth knowing before you upgrade:**
+
+- **`worklog add` and `worklog update` gained flags** for the default-on
+  optional fields (`--owner`, `--risk`, `--acceptance-criteria`). Nothing is
+  required and nothing existing changed shape. `--estimate` moved into the
+  same catalog; its behaviour is identical. Run `worklog fields` to see what
+  is on, and switch fields on or off with a `work_item_fields:` block in
+  `.work/config.yml`.
+- **Generated ULIDs now embed the short git hash** in five characters of
+  their entropy. The 26-character format, the time prefix and
+  sort-order-equals-time-order are unchanged, and ids minted before the
+  upgrade stay valid forever. Ingest ids (`ulid.deterministic`) are
+  deliberately unaffected, so remote-change ids remain byte-identical across
+  clones.
+- **A blocked merge now names a command that works.** If the resurrection
+  guard stops a merge commit, run `worklog merge-rescue`. The old advice —
+  recompacting — could not be run from that state and would not have been
+  safe if it could. See ADR-0005/0006/0007.
+- **`pre-commit` refuses staged files containing conflict markers**, with no
+  merge exemption. If you have been landing merges that carried markers into
+  `tests/` or `plugin/`, this will now stop you.
+- **Rendered wiki output is byte-identical** to 0.18.0 despite the renderer
+  being re-plumbed for portability. Verified across all 319 rendered pages.
+
+### Changes
+
+- **New**: `worklog find` — search the generated inventory and graph from the
+  CLI. Documents by text, type or truth state; a node's edges in **both**
+  directions (`--links`); every edge of one type (`--edge supersedes`).
+  Read-only, no network, no new index — it reads what was already generated.
+  Answers "which plan decided this?" and "what is superseded?" (#272)
+- **New**: configurable optional item fields. A `work_item_fields:` block in
+  `.work/config.yml` switches fields on per team; `estimate`, `owner`, `risk`
+  and `acceptance_criteria` default on, `value`, `confidence`, `due_date` and
+  `severity` default off. A disabled field is **invisible** — its flag is
+  never built, so it cannot appear in `--help` or anything an agent reads.
+  The core (`priority`, `milestone`, `depends_on`, …) is deliberately not
+  configurable: it is load-bearing for the roadmap and sync. `worklog fields`
+  prints both populations with what each one means. (#108)
+- **New**: `worklog changelog-draft` — drafts this section from git log since
+  the last tag, grouped by commit type, excluding commits that touched only
+  the log and generated files. Markdown on stdout, the commits it excluded on
+  stderr. It never guesses the version. (#136)
+- **New**: `worklog merge-rescue` — resolves a merge the resurrection guard
+  blocked, by keeping the compacted side's log and re-emitting this branch's
+  own events above the watermark. Uses the **merge base**, not the watermark,
+  to decide what was genuinely already folded, and refuses to write if any
+  item would disappear. (#269)
+- **New**: one render seam for page naming and link syntax. `[[Page]]` is now
+  the renderer's canonical notation, translated once at the output boundary,
+  so a second wiki platform is a new class in `bin/wiki_flavor.py` rather
+  than an edit to forty link sites. The renderer also reads `wiki.system`
+  from config, which it never did. Only GitHub wiki ships. (#271)
+- **New**: sync names the live ticket fields a push replaces, before and
+  after, in its report and under `--dry-run`. One batched read per run rather
+  than one per ticket, and it prints what that read cost. (#238)
+- **Fix** (#284): the compaction watermark is now **per item**, and snapshots
+  sort where their events were. The fold used to drop every event at or below
+  one global mark computed as `max_ev` over the whole log — a time marker
+  doing a content marker's job — so an event created on a branch before a
+  compaction ran on main was discarded silently on merge. Two independent
+  mechanisms caused it and both are fixed: the watermark is now recorded per
+  item on each snapshot, and a snapshot sorts at that mark rather than at the
+  moment the compactor wrote it, so a branch's later close applies on top of
+  the snapshot instead of being erased by it. ADR-0007.
+- **Fix** (#269): the merge guard's printed remedy could not be run from the
+  state the guard creates, and the remedy it named would not have been safe.
+  Recompacting mid-merge verifies `fold(new) == fold(old)` against a fold
+  that has already discarded the branch's events — it would have passed, and
+  made the loss permanent.
+- **Fix**: `pre-commit` refuses any staged file containing a conflict marker,
+  with no merge exemption. `commit-msg` exempts merge commits and nothing
+  parsed `tests/` or `plugin/`, so a resolution that missed a hunk committed
+  cleanly and was only found by running the suite.
+- **Change**: `worklog` warns when two assistant sessions are active in one
+  working directory, and the generated policy now says concurrent sessions
+  belong in separate worktrees. Session identity comes from the harness,
+  because the CLI is short-lived and has no stable pid. Advisory only — it
+  never blocks a write. (#236)
+- **Change**: locally-minted ULIDs carry the short git hash, so agents in
+  different worktrees or branches mint visibly different, traceable ids.
+- **Docs**: ADR-0005 (no custom merge driver), ADR-0006 (resurrected events
+  are not always cosmetic) and ADR-0007 (the watermark is per item) record
+  the merge-safety reasoning end to end, including where an earlier record
+  was wrong and why.
+- **Fix**: `worklog link-pr` resolves an id prefix before writing. It used to
+  file `docs/.index/item/<prefix>.yml`, so the PR edge never reached the graph
+  and the release evidence gate still reported the item as unlinked — with no
+  error, because the write succeeded. Same class already fixed for
+  `close`/`update`.
+- **Internal**: the plugin's harness-hook copies are now sync-checked
+  (`HOOK_CANON`); that check immediately found real drift in
+  `exit-plan-capture.sh`. Test suite 427 → 556.
+
 ## 0.18.0 — 2026-07-29
 
 - **Fix** (github#226): two local items were allowed to own the same external

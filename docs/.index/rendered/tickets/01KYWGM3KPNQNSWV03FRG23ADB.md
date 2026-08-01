@@ -11,6 +11,10 @@ What is left of the IA content model after Phase 5's gate promotion shipped.
 
 Progress: 2/2 done
 
+## Linked PRs
+
+- [[PR-283]]
+
 ## Related tickets
 
 - [github #270](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/270)

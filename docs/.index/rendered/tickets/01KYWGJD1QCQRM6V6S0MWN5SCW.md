@@ -4,6 +4,10 @@
 
 When a union merge resurrects events a compaction removed, the pre-commit merge guard blocks the merge commit and prints: 'Run: python3 bin/compact.py .work/todo.jsonl .work/done.jsonl to recompact.' That remedy cannot be followed.
 
+## Linked PRs
+
+- [[PR-277]]
+
 ## Related tickets
 
 - [github #269](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/269)

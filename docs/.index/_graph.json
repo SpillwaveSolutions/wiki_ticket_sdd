@@ -1107,6 +1107,11 @@
   },
   {
    "from": "item/01KY5NE0ZYGBWG44N0KPEBFCZ8",
+   "to": "pr/283",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KY5NE0ZYGBWG44N0KPEBFCZ8",
    "to": "ticket/github#108",
    "type": "references"
   },
@@ -1449,6 +1454,11 @@
    "from": "item/01KYABYEQPXZAAY0VWF6Z8TQ27",
    "to": "ticket/github#135",
    "type": "references"
+  },
+  {
+   "from": "item/01KYAC0AC01R4C6W7YY1X8NVRV",
+   "to": "pr/279",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYAC0AC01R4C6W7YY1X8NVRV",
@@ -2282,6 +2292,11 @@
   },
   {
    "from": "item/01KYNHEV5GCR1MDNECAXFT0GK2",
+   "to": "pr/278",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYNHEV5GCR1MDNECAXFT0GK2",
    "to": "ticket/github#236",
    "type": "references"
   },
@@ -2289,6 +2304,11 @@
    "from": "item/01KYNHEV9M01PQJZQ5QRZQ3C8J",
    "to": "ticket/github#237",
    "type": "references"
+  },
+  {
+   "from": "item/01KYNHEVDSD4BTASXCTV88Q80Q",
+   "to": "pr/280",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYNHEVDSD4BTASXCTV88Q80Q",
@@ -2447,8 +2467,18 @@
   },
   {
    "from": "item/01KYWGJD1QCQRM6V6S0MWN5SCW",
+   "to": "pr/277",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYWGJD1QCQRM6V6S0MWN5SCW",
    "to": "ticket/github#269",
    "type": "references"
+  },
+  {
+   "from": "item/01KYWGM3KPNQNSWV03FRG23ADB",
+   "to": "pr/283",
+   "type": "lands-in"
   },
   {
    "from": "item/01KYWGM3KPNQNSWV03FRG23ADB",
@@ -2462,6 +2492,11 @@
   },
   {
    "from": "item/01KYWGM3R13Q33YZ3PJA3V7QMD",
+   "to": "pr/282",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYWGM3R13Q33YZ3PJA3V7QMD",
    "to": "ticket/github#271",
    "type": "references"
   },
@@ -2472,13 +2507,38 @@
   },
   {
    "from": "item/01KYWGM3W958F3QK4HB52X1Q1X",
+   "to": "pr/281",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYWGM3W958F3QK4HB52X1Q1X",
    "to": "ticket/github#272",
    "type": "references"
   },
   {
    "from": "item/01KYZ5CY9PS60BYH1E07DF5C9P",
+   "to": "pr/286",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYZ5CY9PS60BYH1E07DF5C9P",
    "to": "ticket/github#284",
    "type": "references"
+  },
+  {
+   "from": "item/01KYZEC0C1MGQXQSH61ZPDD0YZ",
+   "to": "pr/286",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYZER08G7NSQ6CFQ9QWFZFTJ",
+   "to": "pr/286",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KYZFF99YF79DAN4V33HXC7AE",
+   "to": "release/v0.19.0",
+   "type": "targets"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -3668,6 +3728,21 @@
   {
    "from": "roadmap-snapshot/2026-07-29_v0.18.0-release",
    "to": "release/v0.18.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-01_v0.19.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-01_v0.19.0-release",
+   "to": "roadmap-snapshot/2026-07-29_v0.18.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-01_v0.19.0-release",
+   "to": "release/v0.19.0",
    "type": "targets"
   },
   {
@@ -5392,6 +5467,16 @@
    "status": "done",
    "title": "Stamp generated ULIDs with the short git hash so concurrent branches diverge"
   },
+  "item/01KYZFF99YF79DAN4V33HXC7AE": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Cut release v0.19.0"
+  },
+  "item/01KYZFMZ5CF79DAYHMNKXSAZ5K": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "link-pr and pr-sync accept an id prefix and write a phantom sidecar"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -5572,6 +5657,30 @@
   "pr/268": {
    "doc_type": "pr"
   },
+  "pr/277": {
+   "doc_type": "pr"
+  },
+  "pr/278": {
+   "doc_type": "pr"
+  },
+  "pr/279": {
+   "doc_type": "pr"
+  },
+  "pr/280": {
+   "doc_type": "pr"
+  },
+  "pr/281": {
+   "doc_type": "pr"
+  },
+  "pr/282": {
+   "doc_type": "pr"
+  },
+  "pr/283": {
+   "doc_type": "pr"
+  },
+  "pr/286": {
+   "doc_type": "pr"
+  },
   "release/v0.10.0": {
    "doc_type": "release"
   },
@@ -5609,6 +5718,9 @@
    "doc_type": "release"
   },
   "release/v0.18.0": {
+   "doc_type": "release"
+  },
+  "release/v0.19.0": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
@@ -5701,6 +5813,12 @@
   "roadmap-snapshot/2026-07-29_v0.18.0-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-07-29_v0.18.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-08-01_v0.19.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-01_v0.19.0-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },
