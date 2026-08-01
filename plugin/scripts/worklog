@@ -84,8 +84,21 @@ def append(event):
 
 
 def base(item, op, actor):
-    return {"ev": ulid.new(), "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-            "actor": actor, "item": item, "op": op}
+    """Every event the CLI writes starts here.
+
+    `git` is provenance: the short HEAD sha this event was authored at, so
+    two agents in different worktrees or branches produce traceably different
+    events (01KYZNG520). It is a separate field on purpose -- the id must
+    keep its full entropy, and an item's id is minted once, so only a
+    per-event field can name where each event actually came from. Omitted
+    entirely outside a git repo rather than written empty.
+    """
+    ev = {"ev": ulid.new(), "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+          "actor": actor, "item": item, "op": op}
+    sha = ulid.git_commit()
+    if sha:
+        ev["git"] = sha
+    return ev
 
 
 LEVELS = ("epic", "story", "task", "subtask")

@@ -40,66 +40,51 @@ def encode(timestamp_ms: int, entropy: bytes) -> str:
     return _encode(timestamp_ms, 10) + _encode(int.from_bytes(entropy, "big"), 16)
 
 
-GIT_STAMP_LEN = 5
-_git_stamp_cache = []   # one-element memo; `worklog` mints many ids per run
+_git_commit_cache = []   # one-element memo; `worklog` mints many events per run
 
 
-def git_stamp() -> str:
-    """First GIT_STAMP_LEN characters of HEAD, as Crockford base32.
+def git_commit() -> str:
+    """Short HEAD sha, or "" outside a git repo / before the first commit.
 
-    Git hashes are hex, and 0-9/A-F are all valid Crockford, so uppercasing
-    is the whole conversion. Outside a git repo, or before the first commit,
-    this is "" and ULIDs keep their full random entropy.
+    Provenance, NOT identity: this goes in an event's own `git` field, never
+    into the id. An id is issued once and must never collide, so spending its
+    entropy to carry origin information weakens the single guarantee it
+    exists to provide.
 
-    Memoised per process. HEAD does not move underneath a single command, and
-    `worklog` mints an id per event -- shelling out each time would put a
-    subprocess in the hot path of the only writer.
+    Memoised per process. HEAD does not move underneath one command, and
+    `worklog` writes an event per command -- shelling out per event would put
+    a subprocess in the hot path of the only writer.
     """
-    if _git_stamp_cache:
-        return _git_stamp_cache[0]
-    stamp = ""
-    if not os.environ.get("WORKLOG_NO_GIT_ULID"):
+    if _git_commit_cache:
+        return _git_commit_cache[0]
+    sha = ""
+    if not os.environ.get("WORKLOG_NO_GIT_PROVENANCE"):
         try:
             import subprocess
-            p = subprocess.run(["git", "rev-parse", "--short=%d" % GIT_STAMP_LEN,
-                                "HEAD"], capture_output=True, text=True)
-            raw = p.stdout.strip().upper()
-            if p.returncode == 0 and len(raw) >= GIT_STAMP_LEN:
-                candidate = raw[:GIT_STAMP_LEN]
-                if all(c in CROCKFORD for c in candidate):
-                    stamp = candidate
-        except (OSError, ValueError):
-            stamp = ""
-    _git_stamp_cache.append(stamp)
-    return stamp
+            p = subprocess.run(["git", "rev-parse", "--short", "HEAD"],
+                               capture_output=True, text=True)
+            if p.returncode == 0:
+                sha = p.stdout.strip()
+        except OSError:
+            sha = ""
+    _git_commit_cache.append(sha)
+    return sha
 
 
-def new(timestamp_ms: int = None, git: str = None) -> str:
+def new(timestamp_ms: int = None) -> str:
     """A fresh ULID for a locally-originated event.
 
-    Five characters of the entropy carry the short git hash of HEAD, so two
-    agents in different worktrees or on different branches mint visibly
-    different ids and events can be traced back to the branch that wrote
-    them. The 26-character format, the 48-bit time prefix and therefore
-    lexicographic-sort-equals-time-sort are all unchanged; only entropy is
-    spent, 80 bits down to 55, which is still far more than this log will
-    ever need to stay collision-free.
-
-    It REPLACES entropy rather than appending: a 31-character id would not be
-    a ULID, and every reader here (ULID_RE, timestamp_ms, the fold's string
-    sort) is written against the fixed width.
-
-    Deliberately NOT applied to deterministic() -- see that docstring. Two
-    machines ingesting the same remote change must produce byte-identical
-    ids, and a per-clone git hash is the one thing guaranteed to differ.
+    Full 80 bits of entropy, always. v0.19.0 briefly overwrote five of those
+    characters with the short git hash to make branches distinguishable; that
+    was the wrong trade and is reverted. An id is issued once and never
+    changes, and the only thing it must guarantee is that it does not clash,
+    so entropy is not currency to spend on metadata. Provenance lives in the
+    event's `git` field instead -- which also traces better, since an item's
+    id is minted once and could only ever name the branch the ITEM was
+    created on, while a field on every event names the origin of each one.
     """
     ms = int(time.time() * 1000) if timestamp_ms is None else timestamp_ms
-    out = encode(ms, os.urandom(10))
-    stamp = git_stamp() if git is None else git
-    if not stamp:
-        return out
-    # Entropy occupies characters 10..25; overwrite its first five.
-    return out[:10] + stamp[:GIT_STAMP_LEN] + out[10 + GIT_STAMP_LEN:]
+    return encode(ms, os.urandom(10))
 
 
 def deterministic(system: str, key: str, rev: str, rev_timestamp_ms: int) -> str:

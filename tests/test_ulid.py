@@ -3,6 +3,10 @@
 
 import os
 import sys
+import json
+import shutil
+import subprocess
+import tempfile
 import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin"))
@@ -104,52 +108,107 @@ if __name__ == "__main__":
     unittest.main(verbosity=2)
 
 
-class TestGitStamp(unittest.TestCase):
-    """The short git hash is stamped into locally-minted ids so two agents in
-    different worktrees or branches mint visibly different ones (01KYZER08G)."""
+class TestEntropyIsNeverSpent(unittest.TestCase):
+    """01KYZNG520: v0.19.0 overwrote five entropy characters with the short
+    git hash. An id is issued once and never changes, and the only thing it
+    must guarantee is that it does not clash -- so entropy is not currency to
+    spend on metadata. Provenance moved to the event's own `git` field."""
 
-    def test_stamp_replaces_entropy_and_keeps_the_width(self):
-        out = ulid.new(git="ABCDE")
-        self.assertEqual(len(out), 26)
-        self.assertEqual(out[10:15], "ABCDE")
+    def test_ids_are_26_characters(self):
+        self.assertEqual(len(ulid.new()), 26)
 
-    def test_time_prefix_is_untouched(self):
-        stamped = ulid.new(timestamp_ms=1785000000000, git="ABCDE")
-        self.assertEqual(ulid.timestamp_ms(stamped), 1785000000000)
+    def test_full_entropy_is_random_across_the_whole_tail(self):
+        """Every entropy position must vary. If any five consecutive ones are
+        constant across many ids, something is stamping them again."""
+        ids = [ulid.new(timestamp_ms=1785000000000) for _ in range(500)]
+        for pos in range(10, 26):
+            distinct = {i[pos] for i in ids}
+            self.assertGreater(len(distinct), 1,
+                               "character %d is constant -- entropy is being "
+                               "overwritten" % pos)
 
-    def test_sort_is_still_time_sort(self):
-        early = ulid.new(timestamp_ms=1785000000000, git="ZZZZZ")
-        late = ulid.new(timestamp_ms=1785000001000, git="00000")
-        self.assertLess(early, late,
-                        "the stamp must never outrank the timestamp")
+    def test_no_collisions_in_bulk(self):
+        self.assertEqual(len({ulid.new() for _ in range(5000)}), 5000)
 
-    def test_different_branches_produce_different_ids(self):
-        a = ulid.new(timestamp_ms=1785000000000, git="AAAAA")
-        b = ulid.new(timestamp_ms=1785000000000, git="BBBBB")
-        self.assertNotEqual(a[10:15], b[10:15])
+    def test_git_commit_is_provenance_not_identity(self):
+        """It must not appear in the id at all."""
+        sha = ulid.git_commit()
+        if not sha:
+            self.skipTest("not in a git repo")
+        ids = "".join(ulid.new() for _ in range(50))
+        self.assertNotIn(sha.upper(), ids)
 
-    def test_entropy_still_varies_within_one_branch(self):
-        """55 bits remain; two ids in the same ms must not collide."""
-        ids = {ulid.new(timestamp_ms=1785000000000, git="AAAAA")
-               for _ in range(200)}
-        self.assertEqual(len(ids), 200)
-
-    def test_no_stamp_leaves_a_plain_ulid(self):
-        out = ulid.new(git="")
-        self.assertEqual(len(out), 26)
-
-    def test_stamp_is_valid_crockford(self):
-        """Git hashes are hex; 0-9 and A-F are all Crockford, so uppercasing
-        is the whole conversion. A stamp that wasn't would make ids
-        unparseable."""
-        for ch in ulid.git_stamp():
-            self.assertIn(ch, ulid.CROCKFORD)
-
-    def test_deterministic_ids_are_never_stamped(self):
-        """Spec §10.2: two machines ingesting the same remote change must
-        produce byte-identical ids, and a per-clone git hash is the one thing
-        guaranteed to differ."""
+    def test_deterministic_ids_are_unchanged(self):
         a = ulid.deterministic("jira", "PROJ-1", "rev9", 1785000000000)
         b = ulid.deterministic("jira", "PROJ-1", "rev9", 1785000000000)
         self.assertEqual(a, b)
-        self.assertNotEqual(a[10:15], ulid.git_stamp() or None)
+        self.assertEqual(len(a), 26)
+
+
+class TestEventProvenance(unittest.TestCase):
+    """The git sha rides on the EVENT, so every event names where it came
+    from -- not just the one that created the item."""
+
+    def setUp(self):
+        self.d = tempfile.mkdtemp(prefix="worklog-prov-")
+        self.addCleanup(shutil.rmtree, self.d, True)
+        BIN = os.path.join(os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))), "bin")
+        for f in os.listdir(BIN):
+            src = os.path.join(BIN, f)
+            if os.path.isfile(src):
+                shutil.copy(src, os.path.join(self.d, f))
+        os.makedirs(os.path.join(self.d, ".work"))
+        for f in ("todo.jsonl", "done.jsonl"):
+            open(os.path.join(self.d, ".work", f), "w").close()
+        for cmd in (["git", "init", "-q", self.d],
+                    ["git", "-C", self.d, "config", "user.email", "t@t"],
+                    ["git", "-C", self.d, "config", "user.name", "t"]):
+            subprocess.run(cmd, capture_output=True)
+        open(os.path.join(self.d, "seed"), "w").close()
+        subprocess.run(["git", "-C", self.d, "add", "-A"], capture_output=True)
+        subprocess.run(["git", "-C", self.d, "commit", "-qm", "seed"],
+                       capture_output=True)
+
+    def wl(self, *args, env=None):
+        return subprocess.run(
+            [sys.executable, os.path.join(self.d, "worklog"), *args],
+            cwd=self.d, capture_output=True, text=True, env=env)
+
+    def events(self):
+        with open(os.path.join(self.d, ".work", "todo.jsonl")) as fh:
+            return [json.loads(l) for l in fh if l.strip()]
+
+    def head(self):
+        return subprocess.run(["git", "-C", self.d, "rev-parse", "--short", "HEAD"],
+                              capture_output=True, text=True).stdout.strip()
+
+    def test_every_event_carries_the_head_sha(self):
+        iid = self.wl("add", "T", "--body", "b").stdout.strip()
+        self.wl("update", iid, "--status", "in_progress")
+        evs = self.events()
+        self.assertEqual(len(evs), 2)
+        for e in evs:
+            self.assertEqual(e["git"], self.head())
+
+    def test_a_later_event_records_the_commit_it_was_authored_at(self):
+        """The reason it is per-event and not baked into the item id."""
+        iid = self.wl("add", "T", "--body", "b").stdout.strip()
+        first = self.events()[0]["git"]
+        open(os.path.join(self.d, "more"), "w").close()
+        subprocess.run(["git", "-C", self.d, "add", "-A"], capture_output=True)
+        subprocess.run(["git", "-C", self.d, "commit", "-qm", "second"],
+                       capture_output=True)
+        self.wl("update", iid, "--status", "in_progress")
+        self.assertNotEqual(self.events()[-1]["git"], first,
+                            "a later event must name its own commit")
+
+    def test_provenance_never_becomes_item_state(self):
+        iid = self.wl("add", "T", "--body", "b").stdout.strip()
+        item = json.loads(self.wl("show", iid).stdout)
+        self.assertNotIn("git", item)
+
+    def test_outside_a_repo_the_field_is_omitted_not_empty(self):
+        env = dict(os.environ, WORKLOG_NO_GIT_PROVENANCE="1")
+        self.wl("add", "T", "--body", "b", env=env)
+        self.assertNotIn("git", self.events()[0])

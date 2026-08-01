@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "d97e42f4db19",
+   "render_hash": "ea9c46b134a4",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3311,6 +3311,16 @@
    "wiki_key": "item/01KYZFMZ5CF79DAYHMNKXSAZ5K"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KYZNG520D5E9AVN2X1C0BQ3E",
+   "render": "as-is",
+   "render_hash": "4cc15badcf98",
+   "source": "docs/.index/rendered/tickets/01KYZNG520D5E9AVN2X1C0BQ3E.md",
+   "title": "Restore full ULID entropy; record git provenance as its own event field",
+   "truth_state": "done",
+   "wiki_key": "item/01KYZNG520D5E9AVN2X1C0BQ3E"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -3894,11 +3904,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T20:27:08Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T22:04:48Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "aaaf7f8eea2d",
+   "render_hash": "1c086aa8c324",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

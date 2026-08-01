@@ -57,12 +57,19 @@ def _snapshot(item, through=None):
             "set": {k: v for k, v in _public(item).items() if k != "id"}}
     if through:
         snap["through"] = through
+    sha = ulid.git_commit()
+    if sha:
+        snap["git"] = sha
     return snap
 
 
 def _compact_line(watermark):
-    return {"ev": ulid.new(), "ts": _now(), "actor": "compactor",
+    line = {"ev": ulid.new(), "ts": _now(), "actor": "compactor",
             "op": "compact", "through": watermark}
+    sha = ulid.git_commit()
+    if sha:
+        line["git"] = sha
+    return line
 
 
 def _dump(events):
