@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "4df79d448e14",
+   "render_hash": "b5e102edfe03",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2204,10 +2204,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYAC0AC01R4C6W7YY1X8NVRV",
    "render": "as-is",
-   "render_hash": "c3197b57b0a9",
+   "render_hash": "aa1f5a9c43cf",
    "source": "docs/.index/rendered/tickets/01KYAC0AC01R4C6W7YY1X8NVRV.md",
    "title": "Auto-draft the release CHANGELOG unreleased section from git log",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYAC0AC01R4C6W7YY1X8NVRV"
   },
   {
@@ -3721,11 +3721,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-07-31T17:20:48Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T17:46:54Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "7d39646b125e",
+   "render_hash": "0c09f29cba49",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
