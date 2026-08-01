@@ -5353,7 +5353,7 @@
   },
   "item/01KYWGM3W958F3QK4HB52X1Q1X": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "worklog find: search the generated inventory and graph from the CLI"
   },
   "item/01KYWJ6YGQMMHQ58G9CNAF6F00": {
