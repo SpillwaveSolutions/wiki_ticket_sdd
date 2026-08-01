@@ -14,7 +14,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#272](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/272)
 
 ### Extract a render adapter seam so page naming is not hardcoded to Gollum
-`01KYWGM3R13Q33YZ3PJA3V7QMD` · status: todo
+`01KYWGM3R13Q33YZ3PJA3V7QMD` · status: done
 - belongs-to: IA reader plane: platform-portable rendering and document search
 - references: [github#271](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/271)
 

@@ -5348,7 +5348,7 @@
   },
   "item/01KYWGM3R13Q33YZ3PJA3V7QMD": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Extract a render adapter seam so page naming is not hardcoded to Gollum"
   },
   "item/01KYWGM3W958F3QK4HB52X1Q1X": {

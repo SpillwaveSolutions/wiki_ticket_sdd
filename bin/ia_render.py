@@ -21,7 +21,26 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ia
 import ia_graph
+import wiki_flavor
 from fold import fold, CLOSED_STATUSES
+
+# The platform seam (#271). Prose below writes links in the canonical
+# [[Page]] notation; the flavor translates every page once, at the output
+# boundary (render_all and banner), so a second wiki engine is a new class in
+# wiki_flavor.FLAVORS rather than an edit to forty link sites here.
+FLAVOR = wiki_flavor.get()
+
+
+def use_flavor(system=None):
+    """Swap the render flavor. Tests use it; a repo picks one via
+    wiki.system in .work/config.yml."""
+    global FLAVOR
+    FLAVOR = wiki_flavor.get(system)
+    return FLAVOR
+
+
+def _links(text):
+    return wiki_flavor.render_links(text, FLAVOR)
 
 RENDERED = os.path.join(ia.INDEX_DIR, "rendered")
 MANIFEST = os.path.join(ia.INDEX_DIR, "publish-manifest.json")
@@ -59,7 +78,7 @@ def page_name(rec):
         base = ("Design-Doc" if "design_doc" in stem else "Code-Walkthrough")
         m = re.match(r"(\d{4}-\d{2}-\d{2}_.+?)_(?:design_doc|code_walkthrough)$", stem)
         return base + ("-" + m.group(1) if m else "")
-    return rec.get("title", stem).replace(" ", "-")
+    return FLAVOR.sanitize(rec.get("title", stem))
 
 
 def item_page_name(iid):
@@ -79,7 +98,15 @@ def pr_page_name(pr_num):
 
 
 def banner(rec, by_key):
-    """Reader-visible truth banner (§6.1), one blockquote line."""
+    """Reader-visible truth banner (§6.1), one blockquote line.
+
+    Wraps _banner_text so banner links get flavor-translated too: banners
+    reach the reader through the MANIFEST, not through `rendered`, so the
+    boundary in render_all() never sees them."""
+    return _links(_banner_text(rec, by_key))
+
+
+def _banner_text(rec, by_key):
     ts = rec["truth_state"]
     if ts == "current" and ia.is_frozen(rec):
         # is_frozen() covers plan/roadmap-snapshot/status/dated-design (#137)
@@ -674,6 +701,10 @@ def render_all():
             num = key.split("/", 1)[1]
             rendered["prs/%s.md" % num] = render_pr_page(
                 num, fr.items, fwd, back)
+    # The link boundary: translate canonical [[Page]] notation into the
+    # configured wiki's syntax BEFORE the manifest hashes the bytes, so
+    # render_hash always describes what actually gets published.
+    rendered = {name: _links(text) for name, text in rendered.items()}
     manifest = build_manifest(records, rendered, fr.items)
     aliases = build_aliases(records)
     return rendered, manifest, aliases, graph
