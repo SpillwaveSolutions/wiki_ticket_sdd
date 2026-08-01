@@ -23,6 +23,7 @@ Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
 import argparse, glob, json, os, re, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ulid
+import item_fields
 from fold import (fold, FoldResult, read_lines, dedupe_and_sort, external_owners,
                   OPEN_STATUSES, CLOSED_STATUSES, LEGACY_TYPE_MAP)
 
@@ -30,6 +31,29 @@ LOG = ".work/todo.jsonl"
 PATHS = (".work/todo.jsonl", ".work/done.jsonl")
 MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
 VERSION = "0.18.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+
+
+_warned_concurrent = False
+
+
+def _warn_concurrent_sessions():
+    """Advisory (#236). Once per process, on stderr, never blocking.
+
+    Sits in append() rather than in each command: every write in the system
+    funnels through here, so one guard covers add/update/close/link/ingest
+    and anything added later, and no caller can forget it.
+    """
+    global _warned_concurrent
+    if _warned_concurrent or os.environ.get("WORKLOG_NO_SESSION_WARN"):
+        return
+    _warned_concurrent = True
+    try:
+        import session
+        note = session.warning()
+    except Exception:
+        return          # an advisory must never break a write
+    if note:
+        print(f"worklog: WARNING — {note}", file=sys.stderr)
 
 
 def append(event):
@@ -41,6 +65,7 @@ def append(event):
     """
     if len(event.get("set", {}).get("body", "")) > MAX_BODY:
         sys.exit(f"worklog: body exceeds {MAX_BODY}B; put prose in the plan doc")
+    _warn_concurrent_sessions()
     line = json.dumps(event, separators=(",", ":"), sort_keys=True) + "\n"
     fd = os.open(LOG, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o644)
     try:
@@ -144,8 +169,10 @@ def cmd_add(a):
         "parent": a.parent, "plan": a.plan,
         "unplanned": True if a.unplanned else None,
         "discovered_during": a.discovered_during,
-        "estimate": a.estimate,
     }.items() if v is not None}
+    # Optional fields (#108): only the ones this repo has switched on, and
+    # only those the caller actually passed.
+    ev["set"].update(item_fields.collect(a))
     deps = parse_depends_on(a.depends_on)
     if deps:
         ev["set"]["depends_on"] = deps
@@ -195,9 +222,9 @@ def cmd_update(a):
     ev["set"] = {k: v for k, v in
                  {"status": a.status, "priority": a.priority, "title": a.title,
                   "body": a.body,
-                  "kind": a.kind, "milestone": a.milestone,
-                  "estimate": a.estimate}.items()
+                  "kind": a.kind, "milestone": a.milestone}.items()
                  if v is not None}
+    ev["set"].update(item_fields.collect(a))
     # depends_on is SET_VALUED in the fold, exactly like labels, so it takes
     # the same add/del shape rather than whole-field replacement -- two
     # branches each adding a blocker must both survive a union merge.
@@ -809,9 +836,20 @@ def cmd_changelog_draft(a):
                             + (["--since", a.since] if a.since else [])))
 
 
+def cmd_fields(a):
+    for line in item_fields.describe():
+        print(line)
+
+
 def cmd_merge_rescue(a):
     import compact
     compact.report_rescue(*compact.merge_rescue())
+
+
+def cmd_find(a):
+    import ia_graph
+    sys.exit(ia_graph.find(query=a.query, doc_type=a.type, truth=a.truth,
+                           links=a.links, edge=a.edge, as_json=a.json))
 
 
 def _rfc3339(ms):
@@ -1166,8 +1204,7 @@ a.add_argument("--body", help="description readable by a junior dev/PM: what "
                               "and why, no ULIDs (spec §13.4)")
 a.add_argument("--unplanned", action="store_true")
 a.add_argument("--discovered-during", dest="discovered_during")
-a.add_argument("--estimate", choices=list(ESTIMATES),
-               help="relative size (spec §3.3)")
+item_fields.add_arguments(a)
 a.add_argument("--depends-on", dest="depends_on", metavar="ULID[,ULID...]",
                help="items that block this one — scheduling, not hierarchy "
                     "(spec §3.3); the roadmap renders these as blockers")
@@ -1183,8 +1220,7 @@ u.add_argument("--body", help="description readable by a junior dev/PM: what "
                               "and why, no ULIDs (spec §13.4)")
 u.add_argument("--add-label", dest="add_label")
 u.add_argument("--del-label", dest="del_label")
-u.add_argument("--estimate", choices=list(ESTIMATES),
-               help="relative size (spec §3.3)")
+item_fields.add_arguments(u)
 u.add_argument("--add-depends-on", dest="add_depends_on",
                metavar="ULID[,ULID...]", help="add blocking items")
 u.add_argument("--del-depends-on", dest="del_depends_on",
@@ -1277,6 +1313,27 @@ cd = sub.add_parser(
 cd.set_defaults(fn=cmd_changelog_draft)
 cd.add_argument("--version", help="version for the heading (default: X.Y.Z)")
 cd.add_argument("--since", metavar="REF", help="default: the last tag")
+
+fd = sub.add_parser(
+    "find",
+    description="Search the generated inventory and graph: documents by "
+                "text/type/truth-state, a node's edges in both directions, "
+                "or every edge of one type. Read-only, no network (#272).")
+fd.set_defaults(fn=cmd_find)
+fd.add_argument("query", nargs="?", help="case-insensitive substring")
+fd.add_argument("--type", help="doc_type filter, e.g. plan, adr, item, pr")
+fd.add_argument("--truth", help="truth_state filter, e.g. current, frozen")
+fd.add_argument("--links", metavar="KEY",
+                help="show edges into and out of one node")
+fd.add_argument("--edge", metavar="TYPE",
+                help="list every edge of one type, e.g. supersedes")
+fd.add_argument("--json", action="store_true")
+
+sub.add_parser(
+    "fields",
+    description="Show the item field model: the fixed core, and which "
+                "optional fields this repo has switched on, with what each "
+                "one means (#108).").set_defaults(fn=cmd_fields)
 
 sub.add_parser(
     "merge-rescue",

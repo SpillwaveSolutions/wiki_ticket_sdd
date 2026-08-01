@@ -351,3 +351,70 @@ class TestOneOwnerPerKey(Sandbox):
 if __name__ == "__main__":
     unittest.main(verbosity=2)
 
+
+
+class TestOverwriteReporting(Sandbox):
+    """#238: 'updated 2' said nothing about a live ticket's title or state
+    being replaced. In the reported incident that line would have caught the
+    damage on the first run instead of the third."""
+
+    def _linked_item(self, title="Original title"):
+        iid = self.wl("add", title, "--priority", "P1").strip()
+        self.sync("--push-only")          # creates + links the ticket
+        return iid
+
+    def test_a_replaced_title_is_named_before_and_after(self):
+        iid = self._linked_item("Original title")
+        self.wl("update", iid, "--title", "Replacement title")
+        out = self.sync("--push-only")
+        self.assertIn("overwrote live ticket fields", out)
+        self.assertIn("Original title", out)
+        self.assertIn("Replacement title", out)
+
+    def test_the_report_names_the_field_that_changed(self):
+        iid = self._linked_item()
+        self.wl("update", iid, "--priority", "P3")
+        out = self.sync("--push-only")
+        self.assertIn("priority", out)
+
+    def test_an_unchanged_ticket_reports_no_overwrite(self):
+        """Must not cry wolf: a push that changes nothing a reader sees."""
+        self._linked_item()
+        out = self.sync("--push-only")
+        self.assertNotIn("overwrote live ticket fields", out)
+
+    def test_dry_run_shows_what_would_be_replaced(self):
+        """The most valuable case — visible while still hypothetical."""
+        iid = self._linked_item("Before")
+        self.wl("update", iid, "--title", "After")
+        out = self.sync("--push-only", "--dry-run")
+        self.assertIn("overwrote live ticket fields", out)
+        self.assertIn("Before", out)
+        self.assertIn("After", out)
+
+    def test_the_read_cost_is_reported(self):
+        """The ticket called the extra read 'a real cost worth measuring'."""
+        iid = self._linked_item()
+        self.wl("update", iid, "--title", "Changed")
+        out = self.sync("--push-only")
+        self.assertRegex(out, r"read \d+ ticket.* in \d+\.\d+s")
+
+    def test_one_batched_read_covers_many_tickets(self):
+        """Not one read per updated ticket: the cost the ticket flagged is
+        per RUN, which is what makes it affordable."""
+        ids = [self._linked_item(f"Item {n}") for n in range(3)]
+        for n, iid in enumerate(ids):
+            self.wl("update", iid, "--title", f"Renamed {n}")
+        out = self.sync("--push-only")
+        self.assertIn("read 3 tickets", out)
+        for n in range(3):
+            self.assertIn(f"Renamed {n}", out)
+
+    def test_close_that_also_rewrites_fields_is_reported(self):
+        """The update-then-close path is the one that marked the reported
+        ticket Done."""
+        iid = self._linked_item("Live work")
+        self.wl("update", iid, "--title", "Renamed then closed")
+        self.wl("close", iid, "--status", "done")
+        out = self.sync("--push-only")
+        self.assertIn("Live work", out)

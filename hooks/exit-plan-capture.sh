@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# A plugin hook fires in EVERY session, whatever repo the user is in. In a
+# repo not initialized for worklog (no bin/worklog) the hook must be silent —
+# otherwise users get noise on every plan approval and disable the plugin.
+if [ ! -x "bin/worklog" ]; then exit 0; fi
+
 # WORKLOG-SPEC section 12, "Hooks, not hope": a CLAUDE.md instruction holds
 # maybe 80% of the time; this hook holds 100%. Fires after ExitPlanMode and
 # puts the capture requirement in front of the model, non-optionally.

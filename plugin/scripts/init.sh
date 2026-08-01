@@ -82,7 +82,8 @@ skipped=()
 # --- bin/ and hooks/: always re-copied (init on an installed repo IS the upgrade path) ---
 mkdir -p bin hooks
 for f in worklog fold.py ulid.py render_roadmap.py viz_mermaid.py plan_capture.py compact.py adr.py \
-         ia.py ia_render.py ia_graph.py canonical.py sync_dispatch.py changelog.py; do
+         ia.py ia_render.py ia_graph.py canonical.py sync_dispatch.py session.py \
+         item_fields.py wiki_flavor.py changelog.py; do
   cp -p "$PLUGIN_ROOT/scripts/$f" "bin/$f"
   chmod +x "bin/$f"
   wrote+=("bin/$f")
@@ -144,6 +145,15 @@ paths:
   plans: docs/plans
   status: docs/status
   roadmap: docs/roadmap.md
+
+# Optional item fields (`worklog fields` lists them with what each means).
+# The core -- id/title/status/level/kind/priority/milestone/labels/parent/
+# body/plan/depends_on -- is fixed and deliberately not listed here.
+# Defaults: estimate, owner, risk, acceptance_criteria on; value, confidence,
+# due_date, severity off. Uncomment to change.
+# work_item_fields:
+#   severity: on
+#   risk: off
 EOF
   wrote+=(".work/config.yml")
 fi
@@ -227,6 +237,10 @@ else
   (it is generated; change the work items instead).
 - After changing work items, run `worklog roadmap-render` and commit the log
   and roadmap together.
+- One session per working directory. Two assistant sessions sharing a checkout
+  switch branches under each other and solve the same problem twice; give each
+  its own `git worktree`. `worklog` warns when it sees more than one, but the
+  warning is advisory and arrives after the fact.
 <!-- worklog:policy:end -->
 EOF
   wrote+=("CLAUDE.md policy block")

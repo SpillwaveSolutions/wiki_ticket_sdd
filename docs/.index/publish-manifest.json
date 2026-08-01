@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "f727548557b3",
+   "render_hash": "77cc821acfcf",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "05bf0cd94699",
+   "render_hash": "5dbf3d74d37c",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -1854,10 +1854,10 @@
    "frozen": false,
    "page_name": "Ticket-01KY5NE0ZYGBWG44N0KPEBFCZ8",
    "render": "as-is",
-   "render_hash": "e7532788645a",
+   "render_hash": "dfd106d89dfa",
    "source": "docs/.index/rendered/tickets/01KY5NE0ZYGBWG44N0KPEBFCZ8.md",
    "title": "Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KY5NE0ZYGBWG44N0KPEBFCZ8"
   },
   {
@@ -2884,10 +2884,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYNHEV5GCR1MDNECAXFT0GK2",
    "render": "as-is",
-   "render_hash": "0b7a8d38f14e",
+   "render_hash": "aca4bd76df05",
    "source": "docs/.index/rendered/tickets/01KYNHEV5GCR1MDNECAXFT0GK2.md",
    "title": "Concurrent sessions in one working directory corrupt each other's work",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYNHEV5GCR1MDNECAXFT0GK2"
   },
   {
@@ -2904,10 +2904,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYNHEVDSD4BTASXCTV88Q80Q",
    "render": "as-is",
-   "render_hash": "abd6ca7ccfb4",
+   "render_hash": "9a8f31438d74",
    "source": "docs/.index/rendered/tickets/01KYNHEVDSD4BTASXCTV88Q80Q.md",
    "title": "Sync should say which ticket fields it is about to overwrite",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYNHEVDSD4BTASXCTV88Q80Q"
   },
   {
@@ -3134,30 +3134,30 @@
    "frozen": false,
    "page_name": "Ticket-01KYWGM3KPNQNSWV03FRG23ADB",
    "render": "as-is",
-   "render_hash": "f901b06f91ea",
+   "render_hash": "df5808328dd7",
    "source": "docs/.index/rendered/tickets/01KYWGM3KPNQNSWV03FRG23ADB.md",
    "title": "IA reader plane: platform-portable rendering and document search",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYWGM3KPNQNSWV03FRG23ADB"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYWGM3R13Q33YZ3PJA3V7QMD",
    "render": "as-is",
-   "render_hash": "620ceafaa3d5",
+   "render_hash": "acc942080352",
    "source": "docs/.index/rendered/tickets/01KYWGM3R13Q33YZ3PJA3V7QMD.md",
    "title": "Extract a render adapter seam so page naming is not hardcoded to Gollum",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYWGM3R13Q33YZ3PJA3V7QMD"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KYWGM3W958F3QK4HB52X1Q1X",
    "render": "as-is",
-   "render_hash": "537a1e40a162",
+   "render_hash": "636c984d5329",
    "source": "docs/.index/rendered/tickets/01KYWGM3W958F3QK4HB52X1Q1X.md",
    "title": "worklog find: search the generated inventory and graph from the CLI",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYWGM3W958F3QK4HB52X1Q1X"
   },
   {
@@ -3645,6 +3645,17 @@
   {
    "banner": "> **Current** \u2014 the current plan; plans are frozen once written, a changed design gets a new plan.",
    "frozen": true,
+   "page_name": "Plan-configurable-item-fields",
+   "render": "doc+banner",
+   "render_hash": "c3364a23d5fb",
+   "source": "docs/plans/2026-08-01-configurable-item-fields.md",
+   "title": "Configurable optional fields on the work item",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-08-01-configurable-item-fields"
+  },
+  {
+   "banner": "> **Current** \u2014 the current plan; plans are frozen once written, a changed design gets a new plan.",
+   "frozen": true,
    "page_name": "Plan-design-docs-release-sync",
    "render": "doc+banner",
    "render_hash": "3edc847881ac",
@@ -3742,11 +3753,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T17:46:54Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T18:41:02Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "b22b6818a9f8",
+   "render_hash": "d295d98fd1ca",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

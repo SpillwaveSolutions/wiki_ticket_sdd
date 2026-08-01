@@ -3051,6 +3051,11 @@
    "type": "produces"
   },
   {
+   "from": "plan/2026-08-01-configurable-item-fields",
+   "to": "item/01KY5NE0ZYGBWG44N0KPEBFCZ8",
+   "type": "produces"
+  },
+  {
    "from": "plan/design-docs-release-sync",
    "to": "item/01KXY7X0QH47Z6B5QZD5G052FJ",
    "type": "produces"
@@ -4703,7 +4708,7 @@
   },
   "item/01KY5NE0ZYGBWG44N0KPEBFCZ8": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config"
   },
   "item/01KY5P9V0CMM86G43HH4Q28ZDD": {
@@ -5218,7 +5223,7 @@
   },
   "item/01KYNHEV5GCR1MDNECAXFT0GK2": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Concurrent sessions in one working directory corrupt each other's work"
   },
   "item/01KYNHEV9M01PQJZQ5QRZQ3C8J": {
@@ -5228,7 +5233,7 @@
   },
   "item/01KYNHEVDSD4BTASXCTV88Q80Q": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Sync should say which ticket fields it is about to overwrite"
   },
   "item/01KYNHEVJNZTGEJ2EW5A9C9A7C": {
@@ -5343,17 +5348,17 @@
   },
   "item/01KYWGM3KPNQNSWV03FRG23ADB": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "IA reader plane: platform-portable rendering and document search"
   },
   "item/01KYWGM3R13Q33YZ3PJA3V7QMD": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Extract a render adapter seam so page naming is not hardcoded to Gollum"
   },
   "item/01KYWGM3W958F3QK4HB52X1Q1X": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "worklog find: search the generated inventory and graph from the CLI"
   },
   "item/01KYWJ6YGQMMHQ58G9CNAF6F00": {
@@ -5442,6 +5447,12 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions.md",
    "title": "Close both P1 epics, settle the merge-strategy and GONE questions",
+   "truth_state": "current"
+  },
+  "plan/2026-08-01-configurable-item-fields": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-08-01-configurable-item-fields.md",
+   "title": "Configurable optional fields on the work item",
    "truth_state": "current"
   },
   "plan/design-docs-release-sync": {
