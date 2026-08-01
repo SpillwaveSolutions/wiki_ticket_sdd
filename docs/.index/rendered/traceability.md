@@ -6,7 +6,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 `01KYZFMZ5CF79DAYHMNKXSAZ5K` · status: done
 
 ### Cut release v0.19.0
-`01KYZFF99YF79DAN4V33HXC7AE` · status: in_progress
+`01KYZFF99YF79DAN4V33HXC7AE` · status: done
 - targets: release/v0.19.0
 
 ### Stamp generated ULIDs with the short git hash so concurrent branches diverge
