@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "62bca0a4b12b",
+   "render_hash": "d65182c617e6",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -2884,10 +2884,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYNHEV5GCR1MDNECAXFT0GK2",
    "render": "as-is",
-   "render_hash": "0b7a8d38f14e",
+   "render_hash": "aca4bd76df05",
    "source": "docs/.index/rendered/tickets/01KYNHEV5GCR1MDNECAXFT0GK2.md",
    "title": "Concurrent sessions in one working directory corrupt each other's work",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYNHEV5GCR1MDNECAXFT0GK2"
   },
   {
@@ -3742,11 +3742,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T17:27:14Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T17:37:34Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "8aed94cb0efe",
+   "render_hash": "cd0a20228983",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",

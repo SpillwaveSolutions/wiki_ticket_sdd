@@ -82,7 +82,7 @@ skipped=()
 # --- bin/ and hooks/: always re-copied (init on an installed repo IS the upgrade path) ---
 mkdir -p bin hooks
 for f in worklog fold.py ulid.py render_roadmap.py viz_mermaid.py plan_capture.py compact.py adr.py \
-         ia.py ia_render.py ia_graph.py canonical.py sync_dispatch.py; do
+         ia.py ia_render.py ia_graph.py canonical.py sync_dispatch.py session.py; do
   cp -p "$PLUGIN_ROOT/scripts/$f" "bin/$f"
   chmod +x "bin/$f"
   wrote+=("bin/$f")
@@ -227,6 +227,10 @@ else
   (it is generated; change the work items instead).
 - After changing work items, run `worklog roadmap-render` and commit the log
   and roadmap together.
+- One session per working directory. Two assistant sessions sharing a checkout
+  switch branches under each other and solve the same problem twice; give each
+  its own `git worktree`. `worklog` warns when it sees more than one, but the
+  warning is advisory and arrives after the fact.
 <!-- worklog:policy:end -->
 EOF
   wrote+=("CLAUDE.md policy block")
