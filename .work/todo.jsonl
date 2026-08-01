@@ -61,3 +61,5 @@
 {"actor":"richardhightower","ev":"01KYWK2Q8VCDHSJYVJTD93J8R2","item":"01KYTJGK2X700NYTZHB0JDE6Q1","op":"close","set":{"status":"done"},"ts":"2026-07-31T17:20:47Z"}
 {"actor":"richardhightower","ev":"01KYWK2QDS853F5W001F2Z3WHG","item":"01KYTJGK2X98H9T7VVR879B0XC","op":"close","set":{"status":"done"},"ts":"2026-07-31T17:20:48Z"}
 {"actor":"richardhightower","ev":"01KYWK2QJMA2BX2NA1G25J50QD","item":"01KYTJGK2WMX6PNMYQDFFFPGTP","op":"close","set":{"status":"done"},"ts":"2026-07-31T17:20:48Z"}
+{"actor":"richardhightower","ev":"01KYZ5YWJ5566B4T90ENZ70S72","item":"01KYNHEV5GCR1MDNECAXFT0GK2","op":"update","set":{"status":"in_progress"},"ts":"2026-08-01T17:29:14Z"}
+{"actor":"richardhightower","ev":"01KYZ6E519KQNNQ4M1KY8ZWDT9","item":"01KYNHEV5GCR1MDNECAXFT0GK2","op":"close","set":{"resolution":"Advisory warning when two sessions are live in one working directory, plus the worktree rule in the generated policy. Session identity comes from the harness (hook session_id) because the CLI is short-lived and has no stable pid/ppid/sid. SessionEnd prunes so a finished session stops warning the next one.","status":"done"},"ts":"2026-08-01T17:37:34Z"}

@@ -5212,7 +5212,7 @@
   },
   "item/01KYNHEV5GCR1MDNECAXFT0GK2": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Concurrent sessions in one working directory corrupt each other's work"
   },
   "item/01KYNHEV9M01PQJZQ5QRZQ3C8J": {

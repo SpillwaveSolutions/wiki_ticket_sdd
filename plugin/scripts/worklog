@@ -32,6 +32,29 @@ MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
 VERSION = "0.18.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
+_warned_concurrent = False
+
+
+def _warn_concurrent_sessions():
+    """Advisory (#236). Once per process, on stderr, never blocking.
+
+    Sits in append() rather than in each command: every write in the system
+    funnels through here, so one guard covers add/update/close/link/ingest
+    and anything added later, and no caller can forget it.
+    """
+    global _warned_concurrent
+    if _warned_concurrent or os.environ.get("WORKLOG_NO_SESSION_WARN"):
+        return
+    _warned_concurrent = True
+    try:
+        import session
+        note = session.warning()
+    except Exception:
+        return          # an advisory must never break a write
+    if note:
+        print(f"worklog: WARNING — {note}", file=sys.stderr)
+
+
 def append(event):
     """The only writer. Single O_APPEND write, always newline-terminated.
 
@@ -41,6 +64,7 @@ def append(event):
     """
     if len(event.get("set", {}).get("body", "")) > MAX_BODY:
         sys.exit(f"worklog: body exceeds {MAX_BODY}B; put prose in the plan doc")
+    _warn_concurrent_sessions()
     line = json.dumps(event, separators=(",", ":"), sort_keys=True) + "\n"
     fd = os.open(LOG, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o644)
     try:

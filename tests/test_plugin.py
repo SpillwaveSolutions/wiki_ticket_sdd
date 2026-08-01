@@ -26,8 +26,13 @@ CANON = ["bin/worklog", "bin/fold.py", "bin/ulid.py", "bin/render_roadmap.py",
          "bin/viz_mermaid.py",
          "bin/plan_capture.py", "bin/compact.py", "bin/adr.py",
          "bin/sync_dispatch.py", "bin/canonical.py", "bin/ia.py",
-         "bin/ia_render.py", "bin/ia_graph.py",
+         "bin/ia_render.py", "bin/ia_graph.py", "bin/session.py",
          "hooks/pre-commit", "hooks/pre-merge-commit", "hooks/commit-msg"]
+
+# Hooks the harness runs (not git hooks) live in a second directory and are
+# mirrored the same way. #236 added two more, and nothing was checking them.
+HOOK_CANON = ["prompt-reminder.sh", "session-doctor.sh", "session-end.sh",
+              "stop-worklog-check.sh", "exit-plan-capture.sh"]
 
 
 def sh(cwd, *cmd, check=True):
@@ -99,6 +104,15 @@ class TestCanonSync(unittest.TestCase):
             self.assertTrue(
                 filecmp.cmp(src, dst, shallow=False),
                 f"{rel} differs from plugin copy — run: cp {rel} plugin/scripts/")
+
+    def test_repo_hooks_match_plugin_hooks(self):
+        for name in HOOK_CANON:
+            src = os.path.join(ROOT, "hooks", name)
+            dst = os.path.join(PLUGIN, "hooks", "scripts", name)
+            self.assertTrue(
+                filecmp.cmp(src, dst, shallow=False),
+                f"hooks/{name} differs from plugin copy — "
+                f"run: cp hooks/{name} plugin/hooks/scripts/")
 
     def test_skill_trees_match(self):
         """#257: skills existed as two unlinked copies and had drifted in both
