@@ -610,7 +610,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#137](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/137)
 
 ### Auto-draft the release CHANGELOG unreleased section from git log
-`01KYAC0AC01R4C6W7YY1X8NVRV` · status: todo
+`01KYAC0AC01R4C6W7YY1X8NVRV` · status: done
 - references: [github#136](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/136)
 
 ### Phase 0: add item/release page-name helpers and extend build_manifest()

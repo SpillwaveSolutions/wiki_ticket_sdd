@@ -20,7 +20,11 @@ skill; use the platform's own release tooling.
   every plugin skill's frontmatter agree (`tests/test_plugin.py` enforces it).
 - The top CHANGELOG section reads `## X.Y.Z — unreleased` and describes what
   actually ships. If it doesn't, fix that first — release notes are written
-  as features land, not reconstructed at tag time.
+  as features land, not reconstructed at tag time. When the section is missing
+  or thin, `bin/worklog changelog-draft --version X.Y.Z` writes a starting
+  draft from git log since the last tag (markdown on stdout, the commits it
+  excluded on stderr). It is bullets, not release notes: edit the prose before
+  stamping, and read the exclusion list to confirm nothing real was dropped.
 
 ## 2. Stamp
 

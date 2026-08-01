@@ -829,6 +829,13 @@ def cmd_compact(a):
     print(f"compacted through {wm}" if wm else "nothing to compact")
 
 
+def cmd_changelog_draft(a):
+    import changelog
+    sys.exit(changelog.main(["changelog-draft"]
+                            + (["--version", a.version] if a.version else [])
+                            + (["--since", a.since] if a.since else [])))
+
+
 def cmd_fields(a):
     for line in item_fields.describe():
         print(line)
@@ -1296,6 +1303,16 @@ rs = sub.add_parser("roadmap-snapshot"); rs.set_defaults(fn=cmd_roadmap_snapshot
 rs.add_argument("--name")
 co = sub.add_parser("compact"); co.set_defaults(fn=cmd_compact)
 co.add_argument("--yes", action="store_true")
+
+cd = sub.add_parser(
+    "changelog-draft",
+    description="Draft the unreleased CHANGELOG section from git log since "
+                "the last tag, grouped by commit type, with log/index-only "
+                "commits excluded. Markdown on stdout, exclusions on stderr. "
+                "A starting point for release notes, not the notes (#136).")
+cd.set_defaults(fn=cmd_changelog_draft)
+cd.add_argument("--version", help="version for the heading (default: X.Y.Z)")
+cd.add_argument("--since", metavar="REF", help="default: the last tag")
 
 fd = sub.add_parser(
     "find",

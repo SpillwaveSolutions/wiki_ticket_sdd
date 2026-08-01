@@ -2,7 +2,7 @@
 wiki_key: roadmap
 doc_type: roadmap
 truth_state: current
-source_hash: 56302d4c
+source_hash: 46dd8e62
 generated_at: 2026-08-01T18:41:02Z
 ---
 
@@ -13,7 +13,7 @@ generated_at: 2026-08-01T18:41:02Z
 
 # Roadmap
 
-_0 epic(s) in flight, 2 open item(s), 0 blocked, 0 unclassified._
+_0 epic(s) in flight, 1 open item(s), 0 blocked, 0 unclassified._
 
 ## Now
 
@@ -26,7 +26,6 @@ _Nothing here._
 | # | Item | Type | Priority | Status | Blocked by |
 |---|---|---|---|---|---|
 | 01KYZ5CY | Compaction watermark can silently drop branch-local events the snapshot never folded | task | P1 | todo | — |
-| [136](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/136) | Auto-draft the release CHANGELOG unreleased section from git log | task | P2 | todo | — |
 
 ## Later
 
@@ -38,16 +37,14 @@ _Nothing here._
 
 ```mermaid
 graph TD
-    01KYAC0AC01R4C6W7YY1X8NVRV["📦 Auto-draft the release CHANGEL"]
     01KYZ5CY9PS60BYH1E07DF5C9P["🐛 Compaction watermark can silen"]
     classDef todo fill:#f4f4f4,stroke:#999999
-    class 01KYAC0AC01R4C6W7YY1X8NVRV,01KYZ5CY9PS60BYH1E07DF5C9P todo
+    class 01KYZ5CY9PS60BYH1E07DF5C9P todo
 ```
 
 ### Hierarchy
 
 ```mermaid
 graph TD
-    01KYAC0AC01R4C6W7YY1X8NVRV["📦 Auto-draft the release CHANGEL"]
     01KYZ5CY9PS60BYH1E07DF5C9P["🐛 Compaction watermark can silen"]
 ```

@@ -4883,7 +4883,7 @@
   },
   "item/01KYAC0AC01R4C6W7YY1X8NVRV": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Auto-draft the release CHANGELOG unreleased section from git log"
   },
   "item/01KYACFJA0SQSF4C83BJZXB5MY": {
