@@ -19,7 +19,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#271](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/271)
 
 ### IA reader plane: platform-portable rendering and document search
-`01KYWGM3KPNQNSWV03FRG23ADB` · status: todo
+`01KYWGM3KPNQNSWV03FRG23ADB` · status: done
 - references: [github#270](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/270)
 - contains: Extract a render adapter seam so page naming is not hardcoded to Gollum
 - contains: worklog find: search the generated inventory and graph from the CLI

@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "fb0dd750639a",
+   "render_hash": "a56927335b57",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3134,10 +3134,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYWGM3KPNQNSWV03FRG23ADB",
    "render": "as-is",
-   "render_hash": "13812a638688",
+   "render_hash": "df5808328dd7",
    "source": "docs/.index/rendered/tickets/01KYWGM3KPNQNSWV03FRG23ADB.md",
    "title": "IA reader plane: platform-portable rendering and document search",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYWGM3KPNQNSWV03FRG23ADB"
   },
   {
@@ -3753,11 +3753,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T18:19:11Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T18:41:02Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "0fe7bb55d766",
+   "render_hash": "accbb762c4d8",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
