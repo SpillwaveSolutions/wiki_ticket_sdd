@@ -57,6 +57,17 @@
     "url": null,
     "wiki_key": "adr/0005-no-custom-merge-driver-for-the-event-log"
   },
+  "adr/0006-resurrected-events-are-not-always-cosmet": {
+    "canonical_key": "adr/0006-resurrected-events-are-not-always-cosmet",
+    "doc_type": "adr",
+    "rev": null,
+    "source": "docs/adr/0006-resurrected-events-are-not-always-cosmet.md",
+    "source_hash": null,
+    "title": "ADR-0006-resurrected-events-are-not-always-cosmet",
+    "truth_state": "current",
+    "url": null,
+    "wiki_key": "adr/0006-resurrected-events-are-not-always-cosmet"
+  },
   "cli-reference": {
     "aliases": [
       "cli-reference"
