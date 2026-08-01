@@ -5504,7 +5504,7 @@
   },
   "item/01KYZNRRNFBWHA8452CNFKH6XV": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Cut release v0.19.1"
   },
   "plan/2026-07-17_worklog-core_plan": {
