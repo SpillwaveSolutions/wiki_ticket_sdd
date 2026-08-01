@@ -192,3 +192,47 @@ class TestWikiAdd(Sandbox):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestLinkPrResolvesPrefixes(unittest.TestCase):
+    """01KYZFMZ5C: link-pr wrote the sidecar under the raw string, so a short
+    id filed docs/.index/item/<prefix>.yml, the edge never reached the graph,
+    and the release evidence gate still called the item unlinked -- with no
+    error, because the write succeeded. Same class already fixed for
+    close/update."""
+
+    def setUp(self):
+        self.d = tempfile.mkdtemp(prefix="worklog-linkpr-")
+        self.addCleanup(shutil.rmtree, self.d, True)
+        BIN = os.path.join(os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))), "bin")
+        for f in os.listdir(BIN):
+            src = os.path.join(BIN, f)
+            if os.path.isfile(src):
+                shutil.copy(src, os.path.join(self.d, f))
+        os.makedirs(os.path.join(self.d, ".work"))
+        for f in ("todo.jsonl", "done.jsonl"):
+            open(os.path.join(self.d, ".work", f), "w").close()
+
+    def wl(self, *args):
+        return subprocess.run(
+            [sys.executable, os.path.join(self.d, "worklog"), *args],
+            cwd=self.d, capture_output=True, text=True)
+
+    def test_a_prefix_links_the_real_item(self):
+        iid = self.wl("add", "T", "--body", "b").stdout.strip()
+        p = self.wl("link-pr", iid[:8], "--pr", "42")
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn(iid, p.stdout, "must report the resolved id, not the prefix")
+        self.assertTrue(
+            os.path.exists(os.path.join(self.d, "docs", ".index", "item",
+                                        iid + ".yml")),
+            "the sidecar must be filed under the full ULID")
+        self.assertFalse(
+            os.path.exists(os.path.join(self.d, "docs", ".index", "item",
+                                        iid[:8] + ".yml")),
+            "a phantom prefix sidecar must not be created")
+
+    def test_an_unknown_id_is_refused(self):
+        p = self.wl("link-pr", "01ZZZZZZZZ", "--pr", "42")
+        self.assertNotEqual(p.returncode, 0)

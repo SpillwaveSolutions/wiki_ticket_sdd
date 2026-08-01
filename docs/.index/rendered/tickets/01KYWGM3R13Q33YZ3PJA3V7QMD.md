@@ -8,6 +8,10 @@ The renderer never reads the wiki system from config.
 
 - epic: [[Ticket-01KYWGM3KPNQNSWV03FRG23ADB]] IA reader plane: platform-portable rendering and document search — What is left of the IA content model after Phase 5's gate promotion shipped.
 
+## Linked PRs
+
+- [[PR-282]]
+
 ## Related tickets
 
 - [github #271](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/271)

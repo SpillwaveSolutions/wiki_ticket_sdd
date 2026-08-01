@@ -4,6 +4,10 @@
 
 Reported alongside the duplicate-ticket bug: two assistant sessions ran in the same directory, one switched branches out from under the other mid-operation, and both independently 'fixed' the same problem in different ways.
 
+## Linked PRs
+
+- [[PR-278]]
+
 ## Related tickets
 
 - [github #236](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/236)

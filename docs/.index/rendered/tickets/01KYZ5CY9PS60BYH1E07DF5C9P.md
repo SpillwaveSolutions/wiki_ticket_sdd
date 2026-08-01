@@ -4,6 +4,10 @@
 
 The fold drops any event whose id sorts at or below a compaction watermark, on the assumption that the compaction already folded it into a snapshot.
 
+## Linked PRs
+
+- [[PR-286]]
+
 ## Related tickets
 
 - [github #284](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/284)
