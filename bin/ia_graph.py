@@ -387,3 +387,134 @@ def seed_edges(records=None):
                 fh.write(json.dumps(rec, separators=(",", ":"),
                                     sort_keys=True) + "\n")
     return proposed
+
+
+# --- read-only search over the generated model (#272) ---------------------
+#
+# There was no way to ask the content model a question from the command line.
+# Everything an answer needs is already generated and on disk -- every
+# document with its type and truth state in the inventory, every typed edge
+# between documents, items, tickets and PRs in the graph. So this is a reader,
+# not an index: no network call, no new store, nothing written.
+
+def load_graph():
+    """The generated graph, or a clear instruction when it isn't there yet."""
+    try:
+        with open(GRAPH, encoding="utf-8") as fh:
+            return json.load(fh)
+    except FileNotFoundError:
+        raise SystemExit("worklog find: no graph yet — run: worklog ia-graph")
+    except json.JSONDecodeError as e:
+        raise SystemExit(f"worklog find: {GRAPH} is unreadable ({e}); "
+                         "regenerate with: worklog ia-graph")
+
+
+def search_nodes(graph, query=None, doc_type=None, truth=None):
+    """Nodes matching a case-insensitive substring over key, title and source.
+
+    Substring rather than tokens or fuzzy matching: the keys are structured
+    (`adr/0005-...`, `item/01KY...`), so a plain substring already answers
+    "show me the ADRs" and "show me this item" without a query language to
+    learn or maintain.
+    """
+    q = (query or "").lower()
+    out = []
+    for key, node in graph.get("nodes", {}).items():
+        if doc_type and node.get("doc_type") != doc_type:
+            continue
+        if truth and node.get("truth_state") != truth:
+            continue
+        if q and q not in " ".join(
+                str(node.get(f) or "") for f in ("title", "source")).lower() \
+                and q not in key.lower():
+            continue
+        out.append((key, node))
+    return sorted(out)
+
+
+def resolve_node(graph, key):
+    """Exact key, else unique substring match. Ambiguity is an error, never a
+    silent pick -- the same rule `worklog show` uses for item prefixes."""
+    nodes = graph.get("nodes", {})
+    if key in nodes:
+        return key
+    hits = sorted(k for k in nodes if key.lower() in k.lower())
+    if not hits:
+        raise SystemExit(f"worklog find: no node matching {key!r}")
+    if len(hits) > 1:
+        raise SystemExit("worklog find: %r is ambiguous — matches %d nodes:\n  %s"
+                         % (key, len(hits), "\n  ".join(hits[:10])))
+    return hits[0]
+
+
+def node_links(graph, key):
+    """(outbound, inbound) edges for one node, each [(type, other_key)].
+
+    Both directions, because the questions this exists to answer run each way:
+    "which plan decided this?" is inbound, "what did this supersede?" is
+    outbound.
+    """
+    fwd, back = build_adjacency(graph)
+    return sorted(fwd.get(key, [])), sorted(back.get(key, []))
+
+
+def edges_of_type(graph, edge_type):
+    known = sorted(REVERSE)
+    if edge_type not in known:
+        raise SystemExit("worklog find: unknown edge type %r; known: %s"
+                         % (edge_type, ", ".join(known)))
+    return sorted((e["from"], e["to"]) for e in graph.get("edges", [])
+                  if e["type"] == edge_type)
+
+
+def _label(graph, key):
+    node = graph.get("nodes", {}).get(key) or {}
+    title = node.get("title")
+    return f"{key} — {title}" if title else key
+
+
+def find(query=None, doc_type=None, truth=None, links=None, edge=None,
+         as_json=False):
+    """The `worklog find` command. Returns an exit code."""
+    graph = load_graph()
+
+    if links:
+        key = resolve_node(graph, links)
+        out, back = node_links(graph, key)
+        if as_json:
+            print(json.dumps({"node": key, "outbound": out, "inbound": back},
+                             indent=2, sort_keys=True))
+            return 0
+        print(_label(graph, key))
+        if not out and not back:
+            print("  (no edges)")
+        for typ, other in out:
+            print(f"  -> {typ}: {_label(graph, other)}")
+        for typ, other in back:
+            print(f"  <- {typ}: {_label(graph, other)}")
+        return 0
+
+    if edge:
+        pairs = edges_of_type(graph, edge)
+        if as_json:
+            print(json.dumps([{"from": a, "to": b} for a, b in pairs],
+                             indent=2, sort_keys=True))
+            return 0
+        for a, b in pairs:
+            print(f"{a}  --{edge}->  {b}")
+        print(f"\n{len(pairs)} {edge} edge(s)")
+        return 0 if pairs else 1
+
+    hits = search_nodes(graph, query, doc_type, truth)
+    if as_json:
+        print(json.dumps([dict(key=k, **n) for k, n in hits],
+                         indent=2, sort_keys=True))
+        return 0
+    for key, node in hits:
+        bits = [node.get("doc_type") or "?"]
+        if node.get("truth_state"):
+            bits.append(node["truth_state"])
+        print("%-14s %s" % ("[" + "/".join(bits) + "]", _label(graph, key)))
+    print(f"\n{len(hits)} node(s)")
+    # Non-zero on no matches so a script can branch on it, the way grep does.
+    return 0 if hits else 1

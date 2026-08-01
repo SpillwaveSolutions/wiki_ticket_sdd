@@ -9,7 +9,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 `01KYWJ6YGQMMHQ58G9CNAF6F00` · status: cancelled
 
 ### worklog find: search the generated inventory and graph from the CLI
-`01KYWGM3W958F3QK4HB52X1Q1X` · status: todo
+`01KYWGM3W958F3QK4HB52X1Q1X` · status: done
 - belongs-to: IA reader plane: platform-portable rendering and document search
 - references: [github#272](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/272)
 

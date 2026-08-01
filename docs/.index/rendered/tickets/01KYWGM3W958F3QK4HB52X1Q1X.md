@@ -1,6 +1,6 @@
 # worklog find: search the generated inventory and graph from the CLI
 
-`01KYWGM3W958F3QK4HB52X1Q1X` · task/feature · **open**
+`01KYWGM3W958F3QK4HB52X1Q1X` · task/feature · **done**
 
 There is no way to search the content model from the command line -- no find, no search.
 
