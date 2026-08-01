@@ -2,7 +2,7 @@
 wiki_key: roadmap
 doc_type: roadmap
 truth_state: current
-source_hash: d2247d65
+source_hash: 04b008e8
 generated_at: 2026-08-01T18:03:02Z
 ---
 
@@ -13,7 +13,7 @@ generated_at: 2026-08-01T18:03:02Z
 
 # Roadmap
 
-_1 epic(s) in flight, 5 open item(s), 0 blocked, 0 unclassified._
+_1 epic(s) in flight, 4 open item(s), 0 blocked, 0 unclassified._
 
 ## Now
 
@@ -42,7 +42,6 @@ What is left of the IA content model after Phase 5's gate promotion shipped. The
 | # | Item | Type | Priority | Status | Blocked by |
 |---|---|---|---|---|---|
 | [108](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/108) | Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config | story | P3 | todo | — |
-| [238](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/238) | Sync should say which ticket fields it is about to overwrite | task | P3 | todo | — |
 
 ## Visual roadmap
 
@@ -52,13 +51,12 @@ What is left of the IA content model after Phase 5's gate promotion shipped. The
 graph TD
     01KY5NE0ZYGBWG44N0KPEBFCZ8["📦 Configurable work-item field m"]
     01KYAC0AC01R4C6W7YY1X8NVRV["📦 Auto-draft the release CHANGEL"]
-    01KYNHEVDSD4BTASXCTV88Q80Q["📦 Sync should say which ticket f"]
     01KYWGM3KPNQNSWV03FRG23ADB["📦 IA reader plane platform-porta"]
     01KYWGM3R13Q33YZ3PJA3V7QMD["📦 Extract a render adapter seam"]
     01KYZ5CY9PS60BYH1E07DF5C9P["🐛 Compaction watermark can silen"]
     01KYWGM3KPNQNSWV03FRG23ADB --> 01KYWGM3R13Q33YZ3PJA3V7QMD
     classDef todo fill:#f4f4f4,stroke:#999999
-    class 01KY5NE0ZYGBWG44N0KPEBFCZ8,01KYAC0AC01R4C6W7YY1X8NVRV,01KYNHEVDSD4BTASXCTV88Q80Q,01KYWGM3KPNQNSWV03FRG23ADB,01KYWGM3R13Q33YZ3PJA3V7QMD,01KYZ5CY9PS60BYH1E07DF5C9P todo
+    class 01KY5NE0ZYGBWG44N0KPEBFCZ8,01KYAC0AC01R4C6W7YY1X8NVRV,01KYWGM3KPNQNSWV03FRG23ADB,01KYWGM3R13Q33YZ3PJA3V7QMD,01KYZ5CY9PS60BYH1E07DF5C9P todo
 ```
 
 ### Hierarchy
@@ -67,7 +65,6 @@ graph TD
 graph TD
     01KY5NE0ZYGBWG44N0KPEBFCZ8["📦 Configurable work-item field m"]
     01KYAC0AC01R4C6W7YY1X8NVRV["📦 Auto-draft the release CHANGEL"]
-    01KYNHEVDSD4BTASXCTV88Q80Q["📦 Sync should say which ticket f"]
     01KYWGM3KPNQNSWV03FRG23ADB["📦 IA reader plane platform-porta"]
     01KYWGM3R13Q33YZ3PJA3V7QMD["📦 Extract a render adapter seam"]
     01KYZ5CY9PS60BYH1E07DF5C9P["🐛 Compaction watermark can silen"]

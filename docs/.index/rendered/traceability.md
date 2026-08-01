@@ -145,7 +145,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#239](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/239)
 
 ### Sync should say which ticket fields it is about to overwrite
-`01KYNHEVDSD4BTASXCTV88Q80Q` · status: todo
+`01KYNHEVDSD4BTASXCTV88Q80Q` · status: done
 - references: [github#238](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/238)
 
 ### Catch duplicate ticket ownership at merge time, not just at sync
