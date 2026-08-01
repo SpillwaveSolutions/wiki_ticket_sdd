@@ -26,11 +26,8 @@ CANON = ["bin/worklog", "bin/fold.py", "bin/ulid.py", "bin/render_roadmap.py",
          "bin/viz_mermaid.py",
          "bin/plan_capture.py", "bin/compact.py", "bin/adr.py",
          "bin/sync_dispatch.py", "bin/canonical.py", "bin/ia.py",
-<<<<<<< HEAD
-         "bin/ia_render.py", "bin/ia_graph.py", "bin/item_fields.py", "bin/session.py",
-=======
-         "bin/ia_render.py", "bin/ia_graph.py", "bin/wiki_flavor.py", "bin/session.py",
->>>>>>> origin/main
+         "bin/ia_render.py", "bin/ia_graph.py", "bin/item_fields.py",
+         "bin/wiki_flavor.py", "bin/session.py",
          "hooks/pre-commit", "hooks/pre-merge-commit", "hooks/commit-msg"]
 
 # Hooks the harness runs (not git hooks) live in a second directory and are
