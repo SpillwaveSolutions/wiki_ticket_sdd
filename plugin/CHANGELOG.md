@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.19.1 — 2026-08-01
+
+A corrective release for one thing shipped in 0.19.0. Upgrading from 0.19.0
+needs nothing beyond `/worklog:init`; the guidance in the 0.19.0 notes below
+still applies in full if you are coming from 0.18.0 or earlier.
+
+- **Fix**: locally-minted ULIDs are back to their **full 80 bits of entropy**.
+  0.19.0 overwrote five entropy characters with the short git hash to make
+  branches distinguishable. That was the wrong trade: an id is issued once and
+  never changes, and the only thing it must guarantee is that it does not
+  clash, so entropy is not currency to spend on metadata.
+- **New**: git provenance now rides on **every event** as its own `git` field
+  — the short HEAD sha the event was authored at. This traces strictly better
+  than the id ever could: an item's id is minted once, so it could only name
+  the branch the *item* was created on, whereas a per-event field names the
+  commit each individual event came from. Two agents in different worktrees or
+  branches still produce traceably different events, which was the original
+  goal.
+
+  Additive and safe in both directions: the fold ignores unknown event fields,
+  and `canonical_hash` picks only from the *item*, so no sync re-push follows.
+  Events written by 0.19.0 or earlier simply have no `git` field. Set
+  `WORKLOG_NO_GIT_PROVENANCE=1` to omit it.
+
+  **Ids minted by 0.19.0 remain valid and are not rewritten.** They are
+  well-formed ULIDs with slightly less entropy; there is nothing to migrate.
+- **Fix**: `worklog link-pr` resolves an id prefix before writing the sidecar.
+  It used to file `docs/.index/item/<prefix>.yml`, so the PR edge never
+  reached the graph and the release evidence gate still reported the item as
+  unlinked — with no error, because the write succeeded.
+
 ## 0.19.0 — 2026-08-01
 
 ### Upgrading from 0.18.0 or earlier
@@ -126,11 +157,6 @@ the field naturally at the next compaction.
   are not always cosmetic) and ADR-0007 (the watermark is per item) record
   the merge-safety reasoning end to end, including where an earlier record
   was wrong and why.
-- **Fix**: `worklog link-pr` resolves an id prefix before writing. It used to
-  file `docs/.index/item/<prefix>.yml`, so the PR edge never reached the graph
-  and the release evidence gate still reported the item as unlinked — with no
-  error, because the write succeeded. Same class already fixed for
-  `close`/`update`.
 - **Internal**: the plugin's harness-hook copies are now sync-checked
   (`HOOK_CANON`); that check immediately found real drift in
   `exit-plan-capture.sh`. Test suite 427 → 556.

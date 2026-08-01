@@ -2,6 +2,13 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Cut release v0.19.1
+`01KYZNRRNFBWHA8452CNFKH6XV` · status: todo
+- targets: release/v0.19.1
+
+### Restore full ULID entropy; record git provenance as its own event field
+`01KYZNG520D5E9AVN2X1C0BQ3E` · status: done
+
 ### link-pr and pr-sync accept an id prefix and write a phantom sidecar
 `01KYZFMZ5CF79DAYHMNKXSAZ5K` · status: done
 
