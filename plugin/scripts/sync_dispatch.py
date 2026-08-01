@@ -178,6 +178,11 @@ class Dispatcher:
         self.counts = dict.fromkeys(self.COUNT_KEYS, 0)
         self.drift = []
         self.collisions = {}
+        # #238: what this run replaced on live tickets, and what the one
+        # batched read to find that out cost.
+        self.overwrites = []
+        self.remote_before = {}
+        self.snapshot_cost = None
         self.state = self._load_state()
         # GONE bookkeeping (ADR-0004). Exit code 3 cannot separate a deleted
         # ticket from an unreachable project — both are 404 — so the guard is
@@ -444,6 +449,84 @@ class Dispatcher:
                          "%d items: %s (worklog unlink the wrong one first)"
                          % (key, len(owners), ", ".join(owners)))
 
+    # --- overwrite reporting (#238) ---
+
+    # What a reader would notice being replaced on a live ticket. Deliberately
+    # not every ingest field: `body` is long enough to bury the line that
+    # matters, and this exists to make damage visible at a glance.
+    OVERWRITE_FIELDS = ("title", "status", "priority", "milestone", "assignee")
+
+    def _keys_at_risk(self, items, caps, keys, blocked):
+        """Keys of tickets this run may overwrite.
+
+        Approximate on purpose. It does not re-derive the push loop's exact
+        scope rules -- over-fetching costs nothing (the read is batched) and
+        under-fetching only means one ticket reports no before/after. Cloning
+        that logic to be exact would put the delicate part in two places.
+        """
+        at_risk = []
+        for item in items:
+            ext = item.get("external") or {}
+            key = ext.get("key")
+            if (not key or item["id"] in blocked or item.get("_orphan")
+                    or not item.get("title")):
+                continue
+            h = canonical_hash(self.outbound(item, caps))
+            forced = bool(keys) and (item["id"] in keys or key in keys)
+            if self.is_dirty(item["id"], h, ext) or forced:
+                at_risk.append(str(key))
+        return at_risk
+
+    def snapshot_remote(self, caps, at_risk):
+        """{key: remote fields} as they stand BEFORE this run pushes.
+
+        ONE batched `pull --keys` for the whole run. The ticket that asked for
+        this flagged "one extra read per updated ticket" as a real cost worth
+        measuring -- so it is a read per RUN instead, and the run reports how
+        long it took and how many tickets it covered. The adapter contract
+        already accepts a key list, so no new verb was needed.
+
+        Degrades to {}: no pull support, a failed read, or unparseable output
+        all mean "report the fields without before/after", never a failed sync.
+        """
+        if not at_risk or "pull" not in caps["supports"]:
+            return {}
+        started = time.time()
+        p = self.run_adapter("pull", "--keys", ",".join(sorted(set(at_risk))))
+        self.snapshot_cost = (len(set(at_risk)), time.time() - started)
+        if p.returncode != 0:
+            self.note("could not read current ticket state (exit %d); "
+                      "overwrites reported without before/after" % p.returncode)
+            return {}
+        snap = {}
+        for raw in p.stdout.splitlines():
+            if not raw.strip():
+                continue
+            try:
+                line = json.loads(raw)
+            except json.JSONDecodeError:
+                continue
+            key = (line.get("external") or {}).get("key")
+            if key is not None:
+                snap[str(key)] = line
+        return snap
+
+    def note_overwrite(self, iid, key, payload_item):
+        """Record which live fields this push replaced, before -> after."""
+        before = self.remote_before.get(str(key))
+        if before is None:
+            return
+        changed = []
+        for f in self.OVERWRITE_FIELDS:
+            if f not in before:
+                continue
+            old, new = before.get(f), payload_item.get(f)
+            if old != new:
+                changed.append("%s: %r -> %r" % (f, old, new))
+        if changed:
+            self.overwrites.append("%s (%s): %s"
+                                   % (key, iid[:8], "; ".join(changed)))
+
     def push_items(self, items, caps, keys):
         if keys:
             self.refuse_ambiguous_keys(items, keys)
@@ -454,6 +537,10 @@ class Dispatcher:
         if self.collisions:
             self.report_collisions(items)
         blocked = {i for ids in self.collisions.values() for i in ids}
+        # Read the live tickets BEFORE anything is pushed -- after the push
+        # there is no "before" left to report (#238).
+        self.remote_before = self.snapshot_remote(
+            caps, self._keys_at_risk(items, caps, keys, blocked))
         for item in items:
             iid = item["id"]
             ext = item.get("external") or {}
@@ -553,6 +640,9 @@ class Dispatcher:
                             "item": payload_item})
                         if not self.handle_exit(item, p):
                             continue
+                        # This is the path that marked the reported ticket
+                        # Done -- the one most worth naming out loud.
+                        self.note_overwrite(iid, key, payload_item)
                 p = self.run_adapter("close", str(key),
                                      item.get("resolution") or item["status"])
                 if self.handle_exit(item, p):
@@ -567,6 +657,10 @@ class Dispatcher:
             if self.dry_run:
                 print("would %s %s%s" % (op, iid[:8],
                                          " -> %s" % ext["key"] if ext.get("key") else ""))
+                # The most useful place for this: see what would be replaced
+                # while it is still hypothetical.
+                if op == "update":
+                    self.note_overwrite(iid, ext["key"], payload_item)
                 continue
             p = self.call_push(payload)
             if not self.handle_exit(item, p):
@@ -586,6 +680,7 @@ class Dispatcher:
                 self.counts["created"] += 1
             else:
                 self.counts["updated"] += 1
+                self.note_overwrite(iid, pushed_key, payload_item)
             self.record_push(iid, h, pushed_key)
         # The push loop is over, so the abort can no longer fire: whatever is
         # still buffered is what this run really means to record.
@@ -710,6 +805,16 @@ class Dispatcher:
     def report(self):
         print("sync report: " + " ".join("%s=%d" % (k, self.counts[k])
                                          for k in self.COUNT_KEYS))
+        # Before drift: "updated 2" is not the line that catches damage --
+        # naming the field that changed on a live ticket is (#238).
+        if self.overwrites:
+            print("overwrote live ticket fields:")
+            for line in self.overwrites:
+                print("  - " + line)
+        if self.snapshot_cost:
+            n, secs = self.snapshot_cost
+            print("  (read %d ticket%s in %.2fs to report the above)"
+                  % (n, "" if n == 1 else "s", secs))
         if self.drift:
             print("drift:")
             for line in self.drift:
