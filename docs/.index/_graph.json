@@ -3787,6 +3787,12 @@
    "title": "No custom merge driver for the event log",
    "truth_state": "current"
   },
+  "adr/0006-resurrected-events-are-not-always-cosmet": {
+   "doc_type": "adr",
+   "source": "docs/adr/0006-resurrected-events-are-not-always-cosmet.md",
+   "title": "Resurrected events are not always cosmetic",
+   "truth_state": "current"
+  },
   "cli-reference": {
    "doc_type": "guide",
    "source": "docs/user_guide/cli-reference.md",
@@ -5332,7 +5338,7 @@
   },
   "item/01KYWGJD1QCQRM6V6S0MWN5SCW": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Merge guard's printed remedy cannot be run from the state it creates"
   },
   "item/01KYWGM3KPNQNSWV03FRG23ADB": {
@@ -5354,6 +5360,11 @@
    "doc_type": "item",
    "status": "cancelled",
    "title": "Fix the thing from #98"
+  },
+  "item/01KYZ5CY9PS60BYH1E07DF5C9P": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Compaction watermark can silently drop branch-local events the snapshot never folded"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
