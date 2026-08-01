@@ -2,8 +2,14 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Stamp generated ULIDs with the short git hash so concurrent branches diverge
+`01KYZER08G7NSQ6CFQ9QWFZFTJ` · status: done
+
+### Conflict markers can reach a commit: the merge exemption plus unparsed tests
+`01KYZEC0C1MGQXQSH61ZPDD0YZ` · status: done
+
 ### Compaction watermark can silently drop branch-local events the snapshot never folded
-`01KYZ5CY9PS60BYH1E07DF5C9P` · status: todo
+`01KYZ5CY9PS60BYH1E07DF5C9P` · status: done
 - references: [github#284](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/284)
 
 ### Fix the thing from #98

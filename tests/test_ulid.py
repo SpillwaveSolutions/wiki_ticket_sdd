@@ -102,3 +102,54 @@ class TestTheBugThisPrevents(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TestGitStamp(unittest.TestCase):
+    """The short git hash is stamped into locally-minted ids so two agents in
+    different worktrees or branches mint visibly different ones (01KYZER08G)."""
+
+    def test_stamp_replaces_entropy_and_keeps_the_width(self):
+        out = ulid.new(git="ABCDE")
+        self.assertEqual(len(out), 26)
+        self.assertEqual(out[10:15], "ABCDE")
+
+    def test_time_prefix_is_untouched(self):
+        stamped = ulid.new(timestamp_ms=1785000000000, git="ABCDE")
+        self.assertEqual(ulid.timestamp_ms(stamped), 1785000000000)
+
+    def test_sort_is_still_time_sort(self):
+        early = ulid.new(timestamp_ms=1785000000000, git="ZZZZZ")
+        late = ulid.new(timestamp_ms=1785000001000, git="00000")
+        self.assertLess(early, late,
+                        "the stamp must never outrank the timestamp")
+
+    def test_different_branches_produce_different_ids(self):
+        a = ulid.new(timestamp_ms=1785000000000, git="AAAAA")
+        b = ulid.new(timestamp_ms=1785000000000, git="BBBBB")
+        self.assertNotEqual(a[10:15], b[10:15])
+
+    def test_entropy_still_varies_within_one_branch(self):
+        """55 bits remain; two ids in the same ms must not collide."""
+        ids = {ulid.new(timestamp_ms=1785000000000, git="AAAAA")
+               for _ in range(200)}
+        self.assertEqual(len(ids), 200)
+
+    def test_no_stamp_leaves_a_plain_ulid(self):
+        out = ulid.new(git="")
+        self.assertEqual(len(out), 26)
+
+    def test_stamp_is_valid_crockford(self):
+        """Git hashes are hex; 0-9 and A-F are all Crockford, so uppercasing
+        is the whole conversion. A stamp that wasn't would make ids
+        unparseable."""
+        for ch in ulid.git_stamp():
+            self.assertIn(ch, ulid.CROCKFORD)
+
+    def test_deterministic_ids_are_never_stamped(self):
+        """Spec §10.2: two machines ingesting the same remote change must
+        produce byte-identical ids, and a per-clone git hash is the one thing
+        guaranteed to differ."""
+        a = ulid.deterministic("jira", "PROJ-1", "rev9", 1785000000000)
+        b = ulid.deterministic("jira", "PROJ-1", "rev9", 1785000000000)
+        self.assertEqual(a, b)
+        self.assertNotEqual(a[10:15], ulid.git_stamp() or None)

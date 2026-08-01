@@ -3803,6 +3803,12 @@
    "title": "Resurrected events are not always cosmetic",
    "truth_state": "current"
   },
+  "adr/0007-the-compaction-watermark-is-per-item": {
+   "doc_type": "adr",
+   "source": "docs/adr/0007-the-compaction-watermark-is-per-item.md",
+   "title": "The compaction watermark is per item",
+   "truth_state": "current"
+  },
   "cli-reference": {
    "doc_type": "guide",
    "source": "docs/user_guide/cli-reference.md",
@@ -5373,8 +5379,18 @@
   },
   "item/01KYZ5CY9PS60BYH1E07DF5C9P": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Compaction watermark can silently drop branch-local events the snapshot never folded"
+  },
+  "item/01KYZEC0C1MGQXQSH61ZPDD0YZ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Conflict markers can reach a commit: the merge exemption plus unparsed tests"
+  },
+  "item/01KYZER08G7NSQ6CFQ9QWFZFTJ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Stamp generated ULIDs with the short git hash so concurrent branches diverge"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

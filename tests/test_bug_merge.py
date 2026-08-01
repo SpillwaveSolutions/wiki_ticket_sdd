@@ -267,18 +267,25 @@ class TestSubWatermarkEventsAreLost(GitRepo):
         self._checkout("feature")
         return self._merge(self.trunk)
 
-    def test_branch_events_below_the_watermark_are_dropped_by_the_fold(self):
-        """The bug itself: this is data loss, not lost disk-space savings."""
+    def test_branch_events_below_the_watermark_survive_the_fold(self):
+        """#284: this used to assert the OPPOSITE, and said so -- "if this now
+        passes, the watermark rule was fixed and this test should become the
+        regression test for that fix". It was, so it is.
+
+        BRANCHWORK is created on the branch and never folded by any
+        compaction, so no snapshot carries its state. The old global watermark
+        dropped it anyway because it sorted below a mark computed from
+        unrelated items. The per-item rule keeps it."""
         merged = self._fork_compact_merge()
-        self.assertNotEqual(merged.returncode, 0, "guard should block this merge")
+        self.assertNotEqual(merged.returncode, 0, "guard should still block")
 
         items = fold([self.todo, self.done]).items
         self.assertIn("MAINLATER", items)      # main's event survived
-        self.assertNotIn(
-            "BRANCHWORK", items,
-            "expected the branch's own event to be silently dropped -- if this "
-            "now passes, the watermark rule was fixed and this test should "
-            "become the regression test for that fix")
+        self.assertIn("BRANCHWORK", items,
+                      "the branch's own work must survive the merge -- an item "
+                      "with no snapshot has nothing that folded its events")
+        self.assertEqual(items["BRANCHWORK"].get("status"), "in_progress")
+        self.assertEqual(items["BRANCHWORK"].get("title"), "branch work")
 
     def test_merge_rescue_restores_them_and_clears_the_guard(self):
         merged = self._fork_compact_merge()
@@ -319,3 +326,56 @@ class TestSubWatermarkEventsAreLost(GitRepo):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TestConflictMarkerGuard(GitRepo):
+    """01KYZEC0C1: a merge that left conflict markers in a file committed
+    cleanly, because commit-msg exempts merge commits and nothing parsed
+    tests/ or plugin/. Found only by running the suite."""
+
+    WIRE_HOOKS = True
+
+    def _stage(self, name, body):
+        path = os.path.join(self.d, name)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as fh:
+            fh.write(body)
+        env = dict(os.environ, WORKLOG_SKIP_BRANCH_GUARD="1")
+        sh(self.d, "git", "add", "-A", env=env)
+        return env
+
+    def _commit(self, msg="x", env=None):
+        env = env or dict(os.environ, WORKLOG_SKIP_BRANCH_GUARD="1")
+        return sh(self.d, "git", "commit", "-q", "-m", msg, env=env, check=False)
+
+    def test_conflict_markers_block_the_commit(self):
+        env = self._stage("tests/thing.py", "a = 1\n<<<<<<< HEAD\nb = 2\n"
+                                            "=======\nb = 3\n>>>>>>> other\n")
+        p = self._commit("tracked 01A0001", env)
+        self.assertNotEqual(p.returncode, 0, "commit should have been blocked")
+        self.assertIn("conflict markers", p.stdout + p.stderr)
+
+    def test_a_resolved_file_commits_normally(self):
+        env = self._stage("tests/thing.py", "a = 1\nb = 3\n")
+        p = self._commit("tracked 01A0001", env)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+
+    def test_prose_about_conflict_markers_is_not_a_conflict(self):
+        """Docs explaining the markers must stay committable — the check is
+        anchored to line starts and the exact 7-character run."""
+        env = self._stage("docs/notes.md",
+                          "Resolve a `<<<<<<<` marker by picking a side.\n"
+                          "Indented example:\n    <<<<<<< HEAD\n")
+        p = self._commit("tracked 01A0001", env)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+
+    def test_the_guard_is_not_exempted_for_merges(self):
+        """The whole point: the merge path is where this happens, and it is
+        the path every other check exempts."""
+        env = self._stage("tests/thing.py",
+                          "<<<<<<< HEAD\nb = 2\n=======\nb = 3\n>>>>>>> x\n")
+        env["WORKLOG_MERGE_COMMIT"] = "1"          # what a real merge sets
+        p = self._commit("tracked 01A0001", env)
+        self.assertNotEqual(p.returncode, 0,
+                            "a merge commit must not be exempt from this")
+        self.assertIn("conflict markers", p.stdout + p.stderr)

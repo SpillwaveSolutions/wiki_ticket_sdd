@@ -33,6 +33,24 @@ if [ -z "${WORKLOG_SKIP_BRANCH_GUARD:-}" ] && \
   esac
 fi
 
+# Conflict markers, in ANY staged file, with no merge exemption (01KYZEC0C1).
+# A merge is exactly when this happens: commit-msg exempts merge commits from
+# its item-reference rule and nothing else parses tests/ or plugin/, so a
+# resolution that missed a hunk committed cleanly and was only found by
+# running the suite. Staged content only -- an unstaged conflict elsewhere in
+# the tree is not this commit's problem.
+conflicted=$(git diff --cached --name-only --diff-filter=ACM |
+             while IFS= read -r f; do
+               [ -f "$f" ] || continue
+               if git show ":$f" 2>/dev/null |
+                  grep -qE '^(<{7}|={7}|>{7})( |$)'; then echo "$f"; fi
+             done)
+if [ -n "$conflicted" ]; then
+  fail "unresolved conflict markers in staged files:
+$(echo "$conflicted" | sed 's/^/  /')
+Resolve them, re-stage, and commit again."
+fi
+
 for f in .work/todo.jsonl .work/done.jsonl; do
   [ -f "$f" ] || continue
 

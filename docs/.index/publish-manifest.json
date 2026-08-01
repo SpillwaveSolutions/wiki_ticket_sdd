@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "77cc821acfcf",
+   "render_hash": "8cf5fe6f8eeb",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "b86259de7426",
+   "render_hash": "7e6454b844d5",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3174,11 +3174,31 @@
    "frozen": false,
    "page_name": "Ticket-01KYZ5CY9PS60BYH1E07DF5C9P",
    "render": "as-is",
-   "render_hash": "7c259637641f",
+   "render_hash": "846b002e2c06",
    "source": "docs/.index/rendered/tickets/01KYZ5CY9PS60BYH1E07DF5C9P.md",
    "title": "Compaction watermark can silently drop branch-local events the snapshot never folded",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYZ5CY9PS60BYH1E07DF5C9P"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYZEC0C1MGQXQSH61ZPDD0YZ",
+   "render": "as-is",
+   "render_hash": "96b34911ae18",
+   "source": "docs/.index/rendered/tickets/01KYZEC0C1MGQXQSH61ZPDD0YZ.md",
+   "title": "Conflict markers can reach a commit: the merge exemption plus unparsed tests",
+   "truth_state": "done",
+   "wiki_key": "item/01KYZEC0C1MGQXQSH61ZPDD0YZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KYZER08G7NSQ6CFQ9QWFZFTJ",
+   "render": "as-is",
+   "render_hash": "8c0f90fe786b",
+   "source": "docs/.index/rendered/tickets/01KYZER08G7NSQ6CFQ9QWFZFTJ.md",
+   "title": "Stamp generated ULIDs with the short git hash so concurrent branches diverge",
+   "truth_state": "done",
+   "wiki_key": "item/01KYZER08G7NSQ6CFQ9QWFZFTJ"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -3245,6 +3265,17 @@
    "title": "Resurrected events are not always cosmetic",
    "truth_state": "current",
    "wiki_key": "adr/0006-resurrected-events-are-not-always-cosmet"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "ADR-0007-the-compaction-watermark-is-per-item",
+   "render": "doc+banner",
+   "render_hash": "5945ba91dab0",
+   "source": "docs/adr/0007-the-compaction-watermark-is-per-item.md",
+   "title": "The compaction watermark is per item",
+   "truth_state": "current",
+   "wiki_key": "adr/0007-the-compaction-watermark-is-per-item"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -3753,11 +3784,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T18:56:44Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T20:07:57Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "c0e1cb36bef8",
+   "render_hash": "636dc6e3eb76",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -4029,7 +4060,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "2cc64112587a",
+  "render_hash": "0f6364797ef3",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

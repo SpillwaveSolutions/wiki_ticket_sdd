@@ -12,6 +12,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 | [[ADR-0004-clearing-a-dead-ticket-link-stays-a-huma]] Clearing a dead ticket link stays a human action | accepted | 2026-07-31 | — |
 | [[ADR-0005-no-custom-merge-driver-for-the-event-log]] No custom merge driver for the event log | accepted | 2026-07-31 | — |
 | [[ADR-0006-resurrected-events-are-not-always-cosmet]] Resurrected events are not always cosmetic | accepted | 2026-08-01 | — |
+| [[ADR-0007-the-compaction-watermark-is-per-item]] The compaction watermark is per item | accepted | 2026-08-01 | — |
 
 ## Plans
 
