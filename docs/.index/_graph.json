@@ -5228,7 +5228,7 @@
   },
   "item/01KYNHEVDSD4BTASXCTV88Q80Q": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Sync should say which ticket fields it is about to overwrite"
   },
   "item/01KYNHEVJNZTGEJ2EW5A9C9A7C": {
@@ -5353,7 +5353,7 @@
   },
   "item/01KYWGM3W958F3QK4HB52X1Q1X": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "worklog find: search the generated inventory and graph from the CLI"
   },
   "item/01KYWJ6YGQMMHQ58G9CNAF6F00": {
