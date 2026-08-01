@@ -42,11 +42,22 @@ def _public(item):
     return {k: v for k, v in item.items() if not k.startswith("_")}
 
 
-def _snapshot(item):
-    # Fresh ULIDs sort after every past ev, so these outsort the watermark.
-    return {"ev": ulid.new(), "ts": _now(), "actor": "compactor",
+def _snapshot(item, through=None):
+    """A snapshot of one item's folded state.
+
+    `through` is the highest ev this compaction actually folded FOR THIS
+    ITEM, and it is what the fold drops against (#284). A global mark cannot
+    do that job: it is the max over the whole log, so it also covers events
+    from branches this compaction never saw, and dropping those loses work.
+    Kept top-level rather than inside `set`, so it never becomes item state
+    and never reaches the verify comparison.
+    """
+    snap = {"ev": ulid.new(), "ts": _now(), "actor": "compactor",
             "item": item["id"], "op": "snapshot",
             "set": {k: v for k, v in _public(item).items() if k != "id"}}
+    if through:
+        snap["through"] = through
+    return snap
 
 
 def _compact_line(watermark):
@@ -141,6 +152,18 @@ def compact(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
 
     before = fold([todo_path, done_path])              # step 1: full history
 
+    # Highest ev this run actually folded, PER ITEM (#284). Taken from the raw
+    # input lines, not from the fold, because it must describe what was read
+    # rather than what survived.
+    per_item = {}
+    for path in (todo_path, done_path):
+        for _line, e in _raw_lines(path):
+            if e is None or e.get("op") == "compact":
+                continue
+            iid, ev = e.get("item"), e.get("ev")
+            if iid and ev and ev > per_item.get(iid, ""):
+                per_item[iid] = ev
+
     open_items, closed_items = [], []                  # step 3: partition
     for item in sorted(before.items.values(), key=lambda i: i["id"]):
         # Anything not positively closed (incl. orphans) stays open: never
@@ -150,7 +173,7 @@ def compact(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
     open_ids = {i["id"] for i in open_items}
 
     # step 4: new todo = open snapshots + watermark
-    todo_text = _dump([_snapshot(i) for i in open_items]
+    todo_text = _dump([_snapshot(i, per_item.get(i["id"])) for i in open_items]
                       + [_compact_line(watermark)])
 
     # steps 5+6: new done = old lines minus open items, plus snapshots for
@@ -166,7 +189,7 @@ def compact(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
         if parsed.get("item") in open_ids:
             continue  # stale snapshot/event for a reopened item (step 6)
         kept.append(line + "\n")
-    fresh = [_snapshot(i) for i in closed_items
+    fresh = [_snapshot(i, per_item.get(i["id"])) for i in closed_items
              if done_state.get(i["id"]) != _public(i)]
     done_text = "".join(kept) + _dump(fresh + [_compact_line(watermark)])
 
@@ -202,23 +225,46 @@ def check_resurrection(todo_path, done_path):
     pre-compaction size, silently. Flag any such line instead of losing the
     size win with no warning.
 
+    Since #284 this asks the narrower, truthful question: would the fold
+    actually DROP this line? An event is only dropped now if its own item has
+    a snapshot claiming to have folded it, so a resurrected line for an item
+    with no snapshot is no longer flagged -- it survives, and warning about it
+    would be crying wolf. What remains flagged is the real hygiene loss: lines
+    a compaction genuinely removed, back in the file, making it grow to its
+    pre-compaction size again.
+
     Returns a list of problem strings; empty means clean."""
     raw = {p: _raw_lines(p) for p in (todo_path, done_path)}
     wm = _merge_watermark(raw)
     if wm is None:
         return []  # never compacted -- nothing to resurrect
+
+    covered = {}
+    for lines in raw.values():
+        for _line, e in lines:
+            if e is None or e.get("op") != "snapshot":
+                continue
+            through = e.get("through") or wm
+            if through > covered.get(e.get("item"), ""):
+                covered[e.get("item")] = through
+
     problems = []
     for path, lines in raw.items():
         bad = [line for line, e in lines
                if e is not None and e.get("op") not in ("compact", "snapshot")
-               and e.get("ev", "") <= wm]
+               and e.get("item") in covered
+               and e.get("ev", "") <= covered[e.get("item")]]
         if bad:
             problems.append(
-                f"{path}: {len(bad)} event(s) at/below compact watermark {wm} "
-                f"are back (e.g. {bad[0]!r}) -- a union merge resurrected lines "
-                f"below a compaction watermark. The fold DROPS these on read: "
-                f"any one of them that this branch created (rather than one the "
-                f"compaction already folded) is work that silently disappears. "
+                f"{path}: {len(bad)} event(s) at/below their item's compact "
+                f"watermark are back (e.g. {bad[0]!r}) -- a union merge "
+                f"resurrected lines a compaction already folded into a "
+                f"snapshot. Keeping or dropping them changes no state -- the "
+                f"snapshot sorts above them and replaces state entirely -- so "
+                f"the file has merely grown back to its pre-compaction size. "
+                f"That same ordering is why any of these THIS BRANCH authored "
+                f"would be overwritten by the snapshot: merge-rescue re-emits "
+                f"them above it, which is the only thing that preserves them. "
                 f"Run: worklog merge-rescue")
     return problems
 

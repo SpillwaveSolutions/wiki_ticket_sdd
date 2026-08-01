@@ -68,6 +68,17 @@
     "url": null,
     "wiki_key": "adr/0006-resurrected-events-are-not-always-cosmet"
   },
+  "adr/0007-the-compaction-watermark-is-per-item": {
+    "canonical_key": "adr/0007-the-compaction-watermark-is-per-item",
+    "doc_type": "adr",
+    "rev": null,
+    "source": "docs/adr/0007-the-compaction-watermark-is-per-item.md",
+    "source_hash": null,
+    "title": "ADR-0007-the-compaction-watermark-is-per-item",
+    "truth_state": "current",
+    "url": null,
+    "wiki_key": "adr/0007-the-compaction-watermark-is-per-item"
+  },
   "cli-reference": {
     "aliases": [
       "cli-reference"

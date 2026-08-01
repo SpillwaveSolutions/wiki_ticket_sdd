@@ -179,23 +179,91 @@ def dedupe_and_sort(events: List[Dict[str, Any]], result: FoldResult) -> List[Di
             result.deduped += 1
             continue
         seen[key] = ev
-    return sorted(seen.values(), key=lambda e: e["ev"])
+    return sorted(seen.values(), key=position)
+
+
+def position(ev: Dict[str, Any]) -> Tuple[str, int]:
+    """Where an event applies in the fold. Identity is still `ev`; this is
+    only ordering.
+
+    A snapshot applies where the events it folded were -- at its `through` --
+    not at the moment the compactor happened to write it (#284). The
+    compactor mints the snapshot's own `ev` at compaction time, so it sorts
+    above everything; a branch that closed an item before that compaction ran
+    would then have its close applied FIRST and immediately overwritten by
+    the snapshot, because a snapshot replaces state entirely. The work
+    vanished even though the event was still in the log.
+
+    Ordering by `through` puts the snapshot back where it belongs: after the
+    events it folded, before anything that happened later on any branch.
+
+    The second element keeps a snapshot ahead of a same-positioned ordinary
+    event, so the later event wins rather than being replaced. Legacy
+    snapshots carry no `through` and fall back to their own `ev`, which is
+    exactly how they sorted before.
+    """
+    if ev.get("op") == "snapshot" and ev.get("through"):
+        return (ev["through"], 0)
+    return (ev["ev"], 1)
 
 
 def apply_watermark(events: List[Dict[str, Any]], result: FoldResult) -> List[Dict[str, Any]]:
     """Step 4: drop everything the compactor already folded into a snapshot.
 
     Snapshots are exempt -- they carry the state those events produced.
+
+    The rule is PER ITEM, and that is the whole point (#284). The global
+    watermark this used to apply was `max_ev` over the log the compaction
+    read -- a TIME marker being used as a CONTENT marker. An event created on
+    a branch before a compaction ran on main was never folded into any
+    snapshot, yet still sorted below that global mark, so merging the branch
+    back silently discarded it. Reproduced deterministically; the live
+    2026-07-31 incident carried three such events and they survived only
+    because the merge guard blocked and a human re-applied them by hand.
+
+    Two rules replace it:
+
+      - An item with NO snapshot never has events dropped. Nothing folded
+        them, so nothing carries their state. This is compaction's own
+        "never drop data" principle (spec 7 step 3) applied on the read side.
+      - An item WITH a snapshot drops only its own events at/below that
+        snapshot's `through` -- the highest ev the compactor actually folded
+        for that item.
+
+    Legacy logs whose snapshots predate `through` fall back to the global
+    mark, so an un-upgraded log still folds exactly as it did before. The
+    no-snapshot rule applies to them too, because it can only ever restore
+    data.
     """
     marks = [e.get("through") for e in events if e["op"] == "compact" and e.get("through")]
-    if not marks:
-        return [e for e in events if e["op"] != "compact"]
-    result.watermark = max(marks)
-    return [
-        e
-        for e in events
-        if e["op"] != "compact" and (e["op"] == "snapshot" or e["ev"] > result.watermark)
-    ]
+    result.watermark = max(marks) if marks else None
+
+    # item -> highest ev its snapshots claim to have folded. A union merge can
+    # leave two snapshots for one item; the later compaction's is the truth.
+    covered: Dict[str, str] = {}
+    for e in events:
+        if e["op"] != "snapshot":
+            continue
+        through = e.get("through")
+        if through and through > covered.get(e["item"], ""):
+            covered[e["item"]] = through
+    snapshotted = {e["item"] for e in events if e["op"] == "snapshot"}
+
+    kept = []
+    for e in events:
+        if e["op"] == "compact":
+            continue
+        if e["op"] == "snapshot":
+            kept.append(e)
+            continue
+        iid = e.get("item")
+        if iid not in snapshotted:
+            kept.append(e)          # nothing folded it; never drop it
+            continue
+        limit = covered.get(iid) or result.watermark
+        if limit is None or e["ev"] > limit:
+            kept.append(e)
+    return kept
 
 
 def _apply_mutations(item: Dict[str, Any], ev: Dict[str, Any]) -> None:

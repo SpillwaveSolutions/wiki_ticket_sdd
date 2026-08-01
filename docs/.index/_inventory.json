@@ -124,6 +124,26 @@
    "wiki_key": "adr/0006-resurrected-events-are-not-always-cosmet"
   },
   {
+   "canonical_key": "adr/0007-the-compaction-watermark-is-per-item",
+   "date": "2026-08-01",
+   "deciders": [
+    "rick",
+    "claude"
+   ],
+   "doc_type": "adr",
+   "id": 7,
+   "slug": "the-compaction-watermark-is-per-item",
+   "source": "docs/adr/0007-the-compaction-watermark-is-per-item.md",
+   "status": "accepted",
+   "tags": [
+    "core",
+    "git"
+   ],
+   "title": "The compaction watermark is per item",
+   "truth_state": "current",
+   "wiki_key": "adr/0007-the-compaction-watermark-is-per-item"
+  },
+  {
    "aliases": [
     "cli-reference"
    ],
@@ -1033,10 +1053,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-08-01T18:56:44Z",
+   "generated_at": "2026-08-01T20:07:57Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "672f6977",
+   "source_hash": "6f46e6b7",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
