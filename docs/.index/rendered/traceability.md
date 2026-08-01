@@ -153,7 +153,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#237](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/237)
 
 ### Concurrent sessions in one working directory corrupt each other's work
-`01KYNHEV5GCR1MDNECAXFT0GK2` · status: todo
+`01KYNHEV5GCR1MDNECAXFT0GK2` · status: done
 - references: [github#236](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/236)
 
 ### GitHub adapter can file duplicate issues when rate-limited mid-create

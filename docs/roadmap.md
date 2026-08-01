@@ -2,7 +2,7 @@
 wiki_key: roadmap
 doc_type: roadmap
 truth_state: current
-source_hash: 32e90876
+source_hash: 49ce8346
 generated_at: 2026-08-01T17:52:39Z
 ---
 
@@ -13,7 +13,7 @@ generated_at: 2026-08-01T17:52:39Z
 
 # Roadmap
 
-_1 epic(s) in flight, 6 open item(s), 0 blocked, 0 unclassified._
+_1 epic(s) in flight, 5 open item(s), 0 blocked, 0 unclassified._
 
 ## Now
 
@@ -27,7 +27,6 @@ _Nothing here._
 |---|---|---|---|---|---|
 | 01KYZ5CY | Compaction watermark can silently drop branch-local events the snapshot never folded | task | P1 | todo | — |
 | [136](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/136) | Auto-draft the release CHANGELOG unreleased section from git log | task | P2 | todo | — |
-| [236](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/236) | Concurrent sessions in one working directory corrupt each other's work | task | P2 | todo | — |
 
 ## Later
 
@@ -53,7 +52,6 @@ What is left of the IA content model after Phase 5's gate promotion shipped. The
 graph TD
     01KY5NE0ZYGBWG44N0KPEBFCZ8["📦 Configurable work-item field m"]
     01KYAC0AC01R4C6W7YY1X8NVRV["📦 Auto-draft the release CHANGEL"]
-    01KYNHEV5GCR1MDNECAXFT0GK2["🔧 Concurrent sessions in one wor"]
     01KYWGM3KPNQNSWV03FRG23ADB["📦 IA reader plane platform-porta"]
     01KYWGM3R13Q33YZ3PJA3V7QMD["📦 Extract a render adapter seam"]
     01KYWGM3W958F3QK4HB52X1Q1X["📦 worklog find search the genera"]
@@ -61,7 +59,7 @@ graph TD
     01KYWGM3KPNQNSWV03FRG23ADB --> 01KYWGM3R13Q33YZ3PJA3V7QMD
     01KYWGM3KPNQNSWV03FRG23ADB --> 01KYWGM3W958F3QK4HB52X1Q1X
     classDef todo fill:#f4f4f4,stroke:#999999
-    class 01KY5NE0ZYGBWG44N0KPEBFCZ8,01KYAC0AC01R4C6W7YY1X8NVRV,01KYNHEV5GCR1MDNECAXFT0GK2,01KYWGM3KPNQNSWV03FRG23ADB,01KYWGM3R13Q33YZ3PJA3V7QMD,01KYWGM3W958F3QK4HB52X1Q1X,01KYZ5CY9PS60BYH1E07DF5C9P todo
+    class 01KY5NE0ZYGBWG44N0KPEBFCZ8,01KYAC0AC01R4C6W7YY1X8NVRV,01KYWGM3KPNQNSWV03FRG23ADB,01KYWGM3R13Q33YZ3PJA3V7QMD,01KYWGM3W958F3QK4HB52X1Q1X,01KYZ5CY9PS60BYH1E07DF5C9P todo
 ```
 
 ### Hierarchy
@@ -70,7 +68,6 @@ graph TD
 graph TD
     01KY5NE0ZYGBWG44N0KPEBFCZ8["📦 Configurable work-item field m"]
     01KYAC0AC01R4C6W7YY1X8NVRV["📦 Auto-draft the release CHANGEL"]
-    01KYNHEV5GCR1MDNECAXFT0GK2["🔧 Concurrent sessions in one wor"]
     01KYWGM3KPNQNSWV03FRG23ADB["📦 IA reader plane platform-porta"]
     01KYWGM3R13Q33YZ3PJA3V7QMD["📦 Extract a render adapter seam"]
     01KYWGM3W958F3QK4HB52X1Q1X["📦 worklog find search the genera"]
