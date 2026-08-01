@@ -52,3 +52,11 @@ classifier:
 # NOT configurable: the body-size cap (section 8.3) is derived from PIPE_BUF,
 # not chosen. It lives in code as a constant. A knob whose only valid value is
 # the default is a trap.
+
+# Optional item fields (#108). `worklog fields` prints these with their
+# meanings. Core fields are fixed and not listed here. Defaults: estimate,
+# owner, risk, acceptance_criteria on; value, confidence, due_date, severity
+# off.
+work_item_fields:
+  risk: on
+  owner: on

@@ -12,7 +12,7 @@ cd "$(git rev-parse --show-toplevel)"
 removed=()
 
 for f in bin/worklog bin/fold.py bin/ulid.py bin/render_roadmap.py bin/viz_mermaid.py bin/plan_capture.py bin/compact.py bin/adr.py \
-         bin/ia.py bin/ia_render.py bin/ia_graph.py bin/canonical.py bin/sync_dispatch.py \
+         bin/ia.py bin/ia_render.py bin/ia_graph.py bin/canonical.py bin/sync_dispatch.py bin/item_fields.py \
          bin/session.py; do
   if [ -f "$f" ]; then
     rm "$f"

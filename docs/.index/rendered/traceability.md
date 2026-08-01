@@ -826,8 +826,9 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - references: [github#107](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/107)
 
 ### Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config
-`01KY5NE0ZYGBWG44N0KPEBFCZ8` · status: todo
+`01KY5NE0ZYGBWG44N0KPEBFCZ8` · status: done
 - references: [github#108](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/108)
+- produced-by: [[Plan-configurable-item-fields]]
 
 ### issue-description skill + rich ticket bodies in ticket-sync (summary/context/outcome/scope/acceptance/traceability from the item graph)
 `01KY5N7DF2YMR9E11G4W3HF6PY` · status: done

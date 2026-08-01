@@ -17,6 +17,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 
 | Plan | Lifecycle | Truth | Date |
 |---|---|---|---|
+| [[Plan-configurable-item-fields]] Configurable optional fields on the work item | completed | current | 2026-08-01 |
 | [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]] Close both P1 epics, settle the merge-strategy and GONE questions | completed | current | 2026-07-30 |
 | [[Plan-one-owner-per-external-key]] One local owner per remote ticket (#226) | completed | current | 2026-07-28 |
 | [[Plan-post-v017-drift-and-prefix-resolution]] Clear post-v0.17.0 drift and fix the prefix-ULID log corruption | completed | current | 2026-07-27 |
