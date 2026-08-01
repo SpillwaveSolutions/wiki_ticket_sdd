@@ -4,6 +4,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Compaction watermark can silently drop branch-local events the snapshot never folded
 `01KYZ5CY9PS60BYH1E07DF5C9P` · status: todo
+- references: [github#284](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/284)
 
 ### Fix the thing from #98
 `01KYWJ6YGQMMHQ58G9CNAF6F00` · status: cancelled
