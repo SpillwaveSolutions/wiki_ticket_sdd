@@ -1,6 +1,6 @@
 # IA reader plane: platform-portable rendering and document search
 
-`01KYWGM3KPNQNSWV03FRG23ADB` · epic/feature · **open**
+`01KYWGM3KPNQNSWV03FRG23ADB` · epic/feature · **done**
 
 What is left of the IA content model after Phase 5's gate promotion shipped.
 

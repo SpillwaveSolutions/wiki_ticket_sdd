@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "f727548557b3",
+   "render_hash": "77cc821acfcf",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "27e9f212c595",
+   "render_hash": "a56927335b57",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -1854,10 +1854,10 @@
    "frozen": false,
    "page_name": "Ticket-01KY5NE0ZYGBWG44N0KPEBFCZ8",
    "render": "as-is",
-   "render_hash": "e7532788645a",
+   "render_hash": "dfd106d89dfa",
    "source": "docs/.index/rendered/tickets/01KY5NE0ZYGBWG44N0KPEBFCZ8.md",
    "title": "Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KY5NE0ZYGBWG44N0KPEBFCZ8"
   },
   {
@@ -3134,10 +3134,10 @@
    "frozen": false,
    "page_name": "Ticket-01KYWGM3KPNQNSWV03FRG23ADB",
    "render": "as-is",
-   "render_hash": "13812a638688",
+   "render_hash": "df5808328dd7",
    "source": "docs/.index/rendered/tickets/01KYWGM3KPNQNSWV03FRG23ADB.md",
    "title": "IA reader plane: platform-portable rendering and document search",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KYWGM3KPNQNSWV03FRG23ADB"
   },
   {
@@ -3645,6 +3645,17 @@
   {
    "banner": "> **Current** \u2014 the current plan; plans are frozen once written, a changed design gets a new plan.",
    "frozen": true,
+   "page_name": "Plan-configurable-item-fields",
+   "render": "doc+banner",
+   "render_hash": "c3364a23d5fb",
+   "source": "docs/plans/2026-08-01-configurable-item-fields.md",
+   "title": "Configurable optional fields on the work item",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-08-01-configurable-item-fields"
+  },
+  {
+   "banner": "> **Current** \u2014 the current plan; plans are frozen once written, a changed design gets a new plan.",
+   "frozen": true,
    "page_name": "Plan-design-docs-release-sync",
    "render": "doc+banner",
    "render_hash": "3edc847881ac",
@@ -3742,11 +3753,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T18:12:05Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-01T18:41:02Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "994b12ddea9e",
+   "render_hash": "accbb762c4d8",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
