@@ -18,6 +18,8 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 
 | Plan | Lifecycle | Truth | Date |
 |---|---|---|---|
+| [[Plan-trace-check-scope]] Scope the traceability gate to the claim it actually makes | completed | current | 2026-08-02 |
+| [[Plan-plan-banner-state]] A plan's banner should say which plan it is | completed | current | 2026-08-02 |
 | [[Plan-configurable-item-fields]] Configurable optional fields on the work item | completed | current | 2026-08-01 |
 | [[Plan-close-p1-epics-and-settle-merge-and-gone-questions]] Close both P1 epics, settle the merge-strategy and GONE questions | completed | current | 2026-07-30 |
 | [[Plan-one-owner-per-external-key]] One local owner per remote ticket (#226) | completed | current | 2026-07-28 |

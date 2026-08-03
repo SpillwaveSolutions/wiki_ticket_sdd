@@ -106,6 +106,29 @@ def banner(rec, by_key):
     return _links(_banner_text(rec, by_key))
 
 
+PLAN_STATE = {"completed": "completed plan",
+              "active": "plan in flight",
+              "planned": "plan not yet started"}
+
+
+def _plan_state(rec):
+    """A plan's banner label, from the leading word of its status (#292).
+
+    `status` on a plan is free prose, not an enum. Real values run from
+    "completed" to "planned — not yet scheduled; implementation tasks attach
+    to the epic when work starts" — a whole sentence that cannot be dropped
+    into a one-line banner. Only the leading word carries the state; the rest
+    is detail that belongs in the page.
+
+    Unknown prose returns None and the caller falls back to saying nothing
+    about state. That is deliberate: inventing a label for prose we cannot
+    read is how the banner came to announce plans as status reports in the
+    first place. Silence beats a confident guess.
+    """
+    first = (rec.get("status") or "").split()[:1]
+    return PLAN_STATE.get(first[0].lower()) if first else None
+
+
 def _banner_text(rec, by_key):
     ts = rec["truth_state"]
     if ts == "current" and ia.is_frozen(rec):
@@ -113,13 +136,18 @@ def _banner_text(rec, by_key):
         # — only status is a "report"; the rest need their own wording.
         if rec["doc_type"] == "status":
             # e.g. the newest status report: current truth, but frozen — it
-            # will be archived by its successor, never regenerated
+            # will be archived by its successor, never regenerated.
+            # rec["kind"], not .get(..., "status"): kind is REQUIRED on a
+            # status record (ia.py schema), so a missing one is a schema
+            # violation and must raise. The old default silently rendered
+            # plausible prose over broken data (#292).
             return ("> **Current** — the latest %s report. Reports freeze "
                     "once published; corrections appear in later reports."
-                    % rec.get("kind", "status"))
+                    % rec["kind"])
         if rec["doc_type"] == "plan":
-            return ("> **Current** — the current plan; plans are frozen "
-                    "once written, a changed design gets a new plan.")
+            return ("> **Current** — %s; plans are frozen "
+                    "once written, a changed design gets a new plan."
+                    % (_plan_state(rec) or "the current plan"))
         if rec["doc_type"] == "roadmap-snapshot":
             return ("> **Current** — the current roadmap snapshot; frozen "
                     "once published, a new snapshot supersedes it.")

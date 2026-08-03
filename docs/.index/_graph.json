@@ -201,13 +201,33 @@
    "type": "targets"
   },
   {
+   "from": "design/2026-08-02_v0.19.1-release-code-walkthrough",
+   "to": "design/current-code-walkthrough",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-08-02_v0.19.1-release-code-walkthrough",
+   "to": "release/v0.19.1",
+   "type": "targets"
+  },
+  {
+   "from": "design/2026-08-02_v0.19.1-release-design-doc",
+   "to": "design/current-design-doc",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-08-02_v0.19.1-release-design-doc",
+   "to": "release/v0.19.1",
+   "type": "targets"
+  },
+  {
    "from": "design/current-code-walkthrough",
-   "to": "release/v0.18.0",
+   "to": "release/v0.19.1",
    "type": "targets"
   },
   {
    "from": "design/current-design-doc",
-   "to": "release/v0.18.0",
+   "to": "release/v0.19.1",
    "type": "targets"
   },
   {
@@ -2551,6 +2571,31 @@
    "type": "references"
   },
   {
+   "from": "item/01KZ2JAT7PCV6B34W2RK34WBX7",
+   "to": "release/v0.20.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZ2KGPRMKG9B98Q6YVD3MZVJ",
+   "to": "ticket/github#292",
+   "type": "references"
+  },
+  {
+   "from": "item/01KZ2KGPRMKG9B98Q6YVD3MZVJ",
+   "to": "release/v0.20.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZ2M00NVDWJN795G7F8CWTRJ",
+   "to": "release/v0.19.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZ2M07FKC9AYK84B7AC91TVP",
+   "to": "release/v0.19.1",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -3128,6 +3173,16 @@
   {
    "from": "plan/2026-08-01-configurable-item-fields",
    "to": "item/01KY5NE0ZYGBWG44N0KPEBFCZ8",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-08-02-plan-banner-state",
+   "to": "item/01KZ2KGPRMKG9B98Q6YVD3MZVJ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-08-02-trace-check-scope",
+   "to": "item/01KZ2JAT7PCV6B34W2RK34WBX7",
    "type": "produces"
   },
   {
@@ -4056,6 +4111,18 @@
   "design/2026-07-29_v0.18.0-release-design-doc": {
    "doc_type": "design",
    "source": "docs/designs/2026-07-29_v0.18.0-release_design_doc.md",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot"
+  },
+  "design/2026-08-02_v0.19.1-release-code-walkthrough": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-08-02_v0.19.1-release_code_walkthrough.md",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "snapshot"
+  },
+  "design/2026-08-02_v0.19.1-release-design-doc": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-08-02_v0.19.1-release_design_doc.md",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "snapshot"
   },
@@ -5514,13 +5581,28 @@
   },
   "item/01KZ2JAT7PCV6B34W2RK34WBX7": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "trace-check --strict ignores its own released-milestone scope"
   },
   "item/01KZ2JRT7MAE0MJH7Y0SJ3ZJS3": {
    "doc_type": "item",
    "status": "done",
    "title": "CLAUDE.md and AGENTS.md are not tracked in the source repo"
+  },
+  "item/01KZ2KGPRMKG9B98Q6YVD3MZVJ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Plan banners do not distinguish a completed plan from one in flight"
+  },
+  "item/01KZ2M00NVDWJN795G7F8CWTRJ": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Run the v0.19.1 release doc sync"
+  },
+  "item/01KZ2M07FKC9AYK84B7AC91TVP": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Run the v0.19.1 release doc sync"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
@@ -5604,6 +5686,18 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-08-01-configurable-item-fields.md",
    "title": "Configurable optional fields on the work item",
+   "truth_state": "current"
+  },
+  "plan/2026-08-02-plan-banner-state": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-08-02-plan-banner-state.md",
+   "title": "A plan's banner should say which plan it is",
+   "truth_state": "current"
+  },
+  "plan/2026-08-02-trace-check-scope": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-08-02-trace-check-scope.md",
+   "title": "Scope the traceability gate to the claim it actually makes",
    "truth_state": "current"
   },
   "plan/design-docs-release-sync": {
@@ -5769,6 +5863,9 @@
    "doc_type": "release"
   },
   "release/v0.19.1": {
+   "doc_type": "release"
+  },
+  "release/v0.20.0": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
@@ -6471,6 +6568,10 @@
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/29"
   },
   "ticket/github#291": {
+   "doc_type": "ticket",
+   "url": ""
+  },
+  "ticket/github#292": {
    "doc_type": "ticket",
    "url": ""
   },

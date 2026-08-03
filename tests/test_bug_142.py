@@ -45,11 +45,16 @@ class TestLandsInEdges(unittest.TestCase):
         self.assertEqual(item_edges(graph_for([{}])), [])
 
     def test_trace_check_strict_no_longer_flags_a_commit_only_link(self):
-        items = {"01ABC": {"title": "Item", "status": "done"}}
+        # milestone + kind are load-bearing: since #291 the gate only sweeps
+        # the released set, so without them this item falls out of scope and
+        # the assertion would pass vacuously, testing nothing.
+        items = {"01ABC": {"title": "Item", "status": "done",
+                           "kind": "feature", "milestone": "v1"}}
         with patch.object(ia_graph, "item_sidecar",
                           lambda iid: {"code": [{"commit": "deadbeef"}]}):
             graph = ia_graph.build_graph(records={}, items=items)
             gaps = ia_graph.trace_check(graph=graph, items=items, strict=True)
+        self.assertTrue(gaps, "item must be in scope or this proves nothing")
         self.assertFalse(any("no PR/commit link" in g for g in gaps), gaps)
 
 

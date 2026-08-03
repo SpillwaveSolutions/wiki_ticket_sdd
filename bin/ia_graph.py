@@ -247,10 +247,34 @@ def pr_meta(num):
     return ia.read_sidecar("pr/%s" % num)
 
 
+def in_trace_scope(item):
+    """Is this item evidence for a release? (plan 2026-08-02-trace-check-scope)
+
+    Scope is the released-milestone set: an item with no milestone has not
+    shipped in anything named, so there is no release for it to be evidence
+    of. `kind:ops` is exempt outright -- release cuts, status reports, log
+    compactions and worktree cleanup have no plan, ticket or PR by design,
+    and the release skill states release items are deliberately never given
+    an external ticket.
+
+    Until 2026-08-02 this scope was computed as a label, interpolated into
+    every message, and filtered on nothing, so the gate swept all 267 closed
+    items instead of the 39 it claimed -- 401 gaps, 323 of them out of scope.
+    """
+    if item.get("status") not in CLOSED_STATUSES or item.get("status") == "cancelled":
+        return False
+    return bool(item.get("milestone")) and item.get("kind") != "ops"
+
+
 def trace_check(graph=None, items=None, strict=False):
     """Unlinked-evidence report (§9.6): every item in a released milestone
     should trace to a plan, a ticket, and a PR; verified-by stays advisory
-    (a test link is proposed, never assumed). -> list of gaps."""
+    (a test link is proposed, never assumed). -> list of gaps.
+
+    `unplanned` items are excused the PLAN check alone: the taxonomy defines
+    them as arriving without one. They still owe a ticket and a PR -- being
+    discovered mid-flight excuses the plan, not the evidence.
+    """
     if items is None:
         items = fold((".work/todo.jsonl", ".work/done.jsonl")).items
     graph = graph or build_graph(items=items)
@@ -262,17 +286,16 @@ def trace_check(graph=None, items=None, strict=False):
     gaps = []
     for iid in sorted(items):
         it = items[iid]
-        if it.get("status") not in CLOSED_STATUSES or it.get("status") == "cancelled":
+        if not in_trace_scope(it):
             continue
-        key = item_key(iid)
-        have = out_edges.get(key, set())
-        scope = "released" if it.get("milestone") else "closed"
-        if "produced-by" not in have and not it.get("plan"):
-            gaps.append("%s (%s): no plan link" % (iid, scope))
+        have = out_edges.get(item_key(iid), set())
+        if ("produced-by" not in have and not it.get("plan")
+                and not it.get("unplanned")):
+            gaps.append("%s: no plan link" % iid)
         if "references" not in have:
-            gaps.append("%s (%s): no external ticket" % (iid, scope))
+            gaps.append("%s: no external ticket" % iid)
         if strict and "lands-in" not in have:
-            gaps.append("%s (%s): no PR/commit link" % (iid, scope))
+            gaps.append("%s: no PR/commit link" % iid)
     return gaps
 
 
