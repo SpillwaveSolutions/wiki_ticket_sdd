@@ -1,6 +1,6 @@
 # Document the two new fields in the document schema
 
-`01KZ30X6JEH1Z7D5AC5ZAMM5V8` · subtask/feature · **open**
+`01KZ30X6JEH1Z7D5AC5ZAMM5V8` · subtask/feature · **done**
 
 Document the two new fields in the document schema
 

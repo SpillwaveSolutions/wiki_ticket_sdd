@@ -1,6 +1,6 @@
 # Add a full-length commit helper that mirrors the existing environment contract
 
-`01KZ30X6JEXH4TTKHDNV3ZW0Q2` · subtask/feature · **open**
+`01KZ30X6JEXH4TTKHDNV3ZW0Q2` · subtask/feature · **done**
 
 Add a full-length commit helper that mirrors the existing environment contract
 

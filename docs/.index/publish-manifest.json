@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "7ea25da144f9",
+   "render_hash": "a79cd3935d1e",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3444,7 +3444,7 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6HZ6FKJXJX386J44CB1",
    "render": "as-is",
-   "render_hash": "899d13db93b8",
+   "render_hash": "f6d392c71656",
    "source": "docs/.index/rendered/tickets/01KZ30X6HZ6FKJXJX386J44CB1.md",
    "title": "Git provenance on generated docs, and the verifier it enables",
    "truth_state": "open",
@@ -3554,10 +3554,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JECK0M9G04ZHMS4SMA",
    "render": "as-is",
-   "render_hash": "d9ac0082a6d4",
+   "render_hash": "b9d2675dbbbf",
    "source": "docs/.index/rendered/tickets/01KZ30X6JECK0M9G04ZHMS4SMA.md",
    "title": "Stamp the authoring commit onto plans, status reports and new decision records",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JECK0M9G04ZHMS4SMA"
   },
   {
@@ -3584,10 +3584,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JEH1Z7D5AC5ZAMM5V8",
    "render": "as-is",
-   "render_hash": "8fd4329c6014",
+   "render_hash": "cac91ef5d2c4",
    "source": "docs/.index/rendered/tickets/01KZ30X6JEH1Z7D5AC5ZAMM5V8.md",
    "title": "Document the two new fields in the document schema",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JEH1Z7D5AC5ZAMM5V8"
   },
   {
@@ -3604,10 +3604,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JEXH4TTKHDNV3ZW0Q2",
    "render": "as-is",
-   "render_hash": "0d13b2a6aa84",
+   "render_hash": "f24a139fe263",
    "source": "docs/.index/rendered/tickets/01KZ30X6JEXH4TTKHDNV3ZW0Q2.md",
    "title": "Add a full-length commit helper that mirrors the existing environment contract",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JEXH4TTKHDNV3ZW0Q2"
   },
   {
@@ -4341,13 +4341,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T05:30:20Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T15:02:57Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "10167be66b2c",
+   "render_hash": "1a1f79514b6b",
    "source": "docs/roadmap.md",
-   "source_hash": "29c11748388e",
+   "source_hash": "8db74d79ea09",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

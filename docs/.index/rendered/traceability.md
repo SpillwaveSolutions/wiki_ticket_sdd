@@ -6,7 +6,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 `01KZ31DGAQ2YDP6RMEMVNAWABH` · status: todo
 
 ### Add a full-length commit helper that mirrors the existing environment contract
-`01KZ30X6JEXH4TTKHDNV3ZW0Q2` · status: todo
+`01KZ30X6JEXH4TTKHDNV3ZW0Q2` · status: done
 - belongs-to: Stamp the authoring commit onto plans, status reports and new decision records
 - references: [github#316](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/316)
 - produced-by: [[Plan-doc-provenance-and-verification]]
@@ -18,7 +18,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Document the two new fields in the document schema
-`01KZ30X6JEH1Z7D5AC5ZAMM5V8` · status: todo
+`01KZ30X6JEH1Z7D5AC5ZAMM5V8` · status: done
 - belongs-to: Stamp the authoring commit onto plans, status reports and new decision records
 - references: [github#314](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/314)
 - produced-by: [[Plan-doc-provenance-and-verification]]
@@ -39,7 +39,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Stamp the authoring commit onto plans, status reports and new decision records
-`01KZ30X6JECK0M9G04ZHMS4SMA` · status: todo
+`01KZ30X6JECK0M9G04ZHMS4SMA` · status: done
 - belongs-to: Git provenance on generated docs, and the verifier it enables
 - references: [github#311](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/311)
 - contains: Document the two new fields in the document schema

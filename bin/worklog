@@ -585,7 +585,8 @@ def cmd_plan_capture(a):
 
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
-        fh.write(plan_capture.front_matter(date, a.slug, a.title, epic_id, item_ids))
+        fh.write(plan_capture.front_matter(date, a.slug, a.title, epic_id,
+                                           item_ids, ulid.git_commit_full()))
         fh.write(draft)
     print(path)
     print(epic_id)
@@ -661,7 +662,7 @@ def cmd_adr_new(a):
         a.title, nid, slug, date, status=a.status,
         deciders=a.deciders.split(",") if a.deciders else None,
         tags=a.tags.split(",") if a.tags else None,
-        supersedes=a.supersedes)
+        supersedes=a.supersedes, git_hash=ulid.git_commit_full())
     if os.path.exists(path):
         sys.exit(f"worklog: {path} exists")
     if a.supersedes is not None:
@@ -1063,6 +1064,11 @@ def cmd_status(a):
     date = (facts["window"]["to"][:10] if a.kind == "timecard"
             else time.strftime("%Y-%m-%d", time.gmtime(now_ms / 1000)))
     path = f"docs/status/{date}-{a.kind}.md"
+    # Omitted when there is no git (or WORKLOG_NO_GIT_PROVENANCE), never
+    # written empty -- an empty value opens a block list in
+    # ia.parse_front_matter and swallows the closing fence. Quoted so an
+    # all-digit sha is not read back as an int.
+    sha = ulid.git_commit_full()
     doc = ("---\n"
            f"kind: {a.kind}\n"
            f"date: {date}\n"
@@ -1070,6 +1076,7 @@ def cmd_status(a):
            f"to: {facts['window']['to']}}}\n"
            f"through: {facts['through'] or 'null'}\n"
            f"generated_at: {_rfc3339(now_ms)}\n"
+           + (f'git_hash: "{sha}"\n' if sha else "") +
            "---\n\n" + prose.rstrip("\n") + "\n")
     if a.dry_run:
         sys.stdout.write(doc)

@@ -169,10 +169,17 @@ BODY_NOTE = ("<!-- body is written once; only status/superseded_by change "
 
 
 def scaffold(title, adr_id, slug, date, status="proposed",
-             deciders=None, tags=None, supersedes=None):
-    """Template for a new ADR -> (path, content)."""
+             deciders=None, tags=None, supersedes=None, git_hash=None):
+    """Template for a new ADR -> (path, content).
+
+    `git_hash` is passed in, not looked up, so this stays a pure function of
+    its arguments. Omitted when falsy, never written empty; quoted so an
+    all-digit sha survives ia._scalar's int coercion.
+    """
     lines = ["---", "id: %d" % adr_id, "slug: %s" % slug, "title: %s" % title,
              "date: %s" % date, "status: %s" % status]
+    if git_hash:
+        lines.append('git_hash: "%s"' % git_hash)
     if deciders:
         lines.append("deciders: [" + ", ".join(deciders) + "]")
     if tags:

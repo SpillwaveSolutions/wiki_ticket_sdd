@@ -40,35 +40,71 @@ def encode(timestamp_ms: int, entropy: bytes) -> str:
     return _encode(timestamp_ms, 10) + _encode(int.from_bytes(entropy, "big"), 16)
 
 
-_git_commit_cache = []   # one-element memo; `worklog` mints many events per run
+_git_commit_cache = {}   # {"short"|"full": sha}; many events per run
+
+
+def _rev_parse(short: bool) -> str:
+    """HEAD's sha, or "" outside a git repo / before the first commit.
+
+    Memoised per process and per length. HEAD does not move underneath one
+    command, and `worklog` writes an event per command -- shelling out per
+    event would put a subprocess in the hot path of the only writer.
+
+    Never raises. A missing git, a bare directory, or a repo with no commits
+    all return "", and every caller is required to OMIT its field rather
+    than write an empty one.
+    """
+    key = "short" if short else "full"
+    if key in _git_commit_cache:
+        return _git_commit_cache[key]
+    sha = ""
+    if not os.environ.get("WORKLOG_NO_GIT_PROVENANCE"):
+        try:
+            import subprocess
+            argv = ["git", "rev-parse"] + (["--short"] if short else []) + ["HEAD"]
+            p = subprocess.run(argv, capture_output=True, text=True)
+            if p.returncode == 0:
+                sha = p.stdout.strip()
+        except OSError:
+            sha = ""
+    _git_commit_cache[key] = sha
+    return sha
 
 
 def git_commit() -> str:
-    """Short HEAD sha, or "" outside a git repo / before the first commit.
+    """Short HEAD sha for an EVENT's `git` field.
 
     Provenance, NOT identity: this goes in an event's own `git` field, never
     into the id. An id is issued once and must never collide, so spending its
     entropy to carry origin information weakens the single guarantee it
     exists to provide.
 
-    Memoised per process. HEAD does not move underneath one command, and
-    `worklog` writes an event per command -- shelling out per event would put
-    a subprocess in the hot path of the only writer.
+    Short is right here: the log carries one per event and the value is a
+    hint for a human tracing origin, not a key anything resolves.
     """
-    if _git_commit_cache:
-        return _git_commit_cache[0]
-    sha = ""
-    if not os.environ.get("WORKLOG_NO_GIT_PROVENANCE"):
-        try:
-            import subprocess
-            p = subprocess.run(["git", "rev-parse", "--short", "HEAD"],
-                               capture_output=True, text=True)
-            if p.returncode == 0:
-                sha = p.stdout.strip()
-        except OSError:
-            sha = ""
-    _git_commit_cache.append(sha)
-    return sha
+    return _rev_parse(short=True)
+
+
+def git_commit_full() -> str:
+    """Full 40-hex HEAD sha for a DOCUMENT's front matter.
+
+    Full length, and that is not a style preference. `ia._scalar` coerces an
+    all-digit value to int before it considers quotes, so a 7-char short sha
+    is all digits roughly one time in 27 and one with a leading zero reads
+    back corrupted but still sha-shaped. Front matter writers should quote
+    the value too -- belt and braces -- but the cheap structural fix is to
+    make an all-digit sha vanishingly unlikely rather than routine.
+
+    It also matches what design docs have carried since they were introduced,
+    so there is one vocabulary for "the commit this doc was written against"
+    rather than two.
+
+    Caveat worth knowing at every call site: at stamping time HEAD is the
+    commit BEFORE the one the doc lands in -- a commit cannot know its own
+    sha. This means "the tree this document was written against", which is
+    exactly what a reader diffing stale prose wants.
+    """
+    return _rev_parse(short=False)
 
 
 def new(timestamp_ms: int = None) -> str:

@@ -1,6 +1,6 @@
 # Stamp the authoring commit onto plans, status reports and new decision records
 
-`01KZ30X6JECK0M9G04ZHMS4SMA` · task/feature · **open**
+`01KZ30X6JECK0M9G04ZHMS4SMA` · task/feature · **done**
 
 Stamp the authoring commit onto plans, status reports and new decision records
 
@@ -10,10 +10,10 @@ Stamp the authoring commit onto plans, status reports and new decision records
 
 ## Subtasks
 
-- [[Ticket-01KZ30X6JEH1Z7D5AC5ZAMM5V8]] Document the two new fields in the document schema — Document the two new fields in the document schema (open)
-- [[Ticket-01KZ30X6JEXH4TTKHDNV3ZW0Q2]] Add a full-length commit helper that mirrors the existing environment contract — Add a full-length commit helper that mirrors the existing environment contract (open)
+- [[Ticket-01KZ30X6JEH1Z7D5AC5ZAMM5V8]] Document the two new fields in the document schema — Document the two new fields in the document schema (done)
+- [[Ticket-01KZ30X6JEXH4TTKHDNV3ZW0Q2]] Add a full-length commit helper that mirrors the existing environment contract — Add a full-length commit helper that mirrors the existing environment contract (done)
 
-Progress: 0/2 done
+Progress: 2/2 done
 
 ## Related tickets
 

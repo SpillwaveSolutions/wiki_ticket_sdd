@@ -201,6 +201,109 @@ class TestNoGitOnTheRegenerateAndDiffPath(unittest.TestCase):
         self.assertIn('git_hash: "abc1234"', out)
 
 
+class TestTheStampNamesTheRightTree(unittest.TestCase):
+    """The test that matters: it fails when the recorded sha is WRONG.
+
+    Asserting a git_hash exists proves nothing — a stamp naming the wrong
+    commit is present, plausible, and useless, which is precisely the #294
+    failure class. So: build a real repo, stamp, change the file, and assert
+    the recorded sha still resolves to what the doc was written against.
+    """
+
+    def git(self, *args, **kw):
+        return subprocess.run(["git", *args], cwd=self.d, capture_output=True,
+                              text=True, **kw)
+
+    def setUp(self):
+        self.d = tempfile.mkdtemp(prefix="worklog-prov-tree-")
+        self.addCleanup(shutil.rmtree, self.d, True)
+        self.git("init", "-q", ".")
+        self.git("config", "user.email", "t@t")
+        self.git("config", "user.name", "t")
+
+    def commit(self, name, text):
+        write(os.path.join(self.d, name), text)
+        self.git("add", "-A")
+        self.git("commit", "-qm", "x")
+        return self.git("rev-parse", "HEAD").stdout.strip()
+
+    def stamp(self):
+        """What a writer records: full HEAD sha, taken in this repo."""
+        p = self.git("rev-parse", "HEAD")
+        return p.stdout.strip() if p.returncode == 0 else ""
+
+    def test_the_recorded_sha_resolves_to_the_tree_the_doc_was_written_against(self):
+        c0 = self.commit("foo.py", "ORIGINAL\n")
+        recorded = self.stamp()
+        self.assertEqual(recorded, c0)
+        # the code moves on
+        self.commit("foo.py", "REWRITTEN\n")
+        # the stamp still names the tree the doc described
+        at_stamp = self.git("show", "%s:foo.py" % recorded).stdout
+        self.assertEqual(at_stamp, "ORIGINAL\n")
+        # ...and HEAD does not, which is the whole point of pinning
+        self.assertEqual(self.git("show", "HEAD:foo.py").stdout, "REWRITTEN\n")
+
+    def test_the_recorded_sha_is_full_length(self):
+        """Short shas are all digits ~1 time in 27, and ia._scalar coerces
+        an all-digit value to int. Full length makes that ~7e-9."""
+        self.commit("foo.py", "x\n")
+        self.assertEqual(len(self.stamp()), 40)
+
+    def test_a_stamp_is_the_parent_of_the_commit_that_carries_the_doc(self):
+        """Documents the off-by-one honestly rather than pretending it away:
+        a commit cannot know its own sha, so `git_hash` means "the tree this
+        was written against", not "the commit containing this file"."""
+        c0 = self.commit("foo.py", "x\n")
+        recorded = self.stamp()          # what a writer would stamp now
+        c1 = self.commit("doc.md", '---\ngit_hash: "%s"\n---\nbody\n' % recorded)
+        self.assertEqual(recorded, c0)
+        self.assertNotEqual(recorded, c1)
+        parent = self.git("rev-parse", "%s^" % c1).stdout.strip()
+        self.assertEqual(recorded, parent)
+
+
+class TestWritersDegradeWithoutGit(unittest.TestCase):
+    """Absent means "not verifiable, skip and say so". Empty would corrupt
+    the parse of every line after it."""
+
+    def test_plan_front_matter_omits_the_key_when_there_is_no_sha(self):
+        import plan_capture
+        for missing in ("", None):
+            fm = plan_capture.front_matter("2026-08-03", "s", "T", "01E",
+                                           ["01A"], missing)
+            self.assertNotIn("git_hash", fm)
+            self.assertTrue(fm.startswith("---\n"))
+
+    def test_plan_front_matter_quotes_the_sha(self):
+        fm = _plan_fm("0123456")
+        self.assertIn('git_hash: "0123456"', fm)
+        self.assertEqual(ia.parse_front_matter(fm)[0]["git_hash"], "0123456")
+
+    def test_adr_scaffold_omits_and_quotes_the_same_way(self):
+        import adr
+        _, bare = adr.scaffold("T", 1, "s", "2026-08-03")
+        self.assertNotIn("git_hash", bare)
+        _, stamped = adr.scaffold("T", 1, "s", "2026-08-03", git_hash="0123456")
+        self.assertEqual(ia.parse_front_matter(stamped)[0]["git_hash"], "0123456")
+
+    def test_the_env_kill_switch_silences_both_helpers(self):
+        import ulid
+        ulid._git_commit_cache.clear()
+        os.environ["WORKLOG_NO_GIT_PROVENANCE"] = "1"
+        try:
+            self.assertEqual(ulid.git_commit(), "")
+            self.assertEqual(ulid.git_commit_full(), "")
+        finally:
+            del os.environ["WORKLOG_NO_GIT_PROVENANCE"]
+            ulid._git_commit_cache.clear()
+
+
+def _plan_fm(sha):
+    import plan_capture
+    return plan_capture.front_matter("2026-08-03", "s", "T", "01E", ["01A"], sha)
+
+
 def _manifest():
     import json
     with open(os.path.join(ROOT, "docs/.index/publish-manifest.json")) as fh:

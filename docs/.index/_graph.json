@@ -5998,7 +5998,7 @@
   },
   "item/01KZ30X6JECK0M9G04ZHMS4SMA": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Stamp the authoring commit onto plans, status reports and new decision records"
   },
   "item/01KZ30X6JEETVQZG7YYFM7B998": {
@@ -6013,7 +6013,7 @@
   },
   "item/01KZ30X6JEH1Z7D5AC5ZAMM5V8": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Document the two new fields in the document schema"
   },
   "item/01KZ30X6JEWCD74E81Y555DAYP": {
@@ -6023,7 +6023,7 @@
   },
   "item/01KZ30X6JEXH4TTKHDNV3ZW0Q2": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Add a full-length commit helper that mirrors the existing environment contract"
   },
   "item/01KZ31DGAQ2YDP6RMEMVNAWABH": {

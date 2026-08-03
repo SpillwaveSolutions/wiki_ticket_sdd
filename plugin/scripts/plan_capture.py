@@ -66,7 +66,15 @@ def ticket_refs(text):
     return TICKET_REF_RE.findall(text or "")
 
 
-def front_matter(date, slug, title, epic_id, item_ids):
+def front_matter(date, slug, title, epic_id, item_ids, git_hash=None):
+    """The plan's frozen header.
+
+    `git_hash` is passed in rather than looked up so this stays a pure
+    function of its arguments — the caller owns the subprocess. Omitted when
+    falsy (no git, or WORKLOG_NO_GIT_PROVENANCE), never written empty: an
+    empty value opens a block list in ia.parse_front_matter and swallows the
+    closing fence. Quoted so an all-digit sha survives the round trip.
+    """
     return "\n".join([
         "---",
         f"date: {date}",
@@ -74,6 +82,7 @@ def front_matter(date, slug, title, epic_id, item_ids):
         f"title: {title}",
         f"epic: {epic_id}",
         "items: [" + ", ".join(item_ids) + "]",
+    ] + ([f'git_hash: "{git_hash}"'] if git_hash else []) + [
         "---",
         "",   # blank line between front matter and the draft body
         "",
