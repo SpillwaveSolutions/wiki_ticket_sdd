@@ -38,45 +38,49 @@
   "adr/0004-clearing-a-dead-ticket-link-stays-a-huma": {
     "canonical_key": "adr/0004-clearing-a-dead-ticket-link-stays-a-huma",
     "doc_type": "adr",
-    "rev": null,
+    "page_id": "ADR-0004-clearing-a-dead-ticket-link-stays-a-huma",
+    "render_hash": "0b49f4950065",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/adr/0004-clearing-a-dead-ticket-link-stays-a-huma.md",
-    "source_hash": null,
-    "title": "ADR-0004-clearing-a-dead-ticket-link-stays-a-huma",
+    "source_hash": "0f24fc7f7450",
     "truth_state": "current",
-    "url": null,
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0004-clearing-a-dead-ticket-link-stays-a-huma",
     "wiki_key": "adr/0004-clearing-a-dead-ticket-link-stays-a-huma"
   },
   "adr/0005-no-custom-merge-driver-for-the-event-log": {
     "canonical_key": "adr/0005-no-custom-merge-driver-for-the-event-log",
     "doc_type": "adr",
-    "rev": null,
+    "page_id": "ADR-0005-no-custom-merge-driver-for-the-event-log",
+    "render_hash": "9d529b2c4e81",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/adr/0005-no-custom-merge-driver-for-the-event-log.md",
-    "source_hash": null,
-    "title": "ADR-0005-no-custom-merge-driver-for-the-event-log",
+    "source_hash": "ce210cbd41e5",
     "truth_state": "current",
-    "url": null,
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0005-no-custom-merge-driver-for-the-event-log",
     "wiki_key": "adr/0005-no-custom-merge-driver-for-the-event-log"
   },
   "adr/0006-resurrected-events-are-not-always-cosmet": {
     "canonical_key": "adr/0006-resurrected-events-are-not-always-cosmet",
     "doc_type": "adr",
-    "rev": null,
+    "page_id": "ADR-0006-resurrected-events-are-not-always-cosmet",
+    "render_hash": "9306571ab119",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/adr/0006-resurrected-events-are-not-always-cosmet.md",
-    "source_hash": null,
-    "title": "ADR-0006-resurrected-events-are-not-always-cosmet",
+    "source_hash": "826b87e778a4",
     "truth_state": "current",
-    "url": null,
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0006-resurrected-events-are-not-always-cosmet",
     "wiki_key": "adr/0006-resurrected-events-are-not-always-cosmet"
   },
   "adr/0007-the-compaction-watermark-is-per-item": {
     "canonical_key": "adr/0007-the-compaction-watermark-is-per-item",
     "doc_type": "adr",
-    "rev": null,
+    "page_id": "ADR-0007-the-compaction-watermark-is-per-item",
+    "render_hash": "5945ba91dab0",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/adr/0007-the-compaction-watermark-is-per-item.md",
-    "source_hash": null,
-    "title": "ADR-0007-the-compaction-watermark-is-per-item",
+    "source_hash": "86cd07299f27",
     "truth_state": "current",
-    "url": null,
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0007-the-compaction-watermark-is-per-item",
     "wiki_key": "adr/0007-the-compaction-watermark-is-per-item"
   },
   "cli-reference": {
@@ -86,11 +90,10 @@
     "canonical_key": "guide/cli-reference",
     "doc_type": "guide",
     "page_id": "CLI-Reference",
-    "render_hash": "8103ffd900ff",
-    "rev": "7f673e68a4bc90bb26929003c844e807d4d471c1",
+    "render_hash": "5a332cce6bc5",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/user_guide/cli-reference.md",
-    "source_hash": "5084434f89e3",
-    "title": "WikiTicket SDD \u2014 CLI Reference",
+    "source_hash": "b9220105e467",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/CLI-Reference",
     "wiki_key": "cli-reference"
@@ -341,15 +344,62 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-07-29_v0.18.0-release",
     "wiki_key": "design/2026-07-29_v0.18.0-release-design-doc"
   },
+  "design/2026-08-02_v0.19.1-release-code-walkthrough": {
+    "canonical_key": "design/2026-08-02_v0.19.1-release-code-walkthrough",
+    "doc_type": "design",
+    "page_id": "Code-Walkthrough-2026-08-02_v0.19.1-release",
+    "render_hash": "b7031174389b",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/designs/2026-08-02_v0.19.1-release_code_walkthrough.md",
+    "source_hash": "6a5b8dc7334e",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-08-02_v0.19.1-release",
+    "wiki_key": "design/2026-08-02_v0.19.1-release-code-walkthrough"
+  },
+  "design/2026-08-02_v0.19.1-release-design-doc": {
+    "canonical_key": "design/2026-08-02_v0.19.1-release-design-doc",
+    "doc_type": "design",
+    "page_id": "Design-Doc-2026-08-02_v0.19.1-release",
+    "render_hash": "2c9ea663f60f",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/designs/2026-08-02_v0.19.1-release_design_doc.md",
+    "source_hash": "ead68bbce72f",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-08-02_v0.19.1-release",
+    "wiki_key": "design/2026-08-02_v0.19.1-release-design-doc"
+  },
+  "design/2026-08-03_v0.20.0-release-code-walkthrough": {
+    "canonical_key": "design/2026-08-03_v0.20.0-release-code-walkthrough",
+    "doc_type": "design",
+    "page_id": "Code-Walkthrough-2026-08-03_v0.20.0-release",
+    "render_hash": "0b6ecf681697",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/designs/2026-08-03_v0.20.0-release_code_walkthrough.md",
+    "source_hash": "8235cfe89179",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-08-03_v0.20.0-release",
+    "wiki_key": "design/2026-08-03_v0.20.0-release-code-walkthrough"
+  },
+  "design/2026-08-03_v0.20.0-release-design-doc": {
+    "canonical_key": "design/2026-08-03_v0.20.0-release-design-doc",
+    "doc_type": "design",
+    "page_id": "Design-Doc-2026-08-03_v0.20.0-release",
+    "render_hash": "c77b9112c99b",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/designs/2026-08-03_v0.20.0-release_design_doc.md",
+    "source_hash": "cb7a94c11b1f",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-08-03_v0.20.0-release",
+    "wiki_key": "design/2026-08-03_v0.20.0-release-design-doc"
+  },
   "design/current-code-walkthrough": {
     "canonical_key": "design/current-code-walkthrough",
     "doc_type": "design",
     "page_id": "Code-Walkthrough",
-    "render_hash": "798c5e39040a",
-    "rev": "1c393f8b83605f82bdffa9b88f59a478fc6b390e",
+    "render_hash": "a4d8a3823afa",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/designs/current_code_walkthrough.md",
-    "source_hash": "31a28e55e32f",
-    "title": "Worklog \u2014 Code Walkthrough",
+    "source_hash": "acdc5d41a976",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough",
     "wiki_key": "design/current-code-walkthrough"
@@ -358,11 +408,10 @@
     "canonical_key": "design/current-design-doc",
     "doc_type": "design",
     "page_id": "Design-Doc",
-    "render_hash": "c15de0254af4",
-    "rev": "1c393f8b83605f82bdffa9b88f59a478fc6b390e",
+    "render_hash": "f1a3266cb243",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/designs/current_design_doc.md",
-    "source_hash": "e58b692fe8e9",
-    "title": "Worklog \u2014 Software Design Document",
+    "source_hash": "3d0a46cb76ae",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc",
     "wiki_key": "design/current-design-doc"
@@ -371,40 +420,29 @@
     "canonical_key": "home",
     "doc_type": "guide",
     "page_id": "Home",
-    "render_hash": "c8172fe5ca77",
-    "rev": "7f673e68a4bc90bb26929003c844e807d4d471c1",
+    "render_hash": "71ae31aaad74",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/home.md",
-    "source_hash": "c8172fe5ca77",
-    "title": "Home",
+    "source_hash": "71ae31aaad74",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Home",
     "wiki_key": "home"
   },
   "index/decisions": {
-    "canonical_key": "index/decisions",
-    "doc_type": "index",
     "page_id": "Index-Decisions",
-    "render_hash": "2a2e3f59a202",
-    "rev": "7f673e68a4bc90bb26929003c844e807d4d471c1",
+    "render_hash": "10ec80219f2e",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/decisions.md",
-    "source_hash": "2a2e3f59a202",
-    "title": "Decisions Index",
-    "truth_state": "current",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Decisions",
-    "wiki_key": "index/decisions"
+    "source_hash": "10ec80219f2e",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Decisions"
   },
   "index/releases": {
-    "canonical_key": "index/releases",
-    "doc_type": "index",
     "page_id": "Index-Releases",
-    "render_hash": "dafc4e263549",
-    "rev": "241e99f8d7ba381a8452e8b601ac45cb560abf7e",
+    "render_hash": "c7a9db05a263",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/releases.md",
-    "source_hash": "dafc4e263549",
-    "title": "Releases Index",
-    "truth_state": "current",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Releases",
-    "wiki_key": "index/releases"
+    "source_hash": "c7a9db05a263",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Releases"
   },
   "index/status": {
     "render_hash": "5543d4d12ec0",
@@ -414,17 +452,12 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Status"
   },
   "index/traceability": {
-    "canonical_key": "index/traceability",
-    "doc_type": "index",
     "page_id": "Index-Traceability",
-    "render_hash": "90ec49edcfff",
-    "rev": "241e99f8d7ba381a8452e8b601ac45cb560abf7e",
+    "render_hash": "8e90c5b3b5e1",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/traceability.md",
-    "source_hash": "90ec49edcfff",
-    "title": "Traceability Index",
-    "truth_state": "current",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Traceability",
-    "wiki_key": "index/traceability"
+    "source_hash": "8e90c5b3b5e1",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Traceability"
   },
   "integrations/awscodecatalyst": {
     "rev": "12880baf1526da7055fb96e7687718e6813be764",
@@ -2084,17 +2117,12 @@
     "wiki_key": "item/01KY2KHHF43KAZ54F57BQW71TD"
   },
   "item/01KY5D79CY0DPSDAQ09QZFW694": {
-    "canonical_key": "item/01KY5D79CY0DPSDAQ09QZFW694",
-    "doc_type": "item",
     "page_id": "Ticket-01KY5D79CY0DPSDAQ09QZFW694",
-    "render_hash": "248a1d8433b5",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "862e8d73124f",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KY5D79CY0DPSDAQ09QZFW694.md",
-    "source_hash": "248a1d8433b5",
-    "title": "Ignore tmp/ scratch dir in .gitignore (onboarding notes live there untracked)",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY5D79CY0DPSDAQ09QZFW694",
-    "wiki_key": "item/01KY5D79CY0DPSDAQ09QZFW694"
+    "source_hash": "862e8d73124f",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY5D79CY0DPSDAQ09QZFW694"
   },
   "item/01KY5F6QA220S0K7RRK2Q80XR8": {
     "canonical_key": "item/01KY5F6QA220S0K7RRK2Q80XR8",
@@ -2266,17 +2294,12 @@
     "wiki_key": "item/01KY5G9ZW0EYQ5T83RP46Z7952"
   },
   "item/01KY5G9ZW0H2YMNWDFJYGRPYE5": {
-    "canonical_key": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5",
-    "doc_type": "item",
     "page_id": "Ticket-01KY5G9ZW0H2YMNWDFJYGRPYE5",
-    "render_hash": "57e1b6f0ba3d",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "e7d949fffe51",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KY5G9ZW0H2YMNWDFJYGRPYE5.md",
-    "source_hash": "57e1b6f0ba3d",
-    "title": "IA & content model (supersedes wiki-information-architecture)",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY5G9ZW0H2YMNWDFJYGRPYE5",
-    "wiki_key": "item/01KY5G9ZW0H2YMNWDFJYGRPYE5"
+    "source_hash": "e7d949fffe51",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY5G9ZW0H2YMNWDFJYGRPYE5"
   },
   "item/01KY5G9ZW0MQD9335S641DC7ZG": {
     "canonical_key": "item/01KY5G9ZW0MQD9335S641DC7ZG",
@@ -2331,17 +2354,12 @@
     "wiki_key": "item/01KY5G9ZW0PNKDDEK5TM8GS2J6"
   },
   "item/01KY5G9ZW0RABXWHEMEP1FAV2G": {
-    "canonical_key": "item/01KY5G9ZW0RABXWHEMEP1FAV2G",
-    "doc_type": "item",
     "page_id": "Ticket-01KY5G9ZW0RABXWHEMEP1FAV2G",
-    "render_hash": "a2343717e31a",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "14b775cd14bc",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KY5G9ZW0RABXWHEMEP1FAV2G.md",
-    "source_hash": "a2343717e31a",
-    "title": "Phase 5: promote gates to hard fail; platform render adapters (GitLab/ADO/Confluence); /worklog:find + glossary",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY5G9ZW0RABXWHEMEP1FAV2G",
-    "wiki_key": "item/01KY5G9ZW0RABXWHEMEP1FAV2G"
+    "source_hash": "14b775cd14bc",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY5G9ZW0RABXWHEMEP1FAV2G"
   },
   "item/01KY5G9ZW0X5F3K7KHP1SXFM3Q": {
     "canonical_key": "item/01KY5G9ZW0X5F3K7KHP1SXFM3Q",
@@ -2435,17 +2453,12 @@
     "wiki_key": "item/01KY5N7DF2YMR9E11G4W3HF6PY"
   },
   "item/01KY5NE0ZYGBWG44N0KPEBFCZ8": {
-    "canonical_key": "item/01KY5NE0ZYGBWG44N0KPEBFCZ8",
-    "doc_type": "item",
     "page_id": "Ticket-01KY5NE0ZYGBWG44N0KPEBFCZ8",
-    "render_hash": "e7532788645a",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "51e78f0bfe39",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KY5NE0ZYGBWG44N0KPEBFCZ8.md",
-    "source_hash": "e7532788645a",
-    "title": "Configurable work-item field model: optional fields (estimate, risk, effort, value, confidence, owner, due_date, acceptance_criteria, blocked_by/blocks) behind work_item_fields config",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY5NE0ZYGBWG44N0KPEBFCZ8",
-    "wiki_key": "item/01KY5NE0ZYGBWG44N0KPEBFCZ8"
+    "source_hash": "51e78f0bfe39",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY5NE0ZYGBWG44N0KPEBFCZ8"
   },
   "item/01KY5P9V0CMM86G43HH4Q28ZDD": {
     "canonical_key": "item/01KY5P9V0CMM86G43HH4Q28ZDD",
@@ -2630,43 +2643,28 @@
     "wiki_key": "item/01KY5VY0TEWBMZK5W6YJN5FQ9D"
   },
   "item/01KY5ZY3ZX2Z4F73Y0BT0M0NR5": {
-    "canonical_key": "item/01KY5ZY3ZX2Z4F73Y0BT0M0NR5",
-    "doc_type": "item",
     "page_id": "Ticket-01KY5ZY3ZX2Z4F73Y0BT0M0NR5",
-    "render_hash": "b6e8f043b0e7",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "952bf2bffcb3",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KY5ZY3ZX2Z4F73Y0BT0M0NR5.md",
-    "source_hash": "b6e8f043b0e7",
-    "title": "init.sh copy list missing IA modules (ia.py, ia_render.py, ia_graph.py, canonical.py, sync_dispatch.py) \u2014 fresh repos get worklog with broken ia-* commands",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY5ZY3ZX2Z4F73Y0BT0M0NR5",
-    "wiki_key": "item/01KY5ZY3ZX2Z4F73Y0BT0M0NR5"
+    "source_hash": "952bf2bffcb3",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY5ZY3ZX2Z4F73Y0BT0M0NR5"
   },
   "item/01KY6037BN94086PR1QP0CM7XC": {
-    "canonical_key": "item/01KY6037BN94086PR1QP0CM7XC",
-    "doc_type": "item",
     "page_id": "Ticket-01KY6037BN94086PR1QP0CM7XC",
-    "render_hash": "b05e7d5271ad",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "5148d83bea03",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KY6037BN94086PR1QP0CM7XC.md",
-    "source_hash": "b05e7d5271ad",
-    "title": "ia.classify treats README.md inside docs/plans|status|adr dirs as a doc of that type \u2014 generic repos with folder READMEs fail inventory",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY6037BN94086PR1QP0CM7XC",
-    "wiki_key": "item/01KY6037BN94086PR1QP0CM7XC"
+    "source_hash": "5148d83bea03",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY6037BN94086PR1QP0CM7XC"
   },
   "item/01KY69K4ZJMYJ1HWMWXMQ4J7BA": {
-    "canonical_key": "item/01KY69K4ZJMYJ1HWMWXMQ4J7BA",
-    "doc_type": "item",
     "page_id": "Ticket-01KY69K4ZJMYJ1HWMWXMQ4J7BA",
-    "render_hash": "762333dee6e9",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "268aa9050c1b",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KY69K4ZJMYJ1HWMWXMQ4J7BA.md",
-    "source_hash": "762333dee6e9",
-    "title": "Add MIT LICENSE (repo was public with no license)",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY69K4ZJMYJ1HWMWXMQ4J7BA",
-    "wiki_key": "item/01KY69K4ZJMYJ1HWMWXMQ4J7BA"
+    "source_hash": "268aa9050c1b",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KY69K4ZJMYJ1HWMWXMQ4J7BA"
   },
   "item/01KY8KQ8WW4A4RJ07YC4QVE7HB": {
     "canonical_key": "item/01KY8KQ8WW4A4RJ07YC4QVE7HB",
@@ -2734,212 +2732,132 @@
     "wiki_key": "item/01KYA99TVCGX79HFNHN1DVT7Y6"
   },
   "item/01KYABYEQP3YCB9AVHRPCTCMRS": {
-    "canonical_key": "item/01KYABYEQP3YCB9AVHRPCTCMRS",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQP3YCB9AVHRPCTCMRS",
-    "render_hash": "5179ea594e45",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "4eb09cabc1cd",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQP3YCB9AVHRPCTCMRS.md",
-    "source_hash": "5179ea594e45",
-    "title": "Phase 0: add item_links() graph helper",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQP3YCB9AVHRPCTCMRS",
-    "wiki_key": "item/01KYABYEQP3YCB9AVHRPCTCMRS"
+    "source_hash": "4eb09cabc1cd",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQP3YCB9AVHRPCTCMRS"
   },
   "item/01KYABYEQP8ANXGYPBCV2T20D8": {
-    "canonical_key": "item/01KYABYEQP8ANXGYPBCV2T20D8",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQP8ANXGYPBCV2T20D8",
-    "render_hash": "5f5bf436bbd0",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "c42532957635",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQP8ANXGYPBCV2T20D8.md",
-    "source_hash": "5f5bf436bbd0",
-    "title": "Extend IA to tickets, PRs, and releases (artifact pages)",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQP8ANXGYPBCV2T20D8",
-    "wiki_key": "item/01KYABYEQP8ANXGYPBCV2T20D8"
+    "source_hash": "c42532957635",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQP8ANXGYPBCV2T20D8"
   },
   "item/01KYABYEQP9FDY8THDV79F324G": {
-    "canonical_key": "item/01KYABYEQP9FDY8THDV79F324G",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQP9FDY8THDV79F324G",
-    "render_hash": "37942eb12447",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "ecd406e0f329",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQP9FDY8THDV79F324G.md",
-    "source_hash": "37942eb12447",
-    "title": "One-line summary derivation from body's first sentence (no cache)",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQP9FDY8THDV79F324G",
-    "wiki_key": "item/01KYABYEQP9FDY8THDV79F324G"
+    "source_hash": "ecd406e0f329",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQP9FDY8THDV79F324G"
   },
   "item/01KYABYEQPAFJM7WC3XZV6YY76": {
-    "canonical_key": "item/01KYABYEQPAFJM7WC3XZV6YY76",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQPAFJM7WC3XZV6YY76",
-    "render_hash": "90c1e28ec268",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "430f7576636f",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQPAFJM7WC3XZV6YY76.md",
-    "source_hash": "90c1e28ec268",
-    "title": "`ia-ticket <ULID>` preview subcommand on `bin/worklog`",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPAFJM7WC3XZV6YY76",
-    "wiki_key": "item/01KYABYEQPAFJM7WC3XZV6YY76"
+    "source_hash": "430f7576636f",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPAFJM7WC3XZV6YY76"
   },
   "item/01KYABYEQPDS2VFQKQ7B6YXZVR": {
-    "canonical_key": "item/01KYABYEQPDS2VFQKQ7B6YXZVR",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQPDS2VFQKQ7B6YXZVR",
-    "render_hash": "aea2ecc9fa7c",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "5e91b8598337",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQPDS2VFQKQ7B6YXZVR.md",
-    "source_hash": "aea2ecc9fa7c",
-    "title": "Phase 4: regenerate all pages and confirm coverage gate holds",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPDS2VFQKQ7B6YXZVR",
-    "wiki_key": "item/01KYABYEQPDS2VFQKQ7B6YXZVR"
+    "source_hash": "5e91b8598337",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPDS2VFQKQ7B6YXZVR"
   },
   "item/01KYABYEQPF8N2K26ENRKREE0W": {
-    "canonical_key": "item/01KYABYEQPF8N2K26ENRKREE0W",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQPF8N2K26ENRKREE0W",
-    "render_hash": "a4c5dec90d4d",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "9eb5357ccecd",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQPF8N2K26ENRKREE0W.md",
-    "source_hash": "a4c5dec90d4d",
-    "title": "Phase 3: file PR live-metadata follow-up item",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPF8N2K26ENRKREE0W",
-    "wiki_key": "item/01KYABYEQPF8N2K26ENRKREE0W"
+    "source_hash": "9eb5357ccecd",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPF8N2K26ENRKREE0W"
   },
   "item/01KYABYEQPK6PV87WNZXEYRB12": {
-    "canonical_key": "item/01KYABYEQPK6PV87WNZXEYRB12",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQPK6PV87WNZXEYRB12",
-    "render_hash": "2dcac335601f",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "e7fe2ee5b8f4",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQPK6PV87WNZXEYRB12.md",
-    "source_hash": "2dcac335601f",
-    "title": "Phase 1: render ticket pages for all four levels",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPK6PV87WNZXEYRB12",
-    "wiki_key": "item/01KYABYEQPK6PV87WNZXEYRB12"
+    "source_hash": "e7fe2ee5b8f4",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPK6PV87WNZXEYRB12"
   },
   "item/01KYABYEQPNK7HHH5CMAR2V1JG": {
-    "canonical_key": "item/01KYABYEQPNK7HHH5CMAR2V1JG",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQPNK7HHH5CMAR2V1JG",
-    "render_hash": "977928de7e79",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "998d7da8c311",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQPNK7HHH5CMAR2V1JG.md",
-    "source_hash": "977928de7e79",
-    "title": "Phase 4: extend tests/test_ia.py for the new page shapes",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPNK7HHH5CMAR2V1JG",
-    "wiki_key": "item/01KYABYEQPNK7HHH5CMAR2V1JG"
+    "source_hash": "998d7da8c311",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPNK7HHH5CMAR2V1JG"
   },
   "item/01KYABYEQPP82DJEN19F43YRAE": {
-    "canonical_key": "item/01KYABYEQPP82DJEN19F43YRAE",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQPP82DJEN19F43YRAE",
-    "render_hash": "71431ae08b0c",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "61f37236878f",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQPP82DJEN19F43YRAE.md",
-    "source_hash": "71431ae08b0c",
-    "title": "Phase 2: render release pages with graph-derived Change Log",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPP82DJEN19F43YRAE",
-    "wiki_key": "item/01KYABYEQPP82DJEN19F43YRAE"
+    "source_hash": "61f37236878f",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPP82DJEN19F43YRAE"
   },
   "item/01KYABYEQPRM8308SYFPR8X437": {
-    "canonical_key": "item/01KYABYEQPRM8308SYFPR8X437",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQPRM8308SYFPR8X437",
-    "render_hash": "67d5ed2a1628",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "55f7e52e5deb",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQPRM8308SYFPR8X437.md",
-    "source_hash": "67d5ed2a1628",
-    "title": "Aggregate progress rollup for Story/Feature/Epic pages",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPRM8308SYFPR8X437",
-    "wiki_key": "item/01KYABYEQPRM8308SYFPR8X437"
+    "source_hash": "55f7e52e5deb",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPRM8308SYFPR8X437"
   },
   "item/01KYABYEQPW8Q2RGGTNP71W88E": {
-    "canonical_key": "item/01KYABYEQPW8Q2RGGTNP71W88E",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQPW8Q2RGGTNP71W88E",
-    "render_hash": "72a9d4fa42b3",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "f47282978e89",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQPW8Q2RGGTNP71W88E.md",
-    "source_hash": "72a9d4fa42b3",
-    "title": "Phase 2: render PR pages",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPW8Q2RGGTNP71W88E",
-    "wiki_key": "item/01KYABYEQPW8Q2RGGTNP71W88E"
+    "source_hash": "f47282978e89",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPW8Q2RGGTNP71W88E"
   },
   "item/01KYABYEQPXZAAY0VWF6Z8TQ27": {
-    "canonical_key": "item/01KYABYEQPXZAAY0VWF6Z8TQ27",
-    "doc_type": "item",
     "page_id": "Ticket-01KYABYEQPXZAAY0VWF6Z8TQ27",
-    "render_hash": "f997a43dde31",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "d0857e9b2c2f",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYABYEQPXZAAY0VWF6Z8TQ27.md",
-    "source_hash": "f997a43dde31",
-    "title": "Phase 0: add item/release page-name helpers and extend build_manifest()",
-    "truth_state": "done",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPXZAAY0VWF6Z8TQ27",
-    "wiki_key": "item/01KYABYEQPXZAAY0VWF6Z8TQ27"
+    "source_hash": "d0857e9b2c2f",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYABYEQPXZAAY0VWF6Z8TQ27"
   },
   "item/01KYAC0AC01R4C6W7YY1X8NVRV": {
-    "canonical_key": "item/01KYAC0AC01R4C6W7YY1X8NVRV",
-    "doc_type": "item",
     "page_id": "Ticket-01KYAC0AC01R4C6W7YY1X8NVRV",
-    "render_hash": "c3197b57b0a9",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "413b8a3a16ea",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYAC0AC01R4C6W7YY1X8NVRV.md",
-    "source_hash": "c3197b57b0a9",
-    "title": "Auto-draft the release CHANGELOG unreleased section from git log",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYAC0AC01R4C6W7YY1X8NVRV",
-    "wiki_key": "item/01KYAC0AC01R4C6W7YY1X8NVRV"
+    "source_hash": "413b8a3a16ea",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYAC0AC01R4C6W7YY1X8NVRV"
   },
   "item/01KYACFJA0SQSF4C83BJZXB5MY": {
-    "canonical_key": "item/01KYACFJA0SQSF4C83BJZXB5MY",
-    "doc_type": "item",
     "page_id": "Ticket-01KYACFJA0SQSF4C83BJZXB5MY",
-    "render_hash": "d9954dc53b80",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "f512b963d3bc",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYACFJA0SQSF4C83BJZXB5MY.md",
-    "source_hash": "d9954dc53b80",
-    "title": "banner() mislabels frozen 'current' plans as status reports",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYACFJA0SQSF4C83BJZXB5MY",
-    "wiki_key": "item/01KYACFJA0SQSF4C83BJZXB5MY"
+    "source_hash": "f512b963d3bc",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYACFJA0SQSF4C83BJZXB5MY"
   },
   "item/01KYADGT9Q48EKJZVQQSH4HXWZ": {
-    "canonical_key": "item/01KYADGT9Q48EKJZVQQSH4HXWZ",
-    "doc_type": "item",
     "page_id": "Ticket-01KYADGT9Q48EKJZVQQSH4HXWZ",
-    "render_hash": "5700b8de51c7",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "d8729d523021",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYADGT9Q48EKJZVQQSH4HXWZ.md",
-    "source_hash": "5700b8de51c7",
-    "title": "worklog pr-sync: fetch live PR metadata (files, review/CI status)",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYADGT9Q48EKJZVQQSH4HXWZ",
-    "wiki_key": "item/01KYADGT9Q48EKJZVQQSH4HXWZ"
+    "source_hash": "d8729d523021",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYADGT9Q48EKJZVQQSH4HXWZ"
   },
   "item/01KYAGZ8KK46SQF1MKHAHVCTJV": {
-    "canonical_key": "item/01KYAGZ8KK46SQF1MKHAHVCTJV",
-    "doc_type": "item",
     "page_id": "Ticket-01KYAGZ8KK46SQF1MKHAHVCTJV",
-    "render_hash": "f9c3b1a49025",
-    "rev": "f9173b4c1133ea4c72e86903566f211cb5a4af2f",
+    "render_hash": "a372e0c7e577",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYAGZ8KK46SQF1MKHAHVCTJV.md",
-    "source_hash": "f9c3b1a49025",
-    "title": "worklog sync --pull can never bootstrap: cursor-less pull calls the adapter with no --since, which it requires",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYAGZ8KK46SQF1MKHAHVCTJV",
-    "wiki_key": "item/01KYAGZ8KK46SQF1MKHAHVCTJV"
+    "source_hash": "a372e0c7e577",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYAGZ8KK46SQF1MKHAHVCTJV"
   },
   "item/01KYAH3VHPSEK2RY63J7Y109FR": {
     "canonical_key": "item/01KYAH3VHPSEK2RY63J7Y109FR",
@@ -2955,17 +2873,12 @@
     "wiki_key": "item/01KYAH3VHPSEK2RY63J7Y109FR"
   },
   "item/01KYAHAB3T2QXGMN4SQT4ZNZGW": {
-    "canonical_key": "item/01KYAHAB3T2QXGMN4SQT4ZNZGW",
-    "doc_type": "item",
     "page_id": "Ticket-01KYAHAB3T2QXGMN4SQT4ZNZGW",
-    "render_hash": "0c5f562b82a0",
-    "rev": "f9173b4c1133ea4c72e86903566f211cb5a4af2f",
+    "render_hash": "e132e4b933be",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYAHAB3T2QXGMN4SQT4ZNZGW.md",
-    "source_hash": "0c5f562b82a0",
-    "title": "ia_graph build_graph() ignores commit-only sidecar code links (lands-in only honors code.pr)",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYAHAB3T2QXGMN4SQT4ZNZGW",
-    "wiki_key": "item/01KYAHAB3T2QXGMN4SQT4ZNZGW"
+    "source_hash": "e132e4b933be",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYAHAB3T2QXGMN4SQT4ZNZGW"
   },
   "item/01KYAKH389T1ZKKBP94WH2HK94": {
     "canonical_key": "item/01KYAKH389T1ZKKBP94WH2HK94",
@@ -3577,52 +3490,36 @@
     "wiki_key": "item/01KYKATVGM10E5HVZHVPA1C5J0"
   },
   "item/01KYKDGVTYMZ0E84BVBC29FTJY": {
-    "canonical_key": "item/01KYKDGVTYMZ0E84BVBC29FTJY",
     "page_id": "Ticket-01KYKDGVTYMZ0E84BVBC29FTJY",
-    "render_hash": "47f8ef33275c",
-    "rev": "984a7459948bb1804f6df8409366296b52e18ef7",
+    "render_hash": "b40a3bbf969e",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYKDGVTYMZ0E84BVBC29FTJY.md",
-    "source_hash": "47f8ef33275c",
-    "title": "roadmap-snapshot freezes whatever is on disk instead of rendering first",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYKDGVTYMZ0E84BVBC29FTJY",
-    "wiki_key": "item/01KYKDGVTYMZ0E84BVBC29FTJY"
+    "source_hash": "b40a3bbf969e",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYKDGVTYMZ0E84BVBC29FTJY"
   },
   "item/01KYKDGVZ4C7FSCY7GJNGPV0Q5": {
-    "canonical_key": "item/01KYKDGVZ4C7FSCY7GJNGPV0Q5",
     "page_id": "Ticket-01KYKDGVZ4C7FSCY7GJNGPV0Q5",
-    "render_hash": "a0a8c57f83bd",
-    "rev": "984a7459948bb1804f6df8409366296b52e18ef7",
+    "render_hash": "eec029896451",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYKDGVZ4C7FSCY7GJNGPV0Q5.md",
-    "source_hash": "a0a8c57f83bd",
-    "title": "Roadmap hides epics whose children are all closed but which are still open",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYKDGVZ4C7FSCY7GJNGPV0Q5",
-    "wiki_key": "item/01KYKDGVZ4C7FSCY7GJNGPV0Q5"
+    "source_hash": "eec029896451",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYKDGVZ4C7FSCY7GJNGPV0Q5"
   },
   "item/01KYKDGW3DFDEQ1DEDFR6N45SM": {
-    "canonical_key": "item/01KYKDGW3DFDEQ1DEDFR6N45SM",
     "page_id": "Ticket-01KYKDGW3DFDEQ1DEDFR6N45SM",
-    "render_hash": "f103265bd048",
-    "rev": "984a7459948bb1804f6df8409366296b52e18ef7",
+    "render_hash": "c9e68f3538f7",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYKDGW3DFDEQ1DEDFR6N45SM.md",
-    "source_hash": "f103265bd048",
-    "title": "Version lockstep check does not cover the README version marker",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYKDGW3DFDEQ1DEDFR6N45SM",
-    "wiki_key": "item/01KYKDGW3DFDEQ1DEDFR6N45SM"
+    "source_hash": "c9e68f3538f7",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYKDGW3DFDEQ1DEDFR6N45SM"
   },
   "item/01KYKDGW7HJMRQ2KKF02M8CAAW": {
-    "canonical_key": "item/01KYKDGW7HJMRQ2KKF02M8CAAW",
     "page_id": "Ticket-01KYKDGW7HJMRQ2KKF02M8CAAW",
-    "render_hash": "1fa0e3779ea9",
-    "rev": "984a7459948bb1804f6df8409366296b52e18ef7",
+    "render_hash": "ed2ec7d27a24",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYKDGW7HJMRQ2KKF02M8CAAW.md",
-    "source_hash": "1fa0e3779ea9",
-    "title": "Release procedure omits the re-index required after publishing to the wiki",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYKDGW7HJMRQ2KKF02M8CAAW",
-    "wiki_key": "item/01KYKDGW7HJMRQ2KKF02M8CAAW"
+    "source_hash": "ed2ec7d27a24",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYKDGW7HJMRQ2KKF02M8CAAW"
   },
   "item/01KYND4SNNCPZ7R2NWFD7QXYTJ": {
     "canonical_key": "item/01KYND4SNNCPZ7R2NWFD7QXYTJ",
@@ -3733,100 +3630,68 @@
     "wiki_key": "item/01KYNHEV1BJ48RKWHTXCJYVRAF"
   },
   "item/01KYNHEV5GCR1MDNECAXFT0GK2": {
-    "canonical_key": "item/01KYNHEV5GCR1MDNECAXFT0GK2",
     "page_id": "Ticket-01KYNHEV5GCR1MDNECAXFT0GK2",
-    "render_hash": "0b7a8d38f14e",
-    "rev": "7f673e68a4bc90bb26929003c844e807d4d471c1",
+    "render_hash": "355598c43fbd",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYNHEV5GCR1MDNECAXFT0GK2.md",
-    "source_hash": "0b7a8d38f14e",
-    "title": "Concurrent sessions in one working directory corrupt each other's work",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEV5GCR1MDNECAXFT0GK2",
-    "wiki_key": "item/01KYNHEV5GCR1MDNECAXFT0GK2"
+    "source_hash": "355598c43fbd",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEV5GCR1MDNECAXFT0GK2"
   },
   "item/01KYNHEV9M01PQJZQ5QRZQ3C8J": {
-    "canonical_key": "item/01KYNHEV9M01PQJZQ5QRZQ3C8J",
     "page_id": "Ticket-01KYNHEV9M01PQJZQ5QRZQ3C8J",
-    "render_hash": "fb85cf91f312",
-    "rev": "7f673e68a4bc90bb26929003c844e807d4d471c1",
+    "render_hash": "1a96117d668d",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYNHEV9M01PQJZQ5QRZQ3C8J.md",
-    "source_hash": "fb85cf91f312",
-    "title": "Catch duplicate ticket ownership at merge time, not just at sync",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEV9M01PQJZQ5QRZQ3C8J",
-    "wiki_key": "item/01KYNHEV9M01PQJZQ5QRZQ3C8J"
+    "source_hash": "1a96117d668d",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEV9M01PQJZQ5QRZQ3C8J"
   },
   "item/01KYNHEVDSD4BTASXCTV88Q80Q": {
-    "canonical_key": "item/01KYNHEVDSD4BTASXCTV88Q80Q",
     "page_id": "Ticket-01KYNHEVDSD4BTASXCTV88Q80Q",
-    "render_hash": "abd6ca7ccfb4",
-    "rev": "7f673e68a4bc90bb26929003c844e807d4d471c1",
+    "render_hash": "9153b321007b",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYNHEVDSD4BTASXCTV88Q80Q.md",
-    "source_hash": "abd6ca7ccfb4",
-    "title": "Sync should say which ticket fields it is about to overwrite",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEVDSD4BTASXCTV88Q80Q",
-    "wiki_key": "item/01KYNHEVDSD4BTASXCTV88Q80Q"
+    "source_hash": "9153b321007b",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEVDSD4BTASXCTV88Q80Q"
   },
   "item/01KYNHEVJNZTGEJ2EW5A9C9A7C": {
-    "canonical_key": "item/01KYNHEVJNZTGEJ2EW5A9C9A7C",
     "page_id": "Ticket-01KYNHEVJNZTGEJ2EW5A9C9A7C",
-    "render_hash": "7569f887238a",
-    "rev": "7f673e68a4bc90bb26929003c844e807d4d471c1",
+    "render_hash": "526e837150c9",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYNHEVJNZTGEJ2EW5A9C9A7C.md",
-    "source_hash": "7569f887238a",
-    "title": "Restrict a ticket to one item when forcing keys into scope",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEVJNZTGEJ2EW5A9C9A7C",
-    "wiki_key": "item/01KYNHEVJNZTGEJ2EW5A9C9A7C"
+    "source_hash": "526e837150c9",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEVJNZTGEJ2EW5A9C9A7C"
   },
   "item/01KYNHEVPZJZFB9HPHA68K2XBZ": {
-    "canonical_key": "item/01KYNHEVPZJZFB9HPHA68K2XBZ",
     "page_id": "Ticket-01KYNHEVPZJZFB9HPHA68K2XBZ",
-    "render_hash": "061d37f7b9b5",
-    "rev": "7f673e68a4bc90bb26929003c844e807d4d471c1",
+    "render_hash": "82ccd7dbf55a",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYNHEVPZJZFB9HPHA68K2XBZ.md",
-    "source_hash": "061d37f7b9b5",
-    "title": "Conflict and resolve accept any field name, including ones that break sync",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEVPZJZFB9HPHA68K2XBZ",
-    "wiki_key": "item/01KYNHEVPZJZFB9HPHA68K2XBZ"
+    "source_hash": "82ccd7dbf55a",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEVPZJZFB9HPHA68K2XBZ"
   },
   "item/01KYNHEVVG57D20ZG5EJ3F36J3": {
-    "canonical_key": "item/01KYNHEVVG57D20ZG5EJ3F36J3",
     "page_id": "Ticket-01KYNHEVVG57D20ZG5EJ3F36J3",
-    "render_hash": "76f1584f5ec7",
-    "rev": "7f673e68a4bc90bb26929003c844e807d4d471c1",
+    "render_hash": "ea0a3d8169d8",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYNHEVVG57D20ZG5EJ3F36J3.md",
-    "source_hash": "76f1584f5ec7",
-    "title": "A ticket that no longer exists remotely retries forever",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEVVG57D20ZG5EJ3F36J3",
-    "wiki_key": "item/01KYNHEVVG57D20ZG5EJ3F36J3"
+    "source_hash": "ea0a3d8169d8",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEVVG57D20ZG5EJ3F36J3"
   },
   "item/01KYNHEVZSBJ43P0CE2EBXT7Y0": {
-    "canonical_key": "item/01KYNHEVZSBJ43P0CE2EBXT7Y0",
     "page_id": "Ticket-01KYNHEVZSBJ43P0CE2EBXT7Y0",
-    "render_hash": "7aff21fd4e44",
-    "rev": "7f673e68a4bc90bb26929003c844e807d4d471c1",
+    "render_hash": "7a53809ca581",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYNHEVZSBJ43P0CE2EBXT7Y0.md",
-    "source_hash": "7aff21fd4e44",
-    "title": "Warn at plan capture when a task title references a ticket number",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEVZSBJ43P0CE2EBXT7Y0",
-    "wiki_key": "item/01KYNHEVZSBJ43P0CE2EBXT7Y0"
+    "source_hash": "7a53809ca581",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEVZSBJ43P0CE2EBXT7Y0"
   },
   "item/01KYNHEW47G49CWZ9SS9ABQ2VG": {
-    "canonical_key": "item/01KYNHEW47G49CWZ9SS9ABQ2VG",
     "page_id": "Ticket-01KYNHEW47G49CWZ9SS9ABQ2VG",
-    "render_hash": "79d6d884cdfa",
-    "rev": "7f673e68a4bc90bb26929003c844e807d4d471c1",
+    "render_hash": "e5f5a7f41578",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/tickets/01KYNHEW47G49CWZ9SS9ABQ2VG.md",
-    "source_hash": "79d6d884cdfa",
-    "title": "Log compaction is silently undone by any branch that spans it",
-    "truth_state": "open",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEW47G49CWZ9SS9ABQ2VG",
-    "wiki_key": "item/01KYNHEW47G49CWZ9SS9ABQ2VG"
+    "source_hash": "e5f5a7f41578",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNHEW47G49CWZ9SS9ABQ2VG"
   },
   "item/01KYNKBCNS8WY5BH2B7EDBHMF1": {
     "canonical_key": "item/01KYNKBCNS8WY5BH2B7EDBHMF1",
@@ -3840,13 +3705,286 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYNKBCNS8WY5BH2B7EDBHMF1",
     "wiki_key": "item/01KYNKBCNS8WY5BH2B7EDBHMF1"
   },
+  "item/01KYT66K7YA68DB5WF3B0P625B": {
+    "page_id": "Ticket-01KYT66K7YA68DB5WF3B0P625B",
+    "render_hash": "91da6be7dd2f",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYT66K7YA68DB5WF3B0P625B.md",
+    "source_hash": "91da6be7dd2f",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYT66K7YA68DB5WF3B0P625B"
+  },
+  "item/01KYTDN3W67ZFFDE1F60M2ST6T": {
+    "page_id": "Ticket-01KYTDN3W67ZFFDE1F60M2ST6T",
+    "render_hash": "82cea18e5a05",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTDN3W67ZFFDE1F60M2ST6T.md",
+    "source_hash": "82cea18e5a05",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTDN3W67ZFFDE1F60M2ST6T"
+  },
+  "item/01KYTGNS76Z1YRA64QMARYSWJM": {
+    "page_id": "Ticket-01KYTGNS76Z1YRA64QMARYSWJM",
+    "render_hash": "acf2a3864ddf",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTGNS76Z1YRA64QMARYSWJM.md",
+    "source_hash": "acf2a3864ddf",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTGNS76Z1YRA64QMARYSWJM"
+  },
+  "item/01KYTJGK2WMX6PNMYQDFFFPGTP": {
+    "page_id": "Ticket-01KYTJGK2WMX6PNMYQDFFFPGTP",
+    "render_hash": "00759ec785e8",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2WMX6PNMYQDFFFPGTP.md",
+    "source_hash": "00759ec785e8",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2WMX6PNMYQDFFFPGTP"
+  },
+  "item/01KYTJGK2X700NYTZHB0JDE6Q1": {
+    "page_id": "Ticket-01KYTJGK2X700NYTZHB0JDE6Q1",
+    "render_hash": "23fcee3a55af",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2X700NYTZHB0JDE6Q1.md",
+    "source_hash": "23fcee3a55af",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2X700NYTZHB0JDE6Q1"
+  },
+  "item/01KYTJGK2X7FC4PTAMH60ECY36": {
+    "page_id": "Ticket-01KYTJGK2X7FC4PTAMH60ECY36",
+    "render_hash": "a208d52e0cb0",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2X7FC4PTAMH60ECY36.md",
+    "source_hash": "a208d52e0cb0",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2X7FC4PTAMH60ECY36"
+  },
+  "item/01KYTJGK2X7FFZC5BCYF2BPSSF": {
+    "page_id": "Ticket-01KYTJGK2X7FFZC5BCYF2BPSSF",
+    "render_hash": "be40604bab3a",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2X7FFZC5BCYF2BPSSF.md",
+    "source_hash": "be40604bab3a",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2X7FFZC5BCYF2BPSSF"
+  },
+  "item/01KYTJGK2X98H9T7VVR879B0XC": {
+    "page_id": "Ticket-01KYTJGK2X98H9T7VVR879B0XC",
+    "render_hash": "49aae8c74bb1",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2X98H9T7VVR879B0XC.md",
+    "source_hash": "49aae8c74bb1",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2X98H9T7VVR879B0XC"
+  },
+  "item/01KYTJGK2XDQVAZ85ZEH92NGGW": {
+    "page_id": "Ticket-01KYTJGK2XDQVAZ85ZEH92NGGW",
+    "render_hash": "fa1df5c327e3",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2XDQVAZ85ZEH92NGGW.md",
+    "source_hash": "fa1df5c327e3",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2XDQVAZ85ZEH92NGGW"
+  },
+  "item/01KYTJGK2XDTKNHGH8QTHBHCTY": {
+    "page_id": "Ticket-01KYTJGK2XDTKNHGH8QTHBHCTY",
+    "render_hash": "106f8f15f0db",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2XDTKNHGH8QTHBHCTY.md",
+    "source_hash": "106f8f15f0db",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2XDTKNHGH8QTHBHCTY"
+  },
+  "item/01KYTJGK2XJD516RXMZ52PDZP1": {
+    "page_id": "Ticket-01KYTJGK2XJD516RXMZ52PDZP1",
+    "render_hash": "f4daf44c9a61",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2XJD516RXMZ52PDZP1.md",
+    "source_hash": "f4daf44c9a61",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2XJD516RXMZ52PDZP1"
+  },
+  "item/01KYTJGK2XJSCMJ9K16YDXXMD2": {
+    "page_id": "Ticket-01KYTJGK2XJSCMJ9K16YDXXMD2",
+    "render_hash": "74775feaa664",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2XJSCMJ9K16YDXXMD2.md",
+    "source_hash": "74775feaa664",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2XJSCMJ9K16YDXXMD2"
+  },
+  "item/01KYTJGK2XMY73EJMZ026Q573G": {
+    "page_id": "Ticket-01KYTJGK2XMY73EJMZ026Q573G",
+    "render_hash": "9fb7c31a5d15",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2XMY73EJMZ026Q573G.md",
+    "source_hash": "9fb7c31a5d15",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2XMY73EJMZ026Q573G"
+  },
+  "item/01KYTJGK2XSA2C4H72SKP8F34D": {
+    "page_id": "Ticket-01KYTJGK2XSA2C4H72SKP8F34D",
+    "render_hash": "427e66a83c47",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2XSA2C4H72SKP8F34D.md",
+    "source_hash": "427e66a83c47",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2XSA2C4H72SKP8F34D"
+  },
+  "item/01KYTJGK2XYHW1BT3Y1XH1YNP7": {
+    "page_id": "Ticket-01KYTJGK2XYHW1BT3Y1XH1YNP7",
+    "render_hash": "2d3ab6e883fc",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYTJGK2XYHW1BT3Y1XH1YNP7.md",
+    "source_hash": "2d3ab6e883fc",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYTJGK2XYHW1BT3Y1XH1YNP7"
+  },
+  "item/01KYWGJD1QCQRM6V6S0MWN5SCW": {
+    "page_id": "Ticket-01KYWGJD1QCQRM6V6S0MWN5SCW",
+    "render_hash": "7680a3072a62",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYWGJD1QCQRM6V6S0MWN5SCW.md",
+    "source_hash": "7680a3072a62",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYWGJD1QCQRM6V6S0MWN5SCW"
+  },
+  "item/01KYWGM3KPNQNSWV03FRG23ADB": {
+    "page_id": "Ticket-01KYWGM3KPNQNSWV03FRG23ADB",
+    "render_hash": "3d6e478b2f82",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYWGM3KPNQNSWV03FRG23ADB.md",
+    "source_hash": "3d6e478b2f82",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYWGM3KPNQNSWV03FRG23ADB"
+  },
+  "item/01KYWGM3R13Q33YZ3PJA3V7QMD": {
+    "page_id": "Ticket-01KYWGM3R13Q33YZ3PJA3V7QMD",
+    "render_hash": "f00839477541",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYWGM3R13Q33YZ3PJA3V7QMD.md",
+    "source_hash": "f00839477541",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYWGM3R13Q33YZ3PJA3V7QMD"
+  },
+  "item/01KYWGM3W958F3QK4HB52X1Q1X": {
+    "page_id": "Ticket-01KYWGM3W958F3QK4HB52X1Q1X",
+    "render_hash": "48458322b120",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYWGM3W958F3QK4HB52X1Q1X.md",
+    "source_hash": "48458322b120",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYWGM3W958F3QK4HB52X1Q1X"
+  },
+  "item/01KYWJ6YGQMMHQ58G9CNAF6F00": {
+    "page_id": "Ticket-01KYWJ6YGQMMHQ58G9CNAF6F00",
+    "render_hash": "66fa61496217",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYWJ6YGQMMHQ58G9CNAF6F00.md",
+    "source_hash": "66fa61496217",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYWJ6YGQMMHQ58G9CNAF6F00"
+  },
+  "item/01KYZ5CY9PS60BYH1E07DF5C9P": {
+    "page_id": "Ticket-01KYZ5CY9PS60BYH1E07DF5C9P",
+    "render_hash": "aa3624d3eb9e",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYZ5CY9PS60BYH1E07DF5C9P.md",
+    "source_hash": "aa3624d3eb9e",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYZ5CY9PS60BYH1E07DF5C9P"
+  },
+  "item/01KYZEC0C1MGQXQSH61ZPDD0YZ": {
+    "page_id": "Ticket-01KYZEC0C1MGQXQSH61ZPDD0YZ",
+    "render_hash": "9b29cc68c229",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYZEC0C1MGQXQSH61ZPDD0YZ.md",
+    "source_hash": "9b29cc68c229",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYZEC0C1MGQXQSH61ZPDD0YZ"
+  },
+  "item/01KYZER08G7NSQ6CFQ9QWFZFTJ": {
+    "page_id": "Ticket-01KYZER08G7NSQ6CFQ9QWFZFTJ",
+    "render_hash": "e704ac61a81d",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYZER08G7NSQ6CFQ9QWFZFTJ.md",
+    "source_hash": "e704ac61a81d",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYZER08G7NSQ6CFQ9QWFZFTJ"
+  },
+  "item/01KYZFF99YF79DAN4V33HXC7AE": {
+    "page_id": "Ticket-01KYZFF99YF79DAN4V33HXC7AE",
+    "render_hash": "c4d0e2ac5116",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYZFF99YF79DAN4V33HXC7AE.md",
+    "source_hash": "c4d0e2ac5116",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYZFF99YF79DAN4V33HXC7AE"
+  },
+  "item/01KYZFMZ5CF79DAYHMNKXSAZ5K": {
+    "page_id": "Ticket-01KYZFMZ5CF79DAYHMNKXSAZ5K",
+    "render_hash": "e95b66c99032",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYZFMZ5CF79DAYHMNKXSAZ5K.md",
+    "source_hash": "e95b66c99032",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYZFMZ5CF79DAYHMNKXSAZ5K"
+  },
+  "item/01KYZNG520D5E9AVN2X1C0BQ3E": {
+    "page_id": "Ticket-01KYZNG520D5E9AVN2X1C0BQ3E",
+    "render_hash": "4cc15badcf98",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYZNG520D5E9AVN2X1C0BQ3E.md",
+    "source_hash": "4cc15badcf98",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYZNG520D5E9AVN2X1C0BQ3E"
+  },
+  "item/01KYZNRRNFBWHA8452CNFKH6XV": {
+    "page_id": "Ticket-01KYZNRRNFBWHA8452CNFKH6XV",
+    "render_hash": "731caffd0a00",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KYZNRRNFBWHA8452CNFKH6XV.md",
+    "source_hash": "731caffd0a00",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KYZNRRNFBWHA8452CNFKH6XV"
+  },
+  "item/01KZ2JAT7PCV6B34W2RK34WBX7": {
+    "page_id": "Ticket-01KZ2JAT7PCV6B34W2RK34WBX7",
+    "render_hash": "d20f89c749b7",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KZ2JAT7PCV6B34W2RK34WBX7.md",
+    "source_hash": "d20f89c749b7",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ2JAT7PCV6B34W2RK34WBX7"
+  },
+  "item/01KZ2JRT7MAE0MJH7Y0SJ3ZJS3": {
+    "page_id": "Ticket-01KZ2JRT7MAE0MJH7Y0SJ3ZJS3",
+    "render_hash": "67beda91574e",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KZ2JRT7MAE0MJH7Y0SJ3ZJS3.md",
+    "source_hash": "67beda91574e",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ2JRT7MAE0MJH7Y0SJ3ZJS3"
+  },
+  "item/01KZ2KGPRMKG9B98Q6YVD3MZVJ": {
+    "page_id": "Ticket-01KZ2KGPRMKG9B98Q6YVD3MZVJ",
+    "render_hash": "5e4232fb08eb",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KZ2KGPRMKG9B98Q6YVD3MZVJ.md",
+    "source_hash": "5e4232fb08eb",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ2KGPRMKG9B98Q6YVD3MZVJ"
+  },
+  "item/01KZ2M00NVDWJN795G7F8CWTRJ": {
+    "page_id": "Ticket-01KZ2M00NVDWJN795G7F8CWTRJ",
+    "render_hash": "a8500ab54746",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KZ2M00NVDWJN795G7F8CWTRJ.md",
+    "source_hash": "a8500ab54746",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ2M00NVDWJN795G7F8CWTRJ"
+  },
+  "item/01KZ2M07FKC9AYK84B7AC91TVP": {
+    "page_id": "Ticket-01KZ2M07FKC9AYK84B7AC91TVP",
+    "render_hash": "6c22fc13a211",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KZ2M07FKC9AYK84B7AC91TVP.md",
+    "source_hash": "6c22fc13a211",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ2M07FKC9AYK84B7AC91TVP"
+  },
+  "item/01KZ2M75CEXBQHFN1AG1Z8A2YB": {
+    "page_id": "Ticket-01KZ2M75CEXBQHFN1AG1Z8A2YB",
+    "render_hash": "7c885cb11f87",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KZ2M75CEXBQHFN1AG1Z8A2YB.md",
+    "source_hash": "7c885cb11f87",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ2M75CEXBQHFN1AG1Z8A2YB"
+  },
+  "item/01KZ2MZ69SFQDHEXFBJTXTDNFX": {
+    "page_id": "Ticket-01KZ2MZ69SFQDHEXFBJTXTDNFX",
+    "render_hash": "2a88c4e720eb",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/tickets/01KZ2MZ69SFQDHEXFBJTXTDNFX.md",
+    "source_hash": "2a88c4e720eb",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ2MZ69SFQDHEXFBJTXTDNFX"
+  },
   "plan/2026-07-17_worklog-core_plan": {
     "canonical_key": "plan/2026-07-17_worklog-core_plan",
     "doc_type": "plan",
-    "render_hash": "b21b82db6881",
+    "page_id": "Plan-2026-07-17_worklog-core_plan",
+    "render_hash": "b9edaab61e8a",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-17_worklog-core_plan.md",
     "source_hash": "1470921807cc",
-    "title": "Worklog Core (Spec \u00a718 Steps 3\u20134 + CI) Implementation Plan",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-2026-07-17_worklog-core_plan",
     "wiki_key": "plan/2026-07-17_worklog-core_plan"
@@ -3854,10 +3992,11 @@
   "plan/2026-07-18-claude-plugin": {
     "canonical_key": "plan/2026-07-18-claude-plugin",
     "doc_type": "plan",
-    "render_hash": "30073c4c1958",
+    "page_id": "Plan-claude-plugin",
+    "render_hash": "b6c56c768a92",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-18-claude-plugin.md",
     "source_hash": "befc73066254",
-    "title": "Worklog Claude plugin",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-claude-plugin",
     "wiki_key": "plan/2026-07-18-claude-plugin"
@@ -3865,10 +4004,11 @@
   "plan/2026-07-18-docs-wiki-dogfood": {
     "canonical_key": "plan/2026-07-18-docs-wiki-dogfood",
     "doc_type": "plan",
-    "render_hash": "1aad870ae33e",
+    "page_id": "Plan-docs-wiki-dogfood",
+    "render_hash": "7814781186d8",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-18-docs-wiki-dogfood.md",
     "source_hash": "0690ad296203",
-    "title": "Docs, wiki publishing & dogfood discipline",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-docs-wiki-dogfood",
     "wiki_key": "plan/2026-07-18-docs-wiki-dogfood"
@@ -3876,10 +4016,11 @@
   "plan/2026-07-19-adr": {
     "canonical_key": "plan/2026-07-19-adr",
     "doc_type": "plan",
-    "render_hash": "d1d453562cb2",
+    "page_id": "Plan-adr",
+    "render_hash": "b30311954487",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-19-adr.md",
     "source_hash": "ba7f3164d42e",
-    "title": "Architecture Decision Records \u2014 schema-validated, wiki-synced",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-adr",
     "wiki_key": "plan/2026-07-19-adr"
@@ -3887,10 +4028,11 @@
   "plan/2026-07-22-grok-viz-background-execution": {
     "canonical_key": "plan/2026-07-22-grok-viz-background-execution",
     "doc_type": "plan",
-    "render_hash": "f2f0241f7d85",
+    "page_id": "Plan-grok-viz-background-execution",
+    "render_hash": "de70b71f7f66",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-22-grok-viz-background-execution.md",
     "source_hash": "29bf9ab8292f",
-    "title": "Grok viz \u2014 background-subagent execution rule (amendment record)",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-grok-viz-background-execution",
     "wiki_key": "plan/2026-07-22-grok-viz-background-execution"
@@ -3898,10 +4040,11 @@
   "plan/2026-07-22-wiki-ticket-ui-ia": {
     "canonical_key": "plan/2026-07-22-wiki-ticket-ui-ia",
     "doc_type": "plan",
-    "render_hash": "da87f6adbeda",
+    "page_id": "Plan-wiki-ticket-ui-ia",
+    "render_hash": "88352e8763ec",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-22-wiki-ticket-ui-ia.md",
     "source_hash": "ab27d23f82ca",
-    "title": "WikiTicket UI \u2014 IA-aware dashboard (supersedes wiki-ticket-ui)",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-ticket-ui-ia",
     "wiki_key": "plan/2026-07-22-wiki-ticket-ui-ia"
@@ -3909,11 +4052,11 @@
   "plan/2026-07-24-artifact-pages": {
     "canonical_key": "plan/2026-07-24-artifact-pages",
     "doc_type": "plan",
-    "render_hash": "cf57392e75ba",
-    "rev": "5213ddcaa6fdedbf171c469a1ab09344ec1f4c43",
+    "page_id": "Plan-artifact-pages",
+    "render_hash": "3c25e86768da",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-24-artifact-pages.md",
     "source_hash": "87aae657edde",
-    "title": "Extend IA to tickets, PRs, and releases (artifact pages)",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-artifact-pages",
     "wiki_key": "plan/2026-07-24-artifact-pages"
@@ -3922,11 +4065,10 @@
     "canonical_key": "plan/2026-07-25-branch-discipline-hooks",
     "doc_type": "plan",
     "page_id": "Plan-branch-discipline-hooks",
-    "render_hash": "ec09594c2bb3",
-    "rev": "853e2650aeb7c0bbdb71abc9e36c2d4e0a9964c6",
+    "render_hash": "a422789bdf3a",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-25-branch-discipline-hooks.md",
     "source_hash": "0b0f4ca588dc",
-    "title": "Branch-discipline hooks: never commit on main, always reference work",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-branch-discipline-hooks",
     "wiki_key": "plan/2026-07-25-branch-discipline-hooks"
@@ -3935,11 +4077,10 @@
     "canonical_key": "plan/2026-07-25-wiki-driven-integration-guides",
     "doc_type": "plan",
     "page_id": "Plan-wiki-driven-integration-guides",
-    "render_hash": "707c28fd7b58",
-    "rev": "f69d2f148c4e7ea3b628c5da3bd90f9467d8e232",
+    "render_hash": "bf50ad406607",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-25-wiki-driven-integration-guides.md",
     "source_hash": "f4ff9f91bebd",
-    "title": "Wiki-Driven Integration Guides for SDD tools and ticket/wiki systems",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-wiki-driven-integration-guides",
     "wiki_key": "plan/2026-07-25-wiki-driven-integration-guides"
@@ -3948,11 +4089,10 @@
     "canonical_key": "plan/2026-07-26-declare-graph-engineering",
     "doc_type": "plan",
     "page_id": "Plan-declare-graph-engineering",
-    "render_hash": "54e7ca57d1bd",
-    "rev": "cec973f92a2283c9852c3584836de5422b72a064",
+    "render_hash": "8ae2a4595065",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-26-declare-graph-engineering.md",
     "source_hash": "becabcd86332",
-    "title": "Declare wiki_ticket_sdd as a Graph Engineering system",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-declare-graph-engineering",
     "wiki_key": "plan/2026-07-26-declare-graph-engineering"
@@ -3961,11 +4101,10 @@
     "canonical_key": "plan/2026-07-27-post-v017-drift-and-prefix-resolution",
     "doc_type": "plan",
     "page_id": "Plan-post-v017-drift-and-prefix-resolution",
-    "render_hash": "a3d2d17502f0",
-    "rev": "fe47a14f4d50e4052d9638102e5bb23a1ea83bd6",
+    "render_hash": "2e0b1f5661a4",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-27-post-v017-drift-and-prefix-resolution.md",
     "source_hash": "be94cd6dad60",
-    "title": "Clear post-v0.17.0 drift and fix the prefix-ULID log corruption",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-post-v017-drift-and-prefix-resolution",
     "wiki_key": "plan/2026-07-27-post-v017-drift-and-prefix-resolution"
@@ -3974,14 +4113,61 @@
     "canonical_key": "plan/2026-07-28-one-owner-per-external-key",
     "doc_type": "plan",
     "page_id": "Plan-one-owner-per-external-key",
-    "render_hash": "a9c9d60cb8c9",
-    "rev": "9490229e800224da038d15e153f2afe33b67770b",
+    "render_hash": "1d9326975768",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-28-one-owner-per-external-key.md",
     "source_hash": "8e49b3aa6612",
-    "title": "One local owner per remote ticket (#226)",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-one-owner-per-external-key",
     "wiki_key": "plan/2026-07-28-one-owner-per-external-key"
+  },
+  "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions": {
+    "canonical_key": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions",
+    "doc_type": "plan",
+    "page_id": "Plan-close-p1-epics-and-settle-merge-and-gone-questions",
+    "render_hash": "bcef8f4046aa",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/plans/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions.md",
+    "source_hash": "87bd9c5d9ef7",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-close-p1-epics-and-settle-merge-and-gone-questions",
+    "wiki_key": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions"
+  },
+  "plan/2026-08-01-configurable-item-fields": {
+    "canonical_key": "plan/2026-08-01-configurable-item-fields",
+    "doc_type": "plan",
+    "page_id": "Plan-configurable-item-fields",
+    "render_hash": "63f5e56d846d",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/plans/2026-08-01-configurable-item-fields.md",
+    "source_hash": "8bf5a484159e",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-configurable-item-fields",
+    "wiki_key": "plan/2026-08-01-configurable-item-fields"
+  },
+  "plan/2026-08-02-plan-banner-state": {
+    "canonical_key": "plan/2026-08-02-plan-banner-state",
+    "doc_type": "plan",
+    "page_id": "Plan-plan-banner-state",
+    "render_hash": "123d19db7eeb",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/plans/2026-08-02-plan-banner-state.md",
+    "source_hash": "75c053a7bc00",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-plan-banner-state",
+    "wiki_key": "plan/2026-08-02-plan-banner-state"
+  },
+  "plan/2026-08-02-trace-check-scope": {
+    "canonical_key": "plan/2026-08-02-trace-check-scope",
+    "doc_type": "plan",
+    "page_id": "Plan-trace-check-scope",
+    "render_hash": "27d9fffb228b",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/plans/2026-08-02-trace-check-scope.md",
+    "source_hash": "13c4ef8445ad",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-trace-check-scope",
+    "wiki_key": "plan/2026-08-02-trace-check-scope"
   },
   "plan/design-docs-release-sync": {
     "aliases": [
@@ -3989,11 +4175,11 @@
     ],
     "canonical_key": "plan/2026-07-19-design-docs-release-sync",
     "doc_type": "plan",
-    "render_hash": "9f3a72d1e016",
-    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
+    "page_id": "Plan-design-docs-release-sync",
+    "render_hash": "cf34085d217c",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-19-design-docs-release-sync.md",
     "source_hash": "c0756a150c1a",
-    "title": "Design docs + code walkthroughs with release-time doc sync",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-design-docs-release-sync",
     "wiki_key": "plan/design-docs-release-sync"
@@ -4004,11 +4190,11 @@
     ],
     "canonical_key": "plan/2026-07-19-grok-compat-and-mermaid-viz",
     "doc_type": "plan",
-    "render_hash": "b4f3b1d3ebbe",
-    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
+    "page_id": "Plan-grok-compat-and-mermaid-viz",
+    "render_hash": "fd074751107f",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-19-grok-compat-and-mermaid-viz.md",
     "source_hash": "0bfe624745fd",
-    "title": "Grok Build compatibility statement + Mermaid roadmap visualization",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-grok-compat-and-mermaid-viz",
     "wiki_key": "plan/grok-compat-and-mermaid-viz"
@@ -4019,11 +4205,11 @@
     ],
     "canonical_key": "plan/2026-07-22-ia-content-model",
     "doc_type": "plan",
-    "render_hash": "82df4ad34346",
-    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
+    "page_id": "Plan-ia-content-model",
+    "render_hash": "99eea1b5d84c",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-22-ia-content-model.md",
     "source_hash": "0d3a5032659f",
-    "title": "IA & content model (supersedes wiki-information-architecture)",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-ia-content-model",
     "wiki_key": "plan/ia-content-model"
@@ -4034,11 +4220,11 @@
     ],
     "canonical_key": "plan/2026-07-18-ticket-sync-and-init-detection",
     "doc_type": "plan",
-    "render_hash": "22ae694a4124",
-    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
+    "page_id": "Plan-ticket-sync-and-init-detection",
+    "render_hash": "70cc1ea6299b",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-18-ticket-sync-and-init-detection.md",
     "source_hash": "5f1c7269f072",
-    "title": "Ticket sync (push-only, GitHub Issues) + /worklog:init system detection",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-ticket-sync-and-init-detection",
     "wiki_key": "plan/ticket-sync-and-init-detection"
@@ -4049,11 +4235,11 @@
     ],
     "canonical_key": "plan/2026-07-18-typed-adapter-contract",
     "doc_type": "plan",
-    "render_hash": "4d25b95ad027",
-    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
+    "page_id": "Plan-typed-adapter-contract",
+    "render_hash": "599035278616",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-18-typed-adapter-contract.md",
     "source_hash": "41a12da2f252",
-    "title": "Typed Adapter Contract for ticket-sync",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-typed-adapter-contract",
     "wiki_key": "plan/typed-adapter-contract"
@@ -4094,11 +4280,11 @@
     ],
     "canonical_key": "plan/2026-07-18-work-taxonomy",
     "doc_type": "plan",
-    "render_hash": "a81fd55ccaac",
-    "rev": "74814c40497da243aa71b902a5096d935ae2a922",
+    "page_id": "Plan-work-taxonomy",
+    "render_hash": "aca3d36a4086",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/plans/2026-07-18-work-taxonomy.md",
     "source_hash": "514fc74c6594",
-    "title": "Work Taxonomy + Flag-Gated Classifier",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-work-taxonomy",
     "wiki_key": "plan/work-taxonomy"
@@ -4110,176 +4296,197 @@
     "canonical_key": "guide/plugin-guide",
     "doc_type": "guide",
     "page_id": "Plugin-Guide",
-    "render_hash": "bf57eb131bb0",
-    "rev": "4830031",
+    "render_hash": "a7d2bfc093ed",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/user_guide/plugin-guide.md",
-    "source_hash": "6dfd6dd7df60",
-    "title": "WikiTicket SDD \u2014 Plugin Guide",
+    "source_hash": "7c8893e74b82",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plugin-Guide",
     "wiki_key": "plugin-guide"
   },
   "pr/102": {
-    "canonical_key": "pr/102",
-    "doc_type": "pr",
     "page_id": "PR-102",
-    "render_hash": "fbbe115d94c0",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "abe9df726053",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/102.md",
-    "source_hash": "fbbe115d94c0",
-    "title": "PR #102",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-102",
-    "wiki_key": "pr/102"
+    "source_hash": "abe9df726053",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-102"
   },
   "pr/103": {
-    "canonical_key": "pr/103",
-    "doc_type": "pr",
     "page_id": "PR-103",
-    "render_hash": "cc77649cce9a",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "59fb6c3eef83",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/103.md",
-    "source_hash": "cc77649cce9a",
-    "title": "PR #103",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-103",
-    "wiki_key": "pr/103"
+    "source_hash": "59fb6c3eef83",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-103"
   },
   "pr/104": {
-    "canonical_key": "pr/104",
-    "doc_type": "pr",
     "page_id": "PR-104",
-    "render_hash": "fdfb3e56d841",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "a3169ed6ab00",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/104.md",
-    "source_hash": "fdfb3e56d841",
-    "title": "PR #104",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-104",
-    "wiki_key": "pr/104"
+    "source_hash": "a3169ed6ab00",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-104"
   },
   "pr/112": {
-    "canonical_key": "pr/112",
-    "doc_type": "pr",
     "page_id": "PR-112",
-    "render_hash": "8a24961177d0",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "c9f0abe573ba",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/112.md",
-    "source_hash": "8a24961177d0",
-    "title": "PR #112",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-112",
-    "wiki_key": "pr/112"
+    "source_hash": "c9f0abe573ba",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-112"
   },
   "pr/122": {
-    "canonical_key": "pr/122",
-    "doc_type": "pr",
     "page_id": "PR-122",
-    "render_hash": "dea230e68305",
-    "rev": "8530f55b79ee358b54b7f8e6557755a034a3b004",
+    "render_hash": "e8ca61eb17f4",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/122.md",
-    "source_hash": "dea230e68305",
-    "title": "PR #122",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-122",
-    "wiki_key": "pr/122"
+    "source_hash": "e8ca61eb17f4",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-122"
   },
   "pr/155": {
-    "canonical_key": "pr/155",
-    "doc_type": "pr",
     "page_id": "PR-155",
-    "render_hash": "e88159e3b92a",
-    "rev": "31eb4632706adc9a2a60acace356e4c4bc6f902f",
+    "render_hash": "cbd8a8818db1",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/155.md",
-    "source_hash": "e88159e3b92a",
-    "title": "PR #155",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-155",
-    "wiki_key": "pr/155"
+    "source_hash": "cbd8a8818db1",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-155"
   },
   "pr/157": {
-    "canonical_key": "pr/157",
-    "doc_type": "pr",
     "page_id": "PR-157",
-    "render_hash": "567861a546aa",
+    "render_hash": "d944ee7373fd",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/157.md",
-    "source_hash": "567861a546aa",
-    "title": "PR #157",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-157",
-    "wiki_key": "pr/157"
+    "source_hash": "d944ee7373fd",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-157"
   },
   "pr/160": {
-    "canonical_key": "pr/160",
-    "doc_type": "pr",
     "page_id": "PR-160",
-    "render_hash": "5fc076a048e4",
+    "render_hash": "7f904fb7c83f",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/160.md",
-    "source_hash": "5fc076a048e4",
-    "title": "PR #160",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-160",
-    "wiki_key": "pr/160"
+    "source_hash": "7f904fb7c83f",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-160"
   },
   "pr/161": {
-    "canonical_key": "pr/161",
-    "doc_type": "pr",
     "page_id": "PR-161",
-    "render_hash": "51fe6a4d16a5",
+    "render_hash": "c89b19112c08",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/161.md",
-    "source_hash": "51fe6a4d16a5",
-    "title": "PR #161",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-161",
-    "wiki_key": "pr/161"
+    "source_hash": "c89b19112c08",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-161"
   },
   "pr/179": {
-    "canonical_key": "pr/179",
-    "doc_type": "pr",
     "page_id": "PR-179",
-    "render_hash": "185939ed9114",
+    "render_hash": "2e383084704a",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/179.md",
-    "source_hash": "185939ed9114",
-    "title": "PR #179",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-179",
-    "wiki_key": "pr/179"
+    "source_hash": "2e383084704a",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-179"
   },
   "pr/188": {
-    "canonical_key": "pr/188",
     "page_id": "PR-188",
-    "render_hash": "388c8c256e63",
-    "rev": "602828764cf17f5a0ad2d71bd8fc31cd2861b721",
+    "render_hash": "1ba716dbcafd",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/188.md",
-    "source_hash": "388c8c256e63",
-    "title": "PR #188",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-188",
-    "wiki_key": "pr/188"
+    "source_hash": "1ba716dbcafd",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-188"
   },
   "pr/197": {
-    "canonical_key": "pr/197",
-    "doc_type": "pr",
     "page_id": "PR-197",
-    "render_hash": "903e499675c7",
+    "render_hash": "774e79fd1596",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/197.md",
-    "source_hash": "903e499675c7",
-    "title": "PR #197",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-197",
-    "wiki_key": "pr/197"
+    "source_hash": "774e79fd1596",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-197"
   },
   "pr/198": {
-    "canonical_key": "pr/198",
-    "doc_type": "pr",
     "page_id": "PR-198",
-    "render_hash": "8be806644903",
+    "render_hash": "70c9bb50cef9",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/.index/rendered/prs/198.md",
-    "source_hash": "8be806644903",
-    "title": "PR #198",
-    "truth_state": "not tracked",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-198",
-    "wiki_key": "pr/198"
+    "source_hash": "70c9bb50cef9",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-198"
+  },
+  "pr/268": {
+    "page_id": "PR-268",
+    "render_hash": "8107d862f475",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/prs/268.md",
+    "source_hash": "8107d862f475",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-268"
+  },
+  "pr/277": {
+    "page_id": "PR-277",
+    "render_hash": "b03066dcb598",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/prs/277.md",
+    "source_hash": "b03066dcb598",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-277"
+  },
+  "pr/278": {
+    "page_id": "PR-278",
+    "render_hash": "e9ab603363a3",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/prs/278.md",
+    "source_hash": "e9ab603363a3",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-278"
+  },
+  "pr/279": {
+    "page_id": "PR-279",
+    "render_hash": "0ecc691b9b41",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/prs/279.md",
+    "source_hash": "0ecc691b9b41",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-279"
+  },
+  "pr/280": {
+    "page_id": "PR-280",
+    "render_hash": "5265fd7e2b08",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/prs/280.md",
+    "source_hash": "5265fd7e2b08",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-280"
+  },
+  "pr/281": {
+    "page_id": "PR-281",
+    "render_hash": "3397e9b13876",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/prs/281.md",
+    "source_hash": "3397e9b13876",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-281"
+  },
+  "pr/282": {
+    "page_id": "PR-282",
+    "render_hash": "57175cd6c0f3",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/prs/282.md",
+    "source_hash": "57175cd6c0f3",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-282"
+  },
+  "pr/283": {
+    "page_id": "PR-283",
+    "render_hash": "0500fab0bd9e",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/prs/283.md",
+    "source_hash": "0500fab0bd9e",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-283"
+  },
+  "pr/286": {
+    "page_id": "PR-286",
+    "render_hash": "ffd53b62abda",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/prs/286.md",
+    "source_hash": "ffd53b62abda",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-286"
+  },
+  "pr/293": {
+    "page_id": "PR-293",
+    "render_hash": "3207df870073",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/prs/293.md",
+    "source_hash": "3207df870073",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/PR-293"
   },
   "release/v0.10.0": {
     "canonical_key": "release/v0.10.0",
@@ -4446,6 +4653,30 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Release-v0.18.0",
     "wiki_key": "release/v0.18.0"
   },
+  "release/v0.19.0": {
+    "page_id": "Release-v0.19.0",
+    "render_hash": "3c1efc04f736",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/releases/v0.19.0.md",
+    "source_hash": "3c1efc04f736",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Release-v0.19.0"
+  },
+  "release/v0.19.1": {
+    "page_id": "Release-v0.19.1",
+    "render_hash": "a8a09aec356b",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/releases/v0.19.1.md",
+    "source_hash": "a8a09aec356b",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Release-v0.19.1"
+  },
+  "release/v0.20.0": {
+    "page_id": "Release-v0.20.0",
+    "render_hash": "84a5e301475a",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/.index/rendered/releases/v0.20.0.md",
+    "source_hash": "84a5e301475a",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Release-v0.20.0"
+  },
   "release/v0.5.0": {
     "canonical_key": "release/v0.5.0",
     "doc_type": "release",
@@ -4515,11 +4746,10 @@
     "canonical_key": "roadmap",
     "doc_type": "roadmap",
     "page_id": "Roadmap",
-    "render_hash": "b1b577d6a197",
-    "rev": "241e99f8d7ba381a8452e8b601ac45cb560abf7e",
+    "render_hash": "c5f5034c4651",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/roadmap.md",
-    "source_hash": "efda29c37c1b",
-    "title": "Roadmap",
+    "source_hash": "2585aaffd4c5",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
     "wiki_key": "roadmap"
@@ -4674,6 +4904,42 @@
     "truth_state": "snapshot",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-07-29_v0.18.0-release",
     "wiki_key": "roadmap-snapshot/2026-07-29_v0.18.0-release"
+  },
+  "roadmap-snapshot/2026-08-01_v0.19.0-release": {
+    "canonical_key": "roadmap-snapshot/2026-08-01_v0.19.0-release",
+    "doc_type": "roadmap-snapshot",
+    "page_id": "Roadmap-2026-08-01_v0.19.0-release",
+    "render_hash": "32d0b5ada352",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/roadmap/2026-08-01_v0.19.0-release.md",
+    "source_hash": "74eb1b6b6b31",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-01_v0.19.0-release",
+    "wiki_key": "roadmap-snapshot/2026-08-01_v0.19.0-release"
+  },
+  "roadmap-snapshot/2026-08-01_v0.19.1-release": {
+    "canonical_key": "roadmap-snapshot/2026-08-01_v0.19.1-release",
+    "doc_type": "roadmap-snapshot",
+    "page_id": "Roadmap-2026-08-01_v0.19.1-release",
+    "render_hash": "5609ca498ae7",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/roadmap/2026-08-01_v0.19.1-release.md",
+    "source_hash": "db1191497275",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-01_v0.19.1-release",
+    "wiki_key": "roadmap-snapshot/2026-08-01_v0.19.1-release"
+  },
+  "roadmap-snapshot/2026-08-03_v0.20.0-release": {
+    "canonical_key": "roadmap-snapshot/2026-08-03_v0.20.0-release",
+    "doc_type": "roadmap-snapshot",
+    "page_id": "Roadmap-2026-08-03_v0.20.0-release",
+    "render_hash": "5fd3dec9b887",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
+    "source": "docs/roadmap/2026-08-03_v0.20.0-release.md",
+    "source_hash": "c281047c3eb6",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-03_v0.20.0-release",
+    "wiki_key": "roadmap-snapshot/2026-08-03_v0.20.0-release"
   },
   "roadmap/2026-07-18_v0.2-roadmap": {
     "aliases": [
@@ -4849,11 +5115,10 @@
     "canonical_key": "guide/user-guide",
     "doc_type": "guide",
     "page_id": "User-Guide",
-    "render_hash": "96c2837e200f",
-    "rev": "35b85c54dfcccbcafe7b1423671287ac105b7d71",
+    "render_hash": "4a11c8802240",
+    "rev": "4ace2032c46f5520070091cc00877603fa8e7b3e",
     "source": "docs/user_guide/user-guide.md",
-    "source_hash": "abf3b6082ea9",
-    "title": "WikiTicket SDD \u2014 User Guide",
+    "source_hash": "7aade55c5abf",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/User-Guide",
     "wiki_key": "user-guide"

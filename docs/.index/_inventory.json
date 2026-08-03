@@ -81,6 +81,7 @@
    ],
    "title": "Clearing a dead ticket link stays a human action",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0004-clearing-a-dead-ticket-link-stays-a-huma",
    "wiki_key": "adr/0004-clearing-a-dead-ticket-link-stays-a-huma"
   },
   {
@@ -101,6 +102,7 @@
    ],
    "title": "No custom merge driver for the event log",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0005-no-custom-merge-driver-for-the-event-log",
    "wiki_key": "adr/0005-no-custom-merge-driver-for-the-event-log"
   },
   {
@@ -121,6 +123,7 @@
    ],
    "title": "Resurrected events are not always cosmetic",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0006-resurrected-events-are-not-always-cosmet",
    "wiki_key": "adr/0006-resurrected-events-are-not-always-cosmet"
   },
   {
@@ -141,6 +144,7 @@
    ],
    "title": "The compaction watermark is per item",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0007-the-compaction-watermark-is-per-item",
    "wiki_key": "adr/0007-the-compaction-watermark-is-per-item"
   },
   {
@@ -510,6 +514,7 @@
    "tag": "v0.19.1",
    "title": "Worklog \u2014 Code Walkthrough",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-08-02_v0.19.1-release",
    "wiki_key": "design/2026-08-02_v0.19.1-release-code-walkthrough"
   },
   {
@@ -526,6 +531,7 @@
    "tag": "v0.19.1",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-08-02_v0.19.1-release",
    "wiki_key": "design/2026-08-02_v0.19.1-release-design-doc"
   },
   {
@@ -542,6 +548,7 @@
    "tag": "v0.20.0",
    "title": "Worklog \u2014 Code Walkthrough",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Code-Walkthrough-2026-08-03_v0.20.0-release",
    "wiki_key": "design/2026-08-03_v0.20.0-release-code-walkthrough"
   },
   {
@@ -558,6 +565,7 @@
    "tag": "v0.20.0",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Doc-2026-08-03_v0.20.0-release",
    "wiki_key": "design/2026-08-03_v0.20.0-release-design-doc"
   },
   {
@@ -901,6 +909,7 @@
    "status": "completed",
    "title": "Close both P1 epics, settle the merge-strategy and GONE questions",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-close-p1-epics-and-settle-merge-and-gone-questions",
    "wiki_key": "plan/2026-07-30-close-p1-epics-and-settle-merge-and-gone-questions"
   },
   {
@@ -915,6 +924,7 @@
    "status": "completed",
    "title": "Configurable optional fields on the work item",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-configurable-item-fields",
    "wiki_key": "plan/2026-08-01-configurable-item-fields"
   },
   {
@@ -929,6 +939,7 @@
    "status": "completed",
    "title": "A plan's banner should say which plan it is",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-plan-banner-state",
    "wiki_key": "plan/2026-08-02-plan-banner-state"
   },
   {
@@ -943,6 +954,7 @@
    "status": "completed",
    "title": "Scope the traceability gate to the claim it actually makes",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-trace-check-scope",
    "wiki_key": "plan/2026-08-02-trace-check-scope"
   },
   {
@@ -1145,10 +1157,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-08-03T01:56:41Z",
+   "generated_at": "2026-08-03T02:17:32Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "3550d468",
+   "source_hash": "a09788ff",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
@@ -1369,6 +1381,7 @@
    "supersedes": "roadmap-snapshot/2026-07-29_v0.18.0-release",
    "title": "Roadmap",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-01_v0.19.0-release",
    "wiki_key": "roadmap-snapshot/2026-08-01_v0.19.0-release"
   },
   {
@@ -1385,6 +1398,7 @@
    "supersedes": "roadmap-snapshot/2026-08-01_v0.19.0-release",
    "title": "Roadmap",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-01_v0.19.1-release",
    "wiki_key": "roadmap-snapshot/2026-08-01_v0.19.1-release"
   },
   {
@@ -1400,6 +1414,7 @@
    "supersedes": "roadmap-snapshot/2026-08-01_v0.19.1-release",
    "title": "Roadmap",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-03_v0.20.0-release",
    "wiki_key": "roadmap-snapshot/2026-08-03_v0.20.0-release"
   },
   {
