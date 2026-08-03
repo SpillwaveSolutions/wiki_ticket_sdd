@@ -2606,6 +2606,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZ2M75CEXBQHFN1AG1Z8A2YB",
+   "to": "ticket/github#294",
+   "type": "references"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -5614,6 +5619,11 @@
    "status": "done",
    "title": "Run the v0.19.1 release doc sync"
   },
+  "item/01KZ2M75CEXBQHFN1AG1Z8A2YB": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Design docs quote code that no longer exists"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6585,6 +6595,10 @@
    "url": ""
   },
   "ticket/github#292": {
+   "doc_type": "ticket",
+   "url": ""
+  },
+  "ticket/github#294": {
    "doc_type": "ticket",
    "url": ""
   },
