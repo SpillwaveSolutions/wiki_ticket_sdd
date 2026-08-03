@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### CLAUDE.md and AGENTS.md are not tracked in the source repo
+`01KZ2JRT7MAE0MJH7Y0SJ3ZJS3` · status: done
+
 ### trace-check --strict ignores its own released-milestone scope
 `01KZ2JAT7PCV6B34W2RK34WBX7` · status: todo
 - references: ticket/github#291

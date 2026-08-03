@@ -5517,6 +5517,11 @@
    "status": "todo",
    "title": "trace-check --strict ignores its own released-milestone scope"
   },
+  "item/01KZ2JRT7MAE0MJH7Y0SJ3ZJS3": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "CLAUDE.md and AGENTS.md are not tracked in the source repo"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
