@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Cut release v0.20.0
+`01KZ2MZ69SFQDHEXFBJTXTDNFX` · status: todo
+- targets: release/v0.20.0
+
 ### Generated design docs quote code that no longer exists; nothing verifies their claims
 `01KZ2M75CEXBQHFN1AG1Z8A2YB` · status: todo
 - references: ticket/github#294
