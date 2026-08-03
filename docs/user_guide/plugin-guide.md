@@ -99,7 +99,7 @@ Skills are the judgment layer: the model decides *when*, the deterministic
 | `pr-description` | Durable PR prose for the change set (pairs with green-gates merge flow) |
 | `wiki-publish` | Publishes via `docs/.index/publish-manifest.json` when present (Home, Sidebar, indexes, per-ticket/release/PR artifact pages, banners) and the `.work/published.json` ledger; strips YAML frontmatter for GitHub Wiki |
 | `status-report` | Generates and publishes frozen daily/weekly/timecard reports via `worklog status` |
-| `release` | Cuts a versioned release: stamp the changelog, snapshot the roadmap, tag, platform release, publish, sync; refreshes indexes |
+| `release` | Cuts a versioned release: stamp the changelog (first draft from `worklog changelog-draft`), snapshot the roadmap, tag, platform release, publish, sync; refreshes indexes |
 | `design-docs` | Generates/syncs the design doc + code walkthrough pair under `docs/designs/`: frozen dated copies per release, live `current` copies; runs in background agents at release time |
 | `merge-green` | Merges PRs only when every quality gate is green — polls every 5 minutes via `merge-when-green.sh`, never bypasses |
 | `classify` | Flag-gated classifier: sweeps a conversation for untracked work, propose-only into `.work/suggestions.jsonl` — never the event log |
@@ -113,9 +113,10 @@ ships hooks for the invariants:
 | Hook | When | What |
 |---|---|---|
 | `ExitPlanMode` (PostToolUse) | a plan is approved | Invokes plan-capture non-optionally — every plan becomes tracked items |
-| `UserPromptSubmit` | each prompt | One-line reminder: requests that produce work get worklog items first; keep statuses moving |
+| `UserPromptSubmit` | each prompt | One-line reminder: requests that produce work get worklog items first; keep statuses moving. Also heartbeats this session into `.work/.sessions` and appends the concurrent-session warning when another session is live in the same checkout |
 | `Stop` | Claude finishes responding | If the working tree changed but `.work/todo.jsonl` didn't, block once: record the work items or explain. With `classifier.enabled: true` in `.work/config.yml` (**off by default**) it also triggers the classify skill — propose-only suggestions to `.work/suggestions.jsonl`, promoted into real items only via `worklog promote` |
 | `SessionStart` | session opens | Doctor-lite: checks the CLAUDE.md policy block, hook wiring, and version skew; points at `/worklog:init` or `/worklog:doctor` if something's off |
+| `SessionEnd` | session closes | Drops this session from `.work/.sessions`, so a finished session stops warning the next one that opens the directory |
 
 All hooks are silent outside worklog repos (no `bin/worklog`, no output), so
 the plugin doesn't nag in repos that don't use it.
