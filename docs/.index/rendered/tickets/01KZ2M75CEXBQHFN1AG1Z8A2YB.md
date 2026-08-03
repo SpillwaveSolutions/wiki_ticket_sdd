@@ -1,4 +1,4 @@
-# Design docs quote code that no longer exists
+# Generated design docs quote code that no longer exists; nothing verifies their claims
 
 `01KZ2M75CEXBQHFN1AG1Z8A2YB` · task/bug · **open**
 

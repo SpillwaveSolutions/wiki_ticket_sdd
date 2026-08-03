@@ -5611,7 +5611,7 @@
   },
   "item/01KZ2M00NVDWJN795G7F8CWTRJ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "cancelled",
    "title": "Run the v0.19.1 release doc sync"
   },
   "item/01KZ2M07FKC9AYK84B7AC91TVP": {
@@ -5622,7 +5622,7 @@
   "item/01KZ2M75CEXBQHFN1AG1Z8A2YB": {
    "doc_type": "item",
    "status": "todo",
-   "title": "Design docs quote code that no longer exists"
+   "title": "Generated design docs quote code that no longer exists; nothing verifies their claims"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

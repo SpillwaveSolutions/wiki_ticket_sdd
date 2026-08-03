@@ -9,6 +9,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 - Roadmap snapshot: [[Roadmap-2026-08-01_v0.19.1-release]]
 - Shipped: Cut release v0.19.1
 - Shipped: Run the v0.19.1 release doc sync
+- Shipped: Run the v0.19.1 release doc sync
 
 ## v0.19.0 — 2026-08-01
 

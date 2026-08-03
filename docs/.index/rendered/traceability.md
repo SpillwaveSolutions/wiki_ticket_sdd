@@ -2,7 +2,7 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
-### Design docs quote code that no longer exists
+### Generated design docs quote code that no longer exists; nothing verifies their claims
 `01KZ2M75CEXBQHFN1AG1Z8A2YB` · status: todo
 - references: ticket/github#294
 
@@ -11,7 +11,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.19.1
 
 ### Run the v0.19.1 release doc sync
-`01KZ2M00NVDWJN795G7F8CWTRJ` · status: todo
+`01KZ2M00NVDWJN795G7F8CWTRJ` · status: cancelled
 - targets: release/v0.19.1
 
 ### Plan banners do not distinguish a completed plan from one in flight
