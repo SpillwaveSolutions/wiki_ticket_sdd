@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "09b87622c2db",
+   "render_hash": "7ea25da144f9",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3444,7 +3444,7 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6HZ6FKJXJX386J44CB1",
    "render": "as-is",
-   "render_hash": "ee677269da01",
+   "render_hash": "899d13db93b8",
    "source": "docs/.index/rendered/tickets/01KZ30X6HZ6FKJXJX386J44CB1.md",
    "title": "Git provenance on generated docs, and the verifier it enables",
    "truth_state": "open",
@@ -3454,10 +3454,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JD06D11ACPVF8Q5GMW",
    "render": "as-is",
-   "render_hash": "12b9a179e2df",
+   "render_hash": "ab5b97b09bf4",
    "source": "docs/.index/rendered/tickets/01KZ30X6JD06D11ACPVF8Q5GMW.md",
    "title": "Record on the roadmap which commit its data came from",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JD06D11ACPVF8Q5GMW"
   },
   {
@@ -3474,20 +3474,20 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JDHPRBESZDQ2CSNJZ2",
    "render": "as-is",
-   "render_hash": "5f639855af0b",
+   "render_hash": "796407f96557",
    "source": "docs/.index/rendered/tickets/01KZ30X6JDHPRBESZDQ2CSNJZ2.md",
    "title": "Pin the rule that a roadmap snapshot inherits the roadmap's provenance",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JDHPRBESZDQ2CSNJZ2"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JDSYHB6FQB7RRCGKQQ",
    "render": "as-is",
-   "render_hash": "216fee91b11c",
+   "render_hash": "2f6e95b44eeb",
    "source": "docs/.index/rendered/tickets/01KZ30X6JDSYHB6FQB7RRCGKQQ.md",
    "title": "Keep the newest event object during the scan without changing the existing helper's signature",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JDSYHB6FQB7RRCGKQQ"
   },
   {
@@ -3609,6 +3609,16 @@
    "title": "Add a full-length commit helper that mirrors the existing environment contract",
    "truth_state": "open",
    "wiki_key": "item/01KZ30X6JEXH4TTKHDNV3ZW0Q2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ31DGAQ2YDP6RMEMVNAWABH",
+   "render": "as-is",
+   "render_hash": "031a83917824",
+   "source": "docs/.index/rendered/tickets/01KZ31DGAQ2YDP6RMEMVNAWABH.md",
+   "title": "Sync's dry run does not report the field overwrites a close would make",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ31DGAQ2YDP6RMEMVNAWABH"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -4331,13 +4341,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T05:22:13Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T05:30:20Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "1b9771e7ffb8",
+   "render_hash": "10167be66b2c",
    "source": "docs/roadmap.md",
-   "source_hash": "443ebe4adc04",
+   "source_hash": "29c11748388e",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

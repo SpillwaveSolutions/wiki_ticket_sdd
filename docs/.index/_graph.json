@@ -5948,7 +5948,7 @@
   },
   "item/01KZ30X6JD06D11ACPVF8Q5GMW": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Record on the roadmap which commit its data came from"
   },
   "item/01KZ30X6JD7M4XV6Y5194E1D32": {
@@ -5958,12 +5958,12 @@
   },
   "item/01KZ30X6JDHPRBESZDQ2CSNJZ2": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Pin the rule that a roadmap snapshot inherits the roadmap's provenance"
   },
   "item/01KZ30X6JDSYHB6FQB7RRCGKQQ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Keep the newest event object during the scan without changing the existing helper's signature"
   },
   "item/01KZ30X6JDXDZ38RY6AQEYE7VY": {
@@ -6025,6 +6025,11 @@
    "doc_type": "item",
    "status": "todo",
    "title": "Add a full-length commit helper that mirrors the existing environment contract"
+  },
+  "item/01KZ31DGAQ2YDP6RMEMVNAWABH": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Sync's dry run does not report the field overwrites a close would make"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

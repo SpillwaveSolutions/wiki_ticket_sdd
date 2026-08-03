@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Sync's dry run does not report the field overwrites a close would make
+`01KZ31DGAQ2YDP6RMEMVNAWABH` · status: todo
+
 ### Add a full-length commit helper that mirrors the existing environment contract
 `01KZ30X6JEXH4TTKHDNV3ZW0Q2` · status: todo
 - belongs-to: Stamp the authoring commit onto plans, status reports and new decision records
@@ -81,13 +84,13 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Keep the newest event object during the scan without changing the existing helper's signature
-`01KZ30X6JDSYHB6FQB7RRCGKQQ` · status: todo
+`01KZ30X6JDSYHB6FQB7RRCGKQQ` · status: done
 - belongs-to: Record on the roadmap which commit its data came from
 - references: [github#304](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/304)
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Pin the rule that a roadmap snapshot inherits the roadmap's provenance
-`01KZ30X6JDHPRBESZDQ2CSNJZ2` · status: todo
+`01KZ30X6JDHPRBESZDQ2CSNJZ2` · status: done
 - belongs-to: Record on the roadmap which commit its data came from
 - references: [github#303](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/303)
 - produced-by: [[Plan-doc-provenance-and-verification]]
@@ -101,7 +104,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Record on the roadmap which commit its data came from
-`01KZ30X6JD06D11ACPVF8Q5GMW` · status: todo
+`01KZ30X6JD06D11ACPVF8Q5GMW` · status: done
 - belongs-to: Git provenance on generated docs, and the verifier it enables
 - references: [github#301](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/301)
 - contains: Pin the rule that a roadmap snapshot inherits the roadmap's provenance

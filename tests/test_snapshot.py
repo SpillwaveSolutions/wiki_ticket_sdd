@@ -62,6 +62,30 @@ class TestRoadmapSnapshot(unittest.TestCase):
         self.assertNotEqual(p.returncode, 0)
         self.assertIn("roadmap-render first", p.stdout + p.stderr)
 
+    def test_the_snapshot_inherits_the_roadmaps_provenance(self):
+        """A snapshot is a copy, so it needs no provenance code of its own --
+        `git_hash` rides along and names the commit the DATA came from, which
+        is the right answer for a frozen copy of that data.
+
+        Pinned because it is an invariant nothing else asserts: the day
+        `roadmap-snapshot` stops being a copy, or starts restamping the whole
+        front matter instead of specific keys, this silently starts naming
+        the wrong commit rather than failing.
+        """
+        with open(os.path.join(self.dir, "docs", "roadmap.md"), "w",
+                  encoding="utf-8") as fh:
+            fh.write('---\nwiki_key: roadmap\ndoc_type: roadmap\n'
+                     'truth_state: current\ngit_hash: "0123456"\n---\n\n'
+                     "# Roadmap\n\ncontent\n")
+        date = time.strftime("%Y-%m-%d", time.gmtime())
+        self.assertEqual(
+            run(self.dir, "roadmap-snapshot", "--name", "v9").returncode, 0)
+        text = self.read(f"docs/roadmap/{date}_v9.md")
+        # quoted, so the all-digit sha does not come back as the int 123456
+        self.assertIn('git_hash: "0123456"', text)
+        # and the identity keys ARE restamped, not inherited
+        self.assertIn("truth_state: snapshot", text)
+
 
 if __name__ == "__main__":
     unittest.main()

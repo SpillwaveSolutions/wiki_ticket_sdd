@@ -1,6 +1,6 @@
 # Keep the newest event object during the scan without changing the existing helper's signature
 
-`01KZ30X6JDSYHB6FQB7RRCGKQQ` · subtask/feature · **open**
+`01KZ30X6JDSYHB6FQB7RRCGKQQ` · subtask/feature · **done**
 
 Keep the newest event object during the scan without changing the existing helper's signature
 

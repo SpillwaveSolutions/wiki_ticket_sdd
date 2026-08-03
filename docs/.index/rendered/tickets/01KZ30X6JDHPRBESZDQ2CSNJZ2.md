@@ -1,6 +1,6 @@
 # Pin the rule that a roadmap snapshot inherits the roadmap's provenance
 
-`01KZ30X6JDHPRBESZDQ2CSNJZ2` · subtask/feature · **open**
+`01KZ30X6JDHPRBESZDQ2CSNJZ2` · subtask/feature · **done**
 
 Pin the rule that a roadmap snapshot inherits the roadmap's provenance
 
