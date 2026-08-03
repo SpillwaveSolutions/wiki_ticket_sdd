@@ -64,6 +64,34 @@ cites `path — function(), lines N–M`. Fill the template's System Context /
 Source Material from the repo itself: README, docs/worklog-spec.md,
 docs/plans/, docs/adr/, `.work/config.yml`, the test suites.
 
+## 2b. Verify before you report done — not optional
+
+Run `bin/worklog doc-verify` and fix every **FABRICATED** finding in the
+files you just wrote, then re-run until they are gone. Do this before
+publishing and before reporting completion.
+
+This is the step whose absence caused #294. Line citations were checked by
+nobody, and a measured **12 of 26 were wrong** — pointing at offsets from
+several releases earlier. Every one was written by an agent that had the
+file open and copied the previous edition's number forward. One wrong claim
+was even *introduced while hand-fixing the previous wrong claim*, which is
+what a regeneration without a check does: it moves the error rather than
+removing it.
+
+Reading the verdicts:
+
+- **FABRICATED** — the citation is wrong *at the commit you generated
+  against*. Your bug, in the file you just wrote. Fix it.
+- **DRIFT** — right when written, moved since. Expected in the frozen dated
+  copies; in a `current_*` file it means you cited an older tree than the
+  one you generated against, so treat it as yours too.
+- **UNSTAMPED / UNRESOLVABLE** — no `git_hash`, or a commit not in this
+  clone (see ADR-0008). Report it; never re-check against HEAD.
+
+Do not hand-edit a frozen dated copy to silence a finding. Frozen means
+frozen: the correction belongs in the next edition, and the current pair
+should say so in prose where a reader would be misled.
+
 ## 3. Modes
 
 - **Release mode** (invoked by the release skill after the tag exists):

@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Design-docs regeneration does not verify its own citations
+`01KZ4EETMXD1JQMDFA97HSZQM4` · status: done
+
 ### Sync's dry run does not report the field overwrites a close would make
 `01KZ31DGAQ2YDP6RMEMVNAWABH` · status: todo
 

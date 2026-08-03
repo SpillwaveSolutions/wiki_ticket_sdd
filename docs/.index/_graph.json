@@ -6037,6 +6037,11 @@
    "status": "todo",
    "title": "Sync's dry run does not report the field overwrites a close would make"
   },
+  "item/01KZ4EETMXD1JQMDFA97HSZQM4": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Design-docs regeneration does not verify its own citations"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
