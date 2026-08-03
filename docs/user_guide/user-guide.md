@@ -45,9 +45,17 @@ All work items live in `.work/todo.jsonl` — an append-only log where each
 line is one immutable event:
 
 ```jsonl
-{"ev":"01J8X2K4A0","ts":"2026-07-16T14:02:11Z","actor":"rick","item":"01J8X0M2QQ","op":"create","set":{"level":"task","kind":"feature","title":"Extract auth middleware","status":"todo","priority":"P1"}}
-{"ev":"01J8X2M900","ts":"2026-07-16T14:09:03Z","actor":"rick","item":"01J8X0M2QQ","op":"update","set":{"status":"in_progress"}}
+{"ev":"01J8X2K4A0","ts":"2026-07-16T14:02:11Z","actor":"rick","git":"b446a6c","item":"01J8X0M2QQ","op":"create","set":{"level":"task","kind":"feature","title":"Extract auth middleware","status":"todo","priority":"P1"}}
+{"ev":"01J8X2M900","ts":"2026-07-16T14:09:03Z","actor":"rick","git":"b446a6c","item":"01J8X0M2QQ","op":"update","set":{"status":"in_progress"}}
 ```
+
+The `git` field is **provenance**: the short HEAD sha when the event was
+written, so two agents in different worktrees or branches produce traceably
+different events. It is a field and not part of the id, because an id is
+minted once and could only ever name where the *item* was created, while a
+field on every event names the origin of each one — and because entropy in an
+id is not currency to spend on metadata. It is omitted outside a git repo, and
+`WORKLOG_NO_GIT_PROVENANCE` turns it off.
 
 You never edit this file by hand. Every change goes through `bin/worklog`,
 which appends events. Current state is a **fold** over the events: parse,
@@ -148,6 +156,36 @@ Fields you'll use daily:
 | `discovered_during` | item ULID | What the unplanned work interrupted; required with `unplanned` |
 | `plan` | path | The plan doc that produced this item |
 
+### Optional fields: one log, two processes
+
+Those are the **core** fields — fixed, never configurable, because the fold
+keys on them, the roadmap renderer reads them, and sync maps them onto
+tickets. On top of them sits a per-repo optional catalog, so a lightweight
+team isn't carrying fields it never fills in and a heavyweight one has
+somewhere to put risk, owner, or acceptance criteria without inventing
+conventions inside the body text:
+
+| Field | Default | What it's for |
+|---|---|---|
+| `estimate` (`XS`–`XL`) | **on** | Relative size, not time. Compare items; never sum into a schedule |
+| `owner` | **on** | Who is accountable for the item moving — one name, not a team |
+| `risk` (`low`/`medium`/`high`) | **on** | Chance it goes badly or blocks others. Drives planning order, not estimate size |
+| `acceptance_criteria` | **on** | What must be observably true to close it |
+| `value`, `confidence`, `due_date`, `severity` | off | Available, off by default — an unfilled field is worse than a missing one, because it looks like an answer |
+
+```yaml
+# .work/config.yml
+work_item_fields:
+  risk: off
+  severity: on
+```
+
+A disabled field is **invisible, not rejected**: no flag is built for it, so
+it never shows up in the CLI, in `--help`, or in anything an agent reads to
+decide what to write. Run `bin/worklog fields` to see what this repo has
+switched on and what each field means — the descriptions ship with the tool
+so two people don't fill one field with two different meanings.
+
 ## Core workflow: plan → capture → work → close → render → commit
 
 ### 1. Plan, then capture the plan
@@ -227,8 +265,11 @@ git push -u origin feature/auth-refactor    # open the PR
 ```
 
 On every commit, the git hooks check: trailing newline on the logs, event
-schema, roadmap freshness, and the fold test suite. CI runs the same checks,
-so a `--no-verify` commit doesn't get far.
+schema, no unresolved conflict markers in any staged file, roadmap freshness,
+the fold test suite, and — in repos that have a `docs/.index/` — the IA gates
+(`wiki_key` present and unique, valid frontmatter, fresh inventory and
+rendered pages), which are hard failures as of v0.19.0. CI runs the same
+checks, so a `--no-verify` commit doesn't get far.
 
 Two more checks enforce branch discipline. `pre-commit` rejects a commit
 authored directly on `main`/`master` (`main`/`master` is pull-only — branch,
@@ -259,6 +300,57 @@ The merge is parked, not lost — regenerate and finish. Never resolve a
 roadmap conflict by hand-picking hunks; the log is the truth, the roadmap is
 its rendering.
 
+### Merging across a compaction: `worklog merge-rescue`
+
+Compaction runs nightly in CI on `main`. If it lands while you're working,
+your next `git merge main` can be refused with:
+
+```
+.work/todo.jsonl: 12 event(s) at/below their item's compact watermark are
+back … Run: worklog merge-rescue
+```
+
+This is the one merge failure union merge cannot shrug off, and you *will*
+hit it eventually. Compaction replaces an item's events with a snapshot plus
+a watermark, and the fold drops any raw event at or below that item's
+watermark. Union merge takes both sides — so the merge brings the compacted
+lines back (harmless: the file just grows to its old size) *and* puts any
+event **your branch** authored below that watermark underneath the snapshot,
+where the next read silently discards it. That is the part that loses work.
+
+```bash
+bin/worklog merge-rescue        # from inside the blocked merge
+bin/worklog roadmap-render
+git add -A && git commit        # undo with: git merge --abort
+```
+
+Do not try to fix this by recompacting. `compact` verifies
+`fold(new) == fold(old)`, and the fold has already discarded your branch's
+sub-watermark events — the check passes while making the loss permanent
+(ADR-0005, ADR-0006). `merge-rescue` keeps the compacted side's log and
+re-applies your branch's own events *above* the watermark under fresh ids
+(each tagged `rescued_from`), using the merge base to tell "already folded,
+safe to drop" from "never folded, must be replayed". It verifies before it
+writes and aborts with the logs untouched if anything would vanish.
+
+Run it **from the blocked merge**, before `git merge --abort` — the merge
+state is what makes the repair precise. Details and the exact guarantees:
+[CLI Reference](cli-reference.md#merge-rescue). The watermark is per item, not
+global, so an event for an item that was never snapshotted is never at risk
+(ADR-0007).
+
+### Conflict markers never commit
+
+The pre-commit hook rejects any staged file containing `<<<<<<<`, `=======`,
+or `>>>>>>>` at the start of a line, and — unlike the branch guard — **there
+is no merge exemption**. That looks harsh right up until you see why: a merge
+is precisely when a missed hunk happens, and nothing else catches it.
+`commit-msg` exempts merge commits from its item-reference rule, and no other
+check parses `tests/` or `plugin/`, so a half-finished resolution used to
+commit cleanly and only surface when someone ran the suite. An exemption here
+would be an exemption exactly where the check earns its keep. Resolve the
+file, re-stage, commit again.
+
 ### When GitHub reports merge conflicts
 
 GitHub's server-side merge does not run merge drivers — the union merge that
@@ -273,6 +365,37 @@ conflict in the web UI on `docs/roadmap.md`, `.work/published.json`, or even
 4. `git add -A && git commit` — finish the merge commit.
 5. Push the branch.
 6. Merge the PR in the UI — it's conflict-free now.
+
+## One session per working directory
+
+Two assistant sessions in one checkout is a specific, reproducible failure:
+one switches branches out from under the other mid-operation, and both
+independently "fix" the same problem in different ways. `worklog` now notices
+and says so:
+
+```
+WARNING: 2 assistant sessions are active in this working directory
+(branches: feature/auth, main). They share one checkout, so one can switch
+branches under the other mid-operation and both can 'fix' the same thing
+differently. Give each session its own git worktree.
+```
+
+Read that as a smoke alarm, not a fix. The warning is **advisory and arrives
+after the fact** — it never blocks a write, and a missing or corrupt registry
+is silently treated as "no opinion", because a bad advisory file must never be
+the reason someone cannot record work. The actual fix is one `git worktree`
+per session:
+
+```bash
+git worktree add ../repo-auth feature/auth-refactor
+```
+
+Why the detection lives where it does: `worklog` is a short-lived CLI with a
+fresh pid on every invocation, so it cannot tell one session from another. The
+harness is the only thing that knows, and it hands a stable session id to its
+hooks — so the `UserPromptSubmit` hook heartbeats into `.work/.sessions` and
+`SessionEnd` prunes on the way out (without that, a finished session cries
+wolf at the next one for a full hour).
 
 ## Frozen artifacts: what never gets edited
 
@@ -323,8 +446,8 @@ move. What is added:
 | Doc types | Unified frontmatter via `schema/doc.schema.json` — plans, roadmap, snapshots, status, design, ADR, guide, and related types share required fields (`wiki_key`, `doc_type`, `truth_state`, …). Work items use a separate entity schema. |
 | Sidecars | Frozen docs are never rewritten to add metadata. `ia-normalize` writes `docs/.index/<wiki_key>.yml` sidecars instead. Live docs (`roadmap.md`, `current_*` designs) may get in-place frontmatter. |
 | Reader plane | `worklog ia-render` generates Home, Sidebar, and indexes (Decisions, Releases, Status archive, Traceability) under `docs/.index/rendered/`, plus `publish-manifest.json`. |
-| Artifact pages | `ia-render` also generates one page per **ticket** (`Ticket-<ULID>`), **release** (`Release-<tag>`), and **PR** (`PR-<num>`) — hierarchy, subtasks/progress, linked PRs, and release for tickets; a graph-derived Change Log and Release Tree for releases; linked tickets and related release for PRs. All derived from existing graph edges at render time, no new stored fields. Preview a ticket page with `worklog ia-ticket <ULID>` (plan `docs/plans/2026-07-24-artifact-pages.md`). PR pages show "not tracked" for files-changed/review/CI status — live `gh pr view` sync is a deferred follow-up. |
-| Traceability | `worklog ia-graph` builds a typed-edge graph; `link-pr` records PR/commit edges; `trace-check` reports closed items missing plan/ticket/PR links (warn by default, `--strict` pre-release). |
+| Artifact pages | `ia-render` also generates one page per **ticket** (`Ticket-<ULID>`), **release** (`Release-<tag>`), and **PR** (`PR-<num>`) — hierarchy, subtasks/progress, linked PRs, and release for tickets; a graph-derived Change Log and Release Tree for releases; linked tickets and related release for PRs. All derived from existing graph edges at render time, no new stored fields. Preview a ticket page with `worklog ia-ticket <ULID>` (plan `docs/plans/2026-07-24-artifact-pages.md`). PR pages carry real state — files changed, review decision, CI rollup, merge time — once `worklog pr-sync <N>` has fetched it into `docs/.index/pr/<N>.yml`; a PR never synced renders as `not tracked`. Fetch writes a committed file, render only reads it, which is what keeps `ia-render --check` byte-deterministic. |
+| Traceability | `worklog ia-graph` builds a typed-edge graph; `link-pr` records PR/commit edges; `trace-check` reports closed items missing plan/ticket/PR links (warn by default, `--strict` pre-release). `worklog find` searches the inventory and graph — by text, `--type`, `--truth`, a node's `--links`, or every `--edge` of one type. |
 
 Day-to-day: after plan-capture or a release doc set change, run
 `bin/worklog ia-index` (normalize → inventory → render). Wiki publish
@@ -337,7 +460,9 @@ GitHub Wiki, frontmatter is stripped in the wiki copy only.
 bin/worklog ia-index                 # refresh inventory + Home/Sidebar/indexes
 bin/worklog ia-graph                 # rebuild traceability graph
 bin/worklog link-pr <ulid> --pr 104  # attach code evidence
+bin/worklog pr-sync 104              # fetch live PR state into the sidecar
 bin/worklog ia-ticket <ulid>         # preview a generated ticket page
+bin/worklog find watermark           # search the inventory and graph
 bin/worklog trace-check              # unlinked-evidence report
 ```
 

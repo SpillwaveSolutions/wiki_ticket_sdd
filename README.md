@@ -35,6 +35,13 @@ picture, mapped to real code.
   (what ships together), and planned-vs-discovered. The unclassified default
   is `triage` — visible in the roadmap's needs-classification queue, never a
   silent guess.
+- **A small fixed core, plus optional fields your team switches on.**
+  `estimate`, `owner`, `risk`, and `acceptance_criteria` ship enabled;
+  `value`, `confidence`, `due_date`, and `severity` are available and off. A
+  disabled field is invisible, not rejected — no flag is built for it, so it
+  never appears in `--help` or in anything an agent reads. `worklog fields`
+  prints the catalog and what each field means; `work_item_fields` in
+  `.work/config.yml` is the switch.
 - **Generated roadmap and status reports.** `docs/roadmap.md` is rendered
   from the log — no hand-editing, no drift.
 - **Design docs and code walkthroughs, generated from the actual code** at
@@ -90,6 +97,8 @@ bin/worklog add "Fix flaky retry" --kind bug --unplanned --discovered-during <id
 bin/worklog update <id> --status in_progress
 bin/worklog close <id>
 bin/worklog list
+bin/worklog fields          # which item fields this repo has switched on
+bin/worklog find <text>     # search the generated inventory and graph
 ```
 
 Capture a plan and regenerate the roadmap:
@@ -100,11 +109,21 @@ bin/worklog roadmap-render
 ```
 
 The pre-commit and pre-merge-commit hooks enforce the invariants: trailing
-newline on the log, event schema validation, and `roadmap.md` freshness —
-plus branch discipline: `pre-commit` rejects a commit authored directly on
-`main`/`master` (merges via `git merge origin/main` are exempt), and
-`commit-msg` requires every commit message to reference a worklog item
-(26-char ULID) or a ticket (`#123`), merge commits exempt.
+newline on the log, event schema validation, no unresolved conflict markers in
+any staged file (**no merge exemption** — a merge is exactly when a missed
+hunk slips through), and `roadmap.md` freshness — plus branch discipline:
+`pre-commit` rejects a commit authored directly on `main`/`master` (merges via
+`git merge origin/main` are exempt), and `commit-msg` requires every commit
+message to reference a worklog item (26-char ULID) or a ticket (`#123`), merge
+commits exempt.
+
+Nightly compaction runs in CI on `main`. When one lands mid-session and blocks
+your merge — union merge resurrects events a compaction already folded, and
+would silently drop the ones your branch wrote below the watermark —
+`bin/worklog merge-rescue`, run from inside the blocked merge, keeps the
+compacted log and replays your branch's own events above the watermark.
+Recompacting is *not* the fix: it would verify green while making the loss
+permanent.
 
 ## House rules, enforced
 
@@ -123,6 +142,14 @@ Policy that holds because tooling holds it, not because people remember:
   documents.
 - **The roadmap is generated.** Never hand-edited; to change it, change the
   work items and re-render.
+- **One session per working directory.** `worklog` warns when two assistant
+  sessions share a checkout — one switches branches under the other
+  mid-operation and both "fix" the same thing differently. The warning is
+  advisory and arrives after the fact; the fix is a `git worktree` per
+  session.
+- **Provenance on every event.** Each event carries the short HEAD sha it was
+  written at (`WORKLOG_NO_GIT_PROVENANCE` opts out). Ids keep their full
+  entropy — provenance is a field, never spent out of the identifier.
 
 ## Claude Code plugin
 
@@ -185,8 +212,8 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | `docs/.index/` | IA inventory, graph, publish manifest, sidecars, rendered Home/Sidebar/indexes |
 | `docs/user_guide/` | User guide, CLI reference, plugin guide |
 | `docs/integrations/` | Living per-system setup guides (11 SDD tools + ticket/wiki systems), published to the wiki and used as the `integration-guide` skill's offline fallback |
-| `hooks/` | `pre-commit`, `pre-merge-commit`, `commit-msg`, `exit-plan-capture.sh` |
-| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.19.1** |
+| `hooks/` | `pre-commit`, `pre-merge-commit`, `commit-msg`, `exit-plan-capture.sh`, `prompt-reminder.sh`, `session-doctor.sh`, `session-end.sh`, `stop-worklog-check.sh` |
+| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.20.0** |
 | `tests/` | Unit and integration tests |
 
 ## Testing

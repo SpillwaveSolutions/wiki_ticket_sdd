@@ -1,8 +1,8 @@
 ---
-generated_at: 2026-07-29T00:00:00Z
-git_hash: 4d0a0fe79b232644434d7c1b90d6dd9436442974
+generated_at: 2026-08-02T00:00:00Z
+git_hash: 93696385d6d1a83797eb7460355bcecb85865006
 branch: main
-tag: v0.18.0
+tag: v0.19.1
 roadmap: docs/roadmap.md
 wiki_key: design/current-design-doc
 truth_state: current
@@ -14,7 +14,7 @@ doc_type: design
 # 1. Document Overview
 
 **Purpose.** Describe the design of *worklog*, a local-first, git-native work-tracking
-layer for agentic coding, as actually implemented in this repository at v0.18.0.
+layer for agentic coding, as actually implemented in this repository at v0.19.1.
 
 **Audience.** Junior developers who need implementation-level guidance; project
 managers who need scope, dependencies, risks, and behavior.
@@ -31,9 +31,12 @@ artifacts under `docs/`, and the Information Architecture (IA) reader plane unde
 this work log in the v0.13.0 cycle.
 
 **Related documents.** `docs/worklog-spec.md` (v1.9, the normative spec),
-`docs/adr/0001..0003` (Architecture Decision Records), `docs/plans/` (twenty dated
-plan documents — the *why* record, most recently
-`docs/plans/2026-07-28-one-owner-per-external-key.md`), `docs/migrations/0001-type-split.md`
+`docs/adr/0001..0007` (Architecture Decision Records — 0004–0007 are new since
+v0.18.0 and three of them are about merge safety), `docs/plans/` (the *why*
+record, most recently
+`docs/plans/2026-08-01-close-p1-epics-and-settle-merge-and-gone-questions.md`
+and `docs/plans/2026-08-01-configurable-item-fields.md`),
+`docs/migrations/0001-type-split.md`
 and `0002-ia-content-model.md`, `adapters/README.md` (adapter authoring rules),
 `docs/user_guide/` (task-oriented guides), `docs/integrations/` (eleven per-system
 setup guides plus an index, new in v0.16.0), and the companion
@@ -43,9 +46,11 @@ setup guides plus an index, new in v0.16.0), and the companion
 
 | Term | Meaning |
 |---|---|
-| ULID | Universally Unique Lexicographically Sortable Identifier: 48-bit ms timestamp + 80-bit entropy, Crockford base32, 26 chars. Lexicographic sort == time sort. |
+| ULID | Universally Unique Lexicographically Sortable Identifier: 48-bit ms timestamp + **80 bits of entropy, always** (`ulid.new()`), Crockford base32, 26 chars. Lexicographic sort == time sort. |
 | Fold | Deriving item state by replaying the event log in `ev` order (`bin/fold.py`). |
 | Compaction | The only file rewrite: replaces folded history with `snapshot` events plus a `compact` watermark (`bin/compact.py`). |
+| `through` | The highest `ev` a compaction actually folded. On a `compact` line it is the global mark; on a `snapshot` (v0.19.0) it is **per item**, and is both what the fold drops against and where the snapshot sorts (ADR-0007). |
+| `git` (event field) | Provenance: the short HEAD sha an event was authored at (`ulid.git_commit()`, v0.19.1). Never part of the id. |
 | Canonical hash | `sha256(canonical_json(HASH_FIELDS))[:16]` (`bin/canonical.py`) — the sync change-detector. |
 | Marker | The `worklog:<ULID>` token embedded in every pushed ticket body; the idempotency key. |
 | Adapter | A single executable translating canonical JSON to one tracker's CLI; dumb by contract. |
@@ -113,24 +118,46 @@ Main workflows:
   `docs/integrations/fallback-<key>.md` (eleven files + `docs/integrations/README.md`
   index, registered through the existing `worklog wiki-add` + wiki-publish
   pipeline — no new publish path).
+- **Merge safety (v0.19.0, the release's centre of gravity)**: the compaction
+  watermark became **per item** and snapshots now sort where their events were
+  (§9.7, ADR-0007), closing a silent data-loss class; `worklog merge-rescue`
+  (`compact.merge_rescue()`) repairs a merge the resurrection guard blocked by
+  reasoning from the **merge base** rather than the watermark; `hooks/pre-commit`
+  gained a conflict-marker guard with deliberately **no** merge exemption.
+- **Provenance without spending identity (v0.19.1)**: every CLI-written event
+  carries a `git` field — the short HEAD sha it was authored at
+  (`bin/worklog — base()`, `ulid.git_commit()`). v0.19.0 briefly spent five of
+  the id's entropy characters on that hash; that was reverted. `ulid.new()`
+  keeps the full 80 bits, because an id is issued once and its only job is not
+  to clash. Provenance lives in the event, never in the id (§9.8).
+- **Four new support modules (v0.19.0)**: `session.py` (advisory
+  concurrent-session registry under `.work/.sessions`), `changelog.py`
+  (`worklog changelog-draft`), `item_fields.py` (configurable optional item
+  fields, `worklog fields`), `wiki_flavor.py` (the renderer's single wiki
+  platform seam).
 
-Major components: the `worklog` CLI (the API, 1274 lines), `fold.py` (state
-derivation), `compact.py` (the only rewriter, CI-only), `render_roadmap.py` +
-`viz_mermaid.py` (generated docs), `sync_dispatch.py` + `adapters/` (ticket sync),
-`ia.py` / `ia_render.py` (670 lines) / `ia_graph.py` (302 lines) (reader plane +
-graph + artifact pages), `adr.py`/`plan_capture.py`/`canonical.py`/`ulid.py`
-(support modules), git hooks, GitHub Actions, the Claude Code plugin, and (v0.16.0)
-the `integration-guide` skill + `docs/integrations/` content — the first edge in
-this repo built entirely from prose and existing primitives, no new `bin/` code.
+Major components: the `worklog` CLI (the API, 1502 lines), `fold.py` (state
+derivation, 371 lines), `compact.py` (the only rewriter plus `merge_rescue()`,
+498 lines), `render_roadmap.py` + `viz_mermaid.py` (generated docs),
+`sync_dispatch.py` (856 lines) + `adapters/` (ticket sync), `ia.py` (616) /
+`ia_render.py` (735) / `ia_graph.py` (520) (reader plane + graph + artifact
+pages + `worklog find`), `adr.py`/`plan_capture.py`/`canonical.py`/`ulid.py`
+and the four v0.19.0 modules `session.py`/`changelog.py`/`item_fields.py`/
+`wiki_flavor.py` (support modules), git hooks, GitHub Actions, the Claude Code
+plugin, and (v0.16.0) the `integration-guide` skill + `docs/integrations/`
+content — the first edge in this repo built entirely from prose and existing
+primitives, no new `bin/` code.
 
 External dependencies: git (union merge), the `gh` CLI (GitHub adapter and
 merge-when-green), Python 3 stdlib only — **zero third-party runtime dependencies**
 (Confirmed: no requirements file; `tests/` use stdlib `unittest`).
 
 Primary risks: hosted platforms don't run merge drivers server-side (PR-level
-conflicts on the log), wall-clock LWW ties, compaction as the single
-state-rewriting operation (mitigated by fold-equality verification), and IA
-gates still warn-only (Phase 5 hard-fail promotion still open).
+conflicts on the log — settled deliberately in ADR-0005), wall-clock LWW ties,
+and compaction as the single state-rewriting operation (mitigated by
+fold-equality verification). The IA gates are no longer a risk item: three of
+the four were promoted to hard failures in v0.19.0 (#98); `trace-check` stays
+warn-level at commit time by design and `--strict` at release.
 
 # 3. Requirements Summary
 
@@ -154,6 +181,10 @@ Functional requirements (Confirmed, from spec §2 and the implementation):
 | R14 | IA content model: wiki_key, truth_state, inventory, reader plane, traceability | `bin/ia.py`, `ia_render.py`, `ia_graph.py`; plan `docs/plans/2026-07-22-ia-content-model.md`; migration 0002 |
 | R15 | Branch discipline: commits never land directly on main/master; every commit message references a worklog item or ticket | `hooks/pre-commit` branch-guard block, `hooks/commit-msg`; plan `docs/plans/2026-07-25-branch-discipline-hooks.md` |
 | R16 | One local owner per remote ticket; a link is retractable; nothing may fail or diverge between mutating remote state and recording it (v0.18.0) | `fold.external_owners()`, `cmd_link()`/`cmd_unlink()`, `Dispatcher.push_items()`/`is_dirty()`/`record_link()`, `adapters/github/adapter — create_issue()`; plan `docs/plans/2026-07-28-one-owner-per-external-key.md` |
+| R17 | A merge never loses an event a compaction did not fold; a blocked merge has a runnable remedy (v0.19.0) | `fold.apply_watermark()` (per item) + `fold.position()`, `compact._snapshot()`'s `through`, `compact.merge_rescue()`, `hooks/pre-commit` conflict-marker guard; ADR-0005/0006/0007 |
+| R18 | Optional item fields are configurable per team, and a disabled field is invisible rather than rejected (v0.19.0) | `bin/item_fields.py — CORE`/`CATALOG`/`add_arguments()`/`collect()`, `.work/config.yml — work_item_fields`, `worklog fields`; plan `docs/plans/2026-08-01-configurable-item-fields.md` |
+| R19 | Every event records where it came from, without spending id entropy (v0.19.1) | `ulid.git_commit()`, `bin/worklog — base()`, `compact._snapshot()`/`_compact_line()`; `tests/test_ulid.py — TestEntropyIsNeverSpent`/`TestEventProvenance` |
+| R20 | The renderer targets one wiki platform through one seam, not forty call sites (v0.19.0) | `bin/wiki_flavor.py — Gollum`/`render_links()`/`get()`, `ia_render.use_flavor()`/`_links()`/`page_name()` |
 
 Non-functional: no runtime dependencies beyond Python 3 + git; appends atomic under
 `PIPE_BUF` (body capped at `MAX_BODY = 2048`, `bin/worklog` line 31); corrupt input
@@ -219,17 +250,24 @@ stdin. Outputs: log events, `docs/roadmap.md`, `docs/plans/*`, `docs/status/*`,
 
 Layers, all Confirmed from imports:
 
-- **Identity**: `ulid.py` (no imports from siblings).
-- **State**: `fold.py` (imports `hashlib`, `json` only).
-- **CLI/API**: `bin/worklog` imports `ulid`, `fold`; lazily imports
-  `render_roadmap`, `plan_capture`, `compact`, `sync_dispatch`, `adr`, `ia`,
-  `ia_render`, `ia_graph`.
+- **Identity**: `ulid.py` (no imports from siblings; `subprocess` imported lazily
+  inside `git_commit()`).
+- **State**: `fold.py` (imports `json` only).
+- **CLI/API**: `bin/worklog` imports `ulid`, `fold`, `item_fields` at module
+  level; lazily imports `render_roadmap`, `plan_capture`, `compact`,
+  `sync_dispatch`, `adr`, `ia`, `ia_render`, `ia_graph`, `changelog`, and
+  `session` (the last inside `_warn_concurrent_sessions()` under a bare
+  `except`, because an advisory must never break a write).
 - **Rendering**: `render_roadmap.py` imports `ulid`, `fold`; `viz_mermaid.py`
   imports `ulid`, `fold` and is imported lazily by `render_roadmap.render()`.
-- **Sync**: `sync_dispatch.py` imports `canonical`; drives adapters and the CLI
-  as subprocesses.
+- **Sync**: `sync_dispatch.py` imports `canonical` and `fold.external_owners`;
+  drives adapters and the CLI as subprocesses.
 - **IA plane**: `ia.py` imports `fold`; `ia_render.py` / `ia_graph.py` import `ia`
-  (and fold-derived items where needed).
+  (and fold-derived items where needed); `ia_render.py` additionally imports
+  `wiki_flavor` (v0.19.0).
+- **Support (v0.19.0)**: `session.py`, `changelog.py`, `item_fields.py`,
+  `wiki_flavor.py` — each stdlib-only and each importing no sibling module, so
+  none of them can become a second source of truth for anything the fold owns.
 - **Automation**: `hooks/` (git + Claude Code), `.github/workflows/`,
   `plugin/` (packaged copies of the same scripts).
 
@@ -238,8 +276,12 @@ flowchart LR
     subgraph bin["bin/ (stdlib-only Python)"]
         WL["worklog<br/>CLI entry, only log writer"]
         FOLD["fold.py<br/>state = fold(events)"]
-        ULID["ulid.py<br/>random + deterministic IDs"]
+        ULID["ulid.py<br/>random + deterministic IDs<br/>git_commit() provenance"]
         CANON["canonical.py<br/>canonical hash"]
+        IF["item_fields.py<br/>CORE vs CATALOG"]
+        SESS["session.py<br/>.work/.sessions advisory"]
+        CHG["changelog.py<br/>changelog-draft"]
+        WF["wiki_flavor.py<br/>link + name seam"]
         RR["render_roadmap.py"]
         VIZ["viz_mermaid.py"]
         PC["plan_capture.py"]
@@ -264,14 +306,20 @@ flowchart LR
     WL --> IA
     WL --> IAR
     WL --> IAG
+    WL --> IF
+    WL --> SESS
+    WL --> CHG
     RR --> FOLD
     RR --> VIZ
     CP --> FOLD
+    CP --> ULID
     SD --> CANON
+    SD --> FOLD
     SD -->|subprocess| AD
     SD -->|"subprocess: worklog link/ingest/conflict"| WL
     IA --> FOLD
     IAR --> IA
+    IAR --> WF
     IAG --> IA
     SK -->|invoke| WL
 ```
@@ -284,9 +332,9 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    A["worklog add/update/close/link/ingest/conflict"] -->|"single O_APPEND write + newline"| T[(".work/todo.jsonl")]
+    A["worklog add/update/close/link/ingest/conflict"] -->|"single O_APPEND write + newline<br/>every event stamped with git sha (v0.19.1)"| T[(".work/todo.jsonl")]
     B["other branches / other clones"] -->|"git union merge<br/>(.gitattributes)"| T
-    T --> F["fold(): parse-tolerant, dedupe by ev,<br/>sort by ev, watermark, apply LWW"]
+    T --> F["fold(): parse-tolerant, dedupe by ev,<br/>sort by position() (snapshot at its through),<br/>per-item watermark, apply LWW"]
     D[(".work/done.jsonl")] --> F
     F --> ST["derived item state"]
     ST --> RM["docs/roadmap.md (regenerated, diffed by hook)"]
@@ -295,14 +343,16 @@ flowchart TD
     ST --> GRAPH["docs/.index/_graph.json"]
     DOCS["docs/** + published.json"] --> INV["docs/.index/_inventory.json"]
     INV --> REND["docs/.index/rendered/* + publish-manifest"]
-    N["nightly CI compactor"] -->|"snapshots + watermark,<br/>only after fold(new)==fold(old)"| T
+    N["nightly CI compactor"] -->|"per-item snapshots (through) + global watermark,<br/>only after fold(new)==fold(old)"| T
     N -->|append closed snapshots| D
+    MR["worklog merge-rescue<br/>(merge base, not watermark)"] -->|"re-emit this branch's events above the mark"| T
 ```
 
 *Assumptions/failure behavior:* union merge duplicates and scrambles lines — the
 fold's dedupe/sort absorbs that; a corrupt line costs itself only
 (`fold.read_lines()`). IA artifacts are pure functions of committed files; a
-stale index is a gate warning (soon hard fail), not silent drift.
+stale index is a **hard** pre-commit failure since v0.19.0 for
+normalize/inventory/render, and a warning for `trace-check`.
 
 Deployment architecture is §27; trust boundaries §22.
 
@@ -330,6 +380,65 @@ bans `sha256`, `last_pushed_hash`, `canonical_json`, `search`, and
 **ADR-0003 — Green-gates merging** (accepted). PRs merge only when every check is
 green; `merge-when-green.sh` polls (default 300 s, 24 attempts) and treats "no
 gates reporting" as *not* passing (exit 4 timeout). Never `--admin`.
+
+**ADR-0004 — Clearing a dead ticket link stays a human decision** (accepted,
+2026-08-01). Adapter exit 3 (GONE) no longer clears `last_pushed_hash` and
+re-pushes forever (#241). The dispatcher buffers not-founds in `pending_gone`,
+records a `gone_key` in per-item sync state at the end of `push_items()` via
+`commit_gone()` so an aborted run leaves nothing behind, and aborts the whole
+run once `GONE_ABORT = 3` not-founds arrive with nothing having succeeded —
+the signature of a misconfigured project or credential, not three deleted
+tickets. Re-linking is the operator's call (`worklog unlink`, then file a
+fresh one); a rc-0 for the same item pops the stale `gone_key`, so a ticket
+restored from the tracker's trash re-enters scope by itself.
+
+**ADR-0005 — No custom merge driver for the event log** (accepted, 2026-07-31).
+Settles the question #243 left open. Union merge stays and the detector stays,
+on three independently sufficient findings: GitHub never runs a merge driver
+server-side and fails *closed* (it refused the merge outright); the local path
+is already covered by `check_resurrection`, which caught 55 resurrected events
+and blocked the commit; and driver registration lives in per-clone config that
+does not travel with the repository, so a contributor who never ran the
+installer would silently merge without it. Explicitly does **not** supersede
+ADR-0001.
+
+**ADR-0006 — Resurrected events are not always cosmetic** (accepted,
+2026-08-01). Corrects a factually wrong claim in ADR-0005's first consequence.
+ADR-0005 classified `check_resurrection` as a *hygiene* guard on the reasoning
+that "the fold discards resurrected events on read, so no state is ever
+corrupted." That is true for an event the compaction actually folded and false
+for one it never saw: the watermark was `max_ev` over the log the compaction
+read — a **time** marker doing a **content** marker's job — so an event created
+on a branch before a compaction ran on main was never folded into any snapshot,
+yet still sorted below the mark and was silently discarded on merge.
+Reproduced deterministically; the live 2026-07-31 incident carried three such
+events (an `in_progress` and two closes, one of them an epic) which survived
+only because the guard blocked and a human re-applied them by hand. The guard
+was therefore reclassified a **correctness** guard and may not be demoted, and
+recompaction was ruled out as a remedy — it verifies `fold(new) == fold(old)`
+against a fold that has *already* discarded the events, so it would pass while
+making the loss permanent. `worklog merge-rescue` replaces it. Note this record
+also states the ULID caveat that `merge_rescue._reissue()` depends on:
+`ulid.new()` has no intra-millisecond counter, so anything re-emitting a
+sequence must hand in explicit increasing timestamps.
+
+**ADR-0007 — The compaction watermark is per item** (accepted, 2026-08-01).
+The fix ADR-0006 deferred, and it is a WORKLOG-SPEC §7 format change, which is
+why it got its own record. Three changes, all required (§9.7): `_snapshot`
+carries a per-item `through`; `apply_watermark` drops per item and never drops
+events for an item with no snapshot at all; and `fold.position()` sorts a
+snapshot at its `through` rather than its own `ev`. The third exists because
+implementing only the first two left half the bug in place — a snapshot's `ev`
+is minted at compaction time, so it sorts above everything, and since a
+snapshot *replaces* state a branch's later close was applied first and
+immediately erased. A test caught that; the fix would otherwise have passed its
+own regression test and looked done. Consequence worth carrying: with the
+narrower question now being "would the fold actually drop this line?",
+`check_resurrection` is a **hygiene** guard again — which is what ADR-0005
+originally said and ADR-0006 correctly denied *for the code as it then stood*.
+Neither record is superseded; both were right about their own moment. The guard
+still blocks the merge commit, but now to route people to `merge-rescue`, not
+because state is at risk.
 
 **IA content model (plan + migration 0002, not yet a numbered ADR).** Two planes:
 storage stays path-organized by how docs are produced; navigation is a generated
@@ -365,7 +474,14 @@ Decisions not (yet) in ADRs, recorded in plans/spec:
 | Frozen artifacts (plans, snapshots, status, ADR bodies) | Documents people acted on are history, not caches | spec §13.2–13.3; existence refusals; ADR supersede-only |
 | Hooks, not hope | "A CLAUDE.md instruction holds maybe 80% of the time. A hook holds 100%." | spec §12; `hooks/exit-plan-capture.sh` |
 | Sidecars over frozen-doc rewrite | Would otherwise violate §15.8/§15.9 | `ia.is_frozen()`, `ia.normalize()` |
-| IA gates warn-only until Phase 5 | Soft rollout before hard-fail | `hooks/pre-commit` IA block comments |
+| IA gates promoted to hard failures (v0.19.0) | The warn-only rollout is over (#98). Promotion is safe because the block is additionally guarded on `-d docs/.index` — "has this repo opted **into** the IA?", not merely "does it have the code?" — so a scaffolded repo that has never generated an index is not blocked from its first commit, while a repo that has one stays fully enforced | `hooks/pre-commit` IA block |
+| Provenance is a field on the event, never entropy in the id (v0.19.1) | An id is issued once and its only guarantee is non-collision, so entropy is not currency to spend on metadata. A per-event field also traces *better*: an item's id is minted once and could only ever name the branch the **item** was created on | `bin/ulid.py — new()`/`git_commit()` docstrings; `bin/worklog — base()`; `tests/test_ulid.py — TestEntropyIsNeverSpent` |
+| Optional item fields are configurable; the core is not (v0.19.0) | The core is load-bearing — the fold keys on it, the roadmap reads it, sync maps it, the graph walks it. A config that could switch `priority` off is a config that can break the roadmap, so the knob simply is not offered. A *disabled* optional field gets no argparse flag at all, so it is invisible rather than rejected — which is what "never appears in prompts" has to mean for a CLI whose `--help` **is** the prompt | `bin/item_fields.py — CORE`, `CATALOG`, `add_arguments()` |
+| `[[Page]]` is the renderer's canonical link notation, not Gollum output (v0.19.0) | Translation happens once at the output boundary (`render_links()`), so a second platform is one new class instead of edits to ~40 wikilink sites, and Gollum output stays byte-identical because for Gollum the translation is the identity. The seam is deliberately only `link()` + `sanitize()`: no page-layout, frontmatter, directory or `filename()` hook, because those would be guesses about a platform nobody has asked for | `bin/wiki_flavor.py` module docstring; `ia_render._links()`/`page_name()` |
+| No YAML dependency for the two new config blocks (v0.19.0) | `work_item_fields` and `wiki.system` are each one flat block of scalars; both readers do a targeted block scan and treat anything malformed as "not configured", falling back to documented defaults rather than failing every command | `item_fields._config_block()`, `wiki_flavor.configured_system()` |
+| The concurrent-session registry is advisory in both directions (v0.19.0) | Nothing here ever blocks a write, and a registry that is missing, stale or corrupt reads as empty. A bad advisory file must never be the reason someone cannot record work. Session identity comes from the harness because `worklog` is short-lived — pid, ppid and POSIX session id all turn over per tool call | `bin/session.py` module docstring; `bin/worklog — _warn_concurrent_sessions()` |
+| `changelog-draft` never guesses the version and never silently drops a commit | Which digit moves is a semver judgement, so the placeholder stays literal `X.Y.Z` until `--version`; every exclusion is printed on stderr with its reason so stdout stays pipeable markdown | `bin/changelog.py` module docstring |
+| Housekeeping is excluded by **path**, not by subject line | A commit that touched only `.work/`, `docs/.index/`, `docs/roadmap.md`, `docs/status/` or `docs/plans/` changed no behaviour a changelog reader cares about; matching on the subject would misclassify a real fix that happened to say "chore" | `bin/changelog.py — HOUSEKEEPING`, `_housekeeping()` |
 | Uniqueness on `(external.system, external.key)` is a constraint, not an identity change (v0.18.0) | The ULID stays the only primary key and no lookup is done by external key; a `UNIQUE` index coexists with a surrogate primary key. Written into the spec so the next reader does not "fix" it back as a §5.4 violation | `docs/worklog-spec.md:272`; `fold.external_owners()` docstring; plan `docs/plans/2026-07-28-one-owner-per-external-key.md` |
 | Sync **skips** contested items and exits 1, rather than refusing the whole run (v0.18.0) | Corruption needs *both* claimants pushed, so removing the set removes the path; every other item still syncs and pull still works — which is exactly what you want while repairing. Printed as its own block, not a `drift:` line, because drift is what operators skim and burying a live-corruption warning there reproduces the original silent failure in a new costume | `sync_dispatch.report_collisions()`, `push_items()`, `sync()` |
 | `unlink` reuses the `link` op with `external: {}` (v0.18.0) | The fold already applies whole-field LWW to `external`, so an empty value *is* the retraction. No new op means no fold change and an un-upgraded clone still folds it correctly. `{}` and never `null`, because `cmd_list`'s `.get("external", {})` default never fires on an existing null key | `bin/worklog — cmd_unlink()`; `fold._apply_mutations()` |
@@ -373,30 +489,36 @@ Decisions not (yet) in ADRs, recorded in plans/spec:
 | Branch guard + commit-msg hard-fail immediately, no warn period (v0.15.0) | A real incident (13 commits authored straight onto `main`, diverging from `origin/main` for hours) — "hooks enforce invariants, not hope"; `MERGE_HEAD` exempts reconciliation merges, `WORKLOG_SKIP_BRANCH_GUARD` exempts the three non-commit callers (doctor, CI backstop, integration-test assertions) | `hooks/pre-commit` branch-guard block; `hooks/commit-msg`; plan `docs/plans/2026-07-25-branch-discipline-hooks.md` |
 
 Conditions to revisit: a Lamport counter if clock-skew LWW ever bites (spec §16);
-`external` as an array if multi-tracker is needed; Phase 5 hard-fail promotion
-and platform render adapters (open item #98).
+`external` as an array if multi-tracker is needed; a second `wiki_flavor`
+implementation the day a second platform has a user (the seam's own stated
+limit: if it grows past a naming/link interface, stop and wait for that user);
+platform render adapters, the remaining unshipped half of #98.
 
 # 7. Component Inventory
 
 | Component | Type | Responsibility | Inputs | Outputs | Depends on | Failure impact |
 |---|---|---|---|---|---|---|
-| `bin/worklog` | CLI (1274 lines) | All log writes; every subcommand | argv, stdin (status prose, plan drafts) | log events, docs, stdout | `ulid`, `fold`, lazy others | no writes possible |
-| `bin/fold.py` | Library (307 lines) | Derive state; the only interpreter of the log; **`external_owners()` (v0.18.0)**: the one-owner-per-remote-ticket index | log paths, item iterables | `FoldResult`, `(system, key) → [ids]` | stdlib | everything downstream |
-| `bin/ulid.py` | Library | Random + deterministic ULIDs | time/entropy or (system,key,rev,ts) | 26-char IDs | stdlib | ordering/idempotency |
+| `bin/worklog` | CLI (1502 lines) | All log writes; every subcommand | argv, stdin (status prose, plan drafts) | log events, docs, stdout | `ulid`, `fold`, `item_fields`, lazy others | no writes possible |
+| `bin/fold.py` | Library (371 lines) | Derive state; the only interpreter of the log; `external_owners()` (v0.18.0); **`position()` + per-item `apply_watermark()` (v0.19.0)** | log paths, item iterables | `FoldResult`, `(system, key) → [ids]` | stdlib | everything downstream |
+| `bin/ulid.py` | Library (114 lines) | Random + deterministic ULIDs; **`git_commit()` provenance (v0.19.1)** | time/entropy or (system,key,rev,ts) | 26-char IDs, short sha | stdlib (+ lazy `subprocess`) | ordering/idempotency; provenance omitted, never wrong |
 | `bin/canonical.py` | Library | Canonical JSON + 16-hex hash | item dict | hash | stdlib | echo suppression |
+| `bin/session.py` (v0.19.0) | Library (130 lines) | Advisory registry of harness sessions sharing one checkout (#236) | harness `session_id`, `.work/.sessions` | live-session map, one warning line | stdlib | none — advisory in both directions; a corrupt registry reads as empty |
+| `bin/changelog.py` (v0.19.0) | Generator (158 lines) | Draft the unreleased CHANGELOG section from `git log` (#136) | `git log` since a tag | markdown on stdout, exclusions on stderr | `git` | release notes start from scratch |
+| `bin/item_fields.py` (v0.19.0) | Library (201 lines) | The CORE/CATALOG field model; builds a flag per **enabled** optional field (#108) | `.work/config.yml — work_item_fields` | argparse flags, `{field: value}`, `worklog fields` lines | stdlib | optional-field flags vanish; core unaffected |
+| `bin/wiki_flavor.py` (v0.19.0) | Library (109 lines) | The renderer's one platform seam: `link()` + `sanitize()`, canonical `[[…]]` translation (#271) | `wiki.system` from config or `WORKLOG_WIKI_SYSTEM` | flavor object, translated text | stdlib | falls back to Gollum; an unknown system is not an error |
 | `bin/render_roadmap.py` | Generator | Byte-deterministic roadmap | log | markdown | `fold`, `ulid`, `viz_mermaid` | roadmap staleness gate |
 | `bin/viz_mermaid.py` | Generator | Deps/hierarchy/gantt diagrams, 40-node cap | `FoldResult`, log paths | mermaid blocks | `fold`, `ulid` | cosmetic |
 | `bin/plan_capture.py` | Library | Parse `## Tasks` checkboxes; plan front matter | draft text | task list, front matter | stdlib | plan capture |
-| `bin/compact.py` | Batch (CI) | The only file rewriter; verified | log files | rewritten logs | `fold`, `ulid`, `render_roadmap.max_ev` | worst-case: refused, files untouched |
-| `bin/sync_dispatch.py` | Orchestrator | Every sync invariant | fold output, adapter I/O | pushes, ingests, conflicts, report | `canonical`, adapter, `worklog` | sync only; local-only fallback |
+| `bin/compact.py` | Batch (CI) + merge tool (498 lines) | The only file rewriter; verified. Also the two merge guards (`merge_check`) and, since v0.19.0, **`merge_rescue()`** — the repair, reasoning from the merge base | log files, `MERGE_HEAD`/merge base | rewritten logs, guard problems, rescued events | `fold`, `ulid`, `render_roadmap.max_ev`, `git` | worst-case: refused, files untouched |
+| `bin/sync_dispatch.py` | Orchestrator (856 lines) | Every sync invariant; **overwrite preview + GONE policy (v0.19.0)** | fold output, adapter I/O | pushes, ingests, conflicts, report, overwrite block | `canonical`, `fold.external_owners`, adapter, `worklog` | sync only; local-only fallback |
 | `bin/adr.py` | Library | ADR parse/validate/scaffold/supersede | `docs/adr/*.md` | problems list, scaffolds | stdlib | ADR gate |
 | `bin/ia.py` | Library (616 lines) | wiki_key, truth_state, inventory, normalize, sidecars | docs tree, ledger, fold | `_inventory.json`, sidecars, frontmatter patches | `fold` | IA gates / publish metadata |
-| `bin/ia_render.py` | Generator (670 lines) | Home, Sidebar, indexes, publish-manifest, aliases, **artifact pages (v0.14.0)**: ticket/release/PR pages | inventory records, fold items, graph | `docs/.index/rendered/*` (incl. `tickets/`, `releases/`, `prs/`) | `ia`, `ia_graph` | reader plane staleness |
-| `bin/ia_graph.py` | Library (302 lines) | Traceability graph, link-pr overlay, ticket-body, trace-check, **adjacency projection (v0.14.0)**: `build_adjacency()`/`item_links()` | records + fold items | `_graph.json`, sidecar edges | `ia` | unlinked evidence |
+| `bin/ia_render.py` | Generator (735 lines) | Home, Sidebar, indexes, publish-manifest, aliases, artifact pages (v0.14.0); **flavor seam + per-doc_type banners + live PR pages (v0.19.0)** | inventory records, fold items, graph, `pr/<n>` sidecars | `docs/.index/rendered/*` (incl. `tickets/`, `releases/`, `prs/`) | `ia`, `ia_graph`, `wiki_flavor` | reader plane staleness (now a hard commit gate) |
+| `bin/ia_graph.py` | Library (520 lines) | Traceability graph, link-pr overlay, ticket-body, trace-check, adjacency (v0.14.0); **`pr_sync()`/`pr_meta()` and the `find` search surface (v0.19.0)** | records + fold items, `gh pr view` (pr-sync only) | `_graph.json`, sidecar edges, `pr/<n>` sidecars, search results | `ia`, `gh` (pr-sync only) | unlinked evidence; PR pages fall back to "not tracked" |
 | `adapters/github/adapter` | Executable | GitHub translation via `gh` | verb + JSON | JSON/NDJSON, exit codes 0–5 | `gh` CLI | GitHub sync |
 | `adapters/fake/adapter` | Test double | Contract-faithful local tracker | verb + JSON | JSON, state file | stdlib | CI sync tests |
-| `hooks/pre-commit`, `pre-merge-commit`, `commit-msg` (v0.15.0) | Git hooks | Newline/schema/taxonomy/roadmap/ADR/IA gates, **branch guard + work-reference gate (v0.15.0)** | staged tree, branch name, commit message | pass/fail (+ IA warnings) | python3 | invariants unenforced locally; commits can drift onto main untraceably |
-| `hooks/*.sh` (4) | Claude Code hooks | Session policy: capture, reminder, stop-gate, doctor | hook JSON | hook JSON | git, python3 | policy drift |
+| `hooks/pre-commit` (146 lines), `pre-merge-commit`, `commit-msg` (v0.15.0) | Git hooks | Newline/schema/taxonomy/roadmap/ADR gates, branch guard + work-reference gate (v0.15.0), merge integrity guards, **conflict-marker guard with no merge exemption + hard IA gates (v0.19.0)** | staged tree, branch name, commit message | pass/fail (+ trace-check warning) | python3 | invariants unenforced locally; commits can drift onto main untraceably; conflict markers land in tests/ and plugin/ |
+| `hooks/*.sh` (5) | Claude Code hooks | Session policy: capture, reminder (+ session heartbeat), stop-gate, doctor, **`session-end.sh` (v0.19.0)** | hook JSON | hook JSON, `.work/.sessions` | git, python3 | policy drift; a finished session keeps warning the next one for a full hour |
 | `plugin/` | Package | Skills, `/worklog:*` commands, hook wiring, script copies | — | — | mirrors `bin/`, `hooks/` | plugin installs |
 | `.github/workflows/worklog.yml` | CI | Invariants + tests + coverage ≥80% | push/PR | pass/fail | python3, coverage | merge gate |
 | `.github/workflows/compact.yml` | CI | Nightly compaction, own commit | schedule | compact commit | `compact.py` | log growth only |
@@ -582,6 +704,19 @@ v0.13.0 fix: snapshot writes folded state **verbatim** so a closed orphan no
 longer aborts verify (item 01KY5HW7KS / #101) — `compact._public()` keeps the
 folded shape rather than inventing a cleaner one that diverges from fold.
 
+**v0.19.0: each snapshot carries a per-item `through` (Confirmed,
+`compact.py — compact(), lines 165–173` and `_snapshot(), lines 45–63`).** After
+the fold and before the partition, `compact()` walks the *raw* input lines of
+both files a second time and builds `per_item = {item_id: highest ev seen}` —
+raw rather than folded on purpose, because the mark must describe what was
+**read**, not what survived. `_snapshot(item, per_item.get(item["id"]))` writes
+that value top-level on the event, deliberately not inside `set`, so it can
+never become item state and never reaches the `fold(new) == fold(old)`
+comparison. The global `compact` watermark line is still written and is still
+the legacy fallback; the per-item mark is what the fold now drops against.
+Both `_snapshot()` and `_compact_line()` also stamp `git` when
+`ulid.git_commit()` returns a sha (v0.19.1). Analysis: §9.7, ADR-0007.
+
 ## 8.5 Status reports
 
 `cmd_status()`: `--emit-facts` prints deterministic JSON facts (windowed by ULID
@@ -597,7 +732,7 @@ merge); empty or pending → sleep and retry up to 24×300 s; all green → merg
 advisory print when `features.auto_merge_on_green: false` or `--advisory`);
 timeout → exit 4. "No gates reporting is not gates passing" (ADR-0003).
 
-## 8.7 IA pipeline (v0.13.0, extended v0.14.0)
+## 8.7 IA pipeline (v0.13.0, extended v0.14.0 and v0.19.0)
 
 ```mermaid
 sequenceDiagram
@@ -606,7 +741,7 @@ sequenceDiagram
     participant Inv as ia.write_inventory
     participant R as ia_render.write_all
     participant G as ia_graph.write_graph
-    participant Hook as pre-commit (warn-only)
+    participant Hook as pre-commit (hard since v0.19.0)
     Dev->>N: worklog ia-normalize
     N->>N: classify docs, seed wiki_key from ledger, write sidecars / live FM
     Dev->>Inv: worklog ia-inventory
@@ -620,7 +755,7 @@ sequenceDiagram
     Hook->>Inv: ia-inventory --check
     Hook->>R: ia-render --check
     Hook->>G: trace-check (warn forever)
-    Hook-->>Dev: WARNING (soon hard fail) if drift
+    Hook-->>Dev: hard fail on normalize/inventory/render drift; WARNING on trace
 ```
 
 - **Normalize** (`ia.normalize()`): frozen docs get additive sidecars; sanctioned-live
@@ -652,6 +787,27 @@ sequenceDiagram
   `gh pr view` call exists in this codebase yet — #138). `build_manifest()`
   grew a second loop keyed off the `tickets/`, `releases/`, `prs/` filename
   prefixes so a future entity type needs only a new prefix, not a new loop.
+- **v0.19.0 additions.** (a) *Gates are hard* for normalize/inventory/render
+  (#98); `trace-check` stays warn at commit and `--strict` at release, and the
+  release skill now runs it as a mandatory pre-release evidence gate. (b) *The
+  flavor seam*: `ia_render.FLAVOR` (from `wiki_flavor.get()`), `use_flavor()`,
+  and `_links()`; `page_name()` sanitizes through the flavor instead of an
+  inline `.replace(" ", "-")`, and `render_all()` translates every page through
+  `_links` **before** `build_manifest()` hashes the bytes, so `render_hash`
+  describes what actually gets published. Rendered output is byte-identical to
+  v0.18.0 across all 319 pages. (c) *Banners split by `doc_type`*
+  (`_banner_text()`), fixing #137's mislabelling of frozen "current"-titled
+  pages: distinct wording for `status`, `plan`, `roadmap-snapshot`, and
+  everything else. (d) *Live PR metadata* (#138): `worklog pr-sync <n>` calls
+  `gh pr view` once and writes a `pr/<n>` sidecar; `render_pr_page()` reads that
+  sidecar and renders state, review, checks (`ia_graph.rollup_checks()` — worst
+  state wins), merge time and changed files, degrading to "not tracked — run
+  `worklog pr-sync <N>`" when it was never run. The network call lives in the
+  CLI, never in `render_all()`, so the render-purity invariant survives.
+  (e) *`worklog find`* (#272): `ia_graph.find()` searches the already-generated
+  inventory and graph — documents by text/type/truth-state, a node's edges in
+  **both** directions (`--links`), every edge of one type (`--edge`). Read-only,
+  no network, no new index; a no-match exit is non-zero "the way grep does".
 
 # 9. Complex Business Logic
 
@@ -661,25 +817,49 @@ Plain language: read every line of both logs, drop what doesn't parse, keep one
 copy of each event, replay them oldest-first, and let the last write to each field
 win. Formal rules (Confirmed, `bin/fold.py — fold()`):
 
-1. Order is by `ev`, never file position, never `ts`; ties break on
-   `(actor, sha256(line))` so every machine folds identically
-   (`dedupe_and_sort()`).
-2. Events at or below the compact watermark are dropped, **except** `snapshot`
-   (`apply_watermark()`).
-3. `snapshot` replaces state entirely; a duplicate `create` degrades to an update.
-4. Mutation order within an event: `del`, then `add`, then `set`
-   (`_apply_mutations()`).
-5. `close` takes status from `set`; only a missing/open status defaults to `done`
+1. Order is by `ev`, never file position, never `ts` (`dedupe_and_sort()`).
+   There is **no tiebreak**: dedupe runs first and is keyed on `ev`, so no two
+   events reaching the sort can share one. The `(actor, sha256(line))` tiebreak
+   this used to carry was removed in v0.19.0 as unreachable by construction —
+   and as worse than silence, because it advertised a determinism guarantee that
+   actually came from the dedupe above it (worklog#259).
+2. Ordering runs through `position()` (v0.19.0): an ordinary event sorts at
+   `(ev, 1)`; a **snapshot carrying `through` sorts at `(through, 0)`** — where
+   the events it folded were, not where the compactor happened to write it. The
+   `0` keeps a snapshot ahead of a same-positioned ordinary event so the later
+   event wins rather than being replaced. Identity is still `ev`; only ordering
+   moved. A legacy snapshot with no `through` falls back to its own `ev`,
+   exactly as before (§9.7, ADR-0007).
+3. The watermark drop is **per item** (`apply_watermark()`, v0.19.0). An item
+   with no snapshot never has events dropped; an item with a snapshot drops only
+   its own events at or below that snapshot's `through`. `snapshot` events are
+   themselves always exempt, and `compact` lines are removed. Legacy logs whose
+   snapshots predate `through` fall back to the global mark.
+4. `snapshot` replaces state entirely; a duplicate `create` degrades to an update.
+5. Mutation order within an event: `del`, then `add`, then `set`
+   (`_apply_mutations()`). Set-valued fields are `labels` and `depends_on`
+   (`SET_VALUED`), so two branches adding different labels — or different
+   blockers — compose instead of clobbering.
+6. `close` takes status from `set`; only a missing/open status defaults to `done`
    — a `cancelled` item must never report as shipped.
-6. `reopen` clears closed status and `resolution`.
-7. `conflict` appends to `item._conflicts` and changes no state; **any later
+7. `reopen` clears closed status and `resolution`.
+8. `conflict` appends to `item._conflicts` and changes no state; **any later
    event writing that field clears the conflict**.
-8. Events for unknown items become `_orphan` partial items — reported, never
+9. Events for unknown items become `_orphan` partial items — reported, never
    invented, never fatal.
-9. Taxonomy is normalized leniently on create/snapshot: legacy `type` maps via
+10. Taxonomy is normalized leniently on create/snapshot: legacy `type` maps via
    `LEGACY_TYPE_MAP`; a create with neither type nor kind folds to
-   `kind:triage`. Hard validation lives at write time and in the hooks — the fold
-   never crashes on a bad pair.
+   `kind:triage` — but that default applies on `create` **only**, never on
+   `snapshot`, because a snapshot must be a lossless round-trip of the state it
+   was given (spec §7 step 7) and fabricating taxonomy there for an item that
+   was never created (a closed orphan, say) makes compaction non-idempotent and
+   fails its own verify. Hard validation lives at write time and in the hooks —
+   the fold never crashes on a bad pair.
+
+Unknown event fields are ignored, which is what makes v0.19.0's `through` and
+v0.19.1's `git` additive in both directions: an old reader on a new log skips
+them and applies the previous rules, and a new reader on an old log finds
+neither and falls back. No migration, no backfill, no coordinated cutover.
 
 ## 9.2 Item lifecycle
 
@@ -776,6 +956,152 @@ constraint on a nullable secondary attribute, which is a different thing. Both t
 helper's docstring and the spec now say so, to stop the next reader "fixing" it
 back.
 
+## 9.7 The per-item watermark, and the merge it repairs (v0.19.0)
+
+*(Numbered after §9.6 for the same reason: §9.3–§9.5 keep their existing numbers
+so prior cross-references hold.)*
+
+Plain language: compaction deletes raw event lines and writes one snapshot per
+item in their place. The fold needs a rule for "which raw lines are already
+represented by a snapshot and can therefore be ignored". That rule used to be a
+single number and the wrong kind of number, and work disappeared because of it.
+
+**The old rule and why it lost data.** `apply_watermark()` dropped every
+non-snapshot event whose `ev` sorted at or below `max_ev` over the whole log the
+compaction read. That is a **time** marker doing a **content** marker's job.
+An event created on a branch before a compaction ran on `main` was not in the
+log that compaction read, so no snapshot carries its state — yet it still sorts
+below the mark. Merging the branch back made the fold discard it. No error, no
+warning from the fold itself. Reproduced deterministically while fixing #269;
+the live 2026-07-31 incident carried three such events (an `in_progress` and two
+closes, one an epic) and they survived only because the resurrection guard
+blocked the merge commit and a human re-applied them by hand.
+
+**The second mechanism, found while fixing the first.** A snapshot's own `ev` is
+minted at compaction time, so it sorts above everything before it. Because a
+snapshot *replaces* item state entirely, a branch event that legitimately
+survived the watermark could still be applied first and then immediately
+overwritten. The event was in the log, was not dropped, and had no effect. Had
+only the watermark been fixed, the release would have shipped half a fix that
+passed its own regression test.
+
+**The three changes, all required** (Confirmed; ADR-0007):
+
+| # | Change | Where | Why it is not optional |
+|---|---|---|---|
+| 1 | Each snapshot carries `through` — the highest `ev` this compaction folded **for that item** | `compact.py — _snapshot(), lines 45–63`; built from raw lines in `compact(), lines 165–173` | A global mark also covers events from branches the compaction never saw. Top-level on the event, never inside `set`, so it cannot become item state or reach `fold(new) == fold(old)` |
+| 2 | `apply_watermark()` drops per item; an item with **no** snapshot never loses an event | `fold.py — apply_watermark(), lines 210–266` | Nothing folded those events, so nothing carries their state. This is compaction's own "never drop data" rule (spec §7 step 3) applied on the read side |
+| 3 | A snapshot sorts at its `through`, not its `ev` | `fold.py — position(), lines 185–207` | Puts the snapshot back after the events it folded and before anything later on any branch, so a branch's later close applies *on top of* it. Ordering had to be separated from identity — giving the snapshot the `ev` of its `through` would collide with the very event it replaced |
+
+`covered` is built as `item -> max(through)` across every snapshot for that item,
+because a union merge can legitimately leave two snapshots for one item and the
+later compaction's mark is the truth. Legacy logs fold exactly as before:
+snapshots predating `through` fall back to the global mark for dropping and to
+their own `ev` for ordering, while still gaining the "no snapshot, no drop"
+rule — which can only ever *restore* data.
+
+**`worklog merge-rescue`** (`compact.py — merge_rescue(), lines 345–454`) is the
+operator-facing half. Recompaction — what the guard used to advise — cannot be
+run from a blocked-merge state and would not have been safe if it could: it
+verifies `fold(new) == fold(old)` against a fold that has *already* discarded
+the branch's events, so it would pass while making the loss permanent
+(ADR-0006). The rescue instead reasons from the **merge base**:
+
+1. `_merge_state()` reads `MERGE_HEAD`, `HEAD`, and `git merge-base` — no merge
+   in progress is a refusal, not a no-op.
+2. Whichever side has the higher compaction watermark is the log to build on;
+   the other side's events are the ones to replay.
+3. An event present in the base was folded into that side's snapshot and is
+   dropped. An event **not** in the base and sorting below the watermark is
+   exactly the work that would vanish, so `_reissue()` re-emits it with a fresh
+   `ev` above the mark, carrying `rescued_from: <original ev>`.
+4. Reissued ids get **explicitly increasing** millisecond timestamps
+   (`start + n`), because `ulid.new()` has no intra-millisecond counter and two
+   reissues in one millisecond would sort by random bytes and replay a branch's
+   events out of order. ADR-0006 records that this bit the reproduction harness
+   first.
+5. Nothing is written until both `check_resurrection()` passes on the temp files
+   **and** every item either side knew about still folds to a state; on any
+   failure the temp files are unlinked and the real logs are untouched.
+
+Paths are `os.path.realpath`'d against `git rev-parse --show-toplevel` before
+the relative path is computed — `--show-toplevel` resolves symlinks and
+`abspath` does not, so on macOS (`/var → /private/var`) every `git show` would
+otherwise silently return nothing.
+
+Regression suites: `tests/test_watermark.py` (four classes covering
+no-snapshot survival, legacy fallback, per-item marks written by real
+compactions, `through` never leaking into item state, idempotence, and the
+guard no longer crying wolf) and `tests/test_bug_merge.py —
+TestSubWatermarkEventsAreLost` (real git repos, real union merges across a real
+compaction, including `test_rescued_events_keep_provenance`).
+
+## 9.8 Provenance rides the event, not the id (v0.19.1)
+
+v0.19.0 made locally-minted ULIDs carry the short git hash in five of their
+entropy characters, so agents on different branches minted visibly different
+ids. v0.19.1 reverts that and puts the information where it belongs.
+
+The reasoning is in `bin/ulid.py — new()` and `git_commit()` and is worth
+stating in full because it is the kind of trade that gets re-proposed:
+
+- **An id is issued once and never changes, and the only thing it must
+  guarantee is that it does not clash.** Entropy is not currency to spend on
+  metadata. `ulid.new()` therefore keeps all 80 bits, always.
+- **A per-event field traces strictly better anyway.** An *item's* id is minted
+  once, so at best it could name the branch the item was created on. A `git`
+  field on every event names the commit each individual event came from.
+- `git_commit()` returns the short HEAD sha or `""` outside a repo / before the
+  first commit, memoised in a one-element cache because `worklog` mints many
+  events per run and shelling out per event would put a subprocess in the hot
+  path of the only writer. `WORKLOG_NO_GIT_PROVENANCE` suppresses it.
+- `bin/worklog — base(), lines 86–101` stamps `git` on every CLI-written event;
+  `compact._snapshot()`/`_compact_line()` do the same for compactor-written
+  ones. The field is **omitted entirely** outside a git repo rather than written
+  empty.
+- It never becomes item state: it is a top-level event field, not a `set` key,
+  so the fold never assigns it to an item and `canonical_hash` — which picks
+  only from the *item* — cannot see it. No sync re-push follows from the
+  upgrade, and ids minted by v0.19.0 stay valid and are not rewritten; they are
+  well-formed ULIDs with slightly less entropy, and there is nothing to migrate.
+
+Pinned by `tests/test_ulid.py — TestEntropyIsNeverSpent`
+(`test_full_entropy_is_random_across_the_whole_tail`,
+`test_git_commit_is_provenance_not_identity`,
+`test_deterministic_ids_are_unchanged` — ingest ids were never in scope) and
+`TestEventProvenance` (`test_every_event_carries_the_head_sha`,
+`test_a_later_event_records_the_commit_it_was_authored_at`,
+`test_provenance_never_becomes_item_state`,
+`test_outside_a_repo_the_field_is_omitted_not_empty`).
+
+## 9.9 The configurable field model (v0.19.0)
+
+Two populations, and the split is the whole design (`bin/item_fields.py`):
+
+- **CORE** — `id, title, status, level, kind, priority, milestone, labels,
+  parent, body, plan, depends_on, unplanned, discovered_during, external,
+  resolution`. Not configurable, ever. The fold keys on them, the roadmap
+  renderer reads them, sync maps them onto tickets, the traceability index walks
+  them. A config that could switch `priority` off would be a config that can
+  break the roadmap, so the knob is not offered.
+- **CATALOG** — everything optional, enabled per team via a `work_item_fields:`
+  block. Defaults on: `estimate` (XS–XL), `owner`, `risk` (low/medium/high),
+  `acceptance_criteria`. Defaults off: `value`, `confidence`, `due_date`,
+  `severity` (sev1–sev4). Default-off is conservative on purpose — an unfilled
+  field is worse than a missing one, because it looks like an answer.
+
+A disabled field is **invisible, not rejected**: `add_arguments()` builds a flag
+only for enabled fields, so `worklog add --risk high` in a repo with risk off is
+an argparse "unrecognised option". That is what "never appear in prompts, forms,
+or validation" has to mean for a CLI whose `--help` *is* the prompt. Every field
+carries a `description` shipped as a default, because agents read
+`worklog fields` to learn what a field means before writing it, and a field
+whose meaning is guessable from its name still gets guessed differently by two
+people. `validate()` covers only shapes argparse cannot express (today: the
+`due_date` `YYYY-MM-DD` regex); an unreadable config value falls back to the
+documented default rather than failing the command. This repo enables
+`risk: on` and `owner: on` explicitly in `.work/config.yml`.
+
 ## 9.3 Conflict lifecycle decision table
 
 | Local changed since last push | Remote changed | Dispatcher action |
@@ -827,7 +1153,9 @@ erDiagram
         object add "set-valued additions"
         object del "set-valued removals"
         object src "provenance for ingested events"
-        string through "compact watermark only"
+        string through "global mark on compact; per-item mark on snapshot (v0.19.0)"
+        string git "short HEAD sha the event was authored at (v0.19.1); omitted outside a repo"
+        string rescued_from "original ev, on events re-emitted by merge-rescue (v0.19.0)"
     }
     ITEM {
         string id PK "ULID"
@@ -844,6 +1172,10 @@ erDiagram
         string discovered_during FK
         string plan "docs/plans path"
         string resolution
+        string estimate "optional, default on: XS|S|M|L|XL"
+        string owner "optional, default on"
+        string risk "optional, default on: low|medium|high"
+        string acceptance_criteria "optional, default on"
     }
     DOC_RECORD {
         string wiki_key PK
@@ -878,21 +1210,32 @@ is just an item with `level: epic` — there is no epic table; `unplanned: true`
 requires `discovered_during` (write-time); private `_`-prefixed fields never
 survive into snapshots (`compact._public()`); `wiki_key` is unique across the
 inventory; doc_type and entity_type enums are disjoint
-(`tests/test_ia.py — test_doc_and_entity_types_are_disjoint`).
+(`tests/test_ia.py — test_doc_and_entity_types_are_disjoint`). New in v0.19.x:
+`through`, `git` and `rescued_from` are **event** fields only — none of them is
+ever a `set` key, so none can become item state, reach a snapshot's payload, or
+enter `canonical_hash` (`tests/test_ulid.py —
+test_provenance_never_becomes_item_state`; `tests/test_watermark.py —
+test_through_never_leaks_into_item_state`). The optional item fields above exist
+on an item only when the repo has them enabled; the core set is fixed
+(`item_fields.CORE`).
 
 # 11. Module-by-Module Design
 
 | Module | Public surface | Error handling | Testing |
 |---|---|---|---|
 | `bin/worklog` | argparse subcommands (§14) | `sys.exit(str)` with actionable messages; validation before any write | taxonomy, ingest, link, status, snapshot, plugin, IA CLI wrappers |
-| `fold.py` | `fold(paths)`, `FoldResult`, `read_lines`, `dedupe_and_sort`, `external_owners` (v0.18.0), `OPEN/CLOSED_STATUSES`, `LEGACY_TYPE_MAP` | never raises on bad data; errors collected in `result.errors`; `external_owners` tolerates missing/`None`/`{}` external blocks | `test_fold` (incl. `TestExternalOwners`) |
-| `ulid.py` | `new()`, `deterministic()`, `encode()`, `timestamp_ms()` | `ValueError` on bad entropy/timestamp | `test_ulid` |
+| `fold.py` | `fold(paths)`, `FoldResult`, `read_lines`, `dedupe_and_sort`, `position` (v0.19.0), `apply_watermark`, `external_owners` (v0.18.0), `SET_VALUED`, `OPEN/CLOSED_STATUSES`, `LEGACY_TYPE_MAP` | never raises on bad data; errors collected in `result.errors`; `external_owners` tolerates missing/`None`/`{}` external blocks; unknown event fields ignored | `test_fold` (incl. `TestExternalOwners`), `test_watermark` |
+| `ulid.py` | `new()`, `deterministic()`, `encode()`, `timestamp_ms()`, `git_commit()` (v0.19.1) | `ValueError` on bad entropy/timestamp; `git_commit()` swallows `OSError` and returns `""` — provenance is never a reason a write fails | `test_ulid` |
 | `canonical.py` | `HASH_FIELDS`, `canonical_json()`, `canonical_hash()` | none needed (pure) | via `test_dispatch` |
 | `render_roadmap.py` | `render()`, `max_ev()`, `root_epic_id()` | lenient raw scans | `test_render_roadmap` |
 | `viz_mermaid.py` | `render_viz()`, `deps_graph()`, `hierarchy()`, `gantt()`, `item_dates()` | skips unparseable, strips mermaid-breaking chars | `test_viz` |
 | `plan_capture.py` | `parse_tasks()`, `front_matter()` | pure; no I/O | `test_plan_capture` |
-| `compact.py` | `compact()` | `SystemExit(1)` on refusal/verify-failure; temp files deleted | `test_compact` |
-| `sync_dispatch.py` | `Dispatcher`, `validate()`, `ContractError`, `main()` | exit-code taxonomy; drift notes over exceptions | `test_dispatch`, `test_adapter_contract` |
+| `compact.py` | `compact()`, `merge_check()`, `check_resurrection()`, `check_duplicate_ownership()`, `merge_rescue()` + `report_rescue()` (v0.19.0) | `SystemExit(1)` on refusal/verify-failure; temp files deleted in a `BaseException` handler so even a KeyboardInterrupt leaves the logs untouched | `test_compact`, `test_watermark`, `test_bug_merge` |
+| `sync_dispatch.py` | `Dispatcher`, `validate()`, `ContractError`, `earliest_event_ts()` (v0.19.0), `main()` | exit-code taxonomy; drift notes over exceptions; GONE is buffered and committed only at the end of `push_items()` (ADR-0004) | `test_dispatch`, `test_adapter_contract`, `test_gone_policy`, `test_bug_sync` |
+| `session.py` (v0.19.0) | `live()`, `touch()`, `end()`, `warning()`, `branch()` | never raises: missing/corrupt registry reads as `{}`; writes are best-effort atomic (`os.replace`) and swallow `OSError` | `test_session` |
+| `changelog.py` (v0.19.0) | `draft()`, `classify()`, `commits()`, `last_tag()`, `main()` | a failed `git log` returns `[]`; every exclusion reported on stderr with a reason | `test_changelog` |
+| `item_fields.py` (v0.19.0) | `CORE`, `CATALOG`, `enabled()`, `is_enabled()`, `flag()`, `validate()`, `add_arguments()`, `collect()`, `describe()` | unreadable config value falls back to the documented default; `collect()` raises `SystemExit` before a malformed value can reach the log | `test_item_fields`, `test_field_model` |
+| `wiki_flavor.py` (v0.19.0) | `Gollum`, `FLAVORS`, `render_links()`, `configured_system()`, `get()` | an unknown/absent `wiki.system` is not an error — `other`/`none` are legitimate config values, so it falls back to the one implemented flavor rather than refusing to build | `test_wiki_flavor` |
 | `adr.py` | `check_all()`, `scaffold()`, `mark_superseded()`, `parse_front_matter()` | `ValueError` per file; listing stays best-effort | `test_adr` |
 | `ia.py` | `classify`, `resolve_key`, `normalize`, `build_inventory`, `validate_record`, `parse_front_matter` | check mode exits 1 with pending list; never mutates frozen bodies | `test_ia` |
 | `ia_render.py` | `render_all`, `write_all`, `banner`, `build_manifest`, `build_aliases` | check mode reports stale paths | `test_ia` (TestRender) |
@@ -904,14 +1247,19 @@ so `--viz none` costs nothing; `adr.validate` is a **deliberate copy** of
 `schema/doc.schema.json` + `schema/entity.schema.json`
 (`tests/test_ia.py — TestSchemaSync`). `plugin/scripts/` mirrors `bin/` and
 `hooks/`; `tests/test_plugin.py` guards the mirror and the version lockstep
-(`bin/worklog` line 32: `VERSION = "0.18.0"`). New in v0.18.0: `sync_dispatch.py`
-imports `fold.external_owners` — the dispatcher's first import of a `fold`
-symbol, deliberate so the uniqueness predicate has exactly one implementation
-shared with `bin/worklog` (invariant "one hash, one fold, one owner index").
+(`bin/worklog` line 33: `VERSION = "0.19.1"`), and since v0.19.0 also
+sync-checks the plugin's **harness-hook** copies via `HOOK_CANON` — a check that
+found real drift in `exit-plan-capture.sh` the day it landed. New in v0.18.0:
+`sync_dispatch.py` imports `fold.external_owners` — the dispatcher's first
+import of a `fold` symbol, deliberate so the uniqueness predicate has exactly
+one implementation shared with `bin/worklog` (invariant "one hash, one fold, one
+owner index"). New in v0.19.0: the four support modules import no siblings at
+all, and `ia_render` imports `wiki_flavor` — the renderer's only platform
+dependency, by construction.
 
 # 13. Class-by-Class Design
 
-Only three classes exist (the design favors functions over objects):
+Only four classes exist (the design favors functions over objects):
 
 **`fold.FoldResult`**. State container: `items` (id → dict),
 `watermark`, `errors`, `orphans`, `skipped`, `deduped`. Methods `open_items()`,
@@ -923,16 +1271,28 @@ consumed in-process).
 Public methods: `capabilities()` (the gate — schema-validate plus the `{ulid}`
 substring check), `sync()` (capabilities → push → pull → save state → report;
 **returns 1 when `self.collisions` is non-empty**, v0.18.0), `push_items()`,
-`pull()`, `report()`, and (v0.18.0) `is_dirty()`, `record_push()`,
-`record_link()`, `report_collisions()`. State managed: per-item
-`last_pushed_hash` **and `last_pushed_key`** (v0.18.0), per-system `cursors`,
-counters, drift list, and `self.collisions` (`(system, key) → [ids]`, populated
-at the top of `push_items()`). Side effects: subprocesses only; in `dry_run` the
-state file is never written — but the collision gate still fires and still exits
-1. Exceptions: `ContractError` — caught in `main()` and reported as exit 1.
+`pull()`, `report()`, (v0.18.0) `is_dirty()`, `record_push()`, `record_link()`,
+`report_collisions()`, and (v0.19.0) `refuse_ambiguous_keys()`,
+`snapshot_remote()`, `note_overwrite()`, `commit_gone()`. Class-level policy
+constants: `GONE_ABORT = 3` (ADR-0004) and `OVERWRITE_FIELDS = ("title",
+"status", "priority", "milestone", "assignee")` — deliberately excluding `body`,
+whose before/after would drown the report (#238). State managed: per-item
+`last_pushed_hash`, `last_pushed_key` (v0.18.0) and `gone_key` (v0.19.0),
+per-system `cursors`, counters, drift list, `self.collisions`
+(`(system, key) → [ids]`), and (v0.19.0) `self.overwrites`, `self.remote_before`,
+`self.snapshot_cost`, `self.adapter_ok`, `self.pending_gone`. Side effects:
+subprocesses only; in `dry_run` the state file is never written — but the
+collision gate still fires, the overwrite preview still prints, and it still
+exits 1. Exceptions: `ContractError` — caught in `main()` and reported as exit 1.
 
 **`sync_dispatch.ContractError`**. "An adapter broke the typed contract; the
 message names the field."
+
+**`wiki_flavor.Gollum`** (v0.19.0). The single shipped wiki flavor: two methods,
+`link(page, text=None)` and `sanitize(name)`. Registered in `FLAVORS` by its
+`name` class attribute (`github-wiki`), which is also `DEFAULT`. A second
+platform is a new class in that tuple, not a rewrite — and deliberately nothing
+more, since only one platform has a user.
 
 IA modules stay function-oriented (no classes) for the same shell-debuggability
 reason as the event dicts.
@@ -940,24 +1300,29 @@ reason as the event dicts.
 # 14. API Design
 
 The CLI **is** the API. Global flags: `--actor` (defaults to `$USER`),
-`--version` (`worklog 0.18.0`, from `VERSION` at `bin/worklog` line 32, held in
+`--version` (`worklog 0.19.1`, from `VERSION` at `bin/worklog` line 33, held in
 lockstep with `plugin/.claude-plugin/plugin.json` by `tests/test_plugin.py`). All
 log writes go through `append()` — a single `O_APPEND` write,
-newline-terminated, self-healing a missing prior newline. Every subcommand whose
-first positional is an existing item id resolves it through `_resolve()` (§9.2):
-a full ULID or an unambiguous prefix, exiting on no match or ambiguity.
+newline-terminated, self-healing a missing prior newline, and (v0.19.0) the one
+place the concurrent-session advisory fires, so no writing subcommand can forget
+it. Every event the CLI builds starts at `base()`, which stamps `ev`, `ts`,
+`actor`, `item`, `op` and (v0.19.1) `git`. Every subcommand whose first
+positional is an existing item id resolves it through `_resolve()` (§9.2): a full
+ULID or an unambiguous prefix, exiting on no match or ambiguity — since v0.19.1
+that now includes `link-pr`, which previously wrote its sidecar under the raw
+prefix.
 
 | Subcommand | Purpose | Key arguments | Writes | Notable exits |
 |---|---|---|---|---|
-| `add <title>` | create item | `--level` (default task), `--kind` (omitted → folds to triage), `--milestone`, `--priority`, `--parent`, `--plan`, `--labels`, `--unplanned --discovered-during`, deprecated `--type` | 1 create event | taxonomy violations; unplanned without discovered-during |
-| `update <item>` | mutate | `--status todo\|in_progress\|blocked`, `--priority`, `--title`, `--kind`, `--milestone`, `--add-label`, `--del-label` | 1 update event | "nothing to update"; `--status` refused on closed items → use `reopen`; no match / ambiguous prefix |
+| `add <title>` | create item | `--level` (default task), `--kind` (omitted → folds to triage), `--milestone`, `--priority`, `--parent`, `--plan`, `--labels`, `--depends-on` (v0.19.0), `--unplanned --discovered-during`, deprecated `--type`, plus one flag per **enabled** optional field (v0.19.0: `--estimate`, `--owner`, `--risk`, `--acceptance-criteria` by default) | 1 create event | taxonomy violations; unplanned without discovered-during; malformed `--depends-on` / self-dependency; bad optional-field shape. Warns (never refuses) when the title cites a `#123` ticket (#242) |
+| `update <item>` | mutate | `--status todo\|in_progress\|blocked`, `--priority`, `--title`, `--kind`, `--milestone`, `--add-label`, `--del-label`, `--add-depends-on`/`--del-depends-on` (v0.19.0), plus the same enabled optional-field flags | 1 update event | "nothing to update"; `--status` refused on closed items → use `reopen`; no match / ambiguous prefix |
 | `close <item>` | close | `--status done\|cancelled`, `--resolution` | 1 close event | no match / ambiguous prefix |
 | `reopen <item>` | reopen a closed item | id or unambiguous prefix | 1 reopen event | not closed / no match / ambiguous prefix |
 | `link <item>` | record external identity | `--system --key` required; `--url --rev --hash`; `--force` (v0.18.0) | 1 link event | no match / ambiguous prefix; **key already owned by another item** (v0.18.0) unless `--force` |
 | `unlink <item>` (v0.18.0) | retract a link | id or unambiguous prefix | 1 link event setting `external: {}` | item has no external link |
 | `ingest <item>` | ingest remote change | `--system --key --rev --rev-ts-ms` required; `--set FIELD=VALUE` | 1 update event, deterministic `ev` | field/enum whitelist |
-| `conflict <item>` | record both-sides change | `--field --local --remote --remote-rev` | 1 conflict event | — |
-| `resolve <item>` | clear a conflict | `--field --take local\|remote` | 1 update event | no open conflict on field |
+| `conflict <item>` | record both-sides change | `--field --local --remote --remote-rev` | 1 conflict event | field not in `INGEST_FIELDS` (v0.19.0, #240) — `id` is identity and `external` is a structured link; writing either would corrupt the next sync |
+| `resolve <item>` | clear a conflict | `--field --take local\|remote` | 1 update event | no open conflict on field; same field whitelist (v0.19.0) |
 | `list` / `show` / `fold` | read state | `--all`; `show` takes id or unambiguous prefix | none | `show`: no match / ambiguous prefix |
 | `plan-capture` | plan doc + epic + tasks | `--slug --title` required, `--file`, `--priority` | N create events + plan doc | existing slug refused, any date (frozen, v0.17.0 fix) |
 | `roadmap-render` | regenerate roadmap | `--viz deps,hierarchy` (default), `--no-viz` | `docs/roadmap.md` | — |
@@ -967,6 +1332,11 @@ a full ULID or an unambiguous prefix, exiting on no match or ambiguity.
 | `adapter init\|check` | guidance / contract check | optional path | `.work/sync-state.json` `adapter_path` | contract violations |
 | `promote <suggestion_id>` | classifier suggestion → 1 create | — | 1 create event + consumed marker | already consumed / not found |
 | `compact` | manual compaction | `--yes` required | rewrites logs (verified) | refuses without `--yes` |
+| `merge-rescue` (v0.19.0) | resolve a merge the resurrection guard blocked | none | rewrites both logs after verification | no merge in progress; neither side compacted; guard still fails; any item would disappear |
+| `changelog-draft` (v0.19.0) | draft the unreleased CHANGELOG section from `git log` | `--version`, `--since REF` | stdout markdown; exclusions on stderr | `--version`/`--since` given without a value |
+| `fields` (v0.19.0) | print the field model: fixed core + which optional fields are on, with meanings | none | stdout only | — |
+| `find` (v0.19.0) | search the generated inventory and graph | `query` positional, `--type`, `--truth`, `--links KEY`, `--edge TYPE`, `--json` | none (read-only, no network) | non-zero on no matches, the way grep does; ambiguous `--links` key |
+| `pr-sync <n>` (v0.19.0) | fetch live PR metadata into the `pr/<n>` sidecar | PR number | `docs/.index/pr/<n>.yml` | `gh` failure. The one network step in the IA pipeline; render stays offline |
 | `wiki-add <file>` | register in publish ledger | `--key --title` required | `.work/published.json` | file not found |
 | `adr new\|list\|check` | ADR lifecycle | `new <title>` with `--status --deciders --tags --supersedes N` | `docs/adr/NNNN-slug.md` + ledger entry | check exits 1 with problem list |
 | `wiki-key <path>` | print stable wiki_key | `-v` for canonical + aliases | none | path outside content model |
@@ -977,7 +1347,8 @@ a full ULID or an unambiguous prefix, exiting on no match or ambiguity.
 | `ia-graph` | build traceability graph | `--seed` (propose-only) | `_graph.json` or suggestions.jsonl | — |
 | `ticket-body <item>` | rich issue body projection | — | stdout only | unknown item |
 | `ia-ticket <item>` | preview a generated ticket page (v0.14.0) | — | stdout only | unknown item |
-| `link-pr <item>` | overlay PR/commit edge | `--pr` / `--commit` | item sidecar under `docs/.index/item/` | validation error |
+| `link-pr <item>` | overlay PR/commit edge | `--pr` / `--commit` | item sidecar under `docs/.index/item/` | validation error; resolves the id prefix first since v0.19.1 |
+| `roadmap-snapshot` self-heal (v0.19.0, #221) | — | — | re-renders `docs/roadmap.md` first when its own `source_hash:` marker is stale, then snapshots | only rewrites files carrying our own marker |
 | `trace-check` | unlinked-evidence report | `--strict` | none | strict exits 1 if gaps |
 
 Versioning/back-compat: `--type` survives as a deprecated alias mapping through
@@ -1000,15 +1371,26 @@ multi-event transactions, deliberately — no runtime command writes two files
 
 Record types: `create`, `update`, `close`, `reopen`, `link`, `conflict`
 (append-time), `snapshot`, `compact` (compactor only). Indexing: none — the fold
-is a full scan; ULID sort order substitutes for a time index. Replication: git
-push/pull. Concurrent updates: union merge (`.gitattributes`) plus fold
-dedupe/sort. Backup and recovery: git history.
+is a full scan; ULID sort order substitutes for a time index, and since v0.19.0
+a snapshot's *position* in that order is its `through`, not its `ev`.
+Replication: git push/pull. Concurrent updates: union merge (`.gitattributes`)
+plus fold dedupe/sort, and — when a compaction spans a branch —
+`worklog merge-rescue`, which is the only writer besides `compact.py` that
+rewrites rather than appends, and which verifies before `os.replace` exactly as
+compaction does. Backup and recovery: git history.
 
 Migration strategy: schema evolution rides the fold's leniency — the taxonomy
 migration (`docs/migrations/0001-type-split.md`) normalizes on read; the IA
 migration (`docs/migrations/0002-ia-content-model.md`) is additive (sidecars +
 generated index), never rewrites frozen bodies. One-time canonical-hash churn
-was accepted only for the taxonomy split (`canonical.py` comment).
+was accepted only for the taxonomy split (`canonical.py` comment). The v0.19.0
+`through` field and the v0.19.1 `git` field needed **no** migration at all and
+are safe in mixed-version fleets in both directions: an old reader ignores
+`through` and applies the previous global rule, which is strictly more
+conservative and never invents state; a new reader on an old log finds no
+`through`, falls back to the global mark for ordering, and still applies the
+"no snapshot, no drop" rule, which can only restore data. Existing snapshots
+gain the field naturally at the next compaction.
 
 Retention: `done.jsonl` holds closed history forever; compaction prunes only
 stale entries for currently-open items. Sensitive data: none by design.
@@ -1019,8 +1401,10 @@ Ancillary stores (plain JSON/YAML, not event logs — direct load/dump sanctione
 |---|---|---|---|
 | `.work/config.yml` | yes | all machine-readable settings | humans |
 | `.work/published.json` | yes | wiki page identity ledger (+ self-description after normalize) | `_register_published()`, wiki-publish skill, `ia.normalize` |
-| `.work/sync-state.json` | **gitignored** | per-clone `last_pushed_hash`, **`last_pushed_key`** (v0.18.0), cursors, `adapter_path` | `Dispatcher._save_state()`, `cmd_adapter()` |
+| `.work/sync-state.json` | **gitignored** | per-clone `last_pushed_hash`, `last_pushed_key` (v0.18.0), **`gone_key`** (v0.19.0, ADR-0004), cursors, `adapter_path` | `Dispatcher._save_state()`, `cmd_adapter()` |
 | `.work/suggestions.jsonl` | gitignored | classifier + IA edge proposals (propose-only) | classify skill; `ia-graph --seed`; `cmd_promote()` |
+| `.work/.sessions` (v0.19.0) | **gitignored** | advisory registry: `session_id → {ts, branch}` for harness sessions sharing this checkout | `session.touch()` from `hooks/prompt-reminder.sh`; `session.end()` from `hooks/session-end.sh` |
+| `docs/.index/pr/<n>.yml` (v0.19.0) | yes | live PR metadata fetched by `worklog pr-sync` | `ia_graph.pr_sync()` |
 | `docs/.index/_inventory.json` | yes | content inventory | `ia.write_inventory()` |
 | `docs/.index/_graph.json` | yes | traceability graph | `ia_graph.write_graph()` |
 | `docs/.index/<wiki_key>.yml` | yes | frozen-doc sidecars + item PR overlays | `ia.normalize()`, `ia_graph.link_pr()` |
@@ -1112,6 +1496,8 @@ credentials. Confirmed controls:
 | Frozen history rewrite via "metadata fix" | IA normalize | sidecars only for frozen docs; `is_frozen()` | human hand-edit still possible; hooks warn |
 | Silent corruption of a *remote* record two items claim (v0.18.0, github#226) | `link` + dispatcher | `fold.external_owners()` uniqueness check at write time and a pre-loop skip + exit 1 at push time | a union merge of two branches that each linked the same key still lands both events; the gate catches it at the next sync rather than at merge (a merge-time hook check is filed, out of scope) |
 | Duplicate remote records from a retry after a partial mutation (v0.18.0, github#235) | GitHub adapter | create returns key+url+rev in one REST call; link recording is `fatal=False` | an adapter whose create is not atomic can still duplicate; the contract cannot enforce single-call create |
+| Silent loss of a branch's work when a compaction spans the branch (v0.19.0, #284/#269) | fold + compactor | per-item `through` on every snapshot, `apply_watermark()` never dropping events for an unsnapshotted item, `fold.position()` sorting a snapshot at its `through`; `check_resurrection` still blocks the merge commit and routes to `worklog merge-rescue` | the guard is a git hook, and ADR-0005 notes hooks do not run for a hosted merge — mitigated by the v0.19.0 CI `--merge-check` step, which sees the merge result GitHub computed |
+| Unresolved conflict markers committed inside a merge resolution (v0.19.0) | `hooks/pre-commit` | staged-content scan for `<<<<<<<`/`=======`/`>>>>>>>` at line start, **with no merge exemption** — a merge is exactly when this happens, and `commit-msg` exempts merge commits while nothing parsed `tests/` or `plugin/` | unstaged conflicts elsewhere in the tree are deliberately out of scope; `--no-verify` still bypasses locally, which is why CI re-runs the script |
 
 Authorization: the git repository's own access control. AI-specific: skills are
 propose-only where they touch state (classifier + `ia-graph --seed` write
@@ -1130,8 +1516,20 @@ Error taxonomy, Confirmed:
   (2) aborts loudly; not-found (3) self-repairs by scheduling a re-push.
 - **Contract errors**: `ContractError` names the offending field path; the
   capabilities gate runs first, every run, before any push.
-- **IA drift**: check modes exit 1; pre-commit currently **warns** (Phase 5 will
-  hard-fail). `trace-check` without `--strict` always warns.
+- **IA drift**: check modes exit 1, and since v0.19.0 pre-commit **hard-fails**
+  on normalize/inventory/render drift (#98). `trace-check` without `--strict`
+  always warns; `--strict` is a mandatory release gate.
+- **Merge-time integrity (v0.19.0)**: a blocked merge is not an error to work
+  around. `check_resurrection` names the affected file and event count and
+  prints exactly one command — `worklog merge-rescue` — because the remedy it
+  used to print could not be run from that state (ADR-0006). `merge_rescue()`
+  refuses rather than guesses in three cases: no merge in progress, neither side
+  compacted, and any item that would disappear. Staged conflict markers fail
+  the commit outright with the file list.
+- **Advisory, never fatal (v0.19.0)**: the concurrent-session warning
+  (`_warn_concurrent_sessions()`) is wrapped in a bare `except` and fires once
+  per process, and `ulid.git_commit()` returns `""` on any `OSError`. Neither a
+  corrupt `.work/.sessions` nor a missing `git` binary can stop a write.
 - **Shared-remote-state hazards (v0.18.0)**: a contested external key is neither
   drift nor a validation error — it is data corruption in progress. It gets its
   own stderr block, skips only the affected items, and makes `worklog sync` exit
@@ -1166,8 +1564,13 @@ No metrics stack — observability is *artifacts*, Confirmed:
 | Unplanned-work ratio | status "unplanned_in_window" | `_status_facts()` |
 | Version skew, missing hooks | SessionStart doctor context | `hooks/session-doctor.sh` |
 | Compaction result | commit message `chore(worklog): compact through <ulid>` | `compact.yml` |
-| IA drift | pre-commit WARNING lines | `ia-normalize/inventory/render --check` |
+| IA drift | pre-commit **hard failure** naming the repair command | `ia-normalize/inventory/render --check` |
 | Unlinked evidence | `worklog trace-check` output | `ia_graph.trace_check()` |
+| Fields a push is about to overwrite (v0.19.0, #238) | `overwrote live ticket fields:` block before drift, `field: old -> new` per ticket, plus `(read N tickets in X.XXs to report the above)` — the cost of the one batched read is printed rather than hidden | `Dispatcher.snapshot_remote()`, `note_overwrite()`, `report()` |
+| Two sessions in one checkout (v0.19.0, #236) | `worklog: WARNING — N assistant sessions are active in this working directory (branches: …)` on stderr, once per process, and appended to the prompt reminder | `session.warning()`, `hooks/prompt-reminder.sh` |
+| A merge that would have lost events (v0.19.0) | pre-commit block naming the file, the count, and `worklog merge-rescue`; then `merge-rescue`'s own `old-ev -> new-ev` line per rescued event | `compact.check_resurrection()`, `report_rescue()` |
+| Event origin (v0.19.1) | the `git` field on every event — which commit, hence which branch/worktree, each event came from | `ulid.git_commit()`, `worklog base()` |
+| Repeated remote not-founds (v0.19.0, ADR-0004) | run aborts after 3 with "check `WORKLOG_TICKET_PROJECT` and credentials"; otherwise a per-item note naming `worklog unlink <id>` | `Dispatcher.handle_exit()`, `commit_gone()` |
 
 Every status report records the exact `through` watermark, making it
 reproducible after the fact (spec §13.3).
@@ -1176,17 +1579,24 @@ reproducible after the fact (spec §13.3).
 
 Single config file, `.work/config.yml`, committed; policy prose lives in
 `CLAUDE.md`/`AGENTS.md` and carries **no values scripts read** (spec §4.1).
-Confirmed keys: `project`, `ticketing.system/project`, `wiki.system/root_url`,
-`paths`, `status.*`, `sync.*` (`active_window_days`, `conflict_policy: report`,
-`push_on_capture`), `features.auto_merge_on_green`, `release.sync_docs` (drives
-design-doc / walkthrough / user-guide / readme refresh at release),
-`classifier.*` (off by default). Readers parse it with naive block scans, no YAML
-library.
+Confirmed keys: `project`, `ticketing.system/project`, `wiki.system/root_url`
+(`wiki.system` is now actually *read* by the renderer, v0.19.0 — it never was
+before), `paths`, `status.*`, `sync.*` (`active_window_days`,
+`conflict_policy: report`, `push_on_capture`), `features.auto_merge_on_green`,
+`release.sync_docs` (drives design-doc / walkthrough / user-guide / readme
+refresh at release), `classifier.*` (off by default), and **`work_item_fields`**
+(v0.19.0 — one `name: on|off` line per optional field; this repo sets
+`risk: on`, `owner: on`). Readers parse it with naive block scans, no YAML
+library, and treat anything malformed as "not configured".
 
 Environment variables: `WORKLOG_TICKET_ADAPTER`, `WORKLOG_TICKET_SYSTEM` /
 `WORKLOG_TICKET_PROJECT`, `WORKLOG_FAKE_STATE`, `WORKLOG_AUTO_MERGE`,
-`WORKLOG_STOP_SETTLE`. Secrets: none stored; platform CLIs own their auth.
-Deliberately not configurable: the body cap (§6).
+`WORKLOG_STOP_SETTLE`, `WORKLOG_SKIP_BRANCH_GUARD` / `WORKLOG_MERGE_COMMIT`
+(hook exemptions), and new in v0.19.x: `WORKLOG_NO_GIT_PROVENANCE` (omit the
+`git` event field), `WORKLOG_NO_SESSION_WARN` (silence the concurrent-session
+advisory), `WORKLOG_WIKI_SYSTEM` (override the render flavor). Secrets: none
+stored; platform CLIs own their auth. Deliberately not configurable: the body
+cap and the entire `item_fields.CORE` set (§6, §9.9).
 
 # 27. Deployment Architecture
 
@@ -1205,16 +1615,25 @@ There is no deployed service. "Deployment" is three widening circles, Confirmed:
    01KY6037BN).
 2. **Claude Code plugin** — `plugin/` packages skills, `/worklog:*` commands,
    hook wiring (`plugin/hooks/hooks.json`), and canonical script copies; version
-   `0.18.0` in `plugin/.claude-plugin/plugin.json` locked to `bin/worklog VERSION`
+   `0.19.1` in `plugin/.claude-plugin/plugin.json` locked to `bin/worklog VERSION`
    by `tests/test_plugin.py`. MIT LICENSE shipped. **Drift closed (Confirmed):**
-   `README.md`'s repo-layout table row now reads "v0.18.0" and matches VERSION —
-   the recurring cosmetic staleness noted at v0.14.0 through v0.17.1 is gone at
-   this commit.
+   `README.md`'s repo-layout table row reads "**v0.19.1**" and matches VERSION at
+   this commit — as it has since v0.18.0. Since v0.19.0 the plugin's harness-hook
+   copies are also sync-checked (`HOOK_CANON`), which closed the last unguarded
+   mirror. Upgrading an installed repo means re-running `/worklog:init`, which
+   re-copies `bin/` and `hooks/`; v0.19.0 additionally wants three manual steps
+   (wire the `SessionEnd` hook, add `.work/.sessions` to `.gitignore`, re-check
+   `core.hooksPath`), all documented in the changelog.
 3. **CI** — `worklog.yml` (invariants job re-runs the pre-commit script with
    `WORKLOG_SKIP_BRANCH_GUARD=1`, since the checkout runs with no commit in
    flight; a PR-scoped step added in v0.15.0 walks
    `git rev-list --no-merges base..HEAD` through `hooks/commit-msg`, requiring
-   `fetch-depth: 0`; then unit + integration suites; coverage job with
+   `fetch-depth: 0`; **a merge-integrity step added in v0.19.0** runs
+   `python3 bin/compact.py --merge-check` directly, because inside the hook those
+   guards are gated on `WORKLOG_MERGE_COMMIT` or an on-disk `MERGE_HEAD` and
+   neither exists in a CI checkout — while for a `pull_request` GitHub checks out
+   the *merge result*, so CI sees exactly what the local hook would have seen
+   (ADR-0005, #262); then unit + integration suites; coverage job with
    subprocess-aware `.pth` hook and `--fail-under=80`) and `compact.yml`
    (nightly, main-only, own commit, `permissions: contents: write`).
 
@@ -1225,13 +1644,50 @@ walkthrough.
 
 # 28. Testing Strategy
 
-21 stdlib-`unittest` suites, no third-party test dependencies, run as
+**39 stdlib-`unittest` suites and 520 test functions** (Confirmed by count at
+this commit; the v0.19.0 changelog records the jump as 427 → 556 assertions), no
+third-party test dependencies, run as
 `for t in tests/test_*.py; do python3 "$t"; done` (README). Categories,
 Confirmed:
 
 - **Fold as executable spec**: `test_fold.py` — file-order fold, close-assumes-done,
   ignored add/del, snapshot-merge, determinism, corrupt-line tolerance.
+- **Merge safety (v0.19.0), the release's largest test investment**:
+  `test_watermark.py` (213 lines, four classes) is the unit half —
+  `TestNoSnapshotMeansNeverDropped` (an event for an unsnapshotted item survives
+  a low `ev`; a snapshotted item still drops its own folded events; an event
+  above its item's own mark is kept), `TestLegacyLogsStillFold` (a snapshot with
+  no `through` falls back to the global mark; a never-compacted log is
+  untouched), `TestCompactionRecordsPerItemMarks` (each snapshot carries its own
+  item's highest `ev`; `through` never leaks into item state; compaction is
+  still idempotent; **a later branch event survives compaction and re-merge** —
+  the one that proves the ordering half), and `TestGuardStopsCryingWolf` (a
+  resurrected event for an unsnapshotted item is no longer flagged; a genuinely
+  refolded one still is). `test_bug_merge.py` (381 lines) is the integration
+  half: throwaway git repos, real union merges, real compactions —
+  `TestSubWatermarkEventsAreLost` proves the events now survive the fold, that
+  `merge-rescue` restores them and clears the guard, that rescued events keep
+  provenance, and that the command refuses when no merge is in progress;
+  `TestConflictMarkerGuard` proves markers block a commit, a resolved file
+  commits normally, *prose about* conflict markers is not a conflict, and — the
+  case the guard exists for — **the guard is not exempted for merges**.
 - **Deterministic ingest**: `test_ulid.py — TestTheBugThisPrevents`.
+- **Entropy and provenance (v0.19.1)**: `test_ulid.py — TestEntropyIsNeverSpent`
+  (ids are 26 chars, entropy is random across the **whole** tail, no collisions
+  in bulk, `git_commit` is provenance not identity, deterministic ingest ids are
+  unchanged) and `TestEventProvenance` (every event carries the HEAD sha, a later
+  event records the commit it was authored at, provenance never becomes item
+  state, and outside a repo the field is omitted rather than written empty).
+- **The v0.19.0 module suites**: `test_session.py` (advisory registry: liveness
+  window, prune, end, the two-session warning), `test_changelog.py` (grouping,
+  path-based housekeeping exclusion, ULID-ref stripping, version never guessed),
+  `test_item_fields.py` + `test_field_model.py` (defaults, config override,
+  disabled fields have no flag at all, `due_date` shape, `describe()` output),
+  `test_wiki_flavor.py` (canonical `[[…]]` translation both forms, sanitize,
+  unknown system falls back rather than failing), `test_find.py` (search,
+  `--links` both directions, `--edge`, ambiguity refusal), `test_pr_sync.py`,
+  `test_gone_policy.py` (ADR-0004), `test_ticket_ref_warning.py` (#242), and the
+  numbered bug suites `test_bug_137/142/222/253/orphan_drift/sync/worklog.py`.
 - **Sync invariants without network**: `test_dispatch.py` (idempotent double push,
   retry-no-duplicate, capabilities gate, degrade path, both-sides conflict, echo
   suppression, taxonomy ingest, dirty-close update-before-close, schema-mirror,
@@ -1279,10 +1735,17 @@ Confirmed:
   promote, plugin mirror/version lockstep.
 
 Coverage: CI gate ≥80% on `bin/*.py` (subprocess-aware via
-`coverage.process_startup()` in a `.pth`), target 95%. 20 → 21 suites at
-v0.18.0 (`tests/test_github_adapter.py`, 173 lines), after 19 → 20 at
-v0.17.1 (`tests/test_resolve.py`), per the CLAUDE.md rule that new logic ships
-with tests.
+`coverage.process_startup()` in a `.pth`), target 95%. Suite count 21 → 39
+across v0.19.0/v0.19.1, per the CLAUDE.md rule that new logic ships with tests;
+20 → 21 at v0.18.0 (`tests/test_github_adapter.py`), 19 → 20 at v0.17.1
+(`tests/test_resolve.py`).
+
+**The test that says it was wrong (v0.19.0, worth copying).** ADR-0007 records
+that the test which originally *pinned* the data loss said in its own failure
+message that it should become the regression test for the fix. It now asserts
+the opposite, and says why. That is the cheapest available protection against
+the specific failure mode of this bug class — a partial fix that passes its own
+regression test and looks done.
 
 **Manufacturing the duplicate (v0.18.0, worth copying).** `TestOneOwnerPerKey`
 cannot create a contested key through the normal CLI any more — the new guard
@@ -1309,8 +1772,11 @@ above. Try it: `bin/worklog add "task" --level task --kind feature`;
 `WORKLOG_TICKET_ADAPTER=$PWD/adapters/fake/adapter bin/worklog sync --dry-run`,
 or validate an adapter with `bin/worklog adapter check`. Common failure: a
 commit rejected for a stale roadmap — run `bin/worklog roadmap-render` and
-re-commit. IA warnings: `worklog ia-normalize && worklog ia-inventory &&
-worklog ia-render`.
+re-commit. IA failures (hard since v0.19.0): `worklog ia-index`. Orientation
+commands added in v0.19.0: `worklog fields` (what this repo's item model looks
+like), `worklog find <text>` / `--links <key>` / `--edge <type>` (search the
+generated inventory and graph without leaving the terminal), and
+`worklog changelog-draft` (what has landed since the last tag).
 
 # 30. Operations and Support
 
@@ -1322,7 +1788,11 @@ worklog ia-render`.
 | Duplicate wiki pages | `published.json` entry lost url/rev | restore ledger entry; `_register_published()` preserves url/rev on re-register |
 | Conflict flood after upgrade | one-time hash churn (taxonomy migration) | expected; first sync re-pushes once, idempotent by marker |
 | Stop hook blocks a finished session | tree changed with no todo event | record the item or state why none applies; settle via 2 s recheck |
-| IA pre-commit WARNINGs | metadata / inventory / render drift | `worklog ia-index` (or normalize + inventory + render separately) |
+| IA pre-commit **failure** (hard since v0.19.0) | metadata / inventory / render drift | `worklog ia-index` (or normalize + inventory + render separately), then re-commit |
+| Merge blocked: "N event(s) at/below their item's compact watermark are back" (v0.19.0) | a branch forked before a compaction and carries events that compaction folded, or events it never saw | run `worklog merge-rescue` **from the blocked merge, before `git merge --abort`**; it keeps the compacted side's log, re-emits this branch's own events above the mark, and prints `old-ev -> new-ev` per rescued event. Then `worklog roadmap-render`, `git add -A && git commit`. Never recompact: it verifies against a fold that has already discarded the events and would make the loss permanent (ADR-0006) |
+| Commit refused: "unresolved conflict markers in staged files" (v0.19.0) | a merge resolution missed a hunk | resolve the named files, re-stage, commit again. There is no merge exemption, on purpose — a merge is exactly when this happens |
+| `worklog` warns about N active sessions (v0.19.0) | two harness sessions share one checkout | give each session its own `git worktree`. The warning is advisory and arrives after the fact; the worktree is the actual fix. Ensure `hooks/session-end.sh` is wired as a `SessionEnd` hook, or a finished session keeps warning for a full hour |
+| Sync aborts: "3 tickets not found; check WORKLOG_TICKET_PROJECT and credentials" (v0.19.0) | three rc-3 not-founds with nothing having succeeded — a misconfigured project or credential, not three deleted tickets | fix the config or re-auth. For a genuinely deleted ticket, `worklog unlink <id>` and file a fresh one; a ticket restored from the tracker's trash clears its own `gone_key` on the next successful push (ADR-0004) |
 | Unlinked evidence WARNING | closed items without plan/ticket/PR | `worklog trace-check`; link plan on create, ticket via sync, PR via `link-pr` |
 | `sync` exits 1 with "claimed by more than one item" (v0.18.0) | two items own one external key | read the printed claimants, `worklog unlink <the wrong one>` (the block suggests the later-linked id as the likely mistake), then `worklog sync --keys <key>` to force the surviving owner back over the damaged ticket — the second step is required because `external` is not in `HASH_FIELDS`, so unlinking the impostor does **not** make the survivor dirty |
 | `sync` reports "created X but could not record the link" (v0.18.0) | the ticket exists remotely, the log does not know | link it by hand (`worklog link <ulid> --system … --key … --force`) **before** the next sync, or that run files a second ticket |
@@ -1337,20 +1807,23 @@ worklog ia-render`.
 | Remote-origin tickets | pull reports, never creates local items | confirmed | low | future work, kept read-safe deliberately |
 | Triple-copy mini-validator | `sync_dispatch`, `adr`, tests | — | low | deliberate; extract on the fourth copy |
 | Spec/CLI drift on sync scopes | §10.5 flags lack CLI surface | confirmed | low | §34 |
-| IA gates still warn-only | Phase 5 not shipped | confirmed | medium | promote to hard fail in Phase 5 (#98) |
+| ~~IA gates still warn-only~~ | **promoted to hard failures in v0.19.0** (#98) for normalize/inventory/render; `trace-check` stays warn at commit by design and `--strict` at release. Safe to promote because the block is guarded on `-d docs/.index`, so a scaffolded repo is not blocked from its first commit | — | — | closed |
 | Schema constant mirrors | doc/entity schemas duplicated in `ia.py` | — | low | `TestSchemaSync` pins equivalence |
-| PR pages show no live metadata | files-changed/CI/review always "not tracked" | confirmed | low | filed follow-up #138 (`worklog pr-sync`), deliberately deferred |
+| ~~PR pages show no live metadata~~ | **fixed in v0.19.0** — `worklog pr-sync <n>` writes a `pr/<n>` sidecar from one `gh pr view`; `render_pr_page()` reads it. A never-synced PR still degrades to "not tracked", by design, and the network call stays out of `render_all()` | — | — | closed (#138) |
 | ~~`close`/`update` don't resolve ID prefixes~~ | **fixed in v0.17.1** — shared `_resolve()` backs close/update/link/reopen/resolve/show; ambiguous prefixes refused by name | — | — | closed (#123); regression suite `tests/test_resolve.py` |
 | Phantom items already in the log | the fix stops new orphans, it does not retract old ones. `worklog fold` at v0.17.1 still returns two ids that are not 26-char ULIDs: `01KYA8MD` (status `done`, an 8-char prefix close — the exact bug #123 describes) and `01KXSP277AE68GPTHC1QJV1NX` (25 chars, cancelled, `resolution: "orphan from id typo; neutralized"`) | confirmed | low | log is append-only, so removal is a `compact.py` job; neither orphan carries an unresolved external key today |
-| `banner()` mislabels frozen "current" docs | reader-plane banner shows every frozen doc whose page is titled "current" as a status report regardless of `doc_type` | confirmed | low | filed #137, verified on 12/14 published plan pages, not yet fixed |
+| ~~`banner()` mislabels frozen "current" docs~~ | **fixed in v0.19.0** — `_banner_text()` branches on `doc_type` with distinct wording for status / plan / roadmap-snapshot / everything else | — | — | closed (#137); suite `tests/test_bug_137.py` |
 | ~~Two items may own one remote ticket~~ | **fixed in v0.18.0** — `fold.external_owners()` behind a write-time refusal in `link`, a pre-loop skip + exit 1 in `sync`, and a `unlink` retraction | — | — | closed (github#226); suites `test_fold.TestExternalOwners`, `test_link`, `test_dispatch.TestOneOwnerPerKey` |
 | ~~A rate-limited read-back after create files duplicate issues~~ | **fixed in v0.18.0** — GitHub create is one REST call returning number+url+rev | — | — | closed (github#235); suite `tests/test_github_adapter.py` |
-| Merge-time duplicate ownership not caught (v0.18.0) | the guards run at `link` and at `sync`; a git union merge of two branches that each linked the same key still lands both events, and nothing notices until the next sync | confirmed | medium | filed #237; the sync gate contains the damage (it skips rather than pushes), so the residual exposure is a delayed, loud failure rather than a silent one |
-| `--keys` can force a contested key into scope by external key (v0.18.0) | `--keys` matches on `ext.get("key")` without disambiguating the system or the owner | confirmed | low | filed #239; the collision gate runs first and blocks the whole set, so this is a usability gap, not a corruption path today |
-| Two sessions in one working directory (v0.18.0) | the reporter's contributing factor in github#226 — concurrent agents sharing a checkout interleave writes and each other's git state | confirmed | medium | filed #236; mitigation today is process (separate git worktrees per agent), not code |
-| `conflict`/`resolve` accept arbitrary field names | a typo or a non-syncable field can be recorded as a conflict | confirmed | low | filed #240 |
-| A ticket deleted remotely retries forever | adapter exit 3 clears `last_pushed_hash` and never clears the external link, so the item re-pushes every run | confirmed | low | filed #241 |
-| Compaction undone by a branch spanning it | a branch created before a compaction re-introduces the pre-compaction lines on merge; the fold is still correct, the size win is lost | confirmed | low | filed #243 |
+| ~~Merge-time duplicate ownership not caught~~ | **closed in v0.19.0** — `compact.check_duplicate_ownership()` runs from `merge_check()` in `hooks/pre-commit` when a merge is in flight, and from CI's own `--merge-check` step for the hosted path | — | — | closed (#237); suite `tests/test_bug_merge.py — TestDuplicateOwnershipMerge` |
+| ~~`--keys` can force a contested key into scope by external key~~ | **closed in v0.19.0** — `Dispatcher.refuse_ambiguous_keys()` hard-exits before anything is pushed when `--keys` names a ticket number claimed by more than one item | — | — | closed (#239) |
+| ~~Two sessions in one working directory~~ | **advisory shipped in v0.19.0** — `bin/session.py` + the prompt-reminder heartbeat + `hooks/session-end.sh` warn when two harness sessions share a checkout, and CLAUDE.md now states the worktree rule. Still advisory by design: nothing blocks a write | confirmed | low | #236; the real fix is process (one `git worktree` per session) — the warning arrives after the fact and says so |
+| ~~`conflict`/`resolve` accept arbitrary field names~~ | **closed in v0.19.0** — `_check_conflictable_field()` restricts both to `INGEST_FIELDS`; `id` is identity and `external` is a structured link | — | — | closed (#240) |
+| ~~A ticket deleted remotely retries forever~~ | **closed in v0.19.0** — ADR-0004: rc-3 buffers into `pending_gone`, commits a `gone_key` at the end of the run, aborts after `GONE_ABORT = 3` with nothing succeeding, and clears itself on the next rc-0 | — | — | closed (#241); suite `tests/test_gone_policy.py` |
+| ~~Compaction undone by a branch spanning it~~ | **superseded and closed** — the size-win framing was the smaller half of the problem. ADR-0006 showed the same mechanism silently lost data; ADR-0007 fixed the rule (§9.7) and `worklog merge-rescue` handles the repair | — | — | closed (#243 → #269 → #284) |
+| A hosted merge runs no hook (v0.19.0 residual) | ADR-0005: GitHub does not run merge drivers **or** hooks server-side, so the resurrection and duplicate-ownership guards never fire on the merge button | confirmed | low | the v0.19.0 CI `--merge-check` step covers it — for a `pull_request` GitHub checks out the merge result, so CI sees what the hook would have. Residual: a push straight to `main` outside a PR |
+| `merge-rescue` must be run *before* `git merge --abort` | the command reads `MERGE_HEAD`; once the merge is aborted the state it repairs is gone | confirmed | low | the guard's own message says so; `test_bug_merge.py — test_refuses_when_no_merge_is_in_progress` pins the refusal |
+| Optional-field values are unvalidated beyond shape | `owner` and `acceptance_criteria` are free strings; nothing checks an owner exists | confirmed | low | deliberate — `item_fields.validate()` covers only what argparse cannot express. Choices-bearing fields are enforced by argparse |
 | Release procedure omits the post-publish re-index | wiki urls are backfilled into the inventory only by an `ia-index` run **after** publishing; skipping it leaves the inventory without them | confirmed | low | filed #224; the release skill's doc-sync steps now run `ia-index` after the wiki publish |
 
 # 32. Implementation Plan (extension roadmap)
@@ -1358,43 +1831,50 @@ worklog ia-render`.
 Built system; recommended next steps (Recommendation, grounded in open work
 items and in-code TODOs):
 
-1. **Phase 5 IA** (item #98 / 01KY5G9ZW0RABXWHEMEP1FAV2G): promote IA gates to
-   hard fail; platform render adapters (GitLab/ADO/Confluence); `/worklog:find`
-   + glossary.
-2. **`worklog pr-sync`** (#138): the artifact-pages follow-up — one `gh pr view`
-   call per PR, written via `ia.write_sidecar("pr/<num>", …)`, kept outside
-   `render_all()` to preserve the network-free render invariant.
+1. ~~**Phase 5 IA gates**~~ (#98) — **hard-fail promotion done in v0.19.0**, and
+   `/worklog:find` shipped (#272). **Remaining:** platform render adapters
+   (GitLab/ADO/Confluence) and the glossary. The `wiki_flavor` seam is the
+   scaffolding for the render half; the seam's own rule is to wait for a second
+   platform with a real user before growing it.
+2. ~~**`worklog pr-sync`**~~ (#138) — **done in v0.19.0**, exactly as
+   recommended here: one `gh pr view` per PR into a `pr/<num>` sidecar, kept
+   outside `render_all()` so the network-free render invariant survives.
 3. ~~**Fix ID-prefix resolution on `close`/`update`** (#123)~~ — **done in
-   v0.17.1**, exactly as recommended here: the prefix match `reopen` already did
-   was lifted into `_resolve()` and reused by all six item-naming commands.
+   v0.17.1**, and finished in v0.19.1 when `link-pr` joined `_resolve()`; a
+   prefix there had been silently writing `docs/.index/item/<prefix>.yml`, so
+   the PR edge never reached the graph and the release evidence gate still
+   called the item unlinked, with no error because the write succeeded.
    Remaining follow-on, unfiled: sweep the two pre-existing orphans out at the
    next compaction (§31).
-4. **Fix `banner()` doc_type mislabeling** (#137): frozen "current"-titled pages
-   render as status reports regardless of actual `doc_type`.
-4b. **The github#226 follow-up set** (filed v0.18.0, none started): merge-time
-   duplicate-ownership check (#237), name the ticket fields sync is about to
-   overwrite before it does (#238), one-item-per-ticket when forcing `--keys`
-   (#239), field-name validation on `conflict`/`resolve` (#240), stop retrying a
-   ticket that no longer exists remotely (#241), warn at plan capture when a task
-   title references a ticket number (#242), compaction undone by a branch that
-   spans it (#243), and the process one — two sessions in one working directory
-   (#236). Recommended order: #237 first (it closes the last silent path into the
-   state #226 describes), then #241 and #239, then the rest.
-5. **Configurable work-item field model** (#108 / 01KY5NE0ZYGBWG44N0KPEBFCZ8):
-   optional fields (estimate, risk, effort, value, confidence, owner, due_date,
-   acceptance_criteria, blocked_by/blocks) behind `work_item_fields` config.
+4. ~~**Fix `banner()` doc_type mislabeling** (#137)~~ — **done in v0.19.0**
+   (`_banner_text()`).
+4b. ~~**The github#226 follow-up set**~~ — **all eight closed in v0.19.0**:
+   #237 (merge-time duplicate ownership, now in the hook *and* CI), #238
+   (overwrite preview), #239 (`refuse_ambiguous_keys`), #240 (field whitelist),
+   #241 (ADR-0004 GONE policy), #242 (ticket-ref warning at add and per task at
+   plan capture), #243 (superseded by the ADR-0006/0007 chain), and #236
+   (session advisory). The recommended order given at v0.18.0 — #237 first — is
+   what actually happened.
+5. ~~**Configurable work-item field model**~~ (#108) — **done in v0.19.0**
+   (§9.9). The one deviation from the v0.18.0 recommendation is deliberate:
+   `blocked_by`/`blocks` did **not** become optional fields, because
+   `depends_on` was already core and got proper `--depends-on` /
+   `--add-depends-on` / `--del-depends-on` CLI surface instead (#256).
 6. **Label sync via add/del** on pull (marked future work in `pull()`).
 7. **Remote-origin ticket creation** on pull (drift-note today).
 8. **Spec §17 open questions** that gate features: multi-repo aggregation (Q5),
    superseded-plan unpublishing (Q7).
+9. **Recommendation, new at v0.19.1:** the merge guards now depend on a git hook
+   or the CI step, and ADR-0005 records that neither covers a direct push to
+   `main` outside a PR. Branch protection is the cheapest closure and needs no
+   code.
 
-Critical path: of the two found-while-building bugs, #123 landed in v0.17.1 and
-#137 (cosmetic, banner labelling only) is now the sole remaining one — no longer
-release-blocking; Phase 5 hard-fail should
-land before large teams depend on IA banners; field model is independent of IA.
-v0.18.0 closed the two live data-corruption paths (#226, #235) and filed eight
-follow-ups behind them; #237 is the only one of those on the corruption critical
-path.
+Critical path: essentially clear. v0.19.0 closed the entire #226 follow-up set
+plus the data-loss class behind it (#243 → #269 → #284) and the two long-open
+cosmetic/deferred items (#137, #138); v0.19.1 closed the id-entropy regression
+it had introduced and the last `_resolve()` gap (`link-pr`). What remains in
+§32 is optional surface (platform render adapters, label pull, remote-origin
+creation) rather than correctness, and none of it blocks a release.
 
 # 33. Requirement-to-Design Traceability
 
@@ -1416,6 +1896,10 @@ path.
 | R13 | §8.6 | merge-when-green.sh | — | /worklog:merge | `test_merge_green` | loop exit codes |
 | R14 | §8.7 | `ia` / `ia_render` / `ia_graph` | docs/.index/* | ia-*, wiki-key, link-pr, trace-check, ticket-body | `test_ia` | pre-commit WARNING / trace |
 | R15 | commit | `hooks/pre-commit` branch guard, `hooks/commit-msg` | — (git-level gate, no store object) | `git commit` | `TestBranchGuard`, `TestCommitMsgReference` (`tests/test_integration.py`) | hook failure ("pull-only" / missing reference) |
+| R17 | §8.4, §9.7 | `fold.apply_watermark`/`position` + `compact._snapshot`/`merge_rescue` | snapshot `through`; `rescued_from` | compact, merge-rescue | `test_watermark`, `test_bug_merge` | blocked merge naming `worklog merge-rescue`; CI `--merge-check` |
+| R18 | §8.1, §9.9 | `item_fields` | optional item fields | add/update flags, `fields` | `test_item_fields`, `test_field_model` | argparse "unrecognised option" for a disabled field |
+| R19 | §9.8 | `ulid.git_commit` + `worklog.base` | event `git` field | every writing subcommand | `test_ulid.TestEntropyIsNeverSpent`/`TestEventProvenance` | the field itself — grep the log for a sha |
+| R20 | §8.7 | `wiki_flavor` + `ia_render._links`/`page_name` | rendered pages + `render_hash` | ia-render | `test_wiki_flavor` | `ia-render --check` hard failure |
 
 # 34. Open Questions and Decisions Needed
 
@@ -1434,8 +1918,19 @@ From spec §17 (still open) plus gaps found writing this document:
    surface, or should the spec be amended to the shipped flags?** The shipped
    scope rule (open ∪ hash-dirty ∪ keys) covers the need; **Recommendation:**
    amend the spec. Impact of delay: doc drift only.
-6. **When to promote IA gates to hard fail?** Phase 5 item #98; residual risk
-   while warn-only is silent merge of drifted metadata if warnings are ignored.
+6. ~~**When to promote IA gates to hard fail?**~~ **Answered in v0.19.0** —
+   promoted, guarded on `-d docs/.index` so scaffolded repos are unaffected.
+   The remaining half of #98 is platform render adapters.
+7. **Does the merge-safety story need branch protection to be complete?**
+   (New at v0.19.1.) ADR-0005 establishes that no hook and no merge driver runs
+   server-side; v0.19.0's CI `--merge-check` covers the PR path because GitHub
+   checks out the merge result, but a direct push to `main` outside a PR is
+   uncovered. Owner: Rick. **Recommendation:** turn on branch protection — it is
+   configuration, not code.
+8. **When does `wiki_flavor` earn a second implementation?** The module states
+   its own answer: when a second platform has a real user, and not before — and
+   if the seam starts growing past `link()`/`sanitize()`, that is the signal to
+   stop rather than to keep guessing. Owner: whoever brings the second platform.
 
 # 35. Appendices
 
@@ -1444,18 +1939,130 @@ data flow; §8.2 plan-capture sequence; §8.3 sync sequence; §8.7 IA pipeline;
 §9.2 item state diagram; §10 ER diagram; §15 data lifecycle. §9.6 is table-driven
 rather than diagrammed on purpose — the rule is a uniqueness constraint, not a
 flow, and a diagram of "two arrows into one box" would add nothing the sync
-sequence in §8.3 does not already show.
+sequence in §8.3 does not already show. §9.7 is likewise table-driven: the three
+changes are three independent rules, not a sequence, and the thing a diagram
+would have to show — that ordering and identity are now different keys — is
+easier to state than to draw.
 
 **Example event lines** (spec §5.1, shapes confirmed against `cmd_add`/`cmd_ingest`):
 
 ```jsonl
-{"actor":"rick","ev":"01J8X2K4A0...","item":"01J8X0M2QQ...","op":"create","set":{"kind":"feature","level":"task","priority":"P1","status":"todo","title":"Extract auth middleware"},"ts":"2026-07-16T14:02:11Z"}
+{"actor":"rick","ev":"01J8X2K4A0...","git":"9369638","item":"01J8X0M2QQ...","op":"create","set":{"kind":"feature","level":"task","priority":"P1","status":"todo","title":"Extract auth middleware"},"ts":"2026-07-16T14:02:11Z"}
 {"actor":"github","ev":"01J8X4RR10...","item":"01J8X0M2QQ...","op":"update","set":{"priority":"P0"},"src":{"key":"412","rev":"2026-07-16T15:39:58Z","system":"github"},"ts":"2026-07-16T15:39:58Z"}
+{"actor":"compactor","ev":"01KYWK2QJM...","git":"9369638","item":"01J8X0M2QQ...","op":"snapshot","set":{"kind":"feature","level":"task","priority":"P0","status":"in_progress","title":"Extract auth middleware"},"through":"01J8X4RR10...","ts":"2026-07-31T07:17:03Z"}
+{"actor":"compactor","ev":"01KYWK2QJN...","git":"9369638","op":"compact","through":"01J8X9ZZZZ...","ts":"2026-07-31T07:17:03Z"}
 ```
+
+Note the shapes v0.19.x added: `git` is a top-level event field on
+CLI- and compactor-written events (absent on the ingested one, which the sync
+actor writes through `cmd_ingest`); `through` appears **twice with different
+scopes** — per item on the `snapshot`, globally on the `compact` line — and
+neither is ever inside `set`.
 
 **Exit-code catalog (adapter contract §3.6):** 0 success · 2 auth (abort) ·
 3 not-found (re-push next run) · 4 transient (retry ×3) · 5 remote conflict
 (record) · 1 other (drift, continue).
+
+**v0.19.1 release highlights (Confirmed against changelog / code —
+`git log v0.19.0..v0.19.1`, two commits plus merges):**
+
+A corrective release for one thing v0.19.0 shipped, plus one fix.
+
+- **Fix, `bin/ulid.py`: locally-minted ULIDs are back to their full 80 bits of
+  entropy.** v0.19.0 had overwritten five entropy characters with the short git
+  hash so that agents on different branches minted visibly different ids. The
+  goal was right and the mechanism was wrong: an id is issued once, never
+  changes, and its only guarantee is non-collision, so entropy is not currency
+  to spend on metadata. Reverted. Ids minted by v0.19.0 stay valid and are not
+  rewritten — they are well-formed ULIDs with slightly less entropy and there is
+  nothing to migrate.
+- **New, git provenance on every event.** `ulid.git_commit()` (memoised per
+  process) plus `bin/worklog — base()` add a `git` field carrying the short HEAD
+  sha each event was authored at; `compact._snapshot()` and `_compact_line()` do
+  the same. This traces strictly better than the id ever could — an item's id is
+  minted once, so it could only ever name the branch the *item* was created on,
+  while a per-event field names the origin of each event. Additive and safe in
+  both directions: the fold ignores unknown event fields and `canonical_hash`
+  picks only from the *item*, so no sync re-push follows.
+  `WORKLOG_NO_GIT_PROVENANCE=1` omits it; outside a git repo it is omitted
+  rather than written empty. Full analysis in §9.8.
+- **Fix, `worklog link-pr` resolves an id prefix before writing the sidecar.**
+  It used to file `docs/.index/item/<prefix>.yml`, so the PR edge never reached
+  the graph and the release evidence gate still reported the item as unlinked —
+  with **no error, because the write succeeded**. This is the same class as
+  #123 and the last command that had not joined `_resolve()`.
+- New tests: `tests/test_ulid.py — TestEntropyIsNeverSpent` and
+  `TestEventProvenance`. No event-format break, no adapter or schema change, no
+  new subcommand.
+
+**v0.19.0 release highlights (Confirmed against changelog / plans / ADRs / code
+— `git log v0.18.0..v0.19.0`):**
+
+The theme is merge safety, and the honest summary is that a data-loss class was
+found, mis-classified, re-classified, and then actually fixed — with three ADRs
+recording each step, including the one that was wrong.
+
+- **Fix, the compaction watermark is per item** (#284, ADR-0007). The fold
+  dropped every event at or below one global mark computed as `max_ev` over the
+  whole log — a time marker doing a content marker's job — so an event created
+  on a branch before a compaction ran on main was discarded silently on merge.
+  Two independent mechanisms caused it and both are fixed: `_snapshot` now
+  records a per-item `through`, `apply_watermark` drops per item and never drops
+  events for an item with no snapshot, and `fold.position()` sorts a snapshot at
+  its `through` so a branch's later close applies on top of it instead of being
+  erased by it. Full analysis in §9.7; suites `tests/test_watermark.py` and
+  `tests/test_bug_merge.py`.
+- **Docs, ADR-0005 → 0006 → 0007.** ADR-0005 settled the merge-driver question
+  (union stays, no custom driver, three independently sufficient findings).
+  ADR-0006 then **corrected ADR-0005's own consequence**: calling
+  `check_resurrection` a hygiene guard was factually wrong for events a
+  compaction never folded, and the remedy it printed — recompaction — could not
+  be run from the state the guard creates and would have made the loss permanent
+  if it could. ADR-0007 made the fix and, having narrowed the guard's question,
+  restored the hygiene label. Neither earlier record is superseded; each was
+  right about its own moment, and the chain is left visible on purpose.
+- **New, `worklog merge-rescue`** (#269). Keeps the compacted side's log and
+  re-emits this branch's own events above the watermark, reasoning from the
+  **merge base** rather than the watermark to decide what was genuinely already
+  folded, handing `_reissue()` explicit strictly-increasing timestamps (ULIDs
+  have no intra-millisecond counter), and refusing to write if any item would
+  disappear.
+- **Fix, `pre-commit` refuses staged files containing conflict markers, with no
+  merge exemption.** A merge is exactly when this happens: `commit-msg` exempts
+  merge commits from its reference rule and nothing parsed `tests/` or
+  `plugin/`, so a resolution that missed a hunk committed cleanly and was only
+  found by running the suite.
+- **New, `worklog find`** (#272) — search the already-generated inventory and
+  graph: documents by text/type/truth-state, a node's edges in both directions,
+  every edge of one type. Read-only, no network, no new index.
+- **New, configurable optional item fields** (#108, §9.9) with
+  `worklog fields`; `estimate`/`owner`/`risk`/`acceptance_criteria` default on,
+  `value`/`confidence`/`due_date`/`severity` default off, and a disabled field is
+  invisible rather than rejected. The core stays fixed.
+- **New, `worklog changelog-draft`** (#136) — drafts the unreleased section from
+  `git log`, grouped by commit type, excluding housekeeping **by path**, never
+  guessing the version, never silently dropping a commit.
+- **New, one render seam** (#271): `[[Page]]` became the renderer's canonical
+  notation, translated once at the output boundary in `bin/wiki_flavor.py`, and
+  the renderer finally reads `wiki.system` from config. Rendered output is
+  byte-identical across all 319 pages.
+- **New, sync names the fields a push replaces** (#238) — one batched read per
+  run, before and after, in the report and under `--dry-run`, and it prints what
+  that read cost.
+- **Change, concurrent-session advisory** (#236): `bin/session.py`,
+  `.work/.sessions`, a heartbeat in `hooks/prompt-reminder.sh`, and the new
+  `hooks/session-end.sh`. Advisory only — it never blocks a write — with the
+  actual fix (one `git worktree` per session) stated in policy.
+- **The rest of the #226 follow-up set closed**: #237 (merge-time duplicate
+  ownership, now in the hook and in CI), #239, #240, #241 (ADR-0004), #242, and
+  the two long-open items #137 (banner mislabelling) and #138 (`worklog
+  pr-sync`). IA gates promoted to hard failures (#98).
+- **Internal**: the plugin's harness-hook copies are now sync-checked
+  (`HOOK_CANON`), which immediately found real drift in `exit-plan-capture.sh`.
+- **One regression, corrected the same day** in v0.19.1: spending id entropy on
+  the git hash. Recorded here rather than quietly dropped, because the reasoning
+  that made it look like a good trade is exactly what would make someone propose
+  it again.
 
 **v0.18.0 release highlights (Confirmed against changelog / plan / code —
 `git log v0.17.1..v0.18.0`):**
@@ -1677,9 +2284,10 @@ Both produce duplicate or corrupted remote records that the local log cannot see
 
 ## Omitted sections
 
-- **§12 Package-by-Package Design** — `bin/` is a single flat directory of twelve
-  modules; §11 already covers it at module grain, and there are no packages or
-  import-direction rules beyond those shown in §5.
+- **§12 Package-by-Package Design** — `bin/` is a single flat directory of
+  sixteen modules plus the `worklog` entry point; §11 already covers it at module
+  grain, and there are no packages or import-direction rules beyond those shown
+  in §5.
 - **§16 Cache Design** — nothing caches. `.work/sync-state.json` is per-clone
   sync bookkeeping (covered in §15/§20), not a cache with TTL/eviction semantics.
 - **§17 MCP Server Integration** — no MCP server exists in this repo; skills may
@@ -1695,26 +2303,29 @@ Both produce duplicate or corrupted remote records that the local log cannot see
 
 ## Closing summary
 
-**Top architectural risks:** (1) the hosted-platform union-merge gap — now with a
-sharper edge, since a union merge is the one remaining silent path to two items
-owning one ticket (#237, §31); (2) compaction as the single rewriting operation —
-well-gated, but the one place state loss is possible; (3) IA gates still
-warn-only until Phase 5; (4) labels and remote-origin tickets still don't pull
-(deliberate read-safety); (5) of the two correctness bugs found while building
-artifact pages, ID-prefix resolution (#123) is fixed in v0.17.1 and banner
-mislabeling (#137) — cosmetic — remains open; the phantom items the old prefix
-path already wrote are still in the log (§31). The two live data-corruption paths
-(#226, #235) are closed as of v0.18.0.
+**Top architectural risks:** (1) the hosted-platform gap, now understood rather
+than merely feared — ADR-0005 establishes that GitHub runs neither merge drivers
+nor hooks server-side, and v0.19.0's CI `--merge-check` step closes the PR path
+by checking out the merge result; the residual is a direct push to `main`
+outside a PR, which branch protection would close without code; (2) compaction as
+the single rewriting operation — still the one place state loss is possible, and
+v0.19.0's `merge_rescue()` is a second rewriter held to the same
+verify-before-`os.replace` discipline; (3) labels and remote-origin tickets still
+don't pull (deliberate read-safety); (4) the phantom items the pre-v0.17.1 prefix
+path already wrote are still in the log and a compaction is the only thing that
+can sweep them (§31). The live data-corruption paths (#226, #235) closed at
+v0.18.0; the silent data-*loss* path (#284) closed at v0.19.0; the IA gates are
+hard as of v0.19.0.
 
-**Immediate decisions required:** Phase 5 hard-fail timing; amend spec §10.5 to
-the shipped sync flags or schedule the flags (Open Question 5); decide ADO
-adapter timing given the recorded caveats; decide whether the next compaction
-should sweep the two pre-existing orphan items; decide whether the merge-time
-ownership check (#237) blocks the next release or waits, given that the sync gate
-already contains the damage.
+**Immediate decisions required:** turn on branch protection to close the
+hosted-merge residual (Open Question 7 — configuration, not code); amend spec
+§10.5 to the shipped sync flags or schedule the flags (Open Question 5); decide
+ADO adapter timing given the recorded caveats; decide whether the next
+compaction should sweep the two pre-existing orphan items.
 
-**Recommended implementation order:** §32 items 1→2→3→4→4b (#237 first within
-4b).
+**Recommended implementation order:** §32 items 6→7→9, then the remaining half
+of item 1 (platform render adapters) if and when a second wiki platform gets a
+real user. Items 2, 3, 4, 4b and 5 are done.
 
 **Information still needed from stakeholders:** multi-repo requirements (Open
 Question 3).

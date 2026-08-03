@@ -2,6 +2,35 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Generated design docs quote code that no longer exists; nothing verifies their claims
+`01KZ2M75CEXBQHFN1AG1Z8A2YB` · status: todo
+- references: ticket/github#294
+
+### Run the v0.19.1 release doc sync
+`01KZ2M07FKC9AYK84B7AC91TVP` · status: done
+- targets: release/v0.19.1
+
+### Run the v0.19.1 release doc sync
+`01KZ2M00NVDWJN795G7F8CWTRJ` · status: cancelled
+- targets: release/v0.19.1
+
+### Plan banners do not distinguish a completed plan from one in flight
+`01KZ2KGPRMKG9B98Q6YVD3MZVJ` · status: done
+- lands-in: pr/293
+- references: ticket/github#292
+- targets: release/v0.20.0
+- produced-by: [[Plan-plan-banner-state]]
+
+### CLAUDE.md and AGENTS.md are not tracked in the source repo
+`01KZ2JRT7MAE0MJH7Y0SJ3ZJS3` · status: done
+
+### trace-check --strict ignores its own released-milestone scope
+`01KZ2JAT7PCV6B34W2RK34WBX7` · status: done
+- lands-in: pr/293
+- references: ticket/github#291
+- targets: release/v0.20.0
+- produced-by: [[Plan-trace-check-scope]]
+
 ### Cut release v0.19.1
 `01KYZNRRNFBWHA8452CNFKH6XV` · status: done
 - targets: release/v0.19.1

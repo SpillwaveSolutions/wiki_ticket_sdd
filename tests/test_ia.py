@@ -13,6 +13,7 @@ import unittest
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "bin"))
 import ia
+import ia_render
 
 
 def run(cwd, *args):
@@ -132,6 +133,51 @@ class TestKeys(unittest.TestCase):
         key, canonical, aliases = ia.resolve_key("docs/plans/2026-08-01-new.md", {})
         self.assertEqual(key, "plan/2026-08-01-new")
         self.assertEqual(aliases, [])
+
+
+class TestBanner(unittest.TestCase):
+    """#292. Deliberately NOT a TestInventory subclass: banner() is a pure
+    function of one record, so these need no temp repo -- and TestRender is
+    inherited twice, so a case parked there runs three times and builds
+    three throwaway repos to assert the same string."""
+
+    @staticmethod
+    def plan(status):
+        return {"doc_type": "plan", "truth_state": "current",
+                "source": "docs/plans/2026-08-02-x.md", "status": status}
+
+    def test_a_plan_banner_names_the_plans_own_status(self):
+        """Every plan rendered the same banner regardless of status -- and
+        before v0.19.0 that banner announced it as a status report. The
+        record carried `status` the whole time; nothing read it. No test
+        asserted a PLAN's banner, which is why both survived."""
+        self.assertIn("completed plan", ia_render.banner(self.plan("completed"), {}))
+        self.assertIn("plan in flight", ia_render.banner(self.plan("active"), {}))
+        # the leading word carries the state; the rest is prose for the page
+        self.assertIn("plan not yet started",
+                      ia_render.banner(self.plan("planned"), {}))
+        self.assertIn("plan not yet started", ia_render.banner(self.plan(
+            "planned — not yet scheduled; implementation tasks attach to "
+            "the epic when work starts"), {}))
+        for s in ("completed", "active", "planned"):   # none claims to be a report
+            self.assertNotIn("report", ia_render.banner(self.plan(s), {}))
+
+    def test_an_unreadable_plan_status_says_nothing_about_state(self):
+        """Silence beats a confident guess -- inventing a label for prose we
+        cannot read is exactly how plans came to be announced as reports."""
+        self.assertIn("the current plan",
+                      ia_render.banner(self.plan("marinating"), {}))
+
+    def test_a_status_report_without_a_kind_raises(self):
+        """`kind` is required on a status record (ia.py schema). The old
+        .get(..., 'status') default rendered plausible prose over broken
+        data; a KeyError is the correct outcome."""
+        rec = {"doc_type": "status", "truth_state": "current",
+               "source": "docs/status/2026-08-02-daily.md"}
+        with self.assertRaises(KeyError):
+            ia_render.banner(rec, {})
+        rec["kind"] = "daily"
+        self.assertIn("latest daily report", ia_render.banner(rec, {}))
 
 
 class TestInventory(unittest.TestCase):
@@ -475,17 +521,26 @@ class TestGraph(TestRender):
         self.assertEqual(bad.returncode, 1)
 
     def test_trace_check_warn_and_strict(self):
+        # Since #291 the gate sweeps the released-milestone set only, and
+        # exempts kind:ops outright -- so self.orphan (ops, unmilestoned) is
+        # deliberately no longer reported. This test used to assert the
+        # opposite, which is how the mis-scoped sweep survived review. A
+        # milestoned feature with no plan carries the plan-gap case now.
+        noplan = run(self.dir, "add", "Unplanned-looking feature", "--level",
+                     "task", "--kind", "feature", "--milestone", "v1"
+                     ).stdout.strip().splitlines()[-1]
         run(self.dir, "close", self.iid)
         run(self.dir, "close", self.orphan)
+        run(self.dir, "close", noplan)
         w = run(self.dir, "trace-check")
         self.assertEqual(w.returncode, 0)          # warn level never fails
-        self.assertIn("no plan link", w.stdout)     # orphan has no plan
+        self.assertIn("no plan link", w.stdout)     # from noplan
         self.assertIn("no external ticket", w.stdout)
+        self.assertNotIn(self.orphan, w.stdout)     # ops is exempt
         s = run(self.dir, "trace-check", "--strict")
         self.assertEqual(s.returncode, 1)
         self.assertIn("no PR/commit link", s.stdout)
-        # open items are not in scope
-        self.assertNotIn("frobnicator, todo", s.stdout)
+        self.assertNotIn(self.orphan, s.stdout)
 
     def test_ticket_body_projection(self):
         run(self.dir, "link-pr", self.iid, "--pr", "9")

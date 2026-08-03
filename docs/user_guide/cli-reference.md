@@ -53,16 +53,27 @@ bin/worklog add "Extract auth middleware" --level task --kind feature \
 | `--parent <ulid>` | parent item (bugs may float free of any epic) | none |
 | `--plan <path>` | plan doc that produced it | none |
 | `--labels a,b` | comma-separated | none |
+| `--body <text>` | description a junior dev/PM can read: what and why, no ULIDs (spec §13.4) | none |
 | `--unplanned` | flag; requires `--discovered-during` | — |
 | `--discovered-during <ulid>` | what the unplanned work interrupted | — |
-| `--estimate` | `XS` `S` `M` `L` `XL` | omitted — an unsized item looks unsized |
 | `--depends-on a,b` | comma-separated ULIDs that block this item | none |
+
+Plus one flag per **enabled optional field** — by default `--estimate`,
+`--owner`, `--risk`, `--acceptance-criteria`. See
+[fields](#fields) for the catalog and how to switch them on and off; a
+disabled field has no flag at all.
 
 `--depends-on` is scheduling, not hierarchy — use `--parent` for the tree. The
 roadmap renders these in its **Blocked by** column and counts the item as
 blocked. ULID shape is validated but existence is not: an append-only log has
 to stay writable when the blocker is filed a minute later. An item may not
 depend on itself.
+
+A `#123` in the **title** prints a warning (never a refusal): the item's own
+ticket number is minted by the tracker at the next sync, so a number typed
+into the title is either a reference to some *other* ticket or a guess that
+will be wrong. Cite the ULID if you meant this item. `plan-capture` warns the
+same way on task titles.
 
 Taxonomy rules are checked at write time
 (see [the work taxonomy](user-guide.md#the-work-taxonomy)):
@@ -100,8 +111,11 @@ bin/worklog update 01J8X0M2QQ --body "What and why a junior dev/PM can read"
 | `--milestone <m>` | free string |
 | `--body` | human-readable description (what/why; no ULIDs — spec §13.4) |
 | `--add-label a,b` / `--del-label a,b` | comma-separated |
-| `--estimate` | `XS` `S` `M` `L` `XL` |
 | `--add-depends-on a,b` / `--del-depends-on a,b` | comma-separated ULIDs |
+
+`update` carries the same optional-field flags as `add` — by default
+`--estimate`, `--owner`, `--risk`, `--acceptance-criteria` (see
+[fields](#fields)).
 
 Dependencies take the same add/remove shape as labels rather than whole-field
 replacement, and for the same reason: the fold treats both as set-valued, so
@@ -259,6 +273,51 @@ read-only building block other tooling (like the plan-next skill) consumes.
 bin/worklog fold
 ```
 
+### fields
+
+Print the item field model: the fixed core, then every optional field with
+`[on ]`/`[off]` and what it means. Read this before writing a field you
+haven't used — the descriptions ship with the tool so two people don't fill
+the same field with two different meanings.
+
+```bash
+bin/worklog fields
+```
+
+The **core** is not configurable, ever: `id`, `title`, `status`, `level`,
+`kind`, `priority`, `milestone`, `labels`, `parent`, `body`, `plan`,
+`depends_on`, `unplanned`, `discovered_during`, `external`, `resolution`. The
+fold keys on them, the roadmap renderer reads them, sync maps them onto
+tickets — a knob that could switch `priority` off is a knob that can break the
+roadmap.
+
+The **optional** catalog, switched per repo in `.work/config.yml`:
+
+| Field | Values | Default | Meaning |
+|---|---|---|---|
+| `estimate` | `XS` `S` `M` `L` `XL` | **on** | Relative size, not time. Compare items; never sum into a schedule |
+| `owner` | free text | **on** | Who is accountable for the item moving — one name, not a team. Not who does the work |
+| `risk` | `low` `medium` `high` | **on** | Chance this goes badly or blocks others. Drives what gets planned first, not what gets estimated bigger |
+| `acceptance_criteria` | free text | **on** | What must be observably true to close this. Written before the work, checked at close |
+| `value` | free text | off | Expected benefit. Off by default so it doesn't become a field everyone fills with "high" |
+| `confidence` | `low` `medium` `high` | off | How much to trust this item's estimate and value. Meaningless alone |
+| `due_date` | `YYYY-MM-DD` | off | External hard date — a conference, an audit, a contract. Not a wish, not a substitute for a milestone |
+| `severity` | `sev1`–`sev4` | off | For bugs: production impact, independent of priority. Off unless the team runs an incident process |
+
+```yaml
+# .work/config.yml
+work_item_fields:
+  risk: off
+  severity: on
+```
+
+A disabled field is **invisible, not rejected**: its flag is never built, so
+it never appears in the CLI, in `--help`, or in anything an agent reads to
+decide what to write. `worklog add --risk high` in a repo with `risk: off` is
+an argparse error naming an unrecognised option. An unreadable value in
+config falls back to the documented default rather than failing every
+command.
+
 ### promote
 
 Promote a classifier suggestion from `.work/suggestions.jsonl` into exactly
@@ -337,15 +396,31 @@ bin/worklog sync --dry-run
 | `--push-only` / `--pull-only` | One direction only (mutually exclusive) |
 | `--retry-base-delay <s>` | Base backoff for transient adapter failures |
 
-Every run ends with the drift report — one counts line plus a `drift:` list
-of anything a human should see (conflicts, unsupported fields on the
-platform, deferred items, degraded mappings):
+Every run ends with the drift report — one counts line, then the fields it
+overwrote on live tickets, then a `drift:` list of anything else a human
+should see (conflicts, unsupported fields on the platform, deferred items,
+degraded mappings):
 
 ```
 sync report: created=1 updated=2 closed=1 skipped=14 pulled=1 conflicts=0 deferred=0
+overwrote live ticket fields:
+  - owner/repo#412 (01KYA99T): title: 'Old title' -> 'New title'; status: 'todo' -> 'in_progress'
+  (read 2 tickets in 0.31s to report the above)
 drift:
   - fields not synced on github: depends_on
 ```
+
+The overwrite block comes **before** drift on purpose: `updated=2` is not the
+line that catches damage — naming the field a push replaced on a live ticket
+is. It costs one read per pushed ticket, and the report says how much that
+cost.
+
+A ticket the adapter reports **gone** (definitely not found, not a transient
+failure) is marked and not retried on later runs; re-`link`ing the item to a
+new key clears the mark and puts it back in scope. If several tickets report
+gone and *nothing* in the run succeeded, sync aborts rather than condemning
+the backlog — that pattern is a bad token or a wrong project, not a deleted
+ticket (ADR-0004).
 
 **Contested tickets are never pushed.** If more than one item claims the same
 ticket, sync skips *those items* — the corruption needs both of them pushed —
@@ -419,8 +494,72 @@ JSON facts, `--since`/`--until` override the window, `--dry-run` previews,
 
 Compact the event log per spec §7, verifying `fold(new) == fold(old)`
 before writing. Requires `--yes`. Meant for CI (a nightly job on the main
-branch), not day-to-day use — compaction is also what physically migrates
-old `type` events to `level`/`kind`.
+branch — `.github/workflows/compact.yml`), not day-to-day use — compaction is
+also what physically migrates old `type` events to `level`/`kind`.
+
+Compaction replaces an item's events with a **snapshot** plus a watermark
+(`{"op":"compact","through":<ulid>}`), and the fold drops any raw event at or
+below its own item's watermark. That watermark is per item, not global
+(ADR-0007): an event for an item that was never snapshotted is never dropped.
+
+### merge-rescue
+
+Resolve a merge the **resurrection guard** blocked, without losing events.
+
+```bash
+bin/worklog merge-rescue
+```
+
+Reach for this in exactly one situation: the nightly compaction landed on
+`main` while you were working, you merged `main` into your branch, and the
+merge was refused with *"N event(s) at/below their item's compact watermark
+are back … Run: worklog merge-rescue"*. Union merge takes both sides, so the
+merge brought back lines compaction had already folded into a snapshot — and,
+worse, any event **your branch** authored below that watermark now sorts under
+the snapshot and would be silently discarded on the next read.
+
+Recompacting does not fix this and is not safe: `compact` verifies
+`fold(new) == fold(old)`, and the fold has *already* discarded your branch's
+sub-watermark events, so the check passes while making the loss permanent
+(ADR-0005, ADR-0006). `merge-rescue` instead keeps the compacted side's log
+and re-applies your branch's own events above the watermark under fresh ids
+(each carrying `rescued_from: <old ev>`), using the merge base to tell "already
+folded, safe to drop" from "never folded, must be replayed". It verifies before
+it writes: the guard must now pass, and every item either side knew about must
+still fold to a state — otherwise it aborts and leaves the logs untouched.
+
+Run it **from the blocked merge**, before `git merge --abort`; the merge state
+is what makes the repair precise. It exits 1 with an explanation if no merge
+is in progress, or if neither side has ever been compacted. It prints what it
+did, then:
+
+```bash
+bin/worklog roadmap-render
+git add -A && git commit          # undo with: git merge --abort
+```
+
+The same guard runs a second time in CI (`bin/compact.py --merge-check`),
+standalone, because the hook's copy only fires with a merge in flight and a CI
+checkout has none.
+
+### changelog-draft
+
+Draft the unreleased CHANGELOG section from `git log` since the last tag,
+grouped by commit type, with log/index-only commits excluded. Markdown on
+stdout, the exclusion list on stderr.
+
+```bash
+bin/worklog changelog-draft --version 0.20.0 >> /tmp/draft.md
+bin/worklog changelog-draft --since v0.18.0
+```
+
+| Flag | Meaning |
+|---|---|
+| `--version <v>` | version for the heading (default: the literal `X.Y.Z`) |
+| `--since <ref>` | default: the last tag |
+
+A starting point for release notes, not the release notes. The release skill
+uses it as the first draft and a human edits what ships.
 
 ## Information architecture (IA) commands
 
@@ -572,6 +711,30 @@ bin/worklog trace-check
 bin/worklog trace-check --strict
 ```
 
+### find
+
+Search the generated inventory and graph: documents by text / type /
+truth-state, one node's edges in both directions, or every edge of one type.
+Read-only, no network — it reads `docs/.index/_inventory.json` and
+`_graph.json`, so run `ia-index` / `ia-graph` first if they're stale.
+
+```bash
+bin/worklog find compaction                 # substring, case-insensitive
+bin/worklog find --type plan watermark      # narrow by doc_type
+bin/worklog find --links item/01KYZ5CY9P    # edges in and out of one node
+bin/worklog find --edge supersedes          # every edge of one type
+bin/worklog find --type adr --json          # machine-readable
+```
+
+| Flag | Meaning |
+|---|---|
+| `<query>` | positional; case-insensitive substring |
+| `--type <t>` | `doc_type` filter — `plan`, `adr`, `item`, `pr`, … |
+| `--truth <t>` | `truth_state` filter — `current`, `frozen`, … |
+| `--links <key>` | edges into and out of one node |
+| `--edge <type>` | list every edge of one type, e.g. `supersedes` |
+| `--json` | JSON instead of the text table |
+
 ## Git hooks
 
 Installed via `git config core.hooksPath hooks` (done for you by
@@ -584,11 +747,32 @@ worktree's own root. The session doctor accepts either form.
      that keeps union merge safe).
   2. Every log line parses as JSON and carries the required event fields
      (`ev`, `ts`, `actor`, `op`, and `item` except on `compact` events).
-  3. `docs/roadmap.md` is fresh: the hook regenerates it and diffs — a stale
+  3. **Conflict-marker guard**: no staged file may contain `<<<<<<<`,
+     `=======`, or `>>>>>>>` at the start of a line. **There is no merge
+     exemption, deliberately** — a merge is exactly when this happens, and
+     nothing else catches it: `commit-msg` exempts merge commits from its
+     item-reference rule, and no other check parses `tests/` or `plugin/`, so
+     a resolution that missed one hunk used to commit cleanly and only turn
+     up when someone ran the suite. Staged content only; an unstaged conflict
+     elsewhere in the tree is not this commit's problem. Resolve, re-stage,
+     commit again.
+  4. `docs/roadmap.md` is fresh: the hook regenerates it and diffs — a stale
      or hand-edited roadmap blocks the commit
      (`Run: worklog roadmap-render`).
-  4. The fold test suite passes (only in repos that carry `tests/`).
-  5. **Branch guard**: rejects a commit authored directly on `main`/`master`
+  5. The fold test suite passes (only in repos that carry `tests/`).
+  6. **Merge integrity** (only with a merge in flight): the resurrection
+     guard — a union merge that brought back events a compaction already
+     folded into a snapshot, repaired with
+     [`worklog merge-rescue`](#merge-rescue) — and duplicate ticket
+     ownership, two merged branches each claiming one external key
+     (`worklog unlink <id-to-drop>`). CI re-runs both standalone.
+  7. **IA gates** (only in repos that have a `docs/.index/`): `wiki_key`
+     present and unique, schema-valid frontmatter, fresh inventory, fresh
+     rendered pages and manifest. These are **hard failures** as of v0.19.0 —
+     the warn-only cycle is over. `trace-check` stays warn-level here
+     forever; `--strict` runs at release time. A freshly scaffolded repo has
+     no `docs/.index/` and so is never blocked from its first commit.
+  8. **Branch guard**: rejects a commit authored directly on `main`/`master`
      — those branches are pull-only, land work via a PR instead. A real
      reconciliation merge (`git merge origin/main`) is exempt via
      `WORKLOG_MERGE_COMMIT`, set by `pre-merge-commit` before it exec's into
@@ -600,18 +784,46 @@ worktree's own root. The session doctor accepts either form.
   item (26-char Crockford ULID) or a ticket (`#123`); merge commits are
   exempt (detected via `MERGE_HEAD`, reliably present by this point in the
   sequence).
-- **`hooks/pre-merge-commit`** — runs `pre-commit`'s checks (1–4) with
-  `WORKLOG_MERGE_COMMIT` set. Git does *not* run `pre-commit` for merge
-  auto-commits, so without this a merge could silently land a stale roadmap
-  or a smuggled corrupt line. If it blocks your merge: `bin/worklog
-  roadmap-render && git add -A && git commit --no-edit`.
+- **`hooks/pre-merge-commit`** — exec's into `pre-commit` with
+  `WORKLOG_MERGE_COMMIT` set, so every check above runs and only the branch
+  guard is exempted. Git does *not* run `pre-commit` for merge auto-commits,
+  so without this a merge could silently land a stale roadmap, a smuggled
+  corrupt line, or an unresolved conflict marker. If it blocks your merge on
+  the roadmap: `bin/worklog roadmap-render && git add -A && git commit
+  --no-edit`. If it blocks on resurrected events: `bin/worklog merge-rescue`.
 
 CI runs the same checks — including a PR-scoped step that validates every
 commit message in the PR range — on every push and PR, so bypassing a local
 hook with `--no-verify` only defers the failure.
 
+## Environment variables
+
+| Variable | Effect |
+|---|---|
+| `WORKLOG_NO_GIT_PROVENANCE` | Set to anything to stop stamping the `git` field on new events (see below) |
+| `WORKLOG_MERGE_COMMIT` | Set by `pre-merge-commit`; tells `pre-commit` this is a merge, not authored work |
+| `WORKLOG_SKIP_BRANCH_GUARD` | Skips only the `main`/`master` branch guard — for the tool's own bare invocations (`worklog doctor`, CI's backstop) |
+
 ## Invariants worth knowing
 
+- **Every event carries its origin commit.** Each new event gets a `git`
+  field holding the short HEAD sha at the moment it was written, so two
+  agents in different worktrees or branches produce traceably different
+  events. It is a separate field on purpose: the **id keeps its full 80 bits
+  of entropy** (v0.19.0 briefly spent five characters of it on the hash;
+  v0.19.1 reverted that), and an item's id is minted once, so only a
+  per-event field can name where each event actually came from. The sha is
+  omitted entirely — not written empty — outside a git repo or before the
+  first commit, and `WORKLOG_NO_GIT_PROVENANCE` suppresses it.
+- **One session per working directory.** `worklog` warns when more than one
+  assistant session is active in the same checkout: they share one worktree,
+  so one can switch branches under the other mid-operation and both can "fix"
+  the same thing differently. The warning is **advisory and after the fact** —
+  it never blocks a write, and a missing or corrupt registry is silently
+  treated as empty. The actual fix is a `git worktree` per session. The
+  registry (`.work/.sessions`) is heartbeated by the `UserPromptSubmit` hook
+  and pruned by `SessionEnd`, because the harness is the only thing that knows
+  a session is one session — a short-lived CLI cannot tell.
 - **Merging is gated by `merge-when-green.sh`**, and auto-merge on green is
   on by default; teams that want a human on the trigger set
   `features.auto_merge_on_green: false` in `.work/config.yml` (advisory

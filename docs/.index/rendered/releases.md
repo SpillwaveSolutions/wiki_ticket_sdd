@@ -2,10 +2,14 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
-## v0.19.1 — 2026-08-01
+## v0.19.1 — 2026-08-02
 
+- Design: [[Code-Walkthrough-2026-08-02_v0.19.1-release]]
+- Design: [[Design-Doc-2026-08-02_v0.19.1-release]]
 - Roadmap snapshot: [[Roadmap-2026-08-01_v0.19.1-release]]
 - Shipped: Cut release v0.19.1
+- Shipped: Run the v0.19.1 release doc sync
+- Shipped: Run the v0.19.1 release doc sync
 
 ## v0.19.0 — 2026-08-01
 
