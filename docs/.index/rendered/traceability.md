@@ -12,6 +12,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Plan banners do not distinguish a completed plan from one in flight
 `01KZ2KGPRMKG9B98Q6YVD3MZVJ` · status: done
+- lands-in: pr/293
 - references: ticket/github#292
 - targets: release/v0.20.0
 - produced-by: [[Plan-plan-banner-state]]
@@ -21,6 +22,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### trace-check --strict ignores its own released-milestone scope
 `01KZ2JAT7PCV6B34W2RK34WBX7` · status: done
+- lands-in: pr/293
 - references: ticket/github#291
 - targets: release/v0.20.0
 - produced-by: [[Plan-trace-check-scope]]

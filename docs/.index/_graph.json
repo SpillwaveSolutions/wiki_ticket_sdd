@@ -2567,6 +2567,11 @@
   },
   {
    "from": "item/01KZ2JAT7PCV6B34W2RK34WBX7",
+   "to": "pr/293",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01KZ2JAT7PCV6B34W2RK34WBX7",
    "to": "ticket/github#291",
    "type": "references"
   },
@@ -2574,6 +2579,11 @@
    "from": "item/01KZ2JAT7PCV6B34W2RK34WBX7",
    "to": "release/v0.20.0",
    "type": "targets"
+  },
+  {
+   "from": "item/01KZ2KGPRMKG9B98Q6YVD3MZVJ",
+   "to": "pr/293",
+   "type": "lands-in"
   },
   {
    "from": "item/01KZ2KGPRMKG9B98Q6YVD3MZVJ",
@@ -5818,6 +5828,9 @@
    "doc_type": "pr"
   },
   "pr/286": {
+   "doc_type": "pr"
+  },
+  "pr/293": {
    "doc_type": "pr"
   },
   "release/v0.10.0": {

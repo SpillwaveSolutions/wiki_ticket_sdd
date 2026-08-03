@@ -4,6 +4,10 @@
 
 The pre-release evidence gate reports unlinked-evidence gaps for every closed work item, even though it is documented to check only items in a released milestone.
 
+## Linked PRs
+
+- [[PR-293]]
+
 ## Release
 
 - [[Release-v0.20.0]]
