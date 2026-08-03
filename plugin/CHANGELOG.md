@@ -1,5 +1,120 @@
 # Changelog
 
+## 0.20.0 — unreleased
+
+Two correctness fixes to the gates that judge your own repo, plus the release
+doc sync 0.19.1 skipped. **Both fixes change what you see without changing any
+of your data** — read "Upgrading" before you file a bug about the difference.
+
+- **Fix**: `worklog trace-check --strict` now applies the scope it always
+  claimed. The check is documented as covering *"every item in a released
+  milestone"*, but it computed that scope as a label, printed it in every
+  message, and filtered on nothing — so it swept every closed item in the log.
+  In this repo that meant **401 gaps across 214 items, 80% of all closed work**,
+  of which 323 were on items the check's own docstring excludes. The count grew
+  with every item closed, which is how a gate becomes a number people scroll
+  past.
+
+  Scoping alone was not enough: release items carry milestones too, and every
+  `Cut vX.Y.Z release` item was flagged for lacking the external ticket that
+  the release skill explicitly says it must never have. So two exemptions come
+  with it, each derived from a convention already documented elsewhere —
+  `kind:ops` is exempt outright, and `unplanned` work is exempt from the *plan*
+  check only (being discovered mid-flight excuses the plan, not the ticket and
+  the PR). 401 gaps became 16, every one a real missing link.
+
+- **Fix**: a plan's wiki banner now says which plan it is. Every plan page
+  rendered the identical line — "the current plan" — whether the plan was
+  finished, underway, or not yet started, even though the record carried
+  `status` the whole time and nothing read it. The banner now takes the leading
+  word of that status and names the state: *completed plan*, *plan in flight*,
+  *plan not yet started*. Plan status is free prose, not an enum, so **prose
+  the mapping does not recognise renders exactly as before rather than
+  guessing** — inventing a label for text you cannot read is how this class of
+  bug starts.
+
+  Related: `banner()` no longer supplies a default for `kind` on a status
+  record. `kind` is required there by schema; a record missing it now raises
+  instead of rendering plausible prose over broken data.
+
+  If you are on 0.18.0 or earlier, this fix also carries the 0.19.0 correction
+  that stopped plan pages announcing themselves as *status reports*.
+
+- **Fix**: `CLAUDE.md` and its `AGENTS.md` symlink are tracked in this
+  repository. They never had been — not ignored, just never added — so a fresh
+  clone got no work-tracking policy at all. **Check your own repo for this**;
+  see Upgrading.
+
+- **Docs**: the design document, code walkthrough, user guide and README are
+  regenerated against 0.19.1 and the dated pair frozen. The user guide gains
+  the four subcommands that shipped undocumented (`fields`, `merge-rescue`,
+  `changelog-draft`, `find`), an operational page for `merge-rescue`, an
+  environment-variable table, and the per-event `git` provenance rule. Two
+  stale claims corrected: `pr-sync` has shipped, and `pre-merge-commit` runs
+  more than checks 1–4.
+
+  The regeneration also found the previous design docs quoting code that no
+  longer exists — a merge-ordering tiebreak deleted in 0.19.0, a version
+  constant three releases stale, an import `fold.py` does not have. The current
+  pair is corrected; the frozen 0.18.0 pair keeps its errors, as frozen records
+  do, and the current walkthrough names them for readers. Filed as #294.
+
+### Upgrading
+
+**From 0.19.x** — `/worklog:init` and nothing else. Then expect three
+differences, all of them the fixes landing:
+
+1. **`trace-check` will report far fewer gaps.** On a mature repo the drop can
+   be an order of magnitude. **No data was removed.** The graph is unchanged
+   and every edge still exists; the gate simply stopped asking about items it
+   was never scoped to ask about. Run `worklog trace-check --strict` before and
+   after if you want the difference itemised — the survivors are the ones worth
+   your time.
+
+2. **Your next `wiki-publish` will republish every frozen page.** Banner text
+   folds into `render_hash` by design, so changing any banner invalidates every
+   frozen page's hash at once. This is a single one-time churn, not a loop; the
+   publish after it will be normal-sized. Do not interpret the ledger volume as
+   a bug or interrupt the run partway.
+
+3. **A status record with no `kind` now raises** where it previously rendered
+   `"status report"`. If a publish fails with `KeyError: 'kind'`, that record
+   was already malformed and was being papered over. Fix the record; do not
+   restore the default.
+
+**From 0.18.0 or earlier** — read the 0.19.0 and 0.19.1 notes below in full
+first; they carry the compaction-watermark fix (#284) and the ULID entropy
+correction, and neither is optional. Then:
+
+4. **Check whether your policy file is committed.** `worklog init` creates
+   `CLAUDE.md` and the `AGENTS.md` symlink but does not commit them, and it is
+   easy to have never noticed:
+
+   ```
+   git ls-files CLAUDE.md AGENTS.md
+   ```
+
+   Empty output means a fresh clone of your repo gets no policy, and any agent
+   session started from that clone runs with none of your rules. Fix with:
+
+   ```
+   git add CLAUDE.md AGENTS.md && git commit -m "track the worklog policy file"
+   ```
+
+   Verify the symlink stored as a symlink, not a copy — `git ls-files -s
+   AGENTS.md` should show mode `120000`.
+
+5. **If a nightly compaction blocks your first merge after upgrading**, that is
+   expected on a busy repo and is what `worklog merge-rescue` is for. Run it
+   from *inside* the blocked merge, then `worklog roadmap-render`, `git add -A`,
+   `git commit`. Do not recompact to clear the block — recompaction verifies
+   against a fold that has already discarded the branch's events, which makes
+   the loss permanent.
+
+**Downgrading** is safe. Nothing in this release changes the event log format,
+the graph, or any sidecar schema. Both fixes are read-side only: revert the
+version and the old behaviour returns, wrong counts and all.
+
 ## 0.19.1 — 2026-08-01
 
 A corrective release for one thing shipped in 0.19.0. Upgrading from 0.19.0
