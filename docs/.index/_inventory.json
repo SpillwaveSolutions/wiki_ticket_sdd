@@ -985,6 +985,7 @@
    "status": "active",
    "title": "Git provenance on generated docs, and the verifier it enables",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-doc-provenance-and-verification",
    "wiki_key": "plan/2026-08-03-doc-provenance-and-verification"
   },
   {
