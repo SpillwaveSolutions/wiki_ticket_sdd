@@ -94,6 +94,18 @@ class TestManifestCarriesTheGuardsInput(unittest.TestCase):
             if p["render"] == "as-is":
                 self.assertNotIn("source_hash", p, p["wiki_key"])
 
+    def test_build_provenance_is_recorded_once_at_the_top(self):
+        """One fact about one build. Recording it per page would be ~344
+        copies, would move every render_hash at once, and would be stripped
+        before any reader saw it."""
+        man = _manifest()
+        self.assertIn("git_hash", man)
+        self.assertEqual(
+            man["git_hash"],
+            render_roadmap.top_event(render_roadmap.PATHS)["git"])
+        for p in man["pages"]:
+            self.assertNotIn("git_hash", p, p["wiki_key"])
+
 
 class TestRoadmapRecordsItsSourceCommit(unittest.TestCase):
     """The roadmap is regenerated and byte-diffed by hooks/pre-commit and by
@@ -178,6 +190,22 @@ class TestNoGitOnTheRegenerateAndDiffPath(unittest.TestCase):
     This test fails loudly the day someone "fixes" provenance with a
     subprocess call, which is the obvious wrong turn.
     """
+
+    def test_building_the_manifest_shells_out_to_nothing(self):
+        """render_all() is byte-compared by write_all(check=True) from
+        hooks/pre-commit and from CI. A git call anywhere under it makes the
+        freshness gate unpassable."""
+        real = subprocess.run
+
+        def explode(*a, **k):
+            raise AssertionError("ia_render shelled out: %r" % (a,))
+
+        subprocess.run = explode
+        try:
+            _, manifest, _, _ = ia_render.render_all()
+        finally:
+            subprocess.run = real
+        self.assertIn("git_hash", manifest)
 
     def test_rendering_the_roadmap_shells_out_to_nothing(self):
         import json

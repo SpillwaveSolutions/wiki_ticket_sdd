@@ -30,6 +30,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ia
 import ia_graph
+import render_roadmap
 import wiki_flavor
 from fold import fold, CLOSED_STATUSES
 
@@ -718,10 +719,25 @@ def build_manifest(records, rendered, items=None):
             "source_hash": body,
             "render": "doc+banner", "frozen": frozen,
             "render_hash": _hash_bytes((body + b).encode())})
-    return {"version": 1, "pages": pages,
-            "sidebar": {"source": "%s/_Sidebar.md" % RENDERED,
-                        "render_hash": _hash_bytes(
-                            rendered["_Sidebar.md"].encode())}}
+    out = {"version": 1, "pages": pages,
+           "sidebar": {"source": "%s/_Sidebar.md" % RENDERED,
+                       "render_hash": _hash_bytes(
+                           rendered["_Sidebar.md"].encode())}}
+    # Build provenance, recorded ONCE here rather than on every rendered
+    # page. Each page under docs/.index/rendered/ is a projection of the
+    # whole log by one build, so "the commit" is a property of the build,
+    # not of any page. Stamping all ~344 of them would be 344 copies of one
+    # fact, would move every render_hash at once, and would be invisible to
+    # every reader anyway — publish strips front matter (wiki-publish §3).
+    #
+    # From the newest event's `git` field, never `git rev-parse`: write_all
+    # regenerates and byte-compares this file, so a HEAD-derived value would
+    # differ from the committed one on the very next run. Omitted when the
+    # log carries no sha; never written empty.
+    top = render_roadmap.top_event(render_roadmap.PATHS)
+    if top and top.get("git"):
+        out["git_hash"] = top["git"]
+    return out
 
 
 def build_aliases(records):

@@ -59,7 +59,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Record build provenance once on the publish manifest rather than on every rendered page
-`01KZ30X6JE1ERVS43QVXEEGVXA` · status: todo
+`01KZ30X6JE1ERVS43QVXEEGVXA` · status: done
 - belongs-to: Git provenance on generated docs, and the verifier it enables
 - references: [github#308](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/308)
 - produced-by: [[Plan-doc-provenance-and-verification]]

@@ -1,6 +1,6 @@
 # Record build provenance once on the publish manifest rather than on every rendered page
 
-`01KZ30X6JE1ERVS43QVXEEGVXA` · task/feature · **open**
+`01KZ30X6JE1ERVS43QVXEEGVXA` · task/feature · **done**
 
 Record build provenance once on the publish manifest rather than on every rendered page
 

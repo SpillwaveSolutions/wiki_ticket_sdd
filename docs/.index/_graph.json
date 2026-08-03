@@ -5983,7 +5983,7 @@
   },
   "item/01KZ30X6JE1ERVS43QVXEEGVXA": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Record build provenance once on the publish manifest rather than on every rendered page"
   },
   "item/01KZ30X6JE8542ERDW1B8A9P8H": {

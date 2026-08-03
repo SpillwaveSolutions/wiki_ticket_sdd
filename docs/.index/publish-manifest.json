@@ -1,4 +1,5 @@
 {
+ "git_hash": "9bb5500",
  "pages": [
   {
    "frozen": false,
@@ -44,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "a79cd3935d1e",
+   "render_hash": "4b727455948d",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3444,7 +3445,7 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6HZ6FKJXJX386J44CB1",
    "render": "as-is",
-   "render_hash": "f6d392c71656",
+   "render_hash": "9ac6d40679fc",
    "source": "docs/.index/rendered/tickets/01KZ30X6HZ6FKJXJX386J44CB1.md",
    "title": "Git provenance on generated docs, and the verifier it enables",
    "truth_state": "open",
@@ -3524,10 +3525,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JE1ERVS43QVXEEGVXA",
    "render": "as-is",
-   "render_hash": "d0a3ea747cab",
+   "render_hash": "87d6788c0792",
    "source": "docs/.index/rendered/tickets/01KZ30X6JE1ERVS43QVXEEGVXA.md",
    "title": "Record build provenance once on the publish manifest rather than on every rendered page",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JE1ERVS43QVXEEGVXA"
   },
   {
@@ -4341,13 +4342,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T15:02:57Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T17:28:29Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "1a1f79514b6b",
+   "render_hash": "f22de530493a",
    "source": "docs/roadmap.md",
-   "source_hash": "8db74d79ea09",
+   "source_hash": "c8efe8812b4b",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
