@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Correct the v0.20.0 republish claim in the next release notes
+`01KZ2PJZF067ZS4YW231C1FM28` · status: todo
+
 ### Cut release v0.20.0
 `01KZ2MZ69SFQDHEXFBJTXTDNFX` · status: done
 - targets: release/v0.20.0

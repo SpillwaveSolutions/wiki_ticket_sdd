@@ -5681,6 +5681,11 @@
    "status": "done",
    "title": "Cut release v0.20.0"
   },
+  "item/01KZ2PJZF067ZS4YW231C1FM28": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Correct the v0.20.0 republish claim in the next release notes"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
