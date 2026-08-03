@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### trace-check --strict ignores its own released-milestone scope
+`01KZ2JAT7PCV6B34W2RK34WBX7` · status: todo
+- references: ticket/github#291
+
 ### Cut release v0.19.1
 `01KYZNRRNFBWHA8452CNFKH6XV` · status: done
 - targets: release/v0.19.1

@@ -2546,6 +2546,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZ2JAT7PCV6B34W2RK34WBX7",
+   "to": "ticket/github#291",
+   "type": "references"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -5507,6 +5512,11 @@
    "status": "done",
    "title": "Cut release v0.19.1"
   },
+  "item/01KZ2JAT7PCV6B34W2RK34WBX7": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "trace-check --strict ignores its own released-milestone scope"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6454,6 +6464,10 @@
   "ticket/github#29": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/29"
+  },
+  "ticket/github#291": {
+   "doc_type": "ticket",
+   "url": ""
   },
   "ticket/github#34": {
    "doc_type": "ticket",
