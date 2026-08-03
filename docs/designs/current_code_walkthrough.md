@@ -948,7 +948,7 @@ the same bug through with the two commands reordered. And it is
 after a create), so `cur["id"]` is filtered out of `others`.
 
 **Enforcement 2 — push time** (`bin/sync_dispatch.py — push_items(), lines
-363–372`):
+530–540`):
 
 ```python
         self.collisions = {k: v for k, v in external_owners(items).items()

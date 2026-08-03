@@ -1,5 +1,5 @@
 {
- "git_hash": "78af769",
+ "git_hash": "08c5359",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "8966aac874d8",
+   "render_hash": "279b72c00127",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3622,6 +3622,16 @@
    "wiki_key": "item/01KZ31DGAQ2YDP6RMEMVNAWABH"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZ4EETMXD1JQMDFA97HSZQM4",
+   "render": "as-is",
+   "render_hash": "b8eec73ed28b",
+   "source": "docs/.index/rendered/tickets/01KZ4EETMXD1JQMDFA97HSZQM4.md",
+   "title": "Design-docs regeneration does not verify its own citations",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ4EETMXD1JQMDFA97HSZQM4"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4022,9 +4032,9 @@
    "frozen": false,
    "page_name": "Code-Walkthrough",
    "render": "doc+banner",
-   "render_hash": "23234b584eb2",
+   "render_hash": "0b11cf544929",
    "source": "docs/designs/current_code_walkthrough.md",
-   "source_hash": "61207c676d7a",
+   "source_hash": "f03c097f5c56",
    "title": "Worklog \u2014 Code Walkthrough",
    "truth_state": "current",
    "wiki_key": "design/current-code-walkthrough"
@@ -4354,11 +4364,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T17:42:11Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T18:34:52Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "9dceb4080995",
+   "render_hash": "8b0c59bd281c",
    "source": "docs/roadmap.md",
    "source_hash": "b28160567383",
    "title": "Roadmap",
