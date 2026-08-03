@@ -1,6 +1,6 @@
 # Separate a fabricated citation from one that merely drifted
 
-`01KZ30X6JEWCD74E81Y555DAYP` · subtask/feature · **open**
+`01KZ30X6JEWCD74E81Y555DAYP` · subtask/feature · **done**
 
 Separate a fabricated citation from one that merely drifted
 

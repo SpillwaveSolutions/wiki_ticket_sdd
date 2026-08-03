@@ -4274,6 +4274,12 @@
    "title": "The compaction watermark is per item",
    "truth_state": "current"
   },
+  "adr/0008-document-provenance-depends-on-merge-com": {
+   "doc_type": "adr",
+   "source": "docs/adr/0008-document-provenance-depends-on-merge-com.md",
+   "title": "Document provenance depends on merge commits",
+   "truth_state": "current"
+  },
   "cli-reference": {
    "doc_type": "guide",
    "source": "docs/user_guide/cli-reference.md",
@@ -5943,7 +5949,7 @@
   },
   "item/01KZ30X6HZ6FKJXJX386J44CB1": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Git provenance on generated docs, and the verifier it enables"
   },
   "item/01KZ30X6JD06D11ACPVF8Q5GMW": {
@@ -5978,7 +5984,7 @@
   },
   "item/01KZ30X6JE0QSQF6BE8S0YRPBW": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Backfill the merge commit onto documents once they land on the default branch"
   },
   "item/01KZ30X6JE1ERVS43QVXEEGVXA": {
@@ -5988,12 +5994,12 @@
   },
   "item/01KZ30X6JE8542ERDW1B8A9P8H": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Run the backfill from the release routine rather than a git hook"
   },
   "item/01KZ30X6JEBXN08HQTQ77ESSTV": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Record that document provenance depends on merge commits, not squash merges"
   },
   "item/01KZ30X6JECK0M9G04ZHMS4SMA": {
@@ -6003,12 +6009,12 @@
   },
   "item/01KZ30X6JEETVQZG7YYFM7B998": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Refuse to fall back to the current checkout when the recorded commit cannot be resolved"
   },
   "item/01KZ30X6JEF29Z5AEEWXBSJWHV": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Verify document citations against the commit the document was written against"
   },
   "item/01KZ30X6JEH1Z7D5AC5ZAMM5V8": {
@@ -6018,7 +6024,7 @@
   },
   "item/01KZ30X6JEWCD74E81Y555DAYP": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Separate a fabricated citation from one that merely drifted"
   },
   "item/01KZ30X6JEXH4TTKHDNV3ZW0Q2": {

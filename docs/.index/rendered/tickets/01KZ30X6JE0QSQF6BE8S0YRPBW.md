@@ -1,6 +1,6 @@
 # Backfill the merge commit onto documents once they land on the default branch
 
-`01KZ30X6JE0QSQF6BE8S0YRPBW` · task/feature · **open**
+`01KZ30X6JE0QSQF6BE8S0YRPBW` · task/feature · **done**
 
 Backfill the merge commit onto documents once they land on the default branch
 
@@ -10,9 +10,9 @@ Backfill the merge commit onto documents once they land on the default branch
 
 ## Subtasks
 
-- [[Ticket-01KZ30X6JE8542ERDW1B8A9P8H]] Run the backfill from the release routine rather than a git hook — Run the backfill from the release routine rather than a git hook (open)
+- [[Ticket-01KZ30X6JE8542ERDW1B8A9P8H]] Run the backfill from the release routine rather than a git hook — Run the backfill from the release routine rather than a git hook (done)
 
-Progress: 0/1 done
+Progress: 1/1 done
 
 ## Related tickets
 

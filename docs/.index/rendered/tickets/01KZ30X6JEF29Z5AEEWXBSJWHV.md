@@ -1,6 +1,6 @@
 # Verify document citations against the commit the document was written against
 
-`01KZ30X6JEF29Z5AEEWXBSJWHV` · task/feature · **open**
+`01KZ30X6JEF29Z5AEEWXBSJWHV` · task/feature · **done**
 
 Verify document citations against the commit the document was written against
 
@@ -10,11 +10,11 @@ Verify document citations against the commit the document was written against
 
 ## Subtasks
 
-- [[Ticket-01KZ30X6JEBXN08HQTQ77ESSTV]] Record that document provenance depends on merge commits, not squash merges — Record that document provenance depends on merge commits, not squash merges (open)
-- [[Ticket-01KZ30X6JEETVQZG7YYFM7B998]] Refuse to fall back to the current checkout when the recorded commit cannot be resolved — Refuse to fall back to the current checkout when the recorded commit cannot be resolved (open)
-- [[Ticket-01KZ30X6JEWCD74E81Y555DAYP]] Separate a fabricated citation from one that merely drifted — Separate a fabricated citation from one that merely drifted (open)
+- [[Ticket-01KZ30X6JEBXN08HQTQ77ESSTV]] Record that document provenance depends on merge commits, not squash merges — Record that document provenance depends on merge commits, not squash merges (done)
+- [[Ticket-01KZ30X6JEETVQZG7YYFM7B998]] Refuse to fall back to the current checkout when the recorded commit cannot be resolved — Refuse to fall back to the current checkout when the recorded commit cannot be resolved (done)
+- [[Ticket-01KZ30X6JEWCD74E81Y555DAYP]] Separate a fabricated citation from one that merely drifted — Separate a fabricated citation from one that merely drifted (done)
 
-Progress: 0/3 done
+Progress: 3/3 done
 
 ## Related tickets
 

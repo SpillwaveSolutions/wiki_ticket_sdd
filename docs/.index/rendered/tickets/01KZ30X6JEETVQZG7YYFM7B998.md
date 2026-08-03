@@ -1,6 +1,6 @@
 # Refuse to fall back to the current checkout when the recorded commit cannot be resolved
 
-`01KZ30X6JEETVQZG7YYFM7B998` · subtask/feature · **open**
+`01KZ30X6JEETVQZG7YYFM7B998` · subtask/feature · **done**
 
 Refuse to fall back to the current checkout when the recorded commit cannot be resolved
 

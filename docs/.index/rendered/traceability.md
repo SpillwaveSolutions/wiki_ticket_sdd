@@ -12,7 +12,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Separate a fabricated citation from one that merely drifted
-`01KZ30X6JEWCD74E81Y555DAYP` · status: todo
+`01KZ30X6JEWCD74E81Y555DAYP` · status: done
 - belongs-to: Verify document citations against the commit the document was written against
 - references: [github#315](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/315)
 - produced-by: [[Plan-doc-provenance-and-verification]]
@@ -24,7 +24,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Verify document citations against the commit the document was written against
-`01KZ30X6JEF29Z5AEEWXBSJWHV` · status: todo
+`01KZ30X6JEF29Z5AEEWXBSJWHV` · status: done
 - belongs-to: Git provenance on generated docs, and the verifier it enables
 - references: [github#313](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/313)
 - contains: Record that document provenance depends on merge commits, not squash merges
@@ -33,7 +33,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Refuse to fall back to the current checkout when the recorded commit cannot be resolved
-`01KZ30X6JEETVQZG7YYFM7B998` · status: todo
+`01KZ30X6JEETVQZG7YYFM7B998` · status: done
 - belongs-to: Verify document citations against the commit the document was written against
 - references: [github#312](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/312)
 - produced-by: [[Plan-doc-provenance-and-verification]]
@@ -47,13 +47,13 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Record that document provenance depends on merge commits, not squash merges
-`01KZ30X6JEBXN08HQTQ77ESSTV` · status: todo
+`01KZ30X6JEBXN08HQTQ77ESSTV` · status: done
 - belongs-to: Verify document citations against the commit the document was written against
 - references: [github#310](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/310)
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Run the backfill from the release routine rather than a git hook
-`01KZ30X6JE8542ERDW1B8A9P8H` · status: todo
+`01KZ30X6JE8542ERDW1B8A9P8H` · status: done
 - belongs-to: Backfill the merge commit onto documents once they land on the default branch
 - references: [github#309](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/309)
 - produced-by: [[Plan-doc-provenance-and-verification]]
@@ -65,7 +65,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Backfill the merge commit onto documents once they land on the default branch
-`01KZ30X6JE0QSQF6BE8S0YRPBW` · status: todo
+`01KZ30X6JE0QSQF6BE8S0YRPBW` · status: done
 - belongs-to: Git provenance on generated docs, and the verifier it enables
 - references: [github#307](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/307)
 - contains: Run the backfill from the release routine rather than a git hook
@@ -112,7 +112,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Git provenance on generated docs, and the verifier it enables
-`01KZ30X6HZ6FKJXJX386J44CB1` · status: todo
+`01KZ30X6HZ6FKJXJX386J44CB1` · status: done
 - references: [github#300](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/300)
 - contains: Record on the roadmap which commit its data came from
 - contains: Hash the document body, not the whole file, when deciding what to republish

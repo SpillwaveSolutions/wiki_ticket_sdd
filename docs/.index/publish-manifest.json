@@ -1,11 +1,11 @@
 {
- "git_hash": "9bb5500",
+ "git_hash": "78af769",
  "pages": [
   {
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "b7b179417774",
+   "render_hash": "71ae31aaad74",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -15,7 +15,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "c9130eb141f5",
+   "render_hash": "d24a90184e53",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "4b727455948d",
+   "render_hash": "8966aac874d8",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3445,10 +3445,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6HZ6FKJXJX386J44CB1",
    "render": "as-is",
-   "render_hash": "9ac6d40679fc",
+   "render_hash": "67ae48ff5b84",
    "source": "docs/.index/rendered/tickets/01KZ30X6HZ6FKJXJX386J44CB1.md",
    "title": "Git provenance on generated docs, and the verifier it enables",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6HZ6FKJXJX386J44CB1"
   },
   {
@@ -3515,10 +3515,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JE0QSQF6BE8S0YRPBW",
    "render": "as-is",
-   "render_hash": "58fcfe6a166b",
+   "render_hash": "c5cae15cc298",
    "source": "docs/.index/rendered/tickets/01KZ30X6JE0QSQF6BE8S0YRPBW.md",
    "title": "Backfill the merge commit onto documents once they land on the default branch",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JE0QSQF6BE8S0YRPBW"
   },
   {
@@ -3535,20 +3535,20 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JE8542ERDW1B8A9P8H",
    "render": "as-is",
-   "render_hash": "4dc3480a4b12",
+   "render_hash": "2ce761b2e060",
    "source": "docs/.index/rendered/tickets/01KZ30X6JE8542ERDW1B8A9P8H.md",
    "title": "Run the backfill from the release routine rather than a git hook",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JE8542ERDW1B8A9P8H"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JEBXN08HQTQ77ESSTV",
    "render": "as-is",
-   "render_hash": "1db0e92ef315",
+   "render_hash": "e8a5f82812ba",
    "source": "docs/.index/rendered/tickets/01KZ30X6JEBXN08HQTQ77ESSTV.md",
    "title": "Record that document provenance depends on merge commits, not squash merges",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JEBXN08HQTQ77ESSTV"
   },
   {
@@ -3565,20 +3565,20 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JEETVQZG7YYFM7B998",
    "render": "as-is",
-   "render_hash": "7cf37bde414d",
+   "render_hash": "eb8e057e0962",
    "source": "docs/.index/rendered/tickets/01KZ30X6JEETVQZG7YYFM7B998.md",
    "title": "Refuse to fall back to the current checkout when the recorded commit cannot be resolved",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JEETVQZG7YYFM7B998"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JEF29Z5AEEWXBSJWHV",
    "render": "as-is",
-   "render_hash": "9d8bdb1c9605",
+   "render_hash": "7e5bbc455786",
    "source": "docs/.index/rendered/tickets/01KZ30X6JEF29Z5AEEWXBSJWHV.md",
    "title": "Verify document citations against the commit the document was written against",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JEF29Z5AEEWXBSJWHV"
   },
   {
@@ -3595,10 +3595,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ30X6JEWCD74E81Y555DAYP",
    "render": "as-is",
-   "render_hash": "f3b3d5a92fbf",
+   "render_hash": "c28e6ac07704",
    "source": "docs/.index/rendered/tickets/01KZ30X6JEWCD74E81Y555DAYP.md",
    "title": "Separate a fabricated citation from one that merely drifted",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ30X6JEWCD74E81Y555DAYP"
   },
   {
@@ -3704,6 +3704,18 @@
    "title": "The compaction watermark is per item",
    "truth_state": "current",
    "wiki_key": "adr/0007-the-compaction-watermark-is-per-item"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "ADR-0008-document-provenance-depends-on-merge-com",
+   "render": "doc+banner",
+   "render_hash": "baf714186f33",
+   "source": "docs/adr/0008-document-provenance-depends-on-merge-com.md",
+   "source_hash": "1f169ad2797f",
+   "title": "Document provenance depends on merge commits",
+   "truth_state": "current",
+   "wiki_key": "adr/0008-document-provenance-depends-on-merge-com"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -4222,11 +4234,11 @@
    "wiki_key": "plan/2026-08-02-trace-check-scope"
   },
   {
-   "banner": "> **Current** \u2014 plan in flight; plans are frozen once written, a changed design gets a new plan.",
+   "banner": "> **Current** \u2014 completed plan; plans are frozen once written, a changed design gets a new plan.",
    "frozen": true,
    "page_name": "Plan-doc-provenance-and-verification",
    "render": "doc+banner",
-   "render_hash": "9c266d635cf9",
+   "render_hash": "b7eeb2f4c593",
    "source": "docs/plans/2026-08-03-doc-provenance-and-verification.md",
    "source_hash": "af0c57d7a304",
    "title": "Git provenance on generated docs, and the verifier it enables",
@@ -4342,13 +4354,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T17:28:29Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T17:42:11Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "f22de530493a",
+   "render_hash": "9dceb4080995",
    "source": "docs/roadmap.md",
-   "source_hash": "c8efe8812b4b",
+   "source_hash": "b28160567383",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -4679,7 +4691,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "4a8ebfc92919",
+  "render_hash": "d4bf500bb0a5",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

@@ -90,6 +90,17 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0007-the-compaction-watermark-is-per-item",
     "wiki_key": "adr/0007-the-compaction-watermark-is-per-item"
   },
+  "adr/0008-document-provenance-depends-on-merge-com": {
+    "canonical_key": "adr/0008-document-provenance-depends-on-merge-com",
+    "doc_type": "adr",
+    "rev": null,
+    "source": "docs/adr/0008-document-provenance-depends-on-merge-com.md",
+    "source_hash": null,
+    "title": "ADR-0008-document-provenance-depends-on-merge-com",
+    "truth_state": "current",
+    "url": null,
+    "wiki_key": "adr/0008-document-provenance-depends-on-merge-com"
+  },
   "cli-reference": {
     "aliases": [
       "cli-reference"

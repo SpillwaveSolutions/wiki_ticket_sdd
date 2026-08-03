@@ -6,6 +6,7 @@ epic: 01KXV61H5BDS7TD99H0FF9FE11
 items: [01KXV61H5BDS7TD99H0FF9FE11]
 status: planned — not yet scheduled; implementation tasks attach to the epic when work starts
 origin: authored by Rick with the claude.ai design session, stored verbatim
+merged_in: 0a15e5cebfc5b381f4156c8c14cb39ca54031aa8
 ---
 
 # Spec: Work Taxonomy + Flag-Gated Classifier

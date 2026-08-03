@@ -135,6 +135,13 @@ def dump_simple_yaml(meta):
             out.append("%s: {%s}" % (k, inner))
         elif v is None:
             out.append("%s: null" % k)
+        elif isinstance(v, str) and re.fullmatch(r"-?\d+", v):
+            # Round-trip safety: _scalar() turns an all-digit string back
+            # into an int, so writing it bare loses the type and, with a
+            # leading zero, the value ("0123456" -> 123456). Quoting reaches
+            # _scalar's quote-strip branch first. Matters most for git shas,
+            # where a corrupted value still looks like a sha.
+            out.append('%s: "%s"' % (k, v))
         else:
             out.append("%s: %s" % (k, v))
     return "\n".join(out) + "\n"

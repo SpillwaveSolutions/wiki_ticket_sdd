@@ -1,6 +1,6 @@
 # Record that document provenance depends on merge commits, not squash merges
 
-`01KZ30X6JEBXN08HQTQ77ESSTV` · subtask/feature · **open**
+`01KZ30X6JEBXN08HQTQ77ESSTV` · subtask/feature · **done**
 
 Record that document provenance depends on merge commits, not squash merges
 

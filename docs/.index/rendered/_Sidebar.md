@@ -2,7 +2,6 @@
 
 - [[Roadmap]]
 - [[Design-Doc]] · [[Code-Walkthrough]]
-- Plan: [[Plan-doc-provenance-and-verification]]
 - Plan: [[Plan-ticket-sync-and-init-detection]]
 - [[ADR-0001-event-log-fold-union-merge]]
 - [[ADR-0002-skill-based-edges-typed-contract]]
@@ -11,6 +10,7 @@
 - [[ADR-0005-no-custom-merge-driver-for-the-event-log]]
 - [[ADR-0006-resurrected-events-are-not-always-cosmet]]
 - [[ADR-0007-the-compaction-watermark-is-per-item]]
+- [[ADR-0008-document-provenance-depends-on-merge-com]]
 
 ### History
 

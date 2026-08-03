@@ -327,6 +327,211 @@ class TestWritersDegradeWithoutGit(unittest.TestCase):
             ulid._git_commit_cache.clear()
 
 
+class RepoFixture(unittest.TestCase):
+    """A throwaway repo with real history — merges included, because the
+    whole merged_in derivation is about which merge landed what."""
+
+    def git(self, *args):
+        return subprocess.run(["git", *args], cwd=self.d, capture_output=True,
+                              text=True)
+
+    def setUp(self):
+        self.d = tempfile.mkdtemp(prefix="worklog-prov-repo-")
+        self.addCleanup(shutil.rmtree, self.d, True)
+        self.git("init", "-q", "-b", "main", ".")
+        self.git("config", "user.email", "t@t")
+        self.git("config", "user.name", "t")
+        self.commit("seed.txt", "seed\n")
+
+    def commit(self, name, text):
+        path = os.path.join(self.d, name)
+        os.makedirs(os.path.dirname(path), exist_ok=True) if "/" in name else None
+        write(path, text)
+        self.git("add", "-A")
+        self.git("commit", "-qm", name)
+        return self.git("rev-parse", "HEAD").stdout.strip()
+
+    def head(self):
+        return self.git("rev-parse", "HEAD").stdout.strip()
+
+    def run_in_repo(self, fn):
+        cwd = os.getcwd()
+        os.chdir(self.d)
+        try:
+            return fn()
+        finally:
+            os.chdir(cwd)
+
+
+class TestMergedInNamesTheCommitThatLandedIt(RepoFixture):
+    """Both obvious one-liners are wrong, and quietly. These pin the right
+    answer against the exact histories that break them."""
+
+    def landed(self, path):
+        import provenance
+        return self.run_in_repo(lambda: provenance.merged_in(path, "main"))
+
+    def test_it_finds_the_merge_that_brought_the_file_to_main(self):
+        self.git("checkout", "-q", "-b", "feature")
+        self.commit("doc.md", "body\n")
+        self.git("checkout", "-q", "main")
+        self.commit("other.txt", "x\n")
+        self.git("merge", "-q", "--no-ff", "-m", "Merge feature", "feature")
+        self.assertEqual(self.landed("doc.md"), self.head())
+
+    def test_a_merge_of_main_INTO_the_branch_is_not_the_answer(self):
+        """`rev-list --ancestry-path --merges A..main | tail -1` returns THIS
+        merge — the earliest on the path — and it is wrong. Verified wrong on
+        the real repo before this test existed."""
+        self.git("checkout", "-q", "-b", "feature")
+        self.commit("doc.md", "body\n")
+        self.git("checkout", "-q", "main")
+        self.commit("other.txt", "x\n")
+        self.git("checkout", "-q", "feature")
+        self.git("merge", "-q", "--no-ff", "-m", "Merge main into feature", "main")
+        incoming = self.head()
+        self.git("checkout", "-q", "main")
+        self.git("merge", "-q", "--no-ff", "-m", "Merge feature", "feature")
+        landing = self.head()
+        got = self.landed("doc.md")
+        self.assertEqual(got, landing)
+        self.assertNotEqual(got, incoming)
+
+    def test_a_later_merge_does_not_displace_the_first(self):
+        self.git("checkout", "-q", "-b", "feature")
+        self.commit("doc.md", "body\n")
+        self.git("checkout", "-q", "main")
+        self.git("merge", "-q", "--no-ff", "-m", "Merge feature", "feature")
+        landing = self.head()
+        self.git("checkout", "-q", "-b", "second")
+        self.commit("later.txt", "y\n")
+        self.git("checkout", "-q", "main")
+        self.git("merge", "-q", "--no-ff", "-m", "Merge second", "second")
+        self.assertEqual(self.landed("doc.md"), landing)
+
+    def test_a_file_still_on_a_branch_has_no_answer(self):
+        self.git("checkout", "-q", "-b", "feature")
+        self.commit("doc.md", "body\n")
+        self.assertIsNone(self.landed("doc.md"))
+
+    def test_a_file_committed_straight_to_main_landed_as_itself(self):
+        sha = self.commit("doc.md", "body\n")
+        self.assertEqual(self.landed("doc.md"), sha)
+
+
+class TestVerifierReadsThePinnedCommit(RepoFixture):
+    """The #294 regression test.
+
+    A citation that was correct when written, whose code has since moved,
+    must read as DRIFT — not as a defect — because the verifier resolves it
+    at the document's own commit. Checking against HEAD would call it
+    fabricated, which is the failure this whole feature exists to end.
+    """
+
+    def verify_one(self, doc_rel, cite_text, sha):
+        import doc_verify
+        write(os.path.join(self.d, doc_rel),
+              '---\ngit_hash: "%s"\n---\n\n%s\n' % (sha, cite_text))
+        self.git("add", "-A")
+        self.git("commit", "-qm", "doc")
+        rec = {"k": {"source": doc_rel, "git_hash": sha}}
+        return self.run_in_repo(lambda: doc_verify.verify(records=rec))
+
+    def test_a_citation_correct_when_written_reads_as_drift_not_a_defect(self):
+        self.commit("bin/thing.py", "\n".join(
+            ["# 1", "# 2", "def target():", "    pass", "# 5"]) + "\n")
+        sha = self.head()
+        # the code moves: target() is deleted
+        self.commit("bin/thing.py", "\n".join(["# 1", "# 2", "# 3"]) + "\n")
+        findings, summary = self.verify_one(
+            "doc.md", "`bin/thing.py — target(), lines 3–4`", sha)
+        self.assertEqual(summary["fabricated"], 0, findings)
+        self.assertEqual(summary["drift"], 1, findings)
+
+    def test_a_citation_wrong_when_written_reads_as_fabricated(self):
+        self.commit("bin/thing.py", "\n".join(
+            ["# 1", "# 2", "def target():", "    pass", "# 5"]) + "\n")
+        sha = self.head()
+        findings, summary = self.verify_one(
+            "doc.md", "`bin/thing.py — target(), lines 1–2`", sha)
+        self.assertEqual(summary["fabricated"], 1, findings)
+
+    def test_a_range_past_the_end_of_the_file_is_fabricated(self):
+        self.commit("bin/thing.py", "one\ntwo\n")
+        sha = self.head()
+        findings, summary = self.verify_one(
+            "doc.md", "`bin/thing.py — x(), lines 90–99`", sha)
+        self.assertEqual(summary["fabricated"], 1, findings)
+
+    def test_an_accurate_citation_is_just_ok(self):
+        self.commit("bin/thing.py", "\n".join(
+            ["# 1", "# 2", "def target():", "    pass"]) + "\n")
+        sha = self.head()
+        findings, summary = self.verify_one(
+            "doc.md", "`bin/thing.py — target(), lines 3–4`", sha)
+        self.assertEqual((summary["ok"], summary["fabricated"]), (1, 0), findings)
+
+
+class TestVerifierNeverFallsBackToHead(unittest.TestCase):
+    """Falling back is bug #294 with extra steps: it would report drift as
+    fabrication while looking like it worked."""
+
+    def setUp(self):
+        """A document with a citation that WOULD resolve against HEAD, so a
+        fallback would silently produce a verdict. That is the whole point:
+        these tests fail if the verifier ever starts answering."""
+        self.d = tempfile.mkdtemp(prefix="worklog-prov-nofb-")
+        self.addCleanup(shutil.rmtree, self.d, True)
+        self.doc = os.path.join(self.d, "doc.md")
+        write(self.doc, "`bin/fold.py — fold(), lines 1–400`\n")
+
+    def test_an_unstamped_document_is_skipped_not_checked(self):
+        import doc_verify
+        _, summary = doc_verify.verify(records={"k": {"source": self.doc}})
+        self.assertEqual(summary["unstamped"], 1)
+        self.assertEqual((summary["ok"], summary["fabricated"],
+                          summary["drift"]), (0, 0, 0))
+
+    def test_an_unresolvable_commit_is_skipped_not_checked(self):
+        import doc_verify
+        _, summary = doc_verify.verify(
+            records={"k": {"source": self.doc, "git_hash": "0" * 40}})
+        self.assertEqual(summary["unresolvable"], 1)
+        self.assertEqual((summary["ok"], summary["fabricated"],
+                          summary["drift"]), (0, 0, 0))
+
+    def test_strict_fails_on_fabrication_but_tolerates_frozen_drift(self):
+        import doc_verify
+        frozen_drift = {"verdict": "drift", "live": False}
+        live_drift = {"verdict": "drift", "live": True}
+        fabricated = {"verdict": "fabricated", "live": False}
+        self.assertEqual(doc_verify.failing([frozen_drift]), [])
+        self.assertEqual(len(doc_verify.failing([live_drift])), 1)
+        self.assertEqual(len(doc_verify.failing([fabricated])), 1)
+
+
+class TestCitationParsing(unittest.TestCase):
+    """All four forms that actually occur in this repo's design docs."""
+
+    def test_it_reads_the_four_real_forms(self):
+        import doc_verify
+        text = ("`bin/fold.py — apply_watermark(), lines 210–267`\n"
+                "(`bin/worklog`, lines 528–595)\n"
+                "(`ia_graph.ticket_body()`, lines 302–357)\n"
+                "`bin/canonical.py:17`\n")
+        got = {(c["path"], c["symbol"], c["start"], c["end"])
+               for c in doc_verify.citations(text)}
+        self.assertIn(("bin/fold.py", "apply_watermark", 210, 267), got)
+        self.assertIn(("bin/worklog", None, 528, 595), got)
+        self.assertIn(("bin/ia_graph.py", "ticket_body", 302, 357), got)
+        self.assertIn(("bin/canonical.py", None, 17, 17), got)
+
+    def test_an_en_dash_range_is_not_missed(self):
+        """A regex written for a hyphen matches nothing in these docs."""
+        import doc_verify
+        self.assertTrue(doc_verify.citations("`bin/fold.py`, lines 1–2"))
+
+
 def _plan_fm(sha):
     import plan_capture
     return plan_capture.front_matter("2026-08-03", "s", "T", "01E", ["01A"], sha)

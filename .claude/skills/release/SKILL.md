@@ -39,6 +39,14 @@ skill; use the platform's own release tooling.
   closed item must trace to a plan, ticket, and PR. Failures block the
   release; fix the links (`worklog link-pr`, sidecar `relates_to`) or
   consciously report the gaps to the human — never skip silently.
+- `bin/worklog doc-verify --strict` — the pre-release citation gate: every
+  document's code citations must resolve at the commit that document was
+  written against. FABRICATED means wrong even in the tree the author had
+  open — a real defect, fix it. DRIFT on a frozen document is expected and
+  does not block; drift on `current_design_doc` / `current_code_walkthrough`
+  does, because those claim to describe HEAD. `unresolvable` means the
+  stamped commit is not in this clone (see ADR-0008) — report it, never
+  re-check against HEAD.
 
 ## 3. Land it
 
@@ -95,6 +103,16 @@ the contract, not this prose.
   another page need republishing.
 
 ## 7. After
+
+- `bin/worklog provenance-backfill` — stamps `merged_in` on frozen documents
+  that have now landed on the default branch. A document cannot know the
+  merge that will carry it, so this is the step that fills it in; run it on
+  the post-release branch (this step already lands a commit) and run
+  `worklog ia-index` alongside it in the SAME commit, or the freshness gate
+  rejects the result. Frozen documents only, by design — a live document has
+  been edited since it landed, so the merge that first carried it would name
+  a version that no longer exists. Safe to re-run: it skips anything already
+  stamped.
 
 The next feature wave opens a new `## X.Y.Z — unreleased` section and bumps
 the version lockstep in the same commit that adds the first feature.

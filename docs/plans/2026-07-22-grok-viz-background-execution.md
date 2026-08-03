@@ -6,6 +6,7 @@ epic: null
 items: [01KY5QJARJ0S9QHGRPAV8SFV9H]
 relates_to:
 - {type: references, target: plan/grok-compat-and-mermaid-viz}
+merged_in: d5b442d0518acab7c63023479a3b12494144bf43
 ---
 
 # Grok viz — background-subagent execution rule (amendment record)

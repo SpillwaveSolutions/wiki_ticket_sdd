@@ -4,6 +4,7 @@ slug: plan-banner-state
 title: A plan's banner should say which plan it is
 items: [01KZ2KGPRMKG9B98Q6YVD3MZVJ]
 status: completed
+merged_in: b6173ccc8097dd226fa2ebf9f1cdcff6ce5351ea
 ---
 
 # A plan's banner should say which plan it is
