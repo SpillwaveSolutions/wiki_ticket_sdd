@@ -4,7 +4,7 @@
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "71ae31aaad74",
+   "render_hash": "b7b179417774",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -14,7 +14,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "10ec80219f2e",
+   "render_hash": "73571a574b4f",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "7231594204b9",
+   "render_hash": "3fb62d71be42",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3441,6 +3441,176 @@
    "wiki_key": "item/01KZ2PJZF067ZS4YW231C1FM28"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6HZ6FKJXJX386J44CB1",
+   "render": "as-is",
+   "render_hash": "eec0d85d887a",
+   "source": "docs/.index/rendered/tickets/01KZ30X6HZ6FKJXJX386J44CB1.md",
+   "title": "Git provenance on generated docs, and the verifier it enables",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6HZ6FKJXJX386J44CB1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JD06D11ACPVF8Q5GMW",
+   "render": "as-is",
+   "render_hash": "d78921cdbdb0",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JD06D11ACPVF8Q5GMW.md",
+   "title": "Record on the roadmap which commit its data came from",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JD06D11ACPVF8Q5GMW"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JD7M4XV6Y5194E1D32",
+   "render": "as-is",
+   "render_hash": "8b45f3a7167c",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JD7M4XV6Y5194E1D32.md",
+   "title": "Hash the document body, not the whole file, when deciding what to republish",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JD7M4XV6Y5194E1D32"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JDHPRBESZDQ2CSNJZ2",
+   "render": "as-is",
+   "render_hash": "a9628a2fb183",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JDHPRBESZDQ2CSNJZ2.md",
+   "title": "Pin the rule that a roadmap snapshot inherits the roadmap's provenance",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JDHPRBESZDQ2CSNJZ2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JDSYHB6FQB7RRCGKQQ",
+   "render": "as-is",
+   "render_hash": "da07ddb2573a",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JDSYHB6FQB7RRCGKQQ.md",
+   "title": "Keep the newest event object during the scan without changing the existing helper's signature",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JDSYHB6FQB7RRCGKQQ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JDXDZ38RY6AQEYE7VY",
+   "render": "as-is",
+   "render_hash": "590dc2a10243",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JDXDZ38RY6AQEYE7VY.md",
+   "title": "Add a body-only hash and use it for pages published with a banner",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JDXDZ38RY6AQEYE7VY"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JDYF6YQWN6WYMVQ5Y4",
+   "render": "as-is",
+   "render_hash": "7cea4e311668",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JDYF6YQWN6WYMVQ5Y4.md",
+   "title": "Teach the wiki publisher's frozen-document guard to read it, in both skill trees",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JDYF6YQWN6WYMVQ5Y4"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JE0QSQF6BE8S0YRPBW",
+   "render": "as-is",
+   "render_hash": "434a8d464bed",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JE0QSQF6BE8S0YRPBW.md",
+   "title": "Backfill the merge commit onto documents once they land on the default branch",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JE0QSQF6BE8S0YRPBW"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JE1ERVS43QVXEEGVXA",
+   "render": "as-is",
+   "render_hash": "e49ca26a05b0",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JE1ERVS43QVXEEGVXA.md",
+   "title": "Record build provenance once on the publish manifest rather than on every rendered page",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JE1ERVS43QVXEEGVXA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JE8542ERDW1B8A9P8H",
+   "render": "as-is",
+   "render_hash": "52b65e082acb",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JE8542ERDW1B8A9P8H.md",
+   "title": "Run the backfill from the release routine rather than a git hook",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JE8542ERDW1B8A9P8H"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JEBXN08HQTQ77ESSTV",
+   "render": "as-is",
+   "render_hash": "0489f121edac",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JEBXN08HQTQ77ESSTV.md",
+   "title": "Record that document provenance depends on merge commits, not squash merges",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JEBXN08HQTQ77ESSTV"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JECK0M9G04ZHMS4SMA",
+   "render": "as-is",
+   "render_hash": "fa5284ce87c1",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JECK0M9G04ZHMS4SMA.md",
+   "title": "Stamp the authoring commit onto plans, status reports and new decision records",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JECK0M9G04ZHMS4SMA"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JEETVQZG7YYFM7B998",
+   "render": "as-is",
+   "render_hash": "435e4701544b",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JEETVQZG7YYFM7B998.md",
+   "title": "Refuse to fall back to the current checkout when the recorded commit cannot be resolved",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JEETVQZG7YYFM7B998"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JEF29Z5AEEWXBSJWHV",
+   "render": "as-is",
+   "render_hash": "67aa42d3cfdd",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JEF29Z5AEEWXBSJWHV.md",
+   "title": "Verify document citations against the commit the document was written against",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JEF29Z5AEEWXBSJWHV"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JEH1Z7D5AC5ZAMM5V8",
+   "render": "as-is",
+   "render_hash": "851265d81850",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JEH1Z7D5AC5ZAMM5V8.md",
+   "title": "Document the two new fields in the document schema",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JEH1Z7D5AC5ZAMM5V8"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JEWCD74E81Y555DAYP",
+   "render": "as-is",
+   "render_hash": "6d0851307be6",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JEWCD74E81Y555DAYP.md",
+   "title": "Separate a fabricated citation from one that merely drifted",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JEWCD74E81Y555DAYP"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ30X6JEXH4TTKHDNV3ZW0Q2",
+   "render": "as-is",
+   "render_hash": "24ebe57ddf64",
+   "source": "docs/.index/rendered/tickets/01KZ30X6JEXH4TTKHDNV3ZW0Q2.md",
+   "title": "Add a full-length commit helper that mirrors the existing environment contract",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ30X6JEXH4TTKHDNV3ZW0Q2"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -3991,6 +4161,17 @@
    "wiki_key": "plan/2026-08-02-trace-check-scope"
   },
   {
+   "banner": "> **Current** \u2014 plan not yet started; plans are frozen once written, a changed design gets a new plan.",
+   "frozen": true,
+   "page_name": "Plan-doc-provenance-and-verification",
+   "render": "doc+banner",
+   "render_hash": "6e72d78f5a3d",
+   "source": "docs/plans/2026-08-03-doc-provenance-and-verification.md",
+   "title": "Git provenance on generated docs, and the verifier it enables",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-08-03-doc-provenance-and-verification"
+  },
+  {
    "banner": "> **Current** \u2014 completed plan; plans are frozen once written, a changed design gets a new plan.",
    "frozen": true,
    "page_name": "Plan-design-docs-release-sync",
@@ -4090,11 +4271,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T02:17:32Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T05:17:53Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "66e83106dfe7",
+   "render_hash": "cf9351416307",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -4399,7 +4580,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "3692e0afa93e",
+  "render_hash": "4a8ebfc92919",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

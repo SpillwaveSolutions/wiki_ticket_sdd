@@ -958,6 +958,36 @@
    "wiki_key": "plan/2026-08-02-trace-check-scope"
   },
   {
+   "canonical_key": "plan/2026-08-03-doc-provenance-and-verification",
+   "date": "2026-08-03",
+   "doc_type": "plan",
+   "epic": "01KZ30X6HZ6FKJXJX386J44CB1",
+   "items": [
+    "01KZ30X6JD7M4XV6Y5194E1D32",
+    "01KZ30X6JDXDZ38RY6AQEYE7VY",
+    "01KZ30X6JDYF6YQWN6WYMVQ5Y4",
+    "01KZ30X6JD06D11ACPVF8Q5GMW",
+    "01KZ30X6JDSYHB6FQB7RRCGKQQ",
+    "01KZ30X6JDHPRBESZDQ2CSNJZ2",
+    "01KZ30X6JECK0M9G04ZHMS4SMA",
+    "01KZ30X6JEXH4TTKHDNV3ZW0Q2",
+    "01KZ30X6JEH1Z7D5AC5ZAMM5V8",
+    "01KZ30X6JE1ERVS43QVXEEGVXA",
+    "01KZ30X6JE0QSQF6BE8S0YRPBW",
+    "01KZ30X6JE8542ERDW1B8A9P8H",
+    "01KZ30X6JEF29Z5AEEWXBSJWHV",
+    "01KZ30X6JEWCD74E81Y555DAYP",
+    "01KZ30X6JEETVQZG7YYFM7B998",
+    "01KZ30X6JEBXN08HQTQ77ESSTV"
+   ],
+   "slug": "doc-provenance-and-verification",
+   "source": "docs/plans/2026-08-03-doc-provenance-and-verification.md",
+   "status": "planned",
+   "title": "Git provenance on generated docs, and the verifier it enables",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-08-03-doc-provenance-and-verification"
+  },
+  {
    "aliases": [
     "plan/design-docs-release-sync"
    ],
@@ -1157,10 +1187,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-08-03T02:17:32Z",
+   "generated_at": "2026-08-03T05:17:53Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "a09788ff",
+   "source_hash": "d4851d74",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

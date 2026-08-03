@@ -2,6 +2,106 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Add a full-length commit helper that mirrors the existing environment contract
+`01KZ30X6JEXH4TTKHDNV3ZW0Q2` · status: todo
+- belongs-to: Stamp the authoring commit onto plans, status reports and new decision records
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Separate a fabricated citation from one that merely drifted
+`01KZ30X6JEWCD74E81Y555DAYP` · status: todo
+- belongs-to: Verify document citations against the commit the document was written against
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Document the two new fields in the document schema
+`01KZ30X6JEH1Z7D5AC5ZAMM5V8` · status: todo
+- belongs-to: Stamp the authoring commit onto plans, status reports and new decision records
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Verify document citations against the commit the document was written against
+`01KZ30X6JEF29Z5AEEWXBSJWHV` · status: todo
+- belongs-to: Git provenance on generated docs, and the verifier it enables
+- contains: Record that document provenance depends on merge commits, not squash merges
+- contains: Refuse to fall back to the current checkout when the recorded commit cannot be resolved
+- contains: Separate a fabricated citation from one that merely drifted
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Refuse to fall back to the current checkout when the recorded commit cannot be resolved
+`01KZ30X6JEETVQZG7YYFM7B998` · status: todo
+- belongs-to: Verify document citations against the commit the document was written against
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Stamp the authoring commit onto plans, status reports and new decision records
+`01KZ30X6JECK0M9G04ZHMS4SMA` · status: todo
+- belongs-to: Git provenance on generated docs, and the verifier it enables
+- contains: Document the two new fields in the document schema
+- contains: Add a full-length commit helper that mirrors the existing environment contract
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Record that document provenance depends on merge commits, not squash merges
+`01KZ30X6JEBXN08HQTQ77ESSTV` · status: todo
+- belongs-to: Verify document citations against the commit the document was written against
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Run the backfill from the release routine rather than a git hook
+`01KZ30X6JE8542ERDW1B8A9P8H` · status: todo
+- belongs-to: Backfill the merge commit onto documents once they land on the default branch
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Record build provenance once on the publish manifest rather than on every rendered page
+`01KZ30X6JE1ERVS43QVXEEGVXA` · status: todo
+- belongs-to: Git provenance on generated docs, and the verifier it enables
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Backfill the merge commit onto documents once they land on the default branch
+`01KZ30X6JE0QSQF6BE8S0YRPBW` · status: todo
+- belongs-to: Git provenance on generated docs, and the verifier it enables
+- contains: Run the backfill from the release routine rather than a git hook
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Teach the wiki publisher's frozen-document guard to read it, in both skill trees
+`01KZ30X6JDYF6YQWN6WYMVQ5Y4` · status: todo
+- belongs-to: Hash the document body, not the whole file, when deciding what to republish
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Add a body-only hash and use it for pages published with a banner
+`01KZ30X6JDXDZ38RY6AQEYE7VY` · status: todo
+- belongs-to: Hash the document body, not the whole file, when deciding what to republish
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Keep the newest event object during the scan without changing the existing helper's signature
+`01KZ30X6JDSYHB6FQB7RRCGKQQ` · status: todo
+- belongs-to: Record on the roadmap which commit its data came from
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Pin the rule that a roadmap snapshot inherits the roadmap's provenance
+`01KZ30X6JDHPRBESZDQ2CSNJZ2` · status: todo
+- belongs-to: Record on the roadmap which commit its data came from
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Hash the document body, not the whole file, when deciding what to republish
+`01KZ30X6JD7M4XV6Y5194E1D32` · status: todo
+- belongs-to: Git provenance on generated docs, and the verifier it enables
+- contains: Add a body-only hash and use it for pages published with a banner
+- contains: Teach the wiki publisher's frozen-document guard to read it, in both skill trees
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Record on the roadmap which commit its data came from
+`01KZ30X6JD06D11ACPVF8Q5GMW` · status: todo
+- belongs-to: Git provenance on generated docs, and the verifier it enables
+- contains: Pin the rule that a roadmap snapshot inherits the roadmap's provenance
+- contains: Keep the newest event object during the scan without changing the existing helper's signature
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
+### Git provenance on generated docs, and the verifier it enables
+`01KZ30X6HZ6FKJXJX386J44CB1` · status: todo
+- contains: Record on the roadmap which commit its data came from
+- contains: Hash the document body, not the whole file, when deciding what to republish
+- contains: Backfill the merge commit onto documents once they land on the default branch
+- contains: Record build provenance once on the publish manifest rather than on every rendered page
+- contains: Stamp the authoring commit onto plans, status reports and new decision records
+- contains: Verify document citations against the commit the document was written against
+- produced-by: [[Plan-doc-provenance-and-verification]]
+
 ### Correct the v0.20.0 republish claim in the next release notes
 `01KZ2PJZF067ZS4YW231C1FM28` · status: todo
 

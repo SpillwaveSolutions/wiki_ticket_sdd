@@ -18,6 +18,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 
 | Plan | Lifecycle | Truth | Date |
 |---|---|---|---|
+| [[Plan-doc-provenance-and-verification]] Git provenance on generated docs, and the verifier it enables | planned | current | 2026-08-03 |
 | [[Plan-trace-check-scope]] Scope the traceability gate to the claim it actually makes | completed | current | 2026-08-02 |
 | [[Plan-plan-banner-state]] A plan's banner should say which plan it is | completed | current | 2026-08-02 |
 | [[Plan-configurable-item-fields]] Configurable optional fields on the work item | completed | current | 2026-08-01 |
