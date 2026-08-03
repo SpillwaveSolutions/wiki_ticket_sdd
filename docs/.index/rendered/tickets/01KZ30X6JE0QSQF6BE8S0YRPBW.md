@@ -13,3 +13,7 @@ Backfill the merge commit onto documents once they land on the default branch
 - [[Ticket-01KZ30X6JE8542ERDW1B8A9P8H]] Run the backfill from the release routine rather than a git hook — Run the backfill from the release routine rather than a git hook (open)
 
 Progress: 0/1 done
+
+## Related tickets
+
+- [github #307](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/307)

@@ -2636,9 +2636,24 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZ2PJZF067ZS4YW231C1FM28",
+   "to": "ticket/github#299",
+   "type": "references"
+  },
+  {
+   "from": "item/01KZ30X6HZ6FKJXJX386J44CB1",
+   "to": "ticket/github#300",
+   "type": "references"
+  },
+  {
    "from": "item/01KZ30X6JD06D11ACPVF8Q5GMW",
    "to": "item/01KZ30X6HZ6FKJXJX386J44CB1",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ30X6JD06D11ACPVF8Q5GMW",
+   "to": "ticket/github#301",
+   "type": "references"
   },
   {
    "from": "item/01KZ30X6JD7M4XV6Y5194E1D32",
@@ -2646,9 +2661,19 @@
    "type": "belongs-to"
   },
   {
+   "from": "item/01KZ30X6JD7M4XV6Y5194E1D32",
+   "to": "ticket/github#302",
+   "type": "references"
+  },
+  {
    "from": "item/01KZ30X6JDHPRBESZDQ2CSNJZ2",
    "to": "item/01KZ30X6JD06D11ACPVF8Q5GMW",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ30X6JDHPRBESZDQ2CSNJZ2",
+   "to": "ticket/github#303",
+   "type": "references"
   },
   {
    "from": "item/01KZ30X6JDSYHB6FQB7RRCGKQQ",
@@ -2656,9 +2681,19 @@
    "type": "belongs-to"
   },
   {
+   "from": "item/01KZ30X6JDSYHB6FQB7RRCGKQQ",
+   "to": "ticket/github#304",
+   "type": "references"
+  },
+  {
    "from": "item/01KZ30X6JDXDZ38RY6AQEYE7VY",
    "to": "item/01KZ30X6JD7M4XV6Y5194E1D32",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ30X6JDXDZ38RY6AQEYE7VY",
+   "to": "ticket/github#305",
+   "type": "references"
   },
   {
    "from": "item/01KZ30X6JDYF6YQWN6WYMVQ5Y4",
@@ -2666,9 +2701,19 @@
    "type": "belongs-to"
   },
   {
+   "from": "item/01KZ30X6JDYF6YQWN6WYMVQ5Y4",
+   "to": "ticket/github#306",
+   "type": "references"
+  },
+  {
    "from": "item/01KZ30X6JE0QSQF6BE8S0YRPBW",
    "to": "item/01KZ30X6HZ6FKJXJX386J44CB1",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ30X6JE0QSQF6BE8S0YRPBW",
+   "to": "ticket/github#307",
+   "type": "references"
   },
   {
    "from": "item/01KZ30X6JE1ERVS43QVXEEGVXA",
@@ -2676,9 +2721,19 @@
    "type": "belongs-to"
   },
   {
+   "from": "item/01KZ30X6JE1ERVS43QVXEEGVXA",
+   "to": "ticket/github#308",
+   "type": "references"
+  },
+  {
    "from": "item/01KZ30X6JE8542ERDW1B8A9P8H",
    "to": "item/01KZ30X6JE0QSQF6BE8S0YRPBW",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ30X6JE8542ERDW1B8A9P8H",
+   "to": "ticket/github#309",
+   "type": "references"
   },
   {
    "from": "item/01KZ30X6JEBXN08HQTQ77ESSTV",
@@ -2686,9 +2741,19 @@
    "type": "belongs-to"
   },
   {
+   "from": "item/01KZ30X6JEBXN08HQTQ77ESSTV",
+   "to": "ticket/github#310",
+   "type": "references"
+  },
+  {
    "from": "item/01KZ30X6JECK0M9G04ZHMS4SMA",
    "to": "item/01KZ30X6HZ6FKJXJX386J44CB1",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ30X6JECK0M9G04ZHMS4SMA",
+   "to": "ticket/github#311",
+   "type": "references"
   },
   {
    "from": "item/01KZ30X6JEETVQZG7YYFM7B998",
@@ -2696,9 +2761,19 @@
    "type": "belongs-to"
   },
   {
+   "from": "item/01KZ30X6JEETVQZG7YYFM7B998",
+   "to": "ticket/github#312",
+   "type": "references"
+  },
+  {
    "from": "item/01KZ30X6JEF29Z5AEEWXBSJWHV",
    "to": "item/01KZ30X6HZ6FKJXJX386J44CB1",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ30X6JEF29Z5AEEWXBSJWHV",
+   "to": "ticket/github#313",
+   "type": "references"
   },
   {
    "from": "item/01KZ30X6JEH1Z7D5AC5ZAMM5V8",
@@ -2706,14 +2781,29 @@
    "type": "belongs-to"
   },
   {
+   "from": "item/01KZ30X6JEH1Z7D5AC5ZAMM5V8",
+   "to": "ticket/github#314",
+   "type": "references"
+  },
+  {
    "from": "item/01KZ30X6JEWCD74E81Y555DAYP",
    "to": "item/01KZ30X6JEF29Z5AEEWXBSJWHV",
    "type": "belongs-to"
   },
   {
+   "from": "item/01KZ30X6JEWCD74E81Y555DAYP",
+   "to": "ticket/github#315",
+   "type": "references"
+  },
+  {
    "from": "item/01KZ30X6JEXH4TTKHDNV3ZW0Q2",
    "to": "item/01KZ30X6JECK0M9G04ZHMS4SMA",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ30X6JEXH4TTKHDNV3ZW0Q2",
+   "to": "ticket/github#316",
+   "type": "references"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -5863,7 +5953,7 @@
   },
   "item/01KZ30X6JD7M4XV6Y5194E1D32": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Hash the document body, not the whole file, when deciding what to republish"
   },
   "item/01KZ30X6JDHPRBESZDQ2CSNJZ2": {
@@ -5878,12 +5968,12 @@
   },
   "item/01KZ30X6JDXDZ38RY6AQEYE7VY": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Add a body-only hash and use it for pages published with a banner"
   },
   "item/01KZ30X6JDYF6YQWN6WYMVQ5Y4": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Teach the wiki publisher's frozen-document guard to read it, in both skill trees"
   },
   "item/01KZ30X6JE0QSQF6BE8S0YRPBW": {
@@ -6925,6 +7015,78 @@
   "ticket/github#294": {
    "doc_type": "ticket",
    "url": ""
+  },
+  "ticket/github#299": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/299"
+  },
+  "ticket/github#300": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/300"
+  },
+  "ticket/github#301": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/301"
+  },
+  "ticket/github#302": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/302"
+  },
+  "ticket/github#303": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/303"
+  },
+  "ticket/github#304": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/304"
+  },
+  "ticket/github#305": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/305"
+  },
+  "ticket/github#306": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/306"
+  },
+  "ticket/github#307": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/307"
+  },
+  "ticket/github#308": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/308"
+  },
+  "ticket/github#309": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/309"
+  },
+  "ticket/github#310": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/310"
+  },
+  "ticket/github#311": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/311"
+  },
+  "ticket/github#312": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/312"
+  },
+  "ticket/github#313": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/313"
+  },
+  "ticket/github#314": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/314"
+  },
+  "ticket/github#315": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/315"
+  },
+  "ticket/github#316": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/316"
   },
   "ticket/github#34": {
    "doc_type": "ticket",

@@ -15,3 +15,7 @@ Verify document citations against the commit the document was written against
 - [[Ticket-01KZ30X6JEWCD74E81Y555DAYP]] Separate a fabricated citation from one that merely drifted — Separate a fabricated citation from one that merely drifted (open)
 
 Progress: 0/3 done
+
+## Related tickets
+
+- [github #313](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/313)

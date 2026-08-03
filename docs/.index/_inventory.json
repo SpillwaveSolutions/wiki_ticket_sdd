@@ -982,7 +982,7 @@
    ],
    "slug": "doc-provenance-and-verification",
    "source": "docs/plans/2026-08-03-doc-provenance-and-verification.md",
-   "status": "planned",
+   "status": "active",
    "title": "Git provenance on generated docs, and the verifier it enables",
    "truth_state": "current",
    "wiki_key": "plan/2026-08-03-doc-provenance-and-verification"
@@ -1187,10 +1187,10 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-08-03T05:17:53Z",
+   "generated_at": "2026-08-03T05:22:13Z",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "d4851d74",
+   "source_hash": "460a18b8",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

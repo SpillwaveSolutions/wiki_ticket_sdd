@@ -14,3 +14,7 @@ Stamp the authoring commit onto plans, status reports and new decision records
 - [[Ticket-01KZ30X6JEXH4TTKHDNV3ZW0Q2]] Add a full-length commit helper that mirrors the existing environment contract — Add a full-length commit helper that mirrors the existing environment contract (open)
 
 Progress: 0/2 done
+
+## Related tickets
+
+- [github #311](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/311)
