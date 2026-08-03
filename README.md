@@ -183,7 +183,11 @@ contract before anything activates.
 The repo scaffold is harness-independent: `bin/worklog`, the git hooks, and
 CI are committed and work from any shell. The `AGENTS.md` symlink (created
 by `/worklog:init`, pointing at `CLAUDE.md`) carries the full worklog policy
-to any harness that reads `AGENTS.md`. Grok Build is fully compatible with
+to any harness that reads `AGENTS.md` — but init only *creates* those two
+files, it does not commit them. Run `git ls-files CLAUDE.md AGENTS.md`; empty
+output means a fresh clone gets no policy, and `git ls-files -s AGENTS.md`
+should read mode `120000` so the symlink was stored as a symlink, not a copy.
+Grok Build is fully compatible with
 Claude Code with zero configuration — per the xAI docs it automatically reads
 Claude Code marketplaces, plugins, skills, MCPs, agents, hooks, and
 instruction files. See

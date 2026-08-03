@@ -261,6 +261,11 @@ def in_trace_scope(item):
     every message, and filtered on nothing, so the gate swept all 267 closed
     items instead of the 39 it claimed -- 401 gaps, 323 of them out of scope.
     """
+    # The second clause looks redundant and is not: CLOSED_STATUSES is
+    # ("done", "cancelled"), so cancelled work passes the first test and is
+    # excluded only here. Cancelled work shipped nothing, so it is evidence
+    # of nothing. Carried verbatim from the pre-2026-08-02 trace_check; kept
+    # as-is because tests/test_trace_scope.py pins the behaviour either way.
     if item.get("status") not in CLOSED_STATUSES or item.get("status") == "cancelled":
         return False
     return bool(item.get("milestone")) and item.get("kind") != "ops"

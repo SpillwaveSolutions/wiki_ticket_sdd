@@ -3,7 +3,7 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Cut release v0.20.0
-`01KZ2MZ69SFQDHEXFBJTXTDNFX` · status: todo
+`01KZ2MZ69SFQDHEXFBJTXTDNFX` · status: done
 - targets: release/v0.20.0
 
 ### Generated design docs quote code that no longer exists; nothing verifies their claims
@@ -18,7 +18,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 `01KZ2M00NVDWJN795G7F8CWTRJ` · status: cancelled
 - targets: release/v0.19.1
 
-### Plan banners do not distinguish a completed plan from one in flight
+### Frozen plan pages render a status-report banner that ignores the plan's own status
 `01KZ2KGPRMKG9B98Q6YVD3MZVJ` · status: done
 - lands-in: pr/293
 - references: ticket/github#292
