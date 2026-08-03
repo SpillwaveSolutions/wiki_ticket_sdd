@@ -1,4 +1,4 @@
-# Plan banners do not distinguish a completed plan from one in flight
+# Frozen plan pages render a status-report banner that ignores the plan's own status
 
 `01KZ2KGPRMKG9B98Q6YVD3MZVJ` · task/bug · **done**
 

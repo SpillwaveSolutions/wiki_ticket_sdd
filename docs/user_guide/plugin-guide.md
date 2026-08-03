@@ -56,6 +56,20 @@ updates the block in place, never duplicates it, and plain init never
 touches `CLAUDE.md` at all. Because `AGENTS.md` symlinks to `CLAUDE.md`,
 other harnesses inherit the taxonomy for free.
 
+**Init writes `CLAUDE.md` and the `AGENTS.md` symlink but does not commit
+them** — that is your job, and it is easy to never notice, because everything
+works locally either way. Check:
+
+```bash
+git ls-files CLAUDE.md AGENTS.md
+```
+
+Empty output means a fresh clone of your repo carries no policy at all, and
+any agent session started from that clone runs with none of your rules. Fix
+it with `git add CLAUDE.md AGENTS.md` and a commit, then confirm the symlink
+stored as a symlink rather than a copy — `git ls-files -s AGENTS.md` should
+show mode `120000`.
+
 ### /worklog:uninstall
 
 Remove exactly what init added — the tooling, not the data. It asks for

@@ -215,6 +215,16 @@ regardless of date — the guard scans every existing plan file for that slug,
 not just today's. Design changed? Write a new plan that supersedes the old
 one.
 
+A plan's wiki banner names its state — *completed plan*, *plan in flight*,
+*plan not yet started*. Normally you get this for free: `ia-normalize` derives
+the plan's `status` from its items (planned until work starts, active while
+open, completed when all are closed). A hand-written `status:` in the plan's
+front matter overrides that derivation, and because plan status is free prose
+rather than an enum, only its **leading word** is read — `completed`,
+`active`, or `planned`. Prose starting with anything else renders the plain
+"the current plan" banner rather than a guessed label, so if you write your
+own status and want the state shown, lead with one of those three words.
+
 ### 2. Start work
 
 ```bash
@@ -447,7 +457,7 @@ move. What is added:
 | Sidecars | Frozen docs are never rewritten to add metadata. `ia-normalize` writes `docs/.index/<wiki_key>.yml` sidecars instead. Live docs (`roadmap.md`, `current_*` designs) may get in-place frontmatter. |
 | Reader plane | `worklog ia-render` generates Home, Sidebar, and indexes (Decisions, Releases, Status archive, Traceability) under `docs/.index/rendered/`, plus `publish-manifest.json`. |
 | Artifact pages | `ia-render` also generates one page per **ticket** (`Ticket-<ULID>`), **release** (`Release-<tag>`), and **PR** (`PR-<num>`) — hierarchy, subtasks/progress, linked PRs, and release for tickets; a graph-derived Change Log and Release Tree for releases; linked tickets and related release for PRs. All derived from existing graph edges at render time, no new stored fields. Preview a ticket page with `worklog ia-ticket <ULID>` (plan `docs/plans/2026-07-24-artifact-pages.md`). PR pages carry real state — files changed, review decision, CI rollup, merge time — once `worklog pr-sync <N>` has fetched it into `docs/.index/pr/<N>.yml`; a PR never synced renders as `not tracked`. Fetch writes a committed file, render only reads it, which is what keeps `ia-render --check` byte-deterministic. |
-| Traceability | `worklog ia-graph` builds a typed-edge graph; `link-pr` records PR/commit edges; `trace-check` reports closed items missing plan/ticket/PR links (warn by default, `--strict` pre-release). `worklog find` searches the inventory and graph — by text, `--type`, `--truth`, a node's `--links`, or every `--edge` of one type. |
+| Traceability | `worklog ia-graph` builds a typed-edge graph; `link-pr` records PR/commit edges; `trace-check` reports closed items missing plan/ticket/PR links (warn by default, `--strict` pre-release) — scoped to closed items carrying a milestone, with `kind:ops` exempt outright and `unplanned` exempt from the plan check only. Upgrading to 0.20.0 makes that count drop sharply (401 → 16 here) because the scope is finally applied; no edges were removed. `worklog find` searches the inventory and graph — by text, `--type`, `--truth`, a node's `--links`, or every `--edge` of one type. |
 
 Day-to-day: after plan-capture or a release doc set change, run
 `bin/worklog ia-index` (normalize → inventory → render). Wiki publish
@@ -491,7 +501,11 @@ them. When `docs/.index/publish-manifest.json` exists (from `ia-render`),
 that file **is** the publish set — including generated Home/Sidebar,
 indexes, and the per-ticket/release/PR artifact pages — and ledger skip
 uses `render_hash` so a frozen page can still
-republish when only its banner changed. Per-system guidance (GitHub,
+republish when only its banner changed. The corollary: **any change to banner
+text invalidates every frozen page's hash at once**, so the first
+`wiki-publish` after a release that touches banner wording republishes
+everything and the one after it is normal-sized again. That is a one-time
+churn, not a loop — do not interrupt it partway. Per-system guidance (GitHub,
 GitLab, ADO, Confluence) lives in the wiki-publish skill itself; the ledger
 shape is identical everywhere — only how each system fills
 `url`/`rev`/`page_id` differs. Missing tooling degrades to local-only; it

@@ -490,6 +490,12 @@ corrections go in the next report), `--emit-facts` prints the underlying
 JSON facts, `--since`/`--until` override the window, `--dry-run` previews,
 `--force` overwrites an unpublished draft.
 
+`kind` is required on a status record by the document schema, and since 0.20.0
+rendering one without it raises `KeyError: 'kind'` instead of quietly printing
+"status report" in the banner. A publish that fails this way is reporting a
+record that was already malformed — fix the record's frontmatter or its
+sidecar, do not restore a default.
+
 ### compact
 
 Compact the event log per spec §7, verifying `fold(new) == fold(old)`
@@ -710,6 +716,23 @@ Warns by default; `--strict` exits 1 (use pre-release).
 bin/worklog trace-check
 bin/worklog trace-check --strict
 ```
+
+**Scope** — the check covers items that are evidence for a release, and only
+those:
+
+| Item | In scope? |
+|---|---|
+| Closed, has a `milestone` | yes |
+| Open, or `cancelled` | no |
+| No `milestone` | no — it shipped in nothing named |
+| `kind:ops` | no — release cuts, status reports, compactions and worktree cleanup have no plan, ticket or PR by design |
+| `unplanned` | yes, but exempt from the **plan** check only — being discovered mid-flight excuses the plan, not the ticket and the PR |
+
+Before 0.20.0 the scope was computed, printed in every message, and then
+filtered on nothing, so the gate swept every closed item in the log. Applying
+it took this repo from 401 gaps to 16. **Nothing was removed** — the graph and
+its edges are untouched; the gate stopped asking about items it was never
+scoped to ask about. A large drop after upgrading is the fix, not data loss.
 
 ### find
 
