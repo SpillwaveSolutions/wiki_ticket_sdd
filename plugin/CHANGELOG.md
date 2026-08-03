@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.20.0 — unreleased
+## 0.20.0 — 2026-08-03
 
 Two correctness fixes to the gates that judge your own repo, plus the release
 doc sync 0.19.1 skipped. **Both fixes change what you see without changing any

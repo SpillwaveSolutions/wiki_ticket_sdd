@@ -24,7 +24,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "d66502f223e6",
+   "render_hash": "733d29bf5f34",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -44,7 +44,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "cb24a14c0b59",
+   "render_hash": "e6d119515f08",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3421,6 +3421,16 @@
    "wiki_key": "item/01KZ2M75CEXBQHFN1AG1Z8A2YB"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZ2MZ69SFQDHEXFBJTXTDNFX",
+   "render": "as-is",
+   "render_hash": "897f5c0cc717",
+   "source": "docs/.index/rendered/tickets/01KZ2MZ69SFQDHEXFBJTXTDNFX.md",
+   "title": "Cut release v0.20.0",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ2MZ69SFQDHEXFBJTXTDNFX"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4048,11 +4058,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T01:41:24Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T01:49:15Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "5e7d7ca8ceef",
+   "render_hash": "b4ce614259db",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
    "truth_state": "current",
@@ -4213,6 +4223,17 @@
    "wiki_key": "roadmap-snapshot/2026-08-01_v0.19.1-release"
   },
   {
+   "banner": "> **Snapshot** of release v0.20.0 (2026-08-03) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-08-03_v0.20.0-release",
+   "render": "doc+banner",
+   "render_hash": "5fd3dec9b887",
+   "source": "docs/roadmap/2026-08-03_v0.20.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-08-03_v0.20.0-release"
+  },
+  {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
    "frozen": true,
    "page_name": "Roadmap-2026-07-18_v0.2-roadmap",
@@ -4346,7 +4367,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "7dd305fa96c7",
+  "render_hash": "3692e0afa93e",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

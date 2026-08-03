@@ -2,6 +2,12 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
+## v0.20.0 — 2026-08-03
+
+- Roadmap snapshot: [[Roadmap-2026-08-03_v0.20.0-release]]
+- Shipped: trace-check --strict ignores its own released-milestone scope (#291)
+- Shipped: Plan banners do not distinguish a completed plan from one in flight (#292)
+
 ## v0.19.1 — 2026-08-02
 
 - Design: [[Code-Walkthrough-2026-08-02_v0.19.1-release]]
