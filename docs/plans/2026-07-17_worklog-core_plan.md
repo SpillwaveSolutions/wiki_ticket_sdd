@@ -1,3 +1,6 @@
+---
+merged_in: 233dbde1eb4168ada8a731deb818c02eb0170269
+---
 # Worklog Core (Spec §18 Steps 3–4 + CI) Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.

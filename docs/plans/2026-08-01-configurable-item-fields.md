@@ -3,6 +3,7 @@ date: 2026-08-01
 slug: configurable-item-fields
 title: Configurable optional fields on the work item
 items: [01KY5NE0ZYGBWG44N0KPEBFCZ8]
+merged_in: 8278a4ee93cdf597e3fcd15aa49ca914067bad11
 ---
 
 # Configurable optional fields on the work item

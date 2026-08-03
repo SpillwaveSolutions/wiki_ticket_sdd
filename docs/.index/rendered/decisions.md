@@ -13,11 +13,13 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 | [[ADR-0005-no-custom-merge-driver-for-the-event-log]] No custom merge driver for the event log | accepted | 2026-07-31 | — |
 | [[ADR-0006-resurrected-events-are-not-always-cosmet]] Resurrected events are not always cosmetic | accepted | 2026-08-01 | — |
 | [[ADR-0007-the-compaction-watermark-is-per-item]] The compaction watermark is per item | accepted | 2026-08-01 | — |
+| [[ADR-0008-document-provenance-depends-on-merge-com]] Document provenance depends on merge commits | accepted | 2026-08-03 | — |
 
 ## Plans
 
 | Plan | Lifecycle | Truth | Date |
 |---|---|---|---|
+| [[Plan-doc-provenance-and-verification]] Git provenance on generated docs, and the verifier it enables | completed | current | 2026-08-03 |
 | [[Plan-trace-check-scope]] Scope the traceability gate to the claim it actually makes | completed | current | 2026-08-02 |
 | [[Plan-plan-banner-state]] A plan's banner should say which plan it is | completed | current | 2026-08-02 |
 | [[Plan-configurable-item-fields]] Configurable optional fields on the work item | completed | current | 2026-08-01 |

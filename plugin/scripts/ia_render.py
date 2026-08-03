@@ -8,9 +8,18 @@ No git commands (CI checkouts lack tags), no wall clock.
 The manifest closes the legacy-banner gap: a frozen page's `source_hash`
 never changes, so the ledger's hash-skip would keep already-published pages
 banner-less forever. Each manifest page therefore carries a `render_hash`
-(source bytes + banner + renderer); wiki-publish republishes when the
+(source BODY + banner + renderer); wiki-publish republishes when the
 ledger's `render_hash` differs. Frozen still means the SOURCE never changes
 — only the rendered overlay may.
+
+Body, not whole file, and that word is load-bearing. Publish strips front
+matter for Gollum wikis (wiki-publish §3), so a front-matter-only edit —
+the normalizer stamping `wiki_key`, `adr.mark_superseded`, a provenance
+backfill — produces byte-identical published output. Hashing the file made
+all three look like content edits: they moved `render_hash`, republished
+pages whose text had not changed, and tripped the publisher's frozen-source
+guard. Hashing the body makes that guard mean "the prose changed", which is
+the invariant §15.8/§15.9 actually protects.
 """
 import hashlib
 import json
@@ -21,6 +30,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ia
 import ia_graph
+import render_roadmap
 import wiki_flavor
 from fold import fold, CLOSED_STATUSES
 
@@ -638,6 +648,19 @@ def _file_hash(path):
         return _hash_bytes(fh.read())
 
 
+def _body_hash(path):
+    """Hash of the doc BELOW its front matter — what a reader actually gets.
+
+    Publish strips front matter, so two files differing only there publish
+    identically. Hashing the body is therefore both cheaper (no needless
+    republish) and stricter in the way that matters: a change to this hash
+    means the prose changed, which is the only thing the frozen-doc rule
+    was ever protecting.
+    """
+    with open(path, encoding="utf-8") as fh:
+        return _hash_bytes(ia.parse_front_matter(fh.read())[1].encode())
+
+
 def build_manifest(records, rendered, items=None):
     """The intended publish set (§10.2): every rendered page + every doc the
     default set publishes, each with its banner and render_hash. Also one
@@ -683,17 +706,38 @@ def build_manifest(records, rendered, items=None):
             continue  # the home SOURCE is the intro; the PAGE is rendered
         b = banner(rec, records)
         frozen = ia.is_frozen(rec)
+        body = _body_hash(rec["source"])
         pages.append({
             "wiki_key": key, "source": rec["source"],
             "title": rec.get("title", key), "page_name": page_name(rec),
             "truth_state": rec["truth_state"], "banner": b,
+            # source_hash is the FROZEN-DOC GUARD's input: the publisher
+            # compares it against the ledger and stops when a frozen doc's
+            # prose changed. Carried here so the publisher never has to hash
+            # files itself — and so it cannot accidentally hash the wrong
+            # thing and mistake a metadata stamp for an edit.
+            "source_hash": body,
             "render": "doc+banner", "frozen": frozen,
-            "render_hash": _hash_bytes(
-                (_file_hash(rec["source"]) + b).encode())})
-    return {"version": 1, "pages": pages,
-            "sidebar": {"source": "%s/_Sidebar.md" % RENDERED,
-                        "render_hash": _hash_bytes(
-                            rendered["_Sidebar.md"].encode())}}
+            "render_hash": _hash_bytes((body + b).encode())})
+    out = {"version": 1, "pages": pages,
+           "sidebar": {"source": "%s/_Sidebar.md" % RENDERED,
+                       "render_hash": _hash_bytes(
+                           rendered["_Sidebar.md"].encode())}}
+    # Build provenance, recorded ONCE here rather than on every rendered
+    # page. Each page under docs/.index/rendered/ is a projection of the
+    # whole log by one build, so "the commit" is a property of the build,
+    # not of any page. Stamping all ~344 of them would be 344 copies of one
+    # fact, would move every render_hash at once, and would be invisible to
+    # every reader anyway — publish strips front matter (wiki-publish §3).
+    #
+    # From the newest event's `git` field, never `git rev-parse`: write_all
+    # regenerates and byte-compares this file, so a HEAD-derived value would
+    # differ from the committed one on the very next run. Omitted when the
+    # log carries no sha; never written empty.
+    top = render_roadmap.top_event(render_roadmap.PATHS)
+    if top and top.get("git"):
+        out["git_hash"] = top["git"]
+    return out
 
 
 def build_aliases(records):

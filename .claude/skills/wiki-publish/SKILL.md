@@ -28,9 +28,16 @@ set in §4. For each manifest page:
   ledger entry afterwards. This is deliberate: a frozen page's source never
   changes, but its banner can (e.g. a plan becomes superseded) — the
   rendered overlay must reach the wiki even though the source is untouched.
-  `frozen: true` still guards the SOURCE: if a frozen source's own
-  `source_hash` changed, stop and report it — that is a frozen-doc edit,
-  not a render update.
+- **The frozen guard reads the manifest's `source_hash`, and that is a BODY
+  hash.** `frozen: true` still guards the source: if a frozen page's
+  `source_hash` differs from the ledger's, stop and report it — that is a
+  frozen-doc edit, not a render update. Take the value from the manifest;
+  never hash the file yourself. The manifest hashes the doc **below its
+  front matter**, because you strip front matter anyway (§3), so two files
+  differing only there publish identically. That makes this guard mean *the
+  prose changed* — the thing §15.8/§15.9 protects — instead of firing on
+  every metadata stamp the normalizer, `adr.mark_superseded`, or a
+  provenance backfill writes.
 - **Never publish `docs/.index/` internals**: only `docs/.index/rendered/*.md`
   listed in the manifest reaches the wiki. The JSON/YAML files (inventory,
   graph, manifest, aliases, sidecars) are internal join data.
@@ -111,7 +118,7 @@ or adapt it per platform instead of stripping.
 
 `.work/published.json` maps logical keys to what was published:
 
-    {"<logical-key>": {"source": "repo/path.md", "url": ..., "rev": ..., "source_hash": "sha256[:12] of source file"}}
+    {"<logical-key>": {"source": "repo/path.md", "url": ..., "rev": ..., "source_hash": "the manifest's body hash", "render_hash": "the manifest's render_hash"}}
 
 Entries carry a `source` field (the repo path of the file) so the publish
 set is self-describing. The DEFAULT publish set is always: the live roadmap
@@ -124,8 +131,11 @@ change.
 To opt an arbitrary file in, register it:
 `worklog wiki-add <file> --key K --title T`.
 
-Before publishing a file, hash it (`sha256`, first 12 hex chars). If the
-ledger entry's `source_hash` matches, skip it — already published. After
+When a manifest exists (§0) it is the authority: copy its `source_hash` and
+`render_hash` into the ledger rather than hashing files yourself. Only when
+there is no manifest entry — a file registered via `worklog wiki-add`, say —
+hash it directly (`sha256`, first 12 hex chars, of the whole file). If the
+ledger entry's hash matches, skip it — already published. After
 publishing, update the entry with the page url, the wiki revision (e.g. wiki
 commit sha), and the new hash. Commit `published.json` together with the
 docs it describes.

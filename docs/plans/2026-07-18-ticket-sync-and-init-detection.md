@@ -5,6 +5,7 @@ title: Ticket sync (push-only, GitHub Issues) + /worklog:init system detection
 epic: 01KXSP26ENPKCT4APD4YE93MMV
 story: 01KXSQJ3K19QWBDX482FRT7ETR
 items: filled-by-worklog-add (this plan attaches tasks to the pre-seeded epic/story instead of plan-capture, which would duplicate them)
+merged_in: c5a401bd83a1f4cc4447d0d9e77e82afda089c29
 ---
 
 # Ticket sync (push-only) + init system detection

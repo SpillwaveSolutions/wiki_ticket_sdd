@@ -585,7 +585,8 @@ def cmd_plan_capture(a):
 
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
-        fh.write(plan_capture.front_matter(date, a.slug, a.title, epic_id, item_ids))
+        fh.write(plan_capture.front_matter(date, a.slug, a.title, epic_id,
+                                           item_ids, ulid.git_commit_full()))
         fh.write(draft)
     print(path)
     print(epic_id)
@@ -661,7 +662,7 @@ def cmd_adr_new(a):
         a.title, nid, slug, date, status=a.status,
         deciders=a.deciders.split(",") if a.deciders else None,
         tags=a.tags.split(",") if a.tags else None,
-        supersedes=a.supersedes)
+        supersedes=a.supersedes, git_hash=ulid.git_commit_full())
     if os.path.exists(path):
         sys.exit(f"worklog: {path} exists")
     if a.supersedes is not None:
@@ -806,6 +807,34 @@ def cmd_pr_sync(a):
         sys.exit(f"worklog: {e}")
     print(f"pr/{meta['number']}: {meta['state']} · review {meta['review']} "
           f"· checks {meta['checks']} · {len(meta['files'])} file(s)")
+
+
+def cmd_provenance_backfill(a):
+    """Stamp `merged_in` on frozen docs that have landed (plan
+    2026-08-03-doc-provenance-and-verification). Imported lazily: this is
+    the one provenance path that shells out to git, and keeping it out of
+    module scope keeps the import graph of the render plane clean."""
+    import provenance
+    changed = provenance.backfill(check=a.check)
+    provenance.report(changed, check=a.check)
+    if a.check and changed:
+        sys.exit(1)
+
+
+def cmd_doc_verify(a):
+    """Resolve each document's code citations at the commit it was written
+    against (#294). Lazy import: doc_verify shells out to git, and the
+    render plane must not grow that dependency."""
+    import doc_verify
+    findings, summary = doc_verify.verify(strict=a.strict)
+    doc_verify.report(findings, summary)
+    if a.strict:
+        bad = doc_verify.failing(findings)
+        if bad:
+            print("doc-verify: %d finding(s) fail --strict "
+                  "(fabricated anywhere, or drift on a doc claiming to "
+                  "describe HEAD)" % len(bad))
+            sys.exit(1)
 
 
 def cmd_trace_check(a):
@@ -1063,6 +1092,11 @@ def cmd_status(a):
     date = (facts["window"]["to"][:10] if a.kind == "timecard"
             else time.strftime("%Y-%m-%d", time.gmtime(now_ms / 1000)))
     path = f"docs/status/{date}-{a.kind}.md"
+    # Omitted when there is no git (or WORKLOG_NO_GIT_PROVENANCE), never
+    # written empty -- an empty value opens a block list in
+    # ia.parse_front_matter and swallows the closing fence. Quoted so an
+    # all-digit sha is not read back as an int.
+    sha = ulid.git_commit_full()
     doc = ("---\n"
            f"kind: {a.kind}\n"
            f"date: {date}\n"
@@ -1070,6 +1104,7 @@ def cmd_status(a):
            f"to: {facts['window']['to']}}}\n"
            f"through: {facts['through'] or 'null'}\n"
            f"generated_at: {_rfc3339(now_ms)}\n"
+           + (f'git_hash: "{sha}"\n' if sha else "") +
            "---\n\n" + prose.rstrip("\n") + "\n")
     if a.dry_run:
         sys.stdout.write(doc)
@@ -1488,6 +1523,30 @@ tc = sub.add_parser(
                 "PR links. Warn by default; --strict exits 1 (pre-release).")
 tc.set_defaults(fn=cmd_trace_check)
 tc.add_argument("--strict", action="store_true")
+
+dv = sub.add_parser(
+    "doc-verify",
+    description="Check each document's code citations against the commit it "
+                "was written against, not against HEAD. Separates a "
+                "FABRICATED citation (wrong even in the tree the author had "
+                "open) from DRIFT (right then, moved since) — a frozen doc "
+                "is allowed to drift; one claiming to describe HEAD is not. "
+                "Never falls back to HEAD: an unstamped or unresolvable "
+                "document is reported and skipped.")
+dv.set_defaults(fn=cmd_doc_verify)
+dv.add_argument("--strict", action="store_true",
+                help="exit 1 on fabrication, or on drift in a live document")
+
+pb = sub.add_parser(
+    "provenance-backfill",
+    description="Stamp `merged_in` on frozen documents that have landed on "
+                "the default branch — the merge commit a document cannot "
+                "know when it is written. Frozen only: a live doc has been "
+                "edited since it landed, so the merge that first carried it "
+                "would name a version that no longer exists.")
+pb.set_defaults(fn=cmd_provenance_backfill)
+pb.add_argument("--check", action="store_true",
+                help="report what would be stamped and exit 1, writing nothing")
 
 ii = sub.add_parser(
     "ia-inventory",

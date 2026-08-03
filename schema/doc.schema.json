@@ -13,7 +13,14 @@
     "status": {"type": "string"},
     "date": {"type": "string"},
     "generated_at": {"type": "string"},
-    "git_hash": {"type": "string"},
+    "git_hash": {
+      "type": "string",
+      "description": "The commit this document was written against — NOT the commit containing it, which a document cannot know. Full 40-hex from bin/ulid.git_commit_full(), except on docs/roadmap.md and its snapshots, where it is the short sha carried by the newest event because the roadmap is regenerate-and-diffed and may not shell out to git. Always write it QUOTED: ia._scalar coerces an all-digit value to int before it considers quotes. Omit the key entirely when unknown; an empty value opens a block list in ia.parse_front_matter and swallows the closing fence."
+    },
+    "merged_in": {
+      "type": "string",
+      "description": "The merge commit that brought this document to the default branch. Backfilled after landing, so absent on any document still on a branch — which is why it can never be required. Same quoting and omission rules as git_hash."
+    },
     "through": {"type": "string"},
     "epic": {"type": "string"},
     "items": {"type": "array", "items": {"type": "string"}},

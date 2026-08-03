@@ -6,6 +6,7 @@ epic: 01KXV0NQPPPK2K948CK20QJSS1
 items: [01KXV0NQPPPK2K948CK20QJSS1]
 status: planned — not yet scheduled; implementation tasks attach to the epic when work starts
 origin: authored by Rick with the claude.ai design session, stored verbatim
+merged_in: 28773c8f2bbfcc9bd366d60caa3352a60786fb64
 ---
 
 # Spec: Typed Adapter Contract for `ticket-sync`

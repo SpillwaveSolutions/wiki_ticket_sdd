@@ -3,6 +3,7 @@ date: 2026-08-02
 slug: trace-check-scope
 title: Scope the traceability gate to the claim it actually makes
 items: [01KZ2JAT7PCV6B34W2RK34WBX7]
+merged_in: b6173ccc8097dd226fa2ebf9f1cdcff6ce5351ea
 ---
 
 # Scope the traceability gate to the claim it actually makes

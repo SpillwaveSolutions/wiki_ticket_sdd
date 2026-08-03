@@ -4,6 +4,7 @@ slug: declare-graph-engineering
 title: Declare wiki_ticket_sdd as a Graph Engineering system
 epic: 01KYFSRNDMYCTQ1XTMXFWEVBWT
 items: [01KYFSRNDMYBVMWXJFEK2AJWJJ, 01KYFSRNDMMPY0E54PQ9QSWJWK, 01KYFSRNDMSMEXKT7PV0F9X54M]
+merged_in: 715b1bb969b312a4e85cbdb50d93d11ab04f160e
 ---
 
 # Declare wiki_ticket_sdd as a Graph Engineering system

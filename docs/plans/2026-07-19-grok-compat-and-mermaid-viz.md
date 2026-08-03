@@ -6,6 +6,7 @@ epic: null
 items: [01KXXM1Z13NPYK1XBJ1EQFEKGT]
 status: planned — not yet scheduled
 origin: authored by Rick with the claude.ai design session; gantt-date model corrected against the actual schema
+merged_in: fccc59627e0fb68e8ac42897e759fea5d273650d
 ---
 
 # Grok Build compat + Mermaid roadmap visualization
