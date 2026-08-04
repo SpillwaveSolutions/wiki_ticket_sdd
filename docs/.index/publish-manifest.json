@@ -1,5 +1,5 @@
 {
- "git_hash": "e232556",
+ "git_hash": "8471d1b",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "5fa4d0b0f025",
+   "render_hash": "a013db1143d6",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "6abd84828fb5",
+   "render_hash": "4741779b3bc0",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -445,7 +445,7 @@
    "frozen": false,
    "page_name": "Release-v0.21.0",
    "render": "as-is",
-   "render_hash": "e1f27d8e8a11",
+   "render_hash": "ab0bc4a776ee",
    "source": "docs/.index/rendered/releases/v0.21.0.md",
    "title": "Release v0.21.0",
    "truth_state": "shipped",
@@ -3625,7 +3625,7 @@
    "frozen": false,
    "page_name": "Ticket-01KZ31DGAQ2YDP6RMEMVNAWABH",
    "render": "as-is",
-   "render_hash": "031a83917824",
+   "render_hash": "90dd9cd2566c",
    "source": "docs/.index/rendered/tickets/01KZ31DGAQ2YDP6RMEMVNAWABH.md",
    "title": "Sync's dry run does not report the field overwrites a close would make",
    "truth_state": "open",
@@ -3645,10 +3645,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ5CZ2JGGGY1G6QBKFBXW4AW",
    "render": "as-is",
-   "render_hash": "7afb640a9d43",
+   "render_hash": "0e793fc818ce",
    "source": "docs/.index/rendered/tickets/01KZ5CZ2JGGGY1G6QBKFBXW4AW.md",
    "title": "Cut v0.21.0 release",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01KZ5CZ2JGGGY1G6QBKFBXW4AW"
   },
   {
@@ -4384,13 +4384,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-04T03:31:03Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-04T03:45:30Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "a161aaeec642",
+   "render_hash": "d89d70951450",
    "source": "docs/roadmap.md",
-   "source_hash": "23c5c9ed4cca",
+   "source_hash": "412ee714b106",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
