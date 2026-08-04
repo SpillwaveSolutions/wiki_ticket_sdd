@@ -416,6 +416,14 @@ wolf at the next one for a full hour).
 | `docs/roadmap/*.md` | Dated snapshots (see `roadmap-snapshot`), frozen the moment they're written |
 | `.work/*.jsonl` | Only `bin/worklog` writes them. No editors, no `echo >>` |
 
+"Frozen" means the **prose** is frozen. Front matter is metadata about the
+document, not the document, so the tooling may still stamp it — `wiki_key`
+when the normalizer runs, `superseded_by` when a later ADR lands,
+`merged_in` when `provenance-backfill` learns which merge carried the file.
+Since 0.21.0 the publish manifest hashes each document below its front
+matter, so none of those stamps look like an edit to the frozen-source guard.
+A change to the body still does, and still stops the publisher.
+
 ### Architecture decisions
 
 Significant decisions get an ADR in `docs/adr/NNNN-slug.md` (`worklog adr
@@ -442,6 +450,54 @@ release skill spawns background agents to regenerate them and refresh the user
 guide and README. The `release.sync_docs` list in `.work/config.yml` is the
 opt-in/out: what's listed gets synced at release, what isn't doesn't.
 
+These are the documents that cite code by file and line, which is why 0.21.0
+added a check for it — see below.
+
+## Document provenance and citation checking
+
+*(0.21.0)* A generated document that cites code as `<path> — <symbol>(),
+lines N–M` is making a claim about a specific tree. Before 0.21.0 nothing
+checked it, and a hand audit of the 0.20.0 design docs found **12 of 26 line
+citations wrong**: each written by an agent that had the file open and copied
+the previous edition's numbers forward. One wrong claim was introduced while
+hand-fixing another — correcting citations by hand without a check relocates
+the error instead of removing it.
+
+Two fields make the check possible:
+
+| Field | Meaning |
+|---|---|
+| `git_hash` | The commit the document was **written against**. Stamped at authoring time on plans, status reports, ADRs, `docs/roadmap.md` and its snapshots, and once per build on the publish manifest. At generation time that is the commit *before* the one the document lands in — a commit cannot know its own sha. |
+| `merged_in` | The merge commit that brought a frozen document to the default branch. Filled in after the fact by `worklog provenance-backfill`. |
+
+Neither is required. `merged_in` cannot be — a document on a branch has not
+merged, so requiring it would reject the commit that creates any plan — and
+`git_hash` is not, because documents written before 0.21.0 cannot be honestly
+stamped, and backfilling a guessed commit is the exact error this exists to
+prevent.
+
+[`worklog doc-verify`](cli-reference.md#doc-verify) then resolves every
+citation at that commit. It separates a **fabricated** citation (wrong
+already in the tree the author had open — a defect) from **drift** (right
+when written, the code moved since — expected in a frozen document, not a
+defect), which nothing could tell apart before. It runs warn-level in
+`pre-commit`, `--strict` at release, and — the placement that actually
+prevents the bug — inside the design-docs skill, before an agent may report a
+regeneration complete. That is the moment the error is made and the only
+moment fixing it is free.
+
+Expect findings on your existing documents, and expect most of them not to be
+yours to fix: anything written before 0.21.0 reports `unstamped`, and
+fabrications inside frozen files stay frozen. Fix them in live documents;
+name them in prose for frozen ones.
+
+`doc-verify` **never falls back to HEAD** — that fallback is the wrong-tree
+assumption that caused the problem. ADR-0008 records the consequence: the
+whole mechanism depends on this repository using merge commits, because under
+squash-merge the authoring commit never reaches the default branch and `git
+show <sha>:<path>` fails in a fresh clone. At that point the verifier reports
+`unresolvable` and refuses, rather than degrading to a check it can pass.
+
 ## Information architecture & content model
 
 Storage is organized by how docs are produced; **navigation is a generated
@@ -458,6 +514,7 @@ move. What is added:
 | Reader plane | `worklog ia-render` generates Home, Sidebar, and indexes (Decisions, Releases, Status archive, Traceability) under `docs/.index/rendered/`, plus `publish-manifest.json`. |
 | Artifact pages | `ia-render` also generates one page per **ticket** (`Ticket-<ULID>`), **release** (`Release-<tag>`), and **PR** (`PR-<num>`) — hierarchy, subtasks/progress, linked PRs, and release for tickets; a graph-derived Change Log and Release Tree for releases; linked tickets and related release for PRs. All derived from existing graph edges at render time, no new stored fields. Preview a ticket page with `worklog ia-ticket <ULID>` (plan `docs/plans/2026-07-24-artifact-pages.md`). PR pages carry real state — files changed, review decision, CI rollup, merge time — once `worklog pr-sync <N>` has fetched it into `docs/.index/pr/<N>.yml`; a PR never synced renders as `not tracked`. Fetch writes a committed file, render only reads it, which is what keeps `ia-render --check` byte-deterministic. |
 | Traceability | `worklog ia-graph` builds a typed-edge graph; `link-pr` records PR/commit edges; `trace-check` reports closed items missing plan/ticket/PR links (warn by default, `--strict` pre-release) — scoped to closed items carrying a milestone, with `kind:ops` exempt outright and `unplanned` exempt from the plan check only. Upgrading to 0.20.0 makes that count drop sharply (401 → 16 here) because the scope is finally applied; no edges were removed. `worklog find` searches the inventory and graph — by text, `--type`, `--truth`, a node's `--links`, or every `--edge` of one type. |
+| Provenance | Documents carry `git_hash` (the tree they were written against) and, once landed, `merged_in` (the merge that carried them, stamped by `worklog provenance-backfill`). `worklog doc-verify` resolves their code citations at that commit — never at HEAD. See [Document provenance](#document-provenance-and-citation-checking). |
 
 Day-to-day: after plan-capture or a release doc set change, run
 `bin/worklog ia-index` (normalize → inventory → render). Wiki publish
@@ -474,6 +531,8 @@ bin/worklog pr-sync 104              # fetch live PR state into the sidecar
 bin/worklog ia-ticket <ulid>         # preview a generated ticket page
 bin/worklog find watermark           # search the inventory and graph
 bin/worklog trace-check              # unlinked-evidence report
+bin/worklog doc-verify               # check citations at each doc's own commit
+bin/worklog provenance-backfill      # stamp merged_in on frozen docs that landed
 ```
 
 Full command flags: [CLI Reference](cli-reference.md#information-architecture-ia-commands).
@@ -501,11 +560,26 @@ them. When `docs/.index/publish-manifest.json` exists (from `ia-render`),
 that file **is** the publish set — including generated Home/Sidebar,
 indexes, and the per-ticket/release/PR artifact pages — and ledger skip
 uses `render_hash` so a frozen page can still
-republish when only its banner changed. The corollary: **any change to banner
-text invalidates every frozen page's hash at once**, so the first
-`wiki-publish` after a release that touches banner wording republishes
-everything and the one after it is normal-sized again. That is a one-time
-churn, not a loop — do not interrupt it partway. Per-system guidance (GitHub,
+republish when only its banner changed.
+
+**Correction to what this guide said at 0.20.0:** a banner change does *not*
+invalidate every frozen page at once. A page's `render_hash` moves only when
+that page's **own** banner text changes, so the 0.20.0 plan-banner fix
+republished 18 pages here, not the whole site. If you upgraded and saw a
+small publish, nothing failed.
+
+Since 0.21.0 both hashes in the manifest are taken **below the front
+matter**. Publishing strips front matter for Gollum-style wikis, so two files
+differing only there produce byte-identical pages; hashing the whole file
+moved `render_hash` anyway and tripped the frozen-source guard on every
+metadata stamp — the normalizer writing `wiki_key`, an ADR status flip, a
+`provenance-backfill`. The guard now means **the prose changed**, which is
+what it was always protecting. That is why stamping 73 documents with
+provenance moved the republish backlog by two pages instead of by 89. The
+publisher copies `source_hash` and `render_hash` from the manifest rather
+than hashing files itself, so it cannot hash the wrong thing.
+
+Per-system guidance (GitHub,
 GitLab, ADO, Confluence) lives in the wiki-publish skill itself; the ledger
 shape is identical everywhere — only how each system fills
 `url`/`rev`/`page_id` differs. Missing tooling degrades to local-only; it

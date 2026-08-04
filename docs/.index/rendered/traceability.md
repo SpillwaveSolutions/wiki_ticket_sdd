@@ -2,6 +2,14 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### v0.21.0 doc sync: user guide + README
+`01KZ70HNTMN1AQHSX32XZ1J2X9` · status: in_progress
+- targets: release/v0.21.0
+
+### v0.21.0 doc sync: design doc + code walkthrough
+`01KZ70HNMFKYY9KZ0VXVAMD7S5` · status: in_progress
+- targets: release/v0.21.0
+
 ### Cut v0.21.0 release
 `01KZ5CZ2JGGGY1G6QBKFBXW4AW` · status: done
 - targets: release/v0.21.0

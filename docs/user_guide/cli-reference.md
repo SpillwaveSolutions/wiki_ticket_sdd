@@ -734,6 +734,71 @@ it took this repo from 401 gaps to 16. **Nothing was removed** — the graph and
 its edges are untouched; the gate stopped asking about items it was never
 scoped to ask about. A large drop after upgrading is the fix, not data loss.
 
+### doc-verify
+
+*(0.21.0)* Resolve every code citation in `docs/` — `path — symbol(), lines
+N–M` and its variants — **at the commit that document was written against**,
+read from its `git_hash` front matter. Warns by default; `--strict` exits 1
+(used pre-release and inside the design-docs skill).
+
+```bash
+bin/worklog doc-verify
+bin/worklog doc-verify --strict
+```
+
+Five verdicts, and the whole point is the first two:
+
+| Verdict | Meaning |
+|---|---|
+| `ok` | the citation resolves in the author's tree |
+| `fabricated` | wrong **already** in the tree the author had open — a defect, fix it |
+| `drift` | right when written, the code has moved since — **not** a defect in a frozen document |
+| `unstamped` | no `git_hash` (anything written before 0.21.0) — unverifiable, skipped |
+| `unresolvable` | the stamped commit is not in this clone (squash-merge, shallow checkout) — skipped |
+
+`--strict` fails on **any** fabrication, and on drift only in
+`current_design_doc.md` / `current_code_walkthrough.md` — the only two
+documents that claim to describe the tree as it is now. A frozen document is
+allowed to age; failing on that would make the gate un-passable by design.
+
+**It never falls back to HEAD.** An unstamped or unresolvable document is
+reported and skipped, never re-checked against the current tree — that
+fallback is the exact assumption that produced the bad citations (#294): it
+reports drift as fabrication and re-introduces the wrong-tree failure. The
+same reasoning is why the pre-commit hook skips it outright on a shallow
+clone, where `git show <sha>:<path>` can resolve nothing. ADR-0008 records
+the consequence: under squash-merge the authoring commit never reaches the
+default branch, so the verifier must report `unresolvable` and refuse.
+
+Fix fabrications in **live** documents. In a frozen one (a plan, an ADR, a
+dated design pair) the fabrication stays — a frozen document records what
+someone believed at a point in time, and editing it to silence a gate both
+destroys the record and trips the publish ledger's frozen-source guard. Name
+the correction in the current document instead.
+
+### provenance-backfill
+
+*(0.21.0)* Stamp `merged_in` — the merge commit that brought a document to
+the default branch — on frozen documents that have landed. A document cannot
+know the merge that will carry it, so this runs afterwards, from the release
+skill's post-release step. `--check` reports what would be stamped and exits
+1, writing nothing.
+
+```bash
+bin/worklog provenance-backfill
+bin/worklog provenance-backfill --check
+```
+
+Frozen documents only, and that is the whole judgement: a live document
+(`docs/roadmap.md`, the `current_*` pair, an ADR whose status flips) has been
+edited many times since it landed, so the merge that *first* carried it names
+a version of the file that no longer exists. Safe to re-run — anything
+already stamped is skipped. Run `worklog ia-index` and commit its output in
+the **same** commit as the stamps, or the freshness gate rejects the result.
+
+It is not a git hook because `post-merge` fires on the default branch, where
+the branch guard forbids committing.
+
 ### find
 
 Search the generated inventory and graph: documents by text / type /
@@ -793,7 +858,11 @@ worktree's own root. The session doctor accepts either form.
      present and unique, schema-valid frontmatter, fresh inventory, fresh
      rendered pages and manifest. These are **hard failures** as of v0.19.0 —
      the warn-only cycle is over. `trace-check` stays warn-level here
-     forever; `--strict` runs at release time. A freshly scaffolded repo has
+     forever; `--strict` runs at release time. [`doc-verify`](#doc-verify)
+     joined it at that same tier in 0.21.0, for the same reason — it reports
+     on documents this commit may not touch, so blocking here would punish
+     the wrong commit — and is skipped outright on a shallow clone, where
+     every answer would be `unresolvable`. A freshly scaffolded repo has
      no `docs/.index/` and so is never blocked from its first commit.
   8. **Branch guard**: rejects a commit authored directly on `main`/`master`
      — those branches are pull-only, land work via a PR instead. A real
@@ -838,6 +907,27 @@ hook with `--no-verify` only defers the failure.
   per-event field can name where each event actually came from. The sha is
   omitted entirely — not written empty — outside a git repo or before the
   first commit, and `WORKLOG_NO_GIT_PROVENANCE` suppresses it.
+- **Every generated document carries the tree it was written against.**
+  Plans, status reports, ADRs, `docs/roadmap.md` and its snapshots get a
+  `git_hash` in front matter as they are written (0.21.0), and the publish
+  manifest carries one build-level `git_hash` rather than stamping every
+  rendered page with the same fact. It means *the commit this was written
+  against*, which at generation time is the commit **before** the one the
+  document lands in — a commit cannot know its own sha. The roadmap takes
+  the value from the newest event's `git` field instead of shelling out,
+  because it is regenerate-and-diffed in CI and a HEAD-derived value would
+  differ on the very next run. `merged_in` — the merge commit that landed a
+  frozen document — is filled in afterwards by
+  [`provenance-backfill`](#provenance-backfill).
+  Neither field is required by `schema/doc.schema.json`, deliberately:
+  `merged_in` cannot be (a document on a branch has not merged, so requiring
+  it would reject the commit that creates any plan) and `git_hash` is not
+  (documents predating 0.21.0 cannot be honestly stamped, and guessing one
+  is the very error class the verifier exists to catch). Both are always
+  written **quoted** — an all-digit short sha would otherwise be read back as
+  an int — and omitted entirely rather than written empty, because an empty
+  value opens a block list in the front-matter parser and swallows the
+  closing fence.
 - **One session per working directory.** `worklog` warns when more than one
   assistant session is active in the same checkout: they share one worktree,
   so one can switch branches under the other mid-operation and both can "fix"
