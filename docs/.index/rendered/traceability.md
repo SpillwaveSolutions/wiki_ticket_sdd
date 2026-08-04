@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Cut v0.21.0 release
+`01KZ5CZ2JGGGY1G6QBKFBXW4AW` · status: in_progress
+- targets: release/v0.21.0
+
 ### Design-docs regeneration does not verify its own citations
 `01KZ4EETMXD1JQMDFA97HSZQM4` · status: done
 
@@ -126,7 +130,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-doc-provenance-and-verification]]
 
 ### Correct the v0.20.0 republish claim in the next release notes
-`01KZ2PJZF067ZS4YW231C1FM28` · status: todo
+`01KZ2PJZF067ZS4YW231C1FM28` · status: done
 - references: [github#299](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/299)
 
 ### Cut release v0.20.0
@@ -134,7 +138,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.20.0
 
 ### Generated design docs quote code that no longer exists; nothing verifies their claims
-`01KZ2M75CEXBQHFN1AG1Z8A2YB` · status: todo
+`01KZ2M75CEXBQHFN1AG1Z8A2YB` · status: done
 - references: ticket/github#294
 
 ### Run the v0.19.1 release doc sync
