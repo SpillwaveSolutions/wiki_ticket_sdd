@@ -2806,6 +2806,11 @@
    "type": "references"
   },
   {
+   "from": "item/01KZ5CZ2JGGGY1G6QBKFBXW4AW",
+   "to": "release/v0.21.0",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -4133,6 +4138,21 @@
   {
    "from": "roadmap-snapshot/2026-08-03_v0.20.0-release",
    "to": "release/v0.20.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-04_v0.21.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-04_v0.21.0-release",
+   "to": "roadmap-snapshot/2026-08-03_v0.20.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-04_v0.21.0-release",
+   "to": "release/v0.21.0",
    "type": "targets"
   },
   {
@@ -5934,7 +5954,7 @@
   },
   "item/01KZ2M75CEXBQHFN1AG1Z8A2YB": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Generated design docs quote code that no longer exists; nothing verifies their claims"
   },
   "item/01KZ2MZ69SFQDHEXFBJTXTDNFX": {
@@ -5944,7 +5964,7 @@
   },
   "item/01KZ2PJZF067ZS4YW231C1FM28": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Correct the v0.20.0 republish claim in the next release notes"
   },
   "item/01KZ30X6HZ6FKJXJX386J44CB1": {
@@ -6041,6 +6061,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "Design-docs regeneration does not verify its own citations"
+  },
+  "item/01KZ5CZ2JGGGY1G6QBKFBXW4AW": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Cut v0.21.0 release"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
@@ -6315,6 +6340,9 @@
   "release/v0.20.0": {
    "doc_type": "release"
   },
+  "release/v0.21.0": {
+   "doc_type": "release"
+  },
   "release/v0.5.0": {
    "doc_type": "release"
   },
@@ -6423,6 +6451,12 @@
   "roadmap-snapshot/2026-08-03_v0.20.0-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-08-03_v0.20.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-08-04_v0.21.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-04_v0.21.0-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

@@ -1,5 +1,97 @@
 # Changelog
 
+## 0.21.0 — 2026-08-04
+
+Generated documents now carry the commit they were written against, and a new
+gate reads it back. This closes #294 — design docs quoting code that no longer
+exists — but the mechanism is general: any document that cites code can now be
+checked against the tree its author actually had open.
+
+- **New**: `worklog doc-verify` resolves every `path — symbol(), lines N–M`
+  citation in `docs/` at the commit the document was stamped with, and reports
+  one of five verdicts. The distinction it exists to draw is **fabricated**
+  (the citation was already wrong in the tree the author had open — a defect)
+  versus **drift** (it was right when written and the code has since moved —
+  not a defect, and expected in a frozen document). Before this, the two were
+  indistinguishable, so a hand audit of the 0.20.0 design docs found **12 of 26
+  citations wrong** and nobody could tell which of the rest to trust.
+
+  `--strict` exits non-zero on any fabrication, and on drift **only in the two
+  `current_*` design files**, which are the only documents that claim to
+  describe the tree as it is now. It runs warn-level in `hooks/pre-commit`
+  beside `trace-check`, `--strict` in the release skill, and — the placement
+  that actually prevents the bug — inside the design-docs skill, before an
+  agent may report a regeneration complete. That is the moment the error is
+  made and the only moment fixing it is free.
+
+  **It never falls back to HEAD.** A document with no `git_hash`, or one
+  pinned to a commit absent from your clone, is reported `unstamped` or
+  `unresolvable` and skipped. Re-checking against HEAD would be #294 with
+  extra steps: it is precisely the assumption that produced the bad citations.
+
+- **New**: `git_hash` is stamped on plans, status reports and ADRs as they are
+  written, and on `docs/roadmap.md` and its snapshots — the roadmap taking it
+  from the newest event's `git` field rather than shelling out, because the
+  roadmap is regenerate-and-diffed in CI and a commit cannot know its own sha.
+  `docs/.index/publish-manifest.json` carries one build-level `git_hash` rather
+  than stamping 363 rendered pages with the same fact.
+
+  `git_hash` means *the tree this document was written against*, which at
+  generation time is the commit **before** the one the document lands in. That
+  is the honest value and the one a reader diffing stale prose wants.
+
+- **New**: `worklog provenance-backfill` adds `merged_in` — the merge commit
+  that brought a frozen document to the default branch — after it lands. It
+  runs from the release skill's post-release step, not a git hook, because
+  `post-merge` fires on the default branch where committing is forbidden.
+  73 documents carry it here. Both obvious recipes for computing that commit
+  are wrong (`--merges | tail -1` returns merges *into* the branch;
+  `--first-parent` alone returns nothing for a PR merge); the correct one is
+  the oldest commit on the first-parent chain having the add-commit as an
+  ancestor, and both wrong answers are pinned by tests.
+
+- **Fix**: the publish manifest hashes a document **below its front matter**.
+  Publishing strips front matter for Gollum-style wikis, so two files differing
+  only there produce byte-identical pages — yet the old whole-file hash moved
+  anyway, tripping the frozen-source guard on every metadata stamp the
+  normalizer, `adr.mark_superseded`, or this release's provenance backfill
+  writes. The guard now means *the prose changed*, which is the invariant it
+  was always meant to protect. This is why stamping 73 documents moved the
+  republish backlog by two pages instead of by 89.
+
+- **Correction to the 0.20.0 notes.** Upgrading item 2 said your next
+  `wiki-publish` would republish **every** frozen page. It does not. A page's
+  `render_hash` moves only when its own banner text changes, and the 0.20.0
+  banner fix changed plan banners alone — **18 pages republished here, not the
+  whole site**. If you upgraded to 0.20.0 and saw a small publish, nothing
+  failed. Released notes are frozen, so the correction lives here.
+
+- **Docs**: ADR-0008 records that document provenance depends on this
+  repository using merge commits. Under squash-merge the authoring commit never
+  reaches the default branch, `git show <sha>:<path>` fails in a fresh clone,
+  and the verifier loses its ground truth — at which point it must report
+  `unresolvable` and refuse, never degrade to HEAD.
+
+### Upgrading
+
+**From 0.20.x** — `/worklog:init`, then read item 1 before you file a bug.
+
+1. **`doc-verify` will report findings on your existing documents, and most of
+   them are not yours to fix.** Documents written before this release have no
+   `git_hash`, so they report `unstamped` — not a failure, just unverifiable;
+   backfilling a guessed commit would be the exact error class #294 is about.
+   Documents that *are* stamped may report fabrications inside **frozen**
+   files — plans, ADRs, dated design pairs. Those stay. A frozen document is a
+   record of what someone believed at a point in time, and editing it to
+   silence a gate destroys the record and trips the publish ledger's
+   frozen-source guard. Fix fabrications in live documents; name them in prose
+   for frozen ones. Here that split is 45 frozen and 0 live.
+
+2. **Nothing is required in front matter.** `merged_in` cannot be — a document
+   on a branch has not merged, so requiring it would reject the commit that
+   creates any plan — and `git_hash` is not, because documents predating this
+   release cannot be honestly stamped.
+
 ## 0.20.0 — 2026-08-03
 
 Two correctness fixes to the gates that judge your own repo, plus the release
