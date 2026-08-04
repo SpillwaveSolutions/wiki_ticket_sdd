@@ -1,5 +1,5 @@
 {
- "git_hash": "f466341",
+ "git_hash": "cb3be55",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "a013db1143d6",
+   "render_hash": "fea4d9f1b0d3",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "9397d9471711",
+   "render_hash": "7b04dca6b325",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -445,7 +445,7 @@
    "frozen": false,
    "page_name": "Release-v0.21.0",
    "render": "as-is",
-   "render_hash": "ab0bc4a776ee",
+   "render_hash": "902a48b634a4",
    "source": "docs/.index/rendered/releases/v0.21.0.md",
    "title": "Release v0.21.0",
    "truth_state": "shipped",
@@ -3665,10 +3665,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ70HNTMN1AQHSX32XZ1J2X9",
    "render": "as-is",
-   "render_hash": "278c58b45b36",
+   "render_hash": "4add168447a7",
    "source": "docs/.index/rendered/tickets/01KZ70HNTMN1AQHSX32XZ1J2X9.md",
    "title": "v0.21.0 doc sync: user guide + README",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01KZ70HNTMN1AQHSX32XZ1J2X9"
   },
   {
@@ -4404,13 +4404,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-04T18:28:34Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-04T18:45:43Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "e10d13b0f17a",
+   "render_hash": "c399aee4b4f5",
    "source": "docs/roadmap.md",
-   "source_hash": "9f857a233f0b",
+   "source_hash": "cbe22b31ea71",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
