@@ -3,7 +3,7 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Cut v0.21.0 release
-`01KZ5CZ2JGGGY1G6QBKFBXW4AW` · status: in_progress
+`01KZ5CZ2JGGGY1G6QBKFBXW4AW` · status: done
 - targets: release/v0.21.0
 
 ### Design-docs regeneration does not verify its own citations
@@ -11,6 +11,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Sync's dry run does not report the field overwrites a close would make
 `01KZ31DGAQ2YDP6RMEMVNAWABH` · status: todo
+- references: [github#320](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/320)
 
 ### Add a full-length commit helper that mirrors the existing environment contract
 `01KZ30X6JEXH4TTKHDNV3ZW0Q2` · status: done
