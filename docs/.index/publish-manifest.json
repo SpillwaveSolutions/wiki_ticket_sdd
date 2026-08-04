@@ -1,5 +1,5 @@
 {
- "git_hash": "8471d1b",
+ "git_hash": "0ed02ff",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "1940f1d43e75",
+   "render_hash": "d0cadf86dafd",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "4741779b3bc0",
+   "render_hash": "f3f3388b6261",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -445,7 +445,7 @@
    "frozen": false,
    "page_name": "Release-v0.21.0",
    "render": "as-is",
-   "render_hash": "ab0bc4a776ee",
+   "render_hash": "c1ab9f2469a5",
    "source": "docs/.index/rendered/releases/v0.21.0.md",
    "title": "Release v0.21.0",
    "truth_state": "shipped",
@@ -3652,6 +3652,26 @@
    "wiki_key": "item/01KZ5CZ2JGGGY1G6QBKFBXW4AW"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZ70HNMFKYY9KZ0VXVAMD7S5",
+   "render": "as-is",
+   "render_hash": "07054263824a",
+   "source": "docs/.index/rendered/tickets/01KZ70HNMFKYY9KZ0VXVAMD7S5.md",
+   "title": "v0.21.0 doc sync: design doc + code walkthrough",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ70HNMFKYY9KZ0VXVAMD7S5"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ70HNTMN1AQHSX32XZ1J2X9",
+   "render": "as-is",
+   "render_hash": "4add168447a7",
+   "source": "docs/.index/rendered/tickets/01KZ70HNTMN1AQHSX32XZ1J2X9.md",
+   "title": "v0.21.0 doc sync: user guide + README",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ70HNTMN1AQHSX32XZ1J2X9"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -3752,9 +3772,9 @@
    "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "f56b2d0c0958",
+   "render_hash": "1e67fc192abe",
    "source": "docs/user_guide/cli-reference.md",
-   "source_hash": "c425b0951269",
+   "source_hash": "4afb997cd5bc",
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current",
    "wiki_key": "cli-reference"
@@ -4400,19 +4420,19 @@
    "frozen": false,
    "page_name": "Plugin-Guide",
    "render": "doc+banner",
-   "render_hash": "f1a8a4886d0d",
+   "render_hash": "52e69a2bd9ce",
    "source": "docs/user_guide/plugin-guide.md",
-   "source_hash": "4030d226e2a3",
+   "source_hash": "3b5e0de11a7b",
    "title": "WikiTicket SDD \u2014 Plugin Guide",
    "truth_state": "current",
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-04T03:45:30Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-04T18:56:21Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "d89d70951450",
+   "render_hash": "470b89df647c",
    "source": "docs/roadmap.md",
    "source_hash": "412ee714b106",
    "title": "Roadmap",
@@ -4748,9 +4768,9 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "c2e3feab007a",
+   "render_hash": "50980bc63e98",
    "source": "docs/user_guide/user-guide.md",
-   "source_hash": "5fffcb2cec4d",
+   "source_hash": "58e7ff77c5ee",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",
    "wiki_key": "user-guide"

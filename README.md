@@ -47,6 +47,13 @@ picture, mapped to real code.
 - **Design docs and code walkthroughs, generated from the actual code** at
   every release: frozen per-release copies plus always-current versions in
   `docs/designs/`, published to the wiki.
+- **Documents carry the commit they were written against**, and a gate reads
+  it back. `git_hash` in front matter says which tree the author had open;
+  `worklog doc-verify` resolves every `path — symbol(), lines N–M` citation
+  *at that commit*, telling a fabricated citation (wrong even then — a
+  defect) apart from drift (right then, the code moved since). It never falls
+  back to HEAD. `worklog provenance-backfill` adds `merged_in` once the
+  document lands.
 - **Information architecture & content model.** Stable `wiki_key` identity,
   `truth_state` (current vs snapshot/superseded), a generated reader plane
   (Home, Sidebar, Decisions/Releases/Status/Traceability indexes), and a
@@ -139,7 +146,9 @@ Policy that holds because tooling holds it, not because people remember:
   target is 95%.
 - **Frozen artifacts.** Plans, roadmap snapshots, and published status
   reports are written once and never regenerated — corrections go in new
-  documents.
+  documents. Frozen means the *prose*: metadata stamps in front matter are
+  still allowed, and since the publish manifest hashes the body, they no
+  longer look like edits.
 - **The roadmap is generated.** Never hand-edited; to change it, change the
   work items and re-render.
 - **One session per working directory.** `worklog` warns when two assistant
@@ -147,9 +156,15 @@ Policy that holds because tooling holds it, not because people remember:
   mid-operation and both "fix" the same thing differently. The warning is
   advisory and arrives after the fact; the fix is a `git worktree` per
   session.
-- **Provenance on every event.** Each event carries the short HEAD sha it was
-  written at (`WORKLOG_NO_GIT_PROVENANCE` opts out). Ids keep their full
-  entropy — provenance is a field, never spent out of the identifier.
+- **Provenance on every event, and on every generated document.** Each event
+  carries the short HEAD sha it was written at
+  (`WORKLOG_NO_GIT_PROVENANCE` opts out). Ids keep their full
+  entropy — provenance is a field, never spent out of the identifier. Plans,
+  status reports, ADRs and the roadmap carry a `git_hash` naming the tree
+  they were written against, which is what makes `worklog doc-verify`
+  possible. It depends on this repo using merge commits (ADR-0008); under
+  squash-merge the verifier reports `unresolvable` and refuses rather than
+  checking against the wrong tree.
 
 ## Claude Code plugin
 
