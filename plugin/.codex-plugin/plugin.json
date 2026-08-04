@@ -1,0 +1,38 @@
+{
+  "name": "worklog",
+  "version": "0.21.0",
+  "description": "Local-first, git-native spec-driven development with tracked plans, tickets, pull requests, roadmaps, status reports, and wiki publishing.",
+  "author": {
+    "name": "Rick Hightower",
+    "url": "https://github.com/RichardHightower"
+  },
+  "homepage": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd",
+  "repository": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd",
+  "license": "MIT",
+  "keywords": [
+    "work-tracking",
+    "planning",
+    "roadmap",
+    "tickets",
+    "spec-driven-development"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "WikiTicket SDD",
+    "shortDescription": "Git-native plans, tickets, PRs, and wiki publishing",
+    "longDescription": "Turn plans into durable design records and tracked work, synchronize tickets and pull requests, generate roadmaps and status reports, and publish project documentation to a wiki.",
+    "developerName": "Spillwave Solutions",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd",
+    "defaultPrompt": [
+      "Track this implementation with WikiTicket SDD.",
+      "Sync the current worklog with tickets and the wiki.",
+      "Prepare the PR description from tracked work."
+    ],
+    "brandColor": "#6B4EFF"
+  }
+}

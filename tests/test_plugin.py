@@ -50,6 +50,11 @@ def plugin_version():
         return json.load(fh)["version"]
 
 
+def codex_plugin_version():
+    with open(os.path.join(PLUGIN, ".codex-plugin", "plugin.json")) as fh:
+        return json.load(fh)["version"]
+
+
 def make_repo(tc):
     """Fresh empty git repo, cleaned up after the test."""
     d = tempfile.mkdtemp(prefix="worklog-plugin-")
@@ -140,14 +145,15 @@ class TestCanonSync(unittest.TestCase):
 class TestVersionSync(unittest.TestCase):
     def test_cli_manifest_and_skills_agree(self):
         v = plugin_version()
+        self.assertEqual(codex_plugin_version(), v)
         out = sh(ROOT, sys.executable, "bin/worklog", "--version").stdout
         self.assertEqual(out.strip(), f"worklog {v}")
         skills = sorted(glob.glob(os.path.join(PLUGIN, "skills", "*", "SKILL.md")))
         self.assertGreaterEqual(len(skills), 3)  # every skill dir must carry SKILL.md
         for path in skills:
-            versions = [l.split(":", 1)[1].strip()
+            versions = [l.split(":", 1)[1].strip().strip('"\'')
                         for l in front_matter(path)
-                        if l.startswith("version:")]
+                        if l.strip().startswith("version:")]
             self.assertEqual(versions, [v], f"{path} version != plugin.json")
 
     def test_readme_version_marker_agrees(self):

@@ -1,6 +1,7 @@
 # Harness ports
 
-Tracking: GitHub issue #9. The Claude Code plugin format is canonical.
+Tracking: GitHub issue #9. The shared `plugin/` package is canonical; each
+host has a small native manifest or lifecycle adapter where required.
 
 ## Support matrix
 
@@ -8,7 +9,7 @@ Tracking: GitHub issue #9. The Claude Code plugin format is canonical.
 |---|---|---|
 | Claude Code | Canonical | Full experience: auto-invoked skills, `/worklog:*` commands, ExitPlanMode/Stop/SessionStart hooks |
 | Grok build | Full native compatibility, zero configuration | Same as Claude Code: marketplaces, plugins, skills, MCPs, agents, hooks, instruction files |
-| Codex | Works today, zero port needed for the core | Policy via `AGENTS.md` (symlinked to `CLAUDE.md` by `/worklog:init`), plus everything the repo scaffold commits: `bin/worklog`, git hooks, CI |
+| Codex | Native skills plugin | `.codex-plugin/plugin.json`, all bundled skills, policy via `AGENTS.md`, and the repo scaffold |
 | OpenCode | Works today, zero port needed for the core | Same as Codex |
 
 ### Grok build
@@ -29,23 +30,28 @@ The core is harness-independent by design: ALL real settings live in
 symlink to it — so any harness that reads `AGENTS.md` gets the full worklog
 policy, and `bin/worklog` works identically everywhere.
 
-What Codex/OpenCode lose without a native port: auto-invoked skills, slash
-commands, and the ExitPlanMode/Stop/SessionStart hooks. The `AGENTS.md`
-policy prose has to carry that weight — it already states the plan-capture
-and work-track rules, so the model is told what the hooks would have
-enforced.
+Codex installs from this repository's existing marketplace. Run
+`codex plugin marketplace add SpillwaveSolutions/wiki_ticket_sdd`, open
+`/plugins`, install `worklog`, and start a new session.
+
+Codex and Claude Code use different hook configuration schemas, and Codex has
+no documented `ExitPlanMode` event. The Codex manifest therefore packages the
+skills without the Claude lifecycle hooks. `AGENTS.md` remains the work-track
+and plan-capture enforcement point, and the model runs
+`bin/worklog plan-capture` before implementation. Claude Code and Grok Build
+continue to load `hooks/hooks.json` unchanged.
 
 ## Porting table
 
 | Plugin piece | Claude Code / Grok build | Codex / OpenCode |
 |---|---|---|
-| Skills (`plugin/skills/`) | Auto-invoked by the harness | Policy prose in `AGENTS.md`, or harness-native command files if/when the harness grows a format worth targeting |
-| Hooks (ExitPlanMode, Stop, SessionStart, UserPromptSubmit) | Enforced by the harness | None — rely on the policy prose plus the committed git hooks (pre-commit, pre-merge-commit), which run everywhere |
-| Commands (`/worklog:init`, `/worklog:doctor`, `/worklog:uninstall`) | Slash commands | Shell invocations: `bin/worklog ...` and `plugin/scripts/*.sh` work from any shell |
+| Skills (`plugin/skills/`) | Auto-invoked by the harness | Native Codex skills; OpenCode relies on policy prose |
+| Hooks (ExitPlanMode, Stop, SessionStart, UserPromptSubmit) | Enforced by the harness | Policy prose and committed git hooks |
+| Commands (`/worklog:init`, `/worklog:doctor`, `/worklog:uninstall`) | Slash commands | Codex/OpenCode shell invocations: `plugin/scripts/init.sh`, `plugin/scripts/doctor.sh`, and `plugin/scripts/uninstall.sh` |
 | Settings | `.work/config.yml` | Same file — nothing harness-specific to port |
 | Policy | `CLAUDE.md` block | Same block, read via the `AGENTS.md` symlink |
 
 ## When do real ports ship?
 
-Ports ship when a harness gains a native extension format worth targeting;
-until then the repo scaffold IS the port.
+The Codex port ships as a native skills plugin. For hosts without a
+native extension format, the repo scaffold remains the port.

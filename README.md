@@ -166,7 +166,7 @@ Policy that holds because tooling holds it, not because people remember:
   squash-merge the verifier reports `unresolvable` and refuses rather than
   checking against the wrong tree.
 
-## Claude Code plugin
+## Claude Code, Codex, and Grok Build plugins
 
 The plugin (in [plugin/](plugin/)) packages the skills, `/worklog:*`
 commands (including `/worklog:merge`, the green-gates merge loop), and the
@@ -176,6 +176,22 @@ ExitPlanMode capture hook. Install from this repo's marketplace:
 claude plugin marketplace add <this-repo-url-or-path>
 claude plugin install worklog@worklog-marketplace
 ```
+
+Codex uses the same marketplace and the native manifest at
+`plugin/.codex-plugin/plugin.json`:
+
+```sh
+codex plugin marketplace add SpillwaveSolutions/wiki_ticket_sdd
+codex
+# Open /plugins, install worklog, then start a new session.
+```
+
+Codex discovers the bundled skills natively. The Claude lifecycle hooks are
+not part of the Codex manifest because the hosts use different hook schemas,
+and Codex has no documented `ExitPlanMode` event. Repository policy in
+`AGENTS.md` therefore enforces plan capture and work tracking; run
+`bin/worklog plan-capture ...` before implementation. Claude Code and Grok
+Build continue to use the existing commands and hooks unchanged.
 
 Two install levels, deliberately distinct:
 
@@ -193,7 +209,7 @@ violations without changing anything. Ticket sync runs through a typed
 adapter contract: `worklog adapter check` validates an adapter against the
 contract before anything activates.
 
-### Other harnesses (Codex, OpenCode, Grok build)
+### Other harnesses (OpenCode and Grok Build)
 
 The repo scaffold is harness-independent: `bin/worklog`, the git hooks, and
 CI are committed and work from any shell. The `AGENTS.md` symlink (created
@@ -232,7 +248,7 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | `docs/user_guide/` | User guide, CLI reference, plugin guide |
 | `docs/integrations/` | Living per-system setup guides (11 SDD tools + ticket/wiki systems), published to the wiki and used as the `integration-guide` skill's offline fallback |
 | `hooks/` | `pre-commit`, `pre-merge-commit`, `commit-msg`, `exit-plan-capture.sh`, `prompt-reminder.sh`, `session-doctor.sh`, `session-end.sh`, `stop-worklog-check.sh` |
-| `plugin/` | The Claude Code plugin (manifest, commands, skills, hooks, canonical scripts) — **v0.21.0** |
+| `plugin/` | Claude Code, Codex, and Grok Build manifests, commands, skills, hooks, and canonical scripts — **v0.21.0** |
 | `tests/` | Unit and integration tests |
 
 ## Testing
