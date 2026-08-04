@@ -7,7 +7,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.21.0
 
 ### v0.21.0 doc sync: design doc + code walkthrough
-`01KZ70HNMFKYY9KZ0VXVAMD7S5` · status: in_progress
+`01KZ70HNMFKYY9KZ0VXVAMD7S5` · status: done
 - targets: release/v0.21.0
 
 ### Cut v0.21.0 release
