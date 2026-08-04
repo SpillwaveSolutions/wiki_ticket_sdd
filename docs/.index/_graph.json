@@ -241,13 +241,33 @@
    "type": "targets"
   },
   {
+   "from": "design/2026-08-04_v0.21.0-release-code-walkthrough",
+   "to": "design/current-code-walkthrough",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-08-04_v0.21.0-release-code-walkthrough",
+   "to": "release/v0.21.0",
+   "type": "targets"
+  },
+  {
+   "from": "design/2026-08-04_v0.21.0-release-design-doc",
+   "to": "design/current-design-doc",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-08-04_v0.21.0-release-design-doc",
+   "to": "release/v0.21.0",
+   "type": "targets"
+  },
+  {
    "from": "design/current-code-walkthrough",
-   "to": "release/v0.20.0",
+   "to": "release/v0.21.0",
    "type": "targets"
   },
   {
    "from": "design/current-design-doc",
-   "to": "release/v0.20.0",
+   "to": "release/v0.21.0",
    "type": "targets"
   },
   {
@@ -4476,6 +4496,18 @@
   "design/2026-08-03_v0.20.0-release-design-doc": {
    "doc_type": "design",
    "source": "docs/designs/2026-08-03_v0.20.0-release_design_doc.md",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot"
+  },
+  "design/2026-08-04_v0.21.0-release-code-walkthrough": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-08-04_v0.21.0-release_code_walkthrough.md",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "snapshot"
+  },
+  "design/2026-08-04_v0.21.0-release-design-doc": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-08-04_v0.21.0-release_design_doc.md",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "snapshot"
   },
