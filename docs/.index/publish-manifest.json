@@ -1,5 +1,5 @@
 {
- "git_hash": "44dada7",
+ "git_hash": "ca99842",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "2e668bccc511",
+   "render_hash": "1320fb11d2b7",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "20d49b76bf71",
+   "render_hash": "93452901f260",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -455,7 +455,7 @@
    "frozen": false,
    "page_name": "Release-v0.22.0",
    "render": "as-is",
-   "render_hash": "73d5c42a655d",
+   "render_hash": "370d8f9f8fc0",
    "source": "docs/.index/rendered/releases/v0.22.0.md",
    "title": "Release v0.22.0",
    "truth_state": "shipped",
@@ -3755,10 +3755,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ9N0EX7AE9HMYZ84NRMAESP",
    "render": "as-is",
-   "render_hash": "ca6036a8004a",
+   "render_hash": "39679aeeee99",
    "source": "docs/.index/rendered/tickets/01KZ9N0EX7AE9HMYZ84NRMAESP.md",
    "title": "Cut v0.22.0 release",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01KZ9N0EX7AE9HMYZ84NRMAESP"
   },
   {
@@ -4518,13 +4518,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-05T19:04:38Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-05T19:13:17Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "c09a6b743e85",
+   "render_hash": "ee7f670ab376",
    "source": "docs/roadmap.md",
-   "source_hash": "ed909dc54c22",
+   "source_hash": "7852e1ff5e5d",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
