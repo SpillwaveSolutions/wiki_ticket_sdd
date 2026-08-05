@@ -348,10 +348,6 @@ class TestOneOwnerPerKey(Sandbox):
         self.assertEqual(len(linked), 2, "created a ticket without recording it")
 
 
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
-
-
 
 class TestOverwriteReporting(Sandbox):
     """#238: 'updated 2' said nothing about a live ticket's title or state
@@ -399,6 +395,36 @@ class TestOverwriteReporting(Sandbox):
         out = self.sync("--push-only")
         self.assertRegex(out, r"read \d+ ticket.* in \d+\.\d+s")
 
+    def test_dry_run_reports_overwrites_on_the_CLOSE_path_too(self):
+        """01KZ31DG: a close is not always only a close.
+
+        A dirty item pushes its final shape before closing, and that push can
+        rewrite fields on a ticket somebody else filed. The dry run returned
+        early on the close path, so it printed `would close FAKE#1` and said
+        nothing about the title it was about to replace -- silent in exactly
+        the case an operator is least expecting a field write. This is the
+        shape of the incident that renamed another reporter's issue.
+        """
+        iid = self._linked_item("Reporter's own title")
+        self.wl("update", iid, "--title", "Our replacement title")
+        self.wl("close", iid, "--status", "done")
+        out = self.sync("--push-only", "--dry-run")
+        self.assertIn("would close", out, "still a close, not an update")
+        self.assertIn("overwrote live ticket fields", out)
+        self.assertIn("Reporter's own title", out)
+        self.assertIn("Our replacement title", out)
+
+    def test_a_plain_close_still_names_the_status_it_writes(self):
+        """There is no such thing as a close that writes nothing: closing an
+        item moves `status`, and that is a live remote field like any other.
+        Reporting it is not crying wolf -- the remote may have been set to
+        something else by somebody else, and this names what replaces it."""
+        iid = self._linked_item("Unchanged")
+        self.wl("close", iid, "--status", "done")
+        out = self.sync("--push-only", "--dry-run")
+        self.assertIn("would close", out)
+        self.assertRegex(out, r"status: 'todo' -> 'done'")
+
     def test_one_batched_read_covers_many_tickets(self):
         """Not one read per updated ticket: the cost the ticket flagged is
         per RUN, which is what makes it affordable."""
@@ -418,3 +444,7 @@ class TestOverwriteReporting(Sandbox):
         self.wl("close", iid, "--status", "done")
         out = self.sync("--push-only")
         self.assertIn("Live work", out)
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
