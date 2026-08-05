@@ -2,6 +2,17 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
+## v0.22.0 — 2026-08-05
+
+- Roadmap snapshot: [[Roadmap-2026-08-05_v0.22.0-release]]
+- Shipped: Add native Codex plugin compatibility
+- Shipped: Codex PR: regenerate the index so CI goes green
+- Shipped: Ship the worklog hooks to Codex, not just the skills
+- Shipped: Open the 0.22.0 changelog section and bump the version lockstep
+- Shipped: Restore the file patterns in two skill descriptions
+- Shipped: merge-rescue can invert an item's state
+- Shipped: A stray main block hides seven dispatcher tests
+
 ## v0.21.0 — 2026-08-04
 
 - Design: [[Code-Walkthrough-2026-08-04_v0.21.0-release]]
