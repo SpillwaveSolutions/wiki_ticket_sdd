@@ -2846,6 +2846,56 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZ721Y7CM5Q0NTQC31QB2HGS",
+   "to": "release/v0.22.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZ9JTC1SPC6PHXHE6RAGDW9G",
+   "to": "item/01KZ721Y7CM5Q0NTQC31QB2HGS",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ9JTC1SPC6PHXHE6RAGDW9G",
+   "to": "release/v0.22.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZ9JTC6VAC8105JAGT0WRYVH",
+   "to": "item/01KZ721Y7CM5Q0NTQC31QB2HGS",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ9JTC6VAC8105JAGT0WRYVH",
+   "to": "release/v0.22.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZ9JTCBS4W06FVSHZPZMQHCE",
+   "to": "item/01KZ721Y7CM5Q0NTQC31QB2HGS",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ9JTCBS4W06FVSHZPZMQHCE",
+   "to": "release/v0.22.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZ9JTCGG2QJYXW973RJCWDR2",
+   "to": "item/01KZ721Y7CM5Q0NTQC31QB2HGS",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ9JTCGG2QJYXW973RJCWDR2",
+   "to": "release/v0.22.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZ9KGE49EAS3VEFDNFTVM1PV",
+   "to": "release/v0.22.0",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6124,6 +6174,36 @@
    "status": "done",
    "title": "v0.21.0 doc sync: user guide + README"
   },
+  "item/01KZ721Y7CM5Q0NTQC31QB2HGS": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Add native Codex plugin compatibility"
+  },
+  "item/01KZ9JTC1SPC6PHXHE6RAGDW9G": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Codex PR: regenerate the index so CI goes green"
+  },
+  "item/01KZ9JTC6VAC8105JAGT0WRYVH": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Ship the worklog hooks to Codex, not just the skills"
+  },
+  "item/01KZ9JTCBS4W06FVSHZPZMQHCE": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Open the 0.22.0 changelog section and bump the version lockstep"
+  },
+  "item/01KZ9JTCGG2QJYXW973RJCWDR2": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Restore the file patterns in two skill descriptions"
+  },
+  "item/01KZ9KGE49EAS3VEFDNFTVM1PV": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "merge-rescue can invert an item's state"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6398,6 +6478,9 @@
    "doc_type": "release"
   },
   "release/v0.21.0": {
+   "doc_type": "release"
+  },
+  "release/v0.22.0": {
    "doc_type": "release"
   },
   "release/v0.5.0": {

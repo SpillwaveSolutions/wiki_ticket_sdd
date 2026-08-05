@@ -1,5 +1,5 @@
 {
- "git_hash": "0ed02ff",
+ "git_hash": "8720ac1",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "f3f3388b6261",
+   "render_hash": "7726e74bc4d0",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -450,6 +450,16 @@
    "title": "Release v0.21.0",
    "truth_state": "shipped",
    "wiki_key": "release/v0.21.0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.22.0",
+   "render": "as-is",
+   "render_hash": "2fca131e8325",
+   "source": "docs/.index/rendered/releases/v0.22.0.md",
+   "title": "Release v0.22.0",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.22.0"
   },
   {
    "frozen": false,
@@ -3672,6 +3682,66 @@
    "wiki_key": "item/01KZ70HNTMN1AQHSX32XZ1J2X9"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZ721Y7CM5Q0NTQC31QB2HGS",
+   "render": "as-is",
+   "render_hash": "cf6a490f8c91",
+   "source": "docs/.index/rendered/tickets/01KZ721Y7CM5Q0NTQC31QB2HGS.md",
+   "title": "Add native Codex plugin compatibility",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ721Y7CM5Q0NTQC31QB2HGS"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9JTC1SPC6PHXHE6RAGDW9G",
+   "render": "as-is",
+   "render_hash": "82f2d19b930d",
+   "source": "docs/.index/rendered/tickets/01KZ9JTC1SPC6PHXHE6RAGDW9G.md",
+   "title": "Codex PR: regenerate the index so CI goes green",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9JTC1SPC6PHXHE6RAGDW9G"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9JTC6VAC8105JAGT0WRYVH",
+   "render": "as-is",
+   "render_hash": "5a726824250b",
+   "source": "docs/.index/rendered/tickets/01KZ9JTC6VAC8105JAGT0WRYVH.md",
+   "title": "Ship the worklog hooks to Codex, not just the skills",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9JTC6VAC8105JAGT0WRYVH"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9JTCBS4W06FVSHZPZMQHCE",
+   "render": "as-is",
+   "render_hash": "1a52b9515e2e",
+   "source": "docs/.index/rendered/tickets/01KZ9JTCBS4W06FVSHZPZMQHCE.md",
+   "title": "Open the 0.22.0 changelog section and bump the version lockstep",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9JTCBS4W06FVSHZPZMQHCE"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9JTCGG2QJYXW973RJCWDR2",
+   "render": "as-is",
+   "render_hash": "bc52cf79e761",
+   "source": "docs/.index/rendered/tickets/01KZ9JTCGG2QJYXW973RJCWDR2.md",
+   "title": "Restore the file patterns in two skill descriptions",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9JTCGG2QJYXW973RJCWDR2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9KGE49EAS3VEFDNFTVM1PV",
+   "render": "as-is",
+   "render_hash": "d9414a79d4a0",
+   "source": "docs/.index/rendered/tickets/01KZ9KGE49EAS3VEFDNFTVM1PV.md",
+   "title": "merge-rescue can invert an item's state",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ9KGE49EAS3VEFDNFTVM1PV"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4428,13 +4498,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-04T18:56:21Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-05T18:38:25Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "470b89df647c",
+   "render_hash": "7ad7ae1b7f44",
    "source": "docs/roadmap.md",
-   "source_hash": "412ee714b106",
+   "source_hash": "8bd4ffa8d770",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

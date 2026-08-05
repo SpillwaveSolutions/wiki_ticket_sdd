@@ -1,7 +1,8 @@
 ---
 name: wiki-publish
+metadata:
+  version: "0.22.0"
 description: Publish docs (roadmap, plans, user guide, status) to the team's configured wiki. Use when asked to publish/sync docs to the wiki, after cutting a roadmap snapshot, or when a plan/status report should be visible outside the repo.
-version: 0.21.0
 ---
 
 # Wiki publish
