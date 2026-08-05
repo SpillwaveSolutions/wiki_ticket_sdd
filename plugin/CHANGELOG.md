@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.22.0 — unreleased
+
+- **New**: a native Codex plugin. `plugin/.codex-plugin/plugin.json` packages
+  the same skills the Claude plugin ships, installed the same way
+  (`codex plugin marketplace add ...`, then `/plugins`). The shared `plugin/`
+  tree stays canonical; each host gets a small manifest beside it.
+
+- **New**: the Codex package carries lifecycle hooks, not just skills.
+  `plugin/hooks/codex-hooks.json` wires the same prompt-submit, stop and
+  session-start scripts the Claude plugin uses. They needed no porting: Codex
+  sets `CLAUDE_PLUGIN_ROOT` for plugin-sourced hooks, and the scripts already
+  emit the `hookSpecificOutput` / `additionalContext` shape Codex reads. Only
+  the wrapper differs — Codex nests the event map under a `hooks` key.
+
+  The plan-capture hook is the one that does not port, and for a real reason:
+  it fires on `PostToolUse` with a matcher for the `ExitPlanMode` tool, and
+  Codex has the event but not that tool. On Codex, plan capture stays what the
+  policy file says it is. The other three are the ones that enforce work
+  tracking, and they now work on both hosts.
+
 ## 0.21.0 — 2026-08-04
 
 Generated documents now carry the commit they were written against, and a new

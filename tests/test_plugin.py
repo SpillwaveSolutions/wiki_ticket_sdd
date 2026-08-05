@@ -142,6 +142,71 @@ class TestCanonSync(unittest.TestCase):
                 f"— skills ship from plugin/skills; copy that side over")
 
 
+class TestCodexHookParity(unittest.TestCase):
+    """The Codex plugin must ship the enforcement hooks, not just the skills.
+
+    The first cut of the Codex package shipped skills alone, reasoning that the
+    hosts use incompatible hook schemas. They do not: Codex reads the same
+    hookSpecificOutput/additionalContext output our scripts already emit and
+    sets CLAUDE_PLUGIN_ROOT for plugin-sourced hooks, so the scripts are shared
+    verbatim and only the wrapper differs. These tests pin that, because a
+    Codex package with no hooks is the exact failure this project exists to
+    prevent -- policy that holds only because someone remembers it.
+    """
+
+    def codex_hooks(self):
+        with open(os.path.join(PLUGIN, "hooks", "codex-hooks.json")) as fh:
+            return json.load(fh)
+
+    def claude_hooks(self):
+        with open(os.path.join(PLUGIN, "hooks", "hooks.json")) as fh:
+            return json.load(fh)
+
+    def test_the_manifest_points_at_the_hooks_file(self):
+        with open(os.path.join(PLUGIN, ".codex-plugin", "plugin.json")) as fh:
+            rel = json.load(fh)["hooks"]
+        # paths in the manifest resolve against the PLUGIN ROOT (the directory
+        # holding .codex-plugin/), not against the manifest's own directory
+        self.assertTrue(os.path.isfile(os.path.join(PLUGIN, rel.lstrip("./"))),
+                        f"manifest hooks path {rel} resolves to nothing")
+
+    def test_codex_nests_the_event_map_under_a_hooks_key(self):
+        """The one real schema difference. Claude's file is a flat event map;
+        Codex wraps it. Getting this backwards loads zero hooks silently."""
+        self.assertEqual(list(self.codex_hooks()), ["hooks"])
+        self.assertNotIn("hooks", self.claude_hooks())
+
+    def test_the_enforcement_hooks_reach_codex(self):
+        """UserPromptSubmit and Stop are the two the policy file names as the
+        work-tracking enforcement mechanism. Losing either is the regression."""
+        events = self.codex_hooks()["hooks"]
+        for ev in ("UserPromptSubmit", "Stop", "SessionStart"):
+            self.assertIn(ev, events, f"{ev} missing from the Codex hooks")
+
+    def test_both_hosts_run_the_same_scripts(self):
+        def commands(event_map):
+            return {h["command"] for group in event_map.values()
+                    for entry in group for h in entry["hooks"]}
+        codex = commands(self.codex_hooks()["hooks"])
+        claude = commands(self.claude_hooks())
+        # every Codex command is a Claude command -- no forked copies
+        self.assertTrue(codex <= claude, f"Codex-only commands: {codex - claude}")
+        for cmd in codex:
+            rel = cmd.split("}\"/", 1)[1]
+            self.assertTrue(os.access(os.path.join(PLUGIN, rel), os.X_OK),
+                            f"{rel} is not executable")
+
+    def test_plan_capture_is_the_only_hook_left_behind(self):
+        """It matches the ExitPlanMode TOOL, which Codex does not have, so the
+        matcher could never fire. Shipping it would be dead config that reads
+        like coverage. If Codex ever grows the tool, this test fails and tells
+        you to ship it."""
+        missing = set(self.claude_hooks()) - set(self.codex_hooks()["hooks"])
+        self.assertEqual(missing, {"PostToolUse"})
+        matchers = [g.get("matcher") for g in self.claude_hooks()["PostToolUse"]]
+        self.assertEqual(matchers, ["ExitPlanMode"])
+
+
 class TestVersionSync(unittest.TestCase):
     def test_cli_manifest_and_skills_agree(self):
         v = plugin_version()

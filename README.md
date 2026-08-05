@@ -186,12 +186,18 @@ codex
 # Open /plugins, install worklog, then start a new session.
 ```
 
-Codex discovers the bundled skills natively. The Claude lifecycle hooks are
-not part of the Codex manifest because the hosts use different hook schemas,
-and Codex has no documented `ExitPlanMode` event. Repository policy in
-`AGENTS.md` therefore enforces plan capture and work tracking; run
-`bin/worklog plan-capture ...` before implementation. Claude Code and Grok
-Build continue to use the existing commands and hooks unchanged.
+Codex discovers the bundled skills natively, and gets the enforcement hooks
+too — the prompt reminder, the stop check, and the session doctor all run
+there. The scripts are shared, not ported: Codex sets `CLAUDE_PLUGIN_ROOT`
+for plugin-sourced hooks and reads the same `additionalContext` output, so
+only the wrapper differs (`plugin/hooks/codex-hooks.json` nests the event map
+under a `hooks` key).
+
+Plan capture is the exception. That hook fires on `PostToolUse` matching the
+`ExitPlanMode` tool, and Codex has the event but no such tool — so on Codex
+plan capture is what `AGENTS.md` says it is, and you run
+`bin/worklog plan-capture ...` before implementing. Claude Code and Grok Build
+are unchanged.
 
 Two install levels, deliberately distinct:
 
@@ -248,7 +254,7 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | `docs/user_guide/` | User guide, CLI reference, plugin guide |
 | `docs/integrations/` | Living per-system setup guides (11 SDD tools + ticket/wiki systems), published to the wiki and used as the `integration-guide` skill's offline fallback |
 | `hooks/` | `pre-commit`, `pre-merge-commit`, `commit-msg`, `exit-plan-capture.sh`, `prompt-reminder.sh`, `session-doctor.sh`, `session-end.sh`, `stop-worklog-check.sh` |
-| `plugin/` | Claude Code, Codex, and Grok Build manifests, commands, skills, hooks, and canonical scripts — **v0.21.0** |
+| `plugin/` | Claude Code, Codex, and Grok Build manifests, commands, skills, hooks, and canonical scripts — **v0.22.0** |
 | `tests/` | Unit and integration tests |
 
 ## Testing

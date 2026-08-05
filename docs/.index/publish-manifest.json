@@ -1,5 +1,5 @@
 {
- "git_hash": "cb3be55",
+ "git_hash": "56f0bf6",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "fea4d9f1b0d3",
+   "render_hash": "d0cadf86dafd",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "7b04dca6b325",
+   "render_hash": "e2f841a6db28",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -445,11 +445,21 @@
    "frozen": false,
    "page_name": "Release-v0.21.0",
    "render": "as-is",
-   "render_hash": "902a48b634a4",
+   "render_hash": "c1ab9f2469a5",
    "source": "docs/.index/rendered/releases/v0.21.0.md",
    "title": "Release v0.21.0",
    "truth_state": "shipped",
    "wiki_key": "release/v0.21.0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.22.0",
+   "render": "as-is",
+   "render_hash": "2fca131e8325",
+   "source": "docs/.index/rendered/releases/v0.22.0.md",
+   "title": "Release v0.22.0",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.22.0"
   },
   {
    "frozen": false,
@@ -3655,10 +3665,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ70HNMFKYY9KZ0VXVAMD7S5",
    "render": "as-is",
-   "render_hash": "3f619f23a243",
+   "render_hash": "07054263824a",
    "source": "docs/.index/rendered/tickets/01KZ70HNMFKYY9KZ0VXVAMD7S5.md",
    "title": "v0.21.0 doc sync: design doc + code walkthrough",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01KZ70HNMFKYY9KZ0VXVAMD7S5"
   },
   {
@@ -3670,6 +3680,56 @@
    "title": "v0.21.0 doc sync: user guide + README",
    "truth_state": "done",
    "wiki_key": "item/01KZ70HNTMN1AQHSX32XZ1J2X9"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ721Y7CM5Q0NTQC31QB2HGS",
+   "render": "as-is",
+   "render_hash": "cf6a490f8c91",
+   "source": "docs/.index/rendered/tickets/01KZ721Y7CM5Q0NTQC31QB2HGS.md",
+   "title": "Add native Codex plugin compatibility",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ721Y7CM5Q0NTQC31QB2HGS"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9JTC1SPC6PHXHE6RAGDW9G",
+   "render": "as-is",
+   "render_hash": "82f2d19b930d",
+   "source": "docs/.index/rendered/tickets/01KZ9JTC1SPC6PHXHE6RAGDW9G.md",
+   "title": "Codex PR: regenerate the index so CI goes green",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9JTC1SPC6PHXHE6RAGDW9G"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9JTC6VAC8105JAGT0WRYVH",
+   "render": "as-is",
+   "render_hash": "5a726824250b",
+   "source": "docs/.index/rendered/tickets/01KZ9JTC6VAC8105JAGT0WRYVH.md",
+   "title": "Ship the worklog hooks to Codex, not just the skills",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9JTC6VAC8105JAGT0WRYVH"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9JTCBS4W06FVSHZPZMQHCE",
+   "render": "as-is",
+   "render_hash": "1a52b9515e2e",
+   "source": "docs/.index/rendered/tickets/01KZ9JTCBS4W06FVSHZPZMQHCE.md",
+   "title": "Open the 0.22.0 changelog section and bump the version lockstep",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9JTCBS4W06FVSHZPZMQHCE"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9JTCGG2QJYXW973RJCWDR2",
+   "render": "as-is",
+   "render_hash": "bc52cf79e761",
+   "source": "docs/.index/rendered/tickets/01KZ9JTCGG2QJYXW973RJCWDR2.md",
+   "title": "Restore the file patterns in two skill descriptions",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9JTCGG2QJYXW973RJCWDR2"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -4068,25 +4128,49 @@
    "wiki_key": "design/2026-08-03_v0.20.0-release-design-doc"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T00:00:00Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Snapshot** of release v0.21.0 (2026-08-04) \u2014 frozen record. The current version is [[Code-Walkthrough]].",
+   "frozen": true,
+   "page_name": "Code-Walkthrough-2026-08-04_v0.21.0-release",
+   "render": "doc+banner",
+   "render_hash": "b4da5c62abe5",
+   "source": "docs/designs/2026-08-04_v0.21.0-release_code_walkthrough.md",
+   "source_hash": "3d2becfcdf6f",
+   "title": "Worklog \u2014 Code Walkthrough",
+   "truth_state": "snapshot",
+   "wiki_key": "design/2026-08-04_v0.21.0-release-code-walkthrough"
+  },
+  {
+   "banner": "> **Snapshot** of release v0.21.0 (2026-08-04) \u2014 frozen record. The current version is [[Design-Doc]].",
+   "frozen": true,
+   "page_name": "Design-Doc-2026-08-04_v0.21.0-release",
+   "render": "doc+banner",
+   "render_hash": "f674dd2a2900",
+   "source": "docs/designs/2026-08-04_v0.21.0-release_design_doc.md",
+   "source_hash": "a5d32684771b",
+   "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot",
+   "wiki_key": "design/2026-08-04_v0.21.0-release-design-doc"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-04T18:33:22Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Code-Walkthrough",
    "render": "doc+banner",
-   "render_hash": "0b11cf544929",
+   "render_hash": "3e66f65298b7",
    "source": "docs/designs/current_code_walkthrough.md",
-   "source_hash": "f03c097f5c56",
+   "source_hash": "48097660ec76",
    "title": "Worklog \u2014 Code Walkthrough",
    "truth_state": "current",
    "wiki_key": "design/current-code-walkthrough"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-03T00:00:00Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-04T18:33:22Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Design-Doc",
    "render": "doc+banner",
-   "render_hash": "1a5fb82ea00b",
+   "render_hash": "ce60b1f60343",
    "source": "docs/designs/current_design_doc.md",
-   "source_hash": "24969322b2a9",
+   "source_hash": "0eca9d9341c1",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "current",
    "wiki_key": "design/current-design-doc"
@@ -4404,13 +4488,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-04T18:45:43Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-05T18:29:32Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "c399aee4b4f5",
+   "render_hash": "7dfba80882b8",
    "source": "docs/roadmap.md",
-   "source_hash": "cbe22b31ea71",
+   "source_hash": "412ee714b106",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

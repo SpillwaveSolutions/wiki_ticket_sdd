@@ -2,12 +2,40 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Restore the file patterns in two skill descriptions
+`01KZ9JTCGG2QJYXW973RJCWDR2` · status: done
+- belongs-to: Add native Codex plugin compatibility
+- targets: release/v0.22.0
+
+### Open the 0.22.0 changelog section and bump the version lockstep
+`01KZ9JTCBS4W06FVSHZPZMQHCE` · status: done
+- belongs-to: Add native Codex plugin compatibility
+- targets: release/v0.22.0
+
+### Ship the worklog hooks to Codex, not just the skills
+`01KZ9JTC6VAC8105JAGT0WRYVH` · status: done
+- belongs-to: Add native Codex plugin compatibility
+- targets: release/v0.22.0
+
+### Codex PR: regenerate the index so CI goes green
+`01KZ9JTC1SPC6PHXHE6RAGDW9G` · status: done
+- belongs-to: Add native Codex plugin compatibility
+- targets: release/v0.22.0
+
+### Add native Codex plugin compatibility
+`01KZ721Y7CM5Q0NTQC31QB2HGS` · status: done
+- targets: release/v0.22.0
+- contains: Codex PR: regenerate the index so CI goes green
+- contains: Ship the worklog hooks to Codex, not just the skills
+- contains: Open the 0.22.0 changelog section and bump the version lockstep
+- contains: Restore the file patterns in two skill descriptions
+
 ### v0.21.0 doc sync: user guide + README
 `01KZ70HNTMN1AQHSX32XZ1J2X9` · status: done
 - targets: release/v0.21.0
 
 ### v0.21.0 doc sync: design doc + code walkthrough
-`01KZ70HNMFKYY9KZ0VXVAMD7S5` · status: in_progress
+`01KZ70HNMFKYY9KZ0VXVAMD7S5` · status: done
 - targets: release/v0.21.0
 
 ### Cut v0.21.0 release
