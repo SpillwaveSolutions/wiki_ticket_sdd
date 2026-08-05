@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.22.0 — unreleased
+## 0.22.0 — 2026-08-05
 
 - **New**: a native Codex plugin. `plugin/.codex-plugin/plugin.json` packages
   the same skills the Claude plugin ships, installed the same way
@@ -19,6 +19,43 @@
   Codex has the event but not that tool. On Codex, plan capture stays what the
   policy file says it is. The other three are the ones that enforce work
   tracking, and they now work on both hosts.
+
+- **Fix**: `worklog merge-rescue` could hand back an item in an older state
+  than it went in with. When a compaction lands mid-branch, the rescue
+  re-issues the branch's sub-watermark events under fresh ids so the fold
+  cannot drop them. Fresh ids are stamped at *now*, so they sorted above every
+  event that kept its original id — **including later events of the same
+  item**, which sat above the watermark and were left alone. An item whose
+  create and update moved but whose close did not folded back to the pre-close
+  state. Nothing was lost, every guard was green, and the answer was wrong.
+  Seen for real merging into a live branch: a `done` item came back
+  `in_progress`.
+
+  Re-issuing is now contagious forward within an item — once one event moves,
+  every later event of that item moves with it — and a second, independent
+  check verifies the whole log: sorting by the new ids must give each item the
+  same sequence its original ids did, or the rescue refuses and leaves the
+  logs untouched. **If you ran `merge-rescue` on 0.21.0 or earlier and an item
+  looks reopened, that is this bug**; the close event is still in your log, so
+  re-closing the item is a safe and complete repair.
+
+- **Fix**: `worklog sync --dry-run` now reports the fields a *close* would
+  overwrite. A close is not always only a close — a dirty item pushes its
+  final shape first, and that push can rewrite a ticket somebody else filed.
+  The dry run returned early on the close path and printed only
+  `would close #123`, staying silent in exactly the case where a field write
+  is least expected. This is the shape of the incident that renamed another
+  reporter's issue; had that item been closing rather than updating, the dry
+  run would have said nothing at all.
+
+- **Fix**: seven dispatcher tests were never running. `tests/test_dispatch.py`
+  carried its run-as-a-script block in the middle of the file, so every class
+  defined below it was never registered — 20 tests executed where 27 existed,
+  and CI runs these files as scripts. The hidden class covered overwrite
+  reporting, **including the dry-run case fixed above**, so that defect sat
+  underneath tests that could not fail. Worth checking your own suites for the
+  same shape: pytest imports the module and sees all 27, running it as a
+  script sees 20, and neither runner warns you.
 
 ## 0.21.0 — 2026-08-04
 

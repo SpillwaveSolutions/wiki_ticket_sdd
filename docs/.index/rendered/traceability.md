@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Cut v0.22.0 release
+`01KZ9N0EX7AE9HMYZ84NRMAESP` · status: in_progress
+- targets: release/v0.22.0
+
 ### A stray main block hides seven dispatcher tests
 `01KZ9MD733ZEBNT3B2X1672FB0` · status: done
 - targets: release/v0.22.0

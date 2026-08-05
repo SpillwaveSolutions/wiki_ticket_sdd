@@ -2901,6 +2901,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZ9N0EX7AE9HMYZ84NRMAESP",
+   "to": "release/v0.22.0",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -4243,6 +4248,21 @@
   {
    "from": "roadmap-snapshot/2026-08-04_v0.21.0-release",
    "to": "release/v0.21.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-05_v0.22.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-05_v0.22.0-release",
+   "to": "roadmap-snapshot/2026-08-04_v0.21.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-05_v0.22.0-release",
+   "to": "release/v0.22.0",
    "type": "targets"
   },
   {
@@ -6214,6 +6234,11 @@
    "status": "done",
    "title": "A stray main block hides seven dispatcher tests"
   },
+  "item/01KZ9N0EX7AE9HMYZ84NRMAESP": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Cut v0.22.0 release"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6607,6 +6632,12 @@
   "roadmap-snapshot/2026-08-04_v0.21.0-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-08-04_v0.21.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-08-05_v0.22.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-05_v0.22.0-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },
