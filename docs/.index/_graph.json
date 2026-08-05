@@ -2896,6 +2896,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZ9MD733ZEBNT3B2X1672FB0",
+   "to": "release/v0.22.0",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6151,7 +6156,7 @@
   },
   "item/01KZ31DGAQ2YDP6RMEMVNAWABH": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Sync's dry run does not report the field overwrites a close would make"
   },
   "item/01KZ4EETMXD1JQMDFA97HSZQM4": {
@@ -6201,8 +6206,13 @@
   },
   "item/01KZ9KGE49EAS3VEFDNFTVM1PV": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "merge-rescue can invert an item's state"
+  },
+  "item/01KZ9MD733ZEBNT3B2X1672FB0": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "A stray main block hides seven dispatcher tests"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

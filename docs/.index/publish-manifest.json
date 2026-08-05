@@ -1,5 +1,5 @@
 {
- "git_hash": "8720ac1",
+ "git_hash": "ea508fb",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "7726e74bc4d0",
+   "render_hash": "108966aaca26",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -455,7 +455,7 @@
    "frozen": false,
    "page_name": "Release-v0.22.0",
    "render": "as-is",
-   "render_hash": "2fca131e8325",
+   "render_hash": "73d5c42a655d",
    "source": "docs/.index/rendered/releases/v0.22.0.md",
    "title": "Release v0.22.0",
    "truth_state": "shipped",
@@ -3635,10 +3635,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZ31DGAQ2YDP6RMEMVNAWABH",
    "render": "as-is",
-   "render_hash": "90dd9cd2566c",
+   "render_hash": "2884d49c43d8",
    "source": "docs/.index/rendered/tickets/01KZ31DGAQ2YDP6RMEMVNAWABH.md",
    "title": "Sync's dry run does not report the field overwrites a close would make",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ31DGAQ2YDP6RMEMVNAWABH"
   },
   {
@@ -3735,11 +3735,21 @@
    "frozen": false,
    "page_name": "Ticket-01KZ9KGE49EAS3VEFDNFTVM1PV",
    "render": "as-is",
-   "render_hash": "d9414a79d4a0",
+   "render_hash": "3666c7be4c40",
    "source": "docs/.index/rendered/tickets/01KZ9KGE49EAS3VEFDNFTVM1PV.md",
    "title": "merge-rescue can invert an item's state",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZ9KGE49EAS3VEFDNFTVM1PV"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9MD733ZEBNT3B2X1672FB0",
+   "render": "as-is",
+   "render_hash": "3770872e300e",
+   "source": "docs/.index/rendered/tickets/01KZ9MD733ZEBNT3B2X1672FB0.md",
+   "title": "A stray main block hides seven dispatcher tests",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9MD733ZEBNT3B2X1672FB0"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -4498,13 +4508,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-05T18:38:25Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-05T18:58:24Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "7ad7ae1b7f44",
+   "render_hash": "1258845b9578",
    "source": "docs/roadmap.md",
-   "source_hash": "8bd4ffa8d770",
+   "source_hash": "7852e1ff5e5d",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

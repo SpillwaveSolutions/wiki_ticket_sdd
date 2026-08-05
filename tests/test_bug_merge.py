@@ -324,6 +324,91 @@ class TestSubWatermarkEventsAreLost(GitRepo):
             merge_rescue(self.todo, self.done)
 
 
+class TestRescueKeepsPerItemOrder(GitRepo):
+    """A rescue that loses no events can still return the wrong state.
+
+    Re-issued events are stamped at NOW, so they sort above every event that
+    kept its original id -- including LATER events of the same item, which sat
+    above the watermark and were therefore left alone. Re-stamp an item's
+    create and update but not its close, and the fold reads the pre-close
+    state: nothing lost, every existing guard green, wrong answer.
+
+    Seen for real on 2026-08-05 while merging main into the Codex branch --
+    an item that read `done` before the merge read `in_progress` after it.
+    """
+
+    WIRE_HOOKS = True
+
+    def _fork_compact_merge(self):
+        """Same shape as the sub-watermark case, with one difference that is
+        the whole point: the branch's LAST event lands after the compaction,
+        so it sits above the watermark and the old code left it in place while
+        moving the two below it."""
+        write_jsonl(self.todo, [ev(i, f"I{i}", set={"status": "todo"})
+                                for i in range(1, 6)])
+        self._commit("seed")
+
+        self._checkout("feature", new=True)
+        append_jsonl(self.todo, [
+            ev(10, "SPANNER", set={"status": "todo", "title": "spans the mark"}),
+            ev(11, "SPANNER", op="update", set={"status": "in_progress"})])
+        self._commit("branch work below the coming watermark")
+
+        self._checkout(self.trunk)
+        append_jsonl(self.todo, [ev(20, "MAINLATER", set={"status": "todo"})])
+        self._commit("unrelated work lands on main")
+        compact(self.todo, self.done)     # watermark lands above ev 10/11
+        self._commit("nightly compaction")
+
+        self._checkout("feature")
+        # The close happens AFTER the compaction ran on main, so its id sorts
+        # above the watermark. This is the ordinary case -- work continues on
+        # the branch while the nightly job runs.
+        append_jsonl(self.todo, [
+            ev(30, "SPANNER", op="close", set={"status": "done"})])
+        self._commit("branch finishes the work")
+        return self._merge(self.trunk)
+
+    def test_the_close_is_not_undone_by_replaying_earlier_events(self):
+        self._fork_compact_merge()
+        merge_rescue(self.todo, self.done)
+
+        items = fold([self.todo, self.done]).items
+        self.assertEqual(
+            items["SPANNER"].get("status"), "done",
+            "the branch closed this item and nothing reopened it -- an "
+            "earlier event replayed above the close is not a state change")
+
+    def test_every_event_of_a_moved_item_moves_with_it(self):
+        """The mechanism, pinned separately from the symptom: re-issuing is
+        contagious forward within an item. Partial re-stamping is what
+        inverted the order, so no event of a moved item may keep its old id."""
+        self._fork_compact_merge()
+        merge_rescue(self.todo, self.done)
+
+        evs = [json.loads(ln) for ln in open(self.todo) if ln.strip()]
+        spanner = [e for e in evs if e.get("item") == "SPANNER"]
+        self.assertEqual(len(spanner), 3, f"all three events present: {spanner}")
+        self.assertTrue(all(e.get("rescued_from") for e in spanner),
+                        f"every SPANNER event must be re-issued: {spanner}")
+        # and they must still fold in the order the branch wrote them
+        order = [e["rescued_from"] for e in sorted(spanner, key=lambda x: x["ev"])]
+        self.assertEqual(order, ["01A0010", "01A0011", "01A0030"])
+
+    def test_untouched_items_keep_their_original_ids(self):
+        """The contagion is scoped to the item, not the file: rewriting ids
+        that did not need it would churn provenance for no reason."""
+        self._fork_compact_merge()
+        merge_rescue(self.todo, self.done)
+
+        evs = [json.loads(ln) for ln in open(self.todo) if ln.strip()]
+        others = [e for e in evs
+                  if e.get("item") not in (None, "SPANNER") and e.get("ev")]
+        self.assertTrue(others, "there are other items in this log")
+        self.assertFalse([e for e in others if e.get("rescued_from")],
+                         "only the item that had to move should be re-issued")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
 

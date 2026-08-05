@@ -413,12 +413,28 @@ def merge_rescue(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
             carried.append(e)
         # Replay in the branch's own order; one millisecond apart so the
         # fresh ids sort in that same order.
+        #
+        # Re-issuing only the sub-watermark events is not enough, and the
+        # failure is silent. Fresh ids are stamped at NOW, so they sort above
+        # every retained original -- including this item's own LATER events,
+        # which were above the watermark and kept their old ids. An item whose
+        # create and update were re-issued but whose close was retained folds
+        # back to the pre-close state: no event lost, every guard green, wrong
+        # answer. Observed 2026-08-05 on the Codex branch, where a `done` item
+        # came back as `in_progress`.
+        #
+        # So re-issuing is contagious forward: once an item has had one event
+        # re-issued, every later event of that item must move too, or the
+        # partial re-stamp inverts their order.
         start = int(time.time() * 1000)
+        moved = set()
         for n, e in enumerate(sorted(carried, key=lambda x: x.get("ev", ""))):
-            if e.get("op") == "snapshot" or e.get("ev", "") > wm:
+            above = e.get("op") == "snapshot" or e.get("ev", "") > wm
+            if above and e.get("item") not in moved:
                 lines.append(json.dumps(e, separators=(",", ":"), sort_keys=True))
                 continue
             fresh = _reissue(e, start + n)
+            moved.add(e.get("item"))
             rescued.append((e["ev"], fresh["ev"], e["item"], e["op"]))
             lines.append(json.dumps(fresh, separators=(",", ":"), sort_keys=True))
         new_text[p] = "".join(ln + "\n" for ln in lines)
@@ -444,6 +460,25 @@ def merge_rescue(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
             print(f"merge-rescue: would lose {len(missing)} item(s): "
                   f"{sorted(missing)}; aborted, logs untouched", file=sys.stderr)
             raise SystemExit(1)
+        # ...and no item's events may change relative order. Losing nothing is
+        # necessary and NOT sufficient: state is fold(events sorted by id), so
+        # re-stamping ids reorders as surely as deleting them, and the item
+        # count check above stays green either way. Sorting by the new ids must
+        # give each item the same sequence its original ids did.
+        seen = {}
+        for p in paths:
+            for _line, e in _raw_lines(tmp[p]):
+                if not e or "item" not in e or "ev" not in e:
+                    continue
+                seen.setdefault(e["item"], []).append(
+                    (e["ev"], e.get("rescued_from", e["ev"])))
+        for item, evs in seen.items():
+            was = [orig for _new, orig in sorted(evs)]
+            if was != sorted(was):
+                print(f"merge-rescue: replay would reorder {item}'s history "
+                      f"({' '.join(was)}); aborted, logs untouched",
+                      file=sys.stderr)
+                raise SystemExit(1)
     except BaseException:
         for p in paths:
             if os.path.exists(tmp[p]):

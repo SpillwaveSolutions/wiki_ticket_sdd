@@ -2,8 +2,12 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### A stray main block hides seven dispatcher tests
+`01KZ9MD733ZEBNT3B2X1672FB0` · status: done
+- targets: release/v0.22.0
+
 ### merge-rescue can invert an item's state
-`01KZ9KGE49EAS3VEFDNFTVM1PV` · status: todo
+`01KZ9KGE49EAS3VEFDNFTVM1PV` · status: done
 - targets: release/v0.22.0
 
 ### Restore the file patterns in two skill descriptions
@@ -50,7 +54,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 `01KZ4EETMXD1JQMDFA97HSZQM4` · status: done
 
 ### Sync's dry run does not report the field overwrites a close would make
-`01KZ31DGAQ2YDP6RMEMVNAWABH` · status: todo
+`01KZ31DGAQ2YDP6RMEMVNAWABH` · status: done
 - references: [github#320](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/320)
 
 ### Add a full-length commit helper that mirrors the existing environment contract

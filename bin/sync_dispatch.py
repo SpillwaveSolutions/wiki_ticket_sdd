@@ -627,6 +627,16 @@ class Dispatcher:
                 else:
                     if self.dry_run:
                         print("would close %s (%s)" % (key, item.get("status")))
+                        # A close is not always only a close: a dirty item
+                        # pushes its final shape first (see below), and that
+                        # push can rewrite fields on a ticket somebody else
+                        # filed. Reporting overwrites only on the update path
+                        # left this one silent -- the path where an operator
+                        # reading "would close" is least expecting a field
+                        # write. Same call, same condition, so the dry run now
+                        # predicts exactly what the real run does.
+                        if dirty:
+                            self.note_overwrite(iid, key, payload_item)
                         continue
                     if dirty:
                         # Close alone never syncs fields (adapter close is
