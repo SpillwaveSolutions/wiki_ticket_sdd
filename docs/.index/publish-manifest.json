@@ -1,5 +1,5 @@
 {
- "git_hash": "56f0bf6",
+ "git_hash": "8720ac1",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "e2f841a6db28",
+   "render_hash": "7726e74bc4d0",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3732,6 +3732,16 @@
    "wiki_key": "item/01KZ9JTCGG2QJYXW973RJCWDR2"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9KGE49EAS3VEFDNFTVM1PV",
+   "render": "as-is",
+   "render_hash": "d9414a79d4a0",
+   "source": "docs/.index/rendered/tickets/01KZ9KGE49EAS3VEFDNFTVM1PV.md",
+   "title": "merge-rescue can invert an item's state",
+   "truth_state": "open",
+   "wiki_key": "item/01KZ9KGE49EAS3VEFDNFTVM1PV"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4488,13 +4498,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-05T18:29:32Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-05T18:38:25Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "7dfba80882b8",
+   "render_hash": "7ad7ae1b7f44",
    "source": "docs/roadmap.md",
-   "source_hash": "412ee714b106",
+   "source_hash": "8bd4ffa8d770",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

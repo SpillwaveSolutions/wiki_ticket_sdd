@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### merge-rescue can invert an item's state
+`01KZ9KGE49EAS3VEFDNFTVM1PV` · status: todo
+- targets: release/v0.22.0
+
 ### Restore the file patterns in two skill descriptions
 `01KZ9JTCGG2QJYXW973RJCWDR2` · status: done
 - belongs-to: Add native Codex plugin compatibility
