@@ -511,8 +511,8 @@
   "index/releases": {
     "canonical_key": "index/releases",
     "page_id": "Index-Releases",
-    "render_hash": "d0cadf86dafd",
-    "rev": "43d45ceaec58ac1e619f65af9d0b5a9a83577649",
+    "render_hash": "1320fb11d2b7",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
     "source": "docs/.index/rendered/releases.md",
     "source_hash": "1940f1d43e75",
     "title": "Releases Index",
@@ -530,8 +530,8 @@
   "index/traceability": {
     "canonical_key": "index/traceability",
     "page_id": "Index-Traceability",
-    "render_hash": "f3f3388b6261",
-    "rev": "43d45ceaec58ac1e619f65af9d0b5a9a83577649",
+    "render_hash": "93452901f260",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
     "source": "docs/.index/rendered/traceability.md",
     "source_hash": "9397d9471711",
     "title": "Traceability Index",
@@ -4260,11 +4260,11 @@
   "item/01KZ31DGAQ2YDP6RMEMVNAWABH": {
     "canonical_key": "item/01KZ31DGAQ2YDP6RMEMVNAWABH",
     "page_id": "Ticket-01KZ31DGAQ2YDP6RMEMVNAWABH",
-    "render_hash": "90dd9cd2566c",
-    "rev": "f65321ffb3ce2eb4c5080496276ca633dbc6a349",
+    "render_hash": "2884d49c43d8",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
     "source": "docs/.index/rendered/tickets/01KZ31DGAQ2YDP6RMEMVNAWABH.md",
     "title": "Sync's dry run does not report the field overwrites a close would make",
-    "truth_state": "open",
+    "truth_state": "done",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ31DGAQ2YDP6RMEMVNAWABH",
     "wiki_key": "item/01KZ31DGAQ2YDP6RMEMVNAWABH"
   },
@@ -4315,6 +4315,94 @@
     "truth_state": "done",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ70HNTMN1AQHSX32XZ1J2X9",
     "wiki_key": "item/01KZ70HNTMN1AQHSX32XZ1J2X9"
+  },
+  "item/01KZ721Y7CM5Q0NTQC31QB2HGS": {
+    "canonical_key": "item/01KZ721Y7CM5Q0NTQC31QB2HGS",
+    "page_id": "Ticket-01KZ721Y7CM5Q0NTQC31QB2HGS",
+    "render_hash": "cf6a490f8c91",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "source": "docs/.index/rendered/tickets/01KZ721Y7CM5Q0NTQC31QB2HGS.md",
+    "title": "Add native Codex plugin compatibility",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ721Y7CM5Q0NTQC31QB2HGS",
+    "wiki_key": "item/01KZ721Y7CM5Q0NTQC31QB2HGS"
+  },
+  "item/01KZ9JTC1SPC6PHXHE6RAGDW9G": {
+    "canonical_key": "item/01KZ9JTC1SPC6PHXHE6RAGDW9G",
+    "page_id": "Ticket-01KZ9JTC1SPC6PHXHE6RAGDW9G",
+    "render_hash": "82f2d19b930d",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "source": "docs/.index/rendered/tickets/01KZ9JTC1SPC6PHXHE6RAGDW9G.md",
+    "title": "Codex PR: regenerate the index so CI goes green",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ9JTC1SPC6PHXHE6RAGDW9G",
+    "wiki_key": "item/01KZ9JTC1SPC6PHXHE6RAGDW9G"
+  },
+  "item/01KZ9JTC6VAC8105JAGT0WRYVH": {
+    "canonical_key": "item/01KZ9JTC6VAC8105JAGT0WRYVH",
+    "page_id": "Ticket-01KZ9JTC6VAC8105JAGT0WRYVH",
+    "render_hash": "5a726824250b",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "source": "docs/.index/rendered/tickets/01KZ9JTC6VAC8105JAGT0WRYVH.md",
+    "title": "Ship the worklog hooks to Codex, not just the skills",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ9JTC6VAC8105JAGT0WRYVH",
+    "wiki_key": "item/01KZ9JTC6VAC8105JAGT0WRYVH"
+  },
+  "item/01KZ9JTCBS4W06FVSHZPZMQHCE": {
+    "canonical_key": "item/01KZ9JTCBS4W06FVSHZPZMQHCE",
+    "page_id": "Ticket-01KZ9JTCBS4W06FVSHZPZMQHCE",
+    "render_hash": "1a52b9515e2e",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "source": "docs/.index/rendered/tickets/01KZ9JTCBS4W06FVSHZPZMQHCE.md",
+    "title": "Open the 0.22.0 changelog section and bump the version lockstep",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ9JTCBS4W06FVSHZPZMQHCE",
+    "wiki_key": "item/01KZ9JTCBS4W06FVSHZPZMQHCE"
+  },
+  "item/01KZ9JTCGG2QJYXW973RJCWDR2": {
+    "canonical_key": "item/01KZ9JTCGG2QJYXW973RJCWDR2",
+    "page_id": "Ticket-01KZ9JTCGG2QJYXW973RJCWDR2",
+    "render_hash": "bc52cf79e761",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "source": "docs/.index/rendered/tickets/01KZ9JTCGG2QJYXW973RJCWDR2.md",
+    "title": "Restore the file patterns in two skill descriptions",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ9JTCGG2QJYXW973RJCWDR2",
+    "wiki_key": "item/01KZ9JTCGG2QJYXW973RJCWDR2"
+  },
+  "item/01KZ9KGE49EAS3VEFDNFTVM1PV": {
+    "canonical_key": "item/01KZ9KGE49EAS3VEFDNFTVM1PV",
+    "page_id": "Ticket-01KZ9KGE49EAS3VEFDNFTVM1PV",
+    "render_hash": "3666c7be4c40",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "source": "docs/.index/rendered/tickets/01KZ9KGE49EAS3VEFDNFTVM1PV.md",
+    "title": "merge-rescue can invert an item's state",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ9KGE49EAS3VEFDNFTVM1PV",
+    "wiki_key": "item/01KZ9KGE49EAS3VEFDNFTVM1PV"
+  },
+  "item/01KZ9MD733ZEBNT3B2X1672FB0": {
+    "canonical_key": "item/01KZ9MD733ZEBNT3B2X1672FB0",
+    "page_id": "Ticket-01KZ9MD733ZEBNT3B2X1672FB0",
+    "render_hash": "3770872e300e",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "source": "docs/.index/rendered/tickets/01KZ9MD733ZEBNT3B2X1672FB0.md",
+    "title": "A stray main block hides seven dispatcher tests",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ9MD733ZEBNT3B2X1672FB0",
+    "wiki_key": "item/01KZ9MD733ZEBNT3B2X1672FB0"
+  },
+  "item/01KZ9N0EX7AE9HMYZ84NRMAESP": {
+    "canonical_key": "item/01KZ9N0EX7AE9HMYZ84NRMAESP",
+    "page_id": "Ticket-01KZ9N0EX7AE9HMYZ84NRMAESP",
+    "render_hash": "39679aeeee99",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "source": "docs/.index/rendered/tickets/01KZ9N0EX7AE9HMYZ84NRMAESP.md",
+    "title": "Cut v0.22.0 release",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ9N0EX7AE9HMYZ84NRMAESP",
+    "wiki_key": "item/01KZ9N0EX7AE9HMYZ84NRMAESP"
   },
   "plan/2026-07-17_worklog-core_plan": {
     "canonical_key": "plan/2026-07-17_worklog-core_plan",
@@ -5064,6 +5152,17 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Release-v0.21.0",
     "wiki_key": "release/v0.21.0"
   },
+  "release/v0.22.0": {
+    "canonical_key": "release/v0.22.0",
+    "page_id": "Release-v0.22.0",
+    "render_hash": "370d8f9f8fc0",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "source": "docs/.index/rendered/releases/v0.22.0.md",
+    "title": "Release v0.22.0",
+    "truth_state": "shipped",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Release-v0.22.0",
+    "wiki_key": "release/v0.22.0"
+  },
   "release/v0.5.0": {
     "canonical_key": "release/v0.5.0",
     "doc_type": "release",
@@ -5133,10 +5232,10 @@
     "canonical_key": "roadmap",
     "doc_type": "roadmap",
     "page_id": "Roadmap",
-    "render_hash": "470b89df647c",
-    "rev": "43d45ceaec58ac1e619f65af9d0b5a9a83577649",
+    "render_hash": "ee7f670ab376",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
     "source": "docs/roadmap.md",
-    "source_hash": "412ee714b106",
+    "source_hash": "7852e1ff5e5d",
     "title": "Roadmap",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
@@ -5349,6 +5448,19 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-04_v0.21.0-release",
     "wiki_key": "roadmap-snapshot/2026-08-04_v0.21.0-release"
   },
+  "roadmap-snapshot/2026-08-05_v0.22.0-release": {
+    "canonical_key": "roadmap-snapshot/2026-08-05_v0.22.0-release",
+    "doc_type": "roadmap-snapshot",
+    "page_id": "Roadmap-2026-08-05_v0.22.0-release",
+    "render_hash": "f3417540d1ec",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "source": "docs/roadmap/2026-08-05_v0.22.0-release.md",
+    "source_hash": "ed909dc54c22",
+    "title": "Roadmap",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-05_v0.22.0-release",
+    "wiki_key": "roadmap-snapshot/2026-08-05_v0.22.0-release"
+  },
   "roadmap/2026-07-18_v0.2-roadmap": {
     "aliases": [
       "roadmap/2026-07-18_v0.2-roadmap"
@@ -5458,8 +5570,8 @@
     "canonical_key": "sidebar",
     "doc_type": "sidebar",
     "page_id": "_Sidebar",
-    "render_hash": "5924d20a38bd",
-    "rev": "215f37fbefd432497f9331396108bf7891b0d63f",
+    "render_hash": "4dd6e07008f2",
+    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
     "source": "docs/.index/rendered/_Sidebar.md",
     "source_hash": "4ffd66168704",
     "title": "Sidebar",

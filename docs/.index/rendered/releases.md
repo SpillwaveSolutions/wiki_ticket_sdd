@@ -12,6 +12,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 - Shipped: Restore the file patterns in two skill descriptions
 - Shipped: merge-rescue can invert an item's state
 - Shipped: A stray main block hides seven dispatcher tests
+- Shipped: Cut v0.22.0 release
 
 ## v0.21.0 — 2026-08-04
 
