@@ -104,10 +104,6 @@ class TestTheBugThisPrevents(unittest.TestCase):
         self.assertEqual(r.items["A"]["priority"], "P0")  # Rick's edit is gone
 
 
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
-
-
 class TestEntropyIsNeverSpent(unittest.TestCase):
     """01KYZNG520: v0.19.0 overwrote five entropy characters with the short
     git hash. An id is issued once and never changes, and the only thing it
@@ -212,3 +208,7 @@ class TestEventProvenance(unittest.TestCase):
         env = dict(os.environ, WORKLOG_NO_GIT_PROVENANCE="1")
         self.wl("add", "T", "--body", "b", env=env)
         self.assertNotIn("git", self.events()[0])
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
