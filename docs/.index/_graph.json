@@ -2956,6 +2956,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZC9JZTS96R2VSNDYBHR2NVF",
+   "to": "release/v0.22.2",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -4328,6 +4333,21 @@
   {
    "from": "roadmap-snapshot/2026-08-06_v0.22.1-release",
    "to": "release/v0.22.1",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-06_v0.22.2-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-06_v0.22.2-release",
+   "to": "roadmap-snapshot/2026-08-06_v0.22.1-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-06_v0.22.2-release",
+   "to": "release/v0.22.2",
    "type": "targets"
   },
   {
@@ -6333,23 +6353,28 @@
   },
   "item/01KZC7BEFK020YSGQSBB1Z70PX": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "v0.22.1 doc sync: design doc + code walkthrough"
   },
   "item/01KZC7BEN8HXMT90Q4P033YA0Q": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "v0.22.1 doc sync: user guide + README"
   },
   "item/01KZC83EFJV7S63VAXTPRB2YH3": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Three test suites still hide 15 tests behind a mid-file __main__ block"
   },
   "item/01KZC9CB5VY2YDCNDYN3W3QK6Y": {
    "doc_type": "item",
    "status": "done",
    "title": "Sweep every test file for the mid-file runner block"
+  },
+  "item/01KZC9JZTS96R2VSNDYBHR2NVF": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Cut v0.22.2 release"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
@@ -6762,6 +6787,12 @@
   "roadmap-snapshot/2026-08-06_v0.22.1-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-08-06_v0.22.1-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-08-06_v0.22.2-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-06_v0.22.2-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },
