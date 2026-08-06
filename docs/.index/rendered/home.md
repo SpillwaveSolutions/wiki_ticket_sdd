@@ -12,7 +12,7 @@ work is fishbowled, not hidden.
 [[User-Guide]] · [[Design-Doc]] · [[Code-Walkthrough]] · [[Worklog-Spec]]
 
 ## What are we working on now?
-[[Roadmap]] · latest status: [[Status-2026-07-19-daily]]
+[[Roadmap]] · latest status: [[Status-2026-08-06-weekly]]
 Active plans: [[Plan-ticket-sync-and-init-detection]]
 
 ## Why was it built this way?

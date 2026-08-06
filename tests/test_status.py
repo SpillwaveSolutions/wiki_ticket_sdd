@@ -100,6 +100,64 @@ class TestStatus(unittest.TestCase):
             self.assertIn(fresh, opened, kind)
             self.assertNotIn(old, opened, kind)
 
+    def test_a_compacted_close_still_counts_as_shipped(self):
+        """01KZCCG7: a weekly report counted an item as shipped only when a
+        `close` event fell inside the window. Compaction folds an item's
+        history into ONE snapshot, so the close event stops existing and the
+        item silently drops out -- even though it closed inside the window.
+        Nightly compaction runs on the default branch, so this quietly
+        emptied the report of everything closed more than a day earlier: the
+        artifact whose whole job is to span a week.
+
+        The time survives in the snapshot's watermark, which is the last
+        event it folded and, for a closed item, is the close.
+        """
+        a = self.ok("add", "Shipped then compacted", "--priority", "P1").strip()
+        self.ok("close", a, "--status", "done")
+        before = self.facts("weekly")
+        self.assertEqual(before["counts"]["closed_in_window"], 1, before)
+
+        self.ok("compact", "--yes")
+        # the close event is genuinely gone -- this is not a no-op fixture
+        with open(os.path.join(self.dir, ".work", "todo.jsonl"),
+                  encoding="utf-8") as fh:
+            ops = [json.loads(l)["op"] for l in fh if l.strip()]
+        self.assertNotIn("close", ops, "fixture did not actually compact")
+
+        after = self.facts("weekly")
+        self.assertEqual(after["counts"]["closed_in_window"], 1,
+                         "a compacted close must still count as shipped")
+        self.assertEqual(after["closed_in_window"][0]["title"],
+                         "Shipped then compacted")
+
+    def test_a_compacted_close_OUTSIDE_the_window_is_not_counted(self):
+        """The rescue must not become a blanket 'every compacted item is
+        recent'. The watermark carries a real time; honour it."""
+        a = self.ok("add", "Closed long ago", "--priority", "P1").strip()
+        self.ok("close", a, "--status", "done")
+        self.ok("compact", "--yes")
+        # Rewrite the snapshot's watermark to a month back. BOTH logs: a
+        # compaction moves closed items to done.jsonl, so touching only
+        # todo.jsonl leaves the real close sitting in the other file and the
+        # test proves nothing.
+        old = self.old_ulid(30)
+        for name in ("todo.jsonl", "done.jsonl"):
+            path = os.path.join(self.dir, ".work", name)
+            if not os.path.exists(path):
+                continue
+            lines = []
+            with open(path, encoding="utf-8") as fh:
+                for l in fh:
+                    if not l.strip():
+                        continue
+                    e = json.loads(l)
+                    if e["op"] == "snapshot" and e.get("through"):
+                        e["through"] = old
+                    lines.append(json.dumps(e))
+            with open(path, "w", encoding="utf-8") as fh:
+                fh.write("\n".join(lines) + ("\n" if lines else ""))
+        self.assertEqual(self.facts("weekly")["counts"]["closed_in_window"], 0)
+
     def test_write_creates_frozen_report(self):
         self.ok("add", "Something")
         prose = "- Shipped: the thing\n- Blocked: nothing\n"

@@ -1023,16 +1023,42 @@ def _status_facts(kind, now_ms, since=None, until=None):
                 "through": render_roadmap.max_ev(PATHS),
                 "days": [days[k] for k in sorted(days)]}
 
+    def closed_in(evs):
+        """Did this item close inside the window?
+
+        The obvious test -- a `close` event in range -- goes silently wrong
+        after a compaction. Compaction folds an item's history into ONE
+        snapshot, so the close event no longer exists and the item vanishes
+        from the report even though it closed inside the window. Nightly
+        compaction runs on the default branch, so this quietly emptied the
+        weekly report of everything closed more than a day earlier: the
+        artifact whose entire job is to span a week.
+
+        The time is not lost. A snapshot carries `through`, the highest event
+        it folded for that item, and for a closed item that is the close. So
+        fall back to the snapshot's watermark rather than reporting nothing.
+        """
+        if any(e["op"] == "close" and in_window(e) for e in evs):
+            return True
+        return any(e["op"] == "snapshot" and e.get("through")
+                   and lo <= ulid.timestamp_ms(e["through"]) <= hi
+                   for e in evs)
+
     closed, opened, unplanned = [], [], []
     for iid, evs in per.items():
         it = items.get(iid, {})
-        if (it.get("status") in CLOSED_STATUSES
-                and any(e["op"] == "close" and in_window(e) for e in evs)):
+        if it.get("status") in CLOSED_STATUSES and closed_in(evs):
             closed.append({"id": iid, "title": it.get("title", ""),
                            "status": it.get("status"),
                            "resolution": it.get("resolution"),
                            "unplanned": bool(it.get("unplanned")),
                            "epic": epic_title(iid)})
+        # No equivalent rescue exists for `opened`, and the asymmetry is real
+        # rather than an oversight: a snapshot's watermark is the LAST event
+        # it folded, so it recovers a close and can never recover a create.
+        # After a compaction, opened-in-window and the unplanned rollup built
+        # from it under-report. Prefer the unplanned share of CLOSED items,
+        # which is now exact, whenever the two disagree.
         if any(e["op"] == "create" and in_window(e) for e in evs):
             opened.append({"id": iid, "title": it.get("title", ""),
                            "type": it.get("level"), "epic": epic_title(iid)})
