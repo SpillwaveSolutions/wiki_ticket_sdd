@@ -7,6 +7,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 - Roadmap snapshot: [[Roadmap-2026-08-06_v0.22.1-release]]
 - Shipped: Plugin hooks never fired: the manifest was not wrapped
 - Shipped: A test asserted the broken hook manifest shape
+- Shipped: Cut v0.22.1 release
 
 ## v0.22.0 — 2026-08-05
 
