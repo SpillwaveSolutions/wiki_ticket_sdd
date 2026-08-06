@@ -511,8 +511,8 @@
   "index/releases": {
     "canonical_key": "index/releases",
     "page_id": "Index-Releases",
-    "render_hash": "1320fb11d2b7",
-    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "render_hash": "3313b33a496e",
+    "rev": "b173a29771a29f039504a6c24bb269e76f46391e",
     "source": "docs/.index/rendered/releases.md",
     "source_hash": "1940f1d43e75",
     "title": "Releases Index",
@@ -530,8 +530,8 @@
   "index/traceability": {
     "canonical_key": "index/traceability",
     "page_id": "Index-Traceability",
-    "render_hash": "93452901f260",
-    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "render_hash": "5fc0a8ddf43b",
+    "rev": "b173a29771a29f039504a6c24bb269e76f46391e",
     "source": "docs/.index/rendered/traceability.md",
     "source_hash": "9397d9471711",
     "title": "Traceability Index",
@@ -4404,6 +4404,39 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZ9N0EX7AE9HMYZ84NRMAESP",
     "wiki_key": "item/01KZ9N0EX7AE9HMYZ84NRMAESP"
   },
+  "item/01KZC47J0FF1EBGD1JH3GP28RQ": {
+    "canonical_key": "item/01KZC47J0FF1EBGD1JH3GP28RQ",
+    "page_id": "Ticket-01KZC47J0FF1EBGD1JH3GP28RQ",
+    "render_hash": "7922db0b087c",
+    "rev": "b173a29771a29f039504a6c24bb269e76f46391e",
+    "source": "docs/.index/rendered/tickets/01KZC47J0FF1EBGD1JH3GP28RQ.md",
+    "title": "Plugin hooks never fired: the manifest was not wrapped",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZC47J0FF1EBGD1JH3GP28RQ",
+    "wiki_key": "item/01KZC47J0FF1EBGD1JH3GP28RQ"
+  },
+  "item/01KZC47J5M7K96TRWY0X5X53P6": {
+    "canonical_key": "item/01KZC47J5M7K96TRWY0X5X53P6",
+    "page_id": "Ticket-01KZC47J5M7K96TRWY0X5X53P6",
+    "render_hash": "f1449f6cc932",
+    "rev": "b173a29771a29f039504a6c24bb269e76f46391e",
+    "source": "docs/.index/rendered/tickets/01KZC47J5M7K96TRWY0X5X53P6.md",
+    "title": "A test asserted the broken hook manifest shape",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZC47J5M7K96TRWY0X5X53P6",
+    "wiki_key": "item/01KZC47J5M7K96TRWY0X5X53P6"
+  },
+  "item/01KZC4C33K1X5T6K79B9E4D3XY": {
+    "canonical_key": "item/01KZC4C33K1X5T6K79B9E4D3XY",
+    "page_id": "Ticket-01KZC4C33K1X5T6K79B9E4D3XY",
+    "render_hash": "864bb24c1f65",
+    "rev": "b173a29771a29f039504a6c24bb269e76f46391e",
+    "source": "docs/.index/rendered/tickets/01KZC4C33K1X5T6K79B9E4D3XY.md",
+    "title": "Cut v0.22.1 release",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZC4C33K1X5T6K79B9E4D3XY",
+    "wiki_key": "item/01KZC4C33K1X5T6K79B9E4D3XY"
+  },
   "plan/2026-07-17_worklog-core_plan": {
     "canonical_key": "plan/2026-07-17_worklog-core_plan",
     "doc_type": "plan",
@@ -5163,6 +5196,17 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Release-v0.22.0",
     "wiki_key": "release/v0.22.0"
   },
+  "release/v0.22.1": {
+    "canonical_key": "release/v0.22.1",
+    "page_id": "Release-v0.22.1",
+    "render_hash": "9b83e499a581",
+    "rev": "b173a29771a29f039504a6c24bb269e76f46391e",
+    "source": "docs/.index/rendered/releases/v0.22.1.md",
+    "title": "Release v0.22.1",
+    "truth_state": "shipped",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Release-v0.22.1",
+    "wiki_key": "release/v0.22.1"
+  },
   "release/v0.5.0": {
     "canonical_key": "release/v0.5.0",
     "doc_type": "release",
@@ -5232,10 +5276,10 @@
     "canonical_key": "roadmap",
     "doc_type": "roadmap",
     "page_id": "Roadmap",
-    "render_hash": "ee7f670ab376",
-    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "render_hash": "1ffee83ab4ff",
+    "rev": "b173a29771a29f039504a6c24bb269e76f46391e",
     "source": "docs/roadmap.md",
-    "source_hash": "7852e1ff5e5d",
+    "source_hash": "65538697716e",
     "title": "Roadmap",
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
@@ -5461,6 +5505,19 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-05_v0.22.0-release",
     "wiki_key": "roadmap-snapshot/2026-08-05_v0.22.0-release"
   },
+  "roadmap-snapshot/2026-08-06_v0.22.1-release": {
+    "canonical_key": "roadmap-snapshot/2026-08-06_v0.22.1-release",
+    "doc_type": "roadmap-snapshot",
+    "page_id": "Roadmap-2026-08-06_v0.22.1-release",
+    "render_hash": "d2a70487d30d",
+    "rev": "b173a29771a29f039504a6c24bb269e76f46391e",
+    "source": "docs/roadmap/2026-08-06_v0.22.1-release.md",
+    "source_hash": "3d9b53cacafe",
+    "title": "Roadmap",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-06_v0.22.1-release",
+    "wiki_key": "roadmap-snapshot/2026-08-06_v0.22.1-release"
+  },
   "roadmap/2026-07-18_v0.2-roadmap": {
     "aliases": [
       "roadmap/2026-07-18_v0.2-roadmap"
@@ -5570,8 +5627,8 @@
     "canonical_key": "sidebar",
     "doc_type": "sidebar",
     "page_id": "_Sidebar",
-    "render_hash": "4dd6e07008f2",
-    "rev": "9a0b3516546fadcb262c3115a487d16073dedd1c",
+    "render_hash": "38e5fc306d2d",
+    "rev": "b173a29771a29f039504a6c24bb269e76f46391e",
     "source": "docs/.index/rendered/_Sidebar.md",
     "source_hash": "4ffd66168704",
     "title": "Sidebar",

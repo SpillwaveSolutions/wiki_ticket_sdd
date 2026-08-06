@@ -3,7 +3,7 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Cut v0.22.1 release
-`01KZC4C33K1X5T6K79B9E4D3XY` · status: in_progress
+`01KZC4C33K1X5T6K79B9E4D3XY` · status: done
 - targets: release/v0.22.1
 
 ### A test asserted the broken hook manifest shape
