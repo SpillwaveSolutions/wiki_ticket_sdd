@@ -2,7 +2,7 @@
 wiki_key: roadmap
 doc_type: roadmap
 truth_state: current
-source_hash: ba56d3f4
+source_hash: 1286933f
 generated_at: 2026-08-06T18:11:37Z
 git_hash: "3861ff8"
 ---
@@ -39,10 +39,6 @@ _Nothing here._
 | # | Item | Type | Priority | Status | Blocked by |
 |---|---|---|---|---|---|
 | 01KZC4C3 | Cut v0.22.1 release | task | P2 | in progress | — |
-
-## Needs attention
-
-- Orphan events for `01KZ721Y` — no create/snapshot yet.
 
 ## Visual roadmap
 
