@@ -1,6 +1,6 @@
 {
   "name": "worklog",
-  "version": "0.22.0",
+  "version": "0.22.1",
   "description": "Local-first, git-native spec-driven development with tracked plans, tickets, pull requests, roadmaps, status reports, and wiki publishing.",
   "author": {
     "name": "Rick Hightower",

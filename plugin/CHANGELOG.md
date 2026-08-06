@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.22.1 — 2026-08-06
+
+One fix, and it is the kind worth reading: **if you installed this plugin,
+none of its hooks have ever fired.**
+
+- **Fix**: the hook manifest declared its events at the top level; the loader
+  reads them from under a top-level `hooks` key. The file was valid JSON, so
+  nothing failed, nothing warned, and the loader simply found no events —
+  including the plan-capture hook this plugin is partly built around. Every
+  other installed plugin we could compare against (superpowers, i-have-adhd,
+  okf-graph-eng, explanatory-output-style) uses the wrapper; ours did not.
+
+  **After upgrading, expect hooks to start firing that never did.** The
+  prompt reminder on every message, the session doctor at start, the stop
+  check on a dirty tree, and the plan-capture prompt on leaving plan mode are
+  not new features in this release — they are the features you already
+  installed, working for the first time.
+
+  Found by [#329](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/pull/329)
+  against a real installation, by noticing that no hook fired during a live
+  plan-mode session. It could not be found from inside this repository, whose
+  own sessions wire the same scripts through settings rather than through the
+  plugin loader — so the tooling worked for the people building it and not for
+  the people installing it.
+
+  Three checks now cover the class rather than the instance: both manifests
+  must be wrapped, every hook command must point at a file that exists and is
+  executable, and every skill must declare `name` and `description` with no
+  unquoted `": "` in its frontmatter — because a skill whose frontmatter fails
+  to parse is not rejected, it loads with empty metadata and can never be
+  matched. Installed and invisible.
+
 ## 0.22.0 — 2026-08-05
 
 - **New**: a native Codex plugin. `plugin/.codex-plugin/plugin.json` packages

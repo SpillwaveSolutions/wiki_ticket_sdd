@@ -2,6 +2,18 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Cut v0.22.1 release
+`01KZC4C33K1X5T6K79B9E4D3XY` · status: in_progress
+- targets: release/v0.22.1
+
+### A test asserted the broken hook manifest shape
+`01KZC47J5M7K96TRWY0X5X53P6` · status: done
+- targets: release/v0.22.1
+
+### Plugin hooks never fired: the manifest was not wrapped
+`01KZC47J0FF1EBGD1JH3GP28RQ` · status: done
+- targets: release/v0.22.1
+
 ### Cut v0.22.0 release
 `01KZ9N0EX7AE9HMYZ84NRMAESP` · status: done
 - targets: release/v0.22.0
