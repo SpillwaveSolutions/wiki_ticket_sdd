@@ -202,7 +202,13 @@ are unchanged.
 Two install levels, deliberately distinct:
 
 - **Plugin install** (above) — every session gets the skills, commands, and
-  hook. Global; changes no repo.
+  hooks. Global; changes no repo. **Upgrade if you installed before 0.22.1**:
+  the hook manifest declared its events at the top level and the loader reads
+  them from under a `hooks` key, so every hook silently did nothing for
+  everyone who installed the plugin. Nothing failed, nothing warned. After
+  upgrading, hooks start firing that never did — the prompt reminder, session
+  doctor, stop check and plan-capture prompt are not new, they are what you
+  already installed, working for the first time.
 - **Repo install** — inside a target repo, run `/worklog:init`. It scaffolds
   `bin/`, the git hooks, an empty `.work/` with `config.yml`, and the CI
   check. The copies are committed, so hooks and CI work for teammates who

@@ -11,7 +11,8 @@ WikiTicket SDD (pronounced "wicked ticket") is a local-first, git-native work
 tracking layer for teams doing AI-assisted development. This guide covers the
 concepts and day-to-day workflows. See also the
 [CLI Reference](cli-reference.md) for every command and flag, and the
-[Plugin Guide](plugin-guide.md) for installing the Claude Code plugin.
+[Plugin Guide](plugin-guide.md) for installing the Claude Code or Codex
+plugin.
 
 ## What it is, and why
 
@@ -348,6 +349,18 @@ state is what makes the repair precise. Details and the exact guarantees:
 [CLI Reference](cli-reference.md#merge-rescue). The watermark is per item, not
 global, so an event for an item that was never snapshotted is never at risk
 (ADR-0007).
+
+**If you ran `merge-rescue` on 0.21.0 or earlier and an item looks reopened,
+that is a bug, fixed in 0.22.0.** Re-issued events are stamped at *now*, so
+they sorted above every event that kept its original id — including later
+events of the *same item*, which sat above the watermark and were left alone.
+An item whose create and update moved but whose close did not folded back to
+its pre-close state: no event lost, every guard green, wrong answer. The close
+event is still in your log, so **re-closing the item is a complete repair**.
+From 0.22.0 re-issuing is contagious forward within an item — once one event
+moves, every later event of that item moves with it — and a second,
+independent check refuses the whole rescue unless sorting by the new ids gives
+every item the same sequence its original ids did.
 
 ### Conflict markers never commit
 
