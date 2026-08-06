@@ -2966,6 +2966,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZCCG7010S0Q0Y6PF6NN27C2",
+   "to": "release/v0.23.0",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6386,6 +6391,11 @@
    "status": "done",
    "title": "doc-verify accepts a citation whose range is merely close"
   },
+  "item/01KZCCG7010S0Q0Y6PF6NN27C2": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Compaction hides shipped work from the status report"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6867,12 +6877,18 @@
    "doc_type": "status",
    "source": "docs/status/2026-07-18-weekly.md",
    "title": "Weekly \u2014 WikiTicket SDD",
-   "truth_state": "current"
+   "truth_state": "archived"
   },
   "status/2026-07-19-daily": {
    "doc_type": "status",
    "source": "docs/status/2026-07-19-daily.md",
    "title": "Daily status \u2014 2026-07-19",
+   "truth_state": "current"
+  },
+  "status/2026-08-06-weekly": {
+   "doc_type": "status",
+   "source": "docs/status/2026-08-06-weekly.md",
+   "title": "status/2026-08-06-weekly",
    "truth_state": "current"
   },
   "ticket/github#10": {

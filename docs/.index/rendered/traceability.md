@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Compaction hides shipped work from the status report
+`01KZCCG7010S0Q0Y6PF6NN27C2` · status: done
+- targets: release/v0.23.0
+
 ### doc-verify accepts a citation whose range is merely close
 `01KZCC0F3QYFX9QAKTYVZ01TFK` · status: done
 - targets: release/v0.23.0

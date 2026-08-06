@@ -5,7 +5,7 @@
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "71ae31aaad74",
+   "render_hash": "9d2728c1302a",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -35,7 +35,7 @@
    "frozen": false,
    "page_name": "Index-Status",
    "render": "as-is",
-   "render_hash": "5543d4d12ec0",
+   "render_hash": "736d58a8a21a",
    "source": "docs/.index/rendered/status.md",
    "title": "Status Archive",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "702469156743",
+   "render_hash": "e54dcb2fd806",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -485,7 +485,7 @@
    "frozen": false,
    "page_name": "Release-v0.23.0",
    "render": "as-is",
-   "render_hash": "cb3f1e7188e9",
+   "render_hash": "daeb0f765d9f",
    "source": "docs/.index/rendered/releases/v0.23.0.md",
    "title": "Release v0.23.0",
    "truth_state": "shipped",
@@ -3882,6 +3882,16 @@
    "wiki_key": "item/01KZCC0F3QYFX9QAKTYVZ01TFK"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZCCG7010S0Q0Y6PF6NN27C2",
+   "render": "as-is",
+   "render_hash": "b0a9400b5b02",
+   "source": "docs/.index/rendered/tickets/01KZCCG7010S0Q0Y6PF6NN27C2.md",
+   "title": "Compaction hides shipped work from the status report",
+   "truth_state": "done",
+   "wiki_key": "item/01KZCCG7010S0Q0Y6PF6NN27C2"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4662,11 +4672,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T20:31:29Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T20:39:10Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "3b9a33382862",
+   "render_hash": "e9fb8c300420",
    "source": "docs/roadmap.md",
    "source_hash": "65538697716e",
    "title": "Roadmap",
@@ -5010,15 +5020,15 @@
    "wiki_key": "status/2026-07-18-timecard"
   },
   {
-   "banner": "> **Current** \u2014 the latest weekly report. Reports freeze once published; corrections appear in later reports.",
+   "banner": "> **Archived** \u2014 corrections, if any, appear in later reports; do not act on this page.",
    "frozen": true,
    "page_name": "Status-2026-07-18-weekly",
    "render": "doc+banner",
-   "render_hash": "83b031e545eb",
+   "render_hash": "e043f4a6cb6d",
    "source": "docs/status/2026-07-18-weekly.md",
    "source_hash": "b6d5388a49ba",
    "title": "Weekly \u2014 WikiTicket SDD",
-   "truth_state": "current",
+   "truth_state": "archived",
    "wiki_key": "status/2026-07-18-weekly"
   },
   {
@@ -5032,6 +5042,18 @@
    "title": "Daily status \u2014 2026-07-19",
    "truth_state": "current",
    "wiki_key": "status/2026-07-19-daily"
+  },
+  {
+   "banner": "> **Current** \u2014 the latest weekly report. Reports freeze once published; corrections appear in later reports.",
+   "frozen": true,
+   "page_name": "Status-2026-08-06-weekly",
+   "render": "doc+banner",
+   "render_hash": "97cc51e71462",
+   "source": "docs/status/2026-08-06-weekly.md",
+   "source_hash": "e07d4763bb9b",
+   "title": "status/2026-08-06-weekly",
+   "truth_state": "current",
+   "wiki_key": "status/2026-08-06-weekly"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
