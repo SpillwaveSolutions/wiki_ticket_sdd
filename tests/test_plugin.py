@@ -160,7 +160,7 @@ class TestCodexHookParity(unittest.TestCase):
 
     def claude_hooks(self):
         with open(os.path.join(PLUGIN, "hooks", "hooks.json")) as fh:
-            return json.load(fh)
+            return json.load(fh)["hooks"]
 
     def test_the_manifest_points_at_the_hooks_file(self):
         with open(os.path.join(PLUGIN, ".codex-plugin", "plugin.json")) as fh:
@@ -170,11 +170,47 @@ class TestCodexHookParity(unittest.TestCase):
         self.assertTrue(os.path.isfile(os.path.join(PLUGIN, rel.lstrip("./"))),
                         f"manifest hooks path {rel} resolves to nothing")
 
-    def test_codex_nests_the_event_map_under_a_hooks_key(self):
-        """The one real schema difference. Claude's file is a flat event map;
-        Codex wraps it. Getting this backwards loads zero hooks silently."""
-        self.assertEqual(list(self.codex_hooks()), ["hooks"])
-        self.assertNotIn("hooks", self.claude_hooks())
+    def test_BOTH_hosts_wrap_the_event_map_under_a_hooks_key(self):
+        """This test used to assert the OPPOSITE for Claude, and was wrong.
+
+        Shipping the Codex manifest, the wrapper was read as a Codex quirk and
+        this test pinned Claude's file as flat. It never was: `plugin/` had
+        declared its events at the top level since the hooks were written, the
+        loader read no events, and EVERY plugin hook silently did nothing for
+        anyone who installed it -- including the plan-capture hook this plugin
+        is partly built around. The file is valid JSON, so nothing complained.
+
+        Four of four other installed plugins (superpowers, i-have-adhd,
+        okf-graph-eng, explanatory-output-style) use the wrapper. Found
+        against a real installation in #329; the repo's own sessions never
+        caught it because they wire these scripts through settings, not
+        through the plugin loader.
+        """
+        for name in ("hooks.json", "codex-hooks.json"):
+            with open(os.path.join(PLUGIN, "hooks", name)) as fh:
+                top = json.load(fh)
+            self.assertIn("hooks", top,
+                          f"{name}: the loader reads events from under a "
+                          f"top-level 'hooks' key; a flat map parses fine and "
+                          f"loads nothing")
+            self.assertNotIn("PostToolUse", top,
+                             f"{name}: events must be nested, not top-level")
+
+    def test_every_hook_command_points_at_an_executable_script(self):
+        """A path typo fails the same way a missing wrapper does: quietly.
+        Both manifests, every event, every command."""
+        for name in ("hooks.json", "codex-hooks.json"):
+            with open(os.path.join(PLUGIN, "hooks", name)) as fh:
+                events = json.load(fh)["hooks"]
+            for ev, groups in events.items():
+                for entry in groups:
+                    for h in entry["hooks"]:
+                        rel = h["command"].split("}\"/", 1)[1]
+                        path = os.path.join(PLUGIN, rel)
+                        self.assertTrue(os.path.isfile(path),
+                                        f"{name} {ev}: {rel} does not exist")
+                        self.assertTrue(os.access(path, os.X_OK),
+                                        f"{name} {ev}: {rel} is not executable")
 
     def test_the_enforcement_hooks_reach_codex(self):
         """UserPromptSubmit and Stop are the two the policy file names as the
@@ -205,6 +241,46 @@ class TestCodexHookParity(unittest.TestCase):
         self.assertEqual(missing, {"PostToolUse"})
         matchers = [g.get("matcher") for g in self.claude_hooks()["PostToolUse"]]
         self.assertEqual(matchers, ["ExitPlanMode"])
+
+
+class TestSkillFrontmatterLoads(unittest.TestCase):
+    """From #329: a skill whose frontmatter fails to parse is not rejected --
+    it loads with EMPTY metadata. `name` and `description` vanish, so the
+    skill can never be matched, and nothing reports an error. Installed and
+    invisible is the worst failure mode available, so it gets its own checks
+    rather than riding on the version assertion.
+    """
+
+    def skills(self):
+        return sorted(glob.glob(os.path.join(PLUGIN, "skills", "*", "SKILL.md")))
+
+    def test_every_skill_declares_name_and_description(self):
+        """The two fields a host reads to decide whether to invoke. These are
+        exactly what an unparseable block silently drops."""
+        for path in self.skills():
+            keys = {l.split(":", 1)[0].strip()
+                    for l in front_matter(path) if ":" in l}
+            for field in ("name", "description"):
+                self.assertIn(field, keys,
+                              f"{os.path.relpath(path, ROOT)} has no {field}")
+
+    def test_no_unquoted_frontmatter_value_contains_a_colon_space(self):
+        """YAML forbids ': ' inside a plain scalar, and `classify` shipped one
+        ("Propose-only: writes ...") that broke the parse even after the fence
+        it was blamed on had been repaired. Quoting is the fix; this is the
+        check that keeps the next one from shipping."""
+        for path in self.skills():
+            for line in front_matter(path):
+                if line.startswith(" ") or ":" not in line:
+                    continue          # nested value, handled by its parent
+                value = line.split(":", 1)[1].strip()
+                if value[:1] in ("'", '"') or not value:
+                    continue          # quoted, or a block opener
+                self.assertNotIn(
+                    ": ", value,
+                    f"{os.path.relpath(path, ROOT)}: {line[:40]}... contains "
+                    f"': ' unquoted, so the whole block fails to parse and "
+                    f"the skill loads with no name or description")
 
 
 class TestVersionSync(unittest.TestCase):

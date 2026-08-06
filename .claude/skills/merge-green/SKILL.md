@@ -1,7 +1,7 @@
 ---
 name: merge-green
 metadata:
-  version: "0.22.0"
+  version: "0.22.1"
 description: Merge PRs only when all quality gates pass. Use whenever asked to merge a PR, complete a merge, or land a branch — polls checks every 5 minutes until green instead of merging blind or bypassing.
 ---
 

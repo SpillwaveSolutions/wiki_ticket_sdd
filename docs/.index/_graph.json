@@ -2906,6 +2906,21 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZC47J0FF1EBGD1JH3GP28RQ",
+   "to": "release/v0.22.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZC47J5M7K96TRWY0X5X53P6",
+   "to": "release/v0.22.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZC4C33K1X5T6K79B9E4D3XY",
+   "to": "release/v0.22.1",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -4263,6 +4278,21 @@
   {
    "from": "roadmap-snapshot/2026-08-05_v0.22.0-release",
    "to": "release/v0.22.0",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-06_v0.22.1-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-06_v0.22.1-release",
+   "to": "roadmap-snapshot/2026-08-05_v0.22.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-06_v0.22.1-release",
+   "to": "release/v0.22.1",
    "type": "targets"
   },
   {
@@ -6239,6 +6269,21 @@
    "status": "done",
    "title": "Cut v0.22.0 release"
   },
+  "item/01KZC47J0FF1EBGD1JH3GP28RQ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Plugin hooks never fired: the manifest was not wrapped"
+  },
+  "item/01KZC47J5M7K96TRWY0X5X53P6": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "A test asserted the broken hook manifest shape"
+  },
+  "item/01KZC4C33K1X5T6K79B9E4D3XY": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Cut v0.22.1 release"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6518,6 +6563,9 @@
   "release/v0.22.0": {
    "doc_type": "release"
   },
+  "release/v0.22.1": {
+   "doc_type": "release"
+  },
   "release/v0.5.0": {
    "doc_type": "release"
   },
@@ -6638,6 +6686,12 @@
   "roadmap-snapshot/2026-08-05_v0.22.0-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-08-05_v0.22.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-08-06_v0.22.1-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-06_v0.22.1-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

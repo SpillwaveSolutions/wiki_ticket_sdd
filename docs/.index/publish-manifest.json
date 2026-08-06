@@ -1,5 +1,5 @@
 {
- "git_hash": "ca99842",
+ "git_hash": "3861ff8",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "1320fb11d2b7",
+   "render_hash": "fa8d7b14d28f",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "93452901f260",
+   "render_hash": "3289dddf4577",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -460,6 +460,16 @@
    "title": "Release v0.22.0",
    "truth_state": "shipped",
    "wiki_key": "release/v0.22.0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.22.1",
+   "render": "as-is",
+   "render_hash": "49e303cf9359",
+   "source": "docs/.index/rendered/releases/v0.22.1.md",
+   "title": "Release v0.22.1",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.22.1"
   },
   {
    "frozen": false,
@@ -3762,6 +3772,36 @@
    "wiki_key": "item/01KZ9N0EX7AE9HMYZ84NRMAESP"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZC47J0FF1EBGD1JH3GP28RQ",
+   "render": "as-is",
+   "render_hash": "7922db0b087c",
+   "source": "docs/.index/rendered/tickets/01KZC47J0FF1EBGD1JH3GP28RQ.md",
+   "title": "Plugin hooks never fired: the manifest was not wrapped",
+   "truth_state": "done",
+   "wiki_key": "item/01KZC47J0FF1EBGD1JH3GP28RQ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC47J5M7K96TRWY0X5X53P6",
+   "render": "as-is",
+   "render_hash": "f1449f6cc932",
+   "source": "docs/.index/rendered/tickets/01KZC47J5M7K96TRWY0X5X53P6.md",
+   "title": "A test asserted the broken hook manifest shape",
+   "truth_state": "done",
+   "wiki_key": "item/01KZC47J5M7K96TRWY0X5X53P6"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC4C33K1X5T6K79B9E4D3XY",
+   "render": "as-is",
+   "render_hash": "c6cb929494e0",
+   "source": "docs/.index/rendered/tickets/01KZC4C33K1X5T6K79B9E4D3XY.md",
+   "title": "Cut v0.22.1 release",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01KZC4C33K1X5T6K79B9E4D3XY"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4518,13 +4558,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-05T19:13:17Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T18:11:37Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "ee7f670ab376",
+   "render_hash": "53332cc312a7",
    "source": "docs/roadmap.md",
-   "source_hash": "7852e1ff5e5d",
+   "source_hash": "26ff03f3f8a3",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -4734,6 +4774,18 @@
    "wiki_key": "roadmap-snapshot/2026-08-05_v0.22.0-release"
   },
   {
+   "banner": "> **Snapshot** of release v0.22.1 (2026-08-06) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-08-06_v0.22.1-release",
+   "render": "doc+banner",
+   "render_hash": "d2a70487d30d",
+   "source": "docs/roadmap/2026-08-06_v0.22.1-release.md",
+   "source_hash": "3d9b53cacafe",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-08-06_v0.22.1-release"
+  },
+  {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
    "frozen": true,
    "page_name": "Roadmap-2026-07-18_v0.2-roadmap",
@@ -4879,7 +4931,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "4dd6e07008f2",
+  "render_hash": "38e5fc306d2d",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1
