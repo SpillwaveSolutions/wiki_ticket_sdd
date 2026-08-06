@@ -190,10 +190,6 @@ class TestWikiAdd(Sandbox):
         self.assertNotEqual(p.returncode, 0)
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 class TestLinkPrResolvesPrefixes(unittest.TestCase):
     """01KYZFMZ5C: link-pr wrote the sidecar under the raw string, so a short
     id filed docs/.index/item/<prefix>.yml, the edge never reached the graph,
@@ -236,3 +232,7 @@ class TestLinkPrResolvesPrefixes(unittest.TestCase):
     def test_an_unknown_id_is_refused(self):
         p = self.wl("link-pr", "01ZZZZZZZZ", "--pr", "42")
         self.assertNotEqual(p.returncode, 0)
+
+
+if __name__ == "__main__":
+    unittest.main()

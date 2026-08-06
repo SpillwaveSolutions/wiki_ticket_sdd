@@ -1,5 +1,5 @@
 {
- "git_hash": "7d83fa2",
+ "git_hash": "35133f7",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "5fc0a8ddf43b",
+   "render_hash": "ee33facbbb82",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -470,6 +470,16 @@
    "title": "Release v0.22.1",
    "truth_state": "shipped",
    "wiki_key": "release/v0.22.1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.22.2",
+   "render": "as-is",
+   "render_hash": "99fd22705de8",
+   "source": "docs/.index/rendered/releases/v0.22.2.md",
+   "title": "Release v0.22.2",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.22.2"
   },
   {
    "frozen": false,
@@ -3802,6 +3812,46 @@
    "wiki_key": "item/01KZC4C33K1X5T6K79B9E4D3XY"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZC7BEFK020YSGQSBB1Z70PX",
+   "render": "as-is",
+   "render_hash": "35b3573f37f1",
+   "source": "docs/.index/rendered/tickets/01KZC7BEFK020YSGQSBB1Z70PX.md",
+   "title": "v0.22.1 doc sync: design doc + code walkthrough",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01KZC7BEFK020YSGQSBB1Z70PX"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC7BEN8HXMT90Q4P033YA0Q",
+   "render": "as-is",
+   "render_hash": "e6fa377ec440",
+   "source": "docs/.index/rendered/tickets/01KZC7BEN8HXMT90Q4P033YA0Q.md",
+   "title": "v0.22.1 doc sync: user guide + README",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01KZC7BEN8HXMT90Q4P033YA0Q"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC83EFJV7S63VAXTPRB2YH3",
+   "render": "as-is",
+   "render_hash": "377e40d27d22",
+   "source": "docs/.index/rendered/tickets/01KZC83EFJV7S63VAXTPRB2YH3.md",
+   "title": "Three test suites still hide 15 tests behind a mid-file __main__ block",
+   "truth_state": "open",
+   "wiki_key": "item/01KZC83EFJV7S63VAXTPRB2YH3"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC9CB5VY2YDCNDYN3W3QK6Y",
+   "render": "as-is",
+   "render_hash": "e54dc9271be3",
+   "source": "docs/.index/rendered/tickets/01KZC9CB5VY2YDCNDYN3W3QK6Y.md",
+   "title": "Sweep every test file for the mid-file runner block",
+   "truth_state": "done",
+   "wiki_key": "item/01KZC9CB5VY2YDCNDYN3W3QK6Y"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4558,13 +4608,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T18:57:29Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T19:39:08Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "1ffee83ab4ff",
+   "render_hash": "a2cb436b5ac5",
    "source": "docs/roadmap.md",
-   "source_hash": "65538697716e",
+   "source_hash": "067b012fb329",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

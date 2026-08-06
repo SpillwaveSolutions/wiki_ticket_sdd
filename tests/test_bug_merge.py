@@ -409,10 +409,6 @@ class TestRescueKeepsPerItemOrder(GitRepo):
                          "only the item that had to move should be re-issued")
 
 
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
-
-
 class TestConflictMarkerGuard(GitRepo):
     """01KYZEC0C1: a merge that left conflict markers in a file committed
     cleanly, because commit-msg exempts merge commits and nothing parsed
@@ -464,3 +460,7 @@ class TestConflictMarkerGuard(GitRepo):
         self.assertNotEqual(p.returncode, 0,
                             "a merge commit must not be exempt from this")
         self.assertIn("conflict markers", p.stdout + p.stderr)
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

@@ -311,6 +311,43 @@ class TestVersionSync(unittest.TestCase):
                          f"plugin.json says {v}")
 
 
+class TestSuiteHygiene(unittest.TestCase):
+    """No test file may define a class below its `if __name__` block.
+
+    Running a file as a script executes that block, which calls
+    `unittest.main()` and exits -- so every class defined below it is never
+    registered and never runs. Nothing warns. pytest imports the module and
+    sees all of them, so the two runners disagree in silence, and CI runs
+    files as scripts.
+
+    v0.22.0 found this in `test_dispatch.py` (20 of 27 running) and fixed
+    that one file without sweeping the rest. Three more were still hiding 15
+    tests, among them the whole conflict-marker guard suite -- a regression
+    test for a guard the design docs cite as enforcement. Fixing the instance
+    and not the class is what made a second discovery necessary, so this
+    checks the class.
+    """
+
+    def test_no_test_class_is_defined_below_the_runner_block(self):
+        root = os.path.join(ROOT, "tests")
+        files = sorted(glob.glob(os.path.join(root, "test_*.py")))
+        self.assertGreater(len(files), 10, "found suspiciously few test files")
+        for path in files:
+            with open(path, encoding="utf-8") as fh:
+                lines = fh.read().split("\n")
+            guard = next((i for i, l in enumerate(lines)
+                          if l.startswith("if __name__")), None)
+            if guard is None:
+                continue
+            orphans = [l.split("(")[0].removeprefix("class ")
+                       for l in lines[guard:] if l.startswith("class ")]
+            self.assertEqual(
+                orphans, [],
+                f"{os.path.relpath(path, ROOT)}: {orphans} defined below the "
+                f"`if __name__` block at line {guard + 1}, so they never run "
+                f"as a script -- move that block to the end of the file")
+
+
 class TestPackaging(unittest.TestCase):
     def test_no_repo_docs_inside_plugin(self):
         # match whole path segments: skills/design-docs/ is fine, docs/ is not

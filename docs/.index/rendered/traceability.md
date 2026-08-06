@@ -2,6 +2,21 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Sweep every test file for the mid-file runner block
+`01KZC9CB5VY2YDCNDYN3W3QK6Y` · status: done
+- targets: release/v0.22.2
+
+### Three test suites still hide 15 tests behind a mid-file __main__ block
+`01KZC83EFJV7S63VAXTPRB2YH3` · status: todo
+
+### v0.22.1 doc sync: user guide + README
+`01KZC7BEN8HXMT90Q4P033YA0Q` · status: in_progress
+- targets: release/v0.22.1
+
+### v0.22.1 doc sync: design doc + code walkthrough
+`01KZC7BEFK020YSGQSBB1Z70PX` · status: in_progress
+- targets: release/v0.22.1
+
 ### Cut v0.22.1 release
 `01KZC4C33K1X5T6K79B9E4D3XY` · status: done
 - targets: release/v0.22.1

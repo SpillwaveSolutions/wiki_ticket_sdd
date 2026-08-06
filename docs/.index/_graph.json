@@ -2921,6 +2921,21 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZC7BEFK020YSGQSBB1Z70PX",
+   "to": "release/v0.22.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZC7BEN8HXMT90Q4P033YA0Q",
+   "to": "release/v0.22.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZC9CB5VY2YDCNDYN3W3QK6Y",
+   "to": "release/v0.22.2",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6284,6 +6299,26 @@
    "status": "done",
    "title": "Cut v0.22.1 release"
   },
+  "item/01KZC7BEFK020YSGQSBB1Z70PX": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "v0.22.1 doc sync: design doc + code walkthrough"
+  },
+  "item/01KZC7BEN8HXMT90Q4P033YA0Q": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "v0.22.1 doc sync: user guide + README"
+  },
+  "item/01KZC83EFJV7S63VAXTPRB2YH3": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Three test suites still hide 15 tests behind a mid-file __main__ block"
+  },
+  "item/01KZC9CB5VY2YDCNDYN3W3QK6Y": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Sweep every test file for the mid-file runner block"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6564,6 +6599,9 @@
    "doc_type": "release"
   },
   "release/v0.22.1": {
+   "doc_type": "release"
+  },
+  "release/v0.22.2": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
