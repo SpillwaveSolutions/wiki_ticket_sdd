@@ -43,6 +43,28 @@ def plugin_version():
         return json.load(fh)["version"]
 
 
+def read_frontmatter(path):
+    """Frontmatter lines of a SKILL.md, or fail loudly if the fences are wrong.
+
+    Deliberately strict about the CLOSING fence being alone on its line. A
+    hand version bump once ate the newline and produced `version: 0.16.1---`,
+    which a real YAML parser rejects — the skill then loads with empty
+    metadata and its name and description are silently dropped. The previous
+    check here split the file on "---" and so treated the glued fence as a
+    valid terminator, which is exactly why it never caught it.
+    """
+    with open(path, encoding="utf-8") as fh:
+        lines = fh.read().splitlines()
+    if not lines or lines[0].strip() != "---":
+        raise AssertionError(f"{path}: no opening --- fence on line 1")
+    for i, line in enumerate(lines[1:], start=1):
+        if line.strip() == "---":
+            return lines[1:i]
+    raise AssertionError(
+        f"{path}: no closing --- alone on its own line — frontmatter will not "
+        f"parse as YAML and the skill will load with empty metadata")
+
+
 def make_repo(tc):
     """Fresh empty git repo, cleaned up after the test."""
     d = tempfile.mkdtemp(prefix="worklog-plugin-")
@@ -86,12 +108,65 @@ class TestVersionSync(unittest.TestCase):
         skills = sorted(glob.glob(os.path.join(PLUGIN, "skills", "*", "SKILL.md")))
         self.assertGreaterEqual(len(skills), 3)  # every skill dir must carry SKILL.md
         for path in skills:
-            with open(path, encoding="utf-8") as fh:
-                frontmatter = fh.read().split("---")[1]
+            frontmatter = read_frontmatter(path)
             versions = [l.split(":", 1)[1].strip()
-                        for l in frontmatter.splitlines()
+                        for l in frontmatter
                         if l.startswith("version:")]
             self.assertEqual(versions, [v], f"{path} version != plugin.json")
+
+    def test_every_skill_declares_name_and_description(self):
+        """These are the two fields a broken fence silently drops.
+
+        Without them a skill cannot be matched by description, so it is
+        installed but effectively invisible.
+        """
+        for path in sorted(glob.glob(os.path.join(PLUGIN, "skills", "*", "SKILL.md"))):
+            keys = {l.split(":", 1)[0].strip()
+                    for l in read_frontmatter(path) if ":" in l}
+            self.assertIn("name", keys, f"{path} frontmatter has no name")
+            self.assertIn("description", keys, f"{path} frontmatter has no description")
+
+    def test_frontmatter_values_with_a_colon_are_quoted(self):
+        """A plain YAML scalar may not contain ": ".
+
+        `description: Propose-only: writes ...` parses as an error, not as a
+        string, and the whole frontmatter block is dropped. Costs nothing to
+        quote; costs a silently invisible skill not to.
+        """
+        for path in sorted(glob.glob(os.path.join(PLUGIN, "skills", "*", "SKILL.md"))):
+            for line in read_frontmatter(path):
+                key, sep, value = line.partition(":")
+                value = value.strip()
+                if not sep or not value or value[0] in "\"'|>[{":
+                    continue
+                self.assertNotIn(": ", value,
+                                 f"{path}: {key.strip()} contains ': ' and must be quoted")
+
+
+class TestHooksManifest(unittest.TestCase):
+    def test_hooks_json_is_wrapped_in_a_hooks_key(self):
+        """Event names must sit under a top-level "hooks" record.
+
+        Declared at the top level instead, the file parses as JSON but the
+        loader reads no events from it, so every hook silently never fires.
+        """
+        with open(os.path.join(PLUGIN, "hooks", "hooks.json"), encoding="utf-8") as fh:
+            manifest = json.load(fh)
+        self.assertEqual(list(manifest), ["hooks"],
+                         'hooks.json must hold exactly one top-level "hooks" key')
+        self.assertIsInstance(manifest["hooks"], dict)
+        self.assertTrue(manifest["hooks"], "hooks record is empty")
+
+    def test_every_hook_script_exists_and_is_executable(self):
+        with open(os.path.join(PLUGIN, "hooks", "hooks.json"), encoding="utf-8") as fh:
+            events = json.load(fh)["hooks"]
+        for event, entries in events.items():
+            for entry in entries:
+                for hook in entry.get("hooks", []):
+                    rel = hook["command"].split("/hooks/", 1)[1]
+                    path = os.path.join(PLUGIN, "hooks", rel)
+                    self.assertTrue(os.path.isfile(path), f"{event}: missing {rel}")
+                    self.assertTrue(os.access(path, os.X_OK), f"{event}: {rel} not executable")
 
 
 class TestPackaging(unittest.TestCase):

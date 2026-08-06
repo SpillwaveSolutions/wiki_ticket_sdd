@@ -1,7 +1,8 @@
 ---
 name: merge-green
 description: Merge PRs only when all quality gates pass. Use whenever asked to merge a PR, complete a merge, or land a branch — polls checks every 5 minutes until green instead of merging blind or bypassing.
-version: 0.16.1---
+version: 0.16.1
+---
 
 # Merge when green
 

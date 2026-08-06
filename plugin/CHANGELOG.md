@@ -1,5 +1,33 @@
 # Changelog
 
+## Unreleased
+
+The plugin did not load. `claude plugin list` reported `failed to load` at
+both 0.15.0 and 0.16.1, for two independent reasons, neither of which the
+test suite could see:
+
+- **Fix**: 12 of 13 `SKILL.md` files had the closing frontmatter fence glued
+  onto the version line (`version: 0.16.1---`) by a hand version bump that
+  ate the newline. YAML rejects that, and a skill whose frontmatter fails to
+  parse loads with **empty metadata** — `name` and `description` silently
+  dropped — so it cannot be matched by description and is effectively
+  invisible. `integration-guide` was unaffected only because it was authored
+  fresh in 0.16.0 rather than bumped.
+- **Fix**: `classify`'s description was an unquoted plain scalar containing
+  `": "` (`Propose-only: writes …`), which YAML also rejects. Now quoted.
+- **Fix**: `hooks/hooks.json` declared the event names at the top level
+  instead of under the required `"hooks"` record, so the loader read no
+  events and **every hook silently never fired** — the ExitPlanMode capture
+  hook, the prompt reminder, the Stop check and the session doctor all
+  included.
+- **Test**: `tests/test_plugin.py` parsed frontmatter with
+  `read().split("---")[1]`, which treats the glued fence as a valid
+  terminator — the reason a broken file passed for two releases. Replaced
+  with a strict parser that requires the closing `---` alone on its own line,
+  plus three new checks: every skill declares `name` and `description`, no
+  unquoted frontmatter value contains `": "`, and `hooks.json` is wrapped and
+  its scripts exist and are executable. All four fail on the pre-fix tree.
+
 ## 0.16.1 — 2026-07-26
 
 Post-tag doc sync and a real bug fix for v0.16.0, landed on `main` after the

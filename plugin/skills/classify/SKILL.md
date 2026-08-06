@@ -1,7 +1,8 @@
 ---
 name: classify
-description: Propose work items from recent conversation (flag-gated classifier). Use when the Stop hook requests classification or when asked to sweep a conversation for untracked work. Propose-only: writes .work/suggestions.jsonl, never the event log.
-version: 0.16.1---
+description: "Propose work items from recent conversation (flag-gated classifier). Use when the Stop hook requests classification or when asked to sweep a conversation for untracked work. Propose-only: writes .work/suggestions.jsonl, never the event log."
+version: 0.16.1
+---
 
 # Classify — propose work items from conversation
 
