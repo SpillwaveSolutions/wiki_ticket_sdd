@@ -1,5 +1,5 @@
 {
- "git_hash": "7d83fa2",
+ "git_hash": "3129487",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "5fc0a8ddf43b",
+   "render_hash": "48086aff2691",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3802,6 +3802,26 @@
    "wiki_key": "item/01KZC4C33K1X5T6K79B9E4D3XY"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZC7BEFK020YSGQSBB1Z70PX",
+   "render": "as-is",
+   "render_hash": "35b3573f37f1",
+   "source": "docs/.index/rendered/tickets/01KZC7BEFK020YSGQSBB1Z70PX.md",
+   "title": "v0.22.1 doc sync: design doc + code walkthrough",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01KZC7BEFK020YSGQSBB1Z70PX"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC7BEN8HXMT90Q4P033YA0Q",
+   "render": "as-is",
+   "render_hash": "e6fa377ec440",
+   "source": "docs/.index/rendered/tickets/01KZC7BEN8HXMT90Q4P033YA0Q.md",
+   "title": "v0.22.1 doc sync: user guide + README",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01KZC7BEN8HXMT90Q4P033YA0Q"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4558,13 +4578,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T18:57:29Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T19:03:42Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "1ffee83ab4ff",
+   "render_hash": "2241ed090567",
    "source": "docs/roadmap.md",
-   "source_hash": "65538697716e",
+   "source_hash": "8aa2e670b59f",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

@@ -2921,6 +2921,16 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZC7BEFK020YSGQSBB1Z70PX",
+   "to": "release/v0.22.1",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZC7BEN8HXMT90Q4P033YA0Q",
+   "to": "release/v0.22.1",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6283,6 +6293,16 @@
    "doc_type": "item",
    "status": "done",
    "title": "Cut v0.22.1 release"
+  },
+  "item/01KZC7BEFK020YSGQSBB1Z70PX": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "v0.22.1 doc sync: design doc + code walkthrough"
+  },
+  "item/01KZC7BEN8HXMT90Q4P033YA0Q": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "v0.22.1 doc sync: user guide + README"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
