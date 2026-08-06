@@ -24,6 +24,7 @@ resolved. That fallback is bug #294 with extra steps: it would report drift as
 fabrication and quietly re-introduce the "checked against the wrong tree"
 failure this module exists to end.
 """
+import ast
 import os
 import re
 import subprocess
@@ -108,6 +109,26 @@ def citations(text):
     return out
 
 
+def _defined_at(src, symbol):
+    """First line of `symbol`'s definition in `src`, or None if unknowable.
+
+    None means "do not judge": the file is not Python, does not parse at that
+    commit, or the name is defined more than once (a method on two classes,
+    a redefinition under a version guard). Those cases fall back to the
+    substring check rather than guessing, because a wrong ACCUSATION here is
+    worse than a missed one -- this tool's whole value is that a finding is
+    worth acting on.
+    """
+    try:
+        tree = ast.parse(src)
+    except (SyntaxError, ValueError):
+        return None
+    hits = [n for n in ast.walk(tree)
+            if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef,
+                              ast.ClassDef)) and n.name == symbol]
+    return hits[0].lineno if len(hits) == 1 else None
+
+
 def _check_one(cite, sha, head):
     """-> (verdict, detail). Verdicts: ok | fabricated | drift.
 
@@ -128,6 +149,24 @@ def _check_one(cite, sha, head):
             return ("fabricated",
                     "%s() is not in lines %d-%d at that commit"
                     % (cite["symbol"], cite["start"], cite["end"]))
+        # Appearing SOMEWHERE in the window is too weak on its own. A range
+        # that begins in the wrong place still passes it, so the reader is
+        # sent to a window that is not the definition -- `compact()` cited at
+        # 165-173 when it begins at 143 read as fine for three releases. The
+        # v0.22.1 regeneration found six citations wrong this way, every one
+        # reported ok.
+        #
+        # Only the START is judged. The end is where the author chose to stop
+        # quoting, and citing a slice of a long function is legitimate; nine
+        # of the ranges measured overshot by exactly one line, the blank after
+        # the body, which is how people write citations and not an error worth
+        # a finding. Checking the start caught every genuinely misleading case
+        # in the measured set and produced no false positives.
+        defined = _defined_at(body, cite["symbol"])
+        if defined is not None and defined != cite["start"]:
+            return ("fabricated",
+                    "%s() begins at line %d, not %d, at that commit"
+                    % (cite["symbol"], defined, cite["start"]))
     # Correct when written. Has it moved since?
     head_body = _at(head, cite["path"])
     if head_body is None:
@@ -138,6 +177,12 @@ def _check_one(cite, sha, head):
     if cite["symbol"]:
         if cite["symbol"] not in "\n".join(hl[cite["start"] - 1:cite["end"]]):
             return "drift", "%s() has moved since" % cite["symbol"]
+        # Same reasoning as above, one tree later: correct when written, and
+        # the definition has since slid to a different line.
+        now = _defined_at(head_body, cite["symbol"])
+        if now is not None and now != cite["start"]:
+            return "drift", ("%s() now begins at line %d, not %d"
+                             % (cite["symbol"], now, cite["start"]))
     return "ok", ""
 
 

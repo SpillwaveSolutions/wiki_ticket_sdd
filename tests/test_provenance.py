@@ -456,6 +456,64 @@ class TestVerifierReadsThePinnedCommit(RepoFixture):
             "doc.md", "`bin/thing.py — target(), lines 1–2`", sha)
         self.assertEqual(summary["fabricated"], 1, findings)
 
+    def test_a_range_that_merely_CONTAINS_the_symbol_is_not_good_enough(self):
+        """01KZCC0F: the check used to ask only whether the symbol appeared
+        somewhere inside the cited window, so a range starting in the wrong
+        place passed. `compact()` was cited at 165-173 when it begins at 143
+        and read as fine for three releases; the v0.22.1 regeneration found
+        six such citations, every one reported ok.
+
+        Here the window contains `target` (in the call on line 2) but the
+        definition starts at 4, so the reader lands two lines above it.
+        """
+        self.commit("bin/thing.py", "\n".join(
+            ["# 1", "target()", "# 3", "def target():", "    pass"]) + "\n")
+        sha = self.head()
+        findings, summary = self.verify_one(
+            "doc.md", "`bin/thing.py — target(), lines 2–5`", sha)
+        self.assertEqual(summary["fabricated"], 1, findings)
+        self.assertIn("begins at line 4", findings[0]["detail"])
+
+    def test_the_END_of_a_range_is_deliberately_not_judged(self):
+        """Citing a SLICE of a long function is legitimate, and nine of the
+        ranges measured overshot by exactly one line -- the blank after the
+        body -- which is how people write citations, not an error worth a
+        finding. Only the start is judged; pinned so nobody 'tightens' this
+        into a source of noise."""
+        self.commit("bin/thing.py", "\n".join(
+            ["# 1", "def target():", "    a = 1", "    b = 2", "    return a + b",
+             "", "# 7"]) + "\n")
+        sha = self.head()
+        for rng in ("2–3", "2–6", "2–7"):     # short slice, +1 blank, overshoot
+            findings, summary = self.verify_one(
+                "doc-%s.md" % rng.replace("–", "-"),
+                "`bin/thing.py — target(), lines %s`" % rng, sha)
+            self.assertEqual(summary["fabricated"], 0,
+                             "range %s should not be a finding: %s" % (rng, findings))
+
+    def test_an_ambiguous_symbol_falls_back_rather_than_accusing(self):
+        """Two definitions of one name -- a method on two classes, or a
+        redefinition under a version guard -- means the AST cannot say which
+        one is meant. Judge nothing: a wrong accusation is worse than a missed
+        one, because this tool's value is that a finding is worth acting on."""
+        self.commit("bin/thing.py", "\n".join(
+            ["class A:", "    def target(self):", "        pass",
+             "class B:", "    def target(self):", "        pass"]) + "\n")
+        sha = self.head()
+        findings, summary = self.verify_one(
+            "doc.md", "`bin/thing.py — target(), lines 4–6`", sha)
+        self.assertEqual(summary["fabricated"], 0, findings)
+
+    def test_a_non_python_file_still_uses_the_substring_check(self):
+        """The AST rule cannot apply, and must not silently pass everything
+        either -- a symbol genuinely absent from the window is still wrong."""
+        self.commit("hooks/pre-commit", "\n".join(
+            ["#!/bin/sh", "# nothing here", "# nor here"]) + "\n")
+        sha = self.head()
+        findings, summary = self.verify_one(
+            "doc.md", "`hooks/pre-commit — target(), lines 1–3`", sha)
+        self.assertEqual(summary["fabricated"], 1, findings)
+
     def test_a_range_past_the_end_of_the_file_is_fabricated(self):
         self.commit("bin/thing.py", "one\ntwo\n")
         sha = self.head()
