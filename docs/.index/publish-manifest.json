@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "15a4c49750b4",
+   "render_hash": "e54dcb2fd806",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -485,7 +485,7 @@
    "frozen": false,
    "page_name": "Release-v0.23.0",
    "render": "as-is",
-   "render_hash": "1b1f5c3157f8",
+   "render_hash": "daeb0f765d9f",
    "source": "docs/.index/rendered/releases/v0.23.0.md",
    "title": "Release v0.23.0",
    "truth_state": "shipped",
@@ -3870,6 +3870,16 @@
    "title": "Cut v0.22.2 release",
    "truth_state": "done",
    "wiki_key": "item/01KZC9JZTS96R2VSNDYBHR2NVF"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZCC0F3QYFX9QAKTYVZ01TFK",
+   "render": "as-is",
+   "render_hash": "d29ec26847cd",
+   "source": "docs/.index/rendered/tickets/01KZCC0F3QYFX9QAKTYVZ01TFK.md",
+   "title": "doc-verify accepts a citation whose range is merely close",
+   "truth_state": "done",
+   "wiki_key": "item/01KZCC0F3QYFX9QAKTYVZ01TFK"
   },
   {
    "frozen": false,

@@ -6,6 +6,10 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 `01KZCCG7010S0Q0Y6PF6NN27C2` · status: done
 - targets: release/v0.23.0
 
+### doc-verify accepts a citation whose range is merely close
+`01KZCC0F3QYFX9QAKTYVZ01TFK` · status: done
+- targets: release/v0.23.0
+
 ### Cut v0.22.2 release
 `01KZC9JZTS96R2VSNDYBHR2NVF` · status: done
 - targets: release/v0.22.2

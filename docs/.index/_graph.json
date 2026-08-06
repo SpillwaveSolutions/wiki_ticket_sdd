@@ -2961,6 +2961,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZCC0F3QYFX9QAKTYVZ01TFK",
+   "to": "release/v0.23.0",
+   "type": "targets"
+  },
+  {
    "from": "item/01KZCCG7010S0Q0Y6PF6NN27C2",
    "to": "release/v0.23.0",
    "type": "targets"
@@ -6380,6 +6385,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "Cut v0.22.2 release"
+  },
+  "item/01KZCC0F3QYFX9QAKTYVZ01TFK": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "doc-verify accepts a citation whose range is merely close"
   },
   "item/01KZCCG7010S0Q0Y6PF6NN27C2": {
    "doc_type": "item",
