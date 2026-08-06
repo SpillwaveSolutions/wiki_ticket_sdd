@@ -7,17 +7,33 @@ wiki_key: plugin-guide
 ---
 # WikiTicket SDD — Plugin Guide
 
-How the Claude Code plugin packages WikiTicket SDD, and how the two install
-levels fit together. For concepts see the [User Guide](user-guide.md); for
-command flags see the [CLI Reference](cli-reference.md).
+How the plugin packages WikiTicket SDD, and how the two install levels fit
+together. One shared `plugin/` tree, one manifest per host: Claude Code (and
+Grok Build, which reads the Claude format natively) and, since 0.22.0, Codex.
+For concepts see the [User Guide](user-guide.md); for command flags see the
+[CLI Reference](cli-reference.md).
 
 ## Two install levels
 
 The tooling installs at two distinct levels, and the distinction matters:
 
-1. **Plugin install (per person).** Installing the plugin via the Claude Code
+1. **Plugin install (per person).** Installing the plugin from the
    marketplace gives *you* the skills, slash commands, and hooks in every
    repo you open. Nothing in any repo changes.
+
+   ```sh
+   claude plugin marketplace add <this-repo-url-or-path>
+   claude plugin install worklog@worklog-marketplace
+   ```
+
+   Codex uses the same marketplace and the native manifest at
+   `plugin/.codex-plugin/plugin.json`:
+
+   ```sh
+   codex plugin marketplace add SpillwaveSolutions/wiki_ticket_sdd
+   codex
+   # Open /plugins, install worklog, then start a new session.
+   ```
 
 2. **Repo scaffold (per repo, committed).** Running `/worklog:init` inside a
    repo copies the CLI (`bin/`), the git hooks (`hooks/`), the union-merge
@@ -101,7 +117,10 @@ coverage floor on `bin/*.py` (target 95).
 ## The skills
 
 Skills are the judgment layer: the model decides *when*, the deterministic
-`bin/worklog` scripts decide *what*.
+`bin/worklog` scripts decide *what*. A skill whose YAML frontmatter fails to
+parse is **not rejected** — it loads with empty metadata, so its `name` and
+`description` vanish and the model can never match it. Installed and
+invisible; 0.22.1 added a check that every shipped skill declares both.
 
 | Skill | What it does |
 |---|---|
@@ -135,6 +154,29 @@ ships hooks for the invariants:
 All hooks are silent outside worklog repos (no `bin/worklog`, no output), so
 the plugin doesn't nag in repos that don't use it.
 
+**Upgrade to 0.22.1 if you installed the plugin before it.** Until 0.22.1 the
+hook manifest declared its events at the top level, where the loader reads
+them from under a top-level `hooks` key. The file was valid JSON, so nothing
+failed and nothing warned — the loader simply found no events, and **every
+hook above silently did nothing for anyone who installed the plugin**,
+including plan capture. After upgrading, expect hooks to start firing that
+never did: the prompt reminder, the session doctor, the stop check and the
+plan-capture prompt are not new features, they are what you already installed
+working for the first time. It could not be found from inside this repository,
+whose own sessions wire the same scripts through settings rather than through
+the plugin loader.
+
+On Codex, `plugin/hooks/codex-hooks.json` wires the same scripts — the prompt
+reminder, the stop check and the session doctor all run there. They needed no
+porting: Codex sets `CLAUDE_PLUGIN_ROOT` for plugin-sourced hooks and reads
+the same `hookSpecificOutput` / `additionalContext` output, so only the
+wrapper differs. Plan capture is the exception: it matches the `ExitPlanMode`
+**tool** on `PostToolUse`, and Codex has the event but not that tool — so on
+Codex plan capture is what `AGENTS.md` says it is, and you run
+`bin/worklog plan-capture ...` before implementing. The two hooks the policy
+names as the enforcement mechanism for work tracking are exactly the two that
+port.
+
 ## Harness support
 
 The Claude plugin format works with **Claude Code and Grok build today** (per
@@ -143,9 +185,10 @@ configuration, automatically reading Claude Code marketplaces, plugins,
 skills, MCPs, agents, hooks, and instruction files) —
 all real settings live in `.work/config.yml` (never in the agent file), and
 `/worklog:init` scaffolds `AGENTS.md` as a symlink to `CLAUDE.md`, so one
-policy file serves every harness that reads either name. **Codex and
-OpenCode therefore work today with no port**: because `/worklog:init`
-commits everything a repo needs, teammates on any harness — or none — can
-still run `bin/worklog` and get the hooks; the plugin only adds the
-skills-and-hooks convenience layer on top. The support matrix and porting
-guide live in [plugin/PORTS.md](../../plugin/PORTS.md).
+policy file serves every harness that reads either name. **Codex has a native
+plugin as of 0.22.0** — the same skills, plus every hook except plan capture
+(see above). **OpenCode still needs no port**: because `/worklog:init` commits
+everything a repo needs, teammates on any harness — or none — can still run
+`bin/worklog` and get the git hooks; a plugin only adds the skills-and-hooks
+convenience layer on top. The support matrix and porting guide live in
+[plugin/PORTS.md](../../plugin/PORTS.md).

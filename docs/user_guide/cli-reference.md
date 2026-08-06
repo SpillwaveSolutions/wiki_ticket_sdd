@@ -415,6 +415,13 @@ line that catches damage — naming the field a push replaced on a live ticket
 is. It costs one read per pushed ticket, and the report says how much that
 cost.
 
+*(0.22.0)* `--dry-run` reports the overwrites a **close** would cause too. A
+close is not always only a close: an item with unsynced field changes pushes
+its final shape before closing, and that push can rewrite a ticket somebody
+else filed. The dry run used to return early on the close path and print only
+`would close #123` — silent in exactly the case where a field write is least
+expected. It now predicts what the real run does on both paths.
+
 A ticket the adapter reports **gone** (definitely not found, not a transient
 failure) is marked and not retried on later runs; re-`link`ing the item to a
 new key clears the mark and puts it back in scope. If several tickets report
@@ -533,6 +540,17 @@ and re-applies your branch's own events above the watermark under fresh ids
 folded, safe to drop" from "never folded, must be replayed". It verifies before
 it writes: the guard must now pass, and every item either side knew about must
 still fold to a state — otherwise it aborts and leaves the logs untouched.
+
+*(0.22.0)* Re-issuing is **contagious forward within an item**: once one of an
+item's events is re-issued, every later event of that item is re-issued too.
+Fresh ids are stamped at *now*, so a partially re-stamped item inverted its
+own history — its create and update sorted above a close that kept its
+original id, and the item folded back to its pre-close state. Losing nothing
+is necessary and not sufficient, so a third check now verifies the whole log:
+sorting by the new ids must give each item the same sequence its original ids
+did, or the rescue refuses and writes nothing. **Ran `merge-rescue` on 0.21.0
+or earlier and an item looks reopened? That is this bug** — the close event is
+still in the log, so re-closing the item is a complete repair.
 
 Run it **from the blocked merge**, before `git merge --abort`; the merge state
 is what makes the repair precise. It exits 1 with an explanation if no merge
