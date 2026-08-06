@@ -110,6 +110,16 @@ def _require_item(item):
     """Reject empty/whitespace item ids before any log write (worklog 01KXXMCG41)."""
     if not item or not item.strip():
         sys.exit("worklog: empty item id")
+    # `item` is a single positional, so `close "$id1 $id2"` silently writes an
+    # event against a composite key that matches no item — a no-op that also
+    # renders a junk sidecar path. Four such records reached one downstream
+    # log between 2026-07-23 and 2026-08-04; the widest (10 ULIDs) exceeded the
+    # 255-byte filename limit and crashed `ia-render`. An id never contains
+    # whitespace, so this also catches an error message captured into the id.
+    if len(item.split()) > 1:
+        sys.exit(f"worklog: item id contains whitespace: {item[:60]!r}\n"
+                 "  one item per invocation — loop instead: "
+                 "for i in $ids; do worklog close \"$i\"; done")
 
 
 def cmd_update(a):

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- **Fix**: `_require_item()` now rejects an item id containing whitespace.
+  `item` is a single positional, so `close "$id1 $id2"` silently wrote an
+  event against a composite key matching no item — a no-op that also rendered
+  a junk sidecar path. Four such records reached one downstream log between
+  2026-07-23 and 2026-08-04; the widest (10 ULIDs) produced a 273-byte
+  filename, over the 255-byte limit, which crashed `ia-render` and left the
+  doc index stale. An id never contains whitespace, so the same guard catches
+  an error message captured into the id by mistake. Written downstream, never
+  upstreamed, and therefore **silently reverted by `init.sh` on every upgrade**
+  — which is how it was found.
+
 The plugin did not load. `claude plugin list` reported `failed to load` at
 both 0.15.0 and 0.16.1, for two independent reasons, neither of which the
 test suite could see:
