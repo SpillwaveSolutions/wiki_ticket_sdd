@@ -1,5 +1,5 @@
 {
- "git_hash": "b6c795c",
+ "git_hash": "b0c248f",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "ab71e2bf5ef7",
+   "render_hash": "702469156743",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -480,6 +480,16 @@
    "title": "Release v0.22.2",
    "truth_state": "shipped",
    "wiki_key": "release/v0.22.2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.23.0",
+   "render": "as-is",
+   "render_hash": "cb3f1e7188e9",
+   "source": "docs/.index/rendered/releases/v0.23.0.md",
+   "title": "Release v0.23.0",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.23.0"
   },
   {
    "frozen": false,
@@ -3862,6 +3872,16 @@
    "wiki_key": "item/01KZC9JZTS96R2VSNDYBHR2NVF"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZCC0F3QYFX9QAKTYVZ01TFK",
+   "render": "as-is",
+   "render_hash": "d29ec26847cd",
+   "source": "docs/.index/rendered/tickets/01KZCC0F3QYFX9QAKTYVZ01TFK.md",
+   "title": "doc-verify accepts a citation whose range is merely close",
+   "truth_state": "done",
+   "wiki_key": "item/01KZCC0F3QYFX9QAKTYVZ01TFK"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4642,11 +4662,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T19:46:28Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T20:31:29Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "79d98b208f11",
+   "render_hash": "3b9a33382862",
    "source": "docs/roadmap.md",
    "source_hash": "65538697716e",
    "title": "Roadmap",

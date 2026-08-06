@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### doc-verify accepts a citation whose range is merely close
+`01KZCC0F3QYFX9QAKTYVZ01TFK` · status: done
+- targets: release/v0.23.0
+
 ### Cut v0.22.2 release
 `01KZC9JZTS96R2VSNDYBHR2NVF` · status: done
 - targets: release/v0.22.2

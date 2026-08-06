@@ -2961,6 +2961,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZCC0F3QYFX9QAKTYVZ01TFK",
+   "to": "release/v0.23.0",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6376,6 +6381,11 @@
    "status": "done",
    "title": "Cut v0.22.2 release"
   },
+  "item/01KZCC0F3QYFX9QAKTYVZ01TFK": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "doc-verify accepts a citation whose range is merely close"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6659,6 +6669,9 @@
    "doc_type": "release"
   },
   "release/v0.22.2": {
+   "doc_type": "release"
+  },
+  "release/v0.23.0": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
