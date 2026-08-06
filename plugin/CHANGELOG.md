@@ -1,5 +1,43 @@
 # Changelog
 
+## 0.22.2 — 2026-08-06
+
+- **Fix**: fifteen tests were never running. 0.22.0 found a run-as-a-script
+  block sitting in the *middle* of one test file — everything defined below it
+  is never registered — and fixed that one file without checking the other
+  forty. Three were still hiding tests: `test_ulid.py` (11 of 20 running),
+  `test_bug_merge.py` (15 of 19), `test_link.py` (15 of 17).
+
+  Among the dead was the whole conflict-marker guard suite: the regression
+  test for the check that stops an unresolved merge marker reaching the
+  default branch, which the design documents cite as the enforcement. It had
+  never run in CI.
+
+  The two runners disagreed in silence — pytest imports the module and sees
+  every class, CI runs the file as a script and sees only what precedes the
+  block. **Worth checking your own suites for the same shape**; neither
+  runner warns you.
+
+  Fixing the instance and not the class is what made a second discovery
+  necessary, so the check now covers the class: no test file may define a
+  class below its `if __name__` block. Suite: 615 → 630 tests.
+
+- **Docs**: the design document and code walkthrough are regenerated against
+  0.22.1 and the dated pair frozen. Six inherited line citations were wrong at
+  the tag and were corrected; every citation in both files was re-derived from
+  the code rather than carried forward, and the pair verifies clean.
+
+  The user guide, CLI reference, plugin guide and README are refreshed for
+  0.22.0 and 0.22.1 — the Codex install path, the `merge-rescue`
+  state-inversion repair (**if an item looks reopened, re-closing it is a
+  complete repair**), the close-path overwrite report, and the plain statement
+  that plugin hooks never fired before 0.22.1 and will start firing after you
+  upgrade.
+
+  Both defects in this release were found by the regeneration itself. That is
+  twice in three releases that reading the code closely enough to describe it
+  has surfaced something nothing else was looking for.
+
 ## 0.22.1 — 2026-08-06
 
 One fix, and it is the kind worth reading: **if you installed this plugin,

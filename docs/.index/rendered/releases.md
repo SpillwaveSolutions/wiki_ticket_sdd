@@ -2,6 +2,11 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
+## v0.22.2 — 2026-08-06
+
+- Roadmap snapshot: [[Roadmap-2026-08-06_v0.22.2-release]]
+- Shipped: Sweep every test file for the mid-file runner block
+
 ## v0.22.1 — 2026-08-06
 
 - Design: [[Code-Walkthrough-2026-08-06_v0.22.1-release]]
@@ -10,6 +15,8 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 - Shipped: Plugin hooks never fired: the manifest was not wrapped
 - Shipped: A test asserted the broken hook manifest shape
 - Shipped: Cut v0.22.1 release
+- Shipped: v0.22.1 doc sync: design doc + code walkthrough
+- Shipped: v0.22.1 doc sync: user guide + README
 
 ## v0.22.0 — 2026-08-05
 
