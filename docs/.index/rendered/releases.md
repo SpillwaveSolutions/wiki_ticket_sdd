@@ -6,6 +6,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 
 - Roadmap snapshot: [[Roadmap-2026-08-06_v0.22.2-release]]
 - Shipped: Sweep every test file for the mid-file runner block
+- Shipped: Cut v0.22.2 release
 
 ## v0.22.1 — 2026-08-06
 

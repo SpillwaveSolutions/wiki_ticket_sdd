@@ -3,7 +3,7 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Cut v0.22.2 release
-`01KZC9JZTS96R2VSNDYBHR2NVF` · status: in_progress
+`01KZC9JZTS96R2VSNDYBHR2NVF` · status: done
 - targets: release/v0.22.2
 
 ### Sweep every test file for the mid-file runner block
