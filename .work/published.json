@@ -513,8 +513,8 @@
     "canonical_key": "home",
     "doc_type": "guide",
     "page_id": "Home",
-    "render_hash": "71ae31aaad74",
-    "rev": "17ceed0af05b6c4bd19100c18028a50407c3b59a",
+    "render_hash": "9d2728c1302a",
+    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
     "source": "docs/.index/rendered/home.md",
     "source_hash": "71ae31aaad74",
     "title": "Home",
@@ -547,17 +547,22 @@
     "wiki_key": "index/releases"
   },
   "index/status": {
-    "render_hash": "5543d4d12ec0",
+    "canonical_key": "index/status",
+    "page_id": "Index-Status",
+    "render_hash": "736d58a8a21a",
+    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
     "source": "docs/.index/rendered/status.md",
     "source_hash": "5543d4d12ec0",
     "title": "Status Archive",
-    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Status"
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Index-Status",
+    "wiki_key": "index/status"
   },
   "index/traceability": {
     "canonical_key": "index/traceability",
     "page_id": "Index-Traceability",
-    "render_hash": "ab71e2bf5ef7",
-    "rev": "307d2f6b020a627c4341f654de2b6ffefc8c16a4",
+    "render_hash": "e54dcb2fd806",
+    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
     "source": "docs/.index/rendered/traceability.md",
     "source_hash": "9397d9471711",
     "title": "Traceability Index",
@@ -4518,6 +4523,28 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZC9JZTS96R2VSNDYBHR2NVF",
     "wiki_key": "item/01KZC9JZTS96R2VSNDYBHR2NVF"
   },
+  "item/01KZCC0F3QYFX9QAKTYVZ01TFK": {
+    "canonical_key": "item/01KZCC0F3QYFX9QAKTYVZ01TFK",
+    "page_id": "Ticket-01KZCC0F3QYFX9QAKTYVZ01TFK",
+    "render_hash": "d29ec26847cd",
+    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
+    "source": "docs/.index/rendered/tickets/01KZCC0F3QYFX9QAKTYVZ01TFK.md",
+    "title": "doc-verify accepts a citation whose range is merely close",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZCC0F3QYFX9QAKTYVZ01TFK",
+    "wiki_key": "item/01KZCC0F3QYFX9QAKTYVZ01TFK"
+  },
+  "item/01KZCCG7010S0Q0Y6PF6NN27C2": {
+    "canonical_key": "item/01KZCCG7010S0Q0Y6PF6NN27C2",
+    "page_id": "Ticket-01KZCCG7010S0Q0Y6PF6NN27C2",
+    "render_hash": "b0a9400b5b02",
+    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
+    "source": "docs/.index/rendered/tickets/01KZCCG7010S0Q0Y6PF6NN27C2.md",
+    "title": "Compaction hides shipped work from the status report",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZCCG7010S0Q0Y6PF6NN27C2",
+    "wiki_key": "item/01KZCCG7010S0Q0Y6PF6NN27C2"
+  },
   "plan/2026-07-17_worklog-core_plan": {
     "canonical_key": "plan/2026-07-17_worklog-core_plan",
     "doc_type": "plan",
@@ -5299,6 +5326,17 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Release-v0.22.2",
     "wiki_key": "release/v0.22.2"
   },
+  "release/v0.23.0": {
+    "canonical_key": "release/v0.23.0",
+    "page_id": "Release-v0.23.0",
+    "render_hash": "daeb0f765d9f",
+    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
+    "source": "docs/.index/rendered/releases/v0.23.0.md",
+    "title": "Release v0.23.0",
+    "truth_state": "shipped",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Release-v0.23.0",
+    "wiki_key": "release/v0.23.0"
+  },
   "release/v0.5.0": {
     "canonical_key": "release/v0.5.0",
     "doc_type": "release",
@@ -5368,8 +5406,8 @@
     "canonical_key": "roadmap",
     "doc_type": "roadmap",
     "page_id": "Roadmap",
-    "render_hash": "79d98b208f11",
-    "rev": "307d2f6b020a627c4341f654de2b6ffefc8c16a4",
+    "render_hash": "e9fb8c300420",
+    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
     "source": "docs/roadmap.md",
     "source_hash": "65538697716e",
     "title": "Roadmap",
@@ -5771,8 +5809,8 @@
     "canonical_key": "status/2026-07-18-weekly",
     "doc_type": "status",
     "page_id": "Status-2026-07-18-weekly",
-    "render_hash": "83b031e545eb",
-    "rev": "e6d464b423d224caebcd0d9f018194b3a690e29e",
+    "render_hash": "e043f4a6cb6d",
+    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
     "source": "docs/status/2026-07-18-weekly.md",
     "source_hash": "b6d5388a49ba",
     "title": "Weekly \u2014 WikiTicket SDD",
@@ -5792,6 +5830,19 @@
     "truth_state": "current",
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-07-19-daily",
     "wiki_key": "status/2026-07-19-daily"
+  },
+  "status/2026-08-06-weekly": {
+    "canonical_key": "status/2026-08-06-weekly",
+    "doc_type": "status",
+    "page_id": "Status-2026-08-06-weekly",
+    "render_hash": "97cc51e71462",
+    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
+    "source": "docs/status/2026-08-06-weekly.md",
+    "source_hash": "e07d4763bb9b",
+    "title": "status/2026-08-06-weekly",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Status-2026-08-06-weekly",
+    "wiki_key": "status/2026-08-06-weekly"
   },
   "user-guide": {
     "aliases": [
