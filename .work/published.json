@@ -537,8 +537,8 @@
   "index/releases": {
     "canonical_key": "index/releases",
     "page_id": "Index-Releases",
-    "render_hash": "1eb8dc8499d9",
-    "rev": "307d2f6b020a627c4341f654de2b6ffefc8c16a4",
+    "render_hash": "1f567528e3a0",
+    "rev": "09170500f80fb1bb415f61bb59651d445a37379b",
     "source": "docs/.index/rendered/releases.md",
     "source_hash": "1940f1d43e75",
     "title": "Releases Index",
@@ -561,8 +561,8 @@
   "index/traceability": {
     "canonical_key": "index/traceability",
     "page_id": "Index-Traceability",
-    "render_hash": "e54dcb2fd806",
-    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
+    "render_hash": "37290e427309",
+    "rev": "09170500f80fb1bb415f61bb59651d445a37379b",
     "source": "docs/.index/rendered/traceability.md",
     "source_hash": "9397d9471711",
     "title": "Traceability Index",
@@ -4545,6 +4545,39 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZCCG7010S0Q0Y6PF6NN27C2",
     "wiki_key": "item/01KZCCG7010S0Q0Y6PF6NN27C2"
   },
+  "item/01KZCYXC49J4M5NECS620EFXNB": {
+    "canonical_key": "item/01KZCYXC49J4M5NECS620EFXNB",
+    "page_id": "Ticket-01KZCYXC49J4M5NECS620EFXNB",
+    "render_hash": "15725cae24ff",
+    "rev": "09170500f80fb1bb415f61bb59651d445a37379b",
+    "source": "docs/.index/rendered/tickets/01KZCYXC49J4M5NECS620EFXNB.md",
+    "title": "Composite item ids write junk events on the non-resolving sync commands",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZCYXC49J4M5NECS620EFXNB",
+    "wiki_key": "item/01KZCYXC49J4M5NECS620EFXNB"
+  },
+  "item/01KZCZQ2561TW1BPT3Z9AM75SZ": {
+    "canonical_key": "item/01KZCZQ2561TW1BPT3Z9AM75SZ",
+    "page_id": "Ticket-01KZCZQ2561TW1BPT3Z9AM75SZ",
+    "render_hash": "15345faf13a0",
+    "rev": "09170500f80fb1bb415f61bb59651d445a37379b",
+    "source": "docs/.index/rendered/tickets/01KZCZQ2561TW1BPT3Z9AM75SZ.md",
+    "title": "The citation warning fires on every commit and can never clear",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZCZQ2561TW1BPT3Z9AM75SZ",
+    "wiki_key": "item/01KZCZQ2561TW1BPT3Z9AM75SZ"
+  },
+  "item/01KZD8FBVV2AP9JKMMCX1YWDEP": {
+    "canonical_key": "item/01KZD8FBVV2AP9JKMMCX1YWDEP",
+    "page_id": "Ticket-01KZD8FBVV2AP9JKMMCX1YWDEP",
+    "render_hash": "444109971543",
+    "rev": "09170500f80fb1bb415f61bb59651d445a37379b",
+    "source": "docs/.index/rendered/tickets/01KZD8FBVV2AP9JKMMCX1YWDEP.md",
+    "title": "Cut v0.23.0 release",
+    "truth_state": "done",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Ticket-01KZD8FBVV2AP9JKMMCX1YWDEP",
+    "wiki_key": "item/01KZD8FBVV2AP9JKMMCX1YWDEP"
+  },
   "plan/2026-07-17_worklog-core_plan": {
     "canonical_key": "plan/2026-07-17_worklog-core_plan",
     "doc_type": "plan",
@@ -5329,8 +5362,8 @@
   "release/v0.23.0": {
     "canonical_key": "release/v0.23.0",
     "page_id": "Release-v0.23.0",
-    "render_hash": "daeb0f765d9f",
-    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
+    "render_hash": "0dfa0ce6d897",
+    "rev": "09170500f80fb1bb415f61bb59651d445a37379b",
     "source": "docs/.index/rendered/releases/v0.23.0.md",
     "title": "Release v0.23.0",
     "truth_state": "shipped",
@@ -5406,8 +5439,8 @@
     "canonical_key": "roadmap",
     "doc_type": "roadmap",
     "page_id": "Roadmap",
-    "render_hash": "e9fb8c300420",
-    "rev": "ca6849ce8a282aa5fd483f143efa5f4b982cb6de",
+    "render_hash": "c8e20848ff51",
+    "rev": "09170500f80fb1bb415f61bb59651d445a37379b",
     "source": "docs/roadmap.md",
     "source_hash": "65538697716e",
     "title": "Roadmap",
@@ -5661,6 +5694,19 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-06_v0.22.2-release",
     "wiki_key": "roadmap-snapshot/2026-08-06_v0.22.2-release"
   },
+  "roadmap-snapshot/2026-08-07_v0.23.0-release": {
+    "canonical_key": "roadmap-snapshot/2026-08-07_v0.23.0-release",
+    "doc_type": "roadmap-snapshot",
+    "page_id": "Roadmap-2026-08-07_v0.23.0-release",
+    "render_hash": "3d35dc51f4b6",
+    "rev": "09170500f80fb1bb415f61bb59651d445a37379b",
+    "source": "docs/roadmap/2026-08-07_v0.23.0-release.md",
+    "source_hash": "4edf01f9f7c2",
+    "title": "Roadmap",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-07_v0.23.0-release",
+    "wiki_key": "roadmap-snapshot/2026-08-07_v0.23.0-release"
+  },
   "roadmap/2026-07-18_v0.2-roadmap": {
     "aliases": [
       "roadmap/2026-07-18_v0.2-roadmap"
@@ -5770,8 +5816,8 @@
     "canonical_key": "sidebar",
     "doc_type": "sidebar",
     "page_id": "_Sidebar",
-    "render_hash": "255b0baa2a6f",
-    "rev": "307d2f6b020a627c4341f654de2b6ffefc8c16a4",
+    "render_hash": "43c2b4eedb2e",
+    "rev": "09170500f80fb1bb415f61bb59651d445a37379b",
     "source": "docs/.index/rendered/_Sidebar.md",
     "source_hash": "4ffd66168704",
     "title": "Sidebar",
