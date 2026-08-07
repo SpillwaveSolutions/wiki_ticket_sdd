@@ -6403,7 +6403,7 @@
   },
   "item/01KZCYXC49J4M5NECS620EFXNB": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Composite item ids write junk events on the non-resolving sync commands"
   },
   "item/01KZCZQ2561TW1BPT3Z9AM75SZ": {
