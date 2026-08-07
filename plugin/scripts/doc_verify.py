@@ -186,15 +186,39 @@ def _check_one(cite, sha, head):
     return "ok", ""
 
 
-def verify(records=None, strict=False):
+def staged_docs():
+    """Markdown files this commit actually touches, or None outside a commit.
+
+    None and an empty set mean different things and the caller must not
+    conflate them: None is "no staged set to speak of, check everything",
+    empty is "this commit touches no documents, check nothing".
+    """
+    out = _git("diff", "--cached", "--name-only", "--diff-filter=ACMR")
+    if out is None:
+        return None
+    return {p for p in out.split("\n") if p.strip().endswith(".md")}
+
+
+def verify(records=None, strict=False, only=None):
     """-> (findings, summary). A finding is a dict; summary counts verdicts.
 
     `strict` only changes the EXIT policy of the caller, never the analysis:
     drift on a live doc (one claiming to describe HEAD) is a failure, drift
     on a frozen doc is information.
+
+    `only` restricts the check to a set of source paths. The repo-wide run
+    is the right default for a release gate and the wrong one for a commit
+    hook: every finding here lives in a FROZEN document, which policy says
+    stays frozen, so the hook warned on every commit forever no matter what
+    it touched. A warning that always fires is one people learn to scroll
+    past, which costs more than it catches -- the hook's own comment already
+    said it "reports on documents this commit may not touch".
     """
     if records is None:
         records = ia.build_records()
+    if only is not None:
+        records = {k: r for k, r in records.items()
+                   if r.get("source") in only}
     shallow = is_shallow()
     # Resolve once: a symbolic ref is not a stable cache key and reads
     # differently depending on where the process is standing.
