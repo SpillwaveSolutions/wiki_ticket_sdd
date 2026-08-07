@@ -1,5 +1,5 @@
 {
- "git_hash": "f1411a0",
+ "git_hash": "247688a",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "6ddb6ed644a9",
+   "render_hash": "5ae0658a4202",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3895,10 +3895,10 @@
    "frozen": false,
    "page_name": "Ticket-01KZCYXC49J4M5NECS620EFXNB",
    "render": "as-is",
-   "render_hash": "9e6014f02895",
+   "render_hash": "0fbe061d6ef4",
    "source": "docs/.index/rendered/tickets/01KZCYXC49J4M5NECS620EFXNB.md",
    "title": "Composite item ids write junk events on the non-resolving sync commands",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01KZCYXC49J4M5NECS620EFXNB"
   },
   {
@@ -4692,13 +4692,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-07T02:14:14Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-07T04:35:02Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "0dfdcfc75232",
+   "render_hash": "d28ced22f0da",
    "source": "docs/roadmap.md",
-   "source_hash": "def96d72ae99",
+   "source_hash": "65538697716e",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

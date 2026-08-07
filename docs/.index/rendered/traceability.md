@@ -7,7 +7,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.23.0
 
 ### Composite item ids write junk events on the non-resolving sync commands
-`01KZCYXC49J4M5NECS620EFXNB` · status: todo
+`01KZCYXC49J4M5NECS620EFXNB` · status: done
 
 ### Compaction hides shipped work from the status report
 `01KZCCG7010S0Q0Y6PF6NN27C2` · status: done
