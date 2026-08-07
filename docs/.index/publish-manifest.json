@@ -1,5 +1,5 @@
 {
- "git_hash": "b0c248f",
+ "git_hash": "f1411a0",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "e54dcb2fd806",
+   "render_hash": "509d5ce5736c",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3892,6 +3892,16 @@
    "wiki_key": "item/01KZCCG7010S0Q0Y6PF6NN27C2"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZCYXC49J4M5NECS620EFXNB",
+   "render": "as-is",
+   "render_hash": "9e6014f02895",
+   "source": "docs/.index/rendered/tickets/01KZCYXC49J4M5NECS620EFXNB.md",
+   "title": "Composite item ids write junk events on the non-resolving sync commands",
+   "truth_state": "open",
+   "wiki_key": "item/01KZCYXC49J4M5NECS620EFXNB"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4672,13 +4682,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T20:39:10Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-07T01:55:26Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "e9fb8c300420",
+   "render_hash": "54cea49c3afc",
    "source": "docs/roadmap.md",
-   "source_hash": "65538697716e",
+   "source_hash": "def96d72ae99",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

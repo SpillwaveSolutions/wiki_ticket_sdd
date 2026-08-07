@@ -6396,6 +6396,11 @@
    "status": "done",
    "title": "Compaction hides shipped work from the status report"
   },
+  "item/01KZCYXC49J4M5NECS620EFXNB": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Composite item ids write junk events on the non-resolving sync commands"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
