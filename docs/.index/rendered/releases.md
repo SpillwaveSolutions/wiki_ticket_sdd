@@ -2,6 +2,14 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
+## v0.23.0 — 2026-08-07
+
+- Roadmap snapshot: [[Roadmap-2026-08-07_v0.23.0-release]]
+- Shipped: doc-verify accepts a citation whose range is merely close
+- Shipped: Compaction hides shipped work from the status report
+- Shipped: Composite item ids write junk events on the non-resolving sync commands
+- Shipped: The citation warning fires on every commit and can never clear
+
 ## v0.22.2 — 2026-08-06
 
 - Roadmap snapshot: [[Roadmap-2026-08-06_v0.22.2-release]]

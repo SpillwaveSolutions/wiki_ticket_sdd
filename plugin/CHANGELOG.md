@@ -1,6 +1,47 @@
 # Changelog
 
-## Unreleased
+## 0.23.0 — 2026-08-07
+
+Four correctness fixes. Three of them are the same shape, and it is worth
+naming: **a check that reported success while the answer was wrong.**
+
+- **Fix**: `worklog doc-verify` now checks that a cited range *begins* where
+  the symbol is defined. It used to ask only whether the symbol appeared
+  somewhere inside the cited window, so a range starting in the wrong place
+  passed — `compact()` was cited at lines 165–173 when it begins at 143, and
+  read as fine for three releases. Six citations were wrong this way and
+  every one was reported `ok`.
+
+  Only the start is judged. The end is where the author chose to stop
+  quoting, and citing a slice of a long function is legitimate; nine of the
+  ranges measured overshot by exactly one line — the blank after the body,
+  which is how people write citations and not a defect. Falls back to the old
+  check when the syntax tree cannot say which definition is meant, because a
+  wrong accusation costs more here than a missed one.
+
+- **Fix**: the weekly status report lost work to compaction. It counted an
+  item as shipped only when a `close` event fell inside the window, and
+  compaction folds an item's history into a single snapshot — so the close
+  event stops existing and the item vanishes from the report even though it
+  closed in the window. Nightly compaction runs on the default branch, so
+  **everything closed more than a day earlier disappeared** from the artifact
+  whose whole job is to span a week. This repo's window read **9 items before
+  the fix and 63 after**.
+
+  The time was never lost: a snapshot carries the highest event it folded,
+  which for a closed item is the close. **If you keep weekly reports, the
+  older ones under-count.** No equivalent rescue exists for *opened* — a
+  watermark is the last event folded, never the first — so figures derived
+  from opened-in-window still under-report after a compaction.
+
+- **New**: `worklog doc-verify --staged` checks only the documents a commit
+  touches, and `hooks/pre-commit` now uses it. Every citation finding in a
+  mature repo tends to live in a **frozen** document that policy says stays
+  frozen, so the unscoped check warned on every commit forever regardless of
+  what the commit contained — and a warning that always fires is one people
+  learn to scroll past. The repo-wide run is still what the release gate
+  uses, where the whole corpus is the subject rather than the commit.
+
 
 - **Fix**: `_require_item` now rejects an item id containing whitespace.
   `item` is a single positional, so `close "$id1 $id2"` puts both ids in one

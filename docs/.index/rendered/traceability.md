@@ -2,12 +2,17 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Cut v0.23.0 release
+`01KZD8FBVV2AP9JKMMCX1YWDEP` · status: in_progress
+- targets: release/v0.23.0
+
 ### The citation warning fires on every commit and can never clear
 `01KZCZQ2561TW1BPT3Z9AM75SZ` · status: done
 - targets: release/v0.23.0
 
 ### Composite item ids write junk events on the non-resolving sync commands
 `01KZCYXC49J4M5NECS620EFXNB` · status: done
+- targets: release/v0.23.0
 
 ### Compaction hides shipped work from the status report
 `01KZCCG7010S0Q0Y6PF6NN27C2` · status: done
