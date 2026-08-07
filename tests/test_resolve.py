@@ -126,6 +126,44 @@ class ResolveTest(unittest.TestCase):
         self.assertNotEqual(p.returncode, 0)
         self.assertIn("empty item id", p.stderr + p.stdout)
 
+    def test_composite_id_on_close_names_the_real_mistake(self):
+        """`close "$id1 $id2"` puts both ids in one positional.
+
+        `_resolve` already refuses to act on the composite key, so no event is
+        written here — but it reports "no item matching <two ULIDs>", which
+        reads as a missing item rather than as a quoting mistake. Name the
+        actual fault instead.
+        """
+        a = self.add("First")
+        b = self.add("Second")
+        before = self.items()
+        p = self.run_wl("close", f"{a} {b}")
+        self.assertNotEqual(p.returncode, 0, "a composite id was accepted")
+        self.assertIn("whitespace", p.stderr + p.stdout)
+        self.assertEqual(self.items(), before)
+
+    def test_composite_id_on_a_non_resolving_command_writes_nothing(self):
+        """`conflict` and `ingest` append without resolving — the real hole.
+
+        Both call `_require_item` and then `append()` directly, so before this
+        guard a whitespace-bearing id wrote an event against a composite key
+        matching no item: a silent no-op whose rendered sidecar path grows with
+        every id. One downstream log carried a 10-ULID key whose 273-byte
+        filename exceeded the filesystem limit and crashed `ia-render`. These
+        are sync-path commands, so the id can arrive from a remote system.
+        """
+        a = self.add("First")
+        b = self.add("Second")
+        log = os.path.join(self.dir, ".work", "todo.jsonl")
+        with open(log, encoding="utf-8") as fh:
+            before = fh.read()
+        p = self.run_wl("conflict", f"{a} {b}", "--field", "title",
+                        "--local", "x", "--remote", "y", "--remote-rev", "1")
+        self.assertNotEqual(p.returncode, 0, "a composite id was accepted")
+        self.assertIn("whitespace", p.stderr + p.stdout)
+        with open(log, encoding="utf-8") as fh:
+            self.assertEqual(fh.read(), before, "a rejected id still wrote an event")
+
     # -- commands that already resolved keep working --------------------
 
     def test_show_and_reopen_by_prefix(self):
