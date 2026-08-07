@@ -2,7 +2,7 @@
 wiki_key: roadmap
 doc_type: roadmap
 truth_state: current
-source_hash: 599b9dc3
+source_hash: 80c54b50
 generated_at: 2026-08-07T02:14:14Z
 git_hash: "f1411a0"
 ---
@@ -14,7 +14,7 @@ git_hash: "f1411a0"
 
 # Roadmap
 
-_0 epic(s) in flight, 0 open item(s), 0 blocked, 0 unclassified._
+_0 epic(s) in flight, 1 open item(s), 0 blocked, 0 unclassified._
 
 ## Now
 
@@ -22,8 +22,30 @@ _Nothing here._
 
 ## Next
 
-_Nothing here._
+### (no epic)
+
+| # | Item | Type | Priority | Status | Blocked by |
+|---|---|---|---|---|---|
+| 01KZCYXC | Composite item ids write junk events on the non-resolving sync commands | task | P1 | todo | — |
 
 ## Later
 
 _Nothing here._
+
+## Visual roadmap
+
+### Dependency graph
+
+```mermaid
+graph TD
+    01KZCYXC49J4M5NECS620EFXNB["🐛 Composite item ids write junk"]
+    classDef todo fill:#f4f4f4,stroke:#999999
+    class 01KZCYXC49J4M5NECS620EFXNB todo
+```
+
+### Hierarchy
+
+```mermaid
+graph TD
+    01KZCYXC49J4M5NECS620EFXNB["🐛 Composite item ids write junk"]
+```

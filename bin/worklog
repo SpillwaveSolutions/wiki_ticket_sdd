@@ -196,9 +196,20 @@ def cmd_add(a):
 
 
 def _require_item(item):
-    """Reject empty/whitespace item ids before any log write (worklog 01KXXMCG41)."""
+    """Reject empty/whitespace item ids before any log write (worklog 01KXXMCG41).
+
+    Whitespace inside an id is rejected too. `item` is a single positional, so
+    `close "$id1 $id2"` writes an event against a composite key matching no
+    item — a silent no-op that also renders a junk sidecar path. A real id
+    never contains whitespace, so the same guard catches an error message
+    captured into the id by mistake, which is how one of these arose.
+    """
     if not item or not item.strip():
         sys.exit("worklog: empty item id")
+    if len(item.split()) > 1:
+        sys.exit(f"worklog: item id contains whitespace: {item[:60]!r}\n"
+                 "  one item per invocation — loop instead: "
+                 "for i in $ids; do worklog close \"$i\"; done")
 
 
 def _resolve(item, r=None):

@@ -1,5 +1,32 @@
 # Changelog
 
+## Unreleased
+
+- **Fix**: `_require_item` now rejects an item id containing whitespace.
+  `item` is a single positional, so `close "$id1 $id2"` puts both ids in one
+  string. `_resolve` already refuses to act on that, but two commands —
+  `ingest` and `conflict` — call `_require_item` and then `append()` **without
+  resolving**, so the event was written against a composite key matching no
+  item: exit 0, no output, nothing changed. Both are sync-path commands, so the
+  id can arrive from a remote system.
+
+  The cost is not the no-op. The sidecar path rendered from that key grows with
+  every id, and a downstream log carried a 10-ULID key whose 273-byte filename
+  exceeded the filesystem limit and crashed `ia-render`, leaving the doc index
+  stale behind a "soon a hard gate" warning. Four such records reached one log
+  between 2026-07-23 and 2026-08-04; the older three survived only by staying
+  under the limit.
+
+  A real id never contains whitespace, so the same guard catches an error
+  message captured into an id by mistake, which is how one of the four arose.
+  On `close` the message now names the quoting mistake rather than reporting
+  "no item matching &lt;two ULIDs&gt;", which reads as a missing item.
+
+  Written downstream in a consuming repo and never sent here, so `init.sh`
+  silently deleted it on upgrade — twice in one day, at 0.16.1 and again at
+  0.22.2. That is how it surfaced. **A fix that lives only downstream has an
+  expiry date.**
+
 ## 0.22.2 — 2026-08-06
 
 - **Fix**: fifteen tests were never running. 0.22.0 found a run-as-a-script

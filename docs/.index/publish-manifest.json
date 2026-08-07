@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "1567b638cd82",
+   "render_hash": "6ddb6ed644a9",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3893,6 +3893,16 @@
   },
   {
    "frozen": false,
+   "page_name": "Ticket-01KZCYXC49J4M5NECS620EFXNB",
+   "render": "as-is",
+   "render_hash": "9e6014f02895",
+   "source": "docs/.index/rendered/tickets/01KZCYXC49J4M5NECS620EFXNB.md",
+   "title": "Composite item ids write junk events on the non-resolving sync commands",
+   "truth_state": "open",
+   "wiki_key": "item/01KZCYXC49J4M5NECS620EFXNB"
+  },
+  {
+   "frozen": false,
    "page_name": "Ticket-01KZCZQ2561TW1BPT3Z9AM75SZ",
    "render": "as-is",
    "render_hash": "15345faf13a0",
@@ -4686,9 +4696,9 @@
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "d99a7442c59c",
+   "render_hash": "0dfdcfc75232",
    "source": "docs/roadmap.md",
-   "source_hash": "65538697716e",
+   "source_hash": "def96d72ae99",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
