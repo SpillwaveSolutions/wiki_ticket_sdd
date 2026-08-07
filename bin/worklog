@@ -826,7 +826,16 @@ def cmd_doc_verify(a):
     against (#294). Lazy import: doc_verify shells out to git, and the
     render plane must not grow that dependency."""
     import doc_verify
-    findings, summary = doc_verify.verify(strict=a.strict)
+    only = None
+    if getattr(a, "staged", False):
+        only = doc_verify.staged_docs()
+        if not only:
+            # Distinguish "nothing staged" from "everything clean": with an
+            # empty set verify() would check nothing and report a perfect
+            # score, which reads as a pass it never earned.
+            print("doc-verify: this commit touches no documents")
+            return
+    findings, summary = doc_verify.verify(strict=a.strict, only=only)
     doc_verify.report(findings, summary)
     if a.strict:
         bad = doc_verify.failing(findings)
@@ -1562,6 +1571,10 @@ dv = sub.add_parser(
 dv.set_defaults(fn=cmd_doc_verify)
 dv.add_argument("--strict", action="store_true",
                 help="exit 1 on fabrication, or on drift in a live document")
+dv.add_argument("--staged", action="store_true",
+                help="check only documents this commit touches — what the "
+                     "pre-commit hook wants, since a repo-wide run warns "
+                     "about frozen documents the commit never saw")
 
 pb = sub.add_parser(
     "provenance-backfill",

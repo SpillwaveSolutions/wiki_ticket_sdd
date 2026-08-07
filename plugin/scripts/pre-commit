@@ -143,11 +143,16 @@ if [ -f bin/ia.py ] && [ -x bin/worklog ] && [ -d docs/.index ]; then
   # trace-check stays warn-level here forever; --strict runs at release time
   [ ! -f bin/ia_graph.py ] || python3 bin/worklog trace-check >/dev/null 2>&1 || \
     echo "worklog: WARNING — unlinked evidence; run: worklog trace-check" >&2
-  # doc-verify, same tier and for the same reason: it reports on documents
-  # this commit may not touch, so blocking here would punish the wrong
-  # commit. --strict runs at release time. It is also skipped outright on a
-  # shallow clone, where `git show <sha>:path` cannot resolve and every
-  # answer would be "unresolvable" (#294).
-  [ ! -f bin/doc_verify.py ] || python3 bin/worklog doc-verify --strict >/dev/null 2>&1 || \
-    echo "worklog: WARNING — document citations do not match the commit they were written against; run: worklog doc-verify" >&2
+  # doc-verify, scoped to the documents THIS commit touches (--staged).
+  # Repo-wide is right for the release gate and wrong here: every finding in
+  # this repo lives in a frozen document that policy says stays frozen, so
+  # the unscoped check warned on every commit forever no matter what it
+  # touched, and a warning that always fires is one people learn to scroll
+  # past. Still warn-level rather than blocking: a commit that legitimately
+  # edits a frozen doc's metadata should not be stopped. --strict runs at
+  # release time, unscoped. Skipped outright on a shallow clone, where
+  # `git show <sha>:path` cannot resolve and every answer is
+  # "unresolvable" (#294).
+  [ ! -f bin/doc_verify.py ] || python3 bin/worklog doc-verify --staged --strict >/dev/null 2>&1 || \
+    echo "worklog: WARNING — a document THIS commit touches cites code that does not match the commit it was written against; run: worklog doc-verify --staged" >&2
 fi
