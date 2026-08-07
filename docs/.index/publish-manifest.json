@@ -1,5 +1,5 @@
 {
- "git_hash": "247688a",
+ "git_hash": "4cec2fc",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "1eb8dc8499d9",
+   "render_hash": "65a99fc02a07",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "5ae0658a4202",
+   "render_hash": "b7ab82d1fca6",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -485,7 +485,7 @@
    "frozen": false,
    "page_name": "Release-v0.23.0",
    "render": "as-is",
-   "render_hash": "244a21cc29d9",
+   "render_hash": "510d249736ec",
    "source": "docs/.index/rendered/releases/v0.23.0.md",
    "title": "Release v0.23.0",
    "truth_state": "shipped",
@@ -3895,7 +3895,7 @@
    "frozen": false,
    "page_name": "Ticket-01KZCYXC49J4M5NECS620EFXNB",
    "render": "as-is",
-   "render_hash": "0fbe061d6ef4",
+   "render_hash": "15725cae24ff",
    "source": "docs/.index/rendered/tickets/01KZCYXC49J4M5NECS620EFXNB.md",
    "title": "Composite item ids write junk events on the non-resolving sync commands",
    "truth_state": "done",
@@ -3910,6 +3910,16 @@
    "title": "The citation warning fires on every commit and can never clear",
    "truth_state": "done",
    "wiki_key": "item/01KZCZQ2561TW1BPT3Z9AM75SZ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZD8FBVV2AP9JKMMCX1YWDEP",
+   "render": "as-is",
+   "render_hash": "8707c445a2d2",
+   "source": "docs/.index/rendered/tickets/01KZD8FBVV2AP9JKMMCX1YWDEP.md",
+   "title": "Cut v0.23.0 release",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01KZD8FBVV2AP9JKMMCX1YWDEP"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -4692,13 +4702,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-07T04:35:02Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-07T04:42:33Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "d28ced22f0da",
+   "render_hash": "b468b8874e0e",
    "source": "docs/roadmap.md",
-   "source_hash": "65538697716e",
+   "source_hash": "4edf01f9f7c2",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -4932,6 +4942,18 @@
    "wiki_key": "roadmap-snapshot/2026-08-06_v0.22.2-release"
   },
   {
+   "banner": "> **Snapshot** of release v0.23.0 (2026-08-07) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-08-07_v0.23.0-release",
+   "render": "doc+banner",
+   "render_hash": "3d35dc51f4b6",
+   "source": "docs/roadmap/2026-08-07_v0.23.0-release.md",
+   "source_hash": "4edf01f9f7c2",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-08-07_v0.23.0-release"
+  },
+  {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
    "frozen": true,
    "page_name": "Roadmap-2026-07-18_v0.2-roadmap",
@@ -5089,7 +5111,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "255b0baa2a6f",
+  "render_hash": "43c2b4eedb2e",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1
