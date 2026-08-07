@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "509d5ce5736c",
+   "render_hash": "6ddb6ed644a9",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -485,7 +485,7 @@
    "frozen": false,
    "page_name": "Release-v0.23.0",
    "render": "as-is",
-   "render_hash": "daeb0f765d9f",
+   "render_hash": "244a21cc29d9",
    "source": "docs/.index/rendered/releases/v0.23.0.md",
    "title": "Release v0.23.0",
    "truth_state": "shipped",
@@ -3902,6 +3902,16 @@
    "wiki_key": "item/01KZCYXC49J4M5NECS620EFXNB"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZCZQ2561TW1BPT3Z9AM75SZ",
+   "render": "as-is",
+   "render_hash": "15345faf13a0",
+   "source": "docs/.index/rendered/tickets/01KZCZQ2561TW1BPT3Z9AM75SZ.md",
+   "title": "The citation warning fires on every commit and can never clear",
+   "truth_state": "done",
+   "wiki_key": "item/01KZCZQ2561TW1BPT3Z9AM75SZ"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4682,11 +4692,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-07T01:55:26Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-07T02:14:14Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "54cea49c3afc",
+   "render_hash": "0dfdcfc75232",
    "source": "docs/roadmap.md",
    "source_hash": "def96d72ae99",
    "title": "Roadmap",

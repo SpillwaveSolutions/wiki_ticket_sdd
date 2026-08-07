@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### The citation warning fires on every commit and can never clear
+`01KZCZQ2561TW1BPT3Z9AM75SZ` · status: done
+- targets: release/v0.23.0
+
 ### Composite item ids write junk events on the non-resolving sync commands
 `01KZCYXC49J4M5NECS620EFXNB` · status: todo
 

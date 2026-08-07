@@ -514,6 +514,55 @@ class TestVerifierReadsThePinnedCommit(RepoFixture):
             "doc.md", "`hooks/pre-commit — target(), lines 1–3`", sha)
         self.assertEqual(summary["fabricated"], 1, findings)
 
+    def test_staged_scope_hides_a_finding_in_a_doc_this_commit_never_saw(self):
+        """01KZCZQ2: the hook ran repo-wide, and every finding in this repo
+        lives in a FROZEN document that policy says stays frozen -- so it
+        warned on every commit forever regardless of what the commit touched.
+        A warning that always fires is one people learn to scroll past, which
+        costs more than it catches.
+
+        Here two documents both cite the same wrong lines. Scoped to one, the
+        other's finding must not appear.
+        """
+        self.commit("bin/thing.py", "\n".join(
+            ["# 1", "# 2", "def target():", "    pass"]) + "\n")
+        sha = self.head()
+        cite = "`bin/thing.py — target(), lines 1–2`"
+        for name in ("mine.md", "theirs.md"):
+            write(os.path.join(self.d, name),
+                  '---\ngit_hash: "%s"\n---\n\n%s\n' % (sha, cite))
+        self.git("add", "-A")
+        self.git("commit", "-qm", "two docs")
+        import doc_verify
+        recs = {"mine": {"source": "mine.md", "git_hash": sha},
+                "theirs": {"source": "theirs.md", "git_hash": sha}}
+
+        both = self.run_in_repo(lambda: doc_verify.verify(records=recs))
+        self.assertEqual(both[1]["fabricated"], 2, both[0])
+
+        one = self.run_in_repo(
+            lambda: doc_verify.verify(records=recs, only={"mine.md"}))
+        self.assertEqual(one[1]["fabricated"], 1, one[0])
+        self.assertEqual(one[0][0]["source"], "mine.md")
+
+    def test_an_empty_staged_set_is_not_the_same_as_no_scope(self):
+        """`only=set()` must check nothing, not everything. Conflating the
+        two would make a commit that touches no documents silently run the
+        repo-wide check again -- the exact behaviour being removed."""
+        self.commit("bin/thing.py", "def target():\n    pass\n")
+        sha = self.head()
+        write(os.path.join(self.d, "doc.md"),
+              '---\ngit_hash: "%s"\n---\n\n`bin/thing.py — target(), lines 90–99`\n'
+              % sha)
+        self.git("add", "-A")
+        self.git("commit", "-qm", "doc")
+        import doc_verify
+        recs = {"k": {"source": "doc.md", "git_hash": sha}}
+        _, summary = self.run_in_repo(
+            lambda: doc_verify.verify(records=recs, only=set()))
+        self.assertEqual(summary["docs"], 0)
+        self.assertEqual(summary["fabricated"], 0)
+
     def test_a_range_past_the_end_of_the_file_is_fabricated(self):
         self.commit("bin/thing.py", "one\ntwo\n")
         sha = self.head()

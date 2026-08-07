@@ -2971,6 +2971,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZCZQ2561TW1BPT3Z9AM75SZ",
+   "to": "release/v0.23.0",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6400,6 +6405,11 @@
    "doc_type": "item",
    "status": "todo",
    "title": "Composite item ids write junk events on the non-resolving sync commands"
+  },
+  "item/01KZCZQ2561TW1BPT3Z9AM75SZ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "The citation warning fires on every commit and can never clear"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
