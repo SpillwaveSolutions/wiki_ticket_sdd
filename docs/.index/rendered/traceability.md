@@ -3,7 +3,7 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Cut v0.23.0 release
-`01KZD8FBVV2AP9JKMMCX1YWDEP` · status: in_progress
+`01KZD8FBVV2AP9JKMMCX1YWDEP` · status: done
 - targets: release/v0.23.0
 
 ### The citation warning fires on every commit and can never clear

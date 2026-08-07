@@ -1327,11 +1327,11 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-08-07T04:42:33Z",
-   "git_hash": "4cec2fc",
+   "generated_at": "2026-08-07T04:51:34Z",
+   "git_hash": "2eeabbb",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "96ca6d46",
+   "source_hash": "a297cd70",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
@@ -1683,6 +1683,7 @@
    "doc_type": "roadmap-snapshot",
    "generated_at": "2026-08-07T04:42:33Z",
    "git_hash": "4cec2fc",
+   "merged_in": "2eeabbb04044950d549dbd0f4b6ffc4c71829d33",
    "name": "v0.23.0-release",
    "release": "v0.23.0",
    "slug": "2026-08-07_v0.23.0-release",
@@ -1691,6 +1692,7 @@
    "supersedes": "roadmap-snapshot/2026-08-06_v0.22.2-release",
    "title": "Roadmap",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-08-07_v0.23.0-release",
    "wiki_key": "roadmap-snapshot/2026-08-07_v0.23.0-release"
   },
   {
@@ -1898,6 +1900,7 @@
    "generated_at": "2026-08-06T20:39:38Z",
    "git_hash": "b0c248f0aff8de04e855ed1d7495fe9a79dfb3b5",
    "kind": "weekly",
+   "merged_in": "9bc5b1e12b97941e96cf68505c0e2c9464ef0cf7",
    "slug": "2026-08-06-weekly",
    "source": "docs/status/2026-08-06-weekly.md",
    "through": "01KZCCT91JJEV933J5Y5W0KANP",

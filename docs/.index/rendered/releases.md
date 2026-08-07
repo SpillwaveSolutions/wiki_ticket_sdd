@@ -9,6 +9,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 - Shipped: Compaction hides shipped work from the status report
 - Shipped: Composite item ids write junk events on the non-resolving sync commands
 - Shipped: The citation warning fires on every commit and can never clear
+- Shipped: Cut v0.23.0 release
 
 ## v0.22.2 — 2026-08-06
 
