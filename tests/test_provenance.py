@@ -611,10 +611,94 @@ class TestVerifierNeverFallsBackToHead(unittest.TestCase):
         import doc_verify
         frozen_drift = {"verdict": "drift", "live": False}
         live_drift = {"verdict": "drift", "live": True}
-        fabricated = {"verdict": "fabricated", "live": False}
+        fabricated = {"verdict": "fabricated", "live": False, "editable": True}
         self.assertEqual(doc_verify.failing([frozen_drift]), [])
         self.assertEqual(len(doc_verify.failing([live_drift])), 1)
         self.assertEqual(len(doc_verify.failing([fabricated])), 1)
+
+
+class TestStrictIsPassable(RepoFixture):
+    """#345 / ADR-0009. Gating fabrication ANYWHERE was un-passable: the only
+    way to clear one is to edit the document, and for a frozen document the
+    freeze rule forbids exactly that. 48 of them sat in this repo's dated
+    design pairs with no legal fix, so the release gate could never go green.
+
+    The gate now follows editability, and these tests pin both halves --
+    dropping the gate for landed frozen docs is only defensible because the
+    commit that WRITES one still gets checked.
+    """
+
+    def finding(self, **kw):
+        f = {"verdict": "fabricated", "live": False, "editable": False}
+        f.update(kw)
+        return f
+
+    def test_a_landed_frozen_fabrication_does_not_fail_the_gate(self):
+        import doc_verify
+        self.assertEqual(doc_verify.failing([self.finding()]), [])
+
+    def test_the_commit_that_writes_that_same_document_still_fails(self):
+        """The whole justification for the line above. A repo-wide run marks
+        a frozen doc uneditable; a --staged run is scoped to documents the
+        commit is writing, so every finding in it is still fixable."""
+        import doc_verify
+        self.assertEqual(
+            len(doc_verify.failing([self.finding(editable=True)])), 1)
+
+    def test_a_doc_that_is_neither_live_nor_frozen_is_still_gated(self):
+        """docs/user_guide/ and README.md are neither. Scoping the gate to
+        LIVE_DOCS instead of to editability -- the obvious one-line fix --
+        would stop gating a fabrication there, which IS fixable."""
+        import doc_verify
+        rec = {"source": "docs/user_guide/x.md", "doc_type": "guide"}
+        self.assertFalse(ia.is_frozen(rec))
+        self.assertEqual(len(doc_verify.failing(
+            [self.finding(editable=True)])), 1)
+
+    def verdicts_for(self, name, scoped=False):
+        """A fabrication through verify(), which is where `editable` is
+        computed -- failing() never sees a record. The cited path does not
+        exist at any commit, so the verdict does not depend on this repo's
+        contents. `scoped` mimics --staged: the run is restricted to this
+        document, i.e. the commit is writing it.
+
+        This runs inside RepoFixture's throwaway repo, not in whatever clone
+        the runner stands in. verify() asks is_shallow() of the ambient repo
+        and short-circuits every document to `unresolvable` before `editable`
+        is computed, so on a shallow clone -- which is what the CI coverage
+        job checks out -- these assertions never reach what they pin.
+        """
+        import doc_verify
+        self.commit(name, "`bin/no-such-module.py — target(), lines 1–2`\n")
+        rec = {"source": name, "doc_type": "design", "git_hash": self.head()}
+        findings, _ = self.run_in_repo(
+            lambda: doc_verify.verify(records={"k": rec},
+                                      only={name} if scoped else None))
+        self.assertTrue(findings, "expected a fabrication to work with")
+        return findings
+
+    def test_verify_marks_a_landed_frozen_design_uneditable(self):
+        import doc_verify
+        f = self.verdicts_for("2026-07-19_v0.11.0-release_design_doc.md")
+        self.assertFalse(any(x.get("editable") for x in f), f)
+        self.assertEqual(doc_verify.failing(f), [])
+
+    def test_verify_marks_the_current_pair_editable(self):
+        f = self.verdicts_for("current_design_doc.md")
+        self.assertTrue(all(x.get("editable") for x in f), f)
+
+    def test_a_commit_scoped_run_makes_even_a_frozen_design_editable(self):
+        """The load-bearing case: the commit that creates a dated design pair
+        is the last moment its citations can be corrected, so --staged must
+        gate them. If this ever stops holding, a new frozen document can land
+        fabricated and nothing will ever fail on it."""
+        import doc_verify
+        name = "2026-07-19_v0.11.0-release_design_doc.md"
+        f = self.verdicts_for(name)
+        scoped = self.verdicts_for(name, scoped=True)
+        self.assertFalse(any(x.get("editable") for x in f))
+        self.assertTrue(all(x.get("editable") for x in scoped), scoped)
+        self.assertEqual(len(doc_verify.failing(scoped)), 1)
 
 
 class TestCitationParsing(unittest.TestCase):

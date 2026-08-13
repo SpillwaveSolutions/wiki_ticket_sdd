@@ -30,7 +30,7 @@ from fold import (fold, FoldResult, read_lines, dedupe_and_sort, external_owners
 LOG = ".work/todo.jsonl"
 PATHS = (".work/todo.jsonl", ".work/done.jsonl")
 MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
-VERSION = "0.23.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+VERSION = "0.23.1"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
 _warned_concurrent = False
@@ -840,10 +840,14 @@ def cmd_doc_verify(a):
     only = None
     if getattr(a, "staged", False):
         only = doc_verify.staged_docs()
-        if not only:
-            # Distinguish "nothing staged" from "everything clean": with an
-            # empty set verify() would check nothing and report a perfect
-            # score, which reads as a pass it never earned.
+        # None and empty mean different things and must not be conflated:
+        # None is "no staged set to speak of", empty is "this commit touches
+        # no documents". Treating None as empty exits 0 on a check that never
+        # ran -- a pass it never earned.
+        if only is None:
+            print("doc-verify: cannot read the staged set; "
+                  "checking every document")
+        elif not only:
             print("doc-verify: this commit touches no documents")
             return
     findings, summary = doc_verify.verify(strict=a.strict, only=only)
@@ -852,8 +856,8 @@ def cmd_doc_verify(a):
         bad = doc_verify.failing(findings)
         if bad:
             print("doc-verify: %d finding(s) fail --strict "
-                  "(fabricated anywhere, or drift on a doc claiming to "
-                  "describe HEAD)" % len(bad))
+                  "(fabrication in a document that can still be fixed, or "
+                  "drift on a doc claiming to describe HEAD)" % len(bad))
             sys.exit(1)
 
 
@@ -1581,7 +1585,12 @@ dv = sub.add_parser(
                 "document is reported and skipped.")
 dv.set_defaults(fn=cmd_doc_verify)
 dv.add_argument("--strict", action="store_true",
-                help="exit 1 on fabrication, or on drift in a live document")
+                help="exit 1 on a defect that can still be fixed: "
+                     "fabrication in an editable document (with --staged, "
+                     "any document this commit writes), or drift in a live "
+                     "one. Fabrication in a landed frozen document is "
+                     "reported, never gated — the freeze rule forbids the "
+                     "only fix (ADR-0009)")
 dv.add_argument("--staged", action="store_true",
                 help="check only documents this commit touches — what the "
                      "pre-commit hook wants, since a repo-wide run warns "

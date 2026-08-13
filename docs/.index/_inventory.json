@@ -166,6 +166,23 @@
    "wiki_key": "adr/0008-document-provenance-depends-on-merge-com"
   },
   {
+   "canonical_key": "adr/0009-a-frozen-document-s-fabricated-citations",
+   "date": "2026-08-13",
+   "doc_type": "adr",
+   "git_hash": "6bd91ec483a200e8a38e4fad66baa27c46d7cb0b",
+   "id": 9,
+   "slug": "a-frozen-document-s-fabricated-citations",
+   "source": "docs/adr/0009-a-frozen-document-s-fabricated-citations.md",
+   "status": "accepted",
+   "tags": [
+    "docs",
+    "verification"
+   ],
+   "title": "A frozen document's fabricated citations are reported, never gated",
+   "truth_state": "current",
+   "wiki_key": "adr/0009-a-frozen-document-s-fabricated-citations"
+  },
+  {
    "aliases": [
     "cli-reference"
    ],
@@ -1327,11 +1344,11 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-08-07T04:51:34Z",
-   "git_hash": "2eeabbb",
+   "generated_at": "2026-08-13T16:51:51Z",
+   "git_hash": "4e01ded",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "a297cd70",
+   "source_hash": "e5cd6763",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

@@ -14,6 +14,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 | [[ADR-0006-resurrected-events-are-not-always-cosmet]] Resurrected events are not always cosmetic | accepted | 2026-08-01 | — |
 | [[ADR-0007-the-compaction-watermark-is-per-item]] The compaction watermark is per item | accepted | 2026-08-01 | — |
 | [[ADR-0008-document-provenance-depends-on-merge-com]] Document provenance depends on merge commits | accepted | 2026-08-03 | — |
+| [[ADR-0009-a-frozen-document-s-fabricated-citations]] A frozen document's fabricated citations are reported, never gated | accepted | 2026-08-13 | — |
 
 ## Plans
 

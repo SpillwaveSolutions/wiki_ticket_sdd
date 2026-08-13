@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.23.1 — unreleased
+
+- **Fix**: `worklog doc-verify --strict` was un-passable. It exited 1 on a
+  fabricated citation wherever it lived, and the only way to clear one is to
+  edit the document — which the freeze rule forbids for exactly the documents
+  that hold them. 48 fabrications sit in this repo's dated design pairs with no
+  legal fix, so the release gate had been red since the verifier shipped and the
+  remedy in every case was to not run it.
+
+  The gate now follows **editability**, not freeze state: fabrication fails in a
+  document that can still be corrected, and the commit that *creates* a frozen
+  document is scoped by `--staged`, so its citations are still checked strictly
+  — that is the only moment they could have been fixed anyway. Afterwards the
+  errors stay, printed on every run tagged `[frozen record — reported, not
+  gated]` with an explicit count, so silence never reads as absence. Reasoning
+  and the two rejected alternatives: **ADR-0009**. (#345)
+
+- **Fix**: `worklog doc-verify --staged` treated "cannot read the staged set"
+  and "this commit touches no documents" as the same thing and exited 0 for
+  both — a pass a check that never ran had not earned. It now says which
+  happened, and checks everything when the staged set is unavailable.
+
 ## 0.23.0 — 2026-08-07
 
 Four correctness fixes. Three of them are the same shape, and it is worth

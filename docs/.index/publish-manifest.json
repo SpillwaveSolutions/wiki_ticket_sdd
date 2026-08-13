@@ -1,5 +1,5 @@
 {
- "git_hash": "2eeabbb",
+ "git_hash": "4e01ded",
  "pages": [
   {
    "frozen": false,
@@ -15,7 +15,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "d24a90184e53",
+   "render_hash": "1ab8b576c218",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "37290e427309",
+   "render_hash": "12a789d431cc",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3922,6 +3922,26 @@
    "wiki_key": "item/01KZD8FBVV2AP9JKMMCX1YWDEP"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZWHQN8AHWFBC7JV4N6XPVNK",
+   "render": "as-is",
+   "render_hash": "1a3af06c6f46",
+   "source": "docs/.index/rendered/tickets/01KZWHQN8AHWFBC7JV4N6XPVNK.md",
+   "title": "doc-verify --strict is un-passable once a frozen doc carries a fabricated citation",
+   "truth_state": "done",
+   "wiki_key": "item/01KZWHQN8AHWFBC7JV4N6XPVNK"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZY0B9KQBKH6NFGBA0YFSYQA",
+   "render": "as-is",
+   "render_hash": "9f5fcdaf8f02",
+   "source": "docs/.index/rendered/tickets/01KZY0B9KQBKH6NFGBA0YFSYQA.md",
+   "title": "Fix TestStrictIsPassable dependency on ambient git clone depth",
+   "truth_state": "done",
+   "wiki_key": "item/01KZY0B9KQBKH6NFGBA0YFSYQA"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4016,6 +4036,18 @@
    "title": "Document provenance depends on merge commits",
    "truth_state": "current",
    "wiki_key": "adr/0008-document-provenance-depends-on-merge-com"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "ADR-0009-a-frozen-document-s-fabricated-citations",
+   "render": "doc+banner",
+   "render_hash": "5ca99b5f8858",
+   "source": "docs/adr/0009-a-frozen-document-s-fabricated-citations.md",
+   "source_hash": "7db6d740b237",
+   "title": "A frozen document's fabricated citations are reported, never gated",
+   "truth_state": "current",
+   "wiki_key": "adr/0009-a-frozen-document-s-fabricated-citations"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -4702,11 +4734,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-07T04:51:34Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-13T16:51:51Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "c8e20848ff51",
+   "render_hash": "de1f7e423282",
    "source": "docs/roadmap.md",
    "source_hash": "65538697716e",
    "title": "Roadmap",
@@ -5111,7 +5143,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "43c2b4eedb2e",
+  "render_hash": "2a8dd47c9351",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1
