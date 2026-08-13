@@ -103,6 +103,17 @@
     "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0008-document-provenance-depends-on-merge-com",
     "wiki_key": "adr/0008-document-provenance-depends-on-merge-com"
   },
+  "adr/0009-a-frozen-document-s-fabricated-citations": {
+    "canonical_key": "adr/0009-a-frozen-document-s-fabricated-citations",
+    "doc_type": "adr",
+    "rev": null,
+    "source": "docs/adr/0009-a-frozen-document-s-fabricated-citations.md",
+    "source_hash": null,
+    "title": "ADR-0009-a-frozen-document-s-fabricated-citations",
+    "truth_state": "current",
+    "url": null,
+    "wiki_key": "adr/0009-a-frozen-document-s-fabricated-citations"
+  },
   "cli-reference": {
     "aliases": [
       "cli-reference"

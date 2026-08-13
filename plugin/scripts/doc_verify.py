@@ -252,6 +252,18 @@ def verify(records=None, strict=False, only=None):
                                           " (shallow)" if shallow else "")})
             continue
         live = src.endswith(LIVE_DOCS)
+        # Can this document still be fixed? Two different questions, and
+        # conflating them is bug #345:
+        #   live     -- does it CLAIM to describe HEAD? decides drift.
+        #   editable -- may it be corrected at all? decides fabrication.
+        # A frozen document is normally neither, but `only` means this run is
+        # scoped to one commit, so every document in it is being written right
+        # now. That is the single moment a frozen doc is still editable, and
+        # the gate has to bite exactly there or never.
+        # `doc_type` is absent on the partial records callers hand-build; an
+        # unclassified document is not one the freeze rule protects.
+        editable = only is not None or not (
+            rec.get("doc_type") and ia.is_frozen(rec))
         for c in cites:
             verdict, detail = _check_one(c, sha, head)
             summary[verdict] += 1
@@ -259,7 +271,7 @@ def verify(records=None, strict=False, only=None):
                 continue
             findings.append({
                 "doc": key, "source": src, "verdict": verdict,
-                "live": live, "detail": detail,
+                "live": live, "editable": editable, "detail": detail,
                 "cite": "%s%s lines %d-%d" % (
                     c["path"], " %s()" % c["symbol"] if c["symbol"] else "",
                     c["start"], c["end"])})
@@ -267,11 +279,25 @@ def verify(records=None, strict=False, only=None):
 
 
 def failing(findings):
-    """What --strict exits 1 on: fabrication anywhere, and drift only on a
-    document that claims to describe HEAD. A frozen doc is allowed to age --
-    failing on that would make the gate un-passable by design."""
+    """What --strict exits 1 on: a defect in a document that can still be
+    fixed. Drift fails on a doc claiming to describe HEAD; fabrication fails
+    on a doc that is editable.
+
+    "Fabrication anywhere" was the obvious rule and it was un-passable (#345).
+    The freeze rule forbids editing a published design doc; --strict demanded
+    it; 48 fabrications sat in frozen dated design pairs in this repo with no
+    legal way to clear one. A gate nobody can pass is a gate nobody runs.
+
+    Scoping by editability rather than by freeze state keeps the gate's teeth
+    where they matter. The commit that CREATES a frozen document is scoped
+    (`--staged`), so its citations are still checked strictly -- and that is
+    the only moment they could have been corrected anyway. Afterwards the
+    document is history: the errors stay, reported every run, and the current
+    pair names them for readers. That is what the 0.20.0 notes already
+    promised in prose; this makes the code agree.
+    """
     return [f for f in findings
-            if f["verdict"] == "fabricated"
+            if (f["verdict"] == "fabricated" and f.get("editable"))
             or (f["verdict"] == "drift" and f.get("live"))]
 
 
@@ -285,12 +311,25 @@ def report(findings, summary):
             if f["verdict"] in ("unstamped", "unresolvable"):
                 print("  %-12s %s" % (f["verdict"].upper(), f["detail"]))
             else:
-                print("  %-12s %s — %s"
-                      % (f["verdict"].upper(), f["cite"], f["detail"]))
+                # Say which findings the gate will act on. Without this the
+                # frozen ones read as an un-passable --strict rather than as
+                # the historical record they are (#345).
+                frozen = (f["verdict"] == "fabricated"
+                          and not f.get("editable"))
+                print("  %-12s %s — %s%s"
+                      % (f["verdict"].upper(), f["cite"], f["detail"],
+                         " [frozen record — reported, not gated]"
+                         if frozen else ""))
     print("doc-verify: %d citation(s) ok, %d fabricated, %d drifted "
           "across %d document(s); %d unstamped, %d unresolvable"
           % (summary["ok"], summary["fabricated"], summary["drift"],
              summary["docs"], summary["unstamped"], summary["unresolvable"]))
+    stuck = len([f for f in findings if f["verdict"] == "fabricated"
+                 and not f.get("editable")])
+    if stuck:
+        print("doc-verify: %d fabrication(s) are in frozen documents and "
+              "cannot be corrected; they are reported every run and never "
+              "gate --strict (ADR-0009)" % stuck)
 
 
 if __name__ == "__main__":

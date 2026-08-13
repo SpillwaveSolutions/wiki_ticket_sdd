@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### doc-verify --strict is un-passable once a frozen doc carries a fabricated citation
+`01KZWHQN8AHWFBC7JV4N6XPVNK` · status: done
+
 ### Cut v0.23.0 release
 `01KZD8FBVV2AP9JKMMCX1YWDEP` · status: done
 - targets: release/v0.23.0

@@ -4535,6 +4535,12 @@
    "title": "Document provenance depends on merge commits",
    "truth_state": "current"
   },
+  "adr/0009-a-frozen-document-s-fabricated-citations": {
+   "doc_type": "adr",
+   "source": "docs/adr/0009-a-frozen-document-s-fabricated-citations.md",
+   "title": "A frozen document's fabricated citations are reported, never gated",
+   "truth_state": "current"
+  },
   "cli-reference": {
    "doc_type": "guide",
    "source": "docs/user_guide/cli-reference.md",
@@ -6440,6 +6446,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "Cut v0.23.0 release"
+  },
+  "item/01KZWHQN8AHWFBC7JV4N6XPVNK": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "doc-verify --strict is un-passable once a frozen doc carries a fabricated citation"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
