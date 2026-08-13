@@ -1,5 +1,5 @@
 {
- "git_hash": "3ed44ef",
+ "git_hash": "902fcab",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "c3d421e104b1",
+   "render_hash": "6a5660557930",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3945,7 +3945,7 @@
    "frozen": false,
    "page_name": "Ticket-01KZY2EVJMFERMM4PGPKM0QE58",
    "render": "as-is",
-   "render_hash": "1f9b3bd1e0fa",
+   "render_hash": "6d2112dcb8e7",
    "source": "docs/.index/rendered/tickets/01KZY2EVJMFERMM4PGPKM0QE58.md",
    "title": "Stop hook accuses a correctly-logged worktree session of skipping the log",
    "truth_state": "done",
@@ -4744,11 +4744,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-13T18:20:13Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-13T18:21:14Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "2570b559fe6f",
+   "render_hash": "67150b8d1a4b",
    "source": "docs/roadmap.md",
    "source_hash": "65538697716e",
    "title": "Roadmap",

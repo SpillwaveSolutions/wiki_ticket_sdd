@@ -2986,6 +2986,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZY2EVJMFERMM4PGPKM0QE58",
+   "to": "ticket/github#349",
+   "type": "references"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7582,6 +7587,10 @@
   "ticket/github#34": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/34"
+  },
+  "ticket/github#349": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/349"
   },
   "ticket/github#39": {
    "doc_type": "ticket",
