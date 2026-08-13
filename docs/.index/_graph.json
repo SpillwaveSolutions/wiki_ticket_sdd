@@ -6457,6 +6457,11 @@
    "status": "done",
    "title": "Fix TestStrictIsPassable dependency on ambient git clone depth"
   },
+  "item/01KZY2EVJMFERMM4PGPKM0QE58": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Stop hook accuses a correctly-logged worktree session of skipping the log"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",

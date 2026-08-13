@@ -1,5 +1,5 @@
 {
- "git_hash": "4e01ded",
+ "git_hash": "3ed44ef",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "12a789d431cc",
+   "render_hash": "c3d421e104b1",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3942,6 +3942,16 @@
    "wiki_key": "item/01KZY0B9KQBKH6NFGBA0YFSYQA"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZY2EVJMFERMM4PGPKM0QE58",
+   "render": "as-is",
+   "render_hash": "1f9b3bd1e0fa",
+   "source": "docs/.index/rendered/tickets/01KZY2EVJMFERMM4PGPKM0QE58.md",
+   "title": "Stop hook accuses a correctly-logged worktree session of skipping the log",
+   "truth_state": "done",
+   "wiki_key": "item/01KZY2EVJMFERMM4PGPKM0QE58"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4734,11 +4744,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-13T16:51:51Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-13T18:20:13Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "de1f7e423282",
+   "render_hash": "2570b559fe6f",
    "source": "docs/roadmap.md",
    "source_hash": "65538697716e",
    "title": "Roadmap",

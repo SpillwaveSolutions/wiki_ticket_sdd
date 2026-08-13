@@ -112,6 +112,91 @@ class TestStopHookClassifierGate(unittest.TestCase):
             self.assertEqual(r.stdout.strip(), "")
 
 
+class TestStopHookSeesLinkedWorktrees(unittest.TestCase):
+    """The Stop hook asked one checkout two questions, and worklog policy
+    tells concurrent sessions to work in a linked worktree.
+
+    Linked worktrees share an object store but not a working tree: each has
+    its own branch and its own .work/todo.jsonl. So a session can record
+    every item correctly in the worktree while the checkout the hook stands
+    in -- often the primary one -- has an unchanged log and is dirty for some
+    unrelated reason. The hook read that as proof the session skipped
+    tracking and blocked. Copying events between trees by hand is forbidden,
+    so there was no supported way to make it see the real log.
+    """
+
+    def add_worktree(self, d, name="side"):
+        wt = tempfile.mkdtemp(prefix="clsf-wt-")
+        self.addCleanup(shutil.rmtree, wt, True)
+        path = os.path.join(wt, name)
+        subprocess.run(["git", "-C", d, "worktree", "add", "-q", path,
+                        "-b", name], check=True, capture_output=True)
+        self.addCleanup(subprocess.run,
+                        ["git", "-C", d, "worktree", "prune"],
+                        capture_output=True)
+        return path
+
+    def record_in(self, path):
+        """An uncommitted todo.jsonl event -- what `worklog add` leaves
+        behind, and the only evidence of recording the hook accepts."""
+        with open(os.path.join(path, ".work", "todo.jsonl"), "a") as fh:
+            fh.write('{"ev":"01TESTTESTTESTTESTTESTTESTTE",'
+                     '"item":"01TESTTESTTESTTESTTESTTESTTE","op":"create"}\n')
+
+    def test_a_worktree_that_recorded_the_work_clears_the_primary_tree(self):
+        d = make_repo(self)
+        self.record_in(self.add_worktree(d))
+        r = run_hook(d)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(r.stdout.strip(), "", r.stdout)
+
+    def test_it_still_blocks_when_no_checkout_recorded_anything(self):
+        """The fix widens where the hook looks, never whether it bites. A
+        worktree that exists but logged nothing must not launder a dirty
+        tree into a pass."""
+        d = make_repo(self)
+        self.add_worktree(d)
+        r = run_hook(d)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(json.loads(r.stdout).get("decision"), "block")
+
+    def test_the_session_s_own_checkout_still_counts(self):
+        """Widening the search must not lose the single-checkout case, which
+        is every session that never made a worktree."""
+        d = make_repo(self)
+        self.record_in(d)
+        r = run_hook(d)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(r.stdout.strip(), "", r.stdout)
+
+    def test_it_looks_both_ways_when_the_session_runs_in_the_worktree(self):
+        """The mirror image, and the one a $PWD-shaped fix would still miss:
+        the session stands in the linked worktree while the primary checkout
+        holds the log. `worktree list` reports every checkout from any of
+        them, so the direction the session faces stops mattering."""
+        d = make_repo(self)
+        wt = self.add_worktree(d)
+        self.record_in(d)
+        # dirty the worktree instead, so the gate fires there
+        with open(os.path.join(wt, "base.txt"), "a") as fh:
+            fh.write("work happened\n")
+        r = run_hook(wt)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(r.stdout.strip(), "", r.stdout)
+
+    def test_a_recording_worktree_also_silences_the_classifier(self):
+        """Classifier on, the hook emits advisory context instead of a block.
+        Same false positive, same fix -- the gate that decides both is the
+        one being widened."""
+        d = make_repo(self)
+        with open(os.path.join(d, ".work", "config.yml"), "w") as fh:
+            fh.write(CLASSIFIER_ON)
+        self.record_in(self.add_worktree(d))
+        r = run_hook(d)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(r.stdout.strip(), "", r.stdout)
+
+
 class TestTaxonomyBlockInstall(unittest.TestCase):
     def _install(self, cwd):
         r = subprocess.run(["bash", INIT, "taxonomy"], cwd=cwd,
