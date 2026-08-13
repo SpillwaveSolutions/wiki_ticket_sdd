@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Stop hook accuses a correctly-logged worktree session of skipping the log
+`01KZY2EVJMFERMM4PGPKM0QE58` · status: done
+- references: [github#349](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/349)
+
 ### Fix TestStrictIsPassable dependency on ambient git clone depth
 `01KZY0B9KQBKH6NFGBA0YFSYQA` · status: done
 

@@ -24,8 +24,26 @@ branch_after=$(git -C "$PWD" rev-parse --abbrev-ref HEAD 2>/dev/null) || exit 0
 # Fresh repo with no HEAD yet → nothing to diff against, allow stop.
 git -C "$PWD" rev-parse --verify HEAD >/dev/null 2>&1 || exit 0
 
+# Worklog policy puts concurrent sessions in linked worktrees. Those share an
+# object store but not a working tree: each has its own branch and its own
+# .work/todo.jsonl. Asking only $PWD accused a correctly-logged worktree
+# session of skipping the log -- and since copying events between trees by
+# hand is forbidden, there was no supported way to answer the accusation.
+#
+# Only "was it recorded" widens. The dirty check above stays at $PWD, because
+# that is the question $PWD can actually answer: did work happen here.
+# Process substitution, not a pipe: a piped `while` runs in a subshell, where
+# `exit 0` would leave the loop and block anyway.
+while IFS= read -r wt; do
+  [ -n "$wt" ] || continue
+  git -C "$wt" diff --quiet HEAD -- .work/todo.jsonl 2>/dev/null || exit 0
+done < <(git -C "$PWD" worktree list --porcelain 2>/dev/null \
+         | sed -n 's/^worktree //p')
+
 # Tree changed outside .work/roadmap, but todo.jsonl is untouched vs HEAD:
-# work happened with no work item recorded.
+# work happened with no work item recorded. Reached only when no checkout in
+# the repo recorded anything -- `worktree list` failing leaves this as the
+# single-checkout fallback it has always been.
 if git -C "$PWD" diff --quiet HEAD -- .work/todo.jsonl 2>/dev/null; then
   # Flag-gated classifier (spec §6.2): naive-yaml read of classifier.enabled.
   # Absent block, absent file, or anything but "true" → v0.6 behavior unchanged.
