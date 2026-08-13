@@ -617,7 +617,7 @@ class TestVerifierNeverFallsBackToHead(unittest.TestCase):
         self.assertEqual(len(doc_verify.failing([fabricated])), 1)
 
 
-class TestStrictIsPassable(unittest.TestCase):
+class TestStrictIsPassable(RepoFixture):
     """#345 / ADR-0009. Gating fabrication ANYWHERE was un-passable: the only
     way to clear one is to edit the document, and for a frozen document the
     freeze rule forbids exactly that. 48 of them sat in this repo's dated
@@ -660,15 +660,20 @@ class TestStrictIsPassable(unittest.TestCase):
         computed -- failing() never sees a record. The cited path does not
         exist at any commit, so the verdict does not depend on this repo's
         contents. `scoped` mimics --staged: the run is restricted to this
-        document, i.e. the commit is writing it."""
+        document, i.e. the commit is writing it.
+
+        This runs inside RepoFixture's throwaway repo, not in whatever clone
+        the runner stands in. verify() asks is_shallow() of the ambient repo
+        and short-circuits every document to `unresolvable` before `editable`
+        is computed, so on a shallow clone -- which is what the CI coverage
+        job checks out -- these assertions never reach what they pin.
+        """
         import doc_verify
-        d = tempfile.mkdtemp(prefix="worklog-345-")
-        self.addCleanup(shutil.rmtree, d, True)
-        doc = os.path.join(d, name)
-        write(doc, "`bin/no-such-module.py — target(), lines 1–2`\n")
-        rec = {"source": doc, "doc_type": "design", "git_hash": "HEAD"}
-        findings, _ = doc_verify.verify(records={"k": rec},
-                                        only={doc} if scoped else None)
+        self.commit(name, "`bin/no-such-module.py — target(), lines 1–2`\n")
+        rec = {"source": name, "doc_type": "design", "git_hash": self.head()}
+        findings, _ = self.run_in_repo(
+            lambda: doc_verify.verify(records={"k": rec},
+                                      only={name} if scoped else None))
         self.assertTrue(findings, "expected a fabrication to work with")
         return findings
 

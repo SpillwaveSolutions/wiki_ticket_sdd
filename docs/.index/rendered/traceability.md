@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Fix TestStrictIsPassable dependency on ambient git clone depth
+`01KZY0B9KQBKH6NFGBA0YFSYQA` · status: done
+
 ### doc-verify --strict is un-passable once a frozen doc carries a fabricated citation
 `01KZWHQN8AHWFBC7JV4N6XPVNK` · status: done
 

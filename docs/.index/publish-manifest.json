@@ -1,5 +1,5 @@
 {
- "git_hash": "6bd91ec",
+ "git_hash": "4e01ded",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "4d6e4ae797ff",
+   "render_hash": "12a789d431cc",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3932,6 +3932,16 @@
    "wiki_key": "item/01KZWHQN8AHWFBC7JV4N6XPVNK"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZY0B9KQBKH6NFGBA0YFSYQA",
+   "render": "as-is",
+   "render_hash": "9f5fcdaf8f02",
+   "source": "docs/.index/rendered/tickets/01KZY0B9KQBKH6NFGBA0YFSYQA.md",
+   "title": "Fix TestStrictIsPassable dependency on ambient git clone depth",
+   "truth_state": "done",
+   "wiki_key": "item/01KZY0B9KQBKH6NFGBA0YFSYQA"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4724,11 +4734,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-13T03:19:59Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-13T16:51:51Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "0200e04c061d",
+   "render_hash": "de1f7e423282",
    "source": "docs/roadmap.md",
    "source_hash": "65538697716e",
    "title": "Roadmap",

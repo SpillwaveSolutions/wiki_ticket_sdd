@@ -6452,6 +6452,11 @@
    "status": "done",
    "title": "doc-verify --strict is un-passable once a frozen doc carries a fabricated citation"
   },
+  "item/01KZY0B9KQBKH6NFGBA0YFSYQA": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Fix TestStrictIsPassable dependency on ambient git clone depth"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
