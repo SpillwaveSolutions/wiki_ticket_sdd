@@ -6467,6 +6467,11 @@
    "status": "done",
    "title": "Stop hook accuses a correctly-logged worktree session of skipping the log"
   },
+  "item/01M032YRXR61XAJBBNP355AVQW": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Stop hook cannot see work that was recorded and then committed"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
