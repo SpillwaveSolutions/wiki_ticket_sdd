@@ -4,6 +4,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Stop hook cannot see work that was recorded and then committed
 `01M032YRXR61XAJBBNP355AVQW` · status: todo
+- references: [github#352](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/352)
 
 ### Stop hook accuses a correctly-logged worktree session of skipping the log
 `01KZY2EVJMFERMM4PGPKM0QE58` · status: done
