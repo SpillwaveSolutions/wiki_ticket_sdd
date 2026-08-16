@@ -65,9 +65,13 @@ Then set `SECOND_BRAIN_ROOT` to the session bundle from the JSON. Close the sess
 
 ```bash
 export SECOND_BRAIN_IDENTITY="deep-agents/wiki-ticket-sdd"
-bin/worklog show --help
+bin/worklog --actor "$SECOND_BRAIN_IDENTITY" show --help
 # Knowledge-tree writes only, after opening a session:
-# write TicketLink / work-item Markdown into $SECOND_BRAIN_ROOT
+python3 bin/okf_write.py write \
+  --type TicketLink \
+  --title "Example ticket link" \
+  --bundle "$SECOND_BRAIN_ROOT" \
+  --author "$SECOND_BRAIN_IDENTITY"
 ```
 
 Wrap the scripts as tools or shell. The model proposes. The scripts capture, pack, and validate.

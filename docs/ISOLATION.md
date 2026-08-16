@@ -81,15 +81,21 @@ If this plugin materializes TicketLink / work items into an OKF tree, those writ
 
 ```bash
 # Worklog append — no knowledge worktree required
-bin/worklog add --title "Example" --unplanned
+bin/worklog --actor grok-bot/wiki-ticket-sdd add "Example" --unplanned
 
-# Knowledge-tree write — isolation required
+# Knowledge-tree write — isolation + claimed author required
 python3 plugin/scripts/brain_session.py open \
   --repo "$BRAIN_REPO" \
   --bundle knowledge \
   --actor grok-bot/wiki-ticket-sdd \
   --plugin worklog \
   --host grok-bot
+
+python3 bin/okf_write.py write \
+  --type TicketLink \
+  --title "Example ticket link" \
+  --bundle "$SECOND_BRAIN_ROOT" \
+  --author grok-bot/wiki-ticket-sdd
 ```
 
 

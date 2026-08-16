@@ -1,5 +1,5 @@
 {
- "git_hash": "9ef1e40",
+ "git_hash": "e6397a5",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "f87cf6ffc4a6",
+   "render_hash": "20ba900f9739",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -490,6 +490,16 @@
    "title": "Release v0.23.0",
    "truth_state": "shipped",
    "wiki_key": "release/v0.23.0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.24.1",
+   "render": "as-is",
+   "render_hash": "4bae7e450d97",
+   "source": "docs/.index/rendered/releases/v0.24.1.md",
+   "title": "Release v0.24.1",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.24.1"
   },
   {
    "frozen": false,
@@ -3962,6 +3972,16 @@
    "wiki_key": "item/01M032YRXR61XAJBBNP355AVQW"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M06BRQPQ8408XTDYTMY2JYFE",
+   "render": "as-is",
+   "render_hash": "e2963a1655e7",
+   "source": "docs/.index/rendered/tickets/01M06BRQPQ8408XTDYTMY2JYFE.md",
+   "title": "Wave C: require identity on knowledge-tree writes",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M06BRQPQ8408XTDYTMY2JYFE"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4754,13 +4774,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-15T16:22:48Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-16T22:41:06Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "966470283d8f",
+   "render_hash": "c9dbaf7f81d4",
    "source": "docs/roadmap.md",
-   "source_hash": "247ed2276b38",
+   "source_hash": "b796dd6f850f",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

@@ -2,6 +2,11 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Wave C: require identity on knowledge-tree writes
+`01M06BRQPQ8408XTDYTMY2JYFE` · status: in_progress
+- references: [github#356](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/356)
+- targets: release/v0.24.1
+
 ### Stop hook cannot see work that was recorded and then committed
 `01M032YRXR61XAJBBNP355AVQW` · status: todo
 - references: [github#352](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/352)
