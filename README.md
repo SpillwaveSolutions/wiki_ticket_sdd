@@ -166,6 +166,21 @@ Policy that holds because tooling holds it, not because people remember:
   squash-merge the verifier reports `unresolvable` and refuses rather than
   checking against the wrong tree.
 
+## Multi-host
+
+| Host | How it loads |
+|------|----------------|
+| Claude Code | Marketplace `worklog@worklog-marketplace` (`plugin/.claude-plugin`) |
+| Grok Build | Claude-compatible, zero-config |
+| Codex | `plugin/.codex-plugin` + `plugin/hooks/codex-hooks.json` |
+| Agent Plugins 1.0 | Root `plugin.json` and `plugin/plugin.json` |
+| Grok Bot | Skills + [docs/GROK_BOT.md](docs/GROK_BOT.md) |
+| LangChain Deep Agents | `plugin/skills/` — [docs/LANG_CHAIN_DEEP_AGENTS.md](docs/LANG_CHAIN_DEEP_AGENTS.md) |
+
+Two merge models: worklog is append-only ULID events; knowledge-tree writes use worktree + PR. See [docs/ISOLATION.md](docs/ISOLATION.md). Public examples use fictional **lumenfield-detector** and **northstar-console** only.
+
+Also: [Onboarding](./docs/ONBOARDING.md).
+
 ## Claude Code, Codex, and Grok Build plugins
 
 The plugin (in [plugin/](plugin/)) packages the skills, `/worklog:*`
@@ -260,7 +275,7 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | `docs/user_guide/` | User guide, CLI reference, plugin guide |
 | `docs/integrations/` | Living per-system setup guides (11 SDD tools + ticket/wiki systems), published to the wiki and used as the `integration-guide` skill's offline fallback |
 | `hooks/` | `pre-commit`, `pre-merge-commit`, `commit-msg`, `exit-plan-capture.sh`, `prompt-reminder.sh`, `session-doctor.sh`, `session-end.sh`, `stop-worklog-check.sh` |
-| `plugin/` | Claude Code, Codex, and Grok Build manifests, commands, skills, hooks, and canonical scripts — **v0.23.1** |
+| `plugin/` | Claude Code, Codex, and Grok Build manifests, commands, skills, hooks, and canonical scripts — **v0.24.0** |
 | `tests/` | Unit and integration tests |
 
 ## Testing

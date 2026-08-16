@@ -1,7 +1,7 @@
 ---
 name: status-report
 metadata:
-  version: "0.23.1"
+  version: "0.24.0"
 description: 'Generate a status report. Use when asked for a status report, a standup summary, "what changed this week", or "what did we ship". Writes docs/status/<date>-<kind>.md, commits, and publishes — never paste an unrecorded status into chat.'
 ---
 
