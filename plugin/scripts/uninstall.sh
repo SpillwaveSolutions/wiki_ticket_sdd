@@ -14,7 +14,7 @@ removed=()
 for f in bin/worklog bin/fold.py bin/ulid.py bin/render_roadmap.py bin/viz_mermaid.py bin/plan_capture.py bin/compact.py bin/adr.py \
          bin/ia.py bin/ia_render.py bin/ia_graph.py bin/canonical.py bin/sync_dispatch.py \
          bin/item_fields.py bin/wiki_flavor.py bin/changelog.py \
-         bin/session.py; do
+         bin/session.py bin/okf_write.py; do
   if [ -f "$f" ]; then
     rm "$f"
     removed+=("$f")

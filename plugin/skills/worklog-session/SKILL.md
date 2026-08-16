@@ -1,7 +1,7 @@
 ---
 name: worklog-session
 metadata:
-  version: "0.24.0"
+  version: "0.24.1"
 description: Open or close an isolated second-brain write session (worktree + PR). Use before writing knowledge when multiple agents share one knowledge remote.
 ---
 
@@ -46,3 +46,13 @@ Pushes to whatever remote the checkout already has and opens a PR when `gh` is a
 ## Worklog vs knowledge tree
 
 Worklog appends via `bin/worklog` do **not** use this skill. Only OKF knowledge-tree writes do.
+
+After the session is open, materialize owned types with identity:
+
+```bash
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/okf_write.py" write \
+  --type TicketLink \
+  --title "Example ticket link" \
+  --bundle "${SECOND_BRAIN_ROOT}" \
+  --author "${SECOND_BRAIN_IDENTITY:?claim an identity first}"
+```

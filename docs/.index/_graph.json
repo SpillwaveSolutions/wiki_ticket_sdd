@@ -2996,6 +2996,16 @@
    "type": "references"
   },
   {
+   "from": "item/01M06BRQPQ8408XTDYTMY2JYFE",
+   "to": "ticket/github#356",
+   "type": "references"
+  },
+  {
+   "from": "item/01M06BRQPQ8408XTDYTMY2JYFE",
+   "to": "release/v0.24.1",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6477,6 +6487,11 @@
    "status": "todo",
    "title": "Stop hook cannot see work that was recorded and then committed"
   },
+  "item/01M06BRQPQ8408XTDYTMY2JYFE": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Wave C: require identity on knowledge-tree writes"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6763,6 +6778,9 @@
    "doc_type": "release"
   },
   "release/v0.23.0": {
+   "doc_type": "release"
+  },
+  "release/v0.24.1": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
@@ -7605,6 +7623,10 @@
   "ticket/github#352": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/352"
+  },
+  "ticket/github#356": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/356"
   },
   "ticket/github#39": {
    "doc_type": "ticket",

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.24.1 — 2026-08-16
+
+- **Wave C identity.** Knowledge-tree writes (`bin/okf_write.py`) fail-closed
+  without `--author` / `SECOND_BRAIN_IDENTITY` and emit a `WriteEvent`.
+- Worklog `--actor` also accepts `--author` and falls back to
+  `SECOND_BRAIN_IDENTITY` (still defaults to `$USER` for local human use).
+- Documents the write path in `docs/GROK_BOT.md` and `docs/ISOLATION.md`.
+  Worklog union-merge vs knowledge PR isolation is unchanged.
+
 ## 0.24.0 — 2026-08-15
 
 - **Multi-host bindings + isolation notes.** Agent Plugins 1.0 `plugin.json`, Grok Bot / Deep Agents / isolation / onboarding docs, host wrappers, vendored `plugin/scripts/brain_session.py`, and `worklog-session`.

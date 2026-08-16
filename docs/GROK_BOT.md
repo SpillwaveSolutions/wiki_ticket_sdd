@@ -43,9 +43,13 @@ export SECOND_BRAIN_IDENTITY="grok-bot/wiki-ticket-sdd"
 The model proposes structure. Scripts materialize Markdown + YAML.
 
 ```bash
-bin/worklog show --help
+bin/worklog --actor "$SECOND_BRAIN_IDENTITY" show --help
 # Knowledge-tree writes only, after opening a session:
-# write TicketLink / work-item Markdown into $SECOND_BRAIN_ROOT
+python3 bin/okf_write.py write \
+  --type TicketLink \
+  --title "Example ticket link" \
+  --bundle "$SECOND_BRAIN_ROOT" \
+  --author "$SECOND_BRAIN_IDENTITY"
 ```
 
 **Forbidden:** silent raw dumps into the knowledge tree without type, provenance, or validation.

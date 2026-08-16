@@ -30,7 +30,7 @@ from fold import (fold, FoldResult, read_lines, dedupe_and_sort, external_owners
 LOG = ".work/todo.jsonl"
 PATHS = (".work/todo.jsonl", ".work/done.jsonl")
 MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
-VERSION = "0.24.0"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+VERSION = "0.24.1"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
 _warned_concurrent = False
@@ -1290,7 +1290,9 @@ def cmd_adapter(a):
 
 
 p = argparse.ArgumentParser(prog="worklog")
-p.add_argument("--actor", default=os.environ.get("USER", "unknown"))
+p.add_argument("--actor", "--author", dest="actor", default=None,
+               help="who wrote the event; also --author. "
+                    "Falls back to SECOND_BRAIN_IDENTITY, then $USER")
 p.add_argument("--version", action="version", version=f"worklog {VERSION}")
 sub = p.add_subparsers(dest="cmd", required=True)
 
@@ -1617,4 +1619,10 @@ ii.add_argument("--check", action="store_true",
 
 if __name__ == "__main__":
     args = p.parse_args()
+    if not getattr(args, "actor", None):
+        args.actor = (
+            (os.environ.get("SECOND_BRAIN_IDENTITY") or "").strip()
+            or os.environ.get("USER")
+            or "unknown"
+        )
     args.fn(args)

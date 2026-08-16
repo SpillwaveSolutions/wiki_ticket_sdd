@@ -1,7 +1,7 @@
 ---
 name: issue-description
 metadata:
-  version: "0.24.0"
+  version: "0.24.1"
 description: Write rich, durable issue/ticket descriptions. Use when creating or updating tickets by hand, when composing bodies for ticket-sync, or when a work item needs a description a future reader (human or agent) can act on without archaeology.
 ---
 

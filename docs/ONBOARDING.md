@@ -22,7 +22,7 @@ This plugin owns the append-only worklog (`.work/todo.jsonl`) and generated road
 
 ## Non-negotiable rules
 
-1. **Deterministic ops.** Prefer `bin/worklog` for append-only tracking. Prefer `plugin/scripts/brain_session.py` before any OKF knowledge-tree write.
+1. **Deterministic ops.** Prefer `bin/worklog` for append-only tracking. Prefer `plugin/scripts/brain_session.py` before any OKF knowledge-tree write, then `bin/okf_write.py write --author`.
 2. **Identity.** Claim `grok-bot/wiki-ticket-sdd` via `SECOND_BRAIN_IDENTITY`. Chat prefix: `Grok Bot: WikiTicket SDD`.
 3. **Progressive disclosure.** Default ContextPack is 2 hops. Pack before answering or writing.
 4. **Isolation.** Open a session worktree before writing a shared brain. Close it to PR. Never force-push. Never invent a remote URL. See [ISOLATION.md](ISOLATION.md).
