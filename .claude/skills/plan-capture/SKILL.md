@@ -1,7 +1,7 @@
 ---
 name: plan-capture
 metadata:
-  version: "0.23.1"
+  version: "0.24.0"
 description: 'Capture an approved plan as tracked work items. Use when exiting plan mode, when the user approves a plan, or says "capture this plan". Writes docs/plans/<date>-<slug>.md and appends the plan''s tasks to .work/todo.jsonl via bin/worklog.'
 ---
 

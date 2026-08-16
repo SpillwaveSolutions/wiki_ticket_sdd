@@ -1,7 +1,7 @@
 ---
 name: plan-next
 metadata:
-  version: "0.23.1"
+  version: "0.24.0"
 description: Decide what to work on next — use when asked "what should we do next", "what's most important", or when planning a new work session.
 ---
 
