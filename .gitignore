@@ -12,3 +12,7 @@ __pycache__/
 .coverage.*
 tmp/
 .work/.sessions
+
+# Isolation session bookkeeping
+.brain-sessions/
+.brain-worktrees/

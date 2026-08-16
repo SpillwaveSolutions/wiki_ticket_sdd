@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.24.0 — 2026-08-15
+
+- **Multi-host bindings + isolation notes.** Agent Plugins 1.0 `plugin.json`, Grok Bot / Deep Agents / isolation / onboarding docs, host wrappers, vendored `plugin/scripts/brain_session.py`, and `worklog-session`.
+- Documents the two merge models: append-only worklog (`.work/todo.jsonl`) vs knowledge-tree worktree + PR.
+- Isolation tests use fictional **lumenfield-detector** / **northstar-console** only.
+
 ## 0.23.1 — unreleased
 
 - **Fix**: `worklog doc-verify --strict` was un-passable. It exited 1 on a
