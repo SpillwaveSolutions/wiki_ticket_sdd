@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "dafa782d4752",
+   "render_hash": "e9fc7f476e0b",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4005,9 +4005,9 @@
    "frozen": false,
    "page_name": "Ticket-01M09DV3XKWJV5VVNYPJC9PRVF",
    "render": "as-is",
-   "render_hash": "272a17c0323e",
+   "render_hash": "a0b1bbae71ff",
    "source": "docs/.index/rendered/tickets/01M09DV3XKWJV5VVNYPJC9PRVF.md",
-   "title": "sync --keys writes to tickets outside the named scope",
+   "title": "No way to restrict a sync to specific items -- --keys widens scope, it cannot narrow it",
    "truth_state": "open",
    "wiki_key": "item/01M09DV3XKWJV5VVNYPJC9PRVF"
   },
@@ -4804,13 +4804,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-18T07:29:36Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-18T08:27:01Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "58e8885f5077",
+   "render_hash": "353bceac484c",
    "source": "docs/roadmap.md",
-   "source_hash": "104ba73a424d",
+   "source_hash": "e44d160ef78a",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

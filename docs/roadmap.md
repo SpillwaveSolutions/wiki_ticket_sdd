@@ -2,8 +2,8 @@
 wiki_key: roadmap
 doc_type: roadmap
 truth_state: current
-source_hash: dacba8b0
-generated_at: 2026-08-18T07:29:36Z
+source_hash: bc22ada6
+generated_at: 2026-08-18T08:27:01Z
 git_hash: "e3c13bc"
 ---
 
@@ -31,12 +31,15 @@ _0 epic(s) in flight, 4 open item(s), 0 blocked, 0 unclassified._
 | # | Item | Type | Priority | Status | Blocked by |
 |---|---|---|---|---|---|
 | [361](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/361) | Bot pushes to main skip CI, so a broken main goes unnoticed | task | P1 | todo | — |
-| 01M09DV3 | sync --keys writes to tickets outside the named scope | task | P1 | todo | — |
 | [352](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/352) | Stop hook cannot see work that was recorded and then committed | task | P2 | todo | — |
 
 ## Later
 
-_Nothing here._
+### (no epic)
+
+| # | Item | Type | Priority | Status | Blocked by |
+|---|---|---|---|---|---|
+| 01M09DV3 | No way to restrict a sync to specific items -- --keys widens scope, it cannot narrow it | task | P3 | todo | — |
 
 ## Milestones
 
@@ -55,7 +58,7 @@ graph TD
     01M032YRXR61XAJBBNP355AVQW["🐛 Stop hook cannot see work that"]
     01M06BRQPQ8408XTDYTMY2JYFE["📦 Wave C require identity on kno"]
     01M09DEB5YMZRHRBZB8GADMKY0["🔧 Bot pushes to main skip CI so"]
-    01M09DV3XKWJV5VVNYPJC9PRVF["🐛 sync --keys writes to tickets"]
+    01M09DV3XKWJV5VVNYPJC9PRVF["📦 No way to restrict a sync to s"]
     classDef todo fill:#f4f4f4,stroke:#999999
     class 01M032YRXR61XAJBBNP355AVQW,01M09DEB5YMZRHRBZB8GADMKY0,01M09DV3XKWJV5VVNYPJC9PRVF todo
     classDef in_progress fill:#d9f2d9,stroke:#2e7d32
@@ -69,5 +72,5 @@ graph TD
     01M032YRXR61XAJBBNP355AVQW["🐛 Stop hook cannot see work that"]
     01M06BRQPQ8408XTDYTMY2JYFE["📦 Wave C require identity on kno"]
     01M09DEB5YMZRHRBZB8GADMKY0["🔧 Bot pushes to main skip CI so"]
-    01M09DV3XKWJV5VVNYPJC9PRVF["🐛 sync --keys writes to tickets"]
+    01M09DV3XKWJV5VVNYPJC9PRVF["📦 No way to restrict a sync to s"]
 ```
