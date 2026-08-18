@@ -63,6 +63,15 @@ def branch():
         return None
 
 
+def head():
+    try:
+        p = subprocess.run(["git", "rev-parse", "HEAD"],
+                           capture_output=True, text=True)
+        return p.stdout.strip() or None
+    except OSError:
+        return None
+
+
 def live(path=REGISTRY, window=WINDOW, now=None):
     """Sessions that have heartbeated within `window` seconds."""
     now = time.time() if now is None else now
@@ -70,16 +79,46 @@ def live(path=REGISTRY, window=WINDOW, now=None):
             if isinstance(rec, dict) and now - rec.get("ts", 0) <= window}
 
 
-def touch(session_id, path=REGISTRY, window=WINDOW, now=None, branch_name=None):
+def touch(session_id, path=REGISTRY, window=WINDOW, now=None,
+          branch_name=None, base_sha=None):
     """Record this session as alive. Prunes anything past the window so the
     file cannot grow without bound."""
     if not session_id:
         return
     now = time.time() if now is None else now
     data = live(path, window, now)
-    data[session_id] = {"ts": now,
-                        "branch": branch_name if branch_name is not None else branch()}
+    prev = data.get(session_id) or {}
+    rec = {"ts": now,
+           "branch": branch_name if branch_name is not None else branch()}
+    # `base` is the commit this session started from, and it must NOT move.
+    # The Stop hook diffs .work/todo.jsonl against it to decide whether this
+    # session recorded anything. Re-stamping it every heartbeat would erase
+    # that evidence the moment the session commits its own log -- which is the
+    # exact bug this field exists to fix.
+    rec["base"] = prev.get("base") or (base_sha if base_sha is not None
+                                       else head())
+    data[session_id] = rec
     _write(path, data)
+
+
+def base(session_id, path=REGISTRY, window=WINDOW, now=None):
+    """The commit this session started from, or None when unknown.
+
+    The Stop hook's old proof that work was recorded was an UNCOMMITTED change
+    to the log versus HEAD. That proof vanishes when the session commits its
+    own items, so a correctly-logged session read as an unrecorded one and got
+    blocked. Diffing against this fixed point instead survives the commit.
+
+    The trade-off is deliberate: a session that pulls someone else's log
+    changes now also looks like it recorded something. That direction fails
+    quiet -- a missed nag -- where the old direction failed loud, refusing to
+    let a session that did everything right finish its turn.
+    """
+    if not session_id:
+        return None
+    rec = live(path, window, now).get(session_id) or {}
+    sha = rec.get("base")
+    return sha if isinstance(sha, str) and sha else None
 
 
 def end(session_id, path=REGISTRY):
@@ -115,12 +154,16 @@ def main(argv):
         touch(argv[2] if len(argv) > 2 else "")
     elif cmd == "end":
         end(argv[2] if len(argv) > 2 else "")
+    elif cmd == "base":
+        sha = base(argv[2] if len(argv) > 2 else "")
+        if sha:
+            print(sha)
     elif cmd == "warn":
         w = warning()
         if w:
             print(w)
     else:
-        print("usage: session.py touch|end|warn [session-id]")
+        print("usage: session.py touch|end|base|warn [session-id]")
         return 2
     return 0
 

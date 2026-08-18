@@ -13,7 +13,9 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
+import time
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -240,6 +242,96 @@ class TestTaxonomyBlockInstall(unittest.TestCase):
         self.assertFalse(os.path.exists(os.path.join(d, ".work", "config.yml")))
         self.assertFalse(os.path.exists(os.path.join(d, "hooks")))
 
+
+
+class TestStopHookSeesACommittedLog(unittest.TestCase):
+    """A session that records its items and then commits them is following the
+    policy exactly. The old hook proved recording by diffing todo.jsonl against
+    HEAD, so committing the log erased the proof and the session got blocked.
+
+    SessionStart stamps the commit the session began at. Diffing against that
+    fixed point survives the commit.
+    """
+
+    def repo_with_session(self):
+        """make_repo plus bin/session.py, which the hook imports to resolve the
+        marker. Its absence is what keeps every older test on the HEAD path."""
+        d = make_repo(self)
+        shutil.copy2(os.path.join(ROOT, "bin", "session.py"),
+                     os.path.join(d, "bin", "session.py"))
+        return d
+
+    def stamp(self, d, sid="sess-1", sha=None):
+        """What SessionStart writes. `sha` overrides so a test can pin a base
+        that no longer resolves."""
+        if sha is None:
+            sha = subprocess.run(["git", "-C", d, "rev-parse", "HEAD"],
+                                 capture_output=True, text=True,
+                                 check=True).stdout.strip()
+        with open(os.path.join(d, ".work", ".sessions"), "w") as fh:
+            json.dump({sid: {"ts": time.time(), "branch": "main",
+                             "base": sha}}, fh)
+        return sha
+
+    def record(self, d):
+        with open(os.path.join(d, ".work", "todo.jsonl"), "a") as fh:
+            fh.write('{"ev":"01TESTTESTTESTTESTTESTTESTTE",'
+                     '"item":"01TESTTESTTESTTESTTESTTESTTE","op":"create"}\n')
+
+    def commit_log(self, d):
+        subprocess.run(["git", "-C", d, "add", ".work/todo.jsonl"], check=True)
+        subprocess.run(["git", "-C", d, "commit", "-qm", "record (01TEST)"],
+                       check=True)
+
+    def hook(self, d, sid="sess-1"):
+        return subprocess.run(
+            ["bash", HOOK], cwd=d, capture_output=True, text=True,
+            input=json.dumps({"stop_hook_active": False, "session_id": sid}))
+
+    def test_recorded_then_committed_is_allowed_to_stop(self):
+        d = self.repo_with_session()
+        self.stamp(d)
+        self.record(d)
+        self.commit_log(d)          # the step that used to erase the evidence
+        open(os.path.join(d, "base.txt"), "a").write("more work\n")
+        self.assertEqual(self.hook(d).stdout.strip(), "")
+
+    def test_it_still_blocks_when_nothing_was_recorded(self):
+        """The control. A marker must not become a blanket exemption."""
+        d = self.repo_with_session()
+        self.stamp(d)
+        r = self.hook(d)
+        self.assertIn("no work items were recorded", r.stdout)
+
+    def test_an_unknown_session_falls_back_to_head(self):
+        """No marker: the hook behaves exactly as it always has, allowing a
+        stop on an uncommitted log change."""
+        d = self.repo_with_session()
+        self.record(d)
+        self.assertEqual(self.hook(d, sid="never-seen").stdout.strip(), "")
+
+    def test_a_base_that_no_longer_resolves_falls_back_to_head(self):
+        """Rebase, gc, or a registry older than its window can leave a sha that
+        is not in this repo. Falling back to HEAD is what makes that safe --
+        and here it is observable, because a committed log is invisible to HEAD.
+        """
+        d = self.repo_with_session()
+        self.stamp(d, sha="0" * 40)
+        self.record(d)
+        self.commit_log(d)
+        open(os.path.join(d, "base.txt"), "a").write("more work\n")
+        self.assertIn("no work items were recorded", self.hook(d).stdout)
+
+    def test_the_marker_survives_later_heartbeats(self):
+        """UserPromptSubmit touches every turn. If any of those moved the base,
+        the fix would evaporate mid-session."""
+        sys.path.insert(0, os.path.join(ROOT, "bin"))
+        import session
+        p = os.path.join(tempfile.mkdtemp(prefix="clsf-reg-"), "reg.json")
+        self.addCleanup(shutil.rmtree, os.path.dirname(p), True)
+        session.touch("s", path=p, base_sha="aaa")
+        session.touch("s", path=p, base_sha="bbb")
+        self.assertEqual(session.base("s", path=p), "aaa")
 
 if __name__ == "__main__":
     unittest.main()

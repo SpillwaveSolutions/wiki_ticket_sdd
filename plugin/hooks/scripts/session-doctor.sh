@@ -2,6 +2,26 @@
 # Plugin hooks fire in every session; silence outside worklog repos.
 [ -x bin/worklog ] || exit 0
 
+# Stamp the commit this session starts from, before anything else. The Stop
+# hook diffs .work/todo.jsonl against it, so a session that records its items
+# and then commits them still reads as recorded. UserPromptSubmit heartbeats
+# keep it alive but never move it. Best-effort: a session with no id, or a
+# registry that will not write, simply leaves the Stop hook on its old
+# HEAD-based fallback.
+printf '%s' "$(cat)" | python3 -c '
+import json, os, sys
+sys.path.insert(0, os.path.join(os.getcwd(), "bin"))
+try:
+    sid = json.load(sys.stdin).get("session_id")
+except Exception:
+    sid = None
+try:
+    import session
+    session.touch(sid)
+except Exception:
+    pass
+' 2>/dev/null || true
+
 # doctor-lite: read-only, never blocks, reports only failures. Healthy → no output.
 fails=()
 

@@ -528,11 +528,13 @@ worklog sync --scope active        # status in (todo,in_progress,blocked)
                                    #   OR updated within active_window_days
                                    #   OR external.dirty
 worklog sync --scope all           # everything open; slow; manual only
-worklog sync --keys PROJ-412,...   # targeted
+worklog sync --keys PROJ-412,...   # ADDS these to the scope; never narrows it
 worklog sync --report              # print drift, change NOTHING
 worklog sync --apply               # apply LWW, emit conflicts
 worklog sync --dry-run             # print the events that WOULD be appended
 ```
+
+`--keys` is additive, not a filter. The push scope is *open* ∪ *hash-dirty* ∪ `--keys`, so naming one key does not stop the rest of a dirty log from syncing. There is deliberately no flag that narrows a run: a sync that skipped dirty items would leave the tracker further from the log, which is the drift `sync` exists to close. When you want to know what a run will touch, `--dry-run` prints it before anything is written.
 
 **Closed and archived items never reconcile.** That's what keeps the scope bounded. If someone reopens a ticket in Jira, `pull` catches it only while it's inside `active_window_days`; past that, it's a manual `--keys` sync. Documented limitation, not a bug.
 

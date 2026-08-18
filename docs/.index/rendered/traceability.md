@@ -3,22 +3,22 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### No way to restrict a sync to specific items -- --keys widens scope, it cannot narrow it
-`01M09DV3XKWJV5VVNYPJC9PRVF` · status: todo
+`01M09DV3XKWJV5VVNYPJC9PRVF` · status: done
 
 ### Bot pushes to main skip CI, so a broken main goes unnoticed
-`01M09DEB5YMZRHRBZB8GADMKY0` · status: todo
+`01M09DEB5YMZRHRBZB8GADMKY0` · status: done
 - references: [github#361](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/361)
 
 ### Scheduled compaction pushes a stale IA manifest and roadmap to main
 `01M095WZRZC0J94D3FDZV9Q7V0` · status: done
 
 ### Wave C: require identity on knowledge-tree writes
-`01M06BRQPQ8408XTDYTMY2JYFE` · status: in_progress
+`01M06BRQPQ8408XTDYTMY2JYFE` · status: done
 - references: [github#356](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/356)
 - targets: release/v0.24.1
 
 ### Stop hook cannot see work that was recorded and then committed
-`01M032YRXR61XAJBBNP355AVQW` · status: todo
+`01M032YRXR61XAJBBNP355AVQW` · status: done
 - references: [github#352](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/352)
 
 ### Stop hook accuses a correctly-logged worktree session of skipping the log

@@ -1,5 +1,5 @@
 {
- "git_hash": "e3c13bc",
+ "git_hash": "3b44e0a",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "e9fc7f476e0b",
+   "render_hash": "e1b232db3c6e",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -495,7 +495,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.1",
    "render": "as-is",
-   "render_hash": "4bae7e450d97",
+   "render_hash": "a2850325b1af",
    "source": "docs/.index/rendered/releases/v0.24.1.md",
    "title": "Release v0.24.1",
    "truth_state": "shipped",
@@ -3965,20 +3965,20 @@
    "frozen": false,
    "page_name": "Ticket-01M032YRXR61XAJBBNP355AVQW",
    "render": "as-is",
-   "render_hash": "07ef09bd4e00",
+   "render_hash": "7793363cc1b7",
    "source": "docs/.index/rendered/tickets/01M032YRXR61XAJBBNP355AVQW.md",
    "title": "Stop hook cannot see work that was recorded and then committed",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M032YRXR61XAJBBNP355AVQW"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01M06BRQPQ8408XTDYTMY2JYFE",
    "render": "as-is",
-   "render_hash": "e2963a1655e7",
+   "render_hash": "b24ef5e5fc25",
    "source": "docs/.index/rendered/tickets/01M06BRQPQ8408XTDYTMY2JYFE.md",
    "title": "Wave C: require identity on knowledge-tree writes",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M06BRQPQ8408XTDYTMY2JYFE"
   },
   {
@@ -3995,20 +3995,20 @@
    "frozen": false,
    "page_name": "Ticket-01M09DEB5YMZRHRBZB8GADMKY0",
    "render": "as-is",
-   "render_hash": "67f1868d4a09",
+   "render_hash": "8cd4197794fc",
    "source": "docs/.index/rendered/tickets/01M09DEB5YMZRHRBZB8GADMKY0.md",
    "title": "Bot pushes to main skip CI, so a broken main goes unnoticed",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M09DEB5YMZRHRBZB8GADMKY0"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01M09DV3XKWJV5VVNYPJC9PRVF",
    "render": "as-is",
-   "render_hash": "a0b1bbae71ff",
+   "render_hash": "52ad5951ec8c",
    "source": "docs/.index/rendered/tickets/01M09DV3XKWJV5VVNYPJC9PRVF.md",
    "title": "No way to restrict a sync to specific items -- --keys widens scope, it cannot narrow it",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M09DV3XKWJV5VVNYPJC9PRVF"
   },
   {
@@ -4804,13 +4804,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-18T08:27:01Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-18T14:55:49Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "353bceac484c",
+   "render_hash": "641e59bc91da",
    "source": "docs/roadmap.md",
-   "source_hash": "e44d160ef78a",
+   "source_hash": "65538697716e",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -5144,9 +5144,9 @@
    "frozen": false,
    "page_name": "Worklog-Spec",
    "render": "doc+banner",
-   "render_hash": "e0245aeb9a38",
+   "render_hash": "05d01cd65e0b",
    "source": "docs/worklog-spec.md",
-   "source_hash": "414cd9634272",
+   "source_hash": "8a14ac422691",
    "title": "Worklog: Visible-WIP Work Tracking Spec",
    "truth_state": "current",
    "wiki_key": "spec"

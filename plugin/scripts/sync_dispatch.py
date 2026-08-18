@@ -838,7 +838,10 @@ def build_parser():
     ap.add_argument("--dry-run", action="store_true",
                     help="print decisions; call no mutating verbs")
     ap.add_argument("--keys",
-                    help="comma-separated item ULIDs or external keys to force into scope")
+                    help="comma-separated item ULIDs or external keys to ADD "
+                         "to the scope. This widens a run; it cannot narrow "
+                         "one. Everything open or hash-dirty still syncs. To "
+                         "see what a run will touch, use --dry-run.")
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--push-only", action="store_true")
     g.add_argument("--pull-only", action="store_true")
