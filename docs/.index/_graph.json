@@ -6492,6 +6492,11 @@
    "status": "in_progress",
    "title": "Wave C: require identity on knowledge-tree writes"
   },
+  "item/01M095WZRZC0J94D3FDZV9Q7V0": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Scheduled compaction pushes a stale IA manifest and roadmap to main"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",

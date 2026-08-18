@@ -1,5 +1,5 @@
 {
- "git_hash": "e6397a5",
+ "git_hash": "2319ef4",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "20ba900f9739",
+   "render_hash": "88f8cc8a40cc",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3982,6 +3982,16 @@
    "wiki_key": "item/01M06BRQPQ8408XTDYTMY2JYFE"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M095WZRZC0J94D3FDZV9Q7V0",
+   "render": "as-is",
+   "render_hash": "4f4fc1e4273a",
+   "source": "docs/.index/rendered/tickets/01M095WZRZC0J94D3FDZV9Q7V0.md",
+   "title": "Scheduled compaction pushes a stale IA manifest and roadmap to main",
+   "truth_state": "done",
+   "wiki_key": "item/01M095WZRZC0J94D3FDZV9Q7V0"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4774,11 +4784,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-16T22:41:06Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-18T00:59:19Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "c9dbaf7f81d4",
+   "render_hash": "c560b0157607",
    "source": "docs/roadmap.md",
    "source_hash": "b796dd6f850f",
    "title": "Roadmap",

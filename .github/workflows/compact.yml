@@ -19,13 +19,27 @@ jobs:
       - name: compact
         run: python3 bin/compact.py
 
+      # Compaction restamps the top of the log with the current HEAD sha, and
+      # the roadmap and IA manifest both record that sha as build provenance.
+      # Committing the log without them leaves main failing
+      # tests/test_provenance.py on a clean checkout -- a break no developer
+      # caused and none can fix locally, because the next scheduled run
+      # reintroduces it. Order matters: ia-manifest hashes what ia-inventory
+      # wrote, which reads the roadmap, so running them out of order leaves a
+      # stale body hash instead of fixing one.
+      - name: regenerate derived docs
+        run: |
+          bin/worklog roadmap-render
+          bin/worklog ia-inventory
+          bin/worklog ia-manifest
+
       - name: commit and push
         run: |
-          if [ -n "$(git status --porcelain .work)" ]; then
+          if [ -n "$(git status --porcelain .work docs)" ]; then
             wm=$(python3 -c "import json; print([e.get('through') for e in map(json.loads, open('.work/todo.jsonl')) if e.get('op') == 'compact'][-1])")
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add .work/todo.jsonl .work/done.jsonl
+            git add .work/todo.jsonl .work/done.jsonl docs
             git commit -m "chore(worklog): compact through $wm"
             git push
           fi
