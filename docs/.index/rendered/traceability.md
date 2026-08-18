@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Release v0.24.3
+`01M0B004MDMSVF1VT3F4PCCPKV` · status: in_progress
+
 ### No way to restrict a sync to specific items -- --keys widens scope, it cannot narrow it
 `01M09DV3XKWJV5VVNYPJC9PRVF` · status: done
 
