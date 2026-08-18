@@ -3006,6 +3006,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01M09DEB5YMZRHRBZB8GADMKY0",
+   "to": "ticket/github#361",
+   "type": "references"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6502,6 +6507,11 @@
    "status": "todo",
    "title": "Bot pushes to main skip CI, so a broken main goes unnoticed"
   },
+  "item/01M09DV3XKWJV5VVNYPJC9PRVF": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "sync --keys writes to tickets outside the named scope"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -7637,6 +7647,10 @@
   "ticket/github#356": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/356"
+  },
+  "ticket/github#361": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/361"
   },
   "ticket/github#39": {
    "doc_type": "ticket",
