@@ -392,9 +392,16 @@ bin/worklog sync --dry-run
 | Flag | Meaning |
 |---|---|
 | `--dry-run` | Report what would happen; write nothing |
-| `--keys k1,k2` | Restrict the run to specific external keys |
+| `--keys k1,k2` | **Adds** these external keys to the run's scope; never narrows it |
 | `--push-only` / `--pull-only` | One direction only (mutually exclusive) |
 | `--retry-base-delay <s>` | Base backoff for transient adapter failures |
+
+*(0.24.3)* `--keys` is additive, not a filter: the scope is *open* ∪
+*hash-dirty* ∪ `--keys`, so naming one key does not stop the rest of a dirty
+log from syncing. There is deliberately no flag that narrows a run — a sync
+that skipped dirty items would leave the tracker further from the log, which
+is the drift `sync` exists to close. Use `--dry-run` to see what a run will
+touch before it writes.
 
 Every run ends with the drift report — one counts line, then the fields it
 overwrote on live tickets, then a `drift:` list of anything else a human

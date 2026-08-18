@@ -4144,9 +4144,9 @@
    "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "5aa3ee526999",
+   "render_hash": "c1d3f8d56dd2",
    "source": "docs/user_guide/cli-reference.md",
-   "source_hash": "3579ceb4deea",
+   "source_hash": "d4383424fc6c",
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current",
    "wiki_key": "cli-reference"
@@ -4816,9 +4816,9 @@
    "frozen": false,
    "page_name": "Plugin-Guide",
    "render": "doc+banner",
-   "render_hash": "97a2085eb427",
+   "render_hash": "c07b4c1c733a",
    "source": "docs/user_guide/plugin-guide.md",
-   "source_hash": "d2f631467bfc",
+   "source_hash": "75a415d1d174",
    "title": "WikiTicket SDD \u2014 Plugin Guide",
    "truth_state": "current",
    "wiki_key": "plugin-guide"
