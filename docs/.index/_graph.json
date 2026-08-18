@@ -6497,6 +6497,11 @@
    "status": "done",
    "title": "Scheduled compaction pushes a stale IA manifest and roadmap to main"
   },
+  "item/01M09DEB5YMZRHRBZB8GADMKY0": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Bot pushes to main skip CI, so a broken main goes unnoticed"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",

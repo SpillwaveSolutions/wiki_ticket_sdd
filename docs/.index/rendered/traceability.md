@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Bot pushes to main skip CI, so a broken main goes unnoticed
+`01M09DEB5YMZRHRBZB8GADMKY0` · status: todo
+
 ### Scheduled compaction pushes a stale IA manifest and roadmap to main
 `01M095WZRZC0J94D3FDZV9Q7V0` · status: done
 

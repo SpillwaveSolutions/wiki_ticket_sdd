@@ -1,5 +1,5 @@
 {
- "git_hash": "2319ef4",
+ "git_hash": "691316c",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "88f8cc8a40cc",
+   "render_hash": "6b26b3ac41f5",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3992,6 +3992,16 @@
    "wiki_key": "item/01M095WZRZC0J94D3FDZV9Q7V0"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M09DEB5YMZRHRBZB8GADMKY0",
+   "render": "as-is",
+   "render_hash": "749689fa6549",
+   "source": "docs/.index/rendered/tickets/01M09DEB5YMZRHRBZB8GADMKY0.md",
+   "title": "Bot pushes to main skip CI, so a broken main goes unnoticed",
+   "truth_state": "open",
+   "wiki_key": "item/01M09DEB5YMZRHRBZB8GADMKY0"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4784,13 +4794,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-18T00:59:19Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-18T03:08:06Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "c560b0157607",
+   "render_hash": "cadbd8242821",
    "source": "docs/roadmap.md",
-   "source_hash": "b796dd6f850f",
+   "source_hash": "6dae44c1e44c",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
