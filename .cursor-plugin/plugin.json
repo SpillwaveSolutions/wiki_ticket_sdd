@@ -1,11 +1,9 @@
 {
-  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "worklog",
   "version": "0.24.2",
   "description": "WikiTicket SDD (worklog): git-native plans, tickets, roadmaps, and wiki publishing. Multi-host bindings plus worklog-vs-knowledge isolation.",
   "author": {
-    "name": "Rick Hightower",
-    "url": "https://github.com/RichardHightower"
+    "name": "Rick Hightower"
   },
   "homepage": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd",
   "repository": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd",
@@ -20,6 +18,9 @@
     "codex",
     "deep-agents",
     "grok-bot",
-    "cursor"
-  ]
+    "cursor",
+    "second-brain"
+  ],
+  "skills": ".claude/skills/",
+  "rules": ".cursor/rules/"
 }
