@@ -6489,12 +6489,12 @@
   },
   "item/01M032YRXR61XAJBBNP355AVQW": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Stop hook cannot see work that was recorded and then committed"
   },
   "item/01M06BRQPQ8408XTDYTMY2JYFE": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "Wave C: require identity on knowledge-tree writes"
   },
   "item/01M095WZRZC0J94D3FDZV9Q7V0": {
@@ -6504,12 +6504,12 @@
   },
   "item/01M09DEB5YMZRHRBZB8GADMKY0": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Bot pushes to main skip CI, so a broken main goes unnoticed"
   },
   "item/01M09DV3XKWJV5VVNYPJC9PRVF": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "No way to restrict a sync to specific items -- --keys widens scope, it cannot narrow it"
   },
   "plan/2026-07-17_worklog-core_plan": {

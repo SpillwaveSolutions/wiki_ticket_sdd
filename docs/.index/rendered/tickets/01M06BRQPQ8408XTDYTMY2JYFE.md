@@ -1,6 +1,6 @@
 # Wave C: require identity on knowledge-tree writes
 
-`01M06BRQPQ8408XTDYTMY2JYFE` · task/feature · **in-progress**
+`01M06BRQPQ8408XTDYTMY2JYFE` · task/feature · **done**
 
 Isolation says where concurrent sessions write.
 
