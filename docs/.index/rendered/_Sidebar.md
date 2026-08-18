@@ -16,7 +16,7 @@
 ### History
 
 - [[Index-Releases]]
-- Latest snapshot: [[Roadmap-2026-08-07_v0.23.0-release]]
+- Latest snapshot: [[Roadmap-2026-08-18_v0.24.3-release]]
 - [[Index-Status]]
 - [[Index-Decisions]]
 

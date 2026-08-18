@@ -4416,6 +4416,21 @@
    "type": "targets"
   },
   {
+   "from": "roadmap-snapshot/2026-08-18_v0.24.3-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-18_v0.24.3-release",
+   "to": "roadmap-snapshot/2026-08-07_v0.23.0-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-18_v0.24.3-release",
+   "to": "release/v0.24.3",
+   "type": "targets"
+  },
+  {
    "from": "roadmap/2026-07-18_v0.2-roadmap",
    "to": "roadmap",
    "type": "snapshot-of"
@@ -6512,6 +6527,11 @@
    "status": "done",
    "title": "No way to restrict a sync to specific items -- --keys widens scope, it cannot narrow it"
   },
+  "item/01M0B004MDMSVF1VT3F4PCCPKV": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Release v0.24.3"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6803,6 +6823,9 @@
   "release/v0.24.1": {
    "doc_type": "release"
   },
+  "release/v0.24.3": {
+   "doc_type": "release"
+  },
   "release/v0.5.0": {
    "doc_type": "release"
   },
@@ -6941,6 +6964,12 @@
   "roadmap-snapshot/2026-08-07_v0.23.0-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-08-07_v0.23.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-08-18_v0.24.3-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-18_v0.24.3-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

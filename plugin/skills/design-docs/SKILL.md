@@ -1,7 +1,7 @@
 ---
 name: design-docs
 metadata:
-  version: "0.24.1"
+  version: "0.24.3"
 description: Generate or sync the design document and code walkthrough under docs/designs/ — frozen dated pairs tied to a release tag, live current pairs regenerated from the actual code. Use when asked for a design doc or code walkthrough, and automatically (background agents) at every release.
 ---
 
