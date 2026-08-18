@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Scheduled compaction pushes a stale IA manifest and roadmap to main
+`01M095WZRZC0J94D3FDZV9Q7V0` · status: done
+
 ### Wave C: require identity on knowledge-tree writes
 `01M06BRQPQ8408XTDYTMY2JYFE` · status: in_progress
 - references: [github#356](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/356)
