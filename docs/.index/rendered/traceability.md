@@ -2,7 +2,7 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
-### sync --keys writes to tickets outside the named scope
+### No way to restrict a sync to specific items -- --keys widens scope, it cannot narrow it
 `01M09DV3XKWJV5VVNYPJC9PRVF` · status: todo
 
 ### Bot pushes to main skip CI, so a broken main goes unnoticed
