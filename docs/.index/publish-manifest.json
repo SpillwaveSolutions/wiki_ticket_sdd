@@ -1,5 +1,5 @@
 {
- "git_hash": "691316c",
+ "git_hash": "aac728f",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "6b26b3ac41f5",
+   "render_hash": "dafa782d4752",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -3995,11 +3995,21 @@
    "frozen": false,
    "page_name": "Ticket-01M09DEB5YMZRHRBZB8GADMKY0",
    "render": "as-is",
-   "render_hash": "749689fa6549",
+   "render_hash": "67f1868d4a09",
    "source": "docs/.index/rendered/tickets/01M09DEB5YMZRHRBZB8GADMKY0.md",
    "title": "Bot pushes to main skip CI, so a broken main goes unnoticed",
    "truth_state": "open",
    "wiki_key": "item/01M09DEB5YMZRHRBZB8GADMKY0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M09DV3XKWJV5VVNYPJC9PRVF",
+   "render": "as-is",
+   "render_hash": "272a17c0323e",
+   "source": "docs/.index/rendered/tickets/01M09DV3XKWJV5VVNYPJC9PRVF.md",
+   "title": "sync --keys writes to tickets outside the named scope",
+   "truth_state": "open",
+   "wiki_key": "item/01M09DV3XKWJV5VVNYPJC9PRVF"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -4794,13 +4804,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-18T03:08:06Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-18T03:15:05Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "cadbd8242821",
+   "render_hash": "3fbe5ef98ea0",
    "source": "docs/roadmap.md",
-   "source_hash": "6dae44c1e44c",
+   "source_hash": "104ba73a424d",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
