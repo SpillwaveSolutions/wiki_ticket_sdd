@@ -1,5 +1,5 @@
 {
- "git_hash": "307d437",
+ "git_hash": "2fea92c",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "76645236fa98",
+   "render_hash": "9443ed412501",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4025,10 +4025,10 @@
    "frozen": false,
    "page_name": "Ticket-01M0B004MDMSVF1VT3F4PCCPKV",
    "render": "as-is",
-   "render_hash": "b1af1abd700f",
+   "render_hash": "1e9a5a0eed23",
    "source": "docs/.index/rendered/tickets/01M0B004MDMSVF1VT3F4PCCPKV.md",
    "title": "Release v0.24.3",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M0B004MDMSVF1VT3F4PCCPKV"
   },
   {
@@ -4848,13 +4848,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-18T17:51:46Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-18T18:23:50Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "a87663799b20",
+   "render_hash": "cdff07756bdb",
    "source": "docs/roadmap.md",
-   "source_hash": "18219005ba61",
+   "source_hash": "65538697716e",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
