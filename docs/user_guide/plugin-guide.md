@@ -147,8 +147,8 @@ ships hooks for the invariants:
 |---|---|---|
 | `ExitPlanMode` (PostToolUse) | a plan is approved | Invokes plan-capture non-optionally — every plan becomes tracked items |
 | `UserPromptSubmit` | each prompt | One-line reminder: requests that produce work get worklog items first; keep statuses moving. Also heartbeats this session into `.work/.sessions` and appends the concurrent-session warning when another session is live in the same checkout |
-| `Stop` | Claude finishes responding | If the working tree changed but `.work/todo.jsonl` didn't, block once: record the work items or explain. With `classifier.enabled: true` in `.work/config.yml` (**off by default**) it also triggers the classify skill — propose-only suggestions to `.work/suggestions.jsonl`, promoted into real items only via `worklog promote` |
-| `SessionStart` | session opens | Doctor-lite: checks the CLAUDE.md policy block, hook wiring, and version skew; points at `/worklog:init` or `/worklog:doctor` if something's off |
+| `Stop` | Claude finishes responding | If the working tree changed but `.work/todo.jsonl` hasn't moved since the commit this session started at, block once: record the work items or explain. *(0.24.3)* That start commit is stamped by `SessionStart` and never moves, so recording items and then committing them — the rhythm the policy asks for — still reads as recorded; no marker falls back to `HEAD`. With `classifier.enabled: true` in `.work/config.yml` (**off by default**) it also triggers the classify skill — propose-only suggestions to `.work/suggestions.jsonl`, promoted into real items only via `worklog promote` |
+| `SessionStart` | session opens | Doctor-lite: checks the CLAUDE.md policy block, hook wiring, and version skew; points at `/worklog:init` or `/worklog:doctor` if something's off. Also stamps the commit this session begins at into `.work/.sessions`, which is the fixed point the `Stop` check diffs against |
 | `SessionEnd` | session closes | Drops this session from `.work/.sessions`, so a finished session stops warning the next one that opens the directory |
 
 All hooks are silent outside worklog repos (no `bin/worklog`, no output), so
