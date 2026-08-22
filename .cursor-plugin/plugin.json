@@ -22,5 +22,6 @@
     "second-brain"
   ],
   "skills": ".claude/skills/",
-  "rules": ".cursor/rules/"
+  "rules": ".cursor/rules/",
+  "hooks": "./plugin/hooks/cursor-hooks.json"
 }
