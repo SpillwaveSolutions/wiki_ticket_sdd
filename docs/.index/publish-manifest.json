@@ -1,5 +1,5 @@
 {
- "git_hash": "92721be",
+ "git_hash": "7f54319",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "ac97eca5f772",
+   "render_hash": "4cc4094ff41e",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "2bc152f9ed03",
+   "render_hash": "d9b878c0ebe6",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -510,6 +510,16 @@
    "title": "Release v0.24.3",
    "truth_state": "shipped",
    "wiki_key": "release/v0.24.3"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.24.5",
+   "render": "as-is",
+   "render_hash": "9b763e17a9e5",
+   "source": "docs/.index/rendered/releases/v0.24.5.md",
+   "title": "Release v0.24.5",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.24.5"
   },
   {
    "frozen": false,
@@ -4082,6 +4092,16 @@
    "wiki_key": "item/01M0KCDVAYS67SPN8FHAYY4DWX"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M0TQ90FYZXRJ637E58FCT5WJ",
+   "render": "as-is",
+   "render_hash": "0005b7d69d7c",
+   "source": "docs/.index/rendered/tickets/01M0TQ90FYZXRJ637E58FCT5WJ.md",
+   "title": "Release v0.24.5 mermaid-first design docs",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M0TQ90FYZXRJ637E58FCT5WJ"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4898,13 +4918,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-22T00:07:30Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-24T20:27:17Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "102ec7b27533",
+   "render_hash": "ea6cccc71b32",
    "source": "docs/roadmap.md",
-   "source_hash": "20475d6c127f",
+   "source_hash": "4a0bfab82c67",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -5162,6 +5182,18 @@
    "wiki_key": "roadmap-snapshot/2026-08-18_v0.24.3-release"
   },
   {
+   "banner": "> **Snapshot** of release v0.24.5 (2026-08-24) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-08-24_v0.24.5-release",
+   "render": "doc+banner",
+   "render_hash": "cf64256f16f3",
+   "source": "docs/roadmap/2026-08-24_v0.24.5-release.md",
+   "source_hash": "4a0bfab82c67",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-08-24_v0.24.5-release"
+  },
+  {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
    "frozen": true,
    "page_name": "Roadmap-2026-07-18_v0.2-roadmap",
@@ -5319,7 +5351,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "fe52754a2c7c",
+  "render_hash": "a146f7deeb4b",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1
