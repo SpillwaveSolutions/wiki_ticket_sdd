@@ -12,9 +12,10 @@ day one, and can trust, because every claim is anchored in the actual code.
 
 Load `companion-skills.md` in this folder. Then:
 
-1. `document-specialist` writes the prose. Default voice is STE100. Do not use an em dash. Do not start a sentence with So, That, Thus, or Hence. Use `google-docs-style` only when the user names Google style. Do not mix packs. Include Salt wireframes when the UI matters.
-2. `design-doc-mermaid` draws every GitHub-safe diagram, including class, ER, state, sequence, flowchart, and C4. Put a fenced `mermaid` block in the Markdown. Validate before publish.
-3. `plantuml` is opt-in for wireframes, use case, timing, and ArchiMate. Save `.puml` plus PNG or SVG under `docs/diagrams/`. Link the image. Upload the image with the wiki or Confluence page. Do not leave raw PlantUML as the only view.
+1. `document-specialist` **v3.2.1** writes the prose. Default voice is STE100. Do not use an em dash. Do not start a sentence with So, That, Thus, or Hence. Use `google-docs-style` **v1.1.3** only when the user names Google style. Do not mix packs. Include Salt wireframes when the UI matters.
+2. `design-doc-mermaid` **v1.1.0** draws every GitHub-safe diagram, including class, ER, state, sequence, flowchart, and C4. Put a fenced `mermaid` block in the Markdown. Validate before publish.
+3. `plantuml` **v1.2.1** is opt-in for wireframes, use case, timing, and ArchiMate. Save `.puml` plus PNG or SVG under `docs/diagrams/`. Link the image. Upload the image with the wiki or Confluence page. Do not leave raw PlantUML as the only view.
+
 
 GitHub wiki renders Mermaid. Confluence needs images for Mermaid and PlantUML.
 

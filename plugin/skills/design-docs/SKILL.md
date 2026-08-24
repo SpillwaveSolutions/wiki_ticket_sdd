@@ -2,7 +2,7 @@
 name: design-docs
 metadata:
   version: "0.24.4"
-description: Generate or sync the design document and code walkthrough under docs/designs/. Frozen dated pairs tied to a release tag, live current pairs regenerated from the actual code. Use when asked for a design doc or code walkthrough, and automatically (background agents) at every release.
+description: Generate or sync the design document, code walkthrough, or requirements doc. Frozen dated pairs tied to a release tag, live current pairs regenerated from the actual code. Uses document-specialist v3.2.1, design-doc-mermaid v1.1.0, plantuml v1.2.1. Use when asked for a design doc, architecture doc, code walkthrough, or requirements doc, and automatically (background agents) at every release.
 ---
 
 # Design docs and code walkthroughs
@@ -15,14 +15,14 @@ procedure around them.
 
 When this skill writes an architecture doc, a code walkthrough, or a requirements doc, invoke the
 Spillwave documentation suite. Install from
-`SpillwaveSolutions/spillwave-documentation-marketplace`.
+`SpillwaveSolutions/spillwave-documentation-marketplace` **v0.2.0**.
 Load `references/companion-skills.md` before either prompt.
 
-| Role | Skill | Rule |
-|------|--------|------|
-| Prose | `document-specialist` | Default voice is STE100. Switch to `google-docs-style` only when the user names Google style. Never mix packs. Wireframes belong in this skill's diagram pass. |
-| GitHub-safe diagrams | `design-doc-mermaid` | Default for flowchart, sequence, class, ER, state, C4, and component views. Fenced `mermaid` in the Markdown. Validate before publish. |
-| Leftover UML and wireframes | `plantuml` | Use case, timing, ArchiMate, Salt wireframes, nwdiag, WBS. Always render PNG or SVG. GitHub wiki does not render PlantUML source. |
+| Role | Skill | Version | Rule |
+|------|--------|---------|------|
+| Prose | `document-specialist` | v3.2.1 | Default voice is STE100. Switch to `google-docs-style` v1.1.3 only when the user names Google style. Never mix packs. Wireframes belong in this skill's diagram pass. |
+| GitHub-safe diagrams | `design-doc-mermaid` | v1.1.0 | Default for flowchart, sequence, class, ER, state, C4, and component views. Fenced `mermaid` in the Markdown. Validate before publish. |
+| Leftover UML and wireframes | `plantuml` | v1.2.1 | Use case, timing, ArchiMate, Salt wireframes, nwdiag, WBS. Always render PNG or SVG. GitHub wiki does not render PlantUML source. |
 
 Hard bans for prose in both voice packs:
 
@@ -37,6 +37,7 @@ Hard bans for prose in both voice packs:
 | `docs/designs/<DATE>_<NAME>_code_walkthrough.md` | dated | frozen. Same |
 | `docs/designs/current_design_doc.md` | live | regenerated each release; in-place rewrite is sanctioned (like `docs/roadmap.md`) |
 | `docs/designs/current_code_walkthrough.md` | live | same |
+| `docs/requirements/<NAME>_srs.md` or `_prd.md` | ad-hoc | generated on request from `requirements-doc-prompt.md`. Register with `worklog wiki-add`. |
 
 `<NAME>` at release time is `vX.Y.Z-release` (matches roadmap-snapshot
 naming). Ad-hoc names are fine mid-cycle.
@@ -77,8 +78,11 @@ routes the other two to the user-docs refresh agent.
 ## 2. Generate
 
 Load `references/companion-skills.md`, then run
-`references/design-doc-prompt.md` (or `code-walkthrough-prompt.md`)
+`references/design-doc-prompt.md` (architecture / design),
+`references/code-walkthrough-prompt.md` (walkthrough), or
+`references/requirements-doc-prompt.md` (SRS / PRD)
 against the repository at HEAD. The template's own rules govern content.
+
 Sections are a menu. Omissions are listed with reasons. Every code claim
 cites `path, function(), lines N-M`. Fill System Context and Source Material
 from the repo itself: README, docs/worklog-spec.md,

@@ -44,9 +44,13 @@ picture, mapped to real code.
   `.work/config.yml` is the switch.
 - **Generated roadmap and status reports.** `docs/roadmap.md` is rendered
   from the log — no hand-editing, no drift.
-- **Design docs and code walkthroughs, generated from the actual code** at
+- **Design docs, architecture docs, code walkthroughs, and requirements**, generated from the actual code at
   every release: frozen per-release copies plus always-current versions in
-  `docs/designs/`, published to the wiki.
+  `docs/designs/`, published to the wiki. Prose uses `document-specialist` v3.2.1
+  (STE100 default). Diagrams default to `design-doc-mermaid` v1.1.0. `plantuml`
+  v1.2.1 is leftover types only and always PNG/SVG. Install the suite from
+  `SpillwaveSolutions/spillwave-documentation-marketplace` v0.2.0.
+
 - **Documents carry the commit they were written against**, and a gate reads
   it back. `git_hash` in front matter says which tree the author had open;
   `worklog doc-verify` resolves every `path — symbol(), lines N–M` citation
