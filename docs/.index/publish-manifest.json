@@ -1,5 +1,5 @@
 {
- "git_hash": "15e2cb0",
+ "git_hash": "c0dc7e1",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "c42a9f50f05b",
+   "render_hash": "2997071ff528",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -303,6 +303,16 @@
   },
   {
    "frozen": false,
+   "page_name": "PR-375",
+   "render": "as-is",
+   "render_hash": "6236b1d5a282",
+   "source": "docs/.index/rendered/prs/375.md",
+   "title": "PR #375",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/375"
+  },
+  {
+   "frozen": false,
    "page_name": "Release-v0.10.0",
    "render": "as-is",
    "render_hash": "a1d7e2472b9e",
@@ -555,7 +565,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.7",
    "render": "as-is",
-   "render_hash": "efafc284b477",
+   "render_hash": "c73d3faac1d1",
    "source": "docs/.index/rendered/releases/v0.24.7.md",
    "title": "Release v0.24.7",
    "truth_state": "shipped",
@@ -4155,10 +4165,10 @@
    "frozen": false,
    "page_name": "Ticket-01M0V0ZQ56VWB1QMTP8HRXKCXG",
    "render": "as-is",
-   "render_hash": "2c5b8c1eee7b",
+   "render_hash": "f2772664d142",
    "source": "docs/.index/rendered/tickets/01M0V0ZQ56VWB1QMTP8HRXKCXG.md",
    "title": "Align design-docs prompt companion pins",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M0V0ZQ56VWB1QMTP8HRXKCXG"
   },
   {
@@ -4978,13 +4988,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-24T23:16:52Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-24T23:23:41Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "9b29b7d607ff",
+   "render_hash": "9d0df45f5c6b",
    "source": "docs/roadmap.md",
-   "source_hash": "d14039993a44",
+   "source_hash": "20475d6c127f",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

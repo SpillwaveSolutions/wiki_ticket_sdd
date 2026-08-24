@@ -3072,6 +3072,11 @@
   },
   {
    "from": "item/01M0V0ZQ56VWB1QMTP8HRXKCXG",
+   "to": "pr/375",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M0V0ZQ56VWB1QMTP8HRXKCXG",
    "to": "release/v0.24.7",
    "type": "targets"
   },
@@ -6676,7 +6681,7 @@
   },
   "item/01M0V0ZQ56VWB1QMTP8HRXKCXG": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "Align design-docs prompt companion pins"
   },
   "plan/2026-07-17_worklog-core_plan": {
@@ -6908,6 +6913,9 @@
    "doc_type": "pr"
   },
   "pr/373": {
+   "doc_type": "pr"
+  },
+  "pr/375": {
    "doc_type": "pr"
   },
   "release/v0.10.0": {
