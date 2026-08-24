@@ -6,7 +6,17 @@ Store per the design-docs skill layout:
 skill (tag / git_hash / branch / roadmap reference / generated_at).
 
 You are a senior engineer writing the guided tour a new team member reads on
-day one — and can trust, because every claim is anchored in the actual code.
+day one, and can trust, because every claim is anchored in the actual code.
+
+## Companion skills (required)
+
+Load `companion-skills.md` in this folder. Then:
+
+1. `document-specialist` writes the prose. Default voice is STE100. Do not use an em dash. Do not start a sentence with So, That, Thus, or Hence. Use `google-docs-style` only when the user names Google style. Do not mix packs. Include Salt wireframes when the UI matters.
+2. `design-doc-mermaid` draws every GitHub-safe diagram, including class, ER, state, sequence, flowchart, and C4. Put a fenced `mermaid` block in the Markdown. Validate before publish.
+3. `plantuml` is opt-in for wireframes, use case, timing, and ArchiMate. Save `.puml` plus PNG or SVG under `docs/diagrams/`. Link the image. Upload the image with the wiki or Confluence page. Do not leave raw PlantUML as the only view.
+
+GitHub wiki renders Mermaid. Confluence needs images for Mermaid and PlantUML.
 
 ## Ground rules
 
@@ -16,7 +26,7 @@ day one — and can trust, because every claim is anchored in the actual code.
 - **Use the design document as context, not as proof.** Where the code
   contradicts the design doc, the code wins and the contradiction is
   reported (see Gaps section).
-- **Cite everything**: `path — function(), lines N–M` for every code
+- **Cite everything**: `path, function(), lines N-M` for every code
   listing and every behavioral claim.
 - Call out anything that cannot be confirmed statically. Distinguish
   production code, test code, fixtures, and deprecated code.
@@ -33,11 +43,11 @@ actual imports/calls).
 
 ### 2. Execution-order tour
 
-Walk the main flows in the order they actually execute — entry point to
+Walk the main flows in the order they actually execute, entry point to
 exit, following real call chains. For each stop: the code (quoted), what it
 receives, what it returns, what can fail, and why it is written this way.
 Cover the primary user-facing flow, the write path for persistent state,
-and the automation paths (hooks, CI, scheduled jobs) — whichever exist.
+and the automation paths (hooks, CI, scheduled jobs), whichever exist.
 
 ### 3. Load-bearing invariants
 

@@ -68,10 +68,12 @@ blocks the way Gollum-style wikis do. Any doc going to Confluence that
 contains a Mermaid or PlantUML diagram must have that diagram converted to
 an image first:
 
-1. Generate the diagram via the `design-doc-mermaid` skill (Mermaid) or
-   the `plantuml` skill (PlantUML).
-2. Convert it to PNG or SVG using the same skill's image-conversion step —
-   do not leave it as a fenced code block.
+1. Default generator is `design-doc-mermaid` (flowchart, sequence, class,
+   ER, state, C4). Use `plantuml` only for leftover types (Salt wireframes,
+   use case, timing, ArchiMate, nwdiag, WBS).
+2. Convert **both** Mermaid and PlantUML to PNG or SVG using that skill's
+   image-conversion step. Do not leave a fenced code block as the only
+   Confluence view.
 3. Upload the image as a Confluence attachment, then reference it from
    the page body (Confluence macro or standard image markup, per whatever
    the `confluence` skill/converter expects).

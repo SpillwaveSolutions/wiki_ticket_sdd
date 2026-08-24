@@ -172,3 +172,23 @@ publish once and are never re-published. The live Roadmap page, ADRs, and
 re-publish whenever the source hash changes — for an ADR, a status flip
 (proposed→accepted, accepted→superseded) is exactly the change that must
 reach the wiki.
+
+## 9. Diagram assets
+
+GitHub wiki renders fenced `mermaid` blocks. It does not render PlantUML
+source. Confluence does not reliably render either.
+
+When a page under `docs/designs/` (or a requirements doc) links an image
+in `docs/diagrams/`:
+
+- **github-wiki**: copy the PNG or SVG into the wiki checkout next to the
+  page (flat namespace) or keep a working relative link. A wiki page that
+  points at a missing image is a publish defect.
+- **confluence**: upload Mermaid and PlantUML images as attachments and
+  replace source fences with the image. Do not ship a mermaid fence as
+  the only Confluence view.
+- Leave mermaid fences in the GitHub wiki copy. Leave PlantUML as an
+  image plus the `.puml` source in the repo.
+
+Missing `docs/diagrams/*.png` (or `.svg`) for a PlantUML leftover type
+blocks publish. Same for Confluence mermaid images.
