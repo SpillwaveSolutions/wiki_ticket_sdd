@@ -3062,6 +3062,11 @@
   },
   {
    "from": "item/01M0TSFFFHSSCXE44PPY3BC59H",
+   "to": "pr/373",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M0TSFFFHSSCXE44PPY3BC59H",
    "to": "release/v0.24.6",
    "type": "targets"
   },
@@ -6661,7 +6666,7 @@
   },
   "item/01M0TSFFFHSSCXE44PPY3BC59H": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "Release v0.24.6 Claude Code packaging pins"
   },
   "plan/2026-07-17_worklog-core_plan": {
@@ -6890,6 +6895,9 @@
    "doc_type": "pr"
   },
   "pr/371": {
+   "doc_type": "pr"
+  },
+  "pr/373": {
    "doc_type": "pr"
   },
   "release/v0.10.0": {
