@@ -5,6 +5,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 ## v0.24.6 — 2026-08-24
 
 - Roadmap snapshot: [[Roadmap-2026-08-24_v0.24.6-release]]
+- Shipped: Release v0.24.6 Claude Code packaging pins
 
 ## v0.24.5 — 2026-08-24
 
