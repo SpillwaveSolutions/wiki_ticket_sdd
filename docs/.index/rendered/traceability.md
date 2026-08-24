@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Align design-docs prompt companion pins
+`01M0V0ZQ56VWB1QMTP8HRXKCXG` · status: in_progress
+- targets: release/v0.24.7
+
 ### Release v0.24.6 Claude Code packaging pins
 `01M0TSFFFHSSCXE44PPY3BC59H` · status: done
 - lands-in: pr/373

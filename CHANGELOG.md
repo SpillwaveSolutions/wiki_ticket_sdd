@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.24.7 — unreleased
+
+- **Prompt companion pins.** `design-doc-prompt.md`, `code-walkthrough-prompt.md`, and `requirements-doc-prompt.md` now name the same versions as the skill table: `document-specialist` v3.2.2, `design-doc-mermaid` v1.1.1, `plantuml` v1.2.2, `google-docs-style` v1.1.4. PlantUML is leftover types only.
+
 ## 0.24.6 — 2026-08-24
 
 - **Claude Code packaging pins.** Companion skills now point at the GitHub releases that actually install: `spillwave-documentation-marketplace` v0.2.1 (catalog at `.claude-plugin/marketplace.json` with GitHub source objects), `document-specialist` v3.2.2, `design-doc-mermaid` v1.1.1, `plantuml` v1.2.2, `google-docs-style` v1.1.4 (agents is a file array; hooks auto-discover). `ste100` stays v0.1.4. Claude Code can `plugin marketplace add SpillwaveSolutions/spillwave-documentation-marketplace` from GitHub without a local clone.
