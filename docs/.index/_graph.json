@@ -3071,6 +3071,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01M0V0ZQ56VWB1QMTP8HRXKCXG",
+   "to": "release/v0.24.7",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6669,6 +6674,11 @@
    "status": "done",
    "title": "Release v0.24.6 Claude Code packaging pins"
   },
+  "item/01M0V0ZQ56VWB1QMTP8HRXKCXG": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Align design-docs prompt companion pins"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6973,6 +6983,9 @@
    "doc_type": "release"
   },
   "release/v0.24.6": {
+   "doc_type": "release"
+  },
+  "release/v0.24.7": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
