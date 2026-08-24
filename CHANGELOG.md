@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.24.6 — 2026-08-24
+
+- **Claude Code packaging pins.** Companion skills now point at the GitHub releases that actually install: `spillwave-documentation-marketplace` v0.2.1 (catalog at `.claude-plugin/marketplace.json` with GitHub source objects), `document-specialist` v3.2.2, `design-doc-mermaid` v1.1.1, `plantuml` v1.2.2, `google-docs-style` v1.1.4 (agents is a file array; hooks auto-discover). `ste100` stays v0.1.4. Claude Code can `plugin marketplace add SpillwaveSolutions/spillwave-documentation-marketplace` from GitHub without a local clone.
+- **Version lockstep 0.24.6.** Plugin manifests, `bin/worklog`, both skill trees, and the README marker all read 0.24.6.
+
+Released with `trace-check --strict` gaps on historical work (none of it from this wave). Reported and accepted rather than skipped silently. `doc-verify --strict` findings on frozen documents do not gate (ADR-0009); live design docs regenerate after the tag.
+
 ## 0.24.5 — 2026-08-24
 
 - **Mermaid-first design docs.** Architecture docs, code walkthroughs, and requirements now require the Spillwave documentation suite: `document-specialist` v3.2.1 writes the prose (STE100 default; Google style only when named) and owns wireframes; `design-doc-mermaid` v1.1.0 is the default for flowchart, sequence, class, ER, state, C4, and component views; `plantuml` v1.2.1 is leftover types only (Salt wireframes, use case, timing, ArchiMate, nwdiag, WBS) and always PNG or SVG. Install from `spillwave-documentation-marketplace` v0.2.0.

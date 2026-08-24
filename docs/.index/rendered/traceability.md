@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Release v0.24.6 Claude Code packaging pins
+`01M0TSFFFHSSCXE44PPY3BC59H` · status: in_progress
+- targets: release/v0.24.6
+
 ### Release v0.24.5 mermaid-first design docs
 `01M0TQ90FYZXRJ637E58FCT5WJ` · status: done
 - lands-in: pr/371

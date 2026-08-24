@@ -3061,6 +3061,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01M0TSFFFHSSCXE44PPY3BC59H",
+   "to": "release/v0.24.6",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -4493,6 +4498,21 @@
   {
    "from": "roadmap-snapshot/2026-08-24_v0.24.5-release",
    "to": "release/v0.24.5",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-24_v0.24.6-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-24_v0.24.6-release",
+   "to": "roadmap-snapshot/2026-08-24_v0.24.5-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-24_v0.24.6-release",
+   "to": "release/v0.24.6",
    "type": "targets"
   },
   {
@@ -6639,6 +6659,11 @@
    "status": "done",
    "title": "Release v0.24.5 mermaid-first design docs"
   },
+  "item/01M0TSFFFHSSCXE44PPY3BC59H": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Release v0.24.6 Claude Code packaging pins"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6939,6 +6964,9 @@
   "release/v0.24.5": {
    "doc_type": "release"
   },
+  "release/v0.24.6": {
+   "doc_type": "release"
+  },
   "release/v0.5.0": {
    "doc_type": "release"
   },
@@ -7089,6 +7117,12 @@
   "roadmap-snapshot/2026-08-24_v0.24.5-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-08-24_v0.24.5-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-08-24_v0.24.6-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-24_v0.24.6-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },
