@@ -3051,6 +3051,11 @@
    "type": "belongs-to"
   },
   {
+   "from": "item/01M0TQ90FYZXRJ637E58FCT5WJ",
+   "to": "release/v0.24.5",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -4468,6 +4473,21 @@
   {
    "from": "roadmap-snapshot/2026-08-18_v0.24.3-release",
    "to": "release/v0.24.3",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-24_v0.24.5-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-24_v0.24.5-release",
+   "to": "roadmap-snapshot/2026-08-18_v0.24.3-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-24_v0.24.5-release",
+   "to": "release/v0.24.5",
    "type": "targets"
   },
   {
@@ -6609,6 +6629,11 @@
    "status": "in_progress",
    "title": "Phase 2-3 style plugins + AGER polish"
   },
+  "item/01M0TQ90FYZXRJ637E58FCT5WJ": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Release v0.24.5 mermaid-first design docs"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6903,6 +6928,9 @@
   "release/v0.24.3": {
    "doc_type": "release"
   },
+  "release/v0.24.5": {
+   "doc_type": "release"
+  },
   "release/v0.5.0": {
    "doc_type": "release"
   },
@@ -7047,6 +7075,12 @@
   "roadmap-snapshot/2026-08-18_v0.24.3-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-08-18_v0.24.3-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-08-24_v0.24.5-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-24_v0.24.5-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

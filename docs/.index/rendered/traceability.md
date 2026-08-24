@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Release v0.24.5 mermaid-first design docs
+`01M0TQ90FYZXRJ637E58FCT5WJ` · status: in_progress
+- targets: release/v0.24.5
+
 ### Phase 2-3 style plugins + AGER polish
 `01M0KCDVAYS67SPN8FHAYY4DWX` · status: in_progress
 - belongs-to: multi-host plugin matrix + three-host hooks

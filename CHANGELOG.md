@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.24.5 — 2026-08-24
+
+- **Mermaid-first design docs.** Architecture docs, code walkthroughs, and requirements now require the Spillwave documentation suite: `document-specialist` v3.2.1 writes the prose (STE100 default; Google style only when named) and owns wireframes; `design-doc-mermaid` v1.1.0 is the default for flowchart, sequence, class, ER, state, C4, and component views; `plantuml` v1.2.1 is leftover types only (Salt wireframes, use case, timing, ArchiMate, nwdiag, WBS) and always PNG or SVG. Install from `spillwave-documentation-marketplace` v0.2.0.
+- **Wiki vs Confluence diagrams.** GitHub wiki keeps fenced mermaid and uploads PlantUML images with the page. Confluence uploads images for both mermaid and PlantUML. A wiki page that points at a missing `docs/diagrams/*.png` is a publish defect.
+- **Requirements prompt.** `design-docs` now ships `requirements-doc-prompt.md` for SRS and PRD, using the same companion skills as the design doc and walkthrough.
+- **Hard bans in both voice packs.** No em dash. Do not start a sentence with So, That, Thus, or Hence.
+
+Released with `trace-check --strict` gaps on historical work (none of it from this wave). Reported and accepted rather than skipped silently. `doc-verify --strict` findings on frozen documents do not gate (ADR-0009); live design docs regenerate after the tag.
+
 ## 0.24.4
 
 - Three-host hooks: Codex + Cursor-native when Claude hooks exist.

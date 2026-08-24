@@ -1,7 +1,7 @@
 ---
 name: pr-description
 metadata:
-  version: "0.24.4"
+  version: "0.24.5"
 description: Write a high-context PR description for any substantial PR. Use whenever creating or editing a pull request body — the description must let a reader with zero prior context understand what is being built, why, where it sits in the larger system, and exactly what changed, without digging through tickets or code.
 ---
 

@@ -1,13 +1,13 @@
 {
   "name": "worklog-marketplace",
   "description": "Grok marketplace pin for WikiTicket SDD. Grok Build also loads Claude plugins zero-config.",
-  "version": "0.24.4",
+  "version": "0.24.5",
   "plugins": [
     {
       "name": "worklog",
       "source": "./plugin",
       "description": "Git-native plans, tickets, roadmaps, wiki publishing.",
-      "version": "0.24.4",
+      "version": "0.24.5",
       "compatibility": {
         "claude_plugin": true,
         "zero_config": true
