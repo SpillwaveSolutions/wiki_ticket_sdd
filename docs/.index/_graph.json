@@ -3052,6 +3052,11 @@
   },
   {
    "from": "item/01M0TQ90FYZXRJ637E58FCT5WJ",
+   "to": "pr/371",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M0TQ90FYZXRJ637E58FCT5WJ",
    "to": "release/v0.24.5",
    "type": "targets"
   },
@@ -6631,7 +6636,7 @@
   },
   "item/01M0TQ90FYZXRJ637E58FCT5WJ": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "Release v0.24.5 mermaid-first design docs"
   },
   "plan/2026-07-17_worklog-core_plan": {
@@ -6857,6 +6862,9 @@
    "doc_type": "pr"
   },
   "pr/293": {
+   "doc_type": "pr"
+  },
+  "pr/371": {
    "doc_type": "pr"
   },
   "release/v0.10.0": {
