@@ -2,6 +2,29 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Phase 2-3 style plugins + AGER polish
+`01M0KCDVAYS67SPN8FHAYY4DWX` · status: in_progress
+- belongs-to: multi-host plugin matrix + three-host hooks
+
+### Phase 1 ContentPack three-host hooks
+`01M0KCDV94P4YPBXJXQZNNGQTM` · status: in_progress
+- belongs-to: multi-host plugin matrix + three-host hooks
+
+### Phase 1 foundation + wiki_ticket_sdd hosts
+`01M0KCDV7AQEQ61TA2MYN3M5C3` · status: in_progress
+- belongs-to: multi-host plugin matrix + three-host hooks
+
+### Phase 0 shared three-host hook template
+`01M0KCDV5GP8BMZT142MMAPAG7` · status: in_progress
+- belongs-to: multi-host plugin matrix + three-host hooks
+
+### multi-host plugin matrix + three-host hooks
+`01M0KCDKJRAZYMWDD9PFGHC6XY` · status: in_progress
+- contains: Phase 0 shared three-host hook template
+- contains: Phase 1 foundation + wiki_ticket_sdd hosts
+- contains: Phase 1 ContentPack three-host hooks
+- contains: Phase 2-3 style plugins + AGER polish
+
 ### Release v0.24.3
 `01M0B004MDMSVF1VT3F4PCCPKV` · status: done
 

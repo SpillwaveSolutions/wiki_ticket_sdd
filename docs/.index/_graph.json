@@ -3031,6 +3031,26 @@
    "type": "references"
   },
   {
+   "from": "item/01M0KCDV5GP8BMZT142MMAPAG7",
+   "to": "item/01M0KCDKJRAZYMWDD9PFGHC6XY",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M0KCDV7AQEQ61TA2MYN3M5C3",
+   "to": "item/01M0KCDKJRAZYMWDD9PFGHC6XY",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M0KCDV94P4YPBXJXQZNNGQTM",
+   "to": "item/01M0KCDKJRAZYMWDD9PFGHC6XY",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M0KCDVAYS67SPN8FHAYY4DWX",
+   "to": "item/01M0KCDKJRAZYMWDD9PFGHC6XY",
+   "type": "belongs-to"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6563,6 +6583,31 @@
    "doc_type": "item",
    "status": "done",
    "title": "Release v0.24.3"
+  },
+  "item/01M0KCDKJRAZYMWDD9PFGHC6XY": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "multi-host plugin matrix + three-host hooks"
+  },
+  "item/01M0KCDV5GP8BMZT142MMAPAG7": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Phase 0 shared three-host hook template"
+  },
+  "item/01M0KCDV7AQEQ61TA2MYN3M5C3": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Phase 1 foundation + wiki_ticket_sdd hosts"
+  },
+  "item/01M0KCDV94P4YPBXJXQZNNGQTM": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Phase 1 ContentPack three-host hooks"
+  },
+  "item/01M0KCDVAYS67SPN8FHAYY4DWX": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Phase 2-3 style plugins + AGER polish"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

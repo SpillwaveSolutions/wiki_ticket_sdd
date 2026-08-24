@@ -1,29 +1,48 @@
 ---
 name: design-docs
 metadata:
-  version: "0.24.3"
-description: Generate or sync the design document and code walkthrough under docs/designs/ — frozen dated pairs tied to a release tag, live current pairs regenerated from the actual code. Use when asked for a design doc or code walkthrough, and automatically (background agents) at every release.
+  version: "0.24.4"
+description: Generate or sync the design document, code walkthrough, or requirements doc. Frozen dated pairs tied to a release tag, live current pairs regenerated from the actual code. Uses document-specialist v3.2.1, design-doc-mermaid v1.1.0, plantuml v1.2.1. Use when asked for a design doc, architecture doc, code walkthrough, or requirements doc, and automatically (background agents) at every release.
 ---
 
-# Design docs & code walkthroughs
+# Design docs and code walkthroughs
 
 Two artifact kinds, four files, one rule: **generated from the actual repo,
 never from memory.** The templates live in `references/`; this skill is the
 procedure around them.
 
+## Companion skills (required)
+
+When this skill writes an architecture doc, a code walkthrough, or a requirements doc, invoke the
+Spillwave documentation suite. Install from
+`SpillwaveSolutions/spillwave-documentation-marketplace` **v0.2.0**.
+Load `references/companion-skills.md` before either prompt.
+
+| Role | Skill | Version | Rule |
+|------|--------|---------|------|
+| Prose | `document-specialist` | v3.2.1 | Default voice is STE100. Switch to `google-docs-style` v1.1.3 only when the user names Google style. Never mix packs. Wireframes belong in this skill's diagram pass. |
+| GitHub-safe diagrams | `design-doc-mermaid` | v1.1.0 | Default for flowchart, sequence, class, ER, state, C4, and component views. Fenced `mermaid` in the Markdown. Validate before publish. |
+| Leftover UML and wireframes | `plantuml` | v1.2.1 | Use case, timing, ArchiMate, Salt wireframes, nwdiag, WBS. Always render PNG or SVG. GitHub wiki does not render PlantUML source. |
+
+Hard bans for prose in both voice packs:
+
+- No em dash.
+- Do not start a sentence with So, That, Thus, or Hence.
+
 ## Artifacts
 
 | File | Kind | Rule |
 |---|---|---|
-| `docs/designs/<DATE>_<NAME>_design_doc.md` | dated | frozen — publish once, never regenerate (same rule as roadmap snapshots) |
-| `docs/designs/<DATE>_<NAME>_code_walkthrough.md` | dated | frozen — same |
+| `docs/designs/<DATE>_<NAME>_design_doc.md` | dated | frozen. Publish once, never regenerate (same rule as roadmap snapshots) |
+| `docs/designs/<DATE>_<NAME>_code_walkthrough.md` | dated | frozen. Same |
 | `docs/designs/current_design_doc.md` | live | regenerated each release; in-place rewrite is sanctioned (like `docs/roadmap.md`) |
 | `docs/designs/current_code_walkthrough.md` | live | same |
+| `docs/requirements/<NAME>_srs.md` or `_prd.md` | ad-hoc | generated on request from `requirements-doc-prompt.md`. Register with `worklog wiki-add`. |
 
 `<NAME>` at release time is `vX.Y.Z-release` (matches roadmap-snapshot
 naming). Ad-hoc names are fine mid-cycle.
 
-## Frontmatter — how a reader knows what they're looking at
+## Frontmatter: how a reader knows what they are looking at
 
 Dated files:
 
@@ -44,9 +63,9 @@ Current files: same minus `date`/`name`/`roadmap_snapshot`, plus
 `wiki_key: design/current-design-doc` (or `-code-walkthrough`) and
 `truth_state: current`. `tag` is
 the latest release tag at generation. Stamp from `git rev-parse HEAD`,
-`git branch --show-current`, `git describe --tags --abbrev=0` — never guess.
+`git branch --show-current`, `git describe --tags --abbrev=0`. Never guess.
 The identity trio (`wiki_key`, `doc_type`, `truth_state`) is required by the
-IA gates (plan ia-content-model §5.4) — regenerating without it trips
+IA gates (plan ia-content-model §5.4). Regenerating without it trips
 `worklog ia-normalize --check`.
 
 ## 1. Read the config
@@ -58,35 +77,39 @@ routes the other two to the user-docs refresh agent.
 
 ## 2. Generate
 
-Run `references/design-doc-prompt.md` (or `code-walkthrough-prompt.md`)
-against the repository at HEAD. The template's own rules govern content —
-sections are a menu, omissions are listed with reasons, every code claim
-cites `path — function(), lines N–M`. Fill the template's System Context /
-Source Material from the repo itself: README, docs/worklog-spec.md,
+Load `references/companion-skills.md`, then run
+`references/design-doc-prompt.md` (architecture / design),
+`references/code-walkthrough-prompt.md` (walkthrough), or
+`references/requirements-doc-prompt.md` (SRS / PRD)
+against the repository at HEAD. The template's own rules govern content.
+
+Sections are a menu. Omissions are listed with reasons. Every code claim
+cites `path, function(), lines N-M`. Fill System Context and Source Material
+from the repo itself: README, docs/worklog-spec.md,
 docs/plans/, docs/adr/, `.work/config.yml`, the test suites.
 
-## 2b. Verify before you report done — not optional
+## 2b. Verify before you report done. Not optional
 
 Run `bin/worklog doc-verify` and fix every **FABRICATED** finding in the
 files you just wrote, then re-run until they are gone. Do this before
 publishing and before reporting completion.
 
 This is the step whose absence caused #294. Line citations were checked by
-nobody, and a measured **12 of 26 were wrong** — pointing at offsets from
+nobody, and a measured **12 of 26 were wrong**, pointing at offsets from
 several releases earlier. Every one was written by an agent that had the
 file open and copied the previous edition's number forward. One wrong claim
-was even *introduced while hand-fixing the previous wrong claim*, which is
+was even introduced while hand-fixing the previous wrong claim, which is
 what a regeneration without a check does: it moves the error rather than
 removing it.
 
 Reading the verdicts:
 
-- **FABRICATED** — the citation is wrong *at the commit you generated
-  against*. Your bug, in the file you just wrote. Fix it.
-- **DRIFT** — right when written, moved since. Expected in the frozen dated
+- **FABRICATED**: the citation is wrong at the commit you generated
+  against. Your bug, in the file you just wrote. Fix it.
+- **DRIFT**: right when written, moved since. Expected in the frozen dated
   copies; in a `current_*` file it means you cited an older tree than the
   one you generated against, so treat it as yours too.
-- **UNSTAMPED / UNRESOLVABLE** — no `git_hash`, or a commit not in this
+- **UNSTAMPED / UNRESOLVABLE**: no `git_hash`, or a commit not in this
   clone (see ADR-0008). Report it; never re-check against HEAD.
 
 Do not hand-edit a frozen dated copy to silence a finding. Frozen means
@@ -104,14 +127,14 @@ should say so in prose where a reader would be misled.
 ## 4. Publish
 
 wiki-publish, standard ledger flow (`.work/published.json`):
-- `design/current-design-doc` → page `Design-Doc` (live: republish on
-  source-hash change), `design/current-code-walkthrough` → `Code-Walkthrough`.
-- Dated files → `Design-Doc-<date>_<name>` / `Code-Walkthrough-<date>_<name>`
+- `design/current-design-doc` to page `Design-Doc` (live: republish on
+  source-hash change), `design/current-code-walkthrough` to `Code-Walkthrough`.
+- Dated files to `Design-Doc-<date>_<name>` / `Code-Walkthrough-<date>_<name>`
   (frozen: publish once), linked from Home next to the roadmap snapshots.
 
 ## 5. Execution rule: always a background subagent
 
-Generation reads the whole repo — it never blocks the main thread or a
+Generation reads the whole repo. It never blocks the main thread or a
 release. Same non-blocking pattern as viz and plan-publish: spawn the agent,
 fold the result in when it reports. At release time the release skill spawns
 this; the tag never waits for prose.

@@ -1,5 +1,5 @@
 {
- "git_hash": "14dbb3f",
+ "git_hash": "92721be",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "9443ed412501",
+   "render_hash": "2bc152f9ed03",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4032,6 +4032,56 @@
    "wiki_key": "item/01M0B004MDMSVF1VT3F4PCCPKV"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M0KCDKJRAZYMWDD9PFGHC6XY",
+   "render": "as-is",
+   "render_hash": "939f2f2bfbaa",
+   "source": "docs/.index/rendered/tickets/01M0KCDKJRAZYMWDD9PFGHC6XY.md",
+   "title": "multi-host plugin matrix + three-host hooks",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M0KCDKJRAZYMWDD9PFGHC6XY"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M0KCDV5GP8BMZT142MMAPAG7",
+   "render": "as-is",
+   "render_hash": "977f58dd6954",
+   "source": "docs/.index/rendered/tickets/01M0KCDV5GP8BMZT142MMAPAG7.md",
+   "title": "Phase 0 shared three-host hook template",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M0KCDV5GP8BMZT142MMAPAG7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M0KCDV7AQEQ61TA2MYN3M5C3",
+   "render": "as-is",
+   "render_hash": "632ce4f12c0a",
+   "source": "docs/.index/rendered/tickets/01M0KCDV7AQEQ61TA2MYN3M5C3.md",
+   "title": "Phase 1 foundation + wiki_ticket_sdd hosts",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M0KCDV7AQEQ61TA2MYN3M5C3"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M0KCDV94P4YPBXJXQZNNGQTM",
+   "render": "as-is",
+   "render_hash": "c072f1a8922a",
+   "source": "docs/.index/rendered/tickets/01M0KCDV94P4YPBXJXQZNNGQTM.md",
+   "title": "Phase 1 ContentPack three-host hooks",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M0KCDV94P4YPBXJXQZNNGQTM"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M0KCDVAYS67SPN8FHAYY4DWX",
+   "render": "as-is",
+   "render_hash": "f77fcee765f4",
+   "source": "docs/.index/rendered/tickets/01M0KCDVAYS67SPN8FHAYY4DWX.md",
+   "title": "Phase 2-3 style plugins + AGER polish",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M0KCDVAYS67SPN8FHAYY4DWX"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4848,13 +4898,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-19T07:29:23Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-22T00:07:30Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "ccf2aeb8f6ff",
+   "render_hash": "102ec7b27533",
    "source": "docs/roadmap.md",
-   "source_hash": "65538697716e",
+   "source_hash": "20475d6c127f",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
