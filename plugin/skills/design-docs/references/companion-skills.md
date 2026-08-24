@@ -2,13 +2,13 @@
 
 Load these skills before you write `docs/designs/` architecture docs,
 code walkthroughs, or requirement docs (SRS / PRD).
-Install from `SpillwaveSolutions/spillwave-documentation-marketplace` **v0.2.0**.
+Install from `SpillwaveSolutions/spillwave-documentation-marketplace` **v0.2.1**.
 
 | Role | Skill | Version | Rule |
 |------|--------|---------|------|
-| Prose | `document-specialist` | **v3.2.1** | Default voice is STE100. Switch to `google-docs-style` **v1.1.3** only when the user names Google style. Never mix packs. Wireframes belong in this skill's diagram pass. |
-| GitHub-safe diagrams | `design-doc-mermaid` | **v1.1.0** | Default for flowchart, sequence, class, ER, state, C4, and component views. Fenced `mermaid` in the Markdown. Validate before publish. |
-| Leftover UML and wireframes | `plantuml` | **v1.2.1** | Use case, timing, ArchiMate, Salt wireframes, nwdiag, WBS. Always render PNG or SVG. GitHub wiki does not render PlantUML source. |
+| Prose | `document-specialist` | **v3.2.2** | Default voice is STE100. Switch to `google-docs-style` **v1.1.4** only when the user names Google style. Never mix packs. Wireframes belong in this skill's diagram pass. |
+| GitHub-safe diagrams | `design-doc-mermaid` | **v1.1.1** | Default for flowchart, sequence, class, ER, state, C4, and component views. Fenced `mermaid` in the Markdown. Validate before publish. |
+| Leftover UML and wireframes | `plantuml` | **v1.2.2** | Use case, timing, ArchiMate, Salt wireframes, nwdiag, WBS. Always render PNG or SVG. GitHub wiki does not render PlantUML source. |
 | STE100 gate | `ste100` | **v0.1.4** | Local orchestrator / editor / adversary. Default voice pack. |
 
 Hard bans for prose in both voice packs:

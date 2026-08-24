@@ -1,7 +1,7 @@
 ---
 name: worklog-session
 metadata:
-  version: "0.24.5"
+  version: "0.24.6"
 description: Open or close an isolated second-brain write session (worktree + PR). Use before writing knowledge when multiple agents share one knowledge remote.
 ---
 

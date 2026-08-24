@@ -46,10 +46,10 @@ picture, mapped to real code.
   from the log — no hand-editing, no drift.
 - **Design docs, architecture docs, code walkthroughs, and requirements**, generated from the actual code at
   every release: frozen per-release copies plus always-current versions in
-  `docs/designs/`, published to the wiki. Prose uses `document-specialist` v3.2.1
-  (STE100 default). Diagrams default to `design-doc-mermaid` v1.1.0. `plantuml`
-  v1.2.1 is leftover types only and always PNG/SVG. Install the suite from
-  `SpillwaveSolutions/spillwave-documentation-marketplace` v0.2.0.
+  `docs/designs/`, published to the wiki. Prose uses `document-specialist` v3.2.2
+  (STE100 default). Diagrams default to `design-doc-mermaid` v1.1.1. `plantuml`
+  v1.2.2 is leftover types only and always PNG/SVG. Install the suite from
+  `SpillwaveSolutions/spillwave-documentation-marketplace` v0.2.1.
 
 - **Documents carry the commit they were written against**, and a gate reads
   it back. `git_hash` in front matter says which tree the author had open;
@@ -279,7 +279,7 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | `docs/user_guide/` | User guide, CLI reference, plugin guide |
 | `docs/integrations/` | Living per-system setup guides (11 SDD tools + ticket/wiki systems), published to the wiki and used as the `integration-guide` skill's offline fallback |
 | `hooks/` | `pre-commit`, `pre-merge-commit`, `commit-msg`, `exit-plan-capture.sh`, `prompt-reminder.sh`, `session-doctor.sh`, `session-end.sh`, `stop-worklog-check.sh` |
-| `plugin/` | Claude Code, Codex, and Grok Build manifests, commands, skills, hooks, and canonical scripts — **v0.24.5** |
+| `plugin/` | Claude Code, Codex, and Grok Build manifests, commands, skills, hooks, and canonical scripts — **v0.24.6** |
 | `tests/` | Unit and integration tests |
 
 ## Testing
