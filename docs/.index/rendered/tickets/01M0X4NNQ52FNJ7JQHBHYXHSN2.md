@@ -1,6 +1,6 @@
 # Release v0.24.7 silent-skip gates
 
-`01M0X4NNQ52FNJ7JQHBHYXHSN2` · story/feature · **in-progress**
+`01M0X4NNQ52FNJ7JQHBHYXHSN2` · story/feature · **done**
 
 Stamp the 0.24.7 changelog, bump the version lockstep, snapshot the roadmap, tag, and publish.
 
@@ -14,6 +14,7 @@ Progress: 2/2 done
 ## Linked PRs
 
 - [[PR-378]]
+- [[PR-379]]
 
 ## Release
 

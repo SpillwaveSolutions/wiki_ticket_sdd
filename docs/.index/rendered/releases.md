@@ -8,6 +8,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 - Shipped: Bot pushes to main skip CI, so a broken main goes unnoticed (#361)
 - Shipped: Align design-docs prompt companion pins
 - Shipped: Stamp git_hash on frozen design sidecars so CI goes green (#377)
+- Shipped: Release v0.24.7 silent-skip gates
 - Shipped: Classify docs/design/ (singular) and project_notes as real doc types
 - Shipped: init.sh copies doc_verify, provenance, and session-end.sh (#344)
 
