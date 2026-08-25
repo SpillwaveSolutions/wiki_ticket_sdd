@@ -3027,8 +3027,18 @@
   },
   {
    "from": "item/01M09DEB5YMZRHRBZB8GADMKY0",
+   "to": "pr/378",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M09DEB5YMZRHRBZB8GADMKY0",
    "to": "ticket/github#361",
    "type": "references"
+  },
+  {
+   "from": "item/01M09DEB5YMZRHRBZB8GADMKY0",
+   "to": "release/v0.24.7",
+   "type": "targets"
   },
   {
    "from": "item/01M0KCDV5GP8BMZT142MMAPAG7",
@@ -3077,8 +3087,18 @@
   },
   {
    "from": "item/01M0V0ZQ56VWB1QMTP8HRXKCXG",
+   "to": "pr/378",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M0V0ZQ56VWB1QMTP8HRXKCXG",
    "to": "release/v0.24.7",
    "type": "targets"
+  },
+  {
+   "from": "item/01M0X499FE5FZCQG0J4H078366",
+   "to": "pr/378",
+   "type": "lands-in"
   },
   {
    "from": "item/01M0X499FE5FZCQG0J4H078366",
@@ -3087,6 +3107,51 @@
   },
   {
    "from": "item/01M0X499FE5FZCQG0J4H078366",
+   "to": "release/v0.24.7",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M0X4NNQ52FNJ7JQHBHYXHSN2",
+   "to": "pr/378",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M0X4NNQ52FNJ7JQHBHYXHSN2",
+   "to": "release/v0.24.7",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M0X4NNV2BV3BZSRN7BTPQ1RT",
+   "to": "item/01M0X4NNQ52FNJ7JQHBHYXHSN2",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M0X4NNV2BV3BZSRN7BTPQ1RT",
+   "to": "pr/378",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M0X4NNV2BV3BZSRN7BTPQ1RT",
+   "to": "release/v0.24.7",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M0X4NZQVZWRKYXTETWSSH6QN",
+   "to": "item/01M0X4NNQ52FNJ7JQHBHYXHSN2",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M0X4NZQVZWRKYXTETWSSH6QN",
+   "to": "pr/378",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M0X4NZQVZWRKYXTETWSSH6QN",
+   "to": "ticket/github#344",
+   "type": "references"
+  },
+  {
+   "from": "item/01M0X4NZQVZWRKYXTETWSSH6QN",
    "to": "release/v0.24.7",
    "type": "targets"
   },
@@ -4538,6 +4603,21 @@
   {
    "from": "roadmap-snapshot/2026-08-24_v0.24.6-release",
    "to": "release/v0.24.6",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-25_v0.24.7-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-25_v0.24.7-release",
+   "to": "roadmap-snapshot/2026-08-24_v0.24.6-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-25_v0.24.7-release",
+   "to": "release/v0.24.7",
    "type": "targets"
   },
   {
@@ -6699,6 +6779,21 @@
    "status": "done",
    "title": "Stamp git_hash on frozen design sidecars so CI goes green"
   },
+  "item/01M0X4NNQ52FNJ7JQHBHYXHSN2": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Release v0.24.7 silent-skip gates"
+  },
+  "item/01M0X4NNV2BV3BZSRN7BTPQ1RT": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Classify docs/design/ (singular) and project_notes as real doc types"
+  },
+  "item/01M0X4NZQVZWRKYXTETWSSH6QN": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "init.sh copies doc_verify, provenance, and session-end.sh"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -6931,6 +7026,9 @@
    "doc_type": "pr"
   },
   "pr/375": {
+   "doc_type": "pr"
+  },
+  "pr/378": {
    "doc_type": "pr"
   },
   "release/v0.10.0": {
@@ -7167,6 +7265,12 @@
   "roadmap-snapshot/2026-08-24_v0.24.6-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-08-24_v0.24.6-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-08-25_v0.24.7-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-25_v0.24.7-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },
@@ -7861,6 +7965,10 @@
   "ticket/github#34": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/34"
+  },
+  "ticket/github#344": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/344"
   },
   "ticket/github#349": {
    "doc_type": "ticket",

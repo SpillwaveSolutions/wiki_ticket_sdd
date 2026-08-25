@@ -2,6 +2,15 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
+## v0.24.7 — 2026-08-25
+
+- Roadmap snapshot: [[Roadmap-2026-08-25_v0.24.7-release]]
+- Shipped: Bot pushes to main skip CI, so a broken main goes unnoticed (#361)
+- Shipped: Align design-docs prompt companion pins
+- Shipped: Stamp git_hash on frozen design sidecars so CI goes green (#377)
+- Shipped: Classify docs/design/ (singular) and project_notes as real doc types
+- Shipped: init.sh copies doc_verify, provenance, and session-end.sh (#344)
+
 ## v0.24.6 — 2026-08-24
 
 - Roadmap snapshot: [[Roadmap-2026-08-24_v0.24.6-release]]

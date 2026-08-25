@@ -1,11 +1,14 @@
 # Changelog
 
-## 0.24.7 — unreleased
+## 0.24.7 — 2026-08-25
 
 - **Prompt companion pins.** `design-doc-prompt.md`, `code-walkthrough-prompt.md`, and `requirements-doc-prompt.md` now name the same versions as the skill table: `document-specialist` v3.2.2, `design-doc-mermaid` v1.1.1, `plantuml` v1.2.2, `google-docs-style` v1.1.4. PlantUML is leftover types only.
 - **Design docs under `docs/design/` (singular) are classified.** `ia.py` matched only `docs/designs/` (plural), so consumer repos that follow the singular convention inventoried `design:0` with no warning and never wrote those files to the publish manifest (#377). Both paths now classify as `design`. The sidecar normalizer stamps `git_hash` from the commit that last touched the file when the artifact did not record one, so `ia-inventory --check` no longer blocks on `missing git_hash` after the path fix. `docs/project_notes/` is classified as `guide` so dated cut notes reach the index instead of vanishing.
 - **`init.sh` installs `doc_verify.py`, `provenance.py`, and `hooks/session-end.sh`.** All three were present, wired, and dead — the pre-commit citation guard is a file-existence test, so a missing module looked like a pass, and the upgrade notes pointed `SessionEnd` at a path init never created (#344). The plugin manifest (Claude, Codex, Cursor) now wires `SessionEnd` too. `session-end.sh` reads the hook payload from stdin instead of a heredoc, so it actually ends the session.
 - **Bot pushes to main now show up in check history.** The compact job already ran the suite before pushing (0.24.3). `worklog-invariants` now also listens on `workflow_run` of `worklog-compact`, which GitHub does fire for `GITHUB_TOKEN` pushes, so a broken compact commit is a red check on main instead of a silent one (#361).
+- **Version lockstep 0.24.7.** Plugin manifests, `bin/worklog`, both skill trees, and the README marker all read 0.24.7.
+
+Released with `trace-check --strict` gaps: 50 historical, plus four from this wave (three unplanned items have no plan link; the classify item does not own #377 because the sidecar-stamp item already does). Reported and accepted rather than skipped silently. `doc-verify --strict` findings on frozen documents do not gate (ADR-0009). Two live-doc drifts on `current_design_doc` (`ia.py` `_scalar` / `is_frozen` line numbers from this wave) — the live pair regenerates after the tag.
 
 ## 0.24.6 — 2026-08-24
 

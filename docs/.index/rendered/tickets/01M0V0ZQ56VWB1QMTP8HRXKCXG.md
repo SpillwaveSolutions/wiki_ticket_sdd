@@ -7,6 +7,7 @@ The SKILL and companion-skills table pin marketplace v0.2.1 / specialist v3.2.2 
 ## Linked PRs
 
 - [[PR-375]]
+- [[PR-378]]
 
 ## Release
 
