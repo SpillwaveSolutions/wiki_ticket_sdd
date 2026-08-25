@@ -16,8 +16,9 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.24.7
 
 ### Release v0.24.7 silent-skip gates
-`01M0X4NNQ52FNJ7JQHBHYXHSN2` · status: in_progress
+`01M0X4NNQ52FNJ7JQHBHYXHSN2` · status: done
 - lands-in: pr/378
+- lands-in: pr/379
 - targets: release/v0.24.7
 - contains: Classify docs/design/ (singular) and project_notes as real doc types
 - contains: init.sh copies doc_verify, provenance, and session-end.sh

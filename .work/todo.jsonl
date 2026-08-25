@@ -16,3 +16,4 @@
 {"actor":"unknown","ev":"01M0X4NZSV5X2B74898801H8J9","git":"7f99647","item":"01M0X4NZQVZWRKYXTETWSSH6QN","op":"link","set":{"external":{"key":"344","synced_at":"2026-08-25T18:59:48Z","system":"github","url":"https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/344"}},"ts":"2026-08-25T18:59:48Z"}
 {"actor":"unknown","ev":"01M0X4NZVTKHHEY51DY4SY2DDD","git":"7f99647","item":"01M0X4NZQVZWRKYXTETWSSH6QN","op":"close","set":{"resolution":"Shipped in #378.","status":"done"},"ts":"2026-08-25T18:59:48Z"}
 {"actor":"unknown","ev":"01M0X4NZXSY73SYS4K55VRE9SX","git":"7f99647","item":"01M09DEB5YMZRHRBZB8GADMKY0","op":"update","set":{"milestone":"v0.24.7"},"ts":"2026-08-25T18:59:48Z"}
+{"actor":"unknown","ev":"01M0X59GEJKZTBHVQ2YH3TPE5Q","git":"ed4306a","item":"01M0X4NNQ52FNJ7JQHBHYXHSN2","op":"close","set":{"resolution":"Tagged v0.24.7 on ed4306a; GitHub release published.","status":"done"},"ts":"2026-08-25T19:10:28Z"}
