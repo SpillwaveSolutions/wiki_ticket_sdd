@@ -1,5 +1,6 @@
 canonical_key: design/2026-08-06_v0.22.1-release-design-doc
 doc_type: design
+git_hash: 7d83fa28eaf048acd468803919a29a4a29038da7
 release: v0.22.1
 slug: 2026-08-06_v0.22.1-release_design_doc
 title: Worklog — Software Design Document

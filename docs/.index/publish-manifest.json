@@ -1,5 +1,5 @@
 {
- "git_hash": "ff2a6f3",
+ "git_hash": "974c017",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "2997071ff528",
+   "render_hash": "0cd3ff650082",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -565,7 +565,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.7",
    "render": "as-is",
-   "render_hash": "c73d3faac1d1",
+   "render_hash": "cf5ec086da01",
    "source": "docs/.index/rendered/releases/v0.24.7.md",
    "title": "Release v0.24.7",
    "truth_state": "shipped",
@@ -4172,6 +4172,16 @@
    "wiki_key": "item/01M0V0ZQ56VWB1QMTP8HRXKCXG"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M0X499FE5FZCQG0J4H078366",
+   "render": "as-is",
+   "render_hash": "8802b0f9c832",
+   "source": "docs/.index/rendered/tickets/01M0X499FE5FZCQG0J4H078366.md",
+   "title": "Stamp git_hash on frozen design sidecars so CI goes green",
+   "truth_state": "done",
+   "wiki_key": "item/01M0X499FE5FZCQG0J4H078366"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4988,11 +4998,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-25T07:31:59Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-25T18:52:58Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "9057ac131446",
+   "render_hash": "13e5f722ad1d",
    "source": "docs/roadmap.md",
    "source_hash": "20475d6c127f",
    "title": "Roadmap",
