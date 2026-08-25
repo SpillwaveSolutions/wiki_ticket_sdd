@@ -29,6 +29,16 @@
           }
         ]
       }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/scripts/session-end.sh"
+          }
+        ]
+      }
     ]
   },
   "description": "Codex port of Claude Code hooks. Same scripts; ExitPlanMode omitted (no such tool)."
