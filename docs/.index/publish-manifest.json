@@ -1,5 +1,5 @@
 {
- "git_hash": "974c017",
+ "git_hash": "7f99647",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "b0c24692f975",
+   "render_hash": "9ec1b4df3b30",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "0cd3ff650082",
+   "render_hash": "a174c6aeb504",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -313,6 +313,16 @@
   },
   {
    "frozen": false,
+   "page_name": "PR-378",
+   "render": "as-is",
+   "render_hash": "bf2405ac6576",
+   "source": "docs/.index/rendered/prs/378.md",
+   "title": "PR #378",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/378"
+  },
+  {
+   "frozen": false,
    "page_name": "Release-v0.10.0",
    "render": "as-is",
    "render_hash": "a1d7e2472b9e",
@@ -565,7 +575,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.7",
    "render": "as-is",
-   "render_hash": "cf5ec086da01",
+   "render_hash": "892ef219bf02",
    "source": "docs/.index/rendered/releases/v0.24.7.md",
    "title": "Release v0.24.7",
    "truth_state": "shipped",
@@ -4065,7 +4075,7 @@
    "frozen": false,
    "page_name": "Ticket-01M09DEB5YMZRHRBZB8GADMKY0",
    "render": "as-is",
-   "render_hash": "8cd4197794fc",
+   "render_hash": "0dfb0d960aa8",
    "source": "docs/.index/rendered/tickets/01M09DEB5YMZRHRBZB8GADMKY0.md",
    "title": "Bot pushes to main skip CI, so a broken main goes unnoticed",
    "truth_state": "done",
@@ -4165,7 +4175,7 @@
    "frozen": false,
    "page_name": "Ticket-01M0V0ZQ56VWB1QMTP8HRXKCXG",
    "render": "as-is",
-   "render_hash": "f2772664d142",
+   "render_hash": "7657c194d756",
    "source": "docs/.index/rendered/tickets/01M0V0ZQ56VWB1QMTP8HRXKCXG.md",
    "title": "Align design-docs prompt companion pins",
    "truth_state": "done",
@@ -4175,11 +4185,41 @@
    "frozen": false,
    "page_name": "Ticket-01M0X499FE5FZCQG0J4H078366",
    "render": "as-is",
-   "render_hash": "8802b0f9c832",
+   "render_hash": "7595a1889821",
    "source": "docs/.index/rendered/tickets/01M0X499FE5FZCQG0J4H078366.md",
    "title": "Stamp git_hash on frozen design sidecars so CI goes green",
    "truth_state": "done",
    "wiki_key": "item/01M0X499FE5FZCQG0J4H078366"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M0X4NNQ52FNJ7JQHBHYXHSN2",
+   "render": "as-is",
+   "render_hash": "26cee63b36cb",
+   "source": "docs/.index/rendered/tickets/01M0X4NNQ52FNJ7JQHBHYXHSN2.md",
+   "title": "Release v0.24.7 silent-skip gates",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M0X4NNQ52FNJ7JQHBHYXHSN2"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M0X4NNV2BV3BZSRN7BTPQ1RT",
+   "render": "as-is",
+   "render_hash": "d8a344297334",
+   "source": "docs/.index/rendered/tickets/01M0X4NNV2BV3BZSRN7BTPQ1RT.md",
+   "title": "Classify docs/design/ (singular) and project_notes as real doc types",
+   "truth_state": "done",
+   "wiki_key": "item/01M0X4NNV2BV3BZSRN7BTPQ1RT"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M0X4NZQVZWRKYXTETWSSH6QN",
+   "render": "as-is",
+   "render_hash": "ce9bfab2beaa",
+   "source": "docs/.index/rendered/tickets/01M0X4NZQVZWRKYXTETWSSH6QN.md",
+   "title": "init.sh copies doc_verify, provenance, and session-end.sh",
+   "truth_state": "done",
+   "wiki_key": "item/01M0X4NZQVZWRKYXTETWSSH6QN"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -4998,13 +5038,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-25T18:52:58Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-25T18:59:48Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "13e5f722ad1d",
+   "render_hash": "1eb875a635da",
    "source": "docs/roadmap.md",
-   "source_hash": "20475d6c127f",
+   "source_hash": "c1ff549de53b",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -5286,6 +5326,18 @@
    "wiki_key": "roadmap-snapshot/2026-08-24_v0.24.6-release"
   },
   {
+   "banner": "> **Snapshot** of release v0.24.7 (2026-08-25) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-08-25_v0.24.7-release",
+   "render": "doc+banner",
+   "render_hash": "2a8985528f26",
+   "source": "docs/roadmap/2026-08-25_v0.24.7-release.md",
+   "source_hash": "c1ff549de53b",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-08-25_v0.24.7-release"
+  },
+  {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
    "frozen": true,
    "page_name": "Roadmap-2026-07-18_v0.2-roadmap",
@@ -5443,7 +5495,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "a51d3a665050",
+  "render_hash": "f4ccee332d22",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

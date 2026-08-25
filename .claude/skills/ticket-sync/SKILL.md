@@ -1,7 +1,7 @@
 ---
 name: ticket-sync
 metadata:
-  version: "0.24.6"
+  version: "0.24.7"
 description: Push work items to the team's configured ticketing system (GitHub Issues, Jira, Azure DevOps, GitLab, Linear...). Use when asked to sync tickets, after closing out a plan, or when items should be visible in the tracker. Push and pull.
 ---
 

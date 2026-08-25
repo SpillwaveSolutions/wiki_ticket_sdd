@@ -2,14 +2,36 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### init.sh copies doc_verify, provenance, and session-end.sh
+`01M0X4NZQVZWRKYXTETWSSH6QN` · status: done
+- belongs-to: Release v0.24.7 silent-skip gates
+- lands-in: pr/378
+- references: [github#344](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/344)
+- targets: release/v0.24.7
+
+### Classify docs/design/ (singular) and project_notes as real doc types
+`01M0X4NNV2BV3BZSRN7BTPQ1RT` · status: done
+- belongs-to: Release v0.24.7 silent-skip gates
+- lands-in: pr/378
+- targets: release/v0.24.7
+
+### Release v0.24.7 silent-skip gates
+`01M0X4NNQ52FNJ7JQHBHYXHSN2` · status: in_progress
+- lands-in: pr/378
+- targets: release/v0.24.7
+- contains: Classify docs/design/ (singular) and project_notes as real doc types
+- contains: init.sh copies doc_verify, provenance, and session-end.sh
+
 ### Stamp git_hash on frozen design sidecars so CI goes green
 `01M0X499FE5FZCQG0J4H078366` · status: done
+- lands-in: pr/378
 - references: [github#377](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/377)
 - targets: release/v0.24.7
 
 ### Align design-docs prompt companion pins
 `01M0V0ZQ56VWB1QMTP8HRXKCXG` · status: done
 - lands-in: pr/375
+- lands-in: pr/378
 - targets: release/v0.24.7
 
 ### Release v0.24.6 Claude Code packaging pins
@@ -53,7 +75,9 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Bot pushes to main skip CI, so a broken main goes unnoticed
 `01M09DEB5YMZRHRBZB8GADMKY0` · status: done
+- lands-in: pr/378
 - references: [github#361](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/361)
+- targets: release/v0.24.7
 
 ### Scheduled compaction pushes a stale IA manifest and roadmap to main
 `01M095WZRZC0J94D3FDZV9Q7V0` · status: done
