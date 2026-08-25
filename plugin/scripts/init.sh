@@ -83,7 +83,8 @@ skipped=()
 mkdir -p bin hooks
 for f in worklog fold.py ulid.py render_roadmap.py viz_mermaid.py plan_capture.py compact.py adr.py \
          ia.py ia_render.py ia_graph.py canonical.py sync_dispatch.py session.py \
-         item_fields.py wiki_flavor.py changelog.py okf_write.py; do
+         item_fields.py wiki_flavor.py changelog.py okf_write.py \
+         doc_verify.py provenance.py; do
   cp -p "$PLUGIN_ROOT/scripts/$f" "bin/$f"
   chmod +x "bin/$f"
   wrote+=("bin/$f")
@@ -93,6 +94,15 @@ for f in pre-commit pre-merge-commit commit-msg; do
   chmod +x "hooks/$f"
   wrote+=("hooks/$f")
 done
+# SessionEnd is not a git hook. The plugin used to tell consumers to wire
+# $CLAUDE_PROJECT_DIR/hooks/session-end.sh by hand after init, then never
+# created the file (#344). Copy it next to the git hooks so that path
+# exists; the plugin manifest now wires SessionEnd too.
+if [ -f "$PLUGIN_ROOT/hooks/scripts/session-end.sh" ]; then
+  cp -p "$PLUGIN_ROOT/hooks/scripts/session-end.sh" "hooks/session-end.sh"
+  chmod +x "hooks/session-end.sh"
+  wrote+=("hooks/session-end.sh")
+fi
 git config core.hooksPath hooks
 
 # --- .gitattributes: union merge for the event logs, append only if absent ---

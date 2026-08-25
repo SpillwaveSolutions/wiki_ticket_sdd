@@ -3081,6 +3081,16 @@
    "type": "targets"
   },
   {
+   "from": "item/01M0X499FE5FZCQG0J4H078366",
+   "to": "ticket/github#377",
+   "type": "references"
+  },
+  {
+   "from": "item/01M0X499FE5FZCQG0J4H078366",
+   "to": "release/v0.24.7",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -6684,6 +6694,11 @@
    "status": "done",
    "title": "Align design-docs prompt companion pins"
   },
+  "item/01M0X499FE5FZCQG0J4H078366": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Stamp git_hash on frozen design sidecars so CI goes green"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -7862,6 +7877,10 @@
   "ticket/github#361": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/361"
+  },
+  "ticket/github#377": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/377"
   },
   "ticket/github#39": {
    "doc_type": "ticket",

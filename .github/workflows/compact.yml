@@ -34,15 +34,15 @@ jobs:
           bin/worklog ia-manifest
 
       # A push made with the default GITHUB_TOKEN does not trigger other
-      # workflows, so worklog-invariants never runs on the commit this job
+      # workflows, so worklog-invariants never ran on the commit this job
       # creates. Main was broken for two days that way: the job committed a
       # log whose provenance sha no longer matched the IA manifest, and the
-      # one check that would have caught it never ran.
+      # one check that would have caught it never ran (#361).
       #
-      # So this job checks itself, BEFORE it pushes. Failing here leaves main
-      # untouched, which is better than a red check after the fact. It does
-      # not restore a run in main's check history -- only a token that is not
-      # GITHUB_TOKEN can do that -- so the residual gap stays on its item.
+      # So this job checks itself BEFORE it pushes. Failing here leaves main
+      # untouched. worklog-invariants also listens on workflow_run of this
+      # job, which GitHub does fire for GITHUB_TOKEN pushes, so main's
+      # check history now records a run on the compact commit too.
       - name: verify what is about to be pushed
         run: |
           WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit

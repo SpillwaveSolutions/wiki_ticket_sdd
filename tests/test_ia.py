@@ -106,8 +106,12 @@ class TestKeys(unittest.TestCase):
             "docs/roadmap/2026-07-21_v0.12.1-release.md": "roadmap-snapshot/2026-07-21_v0.12.1-release",
             "docs/status/2026-07-19-daily.md": "status/2026-07-19-daily",
             "docs/designs/current_design_doc.md": "design/current-design-doc",
+            "docs/design/current_design_doc.md": "design/current-design-doc",
             "docs/designs/2026-07-21_v0.12.1-release_design_doc.md":
                 "design/2026-07-21_v0.12.1-release-design-doc",
+            "docs/design/2026-07-21_v0.12.1-release_design_doc.md":
+                "design/2026-07-21_v0.12.1-release-design-doc",
+            "docs/project_notes/2026-08-01-cut.md": "guide/2026-08-01-cut",
             "docs/adr/0001-event-log-fold-union-merge.md": "adr/0001-event-log-fold-union-merge",
             "docs/user_guide/cli-reference.md": "guide/cli-reference",
             "docs/wiki-home.md": "home",

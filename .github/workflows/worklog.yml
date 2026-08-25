@@ -1,13 +1,32 @@
 name: worklog-invariants
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  # A push made with the default GITHUB_TOKEN does not trigger `push` on
+  # sibling workflows. The compact job pushes that way, so without this
+  # event main's check history never saw those commits (#361).
+  workflow_run:
+    workflows: ["worklog-compact"]
+    types: [completed]
 
 jobs:
   invariants:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        if: github.event_name != 'workflow_run'
         with:
           fetch-depth: 0
+      # workflow_run.head_sha is the commit that *started* compact, not the
+      # commit compact pushed. After a successful compact, main is the new
+      # HEAD, which is what we need to check (#361).
+      - uses: actions/checkout@v4
+        if: github.event_name == 'workflow_run'
+        with:
+          fetch-depth: 0
+          ref: main
       # Same script as the local hook: trailing newline, event schema,
       # roadmap freshness. A dev can --no-verify past the local hook; not
       # this. WORKLOG_SKIP_BRANCH_GUARD: this step runs on whatever ref was
@@ -57,6 +76,7 @@ jobs:
           python3 tests/test_bug_merge.py
 
   coverage:
+    if: github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

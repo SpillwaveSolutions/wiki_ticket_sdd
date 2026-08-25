@@ -18,6 +18,7 @@ import glob
 import json
 import os
 import re
+import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -176,12 +177,20 @@ def classify(path):
         return "roadmap-snapshot"
     if p.startswith("docs/status/"):
         return "status"
-    if p.startswith("docs/designs/"):
+    # Consumer repos store design docs under docs/design/ (singular). This
+    # plugin's own tree uses docs/designs/ (plural). Matching only the
+    # plural silently skipped the whole class: ia-inventory reported a
+    # healthy count for everything else, with design:0 and no warning (#377).
+    if p.startswith("docs/design/") or p.startswith("docs/designs/"):
         return "design"
     if p.startswith("docs/adr/"):
         return "adr"
-    if p.startswith("docs/user_guide/") or p in ("docs/wiki-home.md",
-                                                 "docs/worklog-spec.md"):
+    # docs/project_notes/ holds dated cut notes. They are not their own
+    # type: they are guides — readable documents with a title — so they
+    # reach the inventory and the publish manifest instead of vanishing
+    # the way an unclassified path does (#377 follow-on).
+    if p.startswith("docs/user_guide/") or p.startswith("docs/project_notes/") \
+            or p in ("docs/wiki-home.md", "docs/worklog-spec.md"):
         return "guide"
     return None
 
@@ -257,6 +266,26 @@ def read_sidecar(wiki_key):
         return {}
 
 
+def last_touch_sha(path):
+    """Commit that last touched `path`, or None.
+
+    Fallback only. git_hash is supposed to be the commit the document was
+    *written against*, which a document cannot know after the fact. When a
+    frozen design never recorded one, the last-touch sha is the least-wrong
+    stamp the normalizer can write so ia-inventory --check stops blocking
+    the commit on `missing git_hash` (#377 follow-on). Never called from
+    the regenerate-and-diff path (invariant 32).
+    """
+    try:
+        p = subprocess.run(
+            ["git", "log", "-1", "--format=%H", "--", path],
+            capture_output=True, text=True)
+        sha = (p.stdout or "").strip()
+        return sha or None
+    except OSError:
+        return None
+
+
 def write_sidecar(wiki_key, meta):
     path = sidecar_path(wiki_key)
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -268,9 +297,10 @@ def write_sidecar(wiki_key, meta):
 
 def doc_paths():
     pats = ("docs/plans/*.md", "docs/roadmap.md", "docs/roadmap/*.md",
-            "docs/status/*.md", "docs/designs/*.md", "docs/adr/*.md",
-            "docs/user_guide/*.md", "docs/wiki-home.md",
-            "docs/worklog-spec.md")
+            "docs/status/*.md", "docs/designs/*.md", "docs/design/*.md",
+            "docs/adr/*.md",
+            "docs/user_guide/*.md", "docs/project_notes/*.md",
+            "docs/wiki-home.md", "docs/worklog-spec.md")
     out = []
     for pat in pats:
         out.extend(glob.glob(pat))
@@ -510,6 +540,10 @@ def desired_sidecar(rec, existing):
             side[f] = rec[f]
     if rec["doc_type"] == "plan" and "items" not in fm and "items" not in side:
         side["items"] = []   # legacy pre-worklog plan: nothing was tracked
+    # Frozen design docs require git_hash. The artifact usually carries it
+    # in frontmatter; when it does not, the sidecar is the fill (#377).
+    if rec["doc_type"] == "design" and rec.get("git_hash"):
+        side["git_hash"] = rec["git_hash"]
     return side
 
 
@@ -585,6 +619,8 @@ def normalize(check=False):
                                "run: worklog roadmap-render")
             continue
         if is_frozen(rec):
+            if rec["doc_type"] == "design" and not rec.get("git_hash"):
+                rec["git_hash"] = last_touch_sha(rec["source"])
             existing = read_sidecar(key)
             want = desired_sidecar(rec, existing)
             if want != existing:

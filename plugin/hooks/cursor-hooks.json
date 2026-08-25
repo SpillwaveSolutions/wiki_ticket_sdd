@@ -16,6 +16,11 @@
       {
         "command": "./plugin/hooks/scripts/session-doctor.sh"
       }
+    ],
+    "sessionEnd": [
+      {
+        "command": "./plugin/hooks/scripts/session-end.sh"
+      }
     ]
   }
 }

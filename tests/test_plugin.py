@@ -28,7 +28,7 @@ CANON = ["bin/worklog", "bin/fold.py", "bin/ulid.py", "bin/render_roadmap.py",
          "bin/sync_dispatch.py", "bin/canonical.py", "bin/ia.py",
          "bin/ia_render.py", "bin/ia_graph.py", "bin/item_fields.py",
          "bin/wiki_flavor.py", "bin/session.py", "bin/changelog.py",
-         "bin/okf_write.py",
+         "bin/okf_write.py", "bin/doc_verify.py", "bin/provenance.py",
          "hooks/pre-commit", "hooks/pre-merge-commit", "hooks/commit-msg"]
 
 # Hooks the harness runs (not git hooks) live in a second directory and are
@@ -217,7 +217,7 @@ class TestCodexHookParity(unittest.TestCase):
         """UserPromptSubmit and Stop are the two the policy file names as the
         work-tracking enforcement mechanism. Losing either is the regression."""
         events = self.codex_hooks()["hooks"]
-        for ev in ("UserPromptSubmit", "Stop", "SessionStart"):
+        for ev in ("UserPromptSubmit", "Stop", "SessionStart", "SessionEnd"):
             self.assertIn(ev, events, f"{ev} missing from the Codex hooks")
 
     def test_both_hosts_run_the_same_scripts(self):
@@ -383,6 +383,20 @@ class TestInit(unittest.TestCase):
         self.assertTrue(os.path.exists(agents))
         self.assertTrue(os.path.islink(agents))
         self.assertEqual(os.readlink(agents), "CLAUDE.md")
+
+    def test_init_installs_lazy_cli_modules_and_session_end(self):
+        """#344: init copied sixteen modules into bin/ and three git hooks.
+        doc_verify.py and provenance.py are real subcommands that import
+        lazily, and session-end.sh is the path the upgrade notes told
+        consumers to wire. Each omission was silent: the pre-commit
+        citation guard is a file-existence test, so a missing module
+        looked like a pass."""
+        d = init_repo(self)
+        for rel in ("bin/doc_verify.py", "bin/provenance.py",
+                    "hooks/session-end.sh"):
+            path = os.path.join(d, rel)
+            self.assertTrue(os.path.isfile(path), rel)
+            self.assertTrue(os.access(path, os.X_OK), rel)
 
     def test_idempotent_and_lossless(self):
         d = init_repo(self)

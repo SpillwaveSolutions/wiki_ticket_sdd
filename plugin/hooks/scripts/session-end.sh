@@ -6,17 +6,21 @@
 # finished session keeps looking alive for a full window and warns the next
 # one that opens the directory — an advisory that cries wolf gets ignored,
 # which is the same as not having it.
-python3 - <<'PY'
+#
+# stdin is the hook payload and is not rewindable. Capture it first, then
+# feed it to python -- a heredoc as stdin would swallow the payload and
+# session.end() would always see no session_id.
+payload=$(cat)
+printf '%s' "$payload" | python3 -c '
 import json, os, sys
-
 sys.path.insert(0, os.path.join(os.getcwd(), "bin"))
 try:
-    payload = json.load(sys.stdin)
-except (ValueError, OSError):
-    payload = {}
+    sid = json.load(sys.stdin).get("session_id")
+except Exception:
+    sid = None
 try:
     import session
-    session.end(payload.get("session_id"))
+    session.end(sid)
 except Exception:
     pass
-PY
+'

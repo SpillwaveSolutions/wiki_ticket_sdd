@@ -14,7 +14,7 @@ removed=()
 for f in bin/worklog bin/fold.py bin/ulid.py bin/render_roadmap.py bin/viz_mermaid.py bin/plan_capture.py bin/compact.py bin/adr.py \
          bin/ia.py bin/ia_render.py bin/ia_graph.py bin/canonical.py bin/sync_dispatch.py \
          bin/item_fields.py bin/wiki_flavor.py bin/changelog.py \
-         bin/session.py bin/okf_write.py; do
+         bin/session.py bin/okf_write.py bin/doc_verify.py bin/provenance.py; do
   if [ -f "$f" ]; then
     rm "$f"
     removed+=("$f")
@@ -23,7 +23,7 @@ done
 rm -rf bin/__pycache__   # byproduct of running the scripts init installed
 rmdir bin 2>/dev/null && removed+=("bin/ (empty)") || true
 
-for f in hooks/pre-commit hooks/pre-merge-commit hooks/commit-msg; do
+for f in hooks/pre-commit hooks/pre-merge-commit hooks/commit-msg hooks/session-end.sh; do
   if [ -f "$f" ]; then
     rm "$f"
     removed+=("$f")

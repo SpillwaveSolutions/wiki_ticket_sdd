@@ -2,6 +2,11 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Stamp git_hash on frozen design sidecars so CI goes green
+`01M0X499FE5FZCQG0J4H078366` · status: done
+- references: [github#377](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/377)
+- targets: release/v0.24.7
+
 ### Align design-docs prompt companion pins
 `01M0V0ZQ56VWB1QMTP8HRXKCXG` · status: done
 - lands-in: pr/375
