@@ -11,4 +11,20 @@
 # This hook is git's own reliable "a merge commit is being created" signal
 # instead -- it only ever fires for merge commits, by git's own contract.
 export WORKLOG_MERGE_COMMIT=1
+
+# Generated files use the built-in `ours` merge driver so two branches that
+# each added a work item never conflict on a file nobody edited by hand
+# (#381). `ours` is the wrong content — it is whichever side happened to
+# be checked out — so regenerate from the union-merged log and stage the
+# result before the freshness gate runs.
+export PYTHONDONTWRITEBYTECODE=1
+if [ -f bin/render_roadmap.py ] && [ -f docs/roadmap.md ]; then
+  python3 bin/render_roadmap.py > docs/roadmap.md
+  git add docs/roadmap.md
+fi
+if [ -f bin/ia.py ] && [ -x bin/worklog ] && [ -d docs/.index ]; then
+  python3 bin/worklog ia-index >/dev/null 2>&1 || true
+  git add docs/.index
+fi
+
 exec "$(dirname "$0")/pre-commit"

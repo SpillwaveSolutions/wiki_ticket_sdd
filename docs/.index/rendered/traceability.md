@@ -2,6 +2,28 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Generated roadmap and IA must merge without a conflict
+`01M106V1GYP4MKA3NMV1Z5VS0E` · status: done
+- belongs-to: Release v0.24.8: stop sync dupes and generated-file merge fights
+- targets: release/v0.24.8
+
+### worklog dedupe: collapse agreed marker copies, report conflicts
+`01M106V1FJJD36FRW4QB1SJCG4` · status: done
+- belongs-to: Release v0.24.8: stop sync dupes and generated-file merge fights
+- targets: release/v0.24.8
+
+### Sync must not mint a second ticket after git throws the link away
+`01M106V1E5RB5YEJ3MXPEB1N4E` · status: done
+- belongs-to: Release v0.24.8: stop sync dupes and generated-file merge fights
+- targets: release/v0.24.8
+
+### Release v0.24.8: stop sync dupes and generated-file merge fights
+`01M106V1CN004P95YGSKXX69Q3` · status: in_progress
+- targets: release/v0.24.8
+- contains: Sync must not mint a second ticket after git throws the link away
+- contains: worklog dedupe: collapse agreed marker copies, report conflicts
+- contains: Generated roadmap and IA must merge without a conflict
+
 ### init.sh copies doc_verify, provenance, and session-end.sh
 `01M0X4NZQVZWRKYXTETWSSH6QN` · status: done
 - belongs-to: Release v0.24.7 silent-skip gates

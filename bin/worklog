@@ -7,6 +7,7 @@ Implemented: add, update, close, reopen, link, show, list, fold, plan-capture,
              status (daily|weekly|timecard),
              ingest, conflict, resolve (pull side, sections 10.2 and 10.6),
              sync (dispatcher: bin/sync_dispatch.py), adapter init|check,
+             dedupe (marker copies on the tracker; default dry-run),
              promote (classifier suggestion -> create event, taxonomy §6.4),
              adr new|list|check (docs/adr, bin/adr.py, schema/adr.schema.json).
 No stubs remain.
@@ -30,7 +31,7 @@ from fold import (fold, FoldResult, read_lines, dedupe_and_sort, external_owners
 LOG = ".work/todo.jsonl"
 PATHS = (".work/todo.jsonl", ".work/done.jsonl")
 MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
-VERSION = "0.24.7"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+VERSION = "0.24.8"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
 _warned_concurrent = False
@@ -344,6 +345,22 @@ def cmd_unlink(a):
     ev["set"] = {"external": {}}
     append(ev)
     print(f"unlinked {cur['id']} from {ext.get('system')}:{ext['key']}")
+    # Intentional unlink vs lost-link (#382): last_pushed_key is what stops
+    # a checkout-reverted link from minting a second ticket, so a deliberate
+    # unlink MUST forget it or the next sync would just re-attach.
+    try:
+        with open(".work/sync-state.json", encoding="utf-8") as fh:
+            st = json.load(fh)
+        item_st = st.get("items", {}).get(cur["id"])
+        if item_st:
+            item_st["last_pushed_key"] = None
+            item_st["last_pushed_hash"] = None
+            item_st.pop("gone_key", None)
+            with open(".work/sync-state.json", "w", encoding="utf-8") as fh:
+                json.dump(st, fh, indent=2, sort_keys=True)
+                fh.write("\n")
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        pass
     # The log is only half of it: trackers that merge rather than overwrite
     # (ADO tags) leave the marker behind, and the next pull can still attribute
     # a remote change to this ULID.
@@ -1185,6 +1202,29 @@ def cmd_sync(a):
     sys.exit(sync_dispatch.main(argv))
 
 
+def cmd_dedupe(a):
+    """Find remote tickets that share a worklog marker (#383).
+
+    Default is a dry-run report. `--collapse-agreed` closes extras whose
+    state agrees and re-links the survivor. Mixed open/closed groups and
+    same-title/different-marker twins are never auto-collapsed.
+    """
+    import sync_dispatch
+    adapter = sync_dispatch.resolve_adapter()
+    if not adapter or not os.path.exists(adapter):
+        print(sync_dispatch.LOCAL_ONLY.replace("sync:", "dedupe:"))
+        return
+    mutating = bool(a.collapse_agreed) and not a.dry_run
+    d = sync_dispatch.Dispatcher(adapter, retry_base_delay=0, dry_run=not mutating)
+    try:
+        sys.exit(d.dedupe(collapse_agreed=a.collapse_agreed,
+                          show_conflicts=a.show_conflicts,
+                          dry_run=not mutating))
+    except sync_dispatch.ContractError as e:
+        print("worklog dedupe: contract violation: %s" % e, file=sys.stderr)
+        sys.exit(1)
+
+
 def _config_system():
     """ticketing.system from .work/config.yml; None if absent or 'none'."""
     try:
@@ -1474,6 +1514,26 @@ syg.add_argument("--push-only", dest="push_only", action="store_true")
 syg.add_argument("--pull-only", dest="pull_only", action="store_true")
 sy.add_argument("--retry-base-delay", dest="retry_base_delay", type=float,
                 default=0.5, metavar="SECONDS")
+
+dd = sub.add_parser(
+    "dedupe",
+    description="Find remote tickets that share a worklog marker (the "
+                "inverse of github#226: one item, many keys). Default is a "
+                "dry-run report. --collapse-agreed closes extras whose state "
+                "agrees and re-links the survivor. Mixed Done/To-Do groups "
+                "and same-title twins are never auto-collapsed (#383).")
+dd.set_defaults(fn=cmd_dedupe)
+dd.add_argument("--dry-run", dest="dry_run", action="store_true",
+                help="print decisions; close nothing (the default when "
+                     "--collapse-agreed is omitted)")
+dd.add_argument("--collapse-agreed", dest="collapse_agreed",
+                action="store_true",
+                help="close extras in agreed groups; re-link the survivor")
+dd.add_argument("--show-conflicts", dest="show_conflicts",
+                action="store_true",
+                help="include mixed-state groups in the report "
+                     "(they are always listed; this flag is accepted so "
+                     "operators can ask for them by name)")
 
 ap_ = sub.add_parser("adapter"); ap_.set_defaults(fn=cmd_adapter)
 ap_.add_argument("action", choices=["init", "check"])

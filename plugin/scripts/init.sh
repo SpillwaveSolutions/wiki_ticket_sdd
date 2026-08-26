@@ -104,9 +104,18 @@ if [ -f "$PLUGIN_ROOT/hooks/scripts/session-end.sh" ]; then
   wrote+=("hooks/session-end.sh")
 fi
 git config core.hooksPath hooks
+# Built-in `union` needs no config. `ours` is a named driver, not a built-in:
+# `driver = true` is a no-op that succeeds and leaves the file as ours, which
+# is what pre-merge-commit then regenerates (#381).
+git config merge.ours.driver true
 
-# --- .gitattributes: union merge for the event logs, append only if absent ---
-for line in ".work/todo.jsonl merge=union" ".work/done.jsonl merge=union"; do
+# --- .gitattributes: union merge for the event logs, ours for generated ---
+for line in \
+    ".work/todo.jsonl merge=union" \
+    ".work/done.jsonl merge=union" \
+    "docs/roadmap.md merge=ours" \
+    "docs/.index/** merge=ours"
+do
   if [ -f .gitattributes ] && grep -qxF "$line" .gitattributes; then
     skipped+=(".gitattributes: $line")
   else
