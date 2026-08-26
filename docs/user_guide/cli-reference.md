@@ -429,6 +429,13 @@ else filed. The dry run used to return early on the close path and print only
 `would close #123` — silent in exactly the case where a field write is least
 expected. It now predicts what the real run does on both paths.
 
+*(0.24.8)* Create-vs-update is decided by `remembered_key`: folded
+`external.key` if present, otherwise `last_pushed_key` in the gitignored
+`.work/sync-state.json`. A checkout that throws away an uncommitted `link`
+event used to mint a second ticket (#382); the remembered key updates the
+original and `record_link` restores the folded pointer. `worklog unlink`
+clears `last_pushed_*` so a deliberate unlink still files fresh.
+
 A ticket the adapter reports **gone** (definitely not found, not a transient
 failure) is marked and not retried on later runs; re-`link`ing the item to a
 new key clears the mark and puts it back in scope. If several tickets report
@@ -454,6 +461,28 @@ sync: 1 ticket(s) claimed by more than one item — NOT pushed (github#226)
 Do run that last command. Unlinking the impostor does not by itself repair the
 ticket: change detection is content-based and the surviving owner's content
 never changed, so it stays out of scope until `--keys` forces it in.
+
+### dedupe
+
+Find remote tickets that share a worklog marker — the inverse of github#226
+(one item, many keys). Default is a dry-run report. Agreed groups (all open
+or all closed) can be collapsed; mixed Done/To-Do groups are reported as
+conflicts and never auto-collapsed. Same title without a shared marker is
+low-confidence and never auto-collapsed (#383).
+
+```bash
+bin/worklog dedupe
+bin/worklog dedupe --show-conflicts
+bin/worklog dedupe --collapse-agreed
+```
+
+| Flag | Meaning |
+|---|---|
+| `--dry-run` | Print decisions; close nothing (the default when `--collapse-agreed` is omitted) |
+| `--collapse-agreed` | Close extras in agreed groups; re-link the survivor; write a pointer in the extra's resolution |
+| `--show-conflicts` | Ask for mixed-state groups by name (they are listed either way) |
+
+Collapse never deletes. The survivor is the folded key, else `last_pushed_key`, else the earliest key. Run `--dry-run` first on a live board.
 
 ### adapter
 

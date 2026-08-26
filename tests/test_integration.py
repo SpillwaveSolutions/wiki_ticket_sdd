@@ -46,8 +46,8 @@ class Sandbox:
         os.makedirs(os.path.join(self.dir, ".work"))
         for f in ("todo.jsonl", "done.jsonl"):
             open(os.path.join(self.dir, ".work", f), "w").close()
-        self.write(".gitattributes",
-                   ".work/todo.jsonl merge=union\n.work/done.jsonl merge=union\n")
+        shutil.copy(os.path.join(ROOT, ".gitattributes"),
+                    os.path.join(self.dir, ".gitattributes"))
         # like the real repo: bytecode is never tracked (a committed .pyc on
         # one branch + the same file untracked on another aborts a merge)
         self.write(".gitignore", "__pycache__/\n*.pyc\n")
@@ -55,6 +55,7 @@ class Sandbox:
         self.git("config", "user.email", "it@test.invalid")
         self.git("config", "user.name", "integration-test")
         self.git("config", "core.hooksPath", "hooks")
+        self.git("config", "merge.ours.driver", "true")
         self.worklog("roadmap-render")
         self.commit_all("init", no_verify=True)  # bootstrap, not real work
 
@@ -260,8 +261,11 @@ class TestHookGates(unittest.TestCase):
 
     def test_stale_roadmap_cannot_ride_a_merge_commit(self):
         """A --no-verify'd commit leaves main's roadmap stale. The merge
-        auto-resolves the roadmap file (only one side changed it) -- without
-        hooks/pre-merge-commit the stale result would land silently."""
+        auto-resolves the roadmap file (only one side changed it). Without
+        pre-merge-commit the stale result would land silently; with it the
+        freshness gate used to park the merge. Since #381 the hook
+        regenerates from the union-merged log and stages the result, so
+        the merge lands a fresh combined picture instead of blocking."""
         sb = make_sandbox(self)
         item = sb.add("Base item", "--priority", "P1")
         sb.worklog("roadmap-render")
@@ -277,19 +281,15 @@ class TestHookGates(unittest.TestCase):
         sb.commit_all("main: bypassed hook", no_verify=True)  # roadmap now stale
 
         p = sb.git("merge", "--no-edit", "alice", check=False)
-        self.assertNotEqual(p.returncode, 0)
-        self.assertIn("stale or hand-edited", p.stdout + p.stderr)
-        # merge is parked, not lost: MERGE_HEAD exists
-        self.assertTrue(os.path.exists(os.path.join(sb.dir, ".git", "MERGE_HEAD")))
-
-        sb.worklog("roadmap-render")
-        sb.git("add", "-A")
-        sb.git("commit", "-q", "--no-edit")
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
         parents = sb.git("rev-list", "--parents", "-1", "HEAD").stdout.split()
         self.assertEqual(len(parents), 3)  # a real merge commit
         got = sb.fold()[item]
         self.assertEqual(got["status"], "in_progress")
         self.assertIn("sneaky", got["labels"])
+        # Regenerated from the merged log, not whichever side won `ours`.
+        roadmap = sb.read("docs/roadmap.md")
+        self.assertIn("in progress", roadmap)
 
 
 class TestNewlineCorruption(unittest.TestCase):

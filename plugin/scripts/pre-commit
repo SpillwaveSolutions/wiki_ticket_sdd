@@ -9,6 +9,11 @@ set -euo pipefail
 # repo that doesn't gitignore __pycache__ (item 01KY5P9V0C).
 export PYTHONDONTWRITEBYTECODE=1
 
+# Named merge driver for generated files (#381). Idempotent; a clone that
+# upgraded hooks without re-running init.sh still gets it on the next commit,
+# which is before the next merge.
+git config merge.ours.driver true 2>/dev/null || true
+
 fail() { echo "worklog: $*" >&2; exit 1; }
 
 # Branch guard: never author a commit directly on main/master. A local

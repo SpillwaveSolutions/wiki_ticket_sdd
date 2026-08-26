@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.24.8 — 2026-08-26
+
+- **Lost-link sync no longer mints a second ticket (#382).** Create-vs-update now uses `remembered_key`: folded `external.key` if present, otherwise `last_pushed_key` in gitignored `.work/sync-state.json`. A checkout that throws away an uncommitted `link` event updates the original ticket and `record_link` restores the folded pointer. `worklog unlink` clears `last_pushed_*` so a deliberate unlink still files fresh, including for closed items that must not be re-filed.
+- **`worklog dedupe` collapses the extras #382 already minted (#383).** Groups by marker ULID, classifies agreed vs mixed-state conflicts, and with `--collapse-agreed` closes extras (pointer in the resolution, never deletes) and re-links the survivor. Default is dry-run. Same-title twins without a shared marker are low-confidence and never auto-collapsed.
+- **Generated files stop conflicting on every concurrent branch (#381).** `.gitattributes` marks `docs/roadmap.md` and `docs/.index/**` `merge=ours` (named driver `git config merge.ours.driver true`, installed by `init.sh` and the commit hook). `pre-merge-commit` regenerates from the union-merged log and stages the result before the freshness gate, so the merge commit names both sides' work.
+- **Version lockstep 0.24.8.** Plugin manifests, `bin/worklog`, both skill trees, and the README marker all read 0.24.8.
+
 ## 0.24.7 — 2026-08-25
 
 - **Prompt companion pins.** `design-doc-prompt.md`, `code-walkthrough-prompt.md`, and `requirements-doc-prompt.md` now name the same versions as the skill table: `document-specialist` v3.2.2, `design-doc-mermaid` v1.1.1, `plantuml` v1.2.2, `google-docs-style` v1.1.4. PlantUML is leftover types only.

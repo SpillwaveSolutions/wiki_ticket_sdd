@@ -74,6 +74,9 @@ jobs:
           # Builds throwaway repos and runs real union merges across a
           # compaction, so it belongs here rather than in the fast step (#261).
           python3 tests/test_bug_merge.py
+          python3 tests/test_bug_381.py
+          python3 tests/test_bug_382.py
+          python3 tests/test_bug_383.py
 
   coverage:
     if: github.event_name != 'workflow_run'

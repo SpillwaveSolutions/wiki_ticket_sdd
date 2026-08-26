@@ -292,14 +292,20 @@ message to reference a worklog item (26-char Crockford ULID) or a ticket
 every commit message in the PR range, so a `--no-verify` local commit still
 gets caught before merge.
 
-### Merging: the roadmap-conflict recovery
+### Merging: generated files stay out of the way
 
 The event logs union-merge with **zero conflicts** — that's the guarantee.
-But `docs/roadmap.md` is a generated file, and if both sides regenerated it,
-the merge can conflict on it or land a stale copy. The
-`pre-merge-commit` hook (git runs it, not `pre-commit`, on merge
-auto-commits) blocks any merge that would land a stale roadmap. Recovery is
-always the same two steps:
+`docs/roadmap.md` and `docs/.index/**` are generated, so they use git's
+`ours` merge driver (`git config merge.ours.driver true`, installed by
+init and by the commit hook): two branches that each added a work item
+never conflict on a file nobody edited by hand. `pre-merge-commit` then
+regenerates both from the union-merged log and stages the result before
+the freshness gate runs, so the merge commit carries the combined picture
+rather than whichever side happened to be checked out (#381).
+
+If a merge still stops on a generated file (an older clone whose
+`.gitattributes` is missing the `ours` lines, or a conflict from before
+this driver landed), recovery is the same two steps it always was:
 
 ```bash
 bin/worklog roadmap-render      # regenerate from the merged log

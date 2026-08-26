@@ -1,5 +1,5 @@
 {
- "git_hash": "33b650b",
+ "git_hash": "1fc8c21",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "e0e0b2a322bf",
+   "render_hash": "d9520e75e3d9",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "a3ebe94c9b16",
+   "render_hash": "ab3357382b3a",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -590,6 +590,16 @@
    "title": "Release v0.24.7",
    "truth_state": "shipped",
    "wiki_key": "release/v0.24.7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.24.8",
+   "render": "as-is",
+   "render_hash": "fb860b860d20",
+   "source": "docs/.index/rendered/releases/v0.24.8.md",
+   "title": "Release v0.24.8",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.24.8"
   },
   {
    "frozen": false,
@@ -4232,6 +4242,46 @@
    "wiki_key": "item/01M0X4NZQVZWRKYXTETWSSH6QN"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M106V1CN004P95YGSKXX69Q3",
+   "render": "as-is",
+   "render_hash": "fae273954946",
+   "source": "docs/.index/rendered/tickets/01M106V1CN004P95YGSKXX69Q3.md",
+   "title": "Release v0.24.8: stop sync dupes and generated-file merge fights",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M106V1CN004P95YGSKXX69Q3"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M106V1E5RB5YEJ3MXPEB1N4E",
+   "render": "as-is",
+   "render_hash": "82463246acf8",
+   "source": "docs/.index/rendered/tickets/01M106V1E5RB5YEJ3MXPEB1N4E.md",
+   "title": "Sync must not mint a second ticket after git throws the link away",
+   "truth_state": "done",
+   "wiki_key": "item/01M106V1E5RB5YEJ3MXPEB1N4E"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M106V1FJJD36FRW4QB1SJCG4",
+   "render": "as-is",
+   "render_hash": "1c3eae642753",
+   "source": "docs/.index/rendered/tickets/01M106V1FJJD36FRW4QB1SJCG4.md",
+   "title": "worklog dedupe: collapse agreed marker copies, report conflicts",
+   "truth_state": "done",
+   "wiki_key": "item/01M106V1FJJD36FRW4QB1SJCG4"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M106V1GYP4MKA3NMV1Z5VS0E",
+   "render": "as-is",
+   "render_hash": "b10eca238b1f",
+   "source": "docs/.index/rendered/tickets/01M106V1GYP4MKA3NMV1Z5VS0E.md",
+   "title": "Generated roadmap and IA must merge without a conflict",
+   "truth_state": "done",
+   "wiki_key": "item/01M106V1GYP4MKA3NMV1Z5VS0E"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4344,9 +4394,9 @@
    "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "c1d3f8d56dd2",
+   "render_hash": "20c8a1a458e5",
    "source": "docs/user_guide/cli-reference.md",
-   "source_hash": "d4383424fc6c",
+   "source_hash": "6f0ac110f91c",
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current",
    "wiki_key": "cli-reference"
@@ -5048,13 +5098,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-26T07:33:08Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-26T23:43:49Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "cbf34999e9b3",
+   "render_hash": "ae1171b9b929",
    "source": "docs/roadmap.md",
-   "source_hash": "20475d6c127f",
+   "source_hash": "6cb30fa5c1ab",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -5348,6 +5398,18 @@
    "wiki_key": "roadmap-snapshot/2026-08-25_v0.24.7-release"
   },
   {
+   "banner": "> **Snapshot** of release v0.24.8 (2026-08-26) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-08-26_v0.24.8-release",
+   "render": "doc+banner",
+   "render_hash": "f6b4ab914535",
+   "source": "docs/roadmap/2026-08-26_v0.24.8-release.md",
+   "source_hash": "6cb30fa5c1ab",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-08-26_v0.24.8-release"
+  },
+  {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
    "frozen": true,
    "page_name": "Roadmap-2026-07-18_v0.2-roadmap",
@@ -5496,16 +5558,16 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "8fd5991c00bf",
+   "render_hash": "dde7caafac5c",
    "source": "docs/user_guide/user-guide.md",
-   "source_hash": "65d640666cef",
+   "source_hash": "0b1cea5b920d",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",
    "wiki_key": "user-guide"
   }
  ],
  "sidebar": {
-  "render_hash": "f4ccee332d22",
+  "render_hash": "d4089746e909",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

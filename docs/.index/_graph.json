@@ -3161,6 +3161,41 @@
    "type": "targets"
   },
   {
+   "from": "item/01M106V1CN004P95YGSKXX69Q3",
+   "to": "release/v0.24.8",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M106V1E5RB5YEJ3MXPEB1N4E",
+   "to": "item/01M106V1CN004P95YGSKXX69Q3",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M106V1E5RB5YEJ3MXPEB1N4E",
+   "to": "release/v0.24.8",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M106V1FJJD36FRW4QB1SJCG4",
+   "to": "item/01M106V1CN004P95YGSKXX69Q3",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M106V1FJJD36FRW4QB1SJCG4",
+   "to": "release/v0.24.8",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M106V1GYP4MKA3NMV1Z5VS0E",
+   "to": "item/01M106V1CN004P95YGSKXX69Q3",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M106V1GYP4MKA3NMV1Z5VS0E",
+   "to": "release/v0.24.8",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -4623,6 +4658,21 @@
   {
    "from": "roadmap-snapshot/2026-08-25_v0.24.7-release",
    "to": "release/v0.24.7",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-26_v0.24.8-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-26_v0.24.8-release",
+   "to": "roadmap-snapshot/2026-08-25_v0.24.7-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-26_v0.24.8-release",
+   "to": "release/v0.24.8",
    "type": "targets"
   },
   {
@@ -6799,6 +6849,26 @@
    "status": "done",
    "title": "init.sh copies doc_verify, provenance, and session-end.sh"
   },
+  "item/01M106V1CN004P95YGSKXX69Q3": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Release v0.24.8: stop sync dupes and generated-file merge fights"
+  },
+  "item/01M106V1E5RB5YEJ3MXPEB1N4E": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Sync must not mint a second ticket after git throws the link away"
+  },
+  "item/01M106V1FJJD36FRW4QB1SJCG4": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "worklog dedupe: collapse agreed marker copies, report conflicts"
+  },
+  "item/01M106V1GYP4MKA3NMV1Z5VS0E": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Generated roadmap and IA must merge without a conflict"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -7117,6 +7187,9 @@
   "release/v0.24.7": {
    "doc_type": "release"
   },
+  "release/v0.24.8": {
+   "doc_type": "release"
+  },
   "release/v0.5.0": {
    "doc_type": "release"
   },
@@ -7279,6 +7352,12 @@
   "roadmap-snapshot/2026-08-25_v0.24.7-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-08-25_v0.24.7-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-08-26_v0.24.8-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-26_v0.24.8-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },
