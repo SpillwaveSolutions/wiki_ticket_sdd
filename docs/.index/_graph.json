@@ -3242,6 +3242,11 @@
   },
   {
    "from": "item/01M12PR4SEMBXW56VP6TC63X81",
+   "to": "pr/388",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M12PR4SEMBXW56VP6TC63X81",
    "to": "release/v0.24.9",
    "type": "targets"
   },
@@ -6941,7 +6946,7 @@
   },
   "item/01M12PR4SEMBXW56VP6TC63X81": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "Release v0.24.9: absorb unmarked remotes and closed-on-remote"
   },
   "plan/2026-07-17_worklog-core_plan": {
@@ -7188,6 +7193,9 @@
    "doc_type": "pr"
   },
   "pr/386": {
+   "doc_type": "pr"
+  },
+  "pr/388": {
    "doc_type": "pr"
   },
   "release/v0.10.0": {

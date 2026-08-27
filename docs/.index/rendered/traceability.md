@@ -3,7 +3,8 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Release v0.24.9: absorb unmarked remotes and closed-on-remote
-`01M12PR4SEMBXW56VP6TC63X81` · status: in_progress
+`01M12PR4SEMBXW56VP6TC63X81` · status: done
+- lands-in: pr/388
 - targets: release/v0.24.9
 
 ### Push-only sync absorbs unmarked remotes and closed-on-remote drift
