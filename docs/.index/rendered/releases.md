@@ -5,6 +5,7 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 ## v0.24.9 — 2026-08-27
 
 - Roadmap snapshot: [[Roadmap-2026-08-27_v0.24.9-release]]
+- Shipped: Release v0.24.9: absorb unmarked remotes and closed-on-remote
 
 ## v0.24.8 — 2026-08-26
 

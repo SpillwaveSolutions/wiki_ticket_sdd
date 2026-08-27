@@ -1,5 +1,5 @@
 {
- "git_hash": "73802e6",
+ "git_hash": "b22fd7c",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "3e1c37e34121",
+   "render_hash": "481981106355",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "3cab9d4bc548",
+   "render_hash": "be252c12b1a0",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -353,6 +353,16 @@
   },
   {
    "frozen": false,
+   "page_name": "PR-388",
+   "render": "as-is",
+   "render_hash": "1e5df77d3e5a",
+   "source": "docs/.index/rendered/prs/388.md",
+   "title": "PR #388",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/388"
+  },
+  {
+   "frozen": false,
    "page_name": "Release-v0.10.0",
    "render": "as-is",
    "render_hash": "a1d7e2472b9e",
@@ -625,7 +635,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.9",
    "render": "as-is",
-   "render_hash": "d28fa3bb4be8",
+   "render_hash": "d2d5e220835c",
    "source": "docs/.index/rendered/releases/v0.24.9.md",
    "title": "Release v0.24.9",
    "truth_state": "shipped",
@@ -4325,10 +4335,10 @@
    "frozen": false,
    "page_name": "Ticket-01M12PR4SEMBXW56VP6TC63X81",
    "render": "as-is",
-   "render_hash": "830929d4eed6",
+   "render_hash": "9b5aef9ad11b",
    "source": "docs/.index/rendered/tickets/01M12PR4SEMBXW56VP6TC63X81.md",
    "title": "Release v0.24.9: absorb unmarked remotes and closed-on-remote",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M12PR4SEMBXW56VP6TC63X81"
   },
   {
@@ -5148,13 +5158,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-27T22:52:51Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-27T23:03:48Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "019ff711ed8c",
+   "render_hash": "5a1cb1fc2043",
    "source": "docs/roadmap.md",
-   "source_hash": "b3448b4e79bf",
+   "source_hash": "20475d6c127f",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
