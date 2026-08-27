@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Release v0.24.9: absorb unmarked remotes and closed-on-remote
+`01M12PR4SEMBXW56VP6TC63X81` · status: in_progress
+- targets: release/v0.24.9
+
 ### Push-only sync absorbs unmarked remotes and closed-on-remote drift
 `01M12FX1MV11180BVA967VQBYP` · status: done
 - lands-in: pr/386
@@ -10,20 +14,27 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Generated roadmap and IA must merge without a conflict
 `01M106V1GYP4MKA3NMV1Z5VS0E` · status: done
 - belongs-to: Release v0.24.8: stop sync dupes and generated-file merge fights
+- lands-in: pr/384
+- references: [github#381](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/381)
 - targets: release/v0.24.8
 
 ### worklog dedupe: collapse agreed marker copies, report conflicts
 `01M106V1FJJD36FRW4QB1SJCG4` · status: done
 - belongs-to: Release v0.24.8: stop sync dupes and generated-file merge fights
+- lands-in: pr/384
+- references: [github#383](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/383)
 - targets: release/v0.24.8
 
 ### Sync must not mint a second ticket after git throws the link away
 `01M106V1E5RB5YEJ3MXPEB1N4E` · status: done
 - belongs-to: Release v0.24.8: stop sync dupes and generated-file merge fights
+- lands-in: pr/384
+- references: [github#382](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/382)
 - targets: release/v0.24.8
 
 ### Release v0.24.8: stop sync dupes and generated-file merge fights
-`01M106V1CN004P95YGSKXX69Q3` · status: in_progress
+`01M106V1CN004P95YGSKXX69Q3` · status: done
+- lands-in: pr/384
 - targets: release/v0.24.8
 - contains: Sync must not mint a second ticket after git throws the link away
 - contains: worklog dedupe: collapse agreed marker copies, report conflicts

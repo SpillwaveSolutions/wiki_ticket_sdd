@@ -1,5 +1,5 @@
 {
- "git_hash": "9e8df9b",
+ "git_hash": "73802e6",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "d9520e75e3d9",
+   "render_hash": "3e1c37e34121",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "92156bb4bdb2",
+   "render_hash": "3cab9d4bc548",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -333,6 +333,16 @@
   },
   {
    "frozen": false,
+   "page_name": "PR-384",
+   "render": "as-is",
+   "render_hash": "b695a229b040",
+   "source": "docs/.index/rendered/prs/384.md",
+   "title": "PR #384",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/384"
+  },
+  {
+   "frozen": false,
    "page_name": "PR-386",
    "render": "as-is",
    "render_hash": "6c4a28bac993",
@@ -605,11 +615,21 @@
    "frozen": false,
    "page_name": "Release-v0.24.8",
    "render": "as-is",
-   "render_hash": "fb860b860d20",
+   "render_hash": "070db48cee95",
    "source": "docs/.index/rendered/releases/v0.24.8.md",
    "title": "Release v0.24.8",
    "truth_state": "shipped",
    "wiki_key": "release/v0.24.8"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.24.9",
+   "render": "as-is",
+   "render_hash": "d28fa3bb4be8",
+   "source": "docs/.index/rendered/releases/v0.24.9.md",
+   "title": "Release v0.24.9",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.24.9"
   },
   {
    "frozen": false,
@@ -4255,17 +4275,17 @@
    "frozen": false,
    "page_name": "Ticket-01M106V1CN004P95YGSKXX69Q3",
    "render": "as-is",
-   "render_hash": "fae273954946",
+   "render_hash": "adbde3028c00",
    "source": "docs/.index/rendered/tickets/01M106V1CN004P95YGSKXX69Q3.md",
    "title": "Release v0.24.8: stop sync dupes and generated-file merge fights",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M106V1CN004P95YGSKXX69Q3"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01M106V1E5RB5YEJ3MXPEB1N4E",
    "render": "as-is",
-   "render_hash": "82463246acf8",
+   "render_hash": "7321fde04d71",
    "source": "docs/.index/rendered/tickets/01M106V1E5RB5YEJ3MXPEB1N4E.md",
    "title": "Sync must not mint a second ticket after git throws the link away",
    "truth_state": "done",
@@ -4275,7 +4295,7 @@
    "frozen": false,
    "page_name": "Ticket-01M106V1FJJD36FRW4QB1SJCG4",
    "render": "as-is",
-   "render_hash": "1c3eae642753",
+   "render_hash": "ffe8f37a74d9",
    "source": "docs/.index/rendered/tickets/01M106V1FJJD36FRW4QB1SJCG4.md",
    "title": "worklog dedupe: collapse agreed marker copies, report conflicts",
    "truth_state": "done",
@@ -4285,7 +4305,7 @@
    "frozen": false,
    "page_name": "Ticket-01M106V1GYP4MKA3NMV1Z5VS0E",
    "render": "as-is",
-   "render_hash": "b10eca238b1f",
+   "render_hash": "46c057b661ef",
    "source": "docs/.index/rendered/tickets/01M106V1GYP4MKA3NMV1Z5VS0E.md",
    "title": "Generated roadmap and IA must merge without a conflict",
    "truth_state": "done",
@@ -4300,6 +4320,16 @@
    "title": "Push-only sync absorbs unmarked remotes and closed-on-remote drift",
    "truth_state": "done",
    "wiki_key": "item/01M12FX1MV11180BVA967VQBYP"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M12PR4SEMBXW56VP6TC63X81",
+   "render": "as-is",
+   "render_hash": "830929d4eed6",
+   "source": "docs/.index/rendered/tickets/01M12PR4SEMBXW56VP6TC63X81.md",
+   "title": "Release v0.24.9: absorb unmarked remotes and closed-on-remote",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M12PR4SEMBXW56VP6TC63X81"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -5118,13 +5148,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-27T21:05:21Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-27T22:52:51Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "c44e9ad33479",
+   "render_hash": "019ff711ed8c",
    "source": "docs/roadmap.md",
-   "source_hash": "6cb30fa5c1ab",
+   "source_hash": "b3448b4e79bf",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -5430,6 +5460,18 @@
    "wiki_key": "roadmap-snapshot/2026-08-26_v0.24.8-release"
   },
   {
+   "banner": "> **Snapshot** of release v0.24.9 (2026-08-27) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-08-27_v0.24.9-release",
+   "render": "doc+banner",
+   "render_hash": "729a901b9b0f",
+   "source": "docs/roadmap/2026-08-27_v0.24.9-release.md",
+   "source_hash": "b3448b4e79bf",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-08-27_v0.24.9-release"
+  },
+  {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
    "frozen": true,
    "page_name": "Roadmap-2026-07-18_v0.2-roadmap",
@@ -5587,7 +5629,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "d4089746e909",
+  "render_hash": "eaef3b4310e1",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

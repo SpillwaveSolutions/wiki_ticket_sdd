@@ -1,7 +1,7 @@
 ---
 name: integration-guide
 metadata:
-  version: "0.24.8"
+  version: "0.24.9"
 description: Look up how wiki_ticket_sdd integrates with a specific SDD tool or ticket/wiki system — Superpowers, GSD, SpecKit, OpenSpec, Jira, Confluence, GitHub, GitLab, Azure DevOps (ADO), AWS CodeCatalyst, or Google Cloud DevOps (GCP). Use when asked how to set up, configure, or use one of these, or when ticket-sync/wiki-publish need runtime guidance for a system with no shipped adapter.
 ---
 

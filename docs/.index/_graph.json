@@ -3162,6 +3162,11 @@
   },
   {
    "from": "item/01M106V1CN004P95YGSKXX69Q3",
+   "to": "pr/384",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M106V1CN004P95YGSKXX69Q3",
    "to": "release/v0.24.8",
    "type": "targets"
   },
@@ -3169,6 +3174,16 @@
    "from": "item/01M106V1E5RB5YEJ3MXPEB1N4E",
    "to": "item/01M106V1CN004P95YGSKXX69Q3",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M106V1E5RB5YEJ3MXPEB1N4E",
+   "to": "pr/384",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M106V1E5RB5YEJ3MXPEB1N4E",
+   "to": "ticket/github#382",
+   "type": "references"
   },
   {
    "from": "item/01M106V1E5RB5YEJ3MXPEB1N4E",
@@ -3179,6 +3194,16 @@
    "from": "item/01M106V1FJJD36FRW4QB1SJCG4",
    "to": "item/01M106V1CN004P95YGSKXX69Q3",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M106V1FJJD36FRW4QB1SJCG4",
+   "to": "pr/384",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M106V1FJJD36FRW4QB1SJCG4",
+   "to": "ticket/github#383",
+   "type": "references"
   },
   {
    "from": "item/01M106V1FJJD36FRW4QB1SJCG4",
@@ -3189,6 +3214,16 @@
    "from": "item/01M106V1GYP4MKA3NMV1Z5VS0E",
    "to": "item/01M106V1CN004P95YGSKXX69Q3",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M106V1GYP4MKA3NMV1Z5VS0E",
+   "to": "pr/384",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M106V1GYP4MKA3NMV1Z5VS0E",
+   "to": "ticket/github#381",
+   "type": "references"
   },
   {
    "from": "item/01M106V1GYP4MKA3NMV1Z5VS0E",
@@ -3204,6 +3239,11 @@
    "from": "item/01M12FX1MV11180BVA967VQBYP",
    "to": "ticket/github#385",
    "type": "references"
+  },
+  {
+   "from": "item/01M12PR4SEMBXW56VP6TC63X81",
+   "to": "release/v0.24.9",
+   "type": "targets"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -4683,6 +4723,21 @@
   {
    "from": "roadmap-snapshot/2026-08-26_v0.24.8-release",
    "to": "release/v0.24.8",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-27_v0.24.9-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-27_v0.24.9-release",
+   "to": "roadmap-snapshot/2026-08-26_v0.24.8-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-27_v0.24.9-release",
+   "to": "release/v0.24.9",
    "type": "targets"
   },
   {
@@ -6861,7 +6916,7 @@
   },
   "item/01M106V1CN004P95YGSKXX69Q3": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "Release v0.24.8: stop sync dupes and generated-file merge fights"
   },
   "item/01M106V1E5RB5YEJ3MXPEB1N4E": {
@@ -6883,6 +6938,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "Push-only sync absorbs unmarked remotes and closed-on-remote drift"
+  },
+  "item/01M12PR4SEMBXW56VP6TC63X81": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Release v0.24.9: absorb unmarked remotes and closed-on-remote"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
@@ -7124,6 +7184,9 @@
   "pr/379": {
    "doc_type": "pr"
   },
+  "pr/384": {
+   "doc_type": "pr"
+  },
   "pr/386": {
    "doc_type": "pr"
   },
@@ -7206,6 +7269,9 @@
    "doc_type": "release"
   },
   "release/v0.24.8": {
+   "doc_type": "release"
+  },
+  "release/v0.24.9": {
    "doc_type": "release"
   },
   "release/v0.5.0": {
@@ -7376,6 +7442,12 @@
   "roadmap-snapshot/2026-08-26_v0.24.8-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-08-26_v0.24.8-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-08-27_v0.24.9-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-27_v0.24.9-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },
@@ -8094,6 +8166,18 @@
   "ticket/github#377": {
    "doc_type": "ticket",
    "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/377"
+  },
+  "ticket/github#381": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/381"
+  },
+  "ticket/github#382": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/382"
+  },
+  "ticket/github#383": {
+   "doc_type": "ticket",
+   "url": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/383"
   },
   "ticket/github#385": {
    "doc_type": "ticket",

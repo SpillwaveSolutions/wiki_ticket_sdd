@@ -2,12 +2,17 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
+## v0.24.9 — 2026-08-27
+
+- Roadmap snapshot: [[Roadmap-2026-08-27_v0.24.9-release]]
+
 ## v0.24.8 — 2026-08-26
 
 - Roadmap snapshot: [[Roadmap-2026-08-26_v0.24.8-release]]
-- Shipped: Sync must not mint a second ticket after git throws the link away
-- Shipped: worklog dedupe: collapse agreed marker copies, report conflicts
-- Shipped: Generated roadmap and IA must merge without a conflict
+- Shipped: Release v0.24.8: stop sync dupes and generated-file merge fights
+- Shipped: Sync must not mint a second ticket after git throws the link away (#382)
+- Shipped: worklog dedupe: collapse agreed marker copies, report conflicts (#383)
+- Shipped: Generated roadmap and IA must merge without a conflict (#381)
 
 ## v0.24.7 — 2026-08-25
 
