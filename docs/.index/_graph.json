@@ -3197,6 +3197,11 @@
   },
   {
    "from": "item/01M12FX1MV11180BVA967VQBYP",
+   "to": "pr/386",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M12FX1MV11180BVA967VQBYP",
    "to": "ticket/github#385",
    "type": "references"
   },
@@ -6876,7 +6881,7 @@
   },
   "item/01M12FX1MV11180BVA967VQBYP": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "Push-only sync absorbs unmarked remotes and closed-on-remote drift"
   },
   "plan/2026-07-17_worklog-core_plan": {
@@ -7117,6 +7122,9 @@
    "doc_type": "pr"
   },
   "pr/379": {
+   "doc_type": "pr"
+  },
+  "pr/386": {
    "doc_type": "pr"
   },
   "release/v0.10.0": {

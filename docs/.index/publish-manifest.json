@@ -1,5 +1,5 @@
 {
- "git_hash": "a6d78f6",
+ "git_hash": "9e8df9b",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "6d23ae6b6eba",
+   "render_hash": "92156bb4bdb2",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -330,6 +330,16 @@
    "title": "PR #379",
    "truth_state": "not tracked",
    "wiki_key": "pr/379"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-386",
+   "render": "as-is",
+   "render_hash": "6c4a28bac993",
+   "source": "docs/.index/rendered/prs/386.md",
+   "title": "PR #386",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/386"
   },
   {
    "frozen": false,
@@ -4285,10 +4295,10 @@
    "frozen": false,
    "page_name": "Ticket-01M12FX1MV11180BVA967VQBYP",
    "render": "as-is",
-   "render_hash": "8125fd934a86",
+   "render_hash": "a7cfd670fa1a",
    "source": "docs/.index/rendered/tickets/01M12FX1MV11180BVA967VQBYP.md",
    "title": "Push-only sync absorbs unmarked remotes and closed-on-remote drift",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M12FX1MV11180BVA967VQBYP"
   },
   {
@@ -5108,13 +5118,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-27T20:52:09Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-27T21:05:21Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "00fde373ebf3",
+   "render_hash": "c44e9ad33479",
    "source": "docs/roadmap.md",
-   "source_hash": "e3a1c54a4171",
+   "source_hash": "6cb30fa5c1ab",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
