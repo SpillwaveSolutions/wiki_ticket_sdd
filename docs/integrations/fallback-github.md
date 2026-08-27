@@ -68,6 +68,18 @@ This repo's own issue tracker and wiki are the live example:
 
 ## Gotchas & troubleshooting
 
+- **Never `gh issue create` / `gh issue edit` on a worklog-managed
+  tracker.** A ticket filed that way has no ULID marker, so fold and the
+  roadmap cannot see it. `worklog sync --push-only` reports those as
+  **unmarked remote tickets**; absorb one with
+  `worklog adopt --system github --key N`. The durable body edit is
+  `worklog update --body`, then sync — push-only overwrites the GitHub
+  body from the log. Child worktrees either get a `worklog add` the
+  parent syncs, or they do not file tracker issues at all.
+- A GitHub close does not close the log item. Sync notices a linked
+  issue that is closed remotely while the item is still open, closes
+  the item locally, and does **not** push the open state back (which
+  would rewrite the closed ticket).
 - One-time init: a GitHub wiki's `.wiki.git` does not exist until someone
   clicks "Create the first page" in the repo's wiki tab — if clone/push
   fails not-found, that's the fix, not a bug.

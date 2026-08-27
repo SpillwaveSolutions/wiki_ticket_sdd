@@ -169,5 +169,94 @@ class TestResponseMatchesTheContract(AdapterSandbox):
         self.assertIsInstance(resp["url"], str)
 
 
+STUB_PULL = r"""#!/usr/bin/env python3
+import json, os, sys
+argv = sys.argv[1:]
+with open(os.environ["GH_CALLS"], "a") as fh:
+    fh.write(json.dumps(argv) + "\n")
+table = json.load(open(os.environ["GH_RESPONSES"]))
+if argv[:2] == ["issue", "list"]:
+    key = "issue list search" if "-S" in argv else "issue list open"
+    r = table.get(key, {})
+    sys.stdout.write(r.get("out", "[]"))
+    sys.stderr.write(r.get("err", ""))
+    sys.exit(r.get("rc", 0))
+if argv[:2] == ["issue", "view"]:
+    r = table.get("issue view", {})
+    sys.stdout.write(r.get("out", ""))
+    sys.exit(r.get("rc", 0))
+sys.exit(0)
+"""
+
+MARKED = {
+    "number": 10, "title": "Worklog item",
+    "body": "<!-- worklog:01AAAAAAAAAAAAAAAAAAAAAAAA -->\n\nworklog id `01AAAAAAAAAAAAAAAAAAAAAAAA`",
+    "labels": [], "state": "OPEN", "milestone": None,
+    "updatedAt": "2026-08-01T00:00:00Z", "url": "https://github.com/o/r/issues/10",
+}
+UNMARKED = {
+    "number": 93, "title": "Filed with gh issue create",
+    "body": "no worklog marker here",
+    "labels": [{"name": "P1"}], "state": "OPEN", "milestone": None,
+    "updatedAt": "2026-08-27T00:00:00Z", "url": "https://github.com/o/r/issues/93",
+}
+
+
+class TestPullEmitsUnmarked(unittest.TestCase):
+    """#385: GitHub pull used to search only `worklog: in:body`, so tracker-only
+    issues were invisible to the dispatcher."""
+
+    def setUp(self):
+        self.dir = tempfile.mkdtemp(prefix="worklog-ghpull-")
+        self.addCleanup(shutil.rmtree, self.dir, ignore_errors=True)
+        binp = os.path.join(self.dir, "bin")
+        os.makedirs(binp)
+        stub = os.path.join(binp, "gh")
+        with open(stub, "w", encoding="utf-8") as fh:
+            fh.write(STUB_PULL)
+        os.chmod(stub, 0o755)
+        self.calls = os.path.join(self.dir, "calls.jsonl")
+        self.responses = os.path.join(self.dir, "responses.json")
+        self.env = dict(os.environ,
+                        PATH=binp + os.pathsep + os.environ["PATH"],
+                        GH_CALLS=self.calls, GH_RESPONSES=self.responses,
+                        WORKLOG_TICKET_PROJECT="o/r")
+
+    def test_open_unmarked_issues_are_emitted_with_id_null(self):
+        with open(self.responses, "w", encoding="utf-8") as fh:
+            json.dump({
+                "issue list search": {"out": json.dumps([MARKED])},
+                "issue list open": {"out": json.dumps([MARKED, UNMARKED])},
+            }, fh)
+        p = subprocess.run(
+            [sys.executable, ADAPTER, "pull", "--since", "1970-01-01T00:00:00Z"],
+            capture_output=True, text=True, env=self.env)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        lines = [json.loads(l) for l in p.stdout.splitlines() if l.strip()]
+        by_key = {l["external"]["key"]: l for l in lines}
+        self.assertEqual(by_key["10"]["id"], "01AAAAAAAAAAAAAAAAAAAAAAAA")
+        self.assertIsNone(by_key["93"]["id"])
+        self.assertEqual(by_key["93"]["title"], "Filed with gh issue create")
+        with open(self.calls, encoding="utf-8") as fh:
+            calls = [json.loads(l) for l in fh if l.strip()]
+        lists = [c for c in calls if c[:2] == ["issue", "list"]]
+        self.assertEqual(len(lists), 2, calls)
+        self.assertTrue(any("-S" in c for c in lists))
+        self.assertTrue(any("--state" in c and "open" in c for c in lists))
+        self.assertTrue(any("--limit" in c and "1000" in c for c in lists))
+
+    def test_get_strips_the_marker_from_body(self):
+        with open(self.responses, "w", encoding="utf-8") as fh:
+            json.dump({"issue view": {"out": json.dumps(MARKED)}}, fh)
+        p = subprocess.run(
+            [sys.executable, ADAPTER, "get", "10"],
+            capture_output=True, text=True, env=self.env)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        line = json.loads(p.stdout)
+        self.assertEqual(line["id"], "01AAAAAAAAAAAAAAAAAAAAAAAA")
+        self.assertNotIn("worklog:", line.get("body") or "")
+        self.assertNotIn("worklog id", line.get("body") or "")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

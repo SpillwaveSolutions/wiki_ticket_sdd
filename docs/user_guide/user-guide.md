@@ -620,6 +620,18 @@ unsupported fields, deferred items). That report is the sync's voice; read
 it. Conflicts it detects are resolved with
 `bin/worklog resolve <item> --field <f> --take local|remote`.
 
+`--push-only` still does not ingest remote title/body edits, but it does
+observe the tracker for two gaps a log-as-source-of-truth run otherwise
+cannot see (#385):
+
+- **Unmarked remotes** (no worklog marker) print as their own block.
+  Absorb one with `bin/worklog adopt --system github --key N`. Never
+  `gh issue create` or `gh issue edit` on a worklog-managed tracker —
+  child worktrees add via `worklog` or they file nothing.
+- **Closed on remote, still open in the log.** Sync closes the log item
+  and does not push the open state back. `--dry-run` names
+  `worklog close <id>` instead of writing.
+
 One thing does not go in the drift report: a ticket claimed by more than one
 item. Sync refuses to push *those* items (corruption needs both of them
 pushed), finishes the rest of the run, prints the claimants and the repair as
