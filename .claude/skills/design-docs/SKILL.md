@@ -1,7 +1,7 @@
 ---
 name: design-docs
 metadata:
-  version: "0.24.8"
+  version: "0.24.9"
 description: Generate or sync the design document, code walkthrough, or requirements doc. Frozen dated pairs tied to a release tag, live current pairs regenerated from the actual code. Uses document-specialist v3.2.2, design-doc-mermaid v1.1.1, plantuml v1.2.2. Use when asked for a design doc, architecture doc, code walkthrough, or requirements doc, and automatically (background agents) at every release.
 ---
 
