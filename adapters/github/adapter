@@ -195,6 +195,17 @@ def build_body(marker, item):
     return "\n\n".join(parts)
 
 
+def readable_body(body):
+    """Body a local item can store: strip the marker and the worklog-id line."""
+    if not body:
+        return None
+    body = re.sub(r"<!--\s*worklog:[0-9A-Z]{26}\s*-->", "", body)
+    body = re.sub(r"worklog:[0-9A-Z]{26}", "", body)
+    body = re.sub(r"\n*worklog id `[0-9A-HJKMNP-TV-Z]{26}`\s*", "\n", body)
+    body = body.strip()
+    return body or None
+
+
 def to_line(issue):
     body = issue.get("body") or ""
     ids = MARKER.findall(body)
@@ -203,6 +214,8 @@ def to_line(issue):
         "id": ids[0] if ids else None,
         "title": issue.get("title"),
     }
+    if issue.get("url"):
+        line["external"]["url"] = issue["url"]
     if (issue.get("state") or "").upper() == "CLOSED":
         line["status"] = "done"
     legacy = None
@@ -228,7 +241,7 @@ def to_line(issue):
     return line
 
 
-ISSUE_JSON = "number,title,body,labels,state,milestone,updatedAt"
+ISSUE_JSON = "number,title,body,labels,state,milestone,updatedAt,url"
 
 
 def fetch_issue(repo, key):
@@ -296,15 +309,34 @@ def cmd_pull(argv):
         return
     if not since:
         die(1, "pull requires --since <iso> or --keys")
+    seen = set()
     out = gh(["issue", "list", "-R", repo, "--state", "all",
+              "--limit", "1000",
               "--json", ISSUE_JSON,
               "-S", f"worklog: in:body updated:>{since}"])
     for issue in json.loads(out):
         print(json.dumps(to_line(issue)))
+        seen.add(issue["number"])
+    # Open issues with no worklog marker are tracker-only orphans (#385),
+    # not "new work arriving". Emit them so the dispatcher can report
+    # them as a first-class drift class, including on --push-only.
+    open_out = gh(["issue", "list", "-R", repo, "--state", "open",
+                   "--limit", "1000", "--json", ISSUE_JSON])
+    for issue in json.loads(open_out or "[]"):
+        if issue["number"] in seen:
+            continue
+        if MARKER.findall(issue.get("body") or ""):
+            continue
+        print(json.dumps(to_line(issue)))
 
 
 def cmd_get(key):
-    print(json.dumps(to_line(fetch_issue(target_repo(), key))))
+    issue = fetch_issue(target_repo(), key)
+    line = to_line(issue)
+    body = readable_body(issue.get("body") or "")
+    if body:
+        line["body"] = body
+    print(json.dumps(line))
 
 
 def cmd_close(key, resolution):

@@ -49,7 +49,34 @@ dispatcher computes this, see the contract doc).
    create-vs-update, echo suppression, conflict detection, and
    `worklog ingest` of pulled changes.
 3. Read the drift report and surface anything that needs a human
-   (conflicts, unsupported fields, degraded type mappings, auth failures).
+   (conflicts, unsupported fields, degraded type mappings, auth failures,
+   unmarked remotes, closed-on-remote items).
+
+## 3b. Do not file or edit tracker tickets by hand
+
+The log is the source of truth. On a worklog-managed tracker:
+
+- **Never** `gh issue create`, `gh issue edit`, or the equivalent on
+  GitLab/Jira/ADO. A ticket filed that way has no ULID marker, so fold
+  and the roadmap cannot see it, and the next `--push-only` sync will
+  not absorb it.
+- **Never** edit a ticket body on the tracker to "narrow the issue".
+  Push-only overwrites the GitHub body from the log. The durable edit is
+  `worklog update --body`, then sync.
+- Child worktrees that were told "do not use WikiTicket, that is the
+  parent checkout" must **not** file tracker issues instead. Either the
+  parent runs `worklog add` (and syncs), or the child files nothing.
+
+When a ticket already exists remotely with no marker:
+
+    bin/worklog adopt --system github --key N
+
+That creates the log item, links it, and stamps `<!-- worklog:{ulid} -->`
+so the next push updates. `--dry-run` first.
+
+When sync reports `closed on remote, still open in the log`, it has
+already closed the log item (or, on `--dry-run`, named `worklog close
+<id>`). Do not push the open state back — that rewrites a closed ticket.
 
 ## 4. Invariants — dispatcher-enforced, context only
 

@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Push-only sync absorbs unmarked remotes and closed-on-remote drift
+`01M12FX1MV11180BVA967VQBYP` · status: in_progress
+- references: [github#385](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/385)
+
 ### Generated roadmap and IA must merge without a conflict
 `01M106V1GYP4MKA3NMV1Z5VS0E` · status: done
 - belongs-to: Release v0.24.8: stop sync dupes and generated-file merge fights

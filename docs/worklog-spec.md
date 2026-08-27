@@ -538,6 +538,12 @@ worklog sync --dry-run             # print the events that WOULD be appended
 
 **Closed and archived items never reconcile.** That's what keeps the scope bounded. If someone reopens a ticket in Jira, `pull` catches it only while it's inside `active_window_days`; past that, it's a manual `--keys` sync. Documented limitation, not a bug.
 
+`--push-only` still does not ingest remote title/body, but it **does**
+observe the tracker (#385): remote tickets with no worklog marker are a
+first-class drift class (`worklog adopt --system S --key K` absorbs one);
+a linked ticket that is closed remotely while the log item is still open
+is closed locally rather than pushed back open.
+
 One push-side exception (`external.dirty`): a **closed** item whose external identity is dirty — canonical hash ≠ `last_pushed_hash` — stays in scope exactly until its closure is pushed to the remote (§9.2). Once hashes match, it is inert and never rescanned.
 
 ### 10.6 Conflicts

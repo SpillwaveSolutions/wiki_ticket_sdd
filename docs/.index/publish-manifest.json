@@ -1,5 +1,5 @@
 {
- "git_hash": "87fb3be",
+ "git_hash": "a6d78f6",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "ab3357382b3a",
+   "render_hash": "6d23ae6b6eba",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4282,6 +4282,16 @@
    "wiki_key": "item/01M106V1GYP4MKA3NMV1Z5VS0E"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M12FX1MV11180BVA967VQBYP",
+   "render": "as-is",
+   "render_hash": "8125fd934a86",
+   "source": "docs/.index/rendered/tickets/01M12FX1MV11180BVA967VQBYP.md",
+   "title": "Push-only sync absorbs unmarked remotes and closed-on-remote drift",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M12FX1MV11180BVA967VQBYP"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4394,9 +4404,9 @@
    "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "20c8a1a458e5",
+   "render_hash": "292535bb731f",
    "source": "docs/user_guide/cli-reference.md",
-   "source_hash": "6f0ac110f91c",
+   "source_hash": "91cf02b873d9",
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current",
    "wiki_key": "cli-reference"
@@ -5098,13 +5108,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-27T10:34:12Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-27T20:52:09Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "32682896a366",
+   "render_hash": "00fde373ebf3",
    "source": "docs/roadmap.md",
-   "source_hash": "6cb30fa5c1ab",
+   "source_hash": "e3a1c54a4171",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -5498,9 +5508,9 @@
    "frozen": false,
    "page_name": "Worklog-Spec",
    "render": "doc+banner",
-   "render_hash": "05d01cd65e0b",
+   "render_hash": "fbd0a28e2bcc",
    "source": "docs/worklog-spec.md",
-   "source_hash": "8a14ac422691",
+   "source_hash": "77f1ee32c990",
    "title": "Worklog: Visible-WIP Work Tracking Spec",
    "truth_state": "current",
    "wiki_key": "spec"
@@ -5558,9 +5568,9 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "dde7caafac5c",
+   "render_hash": "e146b641d1da",
    "source": "docs/user_guide/user-guide.md",
-   "source_hash": "0b1cea5b920d",
+   "source_hash": "1ed7a860e343",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",
    "wiki_key": "user-guide"

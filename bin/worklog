@@ -7,6 +7,7 @@ Implemented: add, update, close, reopen, link, show, list, fold, plan-capture,
              status (daily|weekly|timecard),
              ingest, conflict, resolve (pull side, sections 10.2 and 10.6),
              sync (dispatcher: bin/sync_dispatch.py), adapter init|check,
+             adopt (absorb a remote ticket that has no worklog marker),
              dedupe (marker copies on the tracker; default dry-run),
              promote (classifier suggestion -> create event, taxonomy §6.4),
              adr new|list|check (docs/adr, bin/adr.py, schema/adr.schema.json).
@@ -1202,6 +1203,23 @@ def cmd_sync(a):
     sys.exit(sync_dispatch.main(argv))
 
 
+def cmd_adopt(a):
+    """Create a local item from an existing remote ticket and stamp the
+    ULID marker so the next push updates that ticket (#385)."""
+    import sync_dispatch
+    adapter = sync_dispatch.resolve_adapter()
+    if not adapter or not os.path.exists(adapter):
+        print(sync_dispatch.LOCAL_ONLY.replace("sync:", "adopt:"))
+        sys.exit(1)
+    d = sync_dispatch.Dispatcher(adapter, retry_base_delay=0,
+                                 dry_run=a.dry_run, actor=a.actor)
+    try:
+        sys.exit(d.adopt(key=a.key, system=a.system, dry_run=a.dry_run))
+    except sync_dispatch.ContractError as e:
+        print("worklog adopt: contract violation: %s" % e, file=sys.stderr)
+        sys.exit(1)
+
+
 def cmd_dedupe(a):
     """Find remote tickets that share a worklog marker (#383).
 
@@ -1514,6 +1532,20 @@ syg.add_argument("--push-only", dest="push_only", action="store_true")
 syg.add_argument("--pull-only", dest="pull_only", action="store_true")
 sy.add_argument("--retry-base-delay", dest="retry_base_delay", type=float,
                 default=0.5, metavar="SECONDS")
+
+adp = sub.add_parser(
+    "adopt",
+    description="Create a local work item from an existing remote ticket "
+                "that has no worklog marker, link it, and stamp the ULID "
+                "marker so the next sync updates instead of ignoring or "
+                "duplicating (#385). Never `gh issue create` / `gh issue "
+                "edit` on a worklog-managed tracker — add or update in "
+                "the log, then sync.")
+adp.set_defaults(fn=cmd_adopt)
+adp.add_argument("--system", help="tracker name (defaults to the adapter's)")
+adp.add_argument("--key", required=True,
+                 help="remote ticket key (GitHub issue number, FAKE#N, …)")
+adp.add_argument("--dry-run", dest="dry_run", action="store_true")
 
 dd = sub.add_parser(
     "dedupe",

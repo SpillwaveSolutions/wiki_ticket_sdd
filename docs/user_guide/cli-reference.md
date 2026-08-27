@@ -203,6 +203,30 @@ Repairing the log does not repair the tracker. Two things to do by hand:
   damage. Nothing else will: an item's change detection is content-based, and
   the surviving owner's content never changed.
 
+### adopt
+
+Create a local work item from an existing remote ticket that has no
+worklog marker, link it, and stamp the ULID marker so the next sync
+updates that ticket instead of ignoring it (#385).
+
+```bash
+bin/worklog adopt --system github --key 93
+bin/worklog adopt --system github --key 93 --dry-run
+```
+
+| Flag | Meaning |
+|---|---|
+| `--system` | Tracker name; defaults to the configured adapter |
+| `--key` | Remote ticket key (GitHub issue number, `FAKE#N`, …) |
+| `--dry-run` | Print what would happen; write nothing |
+
+Use this when `sync` reports **unmarked remote tickets**. Do not `gh issue
+create` / `gh issue edit` on a worklog-managed tracker — add or update in
+the log, then sync. Child worktrees either get a `worklog add` the parent
+syncs, or they do not file tracker issues at all.
+
+Refuses a key another item already owns (same rule as `link`).
+
 ### ingest
 
 Record a remote-originated change (pull side). The event ID is
@@ -404,15 +428,20 @@ is the drift `sync` exists to close. Use `--dry-run` to see what a run will
 touch before it writes.
 
 Every run ends with the drift report — one counts line, then the fields it
-overwrote on live tickets, then a `drift:` list of anything else a human
-should see (conflicts, unsupported fields on the platform, deferred items,
-degraded mappings):
+overwrote on live tickets, then first-class remote drift (#385), then a
+`drift:` list of anything else a human should see (conflicts, unsupported
+fields on the platform, deferred items, degraded mappings):
 
 ```
 sync report: created=1 updated=2 closed=1 skipped=14 pulled=1 conflicts=0 deferred=0
 overwrote live ticket fields:
   - owner/repo#412 (01KYA99T): title: 'Old title' -> 'New title'; status: 'todo' -> 'in_progress'
   (read 2 tickets in 0.31s to report the above)
+unmarked remote tickets (no worklog marker):
+  - github:93  Session A filed this
+    adopt with: worklog adopt --system github --key 93
+closed on remote, still open in the log:
+  - 01KYA99T (50)  Epic title — closed locally
 drift:
   - fields not synced on github: depends_on
 ```
@@ -435,6 +464,18 @@ expected. It now predicts what the real run does on both paths.
 event used to mint a second ticket (#382); the remembered key updates the
 original and `record_link` restores the folded pointer. `worklog unlink`
 clears `last_pushed_*` so a deliberate unlink still files fresh.
+
+*(Unreleased, #385)* `--push-only` still does not ingest remote title/body
+edits, but it **does** observe the tracker for two gaps a log-as-source-of-truth
+run otherwise cannot see:
+
+- **Unmarked remotes** (no `worklog:` marker in the body) print as their own
+  block, not as "new work arriving". Absorb one with `worklog adopt --system
+  github --key N`.
+- **Closed on remote, still open in the log.** Sync closes the log item
+  (`worklog close`, resolution `closed remotely`) and does **not** push the
+  open state back. `--dry-run` names the `worklog close <id>` instead of
+  writing.
 
 A ticket the adapter reports **gone** (definitely not found, not a transient
 failure) is marked and not retried on later runs; re-`link`ing the item to a

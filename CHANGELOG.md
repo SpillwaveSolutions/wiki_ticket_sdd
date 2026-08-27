@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Push-only sync absorbs tracker-only tickets and closed-on-remote drift (#385).** `worklog sync` (including `--push-only`) lists remote tickets with no worklog marker as a first-class drift class and prints the `worklog adopt --system … --key …` repair. A linked ticket that is closed remotely while the log item is still open is closed locally (`worklog close`) instead of pushing the open state back over it. `worklog adopt` creates the log item, links it, and stamps the ULID marker so the next push updates. Docs: never `gh issue create` / `gh issue edit` on a worklog-managed tracker — child worktrees add via `worklog` or they do not file tracker issues.
+
 ## 0.24.8 — 2026-08-26
 
 - **Lost-link sync no longer mints a second ticket (#382).** Create-vs-update now uses `remembered_key`: folded `external.key` if present, otherwise `last_pushed_key` in gitignored `.work/sync-state.json`. A checkout that throws away an uncommitted `link` event updates the original ticket and `record_link` restores the folded pointer. `worklog unlink` clears `last_pushed_*` so a deliberate unlink still files fresh, including for closed items that must not be re-filed.
