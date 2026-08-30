@@ -156,5 +156,46 @@ class TestMergeWhenGreen(unittest.TestCase):
         self.assertFalse(sb.merged())
 
 
+class TestPostMergeWorkflow(unittest.TestCase):
+    """ADR-0010: invariants must listen on the post-merge job name."""
+
+    def test_invariants_listens_on_post_merge_and_compact(self):
+        with open(os.path.join(ROOT, ".github", "workflows", "worklog.yml"), encoding="utf-8") as fh:
+            text = fh.read()
+        self.assertIn('workflows: ["worklog-compact", "worklog-post-merge"]', text)
+
+    def test_post_merge_workflow_contract(self):
+        with open(os.path.join(ROOT, ".github", "workflows", "post-merge.yml"), encoding="utf-8") as fh:
+            text = fh.read()
+        self.assertIn("name: worklog-post-merge", text)
+        self.assertIn("types: [closed]", text)
+        self.assertIn("bin/worklog roadmap-render", text)
+        self.assertIn("bin/worklog ia-inventory", text)
+        self.assertIn("bin/worklog ia-manifest", text)
+        self.assertIn("bin/worklog sync --report", text)
+        self.assertIn("--merge-check", text)
+        self.assertNotIn("--squash", text)
+
+    def test_ruleset_is_merge_commit_only(self):
+        import json
+        path = os.path.join(ROOT, ".github", "merge-when-green-ruleset.json")
+        with open(path, encoding="utf-8") as fh:
+            data = json.load(fh)
+        self.assertEqual(data["name"], "merge-when-green")
+        self.assertEqual(data["enforcement"], "active")
+        methods = None
+        contexts = []
+        for rule in data["rules"]:
+            if rule["type"] == "pull_request":
+                methods = rule["parameters"]["allowed_merge_methods"]
+            if rule["type"] == "required_status_checks":
+                contexts = [c["context"] for c in rule["parameters"]["required_status_checks"]]
+                self.assertTrue(rule["parameters"]["strict_required_status_checks_policy"])
+        self.assertEqual(methods, ["merge"])
+        self.assertEqual(sorted(contexts), ["coverage", "invariants"])
+        actors = {(a["actor_id"], a["actor_type"]) for a in data["bypass_actors"]}
+        self.assertIn((15368, "Integration"), actors)
+
+
 if __name__ == "__main__":
     unittest.main()

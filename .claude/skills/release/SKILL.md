@@ -56,6 +56,12 @@ Commit the stamp + snapshot on a release-prep branch and land it as a PR
 main is pull-only). The release tags the commit that carries the dated
 changelog.
 
+**Batch ceremony.** Stamp, `provenance-backfill`, and item-close are one
+PR, not three. Each extra PR pays a full CI cycle (history: #386→#389 in
+one afternoon). If backfill needs the merge commit of the stamp, put it
+in the same PR after the stamp commit — do not open a follow-up PR that
+only closes an item or restamps `merged_in`.
+
 ## 4. Tag and platform release
 
 - `git tag vX.Y.Z <commit>` on the landed commit; push the tag.
@@ -113,7 +119,7 @@ the contract, not this prose.
   rejects the result. Frozen documents only, by design — a live document has
   been edited since it landed, so the merge that first carried it would name
   a version that no longer exists. Safe to re-run: it skips anything already
-  stamped.
+  stamped. Do not open a separate PR for this step — see §3 batch ceremony.
 
 The next feature wave opens a new `## X.Y.Z — unreleased` section and bumps
 the version lockstep in the same commit that adds the first feature.

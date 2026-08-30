@@ -1,0 +1,56 @@
+name: worklog-post-merge
+# After a PR lands on main, regenerate derived docs so the next branch does
+# not fight a stale roadmap/index. compact.yml already does this nightly;
+# this job does it at merge time. sync --report is advisory (spec §12).
+#
+# A push made with the default GITHUB_TOKEN does not trigger sibling
+# `push` workflows. worklog-invariants listens on workflow_run of this
+# job for the same reason it listens on worklog-compact (#361).
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  post-merge:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: regenerate derived docs
+        run: |
+          bin/worklog roadmap-render
+          bin/worklog ia-inventory
+          bin/worklog ia-manifest
+
+      - name: sync drift report
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          bin/worklog sync --report | tee /tmp/sync-report.txt
+          body=$(python3 -c 'import pathlib; t=pathlib.Path("/tmp/sync-report.txt").read_text(); print("## post-merge sync --report\\n\\n```\\n"+t+"\\n```")')
+          gh pr comment "${{ github.event.pull_request.number }}" --body "$body" || true
+
+      - name: verify what is about to be pushed
+        run: |
+          WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
+          python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
+
+      - name: commit and push
+        run: |
+          if [ -n "$(git status --porcelain docs)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs
+            git commit -m "chore(worklog): post-merge regenerate derived docs (#${{ github.event.pull_request.number }})"
+            git push
+          fi

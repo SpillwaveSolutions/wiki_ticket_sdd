@@ -58,9 +58,10 @@ notes here.
   target is 95%. New modules ship with tests, and a PR that drops coverage below the
   floor does not merge.
 
-- **PRs merge only when every quality gate is green.** Pending means wait (the
-  merge-green skill polls every 5 minutes via `merge-when-green.sh`); failing means
-  fix. Never `--admin`, never bypass a gate, never merge blind.
+- **PRs merge only when every quality gate is green.** Arm `gh pr merge --auto --merge`
+  (or `/worklog:merge`) so GitHub merges when required checks pass; the poll loop is
+  fallback. Pending means wait; failing means fix. Never `--admin`, never squash
+  (ADR-0008), never bypass a gate, never merge blind.
 
 - **Never edit `.work/*.jsonl` with an editor or a shell redirect.** Use `worklog`. Every
   write must be a well-formed event terminated with a newline; a hand-edit that drops the

@@ -140,10 +140,10 @@ permanent.
 
 Policy that holds because tooling holds it, not because people remember:
 
-- **PRs merge only when every gate is green.** The merge-green skill (or
-  `/worklog:merge`) polls checks every 5 minutes via `merge-when-green.sh`;
-  never `--admin`, never bypass. Auto-merge on green is on by default;
-  teams that want a human on the trigger set
+- **PRs merge only when every gate is green.** `/worklog:merge` arms
+  `gh pr merge --auto --merge` so GitHub merges when required checks pass
+  (ADR-0010); the poll loop is fallback. Never `--admin`, never squash
+  (ADR-0008), never bypass. Teams that want a human on the trigger set
   `features.auto_merge_on_green: false` in `.work/config.yml` (advisory
   mode: report green, human merges).
 - **Coverage floor.** CI enforces >=80% line coverage on `bin/*.py`; the

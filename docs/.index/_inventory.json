@@ -184,6 +184,27 @@
    "wiki_key": "adr/0009-a-frozen-document-s-fabricated-citations"
   },
   {
+   "canonical_key": "adr/0010-native-auto-merge-once-required-checks-e",
+   "date": "2026-08-30",
+   "deciders": [
+    "rick",
+    "grok"
+   ],
+   "doc_type": "adr",
+   "git_hash": "d5bff2bb7cb341fcf479f6f4d95c256c127a8d16",
+   "id": 10,
+   "slug": "native-auto-merge-once-required-checks-e",
+   "source": "docs/adr/0010-native-auto-merge-once-required-checks-e.md",
+   "status": "accepted",
+   "tags": [
+    "ci",
+    "process"
+   ],
+   "title": "Native auto-merge once required checks exist",
+   "truth_state": "current",
+   "wiki_key": "adr/0010-native-auto-merge-once-required-checks-e"
+  },
+  {
    "aliases": [
     "cli-reference"
    ],
@@ -1381,11 +1402,11 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-08-30T06:57:50Z",
-   "git_hash": "9fbfac9",
+   "generated_at": "2026-08-30T07:20:27Z",
+   "git_hash": "d5bff2b",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "5ac3299a",
+   "source_hash": "2530bbaf",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

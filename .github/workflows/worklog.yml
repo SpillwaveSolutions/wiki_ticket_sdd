@@ -6,8 +6,9 @@ on:
   # A push made with the default GITHUB_TOKEN does not trigger `push` on
   # sibling workflows. The compact job pushes that way, so without this
   # event main's check history never saw those commits (#361).
+  # worklog-post-merge pushes the same way after a green merge.
   workflow_run:
-    workflows: ["worklog-compact"]
+    workflows: ["worklog-compact", "worklog-post-merge"]
     types: [completed]
 
 jobs:

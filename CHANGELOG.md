@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **Native auto-merge when green (ADR-0010).** Required checks on `main` (`invariants`, `coverage`), merge-commit only (ADR-0008), `allow_auto_merge` on. `worklog-post-merge` regenerates roadmap/index after a green merge and posts `sync --report`. The poll loop is fallback. Release stamp, provenance-backfill, and item-close land as one PR.
+
 - **Wiki ledger is JSONL, union-merge.** `.work/published.json` (a 308KB JSON dict with no merge strategy) is now `.work/published.jsonl`: append-only events, last-write-wins per key, `merge=union`. `worklog wiki-add` / `wiki-record` / `wiki-get` own the file; the wiki-publish skill must not hand-edit it. Leftover JSON migrates on first write with deterministic ULIDs (#392).
 
 - **Compaction preserves open sync conflicts.** Snapshots are built from public fields, which stripped `_conflicts`; the nightly compact then verified the stripped form and silently dropped every open conflict. Compact now re-emits `conflict` events above each snapshot and verifies the private map too.
