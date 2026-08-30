@@ -1,6 +1,6 @@
 # Phase 2-3 style plugins + AGER polish
 
-`01M0KCDVAYS67SPN8FHAYY4DWX` · story/feature · **in-progress**
+`01M0KCDVAYS67SPN8FHAYY4DWX` · story/feature · **done**
 
 google-docs-style, spillwave-ui-guard, ste100, AGER translators polish.
 

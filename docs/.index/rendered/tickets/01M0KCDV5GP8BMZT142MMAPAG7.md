@@ -1,6 +1,6 @@
 # Phase 0 shared three-host hook template
 
-`01M0KCDV5GP8BMZT142MMAPAG7` · story/feature · **in-progress**
+`01M0KCDV5GP8BMZT142MMAPAG7` · story/feature · **done**
 
 Shared hook translator: Claude hooks.json -> Codex + Cursor-native configs; wire host manifests.
 

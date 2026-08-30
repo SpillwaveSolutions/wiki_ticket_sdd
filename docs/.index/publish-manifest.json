@@ -1,5 +1,5 @@
 {
- "git_hash": "db09837",
+ "git_hash": "c65d9fb",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "731c3de15366",
+   "render_hash": "c618f691eea2",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -585,7 +585,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.10",
    "render": "as-is",
-   "render_hash": "c6575a768d05",
+   "render_hash": "e8aaeed1cde3",
    "source": "docs/.index/rendered/releases/v0.24.10.md",
    "title": "Release v0.24.10",
    "truth_state": "shipped",
@@ -4175,50 +4175,50 @@
    "frozen": false,
    "page_name": "Ticket-01M0KCDKJRAZYMWDD9PFGHC6XY",
    "render": "as-is",
-   "render_hash": "939f2f2bfbaa",
+   "render_hash": "fc9cb8e00de1",
    "source": "docs/.index/rendered/tickets/01M0KCDKJRAZYMWDD9PFGHC6XY.md",
    "title": "multi-host plugin matrix + three-host hooks",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M0KCDKJRAZYMWDD9PFGHC6XY"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01M0KCDV5GP8BMZT142MMAPAG7",
    "render": "as-is",
-   "render_hash": "977f58dd6954",
+   "render_hash": "a07feeb7e394",
    "source": "docs/.index/rendered/tickets/01M0KCDV5GP8BMZT142MMAPAG7.md",
    "title": "Phase 0 shared three-host hook template",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M0KCDV5GP8BMZT142MMAPAG7"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01M0KCDV7AQEQ61TA2MYN3M5C3",
    "render": "as-is",
-   "render_hash": "632ce4f12c0a",
+   "render_hash": "375b6e6e027b",
    "source": "docs/.index/rendered/tickets/01M0KCDV7AQEQ61TA2MYN3M5C3.md",
    "title": "Phase 1 foundation + wiki_ticket_sdd hosts",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M0KCDV7AQEQ61TA2MYN3M5C3"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01M0KCDV94P4YPBXJXQZNNGQTM",
    "render": "as-is",
-   "render_hash": "c072f1a8922a",
+   "render_hash": "73fcd20b8f9f",
    "source": "docs/.index/rendered/tickets/01M0KCDV94P4YPBXJXQZNNGQTM.md",
    "title": "Phase 1 ContentPack three-host hooks",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M0KCDV94P4YPBXJXQZNNGQTM"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01M0KCDVAYS67SPN8FHAYY4DWX",
    "render": "as-is",
-   "render_hash": "f77fcee765f4",
+   "render_hash": "1d6c64082768",
    "source": "docs/.index/rendered/tickets/01M0KCDVAYS67SPN8FHAYY4DWX.md",
    "title": "Phase 2-3 style plugins + AGER polish",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M0KCDVAYS67SPN8FHAYY4DWX"
   },
   {
@@ -4355,10 +4355,10 @@
    "frozen": false,
    "page_name": "Ticket-01M18QBM233GRTVR7JRXSVNK66",
    "render": "as-is",
-   "render_hash": "5d5d2f118f55",
+   "render_hash": "84f1189b942c",
    "source": "docs/.index/rendered/tickets/01M18QBM233GRTVR7JRXSVNK66.md",
    "title": "Convert published.json to JSONL ledger with union merge",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M18QBM233GRTVR7JRXSVNK66"
   },
   {
@@ -4485,10 +4485,10 @@
    "frozen": false,
    "page_name": "Ticket-01M19XRRTTWDBN0SRGDZ1VN35G",
    "render": "as-is",
-   "render_hash": "cbb5449ef74d",
+   "render_hash": "8c5f39390287",
    "source": "docs/.index/rendered/tickets/01M19XRRTTWDBN0SRGDZ1VN35G.md",
    "title": "Close published.jsonl item; triage five stale in_progress",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M19XRRTTWDBN0SRGDZ1VN35G"
   },
   {
@@ -5350,13 +5350,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T18:37:11Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T18:50:29Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "11f661adeab1",
+   "render_hash": "452256316f36",
    "source": "docs/roadmap.md",
-   "source_hash": "5f99790ce11a",
+   "source_hash": "0e7ff689455f",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
