@@ -1399,6 +1399,9 @@ def build_parser():
         description="Ticket-sync dispatcher (typed adapter contract).")
     ap.add_argument("--dry-run", action="store_true",
                     help="print decisions; call no mutating verbs")
+    ap.add_argument("--report", dest="dry_run", action="store_true",
+                    help="alias of --dry-run: print drift, change nothing "
+                         "(spec §10.5 / post-merge CI)")
     ap.add_argument("--keys",
                     help="comma-separated item ULIDs or external keys to ADD "
                          "to the scope. This widens a run; it cannot narrow "

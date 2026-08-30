@@ -2,6 +2,22 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Retention: compact evicts old done.jsonl into an archive
+`01M19XRRZ2894K7XE59RX1EAY1` · status: todo
+- targets: release/v0.24.10
+
+### MIGRATE_MS is a year off (decodes to 2025-07-19)
+`01M19XRRWXHM72JBY29FQRRMEJ` · status: todo
+- targets: release/v0.24.10
+
+### Close published.jsonl item; triage five stale in_progress
+`01M19XRRTTWDBN0SRGDZ1VN35G` · status: todo
+- targets: release/v0.24.10
+
+### Implement worklog sync --report; land compact/post-merge via PR
+`01M19XR46836RE9JSHJHM2DSGC` · status: done
+- targets: release/v0.24.10
+
 ### README positioning vs beads, spec-kit, GitHub Projects; demote graph-engineering essay
 `01M19TTXCBH3M4Z1NRS652QMPD` · status: done
 - targets: release/v0.24.10

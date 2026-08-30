@@ -1,5 +1,9 @@
 name: worklog-compact
 # WORKLOG-SPEC section 7: compaction runs in CI, on main, in its own commit.
+# That commit cannot be a GITHUB_TOKEN push to main: the merge-when-green
+# ruleset requires a pull request, User 41898282 does not exempt the
+# Actions installation token, and Integration 15368 is 422. So this job
+# opens a PR and arms auto-merge (ADR-0010). Never squash (ADR-0008).
 
 on:
   schedule:
@@ -8,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   compact:
@@ -33,29 +38,32 @@ jobs:
           bin/worklog ia-inventory
           bin/worklog ia-manifest
 
-      # A push made with the default GITHUB_TOKEN does not trigger other
-      # workflows, so worklog-invariants never ran on the commit this job
-      # creates. Main was broken for two days that way: the job committed a
-      # log whose provenance sha no longer matched the IA manifest, and the
-      # one check that would have caught it never ran (#361).
-      #
-      # So this job checks itself BEFORE it pushes. Failing here leaves main
-      # untouched. worklog-invariants also listens on workflow_run of this
-      # job, which GitHub does fire for GITHUB_TOKEN pushes, so main's
-      # check history now records a run on the compact commit too.
-      - name: verify what is about to be pushed
+      # Fail here before opening a PR that is already red. The PR still
+      # pays invariants + coverage (required checks). worklog-invariants
+      # also listens on workflow_run of this job (#361).
+      - name: verify working tree
         run: |
-          WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
           python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
           for t in tests/test_*.py; do python3 "$t" >/dev/null || { echo "FAILED: $t"; python3 "$t"; exit 1; }; done
 
-      - name: commit and push
+      - name: commit via PR
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if [ -n "$(git status --porcelain .work docs)" ]; then
-            wm=$(python3 -c "import json; print([e.get('through') for e in map(json.loads, open('.work/todo.jsonl')) if e.get('op') == 'compact'][-1])")
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add .work/todo.jsonl .work/done.jsonl docs
-            git commit -m "chore(worklog): compact through $wm"
-            git push
+          if [ -z "$(git status --porcelain .work docs)" ]; then
+            echo "nothing to compact"
+            exit 0
           fi
+          wm=$(python3 -c "import json; print([e.get('through') for e in map(json.loads, open('.work/todo.jsonl')) if e.get('op') == 'compact'][-1])")
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          branch="chore/compact-${GITHUB_RUN_ID}"
+          git checkout -b "$branch"
+          git add .work/todo.jsonl .work/done.jsonl docs
+          WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
+          git commit -m "chore(worklog): compact through $wm"
+          git push -u origin HEAD
+          gh pr create --head "$branch" --base main \
+            --title "chore(worklog): compact through $wm" \
+            --body "Nightly compaction. Auto-merge when green (ADR-0010). Never squash (ADR-0008)."
+          gh pr merge --auto --merge
