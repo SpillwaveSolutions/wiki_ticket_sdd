@@ -83,7 +83,7 @@ skipped=()
 mkdir -p bin hooks
 for f in worklog fold.py ulid.py render_roadmap.py viz_mermaid.py plan_capture.py compact.py adr.py \
          ia.py ia_render.py ia_graph.py canonical.py sync_dispatch.py session.py \
-         item_fields.py wiki_flavor.py changelog.py okf_write.py \
+         item_fields.py wiki_flavor.py changelog.py \
          doc_verify.py provenance.py published.py; do
   cp -p "$PLUGIN_ROOT/scripts/$f" "bin/$f"
   chmod +x "bin/$f"

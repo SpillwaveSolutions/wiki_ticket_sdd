@@ -1,5 +1,5 @@
 {
- "git_hash": "78242c4",
+ "git_hash": "b51b544",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "ac6d3647fbea",
+   "render_hash": "6ac9a20af761",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -585,7 +585,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.10",
    "render": "as-is",
-   "render_hash": "6aecfd934464",
+   "render_hash": "5f56709089c6",
    "source": "docs/.index/rendered/releases/v0.24.10.md",
    "title": "Release v0.24.10",
    "truth_state": "shipped",
@@ -4412,6 +4412,26 @@
    "wiki_key": "item/01M18S278XJ5W7QWSVC37N9AP7"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M18SFYDE8B64PN3YPE360KT4",
+   "render": "as-is",
+   "render_hash": "6ef401edc70c",
+   "source": "docs/.index/rendered/tickets/01M18SFYDE8B64PN3YPE360KT4.md",
+   "title": "Remove OKF write path and worklog-session skill from the plugin",
+   "truth_state": "done",
+   "wiki_key": "item/01M18SFYDE8B64PN3YPE360KT4"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M18SFYFC72094QJBT8W9PWZC",
+   "render": "as-is",
+   "render_hash": "ae79186be2a7",
+   "source": "docs/.index/rendered/tickets/01M18SFYFC72094QJBT8W9PWZC.md",
+   "title": "Replace persona ONBOARDING.md with a real WikiTicket onboarding",
+   "truth_state": "done",
+   "wiki_key": "item/01M18SFYFC72094QJBT8W9PWZC"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -5240,11 +5260,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T07:27:39Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T07:40:38Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "92dedf7af0a5",
+   "render_hash": "df270bc86ab0",
    "source": "docs/roadmap.md",
    "source_hash": "92018fc77ea0",
    "title": "Roadmap",

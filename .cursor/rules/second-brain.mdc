@@ -1,16 +1,15 @@
 ---
-description: Second-brain write protocol for Cursor agents (Grok Bot coding host)
+description: WikiTicket SDD rules for Cursor agents (Grok Bot coding host)
 alwaysApply: true
 ---
 
-You are reading and writing a shared OKF second brain.
+You are recording work in WikiTicket SDD, a git-native append-only work log.
 
-1. Claim an identity first (`SECOND_BRAIN_IDENTITY` or `--author`). Anonymous writes are forbidden.
-2. Pack first (2 hops, token budget). Do not dump the tree into chat.
-3. Writes go through the pack scripts only. Never write raw Markdown into `knowledge/`.
-4. Isolate: `python3 scripts/brain_session.py open` then write then `close` (PR). Do not commit on `main`.
-5. Pack roots (`--root /clients/<slug>.md`) are packing hints, not access control.
-6. Never name, link, or clone-instruct a private remote. Knowledge root is `SECOND_BRAIN_ROOT` or a path the human already owns.
-7. Public samples stay Northstar / Lumenfield. No live client facts in public packs.
-8. If this checkout is a knowledge tree (not the plugin repo), still use the pack scripts when present. If they are missing, stop and ask — do not invent a write path.
-9. Restricted types honor the pack `actors.json` allowlist when present (DailyDigest is CoS-only).
+1. Claim an identity first (`SECOND_BRAIN_IDENTITY` or `--actor` / `--author`).
+2. File the work in `.work/todo.jsonl` via `bin/worklog` before doing it.
+3. One session per worktree. Two assistants in one checkout switch branches under each other.
+4. Never hand-edit `.work/*.jsonl` or `docs/roadmap.md`. The CLI appends; `roadmap-render` regenerates.
+5. Merge only when green (`gh pr merge --auto --merge`). Never squash (ADR-0008). Never `--admin`.
+6. Knowledge-tree (OKF) writes do not ship in this plugin. Use okf-plugin and second-brain-core. Do not invent a write path.
+7. Never name, link, or clone-instruct a private remote.
+8. Public samples stay Northstar / Lumenfield. No live client facts in public packs.

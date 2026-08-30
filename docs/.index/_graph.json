@@ -3296,6 +3296,16 @@
    "type": "targets"
   },
   {
+   "from": "item/01M18SFYDE8B64PN3YPE360KT4",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M18SFYFC72094QJBT8W9PWZC",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7029,6 +7039,16 @@
    "doc_type": "item",
    "status": "done",
    "title": "Document ruleset bypass as github-actions[bot] user"
+  },
+  "item/01M18SFYDE8B64PN3YPE360KT4": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Remove OKF write path and worklog-session skill from the plugin"
+  },
+  "item/01M18SFYFC72094QJBT8W9PWZC": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Replace persona ONBOARDING.md with a real WikiTicket onboarding"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

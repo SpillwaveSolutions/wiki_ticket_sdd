@@ -2,6 +2,14 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Replace persona ONBOARDING.md with a real WikiTicket onboarding
+`01M18SFYFC72094QJBT8W9PWZC` · status: done
+- targets: release/v0.24.10
+
+### Remove OKF write path and worklog-session skill from the plugin
+`01M18SFYDE8B64PN3YPE360KT4` · status: done
+- targets: release/v0.24.10
+
 ### Document ruleset bypass as github-actions[bot] user
 `01M18S278XJ5W7QWSVC37N9AP7` · status: done
 - belongs-to: Faster merge: auto-merge + post-merge CI

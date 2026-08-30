@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "worklog",
   "version": "0.24.9",
-  "description": "WikiTicket SDD (worklog): git-native plans, tickets, roadmaps, and wiki publishing. Multi-host bindings plus worklog-vs-knowledge isolation.",
+  "description": "WikiTicket SDD (worklog): git-native plans, tickets, roadmaps, and wiki publishing. Multi-host bindings. Knowledge-tree writes live in okf-plugin.",
   "author": {
     "name": "Rick Hightower",
     "url": "https://github.com/RichardHightower"
@@ -12,7 +12,6 @@
   "license": "MIT",
   "keywords": [
     "worklog",
-    "okf",
     "isolation",
     "agent-plugins",
     "claude-code",
