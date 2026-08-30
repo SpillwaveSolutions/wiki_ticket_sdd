@@ -28,7 +28,7 @@ CANON = ["bin/worklog", "bin/fold.py", "bin/ulid.py", "bin/render_roadmap.py",
          "bin/sync_dispatch.py", "bin/canonical.py", "bin/ia.py",
          "bin/ia_render.py", "bin/ia_graph.py", "bin/item_fields.py",
          "bin/wiki_flavor.py", "bin/session.py", "bin/changelog.py",
-         "bin/okf_write.py", "bin/doc_verify.py", "bin/provenance.py",
+         "bin/doc_verify.py", "bin/provenance.py",
          "bin/published.py",
          "hooks/pre-commit", "hooks/pre-merge-commit", "hooks/commit-msg"]
 
@@ -112,6 +112,25 @@ class TestCanonSync(unittest.TestCase):
             self.assertTrue(
                 filecmp.cmp(src, dst, shallow=False),
                 f"{rel} differs from plugin copy — run: cp {rel} plugin/scripts/")
+
+    def test_okf_write_path_is_gone(self):
+        """Knowledge-tree writes live in okf-plugin / second-brain-core."""
+        gone = (
+            "bin/okf_write.py",
+            "plugin/scripts/okf_write.py",
+            "plugin/scripts/brain_session.py",
+            "plugin/skills/worklog-session/SKILL.md",
+            ".claude/skills/worklog-session/SKILL.md",
+            "plugin/commands/session.md",
+            "tests/test_identity.py",
+            "tests/test_isolation.py",
+        )
+        for rel in gone:
+            self.assertFalse(
+                os.path.exists(os.path.join(ROOT, rel)),
+                f"{rel} still ships; eviction of the OKF write path is incomplete")
+        self.assertNotIn("bin/okf_write.py", CANON)
+        self.assertTrue(os.path.isfile(os.path.join(ROOT, "bin/session.py")))
 
     def test_repo_hooks_match_plugin_hooks(self):
         for name in HOOK_CANON:

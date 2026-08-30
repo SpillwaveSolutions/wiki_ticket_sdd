@@ -2,15 +2,19 @@
 
 How to use **worklog** with LangChain Deep Agents and Deep Agents Code (`dcode`).
 
-This package follows the open **Agent Skills** layout (`skills/*/SKILL.md`). Deep Agents loads the same format.
+This package follows the open **Agent Skills** layout (`plugin/skills/*/SKILL.md`).
+Deep Agents loads the same format.
 
-## Privacy and knowledge root
+> Knowledge-tree writes used to ship in this plugin (`brain_session.py`,
+> `okf_write.py`). They do not anymore. Use
+> [okf-plugin](https://github.com/SpillwaveSolutions/okf-plugin) and
+> [second-brain-core](https://github.com/SpillwaveSolutions/second-brain-core).
+> See [ISOLATION.md](ISOLATION.md).
 
-The institutional second brain is a local or private OKF tree the human already owns.
+## Privacy
 
-- Point Deep Agents at that tree with `SECOND_BRAIN_ROOT`.
-- Never hard-code a remote URL or clone command.
-- Public samples use only the in-repo sample graph.
+Never hard-code a remote URL or clone command for a private knowledge tree.
+Public samples use only in-repo fiction.
 
 ## Install / discovery
 
@@ -34,7 +38,7 @@ from deepagents.middleware import SkillsMiddleware
 
 SkillsMiddleware(
     backend=backend,
-    sources=["/skills/", "/path/to/wiki_ticket_sdd/skills/"],
+    sources=["/skills/", "/path/to/wiki_ticket_sdd/plugin/skills/"],
 )
 ```
 
@@ -48,41 +52,25 @@ Thin host wrapper: `plugin/hosts/deep-agents/SKILL.md`.
 
 ## Isolation
 
-Deep Agents on one project worktree (for example **northstar-console**) must not write `main` of a shared brain directly.
-
-```bash
-python3 plugin/scripts/brain_session.py open \
-  --repo "$BRAIN_REPO" \
-  --bundle knowledge \
-  --actor deep-agents/wiki-ticket-sdd \
-  --plugin worklog \
-  --host deep-agents
-```
-
-Then set `SECOND_BRAIN_ROOT` to the session bundle from the JSON. Close the session to PR. See [ISOLATION.md](ISOLATION.md).
+Deep Agents on one project worktree must not share that checkout with a second
+session. Give each session its own `git worktree`. See [ISOLATION.md](ISOLATION.md).
 
 ## Deterministic ops
 
 ```bash
 export SECOND_BRAIN_IDENTITY="deep-agents/wiki-ticket-sdd"
-bin/worklog --actor "$SECOND_BRAIN_IDENTITY" show --help
-# Knowledge-tree writes only, after opening a session:
-python3 bin/okf_write.py write \
-  --type TicketLink \
-  --title "Example ticket link" \
-  --bundle "$SECOND_BRAIN_ROOT" \
-  --author "$SECOND_BRAIN_IDENTITY"
+bin/worklog --actor "$SECOND_BRAIN_IDENTITY" add --level story --kind feature "…"
 ```
 
-Wrap the scripts as tools or shell. The model proposes. The scripts capture, pack, and validate.
+Wrap `bin/worklog` as a tool or shell. The model proposes. The CLI appends.
 
 ## Progressive disclosure
 
-Startup sees skill frontmatter only. Pack (2 hops) before answering or writing.
+Startup sees skill frontmatter only.
 
 ## Related
 
 - Agent Skills spec
 - Agent Plugins 1.0
 - [ISOLATION.md](ISOLATION.md), [GROK_BOT.md](GROK_BOT.md), [ONBOARDING.md](ONBOARDING.md)
-- [second-brain-core](https://github.com/SpillwaveSolutions/second-brain-core) session helpers
+- [okf-plugin](https://github.com/SpillwaveSolutions/okf-plugin) / [second-brain-core](https://github.com/SpillwaveSolutions/second-brain-core)
