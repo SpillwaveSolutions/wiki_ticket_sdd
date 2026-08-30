@@ -178,6 +178,105 @@ class TestCli(Sandbox):
             published.append(ev)
 
 
+class TestPlan(unittest.TestCase):
+    def page(self, key, **kw):
+        p = {"wiki_key": key, "source": key + ".md", "title": key,
+             "page_name": key, "render": "doc+banner", "frozen": False}
+        p.update(kw)
+        return p
+
+    def test_new_page_is_publish(self):
+        r = published.plan({"pages": [self.page("a", render_hash="r1")]}, {})
+        self.assertEqual([p["wiki_key"] for p in r["publish"]], ["a"])
+        self.assertEqual(r["skip"], [])
+        self.assertEqual(r["frozen_violations"], [])
+
+    def test_matching_render_hash_skips(self):
+        r = published.plan(
+            {"pages": [self.page("a", render_hash="r1", source_hash="s1")]},
+            {"a": {"render_hash": "r1", "source_hash": "s1"}},
+        )
+        self.assertEqual(r["publish"], [])
+        self.assertEqual(r["skip"], [{"wiki_key": "a", "reason": "render_hash match"}])
+
+    def test_banner_change_publishes_frozen_page(self):
+        """Frozen source_hash matches; render_hash moved (banner). Publish."""
+        r = published.plan(
+            {"pages": [self.page("plan/x", frozen=True, source_hash="s1",
+                                 render_hash="r2", banner="> superseded")]},
+            {"plan/x": {"source_hash": "s1", "render_hash": "r1"}},
+        )
+        self.assertEqual(r["frozen_violations"], [])
+        self.assertEqual(len(r["publish"]), 1)
+        self.assertEqual(r["publish"][0]["render_hash"], "r2")
+        self.assertEqual(r["publish"][0]["banner"], "> superseded")
+
+    def test_frozen_source_hash_drift_is_a_stop(self):
+        r = published.plan(
+            {"pages": [self.page("plan/x", frozen=True, source_hash="NEW",
+                                 render_hash="r2")]},
+            {"plan/x": {"source_hash": "OLD", "render_hash": "r1"}},
+        )
+        self.assertEqual(r["publish"], [])
+        self.assertEqual(len(r["frozen_violations"]), 1)
+        self.assertEqual(r["frozen_violations"][0]["manifest_source_hash"], "NEW")
+        self.assertEqual(r["frozen_violations"][0]["ledger_source_hash"], "OLD")
+
+    def test_frozen_first_publish_is_not_a_violation(self):
+        r = published.plan(
+            {"pages": [self.page("plan/x", frozen=True, source_hash="s1",
+                                 render_hash="r1")]},
+            {},
+        )
+        self.assertEqual(r["frozen_violations"], [])
+        self.assertEqual([p["wiki_key"] for p in r["publish"]], ["plan/x"])
+
+    def test_sidebar_is_a_page(self):
+        r = published.plan(
+            {"pages": [], "sidebar": {"source": "docs/.index/rendered/_Sidebar.md",
+                                      "render_hash": "abc"}},
+            {},
+        )
+        self.assertEqual(r["publish"][0]["wiki_key"], "sidebar")
+        self.assertEqual(r["publish"][0]["page_name"], "_Sidebar")
+
+    def test_cli_exits_1_on_frozen_drift(self):
+        d = tempfile.mkdtemp(prefix="worklog-plan-")
+        self.addCleanup(shutil.rmtree, d, ignore_errors=True)
+        shutil.copytree(BIN, os.path.join(d, "bin"))
+        os.makedirs(os.path.join(d, ".work"))
+        os.makedirs(os.path.join(d, "docs", ".index"))
+        manifest = {"version": 1, "pages": [
+            {"wiki_key": "plan/x", "source": "p.md", "frozen": True,
+             "source_hash": "NEW", "render_hash": "r2", "title": "X",
+             "page_name": "X", "render": "doc+banner"},
+        ]}
+        with open(os.path.join(d, "docs", ".index", "publish-manifest.json"), "w") as fh:
+            json.dump(manifest, fh)
+        published_path = os.path.join(d, ".work", "published.jsonl")
+        ev = {
+            "ev": "01A" + "0" * 23, "ts": "2026-08-30T00:00:00Z", "actor": "t",
+            "op": "publish", "key": "plan/x",
+            "set": {"source_hash": "OLD", "render_hash": "r1"},
+        }
+        with open(published_path, "w") as fh:
+            fh.write(json.dumps(ev) + "\n")
+        p = run(d, "wiki-plan")
+        self.assertEqual(p.returncode, 1, p.stderr)
+        out = json.loads(p.stdout)
+        self.assertEqual(len(out["frozen_violations"]), 1)
+        self.assertIn("frozen-doc", p.stderr)
+
+    def test_cli_missing_manifest(self):
+        d = tempfile.mkdtemp(prefix="worklog-plan-")
+        self.addCleanup(shutil.rmtree, d, ignore_errors=True)
+        shutil.copytree(BIN, os.path.join(d, "bin"))
+        os.makedirs(os.path.join(d, ".work"))
+        p = run(d, "wiki-plan")
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn("ia-render", p.stderr)
+
+
 class TestGitattributes(unittest.TestCase):
     def test_union_is_declared(self):
         text = open(os.path.join(ROOT, ".gitattributes")).read()

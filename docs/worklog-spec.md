@@ -423,7 +423,7 @@ Local items become tickets. The pull side ships too (§18 step 8): remote change
 
 ### 9.3 The `wiki-publish` skill
 
-- **Ledger** — `.work/published.jsonl`, committed, append-only, `merge=union`. Fold last-write-wins per logical key. Page identity is shared across the team; without it every republish creates duplicate pages. Folded entries map a stable logical key to `{source, title, url, rev, source_hash}` — `source` (the repo path) makes the publish set self-describing. `worklog wiki-get` / `wiki-add` / `wiki-record` are the only readers/writers.
+- **Ledger** — `.work/published.jsonl`, committed, append-only, `merge=union`. Fold last-write-wins per logical key. Page identity is shared across the team; without it every republish creates duplicate pages. Folded entries map a stable logical key to `{source, title, url, rev, source_hash, render_hash}` — `source` (the repo path) makes the publish set self-describing. `worklog wiki-get` / `wiki-add` / `wiki-record` are the only readers/writers of the log; `worklog wiki-plan` is the dispatcher (frozen-guard on body `source_hash`, skip on `render_hash`).
 - **Default publish set** — the live roadmap, every plan in `docs/plans/`, every roadmap snapshot in `docs/roadmap/`, plus anything registered via `worklog wiki-add <file> --key K --title T`.
 - **Frozen rules** (§13's semantics applied at the edge) — plans, snapshots, and status reports publish once and are never re-published. The live roadmap is the exception: republish when `source_hash` changes; matching hash → skip.
 - **One-time init is surfaced to the human**, never silently worked around — e.g. a GitHub wiki's `.wiki.git` does not exist until someone clicks "Create the first page"; on a not-found failure, ask the human to do that once, then retry.
@@ -432,6 +432,7 @@ Local items become tickets. The pull side ships too (§18 step 8): remote change
 
 - `worklog link` — the only writer of external identity into the log.
 - `worklog wiki-add` / `wiki-record` / `wiki-get` — the only writers and reader of the ledger (`wiki-add` registers `{source, title, url: null, rev: null, source_hash: null}`; `wiki-record` fills the nulls after a successful push).
+- `worklog wiki-plan` — frozen-guard + render-hash skip. Reads `docs/.index/publish-manifest.json` and the folded ledger; prints `{publish, skip, frozen_violations}`. Exit 1 on frozen source_hash drift.
 - The file formats — the `published.jsonl` event envelope above and `sync-state.json` (§10.3) — are fixed by this spec, whatever tooling the skill happens to drive.
 
 The old §9.1 exit-code table is gone: there is no executable whose exit codes could be specified. What did *not* move: the sync semantics. §10's canonical hash, echo suppression, field directions, and conflict rules still govern — the skill is the *how*; §10 remains the *what*.

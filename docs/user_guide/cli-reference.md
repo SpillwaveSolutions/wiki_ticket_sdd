@@ -269,6 +269,27 @@ bin/worklog wiki-add docs/plans/2026-07-18-work-taxonomy.md \
     --key work-taxonomy --title "Work taxonomy plan"
 ```
 
+### wiki-plan
+
+Publish dispatcher: frozen-guard + render-hash skip. Reads
+`docs/.index/publish-manifest.json` and the folded ledger; prints JSON
+`{publish, skip, frozen_violations}`. Exit 1 on frozen `source_hash`
+drift — do not publish. wiki-publish runs this instead of hashing files.
+
+```bash
+bin/worklog wiki-plan
+```
+
+`--manifest PATH` overrides the default.
+
+### wiki-get
+
+Fold the published.jsonl ledger. One key, or every page as a JSON dict.
+
+```bash
+bin/worklog wiki-get plan/x
+```
+
 ### list
 
 List open items, sorted by priority. `--all` includes closed ones.
