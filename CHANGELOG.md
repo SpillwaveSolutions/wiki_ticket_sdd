@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **Truth hygiene.** Spec §5.3/§6 match fold.py and ADR-0007 (`ev` is a total order after dedupe; compaction watermark is per-item `snapshot.through`). `status-report` is shipped (§12, §18 step 10). Adapter exit 3 never auto-clears `external` (ADR-0004). HOSTS.md lists the live Cursor events; PORTS.md says both hook manifests nest under `hooks`. A plan is the why of a piece of work; an ADR is the why of a standing decision. New design freezes are a tag+hash+delta note, not a 250KB copy; existing dated copies stay frozen.
+
 - **triggers: config block.** `worklog triggers <event>` is the dispatcher for when generation happens (`plan-capture`, `pr-open`, `pr-merge`, `release`, `status-report`). Skills read the command instead of hardcoding. `pr-merge` is honored in post-merge CI. `release.sync_docs` / `sync.push_on_capture` / `status.publish` are legacy fallbacks; this repo's config uses `triggers:` only.
 
 - **OKF / second-brain write path evicted.** `bin/okf_write.py`, `plugin/scripts/brain_session.py`, the `worklog-session` skill, and `/worklog:session` are gone. Knowledge-tree writes live in [okf-plugin](https://github.com/SpillwaveSolutions/okf-plugin) and [second-brain-core](https://github.com/SpillwaveSolutions/second-brain-core). `docs/ONBOARDING.md` is a WikiTicket first-hour guide. ISOLATION / GROK_BOT / CURSOR / Deep Agents docs point there. `bin/session.py` stays (worklog session registry).

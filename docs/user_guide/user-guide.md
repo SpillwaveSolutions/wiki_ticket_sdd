@@ -433,6 +433,9 @@ wolf at the next one for a full hour).
 | `docs/plans/*.md` | Written once, never edited or regenerated. Designs change by **superseding**: a new dated plan, old one stays as the record of why |
 | `docs/roadmap.md` | Generated, never hand-edited. To change the roadmap, change the work items and re-render |
 | `docs/roadmap/*.md` | Dated snapshots (see `roadmap-snapshot`), frozen the moment they're written |
+| `docs/designs/current_*.md` | Live. Regenerated at each release. |
+| `docs/designs/<DATE>_vX.Y.Z-release.md` | Freeze note: tag + git_hash + a short delta from the previous freeze. Frozen. Not a copy of the live pair. |
+| `docs/designs/<DATE>_*_design_doc.md` and `*_code_walkthrough.md` | Legacy full copies (pre-cap). Frozen forever. Never regenerate, never edit. |
 | `.work/*.jsonl` | Only `bin/worklog` writes them. No editors, no `echo >>` |
 
 "Frozen" means the **prose** is frozen. Front matter is metadata about the
@@ -444,6 +447,8 @@ matter, so none of those stamps look like an edit to the frozen-source guard.
 A change to the body still does, and still stops the publisher.
 
 ### Architecture decisions
+
+A plan is the why of a piece of work (written once, superseded not edited); an ADR is the why of a standing decision (body frozen, status mutates).
 
 Significant decisions get an ADR in `docs/adr/NNNN-slug.md` (`worklog adr
 new` scaffolds one; `worklog adr check` validates them all). ADRs follow
@@ -458,15 +463,18 @@ wiki.
 
 ## Design docs and code walkthroughs
 
-Releases generate four artifacts under `docs/designs/`: a frozen dated pair —
-`<date>_<name>_design_doc.md` plus `<date>_<name>_code_walkthrough.md`, front
-matter tying them to the release's git tag and roadmap snapshot, published
-once and never regenerated (same rule as roadmap snapshots) — and a live pair,
-`current_design_doc.md` plus `current_code_walkthrough.md`, rewritten in place
-at every release; besides `docs/roadmap.md` they are the only docs that are.
-The design-docs skill generates them from the actual code; at tag time the
-release skill spawns background agents to regenerate them and refresh the user
-guide and README. `worklog triggers release` is the opt-in/out: what's
+Releases regenerate two live artifacts under `docs/designs/` —
+`current_design_doc.md` plus `current_code_walkthrough.md`, rewritten in
+place at every release; besides `docs/roadmap.md` they are the only docs
+that are. A freeze is a short dated note,
+`docs/designs/<date>_vX.Y.Z-release.md`: the tag, the git_hash, pointers at
+the live pair and the roadmap snapshot, and a delta from the previous
+freeze. It is not a 250KB copy of the live pair. Full dated copies already
+in the tree stay frozen forever (same rule as roadmap snapshots); do not
+delete them and do not write new ones. The design-docs skill generates the
+live pair from the actual code; at tag time the release skill spawns
+background agents to regenerate them and refresh the user guide and README.
+`worklog triggers release` is the opt-in/out: what's
 listed gets synced at release, what isn't doesn't. `release.sync_docs` is
 the legacy fallback.
 

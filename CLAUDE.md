@@ -50,9 +50,10 @@ notes here.
 
 - **Design docs and code walkthroughs are generated, never hand-edited.** The design-docs
   skill regenerates `docs/designs/` at release via background agents: the `current_*`
-  pair is a sanctioned in-place rewrite (like `docs/roadmap.md`), the dated copies are
-  frozen. A hand-edit is either overwritten at the next release or corrupts a frozen
-  record — fix the code or the skill instead.
+  pair is a sanctioned in-place rewrite (like `docs/roadmap.md`). A freeze is a short
+  dated note (tag + git_hash + delta from the previous freeze), not a copy of the live
+  pair. Existing full dated copies stay frozen. A hand-edit is either overwritten at
+  the next release or corrupts a frozen record — fix the code or the skill instead.
 
 - **Tests must hold coverage.** CI enforces >=80% line coverage on `bin/*.py`; the
   target is 95%. New modules ship with tests, and a PR that drops coverage below the

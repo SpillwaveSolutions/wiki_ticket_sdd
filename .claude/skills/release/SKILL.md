@@ -81,9 +81,11 @@ pull-only — §3. Do not commit these onto the default branch directly.)
 - **Agent A — design-docs skill, release mode**: if `design-doc` and/or
   `code-walkthrough` are listed, regenerates
   `docs/designs/current_design_doc.md` + `current_code_walkthrough.md`
-  against the tagged commit, freezes the dated pair
-  (`<DATE>_<vX.Y.Z-release>_*.md`), publishes all four via wiki-publish
-  when `wiki-publish` is also listed.
+  against the tagged commit, writes one freeze note
+  (`<DATE>_vX.Y.Z-release.md`: tag + git_hash + delta — not a copy of the
+  live pair), publishes the live pair plus the freeze note via wiki-publish
+  when `wiki-publish` is also listed. Existing full dated copies stay frozen;
+  do not write new ones.
 - **Agent B — user-docs refresh**: if `user-guide` and/or `readme` are
   listed, diffs `vPREV..vX.Y.Z`, updates `docs/user_guide/*.md` and
   `README.md` wherever that diff made them stale, then republishes

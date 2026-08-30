@@ -38,8 +38,9 @@ Codex gets the hooks as well as the skills. It supports `UserPromptSubmit`,
 `Stop`, `SessionStart`, `SessionEnd` and the tool events, it reads the same
 `hookSpecificOutput` / `additionalContext` shape our scripts already emit, and
 it sets `CLAUDE_PLUGIN_ROOT` for plugin-sourced hooks. So the scripts are
-shared verbatim and only the wrapper differs: `hooks/codex-hooks.json` nests
-the event map under a `hooks` key, where `hooks/hooks.json` has it flat.
+shared verbatim. Both `hooks/hooks.json` and `hooks/codex-hooks.json` nest
+the event map under a top-level `hooks` key (v0.22.1; both hosts' loaders
+read that key). A flat map parses as valid JSON and loads zero hooks.
 
 The one hook that does not port is plan capture, and the reason is specific.
 It fires on `PostToolUse` with a matcher for the `ExitPlanMode` **tool**;
