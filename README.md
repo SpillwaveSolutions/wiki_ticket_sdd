@@ -12,24 +12,58 @@ the history of what was done is readily available, and roadmaps and status
 reports are generated artifacts anyone can read. No "the agent did a bunch
 of stuff last week and nobody knows what."
 
-By mid-2026 the industry gave this pattern a name: **graph engineering** —
-explicit nodes, typed edges, persistent state, and an index, in place of one
-long agent loop. WikiTicket SDD didn't adopt the framing; it already *was*
-the framing. The event log, `ia-graph`'s typed edges, and the publish
-manifest below are graph engineering made visible, the same way the fishbowl
-above makes the work itself visible. See
-[`docs/graph-engineering.md`](docs/graph-engineering.md) for the full
-picture, mapped to real code.
+Two things set this apart from other git-native agent trackers:
+
+1. **Plans are frozen.** Written once, never regenerated. A changed design
+   gets a new dated plan that supersedes the old one. The record of why an
+   approach was abandoned is the most valuable artifact.
+2. **Documents carry the commit they were written against.** `git_hash` in
+   front matter names the tree the author had open; `worklog doc-verify`
+   resolves every `path — symbol(), lines N–M` citation *at that commit*,
+   telling a fabricated citation (wrong even then) apart from drift (right
+   then, the code moved). It never falls back to HEAD.
+
+The JSONL event log is the mechanism, not the headline. An essay mapping
+the machinery onto the mid-2026 "graph engineering" framing lives at
+[`docs/graph-engineering.md`](docs/graph-engineering.md).
+
+## Compared with beads, spec-kit, and GitHub Projects
+
+The append-only JSONL-in-git log overlaps beads and backlog.md-style agent
+trackers. That's table stakes. The difference is what sits on top of the log.
+
+| | Frozen plans | Citation provenance | Tracker / wiki |
+|---|---|---|---|
+| **WikiTicket SDD** | Written once, superseded not edited | `git_hash` + `doc-verify` at that commit | Bidirectional, to the team's existing systems |
+| **beads** | No | No | Local-first log; not a wiki/tracker publisher |
+| **spec-kit / OpenSpec** | Living specs, updated in place | No | Spec artifacts, not tickets |
+| **GitHub Projects** | No | No | The board *is* GitHub |
+
+spec-kit and OpenSpec generate living `spec.md` / `plan.md` / `tasks.md`.
+WikiTicket can ingest their task lists via `plan-capture`, then freeze the
+why as a dated plan. GitHub Projects is a board on issues; WikiTicket is
+local-first and optionally publishes *to* GitHub (or Jira, ADO, …).
+
+A plan is the why of a piece of work; an ADR is the why of a standing
+decision. Neither is a living spec.
 
 ## What it does
 
+- **Plans are the permanent design record.** Exiting plan mode captures the
+  plan to `docs/plans/` and emits tracked items. Planning never evaporates;
+  when you need the *why*, read the plan. Plans are written once and
+  superseded, never edited.
+- **Documents carry the commit they were written against**, and a gate reads
+  it back. `git_hash` in front matter says which tree the author had open;
+  `worklog doc-verify` resolves every `path — symbol(), lines N–M` citation
+  *at that commit*, telling a fabricated citation (wrong even then — a
+  defect) apart from drift (right then, the code moved since). It never falls
+  back to HEAD. `worklog provenance-backfill` adds `merged_in` once the
+  document lands.
 - **Append-only, git-native work log.** Epics, stories, tasks, subtasks, and
   bugs live in `.work/todo.jsonl` — an event log that multiple people (and
   agents) can work against concurrently. Union merge, event fold: branches
   merge cleanly, state is derived by folding events.
-- **Plans are the permanent design record.** Exiting plan mode captures the
-  plan to `docs/plans/` and emits tracked items. Planning never evaporates;
-  when you need the *why*, read the plan.
 - **A four-axis work taxonomy.** Every item sits on `level`
   (epic/story/task/subtask), `kind` (feature/bug/ops/triage), `milestone`
   (what ships together), and planned-vs-discovered. The unclassified default
@@ -44,20 +78,13 @@ picture, mapped to real code.
   `.work/config.yml` is the switch.
 - **Generated roadmap and status reports.** `docs/roadmap.md` is rendered
   from the log — no hand-editing, no drift.
-- **Design docs, architecture docs, code walkthroughs, and requirements**, generated from the actual code at
-  every release: frozen per-release copies plus always-current versions in
-  `docs/designs/`, published to the wiki. Prose uses `document-specialist` v3.2.2
-  (STE100 default). Diagrams default to `design-doc-mermaid` v1.1.1. `plantuml`
-  v1.2.2 is leftover types only and always PNG/SVG. Install the suite from
+- **Design docs and code walkthroughs**, generated from the actual code at
+  every release: a live `current_*` pair plus a short freeze note (tag +
+  git_hash + delta from the previous freeze). Existing full dated copies stay
+  frozen. Prose uses `document-specialist` v3.2.2 (STE100 default). Diagrams
+  default to `design-doc-mermaid` v1.1.1. `plantuml` v1.2.2 is leftover types
+  only and always PNG/SVG. Install the suite from
   `SpillwaveSolutions/spillwave-documentation-marketplace` v0.2.1.
-
-- **Documents carry the commit they were written against**, and a gate reads
-  it back. `git_hash` in front matter says which tree the author had open;
-  `worklog doc-verify` resolves every `path — symbol(), lines N–M` citation
-  *at that commit*, telling a fabricated citation (wrong even then — a
-  defect) apart from drift (right then, the code moved since). It never falls
-  back to HEAD. `worklog provenance-backfill` adds `merged_in` once the
-  document lands.
 - **Information architecture & content model.** Stable `wiki_key` identity,
   `truth_state` (current vs snapshot/superseded), a generated reader plane
   (Home, Sidebar, Decisions/Releases/Status/Traceability indexes), and a

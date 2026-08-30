@@ -3321,6 +3321,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01M19TTXCBH3M4Z1NRS652QMPD",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7079,6 +7084,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "Truth hygiene: spec fold/watermark, adapters exit-3, HOSTS/PORTS, plan-vs-ADR, freeze cap"
+  },
+  "item/01M19TTXCBH3M4Z1NRS652QMPD": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "README positioning vs beads, spec-kit, GitHub Projects; demote graph-engineering essay"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
