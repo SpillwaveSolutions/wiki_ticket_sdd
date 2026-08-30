@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **Merge pipeline actually lands.** `worklog sync --report` is an alias of `--dry-run` (print drift, change nothing) — post-merge CI, the merge-green skill, and the spec all invoked a flag that did not exist. Compact and post-merge no longer `git push` main: GITHUB_TOKEN cannot bypass the merge-when-green ruleset (User 41898282 does not exempt the Actions installation token; Integration 15368 is 422). Both jobs open a PR and arm `gh pr merge --auto --merge`. post-merge has a concurrency group, verifies after `git add`, and posts the sync comment via `--body-file` (no literal `\\n`).
+
 - **Positioning.** README Why leads with frozen plans and `git_hash` provenance, not the JSONL log or a graph-engineering identity claim. New section compares WikiTicket with beads, spec-kit / OpenSpec, and GitHub Projects. `docs/graph-engineering.md` is an essay, not the product thesis.
 
 - **Truth hygiene.** Spec §5.3/§6 match fold.py and ADR-0007 (`ev` is a total order after dedupe; compaction watermark is per-item `snapshot.through`). `status-report` is shipped (§12, §18 step 10). Adapter exit 3 never auto-clears `external` (ADR-0004). HOSTS.md lists the live Cursor events; PORTS.md says both hook manifests nest under `hooks`. A plan is the why of a piece of work; an ADR is the why of a standing decision. New design freezes are a tag+hash+delta note, not a 250KB copy; existing dated copies stay frozen.

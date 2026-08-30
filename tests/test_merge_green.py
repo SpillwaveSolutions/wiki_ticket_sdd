@@ -174,8 +174,26 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertIn("bin/worklog ia-inventory", text)
         self.assertIn("bin/worklog ia-manifest", text)
         self.assertIn("bin/worklog sync --report", text)
+        self.assertIn("--body-file", text)
+        self.assertIn("concurrency:", text)
         self.assertIn("--merge-check", text)
+        self.assertIn("gh pr merge --auto --merge", text)
         self.assertNotIn("--squash", text)
+        self.assertNotIn("\\\\n", text)
+        # GITHUB_TOKEN cannot push main (GH013 on compact run 33299168867).
+        self.assertNotRegex(text, r"(?m)^\s+git push\s*$",
+                            "bare git push would target main")
+
+    def test_compact_workflow_lands_via_pr(self):
+        with open(os.path.join(ROOT, ".github", "workflows", "compact.yml"), encoding="utf-8") as fh:
+            text = fh.read()
+        self.assertIn("name: worklog-compact", text)
+        self.assertIn("gh pr create", text)
+        self.assertIn("gh pr merge --auto --merge", text)
+        self.assertIn("pull-requests: write", text)
+        self.assertNotIn("--squash", text)
+        self.assertNotRegex(text, r"(?m)^\s+git push\s*$",
+                            "bare git push would target main")
 
     def test_ruleset_is_merge_commit_only(self):
         import json

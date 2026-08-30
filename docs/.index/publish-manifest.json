@@ -1,5 +1,5 @@
 {
- "git_hash": "3291405",
+ "git_hash": "381a2d7",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "8ffca4fbc2cf",
+   "render_hash": "f7582593bb6c",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -585,7 +585,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.10",
    "render": "as-is",
-   "render_hash": "c3dc947a1363",
+   "render_hash": "e1aa90006499",
    "source": "docs/.index/rendered/releases/v0.24.10.md",
    "title": "Release v0.24.10",
    "truth_state": "shipped",
@@ -4472,6 +4472,46 @@
    "wiki_key": "item/01M19TTXCBH3M4Z1NRS652QMPD"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M19XR46836RE9JSHJHM2DSGC",
+   "render": "as-is",
+   "render_hash": "253accbe740b",
+   "source": "docs/.index/rendered/tickets/01M19XR46836RE9JSHJHM2DSGC.md",
+   "title": "Implement worklog sync --report; land compact/post-merge via PR",
+   "truth_state": "done",
+   "wiki_key": "item/01M19XR46836RE9JSHJHM2DSGC"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M19XRRTTWDBN0SRGDZ1VN35G",
+   "render": "as-is",
+   "render_hash": "cbb5449ef74d",
+   "source": "docs/.index/rendered/tickets/01M19XRRTTWDBN0SRGDZ1VN35G.md",
+   "title": "Close published.jsonl item; triage five stale in_progress",
+   "truth_state": "open",
+   "wiki_key": "item/01M19XRRTTWDBN0SRGDZ1VN35G"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M19XRRWXHM72JBY29FQRRMEJ",
+   "render": "as-is",
+   "render_hash": "70cc8b965ba3",
+   "source": "docs/.index/rendered/tickets/01M19XRRWXHM72JBY29FQRRMEJ.md",
+   "title": "MIGRATE_MS is a year off (decodes to 2025-07-19)",
+   "truth_state": "open",
+   "wiki_key": "item/01M19XRRWXHM72JBY29FQRRMEJ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M19XRRZ2894K7XE59RX1EAY1",
+   "render": "as-is",
+   "render_hash": "ec8fb5b8c979",
+   "source": "docs/.index/rendered/tickets/01M19XRRZ2894K7XE59RX1EAY1.md",
+   "title": "Retention: compact evicts old done.jsonl into an archive",
+   "truth_state": "open",
+   "wiki_key": "item/01M19XRRZ2894K7XE59RX1EAY1"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4596,9 +4636,9 @@
    "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "99a2e4078335",
+   "render_hash": "9b9d7e83d643",
    "source": "docs/user_guide/cli-reference.md",
-   "source_hash": "b94de5eb4fd3",
+   "source_hash": "7fbdb28de4ad",
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current",
    "wiki_key": "cli-reference"
@@ -5300,13 +5340,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T17:18:57Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T18:11:36Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "757fc7fd46a6",
+   "render_hash": "a26c55e616dd",
    "source": "docs/roadmap.md",
-   "source_hash": "92018fc77ea0",
+   "source_hash": "5f99790ce11a",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

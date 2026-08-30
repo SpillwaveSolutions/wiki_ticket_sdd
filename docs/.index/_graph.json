@@ -3326,6 +3326,26 @@
    "type": "targets"
   },
   {
+   "from": "item/01M19XR46836RE9JSHJHM2DSGC",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M19XRRTTWDBN0SRGDZ1VN35G",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M19XRRWXHM72JBY29FQRRMEJ",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M19XRRZ2894K7XE59RX1EAY1",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7089,6 +7109,26 @@
    "doc_type": "item",
    "status": "done",
    "title": "README positioning vs beads, spec-kit, GitHub Projects; demote graph-engineering essay"
+  },
+  "item/01M19XR46836RE9JSHJHM2DSGC": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Implement worklog sync --report; land compact/post-merge via PR"
+  },
+  "item/01M19XRRTTWDBN0SRGDZ1VN35G": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Close published.jsonl item; triage five stale in_progress"
+  },
+  "item/01M19XRRWXHM72JBY29FQRRMEJ": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "MIGRATE_MS is a year off (decodes to 2025-07-19)"
+  },
+  "item/01M19XRRZ2894K7XE59RX1EAY1": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Retention: compact evicts old done.jsonl into an archive"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

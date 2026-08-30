@@ -449,11 +449,13 @@ not an error.
 
 ```bash
 bin/worklog sync --dry-run
+bin/worklog sync --report    # alias of --dry-run
 ```
 
 | Flag | Meaning |
 |---|---|
 | `--dry-run` | Report what would happen; write nothing |
+| `--report` | Alias of `--dry-run`. Spec §10.5 / post-merge CI. |
 | `--keys k1,k2` | **Adds** these external keys to the run's scope; never narrows it |
 | `--push-only` / `--pull-only` | One direction only (mutually exclusive) |
 | `--retry-base-delay <s>` | Base backoff for transient adapter failures |

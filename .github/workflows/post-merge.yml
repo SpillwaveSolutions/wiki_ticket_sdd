@@ -5,6 +5,11 @@ name: worklog-post-merge
 # advisory (spec §12). The action list is `.work/config.yml` →
 # `worklog triggers pr-merge`, not this file.
 #
+# GITHUB_TOKEN cannot bypass the merge-when-green ruleset (User 41898282
+# does not exempt the Actions installation token; Integration 15368 is
+# 422). So this job never git-pushes main. It opens a PR and arms
+# auto-merge (ADR-0010). Never squash (ADR-0008).
+#
 # A push made with the default GITHUB_TOKEN does not trigger sibling
 # `push` workflows. worklog-invariants listens on workflow_run of this
 # job for the same reason it listens on worklog-compact (#361).
@@ -12,6 +17,10 @@ name: worklog-post-merge
 on:
   pull_request:
     types: [closed]
+
+concurrency:
+  group: worklog-post-merge
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -44,20 +53,32 @@ jobs:
         run: |
           python3 -c 'import json,sys; a=json.load(open("/tmp/pr-merge-triggers.json"))["actions"]; sys.exit(0 if any(x=="ticket-sync" or x.startswith("ticket-sync:") for x in a) else 1)' || exit 0
           bin/worklog sync --report | tee /tmp/sync-report.txt
-          body=$(python3 -c 'import pathlib; t=pathlib.Path("/tmp/sync-report.txt").read_text(); print("## post-merge sync --report\\n\\n```\\n"+t+"\\n```")')
-          gh pr comment "${{ github.event.pull_request.number }}" --body "$body" || true
+          python3 - <<'PY'
+from pathlib import Path
+t = Path("/tmp/sync-report.txt").read_text()
+Path("/tmp/sync-comment.md").write_text(
+    "## post-merge sync --report\n\n```\n" + t + "\n```\n")
+PY
+          gh pr comment "${{ github.event.pull_request.number }}" --body-file /tmp/sync-comment.md || true
 
-      - name: verify what is about to be pushed
+      - name: commit via PR
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
+          if [ -z "$(git status --porcelain docs)" ]; then
+            echo "no derived-doc changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          branch="chore/post-merge-${{ github.event.pull_request.number }}-${GITHUB_RUN_ID}"
+          git checkout -b "$branch"
+          git add docs
           WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
           python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
-
-      - name: commit and push
-        run: |
-          if [ -n "$(git status --porcelain docs)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add docs
-            git commit -m "chore(worklog): post-merge regenerate derived docs (#${{ github.event.pull_request.number }})"
-            git push
-          fi
+          git commit -m "chore(worklog): post-merge regenerate derived docs (#${{ github.event.pull_request.number }})"
+          git push -u origin HEAD
+          gh pr create --head "$branch" --base main \
+            --title "chore(worklog): post-merge regenerate derived docs (#${{ github.event.pull_request.number }})" \
+            --body "Post-merge derived-doc regenerate for #${{ github.event.pull_request.number }}. Auto-merge when green (ADR-0010). Never squash (ADR-0008)."
+          gh pr merge --auto --merge

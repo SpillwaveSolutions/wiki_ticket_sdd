@@ -378,6 +378,18 @@ class TestOneOwnerPerKey(Sandbox):
         self.assertEqual(p.returncode, 1, p.stdout + p.stderr)
         self.assertIn("claimed by more than one item", p.stdout + p.stderr)
 
+    def test_report_is_dry_run_alias(self):
+        """post-merge CI and spec §10.5 say `sync --report`. The CLI only
+        shipped --dry-run; every merge's report step failed, masked by
+        continue-on-error."""
+        self.contested()
+        p = self.run_wl("sync", "--retry-base-delay", "0", "--push-only",
+                        "--report")
+        self.assertEqual(p.returncode, 1, p.stdout + p.stderr)
+        self.assertIn("claimed by more than one item", p.stdout + p.stderr)
+        help_out = self.run_wl("sync", "--help").stdout
+        self.assertIn("--report", help_out)
+
     def test_unlink_frees_the_ticket_and_the_survivor_repushes(self):
         """The repair, end to end — and the reason last_pushed_key exists:
         `external` is not in HASH_FIELDS, so nothing here is content-dirty."""
