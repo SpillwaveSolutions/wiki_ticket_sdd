@@ -2,6 +2,11 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Document ruleset bypass as github-actions[bot] user
+`01M18S278XJ5W7QWSVC37N9AP7` · status: done
+- belongs-to: Faster merge: auto-merge + post-merge CI
+- targets: release/v0.24.10
+
 ### Batch ceremony PRs; ADR-0010 native auto-merge
 `01M18REAAHRPKS6P4AT071T8MR` · status: done
 - belongs-to: Faster merge: auto-merge + post-merge CI
@@ -23,6 +28,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - contains: Enable auto-merge and required checks on main
 - contains: Post-merge CI regenerates roadmap/index and reports sync drift
 - contains: Batch ceremony PRs; ADR-0010 native auto-merge
+- contains: Document ruleset bypass as github-actions[bot] user
 
 ### Convert published.json to JSONL ledger with union merge
 `01M18QBM233GRTVR7JRXSVNK66` · status: todo

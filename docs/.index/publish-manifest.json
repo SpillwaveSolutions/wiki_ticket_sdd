@@ -1,5 +1,5 @@
 {
- "git_hash": "d5bff2b",
+ "git_hash": "78242c4",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "1b34d02c7c86",
+   "render_hash": "ac6d3647fbea",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -585,7 +585,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.10",
    "render": "as-is",
-   "render_hash": "47a7e650582d",
+   "render_hash": "6aecfd934464",
    "source": "docs/.index/rendered/releases/v0.24.10.md",
    "title": "Release v0.24.10",
    "truth_state": "shipped",
@@ -4365,7 +4365,7 @@
    "frozen": false,
    "page_name": "Ticket-01M18RE2Y7BR0ZAK2EHBSD65AM",
    "render": "as-is",
-   "render_hash": "5e54bf958cbf",
+   "render_hash": "9e18351522e3",
    "source": "docs/.index/rendered/tickets/01M18RE2Y7BR0ZAK2EHBSD65AM.md",
    "title": "Faster merge: auto-merge + post-merge CI",
    "truth_state": "done",
@@ -4400,6 +4400,16 @@
    "title": "Batch ceremony PRs; ADR-0010 native auto-merge",
    "truth_state": "done",
    "wiki_key": "item/01M18REAAHRPKS6P4AT071T8MR"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M18S278XJ5W7QWSVC37N9AP7",
+   "render": "as-is",
+   "render_hash": "39a69e061758",
+   "source": "docs/.index/rendered/tickets/01M18S278XJ5W7QWSVC37N9AP7.md",
+   "title": "Document ruleset bypass as github-actions[bot] user",
+   "truth_state": "done",
+   "wiki_key": "item/01M18S278XJ5W7QWSVC37N9AP7"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -5230,11 +5240,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T07:20:27Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T07:27:39Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "9cd9a412243e",
+   "render_hash": "92dedf7af0a5",
    "source": "docs/roadmap.md",
    "source_hash": "92018fc77ea0",
    "title": "Roadmap",
