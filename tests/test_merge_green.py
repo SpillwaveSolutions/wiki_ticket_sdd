@@ -194,7 +194,7 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertEqual(methods, ["merge"])
         self.assertEqual(sorted(contexts), ["coverage", "invariants"])
         actors = {(a["actor_id"], a["actor_type"]) for a in data["bypass_actors"]}
-        self.assertIn((15368, "Integration"), actors)
+        self.assertIn((41898282, "User"), actors)
 
 
 if __name__ == "__main__":

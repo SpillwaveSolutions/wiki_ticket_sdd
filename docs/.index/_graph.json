@@ -3286,6 +3286,16 @@
    "type": "targets"
   },
   {
+   "from": "item/01M18S278XJ5W7QWSVC37N9AP7",
+   "to": "item/01M18RE2Y7BR0ZAK2EHBSD65AM",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M18S278XJ5W7QWSVC37N9AP7",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7014,6 +7024,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "Batch ceremony PRs; ADR-0010 native auto-merge"
+  },
+  "item/01M18S278XJ5W7QWSVC37N9AP7": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Document ruleset bypass as github-actions[bot] user"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
