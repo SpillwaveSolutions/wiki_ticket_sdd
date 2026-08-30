@@ -106,13 +106,13 @@ schema, roadmap freshness) passing. Exit 0 healthy, 1 with problems.
 ### /worklog:merge
 
 Merge a PR the house-rules way: runs `merge-when-green.sh <pr>` in the
-background, polling the PR's checks every 5 minutes (up to 2 h) and merging
-only when every gate is green. Pending means wait; failing means fix; there
-is no `--admin`, no bypass. After the merge it pulls the base branch,
-deletes the local feature branch, syncs tickets if items closed, and
-re-renders the roadmap if the log changed. These are the same house rules
-CI enforces on this repo: green gates on every PR, plus a >=80% line
-coverage floor on `bin/*.py` (target 95).
+background. The script arms `gh pr merge --auto --merge` (never squash)
+and polls at 60 s as fallback, up to 2 h. Pending means wait; failing
+means fix; there is no `--admin`, no bypass. After the merge it pulls the
+base branch and deletes the local feature branch. Roadmap/index
+regeneration and `sync --report` run in `worklog-post-merge` on main.
+These are the same house rules CI enforces on this repo: green gates on
+every PR, plus a >=80% line coverage floor on `bin/*.py` (target 95).
 
 ## The skills
 
@@ -134,7 +134,7 @@ invisible; 0.22.1 added a check that every shipped skill declares both.
 | `status-report` | Generates and publishes frozen daily/weekly/timecard reports via `worklog status` |
 | `release` | Cuts a versioned release: stamp the changelog (first draft from `worklog changelog-draft`), snapshot the roadmap, tag, platform release, publish, sync; refreshes indexes. Gates on `trace-check --strict` and `doc-verify --strict`; runs `provenance-backfill` in the post-release step |
 | `design-docs` | Generates/syncs the design doc + code walkthrough pair under `docs/designs/`: frozen dated copies per release, live `current` copies; runs in background agents at release time. Must run `worklog doc-verify` and clear every fabricated citation before reporting done — that check is why the pair's line numbers can be trusted |
-| `merge-green` | Merges PRs only when every quality gate is green — polls every 5 minutes via `merge-when-green.sh`, never bypasses |
+| `merge-green` | Merges PRs only when every quality gate is green — arms GitHub auto-merge (`--merge`, never squash), polls at 60s as fallback, never bypasses |
 | `classify` | Flag-gated classifier: sweeps a conversation for untracked work, propose-only into `.work/suggestions.jsonl` — never the event log |
 | `integration-guide` | Looks up the wiki-hosted setup guide for a named SDD tool or ticket/wiki system (Superpowers, GSD, SpecKit, OpenSpec, Jira, Confluence, GitHub, GitLab, Azure DevOps, AWS CodeCatalyst, Google Cloud DevOps), falling back to the local copy under `docs/integrations/` on fetch failure |
 

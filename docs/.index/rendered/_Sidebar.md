@@ -12,6 +12,7 @@
 - [[ADR-0007-the-compaction-watermark-is-per-item]]
 - [[ADR-0008-document-provenance-depends-on-merge-com]]
 - [[ADR-0009-a-frozen-document-s-fabricated-citations]]
+- [[ADR-0010-native-auto-merge-once-required-checks-e]]
 
 ### History
 

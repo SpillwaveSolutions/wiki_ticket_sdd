@@ -2,6 +2,28 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Batch ceremony PRs; ADR-0010 native auto-merge
+`01M18REAAHRPKS6P4AT071T8MR` · status: done
+- belongs-to: Faster merge: auto-merge + post-merge CI
+- targets: release/v0.24.10
+
+### Post-merge CI regenerates roadmap/index and reports sync drift
+`01M18REA7YDR9FHA1PWJ5DPHX4` · status: done
+- belongs-to: Faster merge: auto-merge + post-merge CI
+- targets: release/v0.24.10
+
+### Enable auto-merge and required checks on main
+`01M18REA5STM4FX1G3FA5TMX38` · status: done
+- belongs-to: Faster merge: auto-merge + post-merge CI
+- targets: release/v0.24.10
+
+### Faster merge: auto-merge + post-merge CI
+`01M18RE2Y7BR0ZAK2EHBSD65AM` · status: done
+- targets: release/v0.24.10
+- contains: Enable auto-merge and required checks on main
+- contains: Post-merge CI regenerates roadmap/index and reports sync drift
+- contains: Batch ceremony PRs; ADR-0010 native auto-merge
+
 ### Convert published.json to JSONL ledger with union merge
 `01M18QBM233GRTVR7JRXSVNK66` · status: todo
 

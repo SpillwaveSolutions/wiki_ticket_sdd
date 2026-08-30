@@ -1,5 +1,5 @@
 {
- "git_hash": "9fbfac9",
+ "git_hash": "d5bff2b",
  "pages": [
   {
    "frozen": false,
@@ -15,7 +15,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "1ab8b576c218",
+   "render_hash": "446dd7af7c72",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "f352523ff499",
+   "render_hash": "1b34d02c7c86",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -580,6 +580,16 @@
    "title": "Release v0.24.1",
    "truth_state": "shipped",
    "wiki_key": "release/v0.24.1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.24.10",
+   "render": "as-is",
+   "render_hash": "47a7e650582d",
+   "source": "docs/.index/rendered/releases/v0.24.10.md",
+   "title": "Release v0.24.10",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.24.10"
   },
   {
    "frozen": false,
@@ -4352,6 +4362,46 @@
    "wiki_key": "item/01M18QBM233GRTVR7JRXSVNK66"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M18RE2Y7BR0ZAK2EHBSD65AM",
+   "render": "as-is",
+   "render_hash": "5e54bf958cbf",
+   "source": "docs/.index/rendered/tickets/01M18RE2Y7BR0ZAK2EHBSD65AM.md",
+   "title": "Faster merge: auto-merge + post-merge CI",
+   "truth_state": "done",
+   "wiki_key": "item/01M18RE2Y7BR0ZAK2EHBSD65AM"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M18REA5STM4FX1G3FA5TMX38",
+   "render": "as-is",
+   "render_hash": "26d22a28d3ae",
+   "source": "docs/.index/rendered/tickets/01M18REA5STM4FX1G3FA5TMX38.md",
+   "title": "Enable auto-merge and required checks on main",
+   "truth_state": "done",
+   "wiki_key": "item/01M18REA5STM4FX1G3FA5TMX38"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M18REA7YDR9FHA1PWJ5DPHX4",
+   "render": "as-is",
+   "render_hash": "2980071531e8",
+   "source": "docs/.index/rendered/tickets/01M18REA7YDR9FHA1PWJ5DPHX4.md",
+   "title": "Post-merge CI regenerates roadmap/index and reports sync drift",
+   "truth_state": "done",
+   "wiki_key": "item/01M18REA7YDR9FHA1PWJ5DPHX4"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M18REAAHRPKS6P4AT071T8MR",
+   "render": "as-is",
+   "render_hash": "3356733677f5",
+   "source": "docs/.index/rendered/tickets/01M18REAAHRPKS6P4AT071T8MR.md",
+   "title": "Batch ceremony PRs; ADR-0010 native auto-merge",
+   "truth_state": "done",
+   "wiki_key": "item/01M18REAAHRPKS6P4AT071T8MR"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4462,11 +4512,23 @@
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
+   "page_name": "ADR-0010-native-auto-merge-once-required-checks-e",
+   "render": "doc+banner",
+   "render_hash": "f28f828c1e04",
+   "source": "docs/adr/0010-native-auto-merge-once-required-checks-e.md",
+   "source_hash": "38506d8507d4",
+   "title": "Native auto-merge once required checks exist",
+   "truth_state": "current",
+   "wiki_key": "adr/0010-native-auto-merge-once-required-checks-e"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "292535bb731f",
+   "render_hash": "00a27722d0e9",
    "source": "docs/user_guide/cli-reference.md",
-   "source_hash": "91cf02b873d9",
+   "source_hash": "b2e47327ee3f",
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current",
    "wiki_key": "cli-reference"
@@ -5160,19 +5222,19 @@
    "frozen": false,
    "page_name": "Plugin-Guide",
    "render": "doc+banner",
-   "render_hash": "9d63257b6a8a",
+   "render_hash": "0dcf2454c3ed",
    "source": "docs/user_guide/plugin-guide.md",
-   "source_hash": "3cae5e117206",
+   "source_hash": "f0488c2920ac",
    "title": "WikiTicket SDD \u2014 Plugin Guide",
    "truth_state": "current",
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T06:57:50Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T07:20:27Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "0a543cb91fcb",
+   "render_hash": "9cd9a412243e",
    "source": "docs/roadmap.md",
    "source_hash": "92018fc77ea0",
    "title": "Roadmap",
@@ -5649,7 +5711,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "eaef3b4310e1",
+  "render_hash": "40520f66c5d1",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

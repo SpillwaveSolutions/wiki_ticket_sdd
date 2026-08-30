@@ -53,6 +53,22 @@ am=$(awk '/^features:/{f=1;next} f&&/^[^[:space:]]/{exit} f&&/auto_merge_on_gree
      .work/config.yml 2>/dev/null || true)
 echo "features.auto_merge_on_green: ${am:-true}"
 
+# GitHub arm (informational). Missing protection is not a FAIL: consumer
+# repos may not want a ruleset. ADR-0010 is this flagship's setting. Skip
+# when there is no github origin so sandboxed doctor tests stay offline.
+origin=$(git remote get-url origin 2>/dev/null || true)
+case "$origin" in
+  *github.com*)
+    if command -v gh >/dev/null 2>&1; then
+      owner_repo=$(printf '%s' "$origin" | sed -E 's#.*github.com[:/]##' | sed 's/\.git$//')
+      repo_json=$(gh api "repos/$owner_repo" --jq '{a:.allow_auto_merge,s:.allow_squash_merge}' 2>/dev/null || true)
+      if [ -n "$repo_json" ]; then
+        echo "$repo_json" | python3 -c 'import json,sys; d=json.load(sys.stdin); print("github.allow_auto_merge:", d["a"]); print("github.allow_squash_merge:", d["s"])'
+      fi
+    fi
+    ;;
+esac
+
 # files: present + executable; bin files byte-identical to canonical copies
 for f in worklog fold.py ulid.py render_roadmap.py plan_capture.py; do
   if [ ! -f "bin/$f" ]; then

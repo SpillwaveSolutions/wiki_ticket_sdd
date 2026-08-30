@@ -3251,6 +3251,41 @@
    "type": "targets"
   },
   {
+   "from": "item/01M18RE2Y7BR0ZAK2EHBSD65AM",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M18REA5STM4FX1G3FA5TMX38",
+   "to": "item/01M18RE2Y7BR0ZAK2EHBSD65AM",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M18REA5STM4FX1G3FA5TMX38",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M18REA7YDR9FHA1PWJ5DPHX4",
+   "to": "item/01M18RE2Y7BR0ZAK2EHBSD65AM",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M18REA7YDR9FHA1PWJ5DPHX4",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M18REAAHRPKS6P4AT071T8MR",
+   "to": "item/01M18RE2Y7BR0ZAK2EHBSD65AM",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M18REAAHRPKS6P4AT071T8MR",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -4894,6 +4929,12 @@
    "doc_type": "adr",
    "source": "docs/adr/0009-a-frozen-document-s-fabricated-citations.md",
    "title": "A frozen document's fabricated citations are reported, never gated",
+   "truth_state": "current"
+  },
+  "adr/0010-native-auto-merge-once-required-checks-e": {
+   "doc_type": "adr",
+   "source": "docs/adr/0010-native-auto-merge-once-required-checks-e.md",
+   "title": "Native auto-merge once required checks exist",
    "truth_state": "current"
   },
   "cli-reference": {
@@ -6954,6 +6995,26 @@
    "status": "todo",
    "title": "Convert published.json to JSONL ledger with union merge"
   },
+  "item/01M18RE2Y7BR0ZAK2EHBSD65AM": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Faster merge: auto-merge + post-merge CI"
+  },
+  "item/01M18REA5STM4FX1G3FA5TMX38": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Enable auto-merge and required checks on main"
+  },
+  "item/01M18REA7YDR9FHA1PWJ5DPHX4": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Post-merge CI regenerates roadmap/index and reports sync drift"
+  },
+  "item/01M18REAAHRPKS6P4AT071T8MR": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Batch ceremony PRs; ADR-0010 native auto-merge"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -7267,6 +7328,9 @@
    "doc_type": "release"
   },
   "release/v0.24.1": {
+   "doc_type": "release"
+  },
+  "release/v0.24.10": {
    "doc_type": "release"
   },
   "release/v0.24.3": {
