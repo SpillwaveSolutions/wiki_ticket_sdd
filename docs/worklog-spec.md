@@ -8,7 +8,7 @@ wiki_key: spec
 # Worklog: Visible-WIP Work Tracking Spec
 
 **Version:** 1.9
-**Status:** Implemented through §18 step 8; wiki publish (step 9) done for github-wiki; step 10 outstanding; step 11 (typed adapter contract) shipping; step 12 (work taxonomy) in progress on this branch
+**Status:** Implemented through §18 step 10 (`status-report` shipped; Q4 closed as narrative-only). Wiki publish (step 9) done for github-wiki. Step 11 (typed adapter contract) shipping. Step 12 (work taxonomy) fields are live.
 
 **Changes since 1.8:** New §13.4 — ticket bodies must be readable by a junior dev or a PM (what + why, no ULIDs in the reading path); the `body` field is authored via `worklog add/update --body` and plain description lines under task checkboxes in `## Tasks`, and a marker-only ticket body is a policy violation. The field always existed in the canonical hash (§10.3) and sync path; 1.9 makes authoring it mandatory for skill-created items.
 
@@ -239,7 +239,7 @@ Each line of `todo.jsonl` is one immutable event. State is a **fold** over event
 | `reopen` | Moves a closed item back. The compactor pulls it from `done.jsonl` on next run. |
 | `link` | Records external identity: `set.external`. Appended by `worklog link` after a successful push (§9.2). |
 | `conflict` | Records an unresolved both-sides-changed field. Never changes state; surfaced in reports. |
-| `snapshot` | Compactor output only. Full item state; supersedes all events with `ev` ≤ watermark. |
+| `snapshot` | Compactor output only. Full item state for one item; supersedes that item's events with `ev` ≤ this snapshot's `through` (ADR-0007). Items with no snapshot are never watermarked. |
 | `compact` | Compactor watermark marker. `{"op":"compact","through":"<ulid>"}` |
 
 ### 5.4 Item fields
@@ -303,11 +303,19 @@ fold(lines) -> {item_id: item_state}
 1. Parse each line. On parse error: emit to stderr, skip the line, do NOT abort.
    A corrupt line must never prevent reading the rest of the log.
 2. Dedupe by `ev`. First occurrence wins (they're identical by construction).
-3. Sort ascending by `ev`. ULIDs are lexicographically time-ordered, so this is a
-   plain string sort. Ties broken by `actor` then full-line hash — deterministic
-   across machines.
-4. Discard every event with `ev` <= the highest `compact.through` watermark,
-   EXCEPT `snapshot` events.
+3. Sort. After dedupe, `ev` is a total order — no two remaining events share an
+   `ev`, so there is no actor/line-hash tiebreak (removed; it advertised a
+   guarantee that came from the dedupe above it). Ordinary events sort by
+   `ev`. A snapshot with `through` sorts at that `through` (not at its mint
+   `ev`) so later branch events apply on top of it rather than being replaced
+   by it (ADR-0007, `fold.position`).
+4. Apply the compaction watermark PER ITEM (ADR-0007). An item with no
+   snapshot never has events dropped. An item with a snapshot drops only its
+   own events at or below that snapshot's `through` — the highest `ev` the
+   compactor actually folded for that item. Snapshots themselves are kept.
+   Legacy snapshots without `through` fall back to the global compact
+   watermark. There is no global "discard every event with `ev` <= max
+   compact.through" rule.
 5. Apply in order:
      create   -> initialize item, apply `set`
      snapshot -> replace item state entirely
@@ -320,7 +328,7 @@ fold(lines) -> {item_id: item_state}
    with `_orphan: true`. Report; do not crash. This happens legitimately mid-rebase.
 ```
 
-**Ordering is by `ev` (ULID), not `ts`.** ULIDs are wall-clock derived, so a dev with a fast clock wins LWW ties. Accepted for v1 (see §16). `actor` and `ts` are on every event precisely so "why did my priority flip back?" is answerable by reading the log.
+**Ordering is by `ev` (ULID), not `ts`, with one exception:** a snapshot applies at its `through`. ULIDs are wall-clock derived, so a dev with a fast clock wins LWW ties. Accepted for v1 (see §16). `actor` and `ts` are on every event precisely so "why did my priority flip back?" is answerable by reading the log.
 
 **Both files fold together.** `fold(todo.jsonl + done.jsonl)` is the full history. Most commands only need `todo.jsonl`.
 
@@ -636,11 +644,12 @@ The shipped set:
 | `plan-next` | "what should we do next?" | Folds log. Filters open, unblocked (`depends_on` all closed), sorts by priority then epic order. Presents top N with rationale. **Read-only.** |
 | `ticket-sync` | "sync tickets"; a plan closes out | Push per §9.2 and pull per §10 — model work over the tracker's CLI/MCP; ingests via `worklog ingest`/`worklog conflict`. |
 | `wiki-publish` | "publish to the wiki"; after a roadmap snapshot | Publish per §9.3 — ledger-driven, frozen rules enforced. |
+| `status-report` | "status report"; standup; "what shipped this week" | Writes `docs/status/<date>-<kind>.md` from `worklog status --emit-facts`, freezes it, publishes if `worklog triggers status-report` lists wiki-publish. |
 | `classify` | flag-gated (`classifier.enabled: false` by default), fired from the existing Stop hook | **Propose-only.** Writes suggestions to gitignored `.work/suggestions.jsonl`, never the event log, never blocks on the user. Below `min_confidence` it must propose `kind:triage` plus an open question, never a confident kind. Promotion to a real `create` goes through `work-track`. See docs/plans/2026-07-18-work-taxonomy.md §6. |
 
 Skills that create items set the taxonomy fields (`level`/`kind`/`milestone`, §5.4): `work-track` on `add`, `plan-capture` on captured tasks (`kind:feature` by design — retag bugs after capture). The always-on path is the CLAUDE.md taxonomy block (plan §4); the classifier is the gated escape hatch for teams where work keeps escaping the log.
 
-Still specified, not yet shipped: `status-report` (§13.3) and `worklog-compact` (§7, CI only). `roadmap-render` shipped as a `worklog` subcommand rather than a skill — the callers above invoke it directly.
+`status-report` is shipped (§13.3). Compaction is a CI job (`worklog-compact`, §7), not a skill. `roadmap-render` shipped as a `worklog` subcommand rather than a skill — the callers above invoke it directly.
 
 ### Hooks, not hope
 
@@ -995,7 +1004,7 @@ Concurrent edits from two branches, zero conflicts, nothing lost — and the one
 7. ~~Push-only sync. Ship it. Live with it for two weeks.~~ **Done** — `ticket-sync` skill + `worklog link`, dogfooded against GitHub Issues.
 8. ~~Pull + echo suppression + conflicts.~~ **Done** — `worklog ingest` (deterministic `ev`, §10.2), `worklog conflict`, `worklog resolve <item> --field F --take local|remote` (§10.6).
 9. ~~Wiki adapter + publish.~~ **Done for github-wiki** — `wiki-publish` skill + `worklog wiki-add` + the `published.json` ledger; other wiki systems are config away, not code away.
-10. `status-report` — `daily` and `weekly` first; `timecard` only once open question 4 is settled. `plan-next`.
+10. ~~`status-report` — `daily` and `weekly` first; `timecard` only once open question 4 is settled. `plan-next`.~~ **Done.** Q4 closed: timecard is narrative only. `plan-next` ships as a skill.
 11. Typed adapter contract (§9.5) — dispatcher + fake adapter + generated adapters. **In progress on this branch** (`feature/typed-adapter-contract`).
 12. Work taxonomy — `type` → `level` + `kind` + `milestone` (§5.4), adapter mapping, flag-gated `classify` skill (§12). **In progress on this branch** (`feature/work-taxonomy`); plan: docs/plans/2026-07-18-work-taxonomy.md.
 

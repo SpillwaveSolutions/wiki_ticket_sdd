@@ -1,5 +1,5 @@
 {
- "git_hash": "4551a86",
+ "git_hash": "a8c617f",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "d234ca70e3a3",
+   "render_hash": "46ca2746d163",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -585,7 +585,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.10",
    "render": "as-is",
-   "render_hash": "994cd4fe17ba",
+   "render_hash": "a1f2f7ef2da0",
    "source": "docs/.index/rendered/releases/v0.24.10.md",
    "title": "Release v0.24.10",
    "truth_state": "shipped",
@@ -4452,6 +4452,16 @@
    "wiki_key": "item/01M19RPMRNDZ74HD43MXJ6BPNA"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M19T3CY572RT614FPDJYVTZJ",
+   "render": "as-is",
+   "render_hash": "b467b9ccbe3a",
+   "source": "docs/.index/rendered/tickets/01M19T3CY572RT614FPDJYVTZJ.md",
+   "title": "Truth hygiene: spec fold/watermark, adapters exit-3, HOSTS/PORTS, plan-vs-ADR, freeze cap",
+   "truth_state": "done",
+   "wiki_key": "item/01M19T3CY572RT614FPDJYVTZJ"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -5272,19 +5282,19 @@
    "frozen": false,
    "page_name": "Plugin-Guide",
    "render": "doc+banner",
-   "render_hash": "a168d6178274",
+   "render_hash": "e65d94cf8d98",
    "source": "docs/user_guide/plugin-guide.md",
-   "source_hash": "260d4c847109",
+   "source_hash": "95453de8bd53",
    "title": "WikiTicket SDD \u2014 Plugin Guide",
    "truth_state": "current",
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T16:44:15Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T17:08:13Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "f99bef39f9d3",
+   "render_hash": "af9921f12131",
    "source": "docs/roadmap.md",
    "source_hash": "92018fc77ea0",
    "title": "Roadmap",
@@ -5692,9 +5702,9 @@
    "frozen": false,
    "page_name": "Worklog-Spec",
    "render": "doc+banner",
-   "render_hash": "f20aacb4fc09",
+   "render_hash": "2cdbd7147c30",
    "source": "docs/worklog-spec.md",
-   "source_hash": "768a601a538d",
+   "source_hash": "175cc257fc53",
    "title": "Worklog: Visible-WIP Work Tracking Spec",
    "truth_state": "current",
    "wiki_key": "spec"
@@ -5752,9 +5762,9 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "52a615ac364d",
+   "render_hash": "8b49afebd90c",
    "source": "docs/user_guide/user-guide.md",
-   "source_hash": "8fb949d2e1f6",
+   "source_hash": "f624b4472947",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",
    "wiki_key": "user-guide"

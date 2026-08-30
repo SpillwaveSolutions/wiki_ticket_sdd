@@ -3316,6 +3316,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01M19T3CY572RT614FPDJYVTZJ",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7069,6 +7074,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "triggers: config block for PR vs release generation"
+  },
+  "item/01M19T3CY572RT614FPDJYVTZJ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Truth hygiene: spec fold/watermark, adapters exit-3, HOSTS/PORTS, plan-vs-ADR, freeze cap"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

@@ -412,14 +412,12 @@ class Dispatcher:
             sys.exit("worklog sync: adapter auth failure — re-authenticate "
                      "with the tracker and re-run. Nothing further was pushed.")
         if rc == 3:
-            # GONE (definite not-found), not a transient failure. The adapter
-            # contract says to clear `external` so the item files afresh, but
-            # doing that automatically here cannot tell a real deletion from
-            # a flaky 404 -- and auto-clearing on a transient error would
-            # file a duplicate. Deliberately conservative (worklog#241): stop
-            # retrying this item every run and hand the decision to a human,
-            # instead of popping last_pushed_hash and hammering the same
-            # dead key forever.
+            # GONE (definite not-found), not a transient failure. The original
+            # adapter contract said to clear `external` so the item files
+            # afresh. ADR-0004 reversed that: exit 3 cannot tell a deleted
+            # ticket from a 404-for-forbidden repo, so the dispatcher never
+            # unlinks. Buffer into pending_gone, print `worklog unlink`, abort
+            # after GONE_ABORT if nothing in the run succeeded.
             key = (item.get("external") or {}).get("key")
             if not key:
                 key = self.remembered_key(iid)

@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Truth hygiene: spec fold/watermark, adapters exit-3, HOSTS/PORTS, plan-vs-ADR, freeze cap
+`01M19T3CY572RT614FPDJYVTZJ` · status: done
+- targets: release/v0.24.10
+
 ### triggers: config block for PR vs release generation
 `01M19RPMRNDZ74HD43MXJ6BPNA` · status: done
 - targets: release/v0.24.10

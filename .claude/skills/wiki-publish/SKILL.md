@@ -155,7 +155,7 @@ with not-found, ask the human to do that once, then retry.
 Enforced by `wiki-plan`, not this procedure. A frozen violation is a stop.
 Banner-only changes on a frozen page have a new `render_hash` and a
 matching `source_hash` — those publish. Snapshots, plans, status reports,
-and dated design docs are frozen; the live Roadmap, ADRs, and
+freeze notes, and legacy dated design docs are frozen; the live Roadmap, ADRs, and
 `current_design_doc` / `current_code_walkthrough` re-publish when the
 source hash changes.
 

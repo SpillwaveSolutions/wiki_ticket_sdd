@@ -2,14 +2,14 @@
 name: design-docs
 metadata:
   version: "0.24.9"
-description: Generate or sync the design document, code walkthrough, or requirements doc. Frozen dated pairs tied to a release tag, live current pairs regenerated from the actual code. Uses document-specialist v3.2.2, design-doc-mermaid v1.1.1, plantuml v1.2.2. Use when asked for a design doc, architecture doc, code walkthrough, or requirements doc, and automatically (background agents) at every release.
+description: Generate or sync the design document or code walkthrough. Live current pair regenerated from the actual code; a release freeze is a short tag+hash+delta note, not a full dated copy. Uses document-specialist v3.2.2, design-doc-mermaid v1.1.1, plantuml v1.2.2. Use when asked for a design doc, architecture doc, code walkthrough, or requirements doc, and automatically (background agents) at every release.
 ---
 
 # Design docs and code walkthroughs
 
-Two artifact kinds, four files, one rule: **generated from the actual repo,
-never from memory.** The templates live in `references/`; this skill is the
-procedure around them.
+Two live files, one freeze note per release, one rule: **generated from the
+actual repo, never from memory.** The templates live in `references/`; this
+skill is the procedure around them.
 
 ## Companion skills (required)
 
@@ -33,18 +33,20 @@ Hard bans for prose in both voice packs:
 
 | File | Kind | Rule |
 |---|---|---|
-| `docs/designs/<DATE>_<NAME>_design_doc.md` | dated | frozen. Publish once, never regenerate (same rule as roadmap snapshots) |
-| `docs/designs/<DATE>_<NAME>_code_walkthrough.md` | dated | frozen. Same |
 | `docs/designs/current_design_doc.md` | live | regenerated each release; in-place rewrite is sanctioned (like `docs/roadmap.md`) |
 | `docs/designs/current_code_walkthrough.md` | live | same |
+| `docs/designs/<DATE>_vX.Y.Z-release.md` | freeze note | tag + git_hash + pointers at the live pair + a short delta from the previous freeze. Frozen. Not a copy of the live pair. |
+| `docs/designs/<DATE>_<NAME>_design_doc.md` | legacy dated | full copies written before the freeze cap. Frozen forever. Never regenerate, never edit. |
+| `docs/designs/<DATE>_<NAME>_code_walkthrough.md` | legacy dated | same |
 | `docs/requirements/<NAME>_srs.md` or `_prd.md` | ad-hoc | generated on request from `requirements-doc-prompt.md`. Register with `worklog wiki-add`. |
 
-`<NAME>` at release time is `vX.Y.Z-release` (matches roadmap-snapshot
-naming). Ad-hoc names are fine mid-cycle.
+`<NAME>` on a freeze note is `vX.Y.Z-release` (matches roadmap-snapshot
+naming). Ad-hoc names are fine mid-cycle. Legacy full copies keep the
+names they already have.
 
 ## Frontmatter: how a reader knows what they are looking at
 
-Dated files:
+Legacy dated files (do not write new ones):
 
     ---
     wiki_key: design/<date>_<name>-design-doc   # or -code-walkthrough
@@ -112,25 +114,49 @@ Reading the verdicts:
 - **UNSTAMPED / UNRESOLVABLE**: no `git_hash`, or a commit not in this
   clone (see ADR-0008). Report it; never re-check against HEAD.
 
-Do not hand-edit a frozen dated copy to silence a finding. Frozen means
+Do not hand-edit a frozen dated copy or freeze note to silence a finding. Frozen means
 frozen: the correction belongs in the next edition, and the current pair
 should say so in prose where a reader would be misled.
 
 ## 3. Modes
 
 - **Release mode** (invoked by the release skill after the tag exists):
-  regenerate both `current_*` files against the tagged commit, then copy
-  each to its dated frozen name with the dated frontmatter. Four files out.
+  regenerate both `current_*` files against the tagged commit, then write
+  ONE freeze note `docs/designs/<DATE>_vX.Y.Z-release.md`. Do not copy the
+  live pair into two dated files. Existing full dated copies stay as they
+  are.
 - **Sync mode** (ad-hoc, "update the design doc"): regenerate `current_*`
-  only. A dated freeze happens only when explicitly asked.
+  only. A freeze note happens only when explicitly asked.
+
+### Freeze note shape
+
+    ---
+    wiki_key: design/<date>_vX.Y.Z-release
+    doc_type: design
+    truth_state: snapshot
+    date: YYYY-MM-DD
+    name: vX.Y.Z-release
+    tag: vX.Y.Z
+    git_hash: <full sha the live pair was generated against>
+    branch: <branch at generation>
+    roadmap_snapshot: docs/roadmap/<date>_vX.Y.Z-release.md
+    live_design: docs/designs/current_design_doc.md
+    live_walkthrough: docs/designs/current_code_walkthrough.md
+    ---
+
+Body is a short delta from the previous freeze: what landed in the
+architecture, what was removed, which ADRs shipped. Do not paste the live
+pair. Stamp `git_hash` from `git rev-parse HEAD` at the tagged commit.
 
 ## 4. Publish
 
-wiki-publish, standard ledger flow (`.work/published.json`):
+wiki-publish, standard ledger flow (`.work/published.jsonl`):
 - `design/current-design-doc` to page `Design-Doc` (live: republish on
   source-hash change), `design/current-code-walkthrough` to `Code-Walkthrough`.
-- Dated files to `Design-Doc-<date>_<name>` / `Code-Walkthrough-<date>_<name>`
-  (frozen: publish once), linked from Home next to the roadmap snapshots.
+- Freeze notes to `Design-Freeze-<date>_vX.Y.Z-release` (frozen: publish
+  once), linked from Home next to the roadmap snapshots.
+- Legacy full dated copies already on the wiki stay; do not republish
+  them and do not add new full-copy pages.
 
 ## 5. Execution rule: always a background subagent
 

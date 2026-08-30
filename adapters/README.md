@@ -59,13 +59,13 @@ Connection details come from env, never argv:
 - `WORKLOG_TICKET_PROJECT` — the target project/repo
 - plus whatever the platform itself needs (tokens, hosts, ...)
 
-## Exit codes (spec §3.6)
+## Exit codes (ADR-0004 for 3)
 
 | Code | Meaning | Dispatcher behavior |
 |---|---|---|
 | 0 | success | continue |
 | 2 | auth failure | abort sync, tell the human to re-auth |
-| 3 | not found | clear `external`, mark for re-push |
+| 3 | not found | buffer as gone, print `worklog unlink <id>`; never auto-clear `external` or `last_pushed_hash`. Abort after `GONE_ABORT=3` if nothing in the run succeeded (project likely unreachable, not the tickets) |
 | 4 | rate limited / transient | retry w/ backoff ×3, then defer |
 | 5 | remote conflict | emit `op:"conflict"` event |
 | 1 | other | report, continue with next item |
