@@ -46,8 +46,11 @@ OPS = ("register", "publish", "unpublish")
 
 # First wiki-publish in this repo (docs/plans/2026-07-18-docs-wiki-dogfood.md).
 # Migration events sort before any live write.
+# 1784419200000 = 2026-07-19T00:00:00Z. This repo's already-migrated events
+# were minted with 1752883200000 (2025-07-19); those ULIDs stay. Migrate
+# is one-shot and .work/published.json is gone.
 MIGRATE_TS = "2026-07-19T00:00:00Z"
-MIGRATE_MS = 1752883200000
+MIGRATE_MS = 1784419200000
 
 
 class FoldResult:

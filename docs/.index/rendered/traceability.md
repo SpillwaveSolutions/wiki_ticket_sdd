@@ -3,7 +3,7 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Bot-created compact PRs wait for workflow approval
-`01M1A0SNQQYZHGR7P8R35YFR71` · status: todo
+`01M1A0SNQQYZHGR7P8R35YFR71` · status: done
 - targets: release/v0.24.10
 
 ### post-merge.yml YAML invalid: python heredoc dedents to column 0
@@ -17,7 +17,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-retention]]
 
 ### MIGRATE_MS is a year off (decodes to 2025-07-19)
-`01M19XRRWXHM72JBY29FQRRMEJ` · status: todo
+`01M19XRRWXHM72JBY29FQRRMEJ` · status: done
 - targets: release/v0.24.10
 
 ### Close published.jsonl item; triage five stale in_progress

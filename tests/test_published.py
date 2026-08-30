@@ -283,5 +283,20 @@ class TestGitattributes(unittest.TestCase):
         self.assertIn(".work/published.jsonl merge=union", text)
 
 
+class TestMigrateMs(unittest.TestCase):
+    def test_migrate_ms_matches_migrate_ts(self):
+        """MIGRATE_MS was 1752883200000 = 2025-07-19 while MIGRATE_TS said 2026."""
+        from datetime import datetime, timezone
+        ts = published.MIGRATE_TS
+        expected = int(
+            datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ")
+            .replace(tzinfo=timezone.utc)
+            .timestamp()
+            * 1000
+        )
+        self.assertEqual(published.MIGRATE_MS, expected)
+        self.assertEqual(ts, "2026-07-19T00:00:00Z")
+
+
 if __name__ == "__main__":
     unittest.main()

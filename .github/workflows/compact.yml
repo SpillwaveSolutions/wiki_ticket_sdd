@@ -13,6 +13,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  actions: write
 
 jobs:
   compact:
@@ -66,4 +67,10 @@ jobs:
           gh pr create --head "$branch" --base main \
             --title "chore(worklog): compact through $wm" \
             --body "Nightly compaction. Auto-merge when green (ADR-0010). Never squash (ADR-0008)."
+          # GITHUB_TOKEN pull_request runs may sit action_required
+          # (github-actions[bot] treated as a first-time contributor; #403).
+          # workflow_dispatch is the event GitHub does fire for GITHUB_TOKEN
+          # (#361). Dispatch invariants on this branch so required checks
+          # land without a maintainer click.
+          gh workflow run worklog-invariants --ref "$branch"
           gh pr merge --auto --merge
