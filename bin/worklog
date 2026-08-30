@@ -3,7 +3,8 @@
 worklog -- CLI entry point. WORKLOG-SPEC section 12.
 
 Implemented: add, update, close, reopen, link, show, list, fold, plan-capture,
-             roadmap-render, roadmap-snapshot, wiki-add, wiki-record, wiki-get, wiki-plan, compact,
+             roadmap-render, roadmap-snapshot, wiki-add, wiki-record, wiki-get, wiki-plan,
+             triggers, compact,
              status (daily|weekly|timecard),
              ingest, conflict, resolve (pull side, sections 10.2 and 10.6),
              sync (dispatcher: bin/sync_dispatch.py), adapter init|check,
@@ -27,6 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ulid
 import item_fields
 import published
+import triggers
 from fold import (fold, FoldResult, read_lines, dedupe_and_sort, external_owners,
                   OPEN_STATUSES, CLOSED_STATUSES, LEGACY_TYPE_MAP)
 
@@ -524,6 +526,19 @@ def cmd_wiki_plan(a):
     n = len(result["frozen_violations"])
     if n:
         sys.exit(f"worklog: {n} frozen-doc source_hash drift(s); do not publish")
+
+
+def cmd_triggers(a):
+    """Print the action list for one event, or every event as a JSON object."""
+    try:
+        if a.event:
+            payload = {"event": a.event, "actions": triggers.resolve(a.event)}
+        else:
+            payload = triggers.resolve_all()
+    except KeyError:
+        sys.exit("worklog: unknown trigger event %r (want %s)"
+                 % (a.event, ", ".join(triggers.EVENTS)))
+    print(json.dumps(payload, indent=2, sort_keys=True))
 
 
 def cmd_list(a):
@@ -1525,7 +1540,20 @@ wp = sub.add_parser(
                 "instead of hashing files.")
 wp.set_defaults(fn=cmd_wiki_plan)
 wp.add_argument("--manifest", default=published.MANIFEST,
-                help="publish-manifest.json (default: docs/.index/publish-manifest.json)")
+                help="publish-manifest.json (from worklog ia-render)")
+
+tr = sub.add_parser(
+    "triggers",
+    description="Per-event artifact routing from .work/config.yml. "
+                "Prints JSON {event, actions} for one event, or every "
+                "event as a dict. Skills and post-merge CI read this "
+                "instead of hardcoding when to ticket-sync / wiki-publish "
+                "/ regenerate docs. Missing keys fall back to defaults "
+                "and the legacy knobs (release.sync_docs, "
+                "sync.push_on_capture, status.publish).")
+tr.set_defaults(fn=cmd_triggers)
+tr.add_argument("event", nargs="?", choices=list(triggers.EVENTS),
+                help="plan-capture | pr-open | pr-merge | release | status-report")
 
 l = sub.add_parser("list"); l.set_defaults(fn=cmd_list); l.add_argument("--all", action="store_true")
 s = sub.add_parser("show"); s.set_defaults(fn=cmd_show); s.add_argument("item")

@@ -7,6 +7,9 @@ description: Write a high-context PR description for any substantial PR. Use whe
 
 # High-quality PR descriptions
 
+Run `bin/worklog triggers pr-open`. If `pr-description` is not in the
+list, skip this skill — the team opted the event out.
+
 A PR description is a durable design record, useful long after the merge.
 Write for a smart colleague who has never seen this part of the system.
 Trivial PRs (typo, one-line fix) may use a short body; everything else

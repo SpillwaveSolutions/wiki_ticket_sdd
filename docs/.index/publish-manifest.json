@@ -1,5 +1,5 @@
 {
- "git_hash": "7182257",
+ "git_hash": "4551a86",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "d2683adc6bbc",
+   "render_hash": "d234ca70e3a3",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -585,7 +585,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.10",
    "render": "as-is",
-   "render_hash": "05c230afe710",
+   "render_hash": "994cd4fe17ba",
    "source": "docs/.index/rendered/releases/v0.24.10.md",
    "title": "Release v0.24.10",
    "truth_state": "shipped",
@@ -4442,6 +4442,16 @@
    "wiki_key": "item/01M18TDMWFXHTKD7PF3KT5Q95S"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M19RPMRNDZ74HD43MXJ6BPNA",
+   "render": "as-is",
+   "render_hash": "8f4c294948b4",
+   "source": "docs/.index/rendered/tickets/01M19RPMRNDZ74HD43MXJ6BPNA.md",
+   "title": "triggers: config block for PR vs release generation",
+   "truth_state": "done",
+   "wiki_key": "item/01M19RPMRNDZ74HD43MXJ6BPNA"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4566,9 +4576,9 @@
    "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "37888369afcb",
+   "render_hash": "99a2e4078335",
    "source": "docs/user_guide/cli-reference.md",
-   "source_hash": "61324bf602b5",
+   "source_hash": "b94de5eb4fd3",
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current",
    "wiki_key": "cli-reference"
@@ -5270,11 +5280,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T07:53:44Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T16:44:15Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "474ecbde005a",
+   "render_hash": "f99bef39f9d3",
    "source": "docs/roadmap.md",
    "source_hash": "92018fc77ea0",
    "title": "Roadmap",
@@ -5682,9 +5692,9 @@
    "frozen": false,
    "page_name": "Worklog-Spec",
    "render": "doc+banner",
-   "render_hash": "432c29f48ee8",
+   "render_hash": "f20aacb4fc09",
    "source": "docs/worklog-spec.md",
-   "source_hash": "e8b899733067",
+   "source_hash": "768a601a538d",
    "title": "Worklog: Visible-WIP Work Tracking Spec",
    "truth_state": "current",
    "wiki_key": "spec"
@@ -5742,9 +5752,9 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "58f3d59664b2",
+   "render_hash": "52a615ac364d",
    "source": "docs/user_guide/user-guide.md",
-   "source_hash": "262792e1ccb1",
+   "source_hash": "8fb949d2e1f6",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",
    "wiki_key": "user-guide"

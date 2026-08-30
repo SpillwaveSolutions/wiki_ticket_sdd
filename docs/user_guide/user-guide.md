@@ -466,8 +466,9 @@ once and never regenerated (same rule as roadmap snapshots) — and a live pair,
 at every release; besides `docs/roadmap.md` they are the only docs that are.
 The design-docs skill generates them from the actual code; at tag time the
 release skill spawns background agents to regenerate them and refresh the user
-guide and README. The `release.sync_docs` list in `.work/config.yml` is the
-opt-in/out: what's listed gets synced at release, what isn't doesn't.
+guide and README. `worklog triggers release` is the opt-in/out: what's
+listed gets synced at release, what isn't doesn't. `release.sync_docs` is
+the legacy fallback.
 
 These are the documents that cite code by file and line, which is why 0.21.0
 added a check for it — see below.

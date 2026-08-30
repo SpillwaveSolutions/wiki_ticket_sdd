@@ -70,10 +70,10 @@ IA gates (plan ia-content-model §5.4). Regenerating without it trips
 
 ## 1. Read the config
 
-`release.sync_docs` in `.work/config.yml` lists what regenerates at release
-(`design-doc`, `code-walkthrough`, `user-guide`, `readme`). Absent list =
-defaults all on. This skill owns the first two entries; the release skill
-routes the other two to the user-docs refresh agent.
+Run `bin/worklog triggers release`. This skill owns `design-doc` and
+`code-walkthrough`. The release skill routes `user-guide` / `readme` to
+the user-docs refresh agent. `release.sync_docs` is the legacy fallback.
+Absent list = defaults all on.
 
 ## 2. Generate
 

@@ -3311,6 +3311,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01M19RPMRNDZ74HD43MXJ6BPNA",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7059,6 +7064,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "worklog wiki-plan: frozen-guard and render-hash skip in code"
+  },
+  "item/01M19RPMRNDZ74HD43MXJ6BPNA": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "triggers: config block for PR vs release generation"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

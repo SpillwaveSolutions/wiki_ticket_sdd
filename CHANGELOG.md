@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **triggers: config block.** `worklog triggers <event>` is the dispatcher for when generation happens (`plan-capture`, `pr-open`, `pr-merge`, `release`, `status-report`). Skills read the command instead of hardcoding. `pr-merge` is honored in post-merge CI. `release.sync_docs` / `sync.push_on_capture` / `status.publish` are legacy fallbacks; this repo's config uses `triggers:` only.
+
 - **OKF / second-brain write path evicted.** `bin/okf_write.py`, `plugin/scripts/brain_session.py`, the `worklog-session` skill, and `/worklog:session` are gone. Knowledge-tree writes live in [okf-plugin](https://github.com/SpillwaveSolutions/okf-plugin) and [second-brain-core](https://github.com/SpillwaveSolutions/second-brain-core). `docs/ONBOARDING.md` is a WikiTicket first-hour guide. ISOLATION / GROK_BOT / CURSOR / Deep Agents docs point there. `bin/session.py` stays (worklog session registry).
 
 - **wiki-plan owns frozen-guard and render-hash skip.** `worklog wiki-plan` reads the ia-render manifest and the folded ledger and prints `{publish, skip, frozen_violations}`. Exit 1 on frozen source_hash drift — do not publish. A frozen page whose banner moved (new render_hash, matching source_hash) is in `publish`. wiki-publish skill runs the command instead of hashing files.
