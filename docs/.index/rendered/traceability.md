@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### README positioning vs beads, spec-kit, GitHub Projects; demote graph-engineering essay
+`01M19TTXCBH3M4Z1NRS652QMPD` · status: done
+- targets: release/v0.24.10
+
 ### Truth hygiene: spec fold/watermark, adapters exit-3, HOSTS/PORTS, plan-vs-ADR, freeze cap
 `01M19T3CY572RT614FPDJYVTZJ` · status: done
 - targets: release/v0.24.10

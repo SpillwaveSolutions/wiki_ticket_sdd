@@ -84,5 +84,27 @@ class TestFreezeCap(unittest.TestCase):
         self.assertEqual(plugin, claude)
 
 
+class TestPositioning(unittest.TestCase):
+    def test_readme_leads_with_frozen_plans_and_provenance(self):
+        readme = read("README.md")
+        why = readme.split("## What it does", 1)[0]
+        self.assertIn("Plans are frozen", why)
+        self.assertIn("git_hash", why)
+        self.assertNotIn("it already *was*\nthe framing", why)
+
+    def test_readme_compares_beads_speckit_projects(self):
+        readme = read("README.md")
+        self.assertIn("## Compared with beads, spec-kit, and GitHub Projects", readme)
+        self.assertIn("**beads**", readme)
+        self.assertIn("spec-kit", readme)
+        self.assertIn("GitHub Projects", readme)
+
+    def test_graph_engineering_is_an_essay(self):
+        essay = read("docs/graph-engineering.md")
+        self.assertIn("Essay, not the product thesis", essay)
+        readme = read("README.md")
+        self.assertIn("An essay mapping", readme)
+
+
 if __name__ == "__main__":
     unittest.main()

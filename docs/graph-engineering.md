@@ -1,5 +1,11 @@
 # Graph Engineering
 
+> **Essay, not the product thesis.** This maps WikiTicket SDD onto the
+> mid-2026 "graph engineering" framing. The differentiators that set it
+> apart from beads, spec-kit, and GitHub Projects are frozen plans and
+> document provenance — see the README. The four primitives below are
+> real, and they are the mechanism, not the headline.
+
 WikiTicket SDD is a graph engineering system. Not "graph-engineering-adjacent,"
 not "inspired by" — it already has the four things that name describes:
 explicit nodes with stable identity, typed edges between them, state that
