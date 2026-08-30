@@ -3,7 +3,7 @@
 worklog -- CLI entry point. WORKLOG-SPEC section 12.
 
 Implemented: add, update, close, reopen, link, show, list, fold, plan-capture,
-             roadmap-render, roadmap-snapshot, wiki-add, wiki-record, wiki-get, compact,
+             roadmap-render, roadmap-snapshot, wiki-add, wiki-record, wiki-get, wiki-plan, compact,
              status (daily|weekly|timecard),
              ingest, conflict, resolve (pull side, sections 10.2 and 10.6),
              sync (dispatcher: bin/sync_dispatch.py), adapter init|check,
@@ -505,6 +505,25 @@ def cmd_wiki_get(a):
         print(json.dumps(pages[a.key], indent=2, sort_keys=True))
         return
     print(json.dumps(pages, indent=2, sort_keys=True))
+
+
+def cmd_wiki_plan(a):
+    """Frozen-guard + render-hash skip. JSON plan for wiki-publish."""
+    path = a.manifest
+    if not os.path.exists(path):
+        sys.exit(f"worklog: {path} not found; run worklog ia-render")
+    try:
+        with open(path, encoding="utf-8") as fh:
+            manifest = json.load(fh)
+    except (OSError, json.JSONDecodeError) as e:
+        sys.exit(f"worklog: cannot read {path}: {e}")
+    if not isinstance(manifest, dict):
+        sys.exit(f"worklog: {path} is not a JSON object")
+    result = published.plan(manifest, published.load())
+    print(json.dumps(result, indent=2, sort_keys=True))
+    n = len(result["frozen_violations"])
+    if n:
+        sys.exit(f"worklog: {n} frozen-doc source_hash drift(s); do not publish")
 
 
 def cmd_list(a):
@@ -1496,6 +1515,17 @@ wg = sub.add_parser(
                 "published.json).")
 wg.set_defaults(fn=cmd_wiki_get)
 wg.add_argument("key", nargs="?")
+
+wp = sub.add_parser(
+    "wiki-plan",
+    description="Publish dispatcher: frozen-guard + render-hash skip. "
+                "Reads the ia-render manifest and the folded ledger; prints "
+                "JSON {publish, skip, frozen_violations}. Exit 1 on frozen "
+                "source_hash drift — do not publish. wiki-publish runs this "
+                "instead of hashing files.")
+wp.set_defaults(fn=cmd_wiki_plan)
+wp.add_argument("--manifest", default=published.MANIFEST,
+                help="publish-manifest.json (default: docs/.index/publish-manifest.json)")
 
 l = sub.add_parser("list"); l.set_defaults(fn=cmd_list); l.add_argument("--all", action="store_true")
 s = sub.add_parser("show"); s.set_defaults(fn=cmd_show); s.add_argument("item")

@@ -262,3 +262,77 @@ def record(key: str, fields: Dict[str, Any], actor: str, op: str = "publish") ->
     ev = event(key, op, actor, fields)
     append(ev)
     return load()[key]
+
+
+MANIFEST = "docs/.index/publish-manifest.json"
+
+
+def plan(manifest: Dict[str, Any], ledger: Optional[Dict[str, Dict[str, Any]]] = None) -> Dict[str, Any]:
+    """Frozen-guard + render-hash skip. The wiki-publish dispatcher.
+
+    Skip uses render_hash (a frozen page's banner can move while the source
+    does not). The frozen guard uses source_hash (body hash from the
+    manifest): if a frozen page's prose changed since last publish, that is
+    a frozen-doc edit — stop, do not publish.
+    """
+    ledger = ledger if ledger is not None else load()
+    publish: List[Dict[str, Any]] = []
+    skip: List[Dict[str, Any]] = []
+    violations: List[Dict[str, Any]] = []
+
+    pages = list(manifest.get("pages") or [])
+    sidebar = manifest.get("sidebar")
+    if isinstance(sidebar, dict) and sidebar.get("source"):
+        pages.append({
+            "wiki_key": sidebar.get("wiki_key") or "sidebar",
+            "source": sidebar["source"],
+            "page_name": sidebar.get("page_name") or "_Sidebar",
+            "title": sidebar.get("title") or "Sidebar",
+            "render": sidebar.get("render") or "as-is",
+            "frozen": False,
+            "render_hash": sidebar.get("render_hash"),
+        })
+
+    for page in pages:
+        if not isinstance(page, dict):
+            continue
+        key = page.get("wiki_key")
+        if not key:
+            continue
+        entry = ledger.get(key) or {}
+        src_hash = page.get("source_hash")
+        led_hash = entry.get("source_hash")
+        if page.get("frozen") and src_hash and led_hash and src_hash != led_hash:
+            violations.append({
+                "wiki_key": key,
+                "source": page.get("source"),
+                "manifest_source_hash": src_hash,
+                "ledger_source_hash": led_hash,
+            })
+            continue
+        rh = page.get("render_hash")
+        if rh and entry.get("render_hash") == rh:
+            skip.append({"wiki_key": key, "reason": "render_hash match"})
+            continue
+        item = {
+            "wiki_key": key,
+            "source": page.get("source"),
+            "page_name": page.get("page_name"),
+            "title": page.get("title"),
+            "render": page.get("render"),
+            "frozen": bool(page.get("frozen")),
+            "render_hash": rh,
+        }
+        if src_hash:
+            item["source_hash"] = src_hash
+        if page.get("banner"):
+            item["banner"] = page["banner"]
+        if page.get("truth_state"):
+            item["truth_state"] = page["truth_state"]
+        publish.append(item)
+
+    return {
+        "publish": publish,
+        "skip": skip,
+        "frozen_violations": violations,
+    }

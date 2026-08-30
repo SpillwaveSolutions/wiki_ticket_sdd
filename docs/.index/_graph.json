@@ -3306,6 +3306,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01M18TDMWFXHTKD7PF3KT5Q95S",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7049,6 +7054,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "Replace persona ONBOARDING.md with a real WikiTicket onboarding"
+  },
+  "item/01M18TDMWFXHTKD7PF3KT5Q95S": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "worklog wiki-plan: frozen-guard and render-hash skip in code"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

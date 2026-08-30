@@ -1,5 +1,5 @@
 {
- "git_hash": "b51b544",
+ "git_hash": "7182257",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "6ac9a20af761",
+   "render_hash": "d2683adc6bbc",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -585,7 +585,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.10",
    "render": "as-is",
-   "render_hash": "5f56709089c6",
+   "render_hash": "05c230afe710",
    "source": "docs/.index/rendered/releases/v0.24.10.md",
    "title": "Release v0.24.10",
    "truth_state": "shipped",
@@ -4432,6 +4432,16 @@
    "wiki_key": "item/01M18SFYFC72094QJBT8W9PWZC"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M18TDMWFXHTKD7PF3KT5Q95S",
+   "render": "as-is",
+   "render_hash": "20ee1496b51c",
+   "source": "docs/.index/rendered/tickets/01M18TDMWFXHTKD7PF3KT5Q95S.md",
+   "title": "worklog wiki-plan: frozen-guard and render-hash skip in code",
+   "truth_state": "done",
+   "wiki_key": "item/01M18TDMWFXHTKD7PF3KT5Q95S"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -4556,9 +4566,9 @@
    "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "00a27722d0e9",
+   "render_hash": "37888369afcb",
    "source": "docs/user_guide/cli-reference.md",
-   "source_hash": "b2e47327ee3f",
+   "source_hash": "61324bf602b5",
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current",
    "wiki_key": "cli-reference"
@@ -5252,19 +5262,19 @@
    "frozen": false,
    "page_name": "Plugin-Guide",
    "render": "doc+banner",
-   "render_hash": "0dcf2454c3ed",
+   "render_hash": "a168d6178274",
    "source": "docs/user_guide/plugin-guide.md",
-   "source_hash": "f0488c2920ac",
+   "source_hash": "260d4c847109",
    "title": "WikiTicket SDD \u2014 Plugin Guide",
    "truth_state": "current",
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T07:40:38Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T07:53:44Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "df270bc86ab0",
+   "render_hash": "474ecbde005a",
    "source": "docs/roadmap.md",
    "source_hash": "92018fc77ea0",
    "title": "Roadmap",
@@ -5672,9 +5682,9 @@
    "frozen": false,
    "page_name": "Worklog-Spec",
    "render": "doc+banner",
-   "render_hash": "d08268cb8d7e",
+   "render_hash": "432c29f48ee8",
    "source": "docs/worklog-spec.md",
-   "source_hash": "04e0b334d5aa",
+   "source_hash": "e8b899733067",
    "title": "Worklog: Visible-WIP Work Tracking Spec",
    "truth_state": "current",
    "wiki_key": "spec"

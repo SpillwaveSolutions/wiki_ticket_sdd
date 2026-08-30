@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### worklog wiki-plan: frozen-guard and render-hash skip in code
+`01M18TDMWFXHTKD7PF3KT5Q95S` · status: done
+- targets: release/v0.24.10
+
 ### Replace persona ONBOARDING.md with a real WikiTicket onboarding
 `01M18SFYFC72094QJBT8W9PWZC` · status: done
 - targets: release/v0.24.10
