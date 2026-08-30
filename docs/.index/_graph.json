@@ -6972,27 +6972,27 @@
   },
   "item/01M0KCDKJRAZYMWDD9PFGHC6XY": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "cancelled",
    "title": "multi-host plugin matrix + three-host hooks"
   },
   "item/01M0KCDV5GP8BMZT142MMAPAG7": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "cancelled",
    "title": "Phase 0 shared three-host hook template"
   },
   "item/01M0KCDV7AQEQ61TA2MYN3M5C3": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "cancelled",
    "title": "Phase 1 foundation + wiki_ticket_sdd hosts"
   },
   "item/01M0KCDV94P4YPBXJXQZNNGQTM": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "cancelled",
    "title": "Phase 1 ContentPack three-host hooks"
   },
   "item/01M0KCDVAYS67SPN8FHAYY4DWX": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "cancelled",
    "title": "Phase 2-3 style plugins + AGER polish"
   },
   "item/01M0TQ90FYZXRJ637E58FCT5WJ": {
@@ -7062,7 +7062,7 @@
   },
   "item/01M18QBM233GRTVR7JRXSVNK66": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Convert published.json to JSONL ledger with union merge"
   },
   "item/01M18RE2Y7BR0ZAK2EHBSD65AM": {
@@ -7127,7 +7127,7 @@
   },
   "item/01M19XRRTTWDBN0SRGDZ1VN35G": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Close published.jsonl item; triage five stale in_progress"
   },
   "item/01M19XRRWXHM72JBY29FQRRMEJ": {

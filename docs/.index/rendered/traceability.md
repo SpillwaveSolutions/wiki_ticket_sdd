@@ -16,7 +16,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.24.10
 
 ### Close published.jsonl item; triage five stale in_progress
-`01M19XRRTTWDBN0SRGDZ1VN35G` · status: todo
+`01M19XRRTTWDBN0SRGDZ1VN35G` · status: done
 - targets: release/v0.24.10
 
 ### Implement worklog sync --report; land compact/post-merge via PR
@@ -77,7 +77,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - contains: Document ruleset bypass as github-actions[bot] user
 
 ### Convert published.json to JSONL ledger with union merge
-`01M18QBM233GRTVR7JRXSVNK66` · status: todo
+`01M18QBM233GRTVR7JRXSVNK66` · status: done
 
 ### Release v0.24.9: absorb unmarked remotes and closed-on-remote
 `01M12PR4SEMBXW56VP6TC63X81` · status: done
@@ -162,23 +162,23 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - targets: release/v0.24.5
 
 ### Phase 2-3 style plugins + AGER polish
-`01M0KCDVAYS67SPN8FHAYY4DWX` · status: in_progress
+`01M0KCDVAYS67SPN8FHAYY4DWX` · status: cancelled
 - belongs-to: multi-host plugin matrix + three-host hooks
 
 ### Phase 1 ContentPack three-host hooks
-`01M0KCDV94P4YPBXJXQZNNGQTM` · status: in_progress
+`01M0KCDV94P4YPBXJXQZNNGQTM` · status: cancelled
 - belongs-to: multi-host plugin matrix + three-host hooks
 
 ### Phase 1 foundation + wiki_ticket_sdd hosts
-`01M0KCDV7AQEQ61TA2MYN3M5C3` · status: in_progress
+`01M0KCDV7AQEQ61TA2MYN3M5C3` · status: cancelled
 - belongs-to: multi-host plugin matrix + three-host hooks
 
 ### Phase 0 shared three-host hook template
-`01M0KCDV5GP8BMZT142MMAPAG7` · status: in_progress
+`01M0KCDV5GP8BMZT142MMAPAG7` · status: cancelled
 - belongs-to: multi-host plugin matrix + three-host hooks
 
 ### multi-host plugin matrix + three-host hooks
-`01M0KCDKJRAZYMWDD9PFGHC6XY` · status: in_progress
+`01M0KCDKJRAZYMWDD9PFGHC6XY` · status: cancelled
 - contains: Phase 0 shared three-host hook template
 - contains: Phase 1 foundation + wiki_ticket_sdd hosts
 - contains: Phase 1 ContentPack three-host hooks

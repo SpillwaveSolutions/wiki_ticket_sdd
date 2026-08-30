@@ -1,6 +1,6 @@
 # Phase 1 ContentPack three-host hooks
 
-`01M0KCDV94P4YPBXJXQZNNGQTM` · story/feature · **in-progress**
+`01M0KCDV94P4YPBXJXQZNNGQTM` · story/feature · **done**
 
 Eight ContentPacks: Codex + Cursor native hooks from existing Claude PostToolUse validate.
 

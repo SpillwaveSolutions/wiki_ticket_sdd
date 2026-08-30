@@ -1,6 +1,6 @@
 # Phase 1 foundation + wiki_ticket_sdd hosts
 
-`01M0KCDV7AQEQ61TA2MYN3M5C3` · story/feature · **in-progress**
+`01M0KCDV7AQEQ61TA2MYN3M5C3` · story/feature · **done**
 
 Foundation repos: okf-plugin, PKC, SAC, DEKC, second-brain-core, okf-agent-graph, wiki_ticket_sdd.
 
