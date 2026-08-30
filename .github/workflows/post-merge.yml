@@ -53,12 +53,13 @@ jobs:
         run: |
           python3 -c 'import json,sys; a=json.load(open("/tmp/pr-merge-triggers.json"))["actions"]; sys.exit(0 if any(x=="ticket-sync" or x.startswith("ticket-sync:") for x in a) else 1)' || exit 0
           bin/worklog sync --report | tee /tmp/sync-report.txt
-          python3 - <<'PY'
-from pathlib import Path
-t = Path("/tmp/sync-report.txt").read_text()
-Path("/tmp/sync-comment.md").write_text(
-    "## post-merge sync --report\n\n```\n" + t + "\n```\n")
-PY
+          {
+            echo "## post-merge sync --report"
+            echo
+            echo '```'
+            cat /tmp/sync-report.txt
+            echo '```'
+          } > /tmp/sync-comment.md
           gh pr comment "${{ github.event.pull_request.number }}" --body-file /tmp/sync-comment.md || true
 
       - name: commit via PR

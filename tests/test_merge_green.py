@@ -184,6 +184,32 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertNotRegex(text, r"(?m)^\s+git push\s*$",
                             "bare git push would target main")
 
+    def test_workflow_run_blocks_do_not_dedent(self):
+        """GitHub Actions rejects a run: | body that returns to column 0.
+        post-merge.yml L57 on 0295c50 (python heredoc) made the workflow
+        invalid, so the PR-closed job never fired."""
+        for rel in (".github/workflows/post-merge.yml",
+                    ".github/workflows/compact.yml"):
+            path = os.path.join(ROOT, rel)
+            with open(path, encoding="utf-8") as fh:
+                lines = fh.read().splitlines()
+            in_block = False
+            block_indent = 0
+            for i, line in enumerate(lines, 1):
+                stripped = line.rstrip()
+                if stripped.endswith("run: |") or stripped.endswith("run: |-"):
+                    in_block = True
+                    block_indent = len(line) - len(line.lstrip())
+                    continue
+                if not in_block or not line.strip():
+                    continue
+                indent = len(line) - len(line.lstrip())
+                if indent > block_indent:
+                    continue
+                in_block = False
+                if indent == 0:
+                    self.fail(f"{rel}:{i} dedents to column 0 inside run: |: {line!r}")
+
     def test_compact_workflow_lands_via_pr(self):
         with open(os.path.join(ROOT, ".github", "workflows", "compact.yml"), encoding="utf-8") as fh:
             text = fh.read()
