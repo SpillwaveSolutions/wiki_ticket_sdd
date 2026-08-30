@@ -21,6 +21,7 @@ _Why things are the way they are: ADRs (rules adopted) and plans (designs execut
 
 | Plan | Lifecycle | Truth | Date |
 |---|---|---|---|
+| [[Plan-retention]] Compaction archives old closed items; never deletes | accepted | current | 2026-08-30 |
 | [[Plan-doc-provenance-and-verification]] Git provenance on generated docs, and the verifier it enables | completed | current | 2026-08-03 |
 | [[Plan-trace-check-scope]] Scope the traceability gate to the claim it actually makes | completed | current | 2026-08-02 |
 | [[Plan-plan-banner-state]] A plan's banner should say which plan it is | completed | current | 2026-08-02 |

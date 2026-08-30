@@ -74,3 +74,11 @@ classifier:
 work_item_fields:
   risk: on
   owner: on
+
+# Retention (compaction step 9). Defaults match the code if this block is omitted.
+retention:
+  epic_days: 730
+  story_days: 180
+  task_days: 90
+  subtask_days: 90
+  cap: 1000

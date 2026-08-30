@@ -56,7 +56,7 @@ $(echo "$conflicted" | sed 's/^/  /')
 Resolve them, re-stage, and commit again."
 fi
 
-for f in .work/todo.jsonl .work/done.jsonl; do
+for f in .work/todo.jsonl .work/done.jsonl .work/archive.jsonl; do
   [ -f "$f" ] || continue
 
   # The trailing-newline invariant. Without it, union merge fuses the last line

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **Retention.** Compaction archives closed items older than epic 730d / story 180d / task 90d (then FIFO cap 1000) into `.work/archive.jsonl`. Never deletes. Verify is `fold(todo+done+archive)`. `worklog show` still finds archived items; the roadmap does not. Plan: `docs/plans/2026-08-30-retention.md`.
+
 - **post-merge.yml parses again.** The python heredoc that wrote the sync comment started at column 0, which YAML forbids inside `run: |`. GitHub rejected the file at L57 on 0295c50, so the PR-closed job never ran. The comment is now an indented `echo`/`cat` write still posted via `--body-file`.
 
 - **Merge pipeline actually lands.** `worklog sync --report` is an alias of `--dry-run` (print drift, change nothing) — post-merge CI, the merge-green skill, and the spec all invoked a flag that did not exist. Compact and post-merge no longer `git push` main: GITHUB_TOKEN cannot bypass the merge-when-green ruleset (User 41898282 does not exempt the Actions installation token; Integration 15368 is 422). Both jobs open a PR and arm `gh pr merge --auto --merge`. post-merge has a concurrency group, verifies after `git add`, and posts the sync comment via `--body-file` (no literal `\\n`).

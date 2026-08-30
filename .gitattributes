@@ -1,5 +1,6 @@
 .work/todo.jsonl merge=union
 .work/done.jsonl merge=union
+.work/archive.jsonl merge=union
 .work/published.jsonl merge=union
 docs/roadmap.md merge=ours
 docs/.index/** merge=ours
