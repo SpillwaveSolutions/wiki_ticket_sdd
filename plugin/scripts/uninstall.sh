@@ -38,7 +38,7 @@ if [ -f .gitattributes ]; then
   python3 - .gitattributes <<'PY'
 import sys
 p = sys.argv[1]
-ours = {".work/todo.jsonl merge=union", ".work/done.jsonl merge=union", ".work/published.jsonl merge=union"}
+ours = {".work/todo.jsonl merge=union", ".work/done.jsonl merge=union", ".work/archive.jsonl merge=union", ".work/published.jsonl merge=union"}
 lines = [l for l in open(p).read().splitlines() if l.strip() not in ours]
 if any(l.strip() for l in lines):
     open(p, "w").write("\n".join(lines) + "\n")

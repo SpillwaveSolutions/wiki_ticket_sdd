@@ -1195,6 +1195,20 @@
    "wiki_key": "plan/2026-08-03-doc-provenance-and-verification"
   },
   {
+   "canonical_key": "plan/2026-08-30-retention",
+   "date": "2026-08-30",
+   "doc_type": "plan",
+   "items": [
+    "01M19XRRZ2894K7XE59RX1EAY1"
+   ],
+   "slug": "retention",
+   "source": "docs/plans/2026-08-30-retention.md",
+   "status": "accepted",
+   "title": "Compaction archives old closed items; never deletes",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-08-30-retention"
+  },
+  {
    "aliases": [
     "plan/design-docs-release-sync"
    ],
@@ -1402,11 +1416,11 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-08-30T18:50:29Z",
-   "git_hash": "c65d9fb",
+   "generated_at": "2026-08-30T19:09:07Z",
+   "git_hash": "bebfcfb",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "51909b63",
+   "source_hash": "e82df644",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

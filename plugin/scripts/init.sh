@@ -120,6 +120,7 @@ git config merge.ours.driver true
 for line in \
     ".work/todo.jsonl merge=union" \
     ".work/done.jsonl merge=union" \
+    ".work/archive.jsonl merge=union" \
     ".work/published.jsonl merge=union" \
     "docs/roadmap.md merge=ours" \
     "docs/.index/** merge=ours"
@@ -134,7 +135,7 @@ done
 
 # --- .work/: NEVER truncate or overwrite existing logs. Data outlives tooling. ---
 mkdir -p .work
-for f in .work/todo.jsonl .work/done.jsonl .work/published.jsonl; do
+for f in .work/todo.jsonl .work/done.jsonl .work/archive.jsonl .work/published.jsonl; do
   if [ -f "$f" ]; then
     skipped+=("$f (existing log preserved)")
   else

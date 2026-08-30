@@ -3356,6 +3356,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01M1A0SNQQYZHGR7P8R35YFR71",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -4028,6 +4033,11 @@
   {
    "from": "plan/2026-08-03-doc-provenance-and-verification",
    "to": "item/01KZ30X6JEXH4TTKHDNV3ZW0Q2",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-08-30-retention",
+   "to": "item/01M19XRRZ2894K7XE59RX1EAY1",
    "type": "produces"
   },
   {
@@ -7137,13 +7147,18 @@
   },
   "item/01M19XRRZ2894K7XE59RX1EAY1": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Retention: compact evicts old done.jsonl into an archive"
   },
   "item/01M19YV9VCDNTVPXAHW3D2NSA5": {
    "doc_type": "item",
    "status": "done",
    "title": "post-merge.yml YAML invalid: python heredoc dedents to column 0"
+  },
+  "item/01M1A0SNQQYZHGR7P8R35YFR71": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Bot-created compact PRs wait for workflow approval"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
@@ -7245,6 +7260,12 @@
    "doc_type": "plan",
    "source": "docs/plans/2026-08-03-doc-provenance-and-verification.md",
    "title": "Git provenance on generated docs, and the verifier it enables",
+   "truth_state": "current"
+  },
+  "plan/2026-08-30-retention": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-08-30-retention.md",
+   "title": "Compaction archives old closed items; never deletes",
    "truth_state": "current"
   },
   "plan/design-docs-release-sync": {

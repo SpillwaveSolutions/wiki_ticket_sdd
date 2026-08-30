@@ -33,7 +33,7 @@ from fold import (fold, FoldResult, read_lines, dedupe_and_sort, external_owners
                   OPEN_STATUSES, CLOSED_STATUSES, LEGACY_TYPE_MAP)
 
 LOG = ".work/todo.jsonl"
-PATHS = (".work/todo.jsonl", ".work/done.jsonl")
+PATHS = (".work/todo.jsonl", ".work/done.jsonl", ".work/archive.jsonl")
 MAX_BODY = 2048  # body UTF-8 bytes; derived from PIPE_BUF (section 8.3). Not a setting.
 MAX_LINE = 4096  # POSIX PIPE_BUF; the whole encoded event must fit for atomicity.
 LOCK = ".work/.lock"
@@ -247,7 +247,7 @@ def _resolve(item, r=None):
     check) hand it in rather than folding the log twice -- the documented
     bulk-migration workflow links hundreds of items in a loop."""
     _require_item(item)
-    r = r or fold([LOG, ".work/done.jsonl"])
+    r = r or fold(PATHS)
     match = [i for k, i in r.items.items() if k.startswith(item)]
     if not match:
         sys.exit(f"worklog: no item matching {item}")
@@ -315,7 +315,7 @@ def cmd_reopen(a):
 def cmd_link(a):
     # Same phantom-item hazard as close/update: a link event under a prefix
     # mints an orphan carrying a real external key, which sync then pushes.
-    r = fold([LOG, ".work/done.jsonl"])
+    r = fold(PATHS)
     cur = _resolve(a.item, r)
     # One remote ticket, one local owner (github#226). Status-blind on purpose:
     # a CLOSED owner is among the most dangerous, because sync pushes a full
@@ -542,7 +542,7 @@ def cmd_triggers(a):
 
 
 def cmd_list(a):
-    r = fold([LOG, ".work/done.jsonl"])
+    r = fold(PATHS)
     items = r.open_items() if not a.all else list(r.items.values())
     for i in sorted(items, key=lambda x: (x.get("priority", "P9"), x["id"])):
         # `or {}` not a .get default: unlink writes {} and a merge can leave a
@@ -560,7 +560,7 @@ def cmd_show(a):
 
 
 def cmd_fold(a):
-    r = fold([LOG, ".work/done.jsonl"])
+    r = fold(PATHS)
     print(json.dumps(sorted(r.items.values(), key=lambda i: i["id"]), indent=2))
 
 
@@ -867,7 +867,7 @@ def cmd_ticket_body(a):
 def cmd_ia_ticket(a):
     import ia_graph, ia_render
     from fold import fold
-    items = fold((".work/todo.jsonl", ".work/done.jsonl")).items
+    items = fold(PATHS).items
     if a.item not in items:
         sys.exit(f"worklog: no item {a.item}")
     fwd, back = ia_graph.build_adjacency(ia_graph.build_graph(items=items))

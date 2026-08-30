@@ -70,7 +70,8 @@ AGENTS.md -> CLAUDE.md           # symlink; see §4.1
 .work/
   config.yml                     # machine-readable settings (committed)
   todo.jsonl                     # append-only event log, open items
-  done.jsonl                     # append-only, closed items (written by compactor only)
+  done.jsonl                     # recent closed items (written by compactor only)
+  archive.jsonl                  # closed items past retention (compactor only, never deleted)
   published.jsonl                # append-only wiki ledger (committed, merge=union)
   sync-state.json                # per-clone sync bookkeeping (GITIGNORED)
   changeset.json                 # sync phase-1 output (GITIGNORED)
@@ -330,7 +331,7 @@ fold(lines) -> {item_id: item_state}
 
 **Ordering is by `ev` (ULID), not `ts`, with one exception:** a snapshot applies at its `through`. ULIDs are wall-clock derived, so a dev with a fast clock wins LWW ties. Accepted for v1 (see §16). `actor` and `ts` are on every event precisely so "why did my priority flip back?" is answerable by reading the log.
 
-**Both files fold together.** `fold(todo.jsonl + done.jsonl)` is the full history. Most commands only need `todo.jsonl`.
+**todo + done + archive fold together.** `fold(todo.jsonl + done.jsonl + archive.jsonl)` is the full history. Most commands that show an item (`worklog show`, `list --all`) use all three. The roadmap folds `todo.jsonl + done.jsonl` only (the working set). Most write-path commands only need `todo.jsonl`.
 
 ---
 
@@ -363,9 +364,15 @@ Compaction is the only operation that rewrites a file, and therefore the only on
    compactor *does* owe: **prune from `done.jsonl` any item that is currently open**,
    or stale snapshots accumulate there forever. They're harmless — a later snapshot
    always outsorts them — but the file grows without bound.
-7. Verify: fold(new) == fold(old) for all items. Abort and leave the file untouched
+7. Verify: fold(todo+done+archive) after == before, for all items. Abort and leave every file untouched
    if not. Compaction that loses state is the worst failure mode in this system.
 8. Verify trailing newline. Verify every line parses.
+9. Evict closed snapshots from `done.jsonl` into `archive.jsonl`. Never delete.
+   Age is the last snapshot `ts` on that item (the close clock that survives compact).
+   Defaults: epic 730d / story 180d / task 90d / subtask 90d, then FIFO cap 1000 on
+   remaining `done.jsonl` closed items. Unparseable `ts` is not evicted. Currently-open
+   items are pruned from `archive.jsonl` the same way step 6 prunes `done.jsonl`.
+   `.work/config.yml` `retention:` may override the numbers; missing block uses the defaults.
 ```
 
 **Closing an item does not move a file at runtime.** `close` is just an event. The compactor is what physically relocates state into `done.jsonl`. This is deliberate: it means no runtime command ever writes two files, which removes the write-conflict from the parallel-subagent phase (§11).
@@ -384,6 +391,7 @@ Scheduled (nightly) or when `todo.jsonl` exceeds a line threshold (default 5000)
 # .gitattributes
 .work/todo.jsonl merge=union
 .work/done.jsonl merge=union
+.work/archive.jsonl merge=union
 .work/published.jsonl merge=union
 ```
 

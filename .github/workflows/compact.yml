@@ -59,7 +59,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           branch="chore/compact-${GITHUB_RUN_ID}"
           git checkout -b "$branch"
-          git add .work/todo.jsonl .work/done.jsonl docs
+          git add .work/todo.jsonl .work/done.jsonl .work/archive.jsonl docs
           WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
           git commit -m "chore(worklog): compact through $wm"
           git push -u origin HEAD

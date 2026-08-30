@@ -1,5 +1,5 @@
 {
- "git_hash": "c65d9fb",
+ "git_hash": "bebfcfb",
  "pages": [
   {
    "frozen": false,
@@ -15,7 +15,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "446dd7af7c72",
+   "render_hash": "76893e4f4c2b",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "c618f691eea2",
+   "render_hash": "2f9a572e947a",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -585,7 +585,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.10",
    "render": "as-is",
-   "render_hash": "e8aaeed1cde3",
+   "render_hash": "0fbc476bf5e1",
    "source": "docs/.index/rendered/releases/v0.24.10.md",
    "title": "Release v0.24.10",
    "truth_state": "shipped",
@@ -4505,10 +4505,10 @@
    "frozen": false,
    "page_name": "Ticket-01M19XRRZ2894K7XE59RX1EAY1",
    "render": "as-is",
-   "render_hash": "ec8fb5b8c979",
+   "render_hash": "60878bf8ab77",
    "source": "docs/.index/rendered/tickets/01M19XRRZ2894K7XE59RX1EAY1.md",
    "title": "Retention: compact evicts old done.jsonl into an archive",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M19XRRZ2894K7XE59RX1EAY1"
   },
   {
@@ -4520,6 +4520,16 @@
    "title": "post-merge.yml YAML invalid: python heredoc dedents to column 0",
    "truth_state": "done",
    "wiki_key": "item/01M19YV9VCDNTVPXAHW3D2NSA5"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M1A0SNQQYZHGR7P8R35YFR71",
+   "render": "as-is",
+   "render_hash": "e755af407263",
+   "source": "docs/.index/rendered/tickets/01M1A0SNQQYZHGR7P8R35YFR71.md",
+   "title": "Bot-created compact PRs wait for workflow approval",
+   "truth_state": "open",
+   "wiki_key": "item/01M1A0SNQQYZHGR7P8R35YFR71"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -5242,6 +5252,18 @@
    "wiki_key": "plan/2026-08-03-doc-provenance-and-verification"
   },
   {
+   "banner": "> **Current** \u2014 the current plan; plans are frozen once written, a changed design gets a new plan.",
+   "frozen": true,
+   "page_name": "Plan-retention",
+   "render": "doc+banner",
+   "render_hash": "7f4c20fa1437",
+   "source": "docs/plans/2026-08-30-retention.md",
+   "source_hash": "cc1d76d8f17b",
+   "title": "Compaction archives old closed items; never deletes",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-08-30-retention"
+  },
+  {
    "banner": "> **Current** \u2014 completed plan; plans are frozen once written, a changed design gets a new plan.",
    "frozen": true,
    "page_name": "Plan-design-docs-release-sync",
@@ -5350,13 +5372,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T18:50:29Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T19:09:07Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "452256316f36",
+   "render_hash": "d10ea7ab8f81",
    "source": "docs/roadmap.md",
-   "source_hash": "0e7ff689455f",
+   "source_hash": "e03f75d889aa",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -5762,9 +5784,9 @@
    "frozen": false,
    "page_name": "Worklog-Spec",
    "render": "doc+banner",
-   "render_hash": "2cdbd7147c30",
+   "render_hash": "c47f447fd6b9",
    "source": "docs/worklog-spec.md",
-   "source_hash": "175cc257fc53",
+   "source_hash": "6296e23dd058",
    "title": "Worklog: Visible-WIP Work Tracking Spec",
    "truth_state": "current",
    "wiki_key": "spec"

@@ -13,8 +13,10 @@ Spec 7 algorithm, all eight steps:
   4. rewrite todo.jsonl: one snapshot per open item + a compact watermark line
   5. append to done.jsonl: snapshot per newly-closed item + a watermark line
   6. prune from done.jsonl anything for a currently-open item (stale reopens)
-  7. verify fold(new) == fold(old); on any mismatch leave originals untouched
+  7. verify fold(todo+done+archive) == fold(old); on any mismatch leave originals untouched
   8. verify trailing newline and that every written line parses
+  9. evict old closed snapshots from done.jsonl into archive.jsonl
+     (per-level ages, FIFO cap, never delete)
 
 All writes go to temp copies; the real files are only touched by os.replace
 after verification passes. Compaction that loses state is the worst failure
@@ -22,7 +24,9 @@ mode in this system.
 """
 import json
 import os
+import calendar
 import fcntl
+import re
 import subprocess
 import sys
 import time
@@ -117,6 +121,131 @@ def _dump(events):
                    for e in events)
 
 
+DEFAULT_AGES = {"epic": 730, "story": 180, "task": 90, "subtask": 90}
+DEFAULT_CAP = 1000
+_TS = re.compile(r"^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})")
+
+
+def _archive_path(todo_path):
+    return os.path.join(os.path.dirname(os.path.abspath(todo_path)) or ".",
+                        "archive.jsonl")
+
+
+def _config_path(todo_path):
+    return os.path.join(os.path.dirname(os.path.abspath(todo_path)) or ".",
+                        "config.yml")
+
+
+def _retention_config(config_path):
+    """Ages in days and FIFO cap. Missing/malformed config -> defaults."""
+    ages = dict(DEFAULT_AGES)
+    cap = DEFAULT_CAP
+    try:
+        with open(config_path, encoding="utf-8") as fh:
+            text = fh.read()
+    except OSError:
+        return ages, cap
+    inside = False
+    for raw in text.splitlines():
+        line = raw.split("#", 1)[0].rstrip()
+        if not line.strip():
+            continue
+        if not line[0].isspace():
+            inside = line.strip().startswith("retention:")
+            continue
+        if not inside:
+            continue
+        m = re.match(r"\s+([A-Za-z_][\w]*)\s*:\s*(\S+)", line)
+        if not m:
+            continue
+        key, raw_v = m.group(1), m.group(2).strip("\"'")
+        try:
+            n = int(raw_v)
+        except ValueError:
+            continue
+        if key == "cap" and n >= 0:
+            cap = n
+        elif key.endswith("_days"):
+            level = key[:-5]
+            if level in ages and n >= 0:
+                ages[level] = n
+    return ages, cap
+
+
+def _parse_ts(ts):
+    """UTC epoch seconds from an ISO snapshot ts, or None if unusable."""
+    if not ts or not isinstance(ts, str):
+        return None
+    m = _TS.match(ts)
+    if not m:
+        return None
+    try:
+        t = time.strptime(m.group(1) + "T" + m.group(2), "%Y-%m-%dT%H:%M:%S")
+    except ValueError:
+        return None
+    return calendar.timegm(t)
+
+
+def _evict_done(done_text, folded_items, ages, cap, now):
+    """Split done.jsonl text into (kept, newly_archived). Never deletes.
+
+    Age is last snapshot ts on a closed item. Unparseable ts is not evicted.
+    FIFO cap applies after age eviction, oldest parseable ts first; items
+    with unparseable ts sort last (kept in preference to dropping them).
+    """
+    events = []
+    for line in done_text.splitlines():
+        if line.strip():
+            events.append(json.loads(line))
+    latest_ts = {}
+    for e in events:
+        iid, op = e.get("item"), e.get("op")
+        if op == "snapshot" and iid:
+            ts = e.get("ts") or ""
+            if ts > latest_ts.get(iid, ""):
+                latest_ts[iid] = ts
+    evict = set()
+    remaining = []
+    for iid, item in folded_items.items():
+        if item.get("status") not in CLOSED_STATUSES:
+            continue
+        level = item.get("level") or "task"
+        limit = ages.get(level, ages["task"])
+        epoch = _parse_ts(latest_ts.get(iid))
+        if epoch is not None and (now - epoch) / 86400.0 > limit:
+            evict.add(iid)
+            continue
+        remaining.append((epoch is not None, epoch or 0, iid))
+    remaining.sort(key=lambda t: (not t[0], t[1], t[2]))
+    overflow = len(remaining) - cap
+    if overflow > 0:
+        for _, _, iid in remaining[:overflow]:
+            evict.add(iid)
+    if not evict:
+        return done_text, ""
+    kept, archived = [], []
+    for e in events:
+        if e.get("item") in evict:
+            archived.append(e)
+        else:
+            kept.append(e)
+    return _dump(kept), _dump(archived)
+
+
+def _prune_open_from_text(text, open_ids):
+    if not text or not open_ids:
+        return text
+    kept = []
+    for line in text.splitlines():
+        if not line.strip():
+            continue
+        e = json.loads(line)
+        if e.get("item") in open_ids:
+            continue
+        kept.append(line + "\n")
+    return "".join(kept)
+
+
 def _raw_lines(path):
     """[(line, parsed_or_None)] for every non-blank line. Missing file = []."""
     out = []
@@ -154,9 +283,9 @@ def _git_refuses(paths):
     return False
 
 
-def _verify(before, tmp_todo, tmp_done):
+def _verify(before, *paths):
     """Spec 7 steps 7 and 8. Raises SystemExit(1) on any mismatch."""
-    after = fold([tmp_todo, tmp_done])
+    after = fold([p for p in paths if p])
     old = {iid: _public(i) for iid, i in before.items.items()}
     new = {iid: _public(i) for iid, i in after.items.items()}
     if old != new:
@@ -176,7 +305,9 @@ def _verify(before, tmp_todo, tmp_done):
               file=sys.stderr)
         print("compact: aborted; logs untouched", file=sys.stderr)
         raise SystemExit(1)
-    for path in (tmp_todo, tmp_done):
+    for path in paths:
+        if not path or not os.path.exists(path):
+            continue
         with open(path, "rb") as fh:
             data = fh.read()
         if data and not data.endswith(b"\n"):
@@ -188,38 +319,40 @@ def _verify(before, tmp_todo, tmp_done):
                 json.loads(line)  # unparseable output -> exception -> abort
 
 
-def compact(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
+def compact(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl",
+            archive_path=None):
     """Run one compaction. Returns the watermark ULID, or None on empty logs.
     Raises SystemExit(1) on refusal or failed verification."""
-    if _git_refuses([todo_path, done_path]):
+    if archive_path is None:
+        archive_path = _archive_path(todo_path)
+    if _git_refuses([todo_path, done_path, archive_path]):
         print("compact: uncommitted changes to the logs; commit first "
               "(compaction must be its own commit, spec 7)", file=sys.stderr)
         raise SystemExit(1)
 
     lock_fd = _lock_logs(todo_path)
     try:
-        return _compact_locked(todo_path, done_path)
+        return _compact_locked(todo_path, done_path, archive_path)
     finally:
         os.close(lock_fd)
 
 
-def _compact_locked(todo_path, done_path):
-    watermark = max_ev([todo_path, done_path])         # step 2: raw max ev
+def _compact_locked(todo_path, done_path, archive_path):
+    watermark = max_ev([todo_path, done_path, archive_path])  # step 2
     if watermark is None:
         return None
 
-    before = fold([todo_path, done_path])              # step 1: full history
+    before = fold([todo_path, done_path, archive_path])      # step 1
     raw_todo = _raw_lines(todo_path)
     idle_ops = ("snapshot", "compact", "conflict")
-    if all(e is not None and e.get("op") in idle_ops
-           for _line, e in raw_todo):
-        return watermark  # nothing new since the last run; don't churn files
+    todo_idle = all(e is not None and e.get("op") in idle_ops
+                    for _line, e in raw_todo) if raw_todo else False
 
     # Highest ev this run actually folded, PER ITEM (#284). Taken from the raw
     # input lines, not from the fold, because it must describe what was read
     # rather than what survived.
     per_item = {}
-    for path in (todo_path, done_path):
+    for path in (todo_path, done_path, archive_path):
         for _line, e in _raw_lines(path):
             if e is None or e.get("op") == "compact":
                 continue
@@ -235,11 +368,14 @@ def _compact_locked(todo_path, done_path):
          else open_items).append(item)
     open_ids = {i["id"] for i in open_items}
 
-    # step 4: new todo = open snapshots + open conflicts + watermark
-    todo_events = []
-    for i in open_items:
-        todo_events.extend(_item_events(i, per_item.get(i["id"])))
-    todo_text = _dump(todo_events + [_compact_line(watermark)])
+    if todo_idle:
+        todo_text = None  # leave todo.jsonl bytes alone
+    else:
+        # step 4: new todo = open snapshots + open conflicts + watermark
+        todo_events = []
+        for i in open_items:
+            todo_events.extend(_item_events(i, per_item.get(i["id"])))
+        todo_text = _dump(todo_events + [_compact_line(watermark)])
 
     # steps 5+6: new done = old lines minus open items, plus snapshots for
     # newly-closed items not already there with identical state, plus watermark.
@@ -255,24 +391,56 @@ def _compact_locked(todo_path, done_path):
             continue  # stale snapshot/event for a reopened item (step 6)
         kept.append(line + "\n")
     fresh = []
-    for i in closed_items:
-        if done_state.get(i["id"]) != _public(i) or i.get("_conflicts"):
-            fresh.extend(_item_events(i, per_item.get(i["id"])))
-    done_text = "".join(kept) + _dump(fresh + [_compact_line(watermark)])
+    if not todo_idle:
+        for i in closed_items:
+            if done_state.get(i["id"]) != _public(i) or i.get("_conflicts"):
+                fresh.extend(_item_events(i, per_item.get(i["id"])))
+    done_text = "".join(kept) + _dump(fresh + ([_compact_line(watermark)]
+                                               if not todo_idle else []))
 
-    tmp_todo, tmp_done = todo_path + ".compact", done_path + ".compact"
-    with open(tmp_todo, "w", encoding="utf-8") as fh:
-        fh.write(todo_text)
-    with open(tmp_done, "w", encoding="utf-8") as fh:
-        fh.write(done_text)
+    # step 9: evict old closed snapshots into archive.jsonl
+    ages, cap = _retention_config(_config_path(todo_path))
+    now = calendar.timegm(time.gmtime())
+    closed_map = {i["id"]: i for i in closed_items}
+    done_text, newly_archived = _evict_done(done_text, closed_map, ages, cap, now)
+    existing_archive = ""
+    if os.path.exists(archive_path):
+        with open(archive_path, encoding="utf-8") as fh:
+            existing_archive = fh.read()
+    original_archive = existing_archive
+    existing_archive = _prune_open_from_text(existing_archive, open_ids)
+    archive_text = existing_archive + newly_archived
+
+    if todo_idle and not newly_archived and existing_archive == original_archive:
+        return watermark  # nothing new; don't churn files
+
+    tmp_todo = todo_path + ".compact" if todo_text is not None else None
+    tmp_done, tmp_archive = done_path + ".compact", archive_path + ".compact"
+    archive_changed = archive_text != original_archive
     try:
-        _verify(before, tmp_todo, tmp_done)            # steps 7+8
+        if tmp_todo is not None:
+            with open(tmp_todo, "w", encoding="utf-8") as fh:
+                fh.write(todo_text)
+        with open(tmp_done, "w", encoding="utf-8") as fh:
+            fh.write(done_text)
+        archive_changed = archive_text != original_archive
+        if archive_changed:
+            with open(tmp_archive, "w", encoding="utf-8") as fh:
+                fh.write(archive_text)
+            verify_archive = tmp_archive if archive_text else None
+        else:
+            verify_archive = archive_path if original_archive else None
+        _verify(before, tmp_todo or todo_path, tmp_done, verify_archive)
     except BaseException:
-        os.unlink(tmp_todo)
-        os.unlink(tmp_done)
+        for p in (tmp_todo, tmp_done, tmp_archive):
+            if p and os.path.exists(p):
+                os.unlink(p)
         raise
-    os.replace(tmp_todo, todo_path)                    # originals untouched
-    os.replace(tmp_done, done_path)                    # until verified
+    if tmp_todo is not None:
+        os.replace(tmp_todo, todo_path)
+    os.replace(tmp_done, done_path)
+    if archive_changed:
+        os.replace(tmp_archive, archive_path)
     return watermark
 
 

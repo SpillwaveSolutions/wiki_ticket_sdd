@@ -414,6 +414,7 @@ class TestInit(unittest.TestCase):
         ga = read(d, ".gitattributes")
         self.assertIn(".work/todo.jsonl merge=union", ga)
         self.assertIn(".work/done.jsonl merge=union", ga)
+        self.assertIn(".work/archive.jsonl merge=union", ga)
         self.assertIn(".work/published.jsonl merge=union", ga)
         self.assertIn(f"installed: {plugin_version()}", read(d, ".work/config.yml"))
         hookspath = sh(d, "git", "config", "core.hooksPath").stdout.strip()
@@ -447,6 +448,7 @@ class TestInit(unittest.TestCase):
         ga = read(d, ".gitattributes").splitlines()
         self.assertEqual(ga.count(".work/todo.jsonl merge=union"), 1)
         self.assertEqual(ga.count(".work/done.jsonl merge=union"), 1)
+        self.assertEqual(ga.count(".work/archive.jsonl merge=union"), 1)
         self.assertEqual(ga.count(".work/published.jsonl merge=union"), 1)
         installed = [l for l in read(d, ".work/config.yml").splitlines()
                      if l.startswith("installed:")]
