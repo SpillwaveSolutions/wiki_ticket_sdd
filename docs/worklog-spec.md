@@ -71,7 +71,7 @@ AGENTS.md -> CLAUDE.md           # symlink; see §4.1
   config.yml                     # machine-readable settings (committed)
   todo.jsonl                     # append-only event log, open items
   done.jsonl                     # append-only, closed items (written by compactor only)
-  published.json                 # doc path -> wiki page id/url (committed)
+  published.jsonl                # append-only wiki ledger (committed, merge=union)
   sync-state.json                # per-clone sync bookkeeping (GITIGNORED)
   changeset.json                 # sync phase-1 output (GITIGNORED)
   results/                       # sync phase-2 output (GITIGNORED)
@@ -367,6 +367,7 @@ Scheduled (nightly) or when `todo.jsonl` exceeds a line threshold (default 5000)
 # .gitattributes
 .work/todo.jsonl merge=union
 .work/done.jsonl merge=union
+.work/published.jsonl merge=union
 ```
 
 Union merge takes both sides of a conflict, always. No merge conflicts on the log, ever. Three consequences the design already absorbs:
@@ -377,7 +378,7 @@ Union merge takes both sides of a conflict, always. No merge conflicts on the lo
 | Duplicate lines appear | The fold dedupes by `ev`. |
 | **A missing trailing newline fuses two lines into one corrupt line** | Enforced by writer invariant + pre-commit hook. See below. |
 
-**Hosted-platform caveat (added 1.6):** GitHub — and most hosting platforms — do **not** run merge drivers server-side, not even the built-in `union`. The no-conflict guarantee above holds for *local* merges only; two PRs touching `.work/todo.jsonl` will conflict in the web UI even though a local merge sails through (issue #25, found merging PR #24). Mitigations, in order: keep PR branches rebased/merged-up locally before merging in the UI; and when the UI does report conflicts, recover locally — merge the base branch on the PR branch (union applies), `worklog roadmap-render`, union `published.json` by key, push, then merge the PR. Costs one paragraph here; saves the next person an afternoon.
+**Hosted-platform caveat (added 1.6):** GitHub — and most hosting platforms — do **not** run merge drivers server-side, not even the built-in `union`. The no-conflict guarantee above holds for *local* merges only; two PRs touching `.work/todo.jsonl` will conflict in the web UI even though a local merge sails through (issue #25, found merging PR #24). Mitigations, in order: keep PR branches rebased/merged-up locally before merging in the UI; and when the UI does report conflicts, recover locally — merge the base branch on the PR branch (union applies), `worklog roadmap-render`, the published.jsonl fold already unioned by key, push, then merge the PR. Costs one paragraph here; saves the next person an afternoon.
 
 ### 8.2 The trailing-newline invariant
 
@@ -422,7 +423,7 @@ Local items become tickets. The pull side ships too (§18 step 8): remote change
 
 ### 9.3 The `wiki-publish` skill
 
-- **Ledger** — `.work/published.json`, committed, because page identity is shared across the team; without it every republish creates duplicate pages. Entries map a stable logical key to `{source, title, url, rev, source_hash}` — `source` (the repo path) makes the publish set self-describing.
+- **Ledger** — `.work/published.jsonl`, committed, append-only, `merge=union`. Fold last-write-wins per logical key. Page identity is shared across the team; without it every republish creates duplicate pages. Folded entries map a stable logical key to `{source, title, url, rev, source_hash}` — `source` (the repo path) makes the publish set self-describing. `worklog wiki-get` / `wiki-add` / `wiki-record` are the only readers/writers.
 - **Default publish set** — the live roadmap, every plan in `docs/plans/`, every roadmap snapshot in `docs/roadmap/`, plus anything registered via `worklog wiki-add <file> --key K --title T`.
 - **Frozen rules** (§13's semantics applied at the edge) — plans, snapshots, and status reports publish once and are never re-published. The live roadmap is the exception: republish when `source_hash` changes; matching hash → skip.
 - **One-time init is surfaced to the human**, never silently worked around — e.g. a GitHub wiki's `.wiki.git` does not exist until someone clicks "Create the first page"; on a not-found failure, ask the human to do that once, then retry.
@@ -430,8 +431,8 @@ Local items become tickets. The pull side ships too (§18 step 8): remote change
 ### 9.4 What stays deterministic core
 
 - `worklog link` — the only writer of external identity into the log.
-- `worklog wiki-add` — registers a file in the ledger (`{source, title, url: null, rev: null, source_hash: null}`; the next publish fills the nulls).
-- The file formats — the `published.json` ledger shape above and `sync-state.json` (§10.3) — are fixed by this spec, whatever tooling the skill happens to drive.
+- `worklog wiki-add` / `wiki-record` / `wiki-get` — the only writers and reader of the ledger (`wiki-add` registers `{source, title, url: null, rev: null, source_hash: null}`; `wiki-record` fills the nulls after a successful push).
+- The file formats — the `published.jsonl` event envelope above and `sync-state.json` (§10.3) — are fixed by this spec, whatever tooling the skill happens to drive.
 
 The old §9.1 exit-code table is gone: there is no executable whose exit codes could be specified. What did *not* move: the sync semantics. §10's canonical hash, echo suppression, field directions, and conflict rules still govern — the skill is the *how*; §10 remains the *what*.
 
@@ -606,7 +607,7 @@ Folds `results/*.json` back into the log as events:
 {"ev":"...","actor":"sync","item":"01J8X0M2QQ","op":"link","set":{"external":{"system":"jira","key":"PROJ-412","url":"...","synced_at":"...","hash":"a3f1..."}}}
 ```
 
-Updates `.work/published.json` and `.work/sync-state.json`. Prints a summary: pushed, closed, conflicted, deferred.
+Updates `.work/published.jsonl` (via `wiki-record`) and `.work/sync-state.json`. Prints a summary: pushed, closed, conflicted, deferred.
 
 **Invariant: exactly one process appends to the log at a time within a single `worklog` invocation.** Concurrency across devs is handled by union merge, not by locking.
 

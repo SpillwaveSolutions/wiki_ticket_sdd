@@ -60,6 +60,7 @@ jobs:
           python3 tests/test_compact.py
           python3 tests/test_github_adapter.py
           python3 tests/test_merge_green.py
+          python3 tests/test_published.py
           python3 tests/test_render_roadmap.py
           python3 tests/test_plan_capture.py
           python3 tests/test_ia.py

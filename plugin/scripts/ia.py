@@ -24,7 +24,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from fold import fold, CLOSED_STATUSES
 
-LEDGER = ".work/published.json"
+LEDGER = ".work/published.jsonl"  # folded via published.load(); leftover .json is a read fallback
 INDEX_DIR = "docs/.index"
 INVENTORY = os.path.join(INDEX_DIR, "_inventory.json")
 
@@ -231,11 +231,17 @@ def derive_canonical_key(path):
 
 
 def load_ledger(path=LEDGER):
-    try:
-        with open(path, encoding="utf-8") as fh:
-            return json.load(fh)
-    except FileNotFoundError:
-        return {}
+    """Folded JSONL ledger. A leftover published.json is a read-only fallback
+    so tests and old clones still resolve keys until the first write migrates."""
+    import published as pub
+    if path not in (LEDGER, pub.JSONL, pub.JSON, None):
+        try:
+            with open(path, encoding="utf-8") as fh:
+                data = json.load(fh)
+            return data if isinstance(data, dict) else {}
+        except FileNotFoundError:
+            return {}
+    return pub.load()
 
 
 def resolve_key(path, ledger):
@@ -639,7 +645,7 @@ def normalize(check=False):
                 if not check:
                     ensure_front_matter_fields(rec["source"], fields)
     # ledger self-description (§5.3): additive fields on existing entries
-    dirty = False
+    dirty_keys = []
     for key, entry in ledger.items():
         rec = records.get(key)
         if not rec:
@@ -651,9 +657,9 @@ def normalize(check=False):
         if any(entry.get(k) != v for k, v in want.items()):
             changes.append("ledger %s" % key)
             entry.update(want)
-            dirty = True
-    if dirty and not check:
-        with open(LEDGER, "w", encoding="utf-8") as fh:
-            json.dump(ledger, fh, indent=2, sort_keys=True)
-            fh.write("\n")
+            dirty_keys.append((key, want))
+    if dirty_keys and not check:
+        import published as pub
+        for key, want in dirty_keys:
+            pub.record(key, want, actor="ia")
     return changes

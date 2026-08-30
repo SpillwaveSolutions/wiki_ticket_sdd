@@ -98,6 +98,32 @@ sys.exit(0 if ok else 1)
 PY
 done
 
+# published.jsonl is a separate schema (key, not item). Trailing newline +
+# envelope still apply; taxonomy rules do not.
+if [ -f .work/published.jsonl ]; then
+  [ -z "$(tail -c1 .work/published.jsonl)" ] || fail ".work/published.jsonl has no trailing newline (invariant 15.1)"
+  python3 - .work/published.jsonl <<'PY' || fail "published.jsonl schema validation failed"
+import json, sys
+ok = True
+ops = {"register", "publish", "unpublish"}
+for n, line in enumerate(open(sys.argv[1]), 1):
+    if not line.strip():
+        continue
+    try:
+        ev = json.loads(line)
+    except json.JSONDecodeError as e:
+        print(f"  {sys.argv[1]}:{n}: unparseable: {e}"); ok = False; continue
+    for field in ("ev", "ts", "actor", "op"):
+        if field not in ev:
+            print(f"  {sys.argv[1]}:{n}: missing {field}"); ok = False
+    if ev.get("op") not in ops:
+        print(f"  {sys.argv[1]}:{n}: unknown op {ev.get('op')!r}"); ok = False
+    if ev.get("op") != "unpublish" and "key" not in ev:
+        print(f"  {sys.argv[1]}:{n}: missing key"); ok = False
+sys.exit(0 if ok else 1)
+PY
+fi
+
 # Merge integrity guard (#243 + #237): a union merge can resurrect the very
 # lines a compaction just deleted, or land two branches that each claimed the
 # same external ticket. Only meaningful when a merge is in flight -- same

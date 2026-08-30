@@ -3,7 +3,7 @@
 worklog -- CLI entry point. WORKLOG-SPEC section 12.
 
 Implemented: add, update, close, reopen, link, show, list, fold, plan-capture,
-             roadmap-render, roadmap-snapshot, wiki-add, compact,
+             roadmap-render, roadmap-snapshot, wiki-add, wiki-record, wiki-get, compact,
              status (daily|weekly|timecard),
              ingest, conflict, resolve (pull side, sections 10.2 and 10.6),
              sync (dispatcher: bin/sync_dispatch.py), adapter init|check,
@@ -26,6 +26,7 @@ import argparse, glob, json, os, re, sys, time, fcntl
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ulid
 import item_fields
+import published
 from fold import (fold, FoldResult, read_lines, dedupe_and_sort, external_owners,
                   OPEN_STATUSES, CLOSED_STATUSES, LEGACY_TYPE_MAP)
 
@@ -468,33 +469,42 @@ def cmd_resolve(a):
     print(f"{a.field}: {old} -> {new} (took {a.take})")
 
 
-PUBLISHED = ".work/published.json"
-
-
-def _register_published(key, file, title):
-    """Register a file in the wiki publish set. published.json is a plain JSON
-    map (spec 9.2), not an event log, so direct load/dump is allowed here."""
-    published = {}
-    if os.path.exists(PUBLISHED):
-        with open(PUBLISHED, encoding="utf-8") as fh:
-            published = json.load(fh)
-    # Preserve url/rev/source_hash on re-register: wiping them would make the
-    # next publish create a duplicate page (spec 9.2).
-    entry = published.setdefault(key, {"url": None, "rev": None,
-                                       "source_hash": None})
-    entry["source"] = file
-    entry["title"] = title
-    os.makedirs(os.path.dirname(PUBLISHED), exist_ok=True)
-    with open(PUBLISHED, "w", encoding="utf-8") as fh:
-        json.dump(published, fh, indent=2, sort_keys=True)
-        fh.write("\n")
-
-
 def cmd_wiki_add(a):
     if not os.path.exists(a.file):
         sys.exit(f"worklog: {a.file} not found")
-    _register_published(a.key, a.file, a.title)
+    published.register(a.key, a.file, a.title, a.actor)
     print(a.key)
+
+
+def cmd_wiki_record(a):
+    """Record a successful wiki publish into the JSONL ledger.
+
+    The wiki-publish skill orchestrates the push; this is the only writer
+    of page identity (url/rev/hashes). Never hand-edit published.jsonl.
+    """
+    fields = {}
+    for name in ("source", "title", "url", "rev", "source_hash", "render_hash",
+                 "page_id", "doc_type", "truth_state", "canonical_key"):
+        val = getattr(a, name, None)
+        if val is not None:
+            fields[name] = val
+    if a.null_url:
+        fields["url"] = None
+    if not fields:
+        sys.exit("worklog: wiki-record needs at least one field")
+    published.record(a.key, fields, a.actor)
+    print(a.key)
+
+
+def cmd_wiki_get(a):
+    """Fold the published ledger. One key, or the whole dict as JSON."""
+    pages = published.load()
+    if a.key:
+        if a.key not in pages:
+            sys.exit(f"worklog: no published entry {a.key}")
+        print(json.dumps(pages[a.key], indent=2, sort_keys=True))
+        return
+    print(json.dumps(pages, indent=2, sort_keys=True))
 
 
 def cmd_list(a):
@@ -721,7 +731,7 @@ def cmd_adr_new(a):
     with open(path, "w", encoding="utf-8") as fh:
         fh.write(content)
     key = f"adr/{nid:04d}-{slug}"
-    _register_published(key, path, f"ADR-{nid:04d}-{slug}")
+    published.register(key, path, f"ADR-{nid:04d}-{slug}", a.actor)
     print(path)
 
 
@@ -1458,6 +1468,34 @@ wa = sub.add_parser("wiki-add"); wa.set_defaults(fn=cmd_wiki_add)
 wa.add_argument("file")
 wa.add_argument("--key", required=True)
 wa.add_argument("--title", required=True)
+
+wr = sub.add_parser(
+    "wiki-record",
+    description="Record a successful wiki publish in the JSONL ledger. "
+                "The wiki-publish skill pushes the page; this writes url/rev/"
+                "hashes. Never hand-edit .work/published.jsonl.")
+wr.set_defaults(fn=cmd_wiki_record)
+wr.add_argument("--key", required=True)
+wr.add_argument("--source")
+wr.add_argument("--title")
+wr.add_argument("--url")
+wr.add_argument("--rev")
+wr.add_argument("--source-hash", dest="source_hash")
+wr.add_argument("--render-hash", dest="render_hash")
+wr.add_argument("--page-id", dest="page_id")
+wr.add_argument("--doc-type", dest="doc_type")
+wr.add_argument("--truth-state", dest="truth_state")
+wr.add_argument("--canonical-key", dest="canonical_key")
+wr.add_argument("--null-url", dest="null_url", action="store_true",
+                help="explicitly store url: null (register-style)")
+
+wg = sub.add_parser(
+    "wiki-get",
+    description="Fold the published.jsonl ledger. One key, or every page "
+                "as a JSON dict (the shape wiki-publish used to read from "
+                "published.json).")
+wg.set_defaults(fn=cmd_wiki_get)
+wg.add_argument("key", nargs="?")
 
 l = sub.add_parser("list"); l.set_defaults(fn=cmd_list); l.add_argument("--all", action="store_true")
 s = sub.add_parser("show"); s.set_defaults(fn=cmd_show); s.add_argument("item")

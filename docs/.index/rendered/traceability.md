@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Convert published.json to JSONL ledger with union merge
+`01M18QBM233GRTVR7JRXSVNK66` · status: todo
+
 ### Release v0.24.9: absorb unmarked remotes and closed-on-remote
 `01M12PR4SEMBXW56VP6TC63X81` · status: done
 - lands-in: pr/388
