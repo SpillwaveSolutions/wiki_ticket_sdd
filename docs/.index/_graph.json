@@ -3346,6 +3346,16 @@
    "type": "targets"
   },
   {
+   "from": "item/01M19YV9VCDNTVPXAHW3D2NSA5",
+   "to": "item/01M19XR46836RE9JSHJHM2DSGC",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M19YV9VCDNTVPXAHW3D2NSA5",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7129,6 +7139,11 @@
    "doc_type": "item",
    "status": "todo",
    "title": "Retention: compact evicts old done.jsonl into an archive"
+  },
+  "item/01M19YV9VCDNTVPXAHW3D2NSA5": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "post-merge.yml YAML invalid: python heredoc dedents to column 0"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",

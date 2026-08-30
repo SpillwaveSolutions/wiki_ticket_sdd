@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **post-merge.yml parses again.** The python heredoc that wrote the sync comment started at column 0, which YAML forbids inside `run: |`. GitHub rejected the file at L57 on 0295c50, so the PR-closed job never ran. The comment is now an indented `echo`/`cat` write still posted via `--body-file`.
+
 - **Merge pipeline actually lands.** `worklog sync --report` is an alias of `--dry-run` (print drift, change nothing) — post-merge CI, the merge-green skill, and the spec all invoked a flag that did not exist. Compact and post-merge no longer `git push` main: GITHUB_TOKEN cannot bypass the merge-when-green ruleset (User 41898282 does not exempt the Actions installation token; Integration 15368 is 422). Both jobs open a PR and arm `gh pr merge --auto --merge`. post-merge has a concurrency group, verifies after `git add`, and posts the sync comment via `--body-file` (no literal `\\n`).
 
 - **Positioning.** README Why leads with frozen plans and `git_hash` provenance, not the JSONL log or a graph-engineering identity claim. New section compares WikiTicket with beads, spec-kit / OpenSpec, and GitHub Projects. `docs/graph-engineering.md` is an essay, not the product thesis.

@@ -1,5 +1,5 @@
 {
- "git_hash": "381a2d7",
+ "git_hash": "0295c50",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "f7582593bb6c",
+   "render_hash": "731c3de15366",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -585,7 +585,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.10",
    "render": "as-is",
-   "render_hash": "e1aa90006499",
+   "render_hash": "c6575a768d05",
    "source": "docs/.index/rendered/releases/v0.24.10.md",
    "title": "Release v0.24.10",
    "truth_state": "shipped",
@@ -4475,7 +4475,7 @@
    "frozen": false,
    "page_name": "Ticket-01M19XR46836RE9JSHJHM2DSGC",
    "render": "as-is",
-   "render_hash": "253accbe740b",
+   "render_hash": "e97f05d76c21",
    "source": "docs/.index/rendered/tickets/01M19XR46836RE9JSHJHM2DSGC.md",
    "title": "Implement worklog sync --report; land compact/post-merge via PR",
    "truth_state": "done",
@@ -4510,6 +4510,16 @@
    "title": "Retention: compact evicts old done.jsonl into an archive",
    "truth_state": "open",
    "wiki_key": "item/01M19XRRZ2894K7XE59RX1EAY1"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M19YV9VCDNTVPXAHW3D2NSA5",
+   "render": "as-is",
+   "render_hash": "577ccebcdb4e",
+   "source": "docs/.index/rendered/tickets/01M19YV9VCDNTVPXAHW3D2NSA5.md",
+   "title": "post-merge.yml YAML invalid: python heredoc dedents to column 0",
+   "truth_state": "done",
+   "wiki_key": "item/01M19YV9VCDNTVPXAHW3D2NSA5"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -5340,11 +5350,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T18:11:36Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T18:28:27Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "a26c55e616dd",
+   "render_hash": "765477e50d07",
    "source": "docs/roadmap.md",
    "source_hash": "5f99790ce11a",
    "title": "Roadmap",
