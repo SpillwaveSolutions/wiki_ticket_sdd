@@ -14,7 +14,7 @@ removed=()
 for f in bin/worklog bin/fold.py bin/ulid.py bin/render_roadmap.py bin/viz_mermaid.py bin/plan_capture.py bin/compact.py bin/adr.py \
          bin/ia.py bin/ia_render.py bin/ia_graph.py bin/canonical.py bin/sync_dispatch.py \
          bin/item_fields.py bin/wiki_flavor.py bin/changelog.py \
-         bin/session.py bin/okf_write.py bin/doc_verify.py bin/provenance.py; do
+         bin/session.py bin/okf_write.py bin/doc_verify.py bin/provenance.py bin/published.py; do
   if [ -f "$f" ]; then
     rm "$f"
     removed+=("$f")
@@ -38,7 +38,7 @@ if [ -f .gitattributes ]; then
   python3 - .gitattributes <<'PY'
 import sys
 p = sys.argv[1]
-ours = {".work/todo.jsonl merge=union", ".work/done.jsonl merge=union"}
+ours = {".work/todo.jsonl merge=union", ".work/done.jsonl merge=union", ".work/published.jsonl merge=union"}
 lines = [l for l in open(p).read().splitlines() if l.strip() not in ours]
 if any(l.strip() for l in lines):
     open(p, "w").write("\n".join(lines) + "\n")

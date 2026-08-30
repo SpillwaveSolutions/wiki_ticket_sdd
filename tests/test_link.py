@@ -159,8 +159,10 @@ class TestWikiAdd(Sandbox):
             fh.write("# Plan\n")
 
     def read_published(self):
-        with open(self.published, encoding="utf-8") as fh:
-            return json.load(fh)
+        p = self.run_wl("wiki-get")
+        if p.returncode != 0:
+            raise AssertionError(p.stderr)
+        return json.loads(p.stdout)
 
     def test_creates_entry_with_source_and_null_url(self):
         out = self.wl("wiki-add", "plan.md", "--key", "plan/x", "--title", "Plan X")

@@ -1,5 +1,5 @@
 {
- "git_hash": "4c35276",
+ "git_hash": "9fbfac9",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "be252c12b1a0",
+   "render_hash": "f352523ff499",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4342,6 +4342,16 @@
    "wiki_key": "item/01M12PR4SEMBXW56VP6TC63X81"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M18QBM233GRTVR7JRXSVNK66",
+   "render": "as-is",
+   "render_hash": "5d5d2f118f55",
+   "source": "docs/.index/rendered/tickets/01M18QBM233GRTVR7JRXSVNK66.md",
+   "title": "Convert published.json to JSONL ledger with union merge",
+   "truth_state": "open",
+   "wiki_key": "item/01M18QBM233GRTVR7JRXSVNK66"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -5150,21 +5160,21 @@
    "frozen": false,
    "page_name": "Plugin-Guide",
    "render": "doc+banner",
-   "render_hash": "c07b4c1c733a",
+   "render_hash": "9d63257b6a8a",
    "source": "docs/user_guide/plugin-guide.md",
-   "source_hash": "75a415d1d174",
+   "source_hash": "3cae5e117206",
    "title": "WikiTicket SDD \u2014 Plugin Guide",
    "truth_state": "current",
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-28T10:55:47Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-30T06:57:50Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "ec32e72f0ade",
+   "render_hash": "0a543cb91fcb",
    "source": "docs/roadmap.md",
-   "source_hash": "20475d6c127f",
+   "source_hash": "92018fc77ea0",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -5570,9 +5580,9 @@
    "frozen": false,
    "page_name": "Worklog-Spec",
    "render": "doc+banner",
-   "render_hash": "fbd0a28e2bcc",
+   "render_hash": "d08268cb8d7e",
    "source": "docs/worklog-spec.md",
-   "source_hash": "77f1ee32c990",
+   "source_hash": "04e0b334d5aa",
    "title": "Worklog: Visible-WIP Work Tracking Spec",
    "truth_state": "current",
    "wiki_key": "spec"
@@ -5630,9 +5640,9 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "e146b641d1da",
+   "render_hash": "58f3d59664b2",
    "source": "docs/user_guide/user-guide.md",
-   "source_hash": "1ed7a860e343",
+   "source_hash": "262792e1ccb1",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",
    "wiki_key": "user-guide"

@@ -6949,6 +6949,11 @@
    "status": "done",
    "title": "Release v0.24.9: absorb unmarked remotes and closed-on-remote"
   },
+  "item/01M18QBM233GRTVR7JRXSVNK66": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Convert published.json to JSONL ledger with union merge"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",

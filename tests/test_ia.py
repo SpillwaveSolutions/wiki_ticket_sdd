@@ -333,7 +333,7 @@ class TestNormalize(TestInventory):
         a = run(self.dir, "adr", "check")
         self.assertEqual(a.returncode, 0, a.stdout + a.stderr)
         # ledger gained self-description
-        pub = json.load(open(os.path.join(self.dir, ".work/published.json")))
+        pub = json.loads(run(self.dir, "wiki-get").stdout)
         self.assertEqual(pub["plan/alpha"]["canonical_key"], "plan/2026-07-01-alpha")
         self.assertEqual(pub["plan/alpha"]["truth_state"], "superseded")
         # second run is a no-op; --check agrees

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **Wiki ledger is JSONL, union-merge.** `.work/published.json` (a 308KB JSON dict with no merge strategy) is now `.work/published.jsonl`: append-only events, last-write-wins per key, `merge=union`. `worklog wiki-add` / `wiki-record` / `wiki-get` own the file; the wiki-publish skill must not hand-edit it. Leftover JSON migrates on first write with deterministic ULIDs (#392).
+
 - **Compaction preserves open sync conflicts.** Snapshots are built from public fields, which stripped `_conflicts`; the nightly compact then verified the stripped form and silently dropped every open conflict. Compact now re-emits `conflict` events above each snapshot and verifies the private map too.
 - **Write envelope, flock, monotonic ULIDs.** `worklog` byte-caps the whole encoded event (PIPE_BUF 4096), checks `os.write`, and holds `.work/.lock` across append so a concurrent compact cannot replace the inode mid-write. `ulid.new()` increments entropy inside the same millisecond so create-then-update cannot fold out of order.
 - **Merge bootstrap self-heals.** SessionStart doctor writes `merge.ours.driver` and `core.hooksPath` (absolute in linked worktrees). `doctor --fix-wiring` does the same on demand; `init.sh` is worktree-aware.

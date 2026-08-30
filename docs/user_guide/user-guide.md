@@ -384,13 +384,13 @@ file, re-stage, commit again.
 
 GitHub's server-side merge does not run merge drivers — the union merge that
 makes the logs conflict-free only applies locally — so concurrent PRs can
-conflict in the web UI on `docs/roadmap.md`, `.work/published.json`, or even
+conflict in the web UI on `docs/roadmap.md`, `.work/published.jsonl`, or even
 `.work/todo.jsonl`. Recover on the PR branch locally:
 
 1. `git merge main` — on the PR branch; union merge applies locally, so the
    logs merge clean.
 2. `bin/worklog roadmap-render` — regenerate the roadmap from the merged log.
-3. Resolve `.work/published.json` by taking the union of both sides' keys.
+3. `.work/published.jsonl` is `merge=union` locally — fold it (`worklog wiki-get`) after merging the base branch; GitHub's server-side merge still will not run the driver, so recover locally the same way as the work log.
 4. `git add -A && git commit` — finish the merge commit.
 5. Push the branch.
 6. Merge the PR in the UI — it's conflict-free now.
@@ -574,7 +574,7 @@ MCP server or CLI for Confluence, the ADO CLI for Azure DevOps, and so on.
 If the tooling isn't installed, the agent researches it at runtime and, when
 a step needs a human (e.g. creating a GitHub wiki's first page in the web
 UI), it says so. The wiki-publish skill keeps a ledger in
-`.work/published.json` so republishing updates pages instead of duplicating
+`.work/published.jsonl` so republishing updates pages instead of duplicating
 them. When `docs/.index/publish-manifest.json` exists (from `ia-render`),
 that file **is** the publish set — including generated Home/Sidebar,
 indexes, and the per-ticket/release/PR artifact pages — and ledger skip

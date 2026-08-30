@@ -117,29 +117,35 @@ or adapt it per platform instead of stripping.
 
 ## 4. Maintain the ledger
 
-`.work/published.json` maps logical keys to what was published:
+`.work/published.jsonl` is an append-only event log, folded last-write-wins
+per logical key, `merge=union` — the same story as the work log. **Never
+hand-edit it.** The dispatcher owns the file:
 
-    {"<logical-key>": {"source": "repo/path.md", "url": ..., "rev": ..., "source_hash": "the manifest's body hash", "render_hash": "the manifest's render_hash"}}
+- `worklog wiki-get [key]` — fold the ledger (one page, or the whole dict)
+- `worklog wiki-add <file> --key K --title T` — register a file
+- `worklog wiki-record --key K --url U --rev R --source-hash H --render-hash H ...`
+  — record a successful publish
 
-Entries carry a `source` field (the repo path of the file) so the publish
-set is self-describing. The DEFAULT publish set is always: the live roadmap
-(`docs/roadmap.md`), every plan in `docs/plans/`, every roadmap snapshot in
-`docs/roadmap/`, every ADR in `docs/adr/` — republish on hash change (status
-flips must reach the wiki), page name `ADR-NNNN-slug`, ledger key
-`adr/NNNN-slug` — plus anything registered via `worklog wiki-add`. Plans and
-snapshots publish once (frozen); the roadmap and ADRs re-publish on hash
-change.
-To opt an arbitrary file in, register it:
-`worklog wiki-add <file> --key K --title T`.
+The folded shape of one key is still:
+
+    {"source": "repo/path.md", "url": ..., "rev": ..., "source_hash": "...", "render_hash": "..."}
+
+Entries carry a `source` field so the publish set is self-describing. The
+DEFAULT publish set is always: the live roadmap (`docs/roadmap.md`), every
+plan in `docs/plans/`, every roadmap snapshot in `docs/roadmap/`, every ADR
+in `docs/adr/` — republish on hash change (status flips must reach the wiki),
+page name `ADR-NNNN-slug`, ledger key `adr/NNNN-slug` — plus anything
+registered via `worklog wiki-add`. Plans and snapshots publish once
+(frozen); the roadmap and ADRs re-publish on hash change.
 
 When a manifest exists (§0) it is the authority: copy its `source_hash` and
-`render_hash` into the ledger rather than hashing files yourself. Only when
-there is no manifest entry — a file registered via `worklog wiki-add`, say —
-hash it directly (`sha256`, first 12 hex chars, of the whole file). If the
-ledger entry's hash matches, skip it — already published. After
-publishing, update the entry with the page url, the wiki revision (e.g. wiki
-commit sha), and the new hash. Commit `published.json` together with the
-docs it describes.
+`render_hash` into `wiki-record` rather than hashing files yourself. Only
+when there is no manifest entry — a file registered via `worklog wiki-add`,
+say — hash it directly (`sha256`, first 12 hex chars, of the whole file).
+If `wiki-get <key>` already has a matching hash, skip it — already
+published. After publishing, `worklog wiki-record` the page url, the wiki
+revision (e.g. wiki commit sha), and the new hashes. Commit
+`published.jsonl` together with the docs it describes.
 
 ## 5. Ledger fields across systems
 

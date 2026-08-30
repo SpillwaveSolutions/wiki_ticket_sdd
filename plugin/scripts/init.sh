@@ -84,7 +84,7 @@ mkdir -p bin hooks
 for f in worklog fold.py ulid.py render_roadmap.py viz_mermaid.py plan_capture.py compact.py adr.py \
          ia.py ia_render.py ia_graph.py canonical.py sync_dispatch.py session.py \
          item_fields.py wiki_flavor.py changelog.py okf_write.py \
-         doc_verify.py provenance.py; do
+         doc_verify.py provenance.py published.py; do
   cp -p "$PLUGIN_ROOT/scripts/$f" "bin/$f"
   chmod +x "bin/$f"
   wrote+=("bin/$f")
@@ -120,6 +120,7 @@ git config merge.ours.driver true
 for line in \
     ".work/todo.jsonl merge=union" \
     ".work/done.jsonl merge=union" \
+    ".work/published.jsonl merge=union" \
     "docs/roadmap.md merge=ours" \
     "docs/.index/** merge=ours"
 do
@@ -133,7 +134,7 @@ done
 
 # --- .work/: NEVER truncate or overwrite existing logs. Data outlives tooling. ---
 mkdir -p .work
-for f in .work/todo.jsonl .work/done.jsonl; do
+for f in .work/todo.jsonl .work/done.jsonl .work/published.jsonl; do
   if [ -f "$f" ]; then
     skipped+=("$f (existing log preserved)")
   else

@@ -46,7 +46,7 @@ class TestAdr(unittest.TestCase):
         c = self.check()
         self.assertEqual(c.returncode, 0, c.stdout + c.stderr)
         self.assertIn("1 records ok", c.stdout)
-        pub = json.loads(self.read(".work/published.json"))
+        pub = json.loads(run(self.dir, "wiki-get").stdout)
         entry = pub["adr/0001-use-event-log"]
         self.assertEqual(entry["source"], "docs/adr/0001-use-event-log.md")
         self.assertEqual(entry["title"], "ADR-0001-use-event-log")
