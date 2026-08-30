@@ -59,6 +59,13 @@ class TestDeterministic(unittest.TestCase):
     def test_local_ulids_are_not_deterministic(self):
         self.assertNotEqual(ulid.new(1_700_000_000_000), ulid.new(1_700_000_000_000))
 
+    def test_same_millisecond_ids_are_monotonic(self):
+        """Create-then-update in one tick must fold in that order."""
+        ms = 1_700_000_000_000
+        ids = [ulid.new(ms) for _ in range(32)]
+        self.assertEqual(ids, sorted(ids))
+        self.assertEqual(len(set(ids)), 32)
+
 
 class TestTheBugThisPrevents(unittest.TestCase):
     """Section 10.2, end to end.
@@ -116,7 +123,7 @@ class TestEntropyIsNeverSpent(unittest.TestCase):
     def test_full_entropy_is_random_across_the_whole_tail(self):
         """Every entropy position must vary. If any five consecutive ones are
         constant across many ids, something is stamping them again."""
-        ids = [ulid.new(timestamp_ms=1785000000000) for _ in range(500)]
+        ids = [ulid.new(timestamp_ms=1785000000000 + i) for i in range(500)]
         for pos in range(10, 26):
             distinct = {i[pos] for i in ids}
             self.assertGreater(len(distinct), 1,

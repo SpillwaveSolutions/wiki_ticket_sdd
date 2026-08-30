@@ -218,5 +218,53 @@ class TestTheBugThisPrevents(unittest.TestCase):
         self.assertEqual(before, after)
 
 
+class TestConflictPreservation(CompactBase):
+    """Open `_conflicts` are private fold state. Snapshots are built from
+    `_public()`, which strips them; without re-emitting `conflict` events
+    above the snapshot, every open conflict dies at the next compact."""
+
+    CONFLICT = {
+        "ev": "01A9", "ts": "t", "actor": "sync", "item": "A",
+        "op": "conflict",
+        "set": {"field": "title", "local": "a title",
+                "remote": "remote title", "remote_rev": "r1"},
+    }
+
+    def test_open_conflicts_survive_compaction(self):
+        with open(self.todo, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(self.CONFLICT) + "\n")
+        before = fold([self.todo, self.done])
+        self.assertEqual(before.items["A"]["_conflicts"][0]["remote"],
+                         "remote title")
+        compact(self.todo, self.done)
+        after = fold([self.todo, self.done])
+        self.assertEqual(before.items["A"]["_conflicts"],
+                         after.items["A"]["_conflicts"])
+        ops = [e["op"] for e in read_events(self.todo) if e.get("item") == "A"]
+        self.assertIn("snapshot", ops)
+        self.assertIn("conflict", ops)
+        # Conflict must sort after the snapshot, or the snapshot would
+        # drop it again (fold starts a snapshot from a fresh dict).
+        a_events = [e for e in read_events(self.todo) if e.get("item") == "A"]
+        ops_in_ev_order = [e["op"] for e in sorted(a_events, key=lambda x: x["ev"])]
+        self.assertLess(ops_in_ev_order.index("snapshot"),
+                        ops_in_ev_order.index("conflict"))
+
+    def test_closed_item_conflicts_land_in_done(self):
+        with open(self.todo, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps({
+                "ev": "01A9", "ts": "t", "actor": "sync", "item": "C",
+                "op": "conflict",
+                "set": {"field": "title", "local": "c title",
+                        "remote": "other", "remote_rev": "r2"},
+            }) + "\n")
+        compact(self.todo, self.done)
+        c = fold([self.done]).items["C"]
+        self.assertEqual(c["status"], "done")
+        self.assertEqual(c["_conflicts"][0]["remote"], "other")
+        self.assertIn("conflict", [e["op"] for e in read_events(self.done)
+                                   if e.get("item") == "C"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

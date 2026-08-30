@@ -162,6 +162,44 @@ def resolve_adapter():
         return None
 
 
+def forward_ticket_env(config_path=".work/config.yml"):
+    """Copy ticketing.project / ticketing.system into the adapter env.
+
+    The contract (typed-adapter-contract §3) says connection details arrive
+    via WORKLOG_TICKET_PROJECT; nothing was producing that variable. GitHub
+    papers over the gap with `gh repo view`; a Jira adapter cannot.
+    """
+    if (os.environ.get("WORKLOG_TICKET_PROJECT")
+            and os.environ.get("WORKLOG_TICKET_SYSTEM")):
+        return
+    try:
+        with open(config_path, encoding="utf-8") as fh:
+            text = fh.read()
+    except OSError:
+        return
+    project = system = None
+    inside = False
+    for raw in text.splitlines():
+        line = raw.split("#", 1)[0].rstrip()
+        if not line.strip():
+            continue
+        if line[:1] not in " \t":
+            inside = line.strip().startswith("ticketing:")
+            continue
+        if not inside or ":" not in line:
+            continue
+        key, val = line.split(":", 1)
+        key, val = key.strip(), val.strip().strip("\"'")
+        if key == "project" and val:
+            project = val
+        elif key == "system" and val:
+            system = val
+    if project and not os.environ.get("WORKLOG_TICKET_PROJECT"):
+        os.environ["WORKLOG_TICKET_PROJECT"] = project
+    if system and system != "none" and not os.environ.get("WORKLOG_TICKET_SYSTEM"):
+        os.environ["WORKLOG_TICKET_SYSTEM"] = system
+
+
 class Dispatcher:
     COUNT_KEYS = ("created", "updated", "closed", "skipped", "pulled",
                   "conflicts", "deferred")
@@ -260,6 +298,7 @@ class Dispatcher:
     # --- process seams ---
 
     def run_adapter(self, *args, stdin=None):
+        forward_ticket_env()
         p = subprocess.run([self.adapter, *args], input=stdin,
                            capture_output=True, text=True)
         if p.stderr:
@@ -743,6 +782,26 @@ class Dispatcher:
 
     # --- pull side ---
 
+    def _adapter_keys(self, keys, by_id):
+        """Resolve --keys (item ULIDs or ticket numbers) to adapter keys."""
+        out = []
+        for k in keys:
+            item = by_id.get(k)
+            if item is not None:
+                remembered = self.remembered_key(k, item.get("external") or {})
+                if remembered:
+                    out.append(str(remembered))
+            else:
+                out.append(k)
+        # Preserve order, drop empties/dupes.
+        seen = set()
+        unique = []
+        for k in out:
+            if k and k not in seen:
+                seen.add(k)
+                unique.append(k)
+        return unique
+
     def pull(self, caps, items, keys):
         if "pull" not in caps["supports"]:
             self.note("adapter does not support pull; local log may lag remote")
@@ -753,7 +812,13 @@ class Dispatcher:
         # local event instead of calling with neither (worklog#141).
         cursor = (self.state.get("cursors", {}).get(system)
                  or earliest_event_ts() or EPOCH)
-        args = ["pull", "--since", cursor]
+        by_id = {i["id"]: i for i in items}
+        adapter_keys = self._adapter_keys(keys, by_id) if keys else []
+        keyed = bool(adapter_keys)
+        if keyed:
+            args = ["pull", "--keys", ",".join(adapter_keys)]
+        else:
+            args = ["pull", "--since", cursor]
         p = self.run_adapter(*args)
         if p.returncode == 2:
             sys.exit("worklog sync: adapter auth failure on pull — "
@@ -762,8 +827,8 @@ class Dispatcher:
             self.note("pull failed (exit %d); cursor not advanced" % p.returncode)
             return
         self.adapter_ok = True   # a clean pull proves the project is reachable
-        by_id = {i["id"]: i for i in items}
         max_rev = cursor
+        ingest_failed = False
         for raw in p.stdout.splitlines():
             if not raw.strip():
                 continue
@@ -812,12 +877,20 @@ class Dispatcher:
             if both:
                 # Both sides moved since last push (spec §10.6): record,
                 # never overwrite under the default report policy.
+                wrote = True
                 for f in changed:
-                    self.worklog("conflict", iid, "--field", f,
-                                 "--local", str(local.get(f)),
-                                 "--remote", str(line[f]),
-                                 "--remote-rev", rev or "", fatal=False)
-                    self.counts["conflicts"] += 1
+                    if self.worklog("conflict", iid, "--field", f,
+                                    "--local", str(local.get(f)),
+                                    "--remote", str(line[f]),
+                                    "--remote-rev", rev or "",
+                                    fatal=False) is None:
+                        wrote = False
+                        ingest_failed = True
+                    else:
+                        self.counts["conflicts"] += 1
+                if not wrote:
+                    self.note("pull: conflict record failed on %s; "
+                              "cursor held" % iid[:8])
             else:
                 ing = ["ingest", iid, "--system", system,
                        "--key", str(ext.get("key")), "--rev", rev or "",
@@ -826,9 +899,20 @@ class Dispatcher:
                     ing += ["--set", "%s=%s" % (f, line[f])]
                 if self.worklog(*ing, fatal=False) is not None:
                     self.counts["pulled"] += 1
-        if max_rev and not self.dry_run:
+                else:
+                    ingest_failed = True
+                    self.note("pull: ingest failed on %s; cursor held"
+                              % iid[:8])
+        # A --keys pull is a point query: do not move the since cursor.
+        # A failed ingest must not advance it either, or that remote edit
+        # is skipped until the ticket changes again.
+        if keyed or self.dry_run:
+            return
+        if ingest_failed:
+            self.note("pull: cursor not advanced past failed ingest")
+            return
+        if max_rev:
             self.state.setdefault("cursors", {})[system] = max_rev
-
     def commit_gone(self):
         """Flush the run's buffered gone marks into state.
 

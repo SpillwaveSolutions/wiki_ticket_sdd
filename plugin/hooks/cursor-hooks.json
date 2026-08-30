@@ -1,25 +1,25 @@
 {
   "version": 1,
-  "description": "Cursor-native hook port of Claude Code hooks.json. Shared scripts; event names mapped.",
+  "description": "Cursor-native hook port of Claude Code hooks.json. Shared scripts; event names mapped. Paths resolve against the plugin root (marketplace source: ./plugin).",
   "hooks": {
     "beforeSubmitPrompt": [
       {
-        "command": "./plugin/hooks/scripts/prompt-reminder.sh"
+        "command": "./hooks/scripts/prompt-reminder.sh"
       }
     ],
     "stop": [
       {
-        "command": "./plugin/hooks/scripts/stop-worklog-check.sh"
+        "command": "./hooks/scripts/stop-worklog-check.sh"
       }
     ],
     "sessionStart": [
       {
-        "command": "./plugin/hooks/scripts/session-doctor.sh"
+        "command": "./hooks/scripts/session-doctor.sh"
       }
     ],
     "sessionEnd": [
       {
-        "command": "./plugin/hooks/scripts/session-end.sh"
+        "command": "./hooks/scripts/session-end.sh"
       }
     ]
   }

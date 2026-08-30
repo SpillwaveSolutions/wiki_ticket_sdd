@@ -22,6 +22,21 @@ except Exception:
     pass
 ' 2>/dev/null || true
 
+# Auto-repair clone wiring. Two idempotent git config lines. The Catch-22
+# is that pre-commit would self-heal merge.ours.driver, but pre-commit never
+# runs until core.hooksPath is set — so SessionStart has to do it.
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  git config merge.ours.driver true 2>/dev/null || true
+  git_dir=$(cd "$(git rev-parse --git-dir)" 2>/dev/null && pwd -P || true)
+  common=$(cd "$(git rev-parse --git-common-dir)" 2>/dev/null && pwd -P || true)
+  hooks_abs="$(pwd -P)/hooks"
+  if [ -n "$git_dir" ] && [ -n "$common" ] && [ "$git_dir" != "$common" ] && [ -d "$hooks_abs" ]; then
+    git config core.hooksPath "$hooks_abs" 2>/dev/null || true
+  elif [ -d hooks ]; then
+    git config core.hooksPath hooks 2>/dev/null || true
+  fi
+fi
+
 # doctor-lite: read-only, never blocks, reports only failures. Healthy → no output.
 fails=()
 

@@ -311,6 +311,24 @@ class TestVersionSync(unittest.TestCase):
                          f"README.md advertises {sorted(set(found))}, "
                          f"plugin.json says {v}")
 
+    def test_root_manifests_agree(self):
+        """Marketplace / host pins rot independently of plugin.json (#cursor)."""
+        v = plugin_version()
+        roots = [
+            os.path.join(ROOT, "plugin.json"),
+            os.path.join(ROOT, ".cursor-plugin", "plugin.json"),
+            os.path.join(ROOT, ".grok-plugin", "marketplace.json"),
+        ]
+        for path in roots:
+            with open(path, encoding="utf-8") as fh:
+                data = json.load(fh)
+            if "plugins" in data:
+                versions = {data.get("version")} | {
+                    p.get("version") for p in data["plugins"]}
+                self.assertEqual(versions, {v}, path)
+            else:
+                self.assertEqual(data.get("version"), v, path)
+
 
 class TestSuiteHygiene(unittest.TestCase):
     """No test file may define a class below its `if __name__` block.
@@ -439,6 +457,26 @@ class TestDoctor(unittest.TestCase):
         p = sh(d, "bash", doctor, check=False)
         self.assertEqual(p.returncode, 1)
         self.assertIn("skew", p.stdout + p.stderr)
+
+    def test_fix_wiring_restores_hooks_path(self):
+        d = init_repo(self)
+        iid = worklog(d, "add", "Item", "--priority", "P2").stdout.strip()
+        worklog(d, "roadmap-render")
+        sh(d, "git", "checkout", "-q", "-b", "work")
+        sh(d, "git", "add", "-A")
+        sh(d, "git", "commit", "-q", "-m", f"base: {iid}")
+        sh(d, "git", "config", "--unset", "core.hooksPath")
+        sh(d, "git", "config", "--unset", "merge.ours.driver")
+        doctor = os.path.join(PLUGIN, "scripts", "doctor.sh")
+        p = sh(d, "bash", doctor, check=False)
+        self.assertEqual(p.returncode, 1)
+        self.assertIn("hooksPath", p.stdout + p.stderr)
+        p = sh(d, "bash", doctor, "--fix-wiring")
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        path = sh(d, "git", "config", "core.hooksPath").stdout.strip()
+        self.assertEqual(path, "hooks")
+        driver = sh(d, "git", "config", "merge.ours.driver").stdout.strip()
+        self.assertEqual(driver, "true")
 
 
 class TestUninstall(unittest.TestCase):

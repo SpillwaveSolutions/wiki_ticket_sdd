@@ -1,14 +1,32 @@
 #!/usr/bin/env bash
 # worklog doctor: read-only health report. Exit 0 healthy, 1 if any check failed.
+# --fix-wiring: also write the two per-clone git config lines (hooksPath,
+# merge.ours.driver) so a fresh clone is not a silent hook-floor outage.
 set -uo pipefail
 
 PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
+FIX_WIRING=0
+for arg in "$@"; do
+  [ "$arg" = "--fix-wiring" ] && FIX_WIRING=1
+done
 
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "FAIL not inside a git work tree"
   exit 1
 fi
 cd "$(git rev-parse --show-toplevel)"
+
+if [ "$FIX_WIRING" -eq 1 ]; then
+  git config merge.ours.driver true
+  git_dir=$(cd "$(git rev-parse --git-dir)" && pwd -P)
+  common=$(cd "$(git rev-parse --git-common-dir)" && pwd -P)
+  if [ "$git_dir" != "$common" ]; then
+    git config core.hooksPath "$(pwd -P)/hooks"
+  else
+    git config core.hooksPath hooks
+  fi
+  echo "ok    wiring repaired (core.hooksPath, merge.ours.driver)"
+fi
 
 fail=0
 ok()  { echo "ok    $*"; }

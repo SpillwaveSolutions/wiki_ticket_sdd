@@ -22,7 +22,7 @@ triages it (never silently `feature`).
 
 Nothing else in the repo may write to .work/*.jsonl (invariant 15.4).
 """
-import argparse, glob, json, os, re, sys, time
+import argparse, glob, json, os, re, sys, time, fcntl
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ulid
 import item_fields
@@ -31,7 +31,9 @@ from fold import (fold, FoldResult, read_lines, dedupe_and_sort, external_owners
 
 LOG = ".work/todo.jsonl"
 PATHS = (".work/todo.jsonl", ".work/done.jsonl")
-MAX_BODY = 2048  # derived from PIPE_BUF (section 8.3). Not a setting.
+MAX_BODY = 2048  # body UTF-8 bytes; derived from PIPE_BUF (section 8.3). Not a setting.
+MAX_LINE = 4096  # POSIX PIPE_BUF; the whole encoded event must fit for atomicity.
+LOCK = ".work/.lock"
 VERSION = "0.24.9"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
@@ -64,24 +66,40 @@ def append(event):
     Also self-heals a missing trailing newline on the existing file (a hand
     edit the hook hasn't caught yet): appending without the repair would fuse
     two events into one unparseable line and lose both (section 8.2).
+
+    Holds `.work/.lock` so a concurrent compact cannot os.replace the inode
+    this write is targeting (spec §8.3).
     """
-    if len(event.get("set", {}).get("body", "")) > MAX_BODY:
+    body = event.get("set", {}).get("body", "")
+    if isinstance(body, str) and len(body.encode("utf-8")) > MAX_BODY:
         sys.exit(f"worklog: body exceeds {MAX_BODY}B; put prose in the plan doc")
     _warn_concurrent_sessions()
     line = json.dumps(event, separators=(",", ":"), sort_keys=True) + "\n"
-    fd = os.open(LOG, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o644)
+    raw = line.encode("utf-8")
+    if len(raw) > MAX_LINE:
+        sys.exit(f"worklog: event exceeds {MAX_LINE}B atomicity envelope "
+                 "(PIPE_BUF); shorten title or move prose to the plan doc")
+    os.makedirs(os.path.dirname(LOG) or ".", exist_ok=True)
+    lock_fd = os.open(LOCK, os.O_RDWR | os.O_CREAT, 0o644)
     try:
-        if os.fstat(fd).st_size:
-            rfd = os.open(LOG, os.O_RDONLY)
-            try:
-                os.lseek(rfd, -1, os.SEEK_END)
-                if os.read(rfd, 1) != b"\n":
-                    line = "\n" + line
-            finally:
-                os.close(rfd)
-        os.write(fd, line.encode())   # atomic under PIPE_BUF
+        fcntl.flock(lock_fd, fcntl.LOCK_EX)
+        fd = os.open(LOG, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o644)
+        try:
+            if os.fstat(fd).st_size:
+                rfd = os.open(LOG, os.O_RDONLY)
+                try:
+                    os.lseek(rfd, -1, os.SEEK_END)
+                    if os.read(rfd, 1) != b"\n":
+                        raw = b"\n" + raw
+                finally:
+                    os.close(rfd)
+            n = os.write(fd, raw)
+            if n != len(raw):
+                sys.exit("worklog: short write; event not recorded")
+        finally:
+            os.close(fd)
     finally:
-        os.close(fd)
+        os.close(lock_fd)
     return event
 
 

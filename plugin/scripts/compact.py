@@ -22,6 +22,7 @@ mode in this system.
 """
 import json
 import os
+import fcntl
 import subprocess
 import sys
 import time
@@ -38,8 +39,47 @@ def _now():
 
 def _public(item):
     """Item state minus private _fields -- what a snapshot carries and what
-    verification compares."""
+    verification compares for ordinary fields. `_conflicts` is private but
+    must still survive compaction: it is recorded as `conflict` events
+    above the snapshot, not stuffed into `set`."""
     return {k: v for k, v in item.items() if not k.startswith("_")}
+
+
+def _conflicts_map(result):
+    """Open conflicts per item. Missing and empty are the same (no conflicts)."""
+    out = {}
+    for iid, item in result.items.items():
+        cs = item.get("_conflicts") or []
+        if cs:
+            out[iid] = cs
+    return out
+
+
+def _conflict_event(item, conflict):
+    """Re-emit one open conflict above a snapshot so the fold restores it."""
+    ev = {"ev": ulid.new(), "ts": _now(), "actor": "compactor",
+          "item": item["id"], "op": "conflict", "set": conflict}
+    sha = ulid.git_commit()
+    if sha:
+        ev["git"] = sha
+    return ev
+
+
+def _item_events(item, through=None):
+    """Snapshot plus any open conflicts, in fold order (snapshot, then conflicts)."""
+    events = [_snapshot(item, through)]
+    for c in item.get("_conflicts") or []:
+        events.append(_conflict_event(item, c))
+    return events
+
+
+def _lock_logs(todo_path):
+    """Exclusive lock covering compact vs append. Spec §8.3."""
+    lock_path = os.path.join(os.path.dirname(os.path.abspath(todo_path)) or ".",
+                             ".lock")
+    fd = os.open(lock_path, os.O_RDWR | os.O_CREAT, 0o644)
+    fcntl.flock(fd, fcntl.LOCK_EX)
+    return fd
 
 
 def _snapshot(item, through=None):
@@ -128,6 +168,14 @@ def _verify(before, tmp_todo, tmp_done):
                       file=sys.stderr)
         print("compact: aborted; logs untouched", file=sys.stderr)
         raise SystemExit(1)
+    old_c, new_c = _conflicts_map(before), _conflicts_map(after)
+    if old_c != new_c:
+        print("compact: VERIFY FAILED: open conflicts were not preserved\n"
+              f"  before: {json.dumps(old_c, sort_keys=True)}\n"
+              f"  after:  {json.dumps(new_c, sort_keys=True)}",
+              file=sys.stderr)
+        print("compact: aborted; logs untouched", file=sys.stderr)
+        raise SystemExit(1)
     for path in (tmp_todo, tmp_done):
         with open(path, "rb") as fh:
             data = fh.read()
@@ -148,16 +196,24 @@ def compact(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
               "(compaction must be its own commit, spec 7)", file=sys.stderr)
         raise SystemExit(1)
 
+    lock_fd = _lock_logs(todo_path)
+    try:
+        return _compact_locked(todo_path, done_path)
+    finally:
+        os.close(lock_fd)
+
+
+def _compact_locked(todo_path, done_path):
     watermark = max_ev([todo_path, done_path])         # step 2: raw max ev
     if watermark is None:
         return None
 
+    before = fold([todo_path, done_path])              # step 1: full history
     raw_todo = _raw_lines(todo_path)
-    if all(e is not None and e.get("op") in ("snapshot", "compact")
+    idle_ops = ("snapshot", "compact", "conflict")
+    if all(e is not None and e.get("op") in idle_ops
            for _line, e in raw_todo):
         return watermark  # nothing new since the last run; don't churn files
-
-    before = fold([todo_path, done_path])              # step 1: full history
 
     # Highest ev this run actually folded, PER ITEM (#284). Taken from the raw
     # input lines, not from the fold, because it must describe what was read
@@ -179,9 +235,11 @@ def compact(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
          else open_items).append(item)
     open_ids = {i["id"] for i in open_items}
 
-    # step 4: new todo = open snapshots + watermark
-    todo_text = _dump([_snapshot(i, per_item.get(i["id"])) for i in open_items]
-                      + [_compact_line(watermark)])
+    # step 4: new todo = open snapshots + open conflicts + watermark
+    todo_events = []
+    for i in open_items:
+        todo_events.extend(_item_events(i, per_item.get(i["id"])))
+    todo_text = _dump(todo_events + [_compact_line(watermark)])
 
     # steps 5+6: new done = old lines minus open items, plus snapshots for
     # newly-closed items not already there with identical state, plus watermark.
@@ -196,8 +254,10 @@ def compact(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
         if parsed.get("item") in open_ids:
             continue  # stale snapshot/event for a reopened item (step 6)
         kept.append(line + "\n")
-    fresh = [_snapshot(i, per_item.get(i["id"])) for i in closed_items
-             if done_state.get(i["id"]) != _public(i)]
+    fresh = []
+    for i in closed_items:
+        if done_state.get(i["id"]) != _public(i) or i.get("_conflicts"):
+            fresh.extend(_item_events(i, per_item.get(i["id"])))
     done_text = "".join(kept) + _dump(fresh + [_compact_line(watermark)])
 
     tmp_todo, tmp_done = todo_path + ".compact", done_path + ".compact"
@@ -329,10 +389,8 @@ def _reissue(event, ms):
 
     The original `ev` is below the watermark, so the fold would drop it -- the
     intent has to be re-emitted under an id that sorts above. Timestamps are
-    handed in explicitly and strictly increasing: ulid.new() has no
-    intra-millisecond counter, so two reissues generated in the same
-    millisecond would sort by random bytes and replay the branch's events out
-    of order.
+    handed in explicitly and strictly increasing so a batch of reissues keeps
+    the branch's order even when they land in one millisecond.
     """
     fresh = {"ev": ulid.new(ms), "ts": _now(), "actor": event.get("actor", "rescue"),
              "item": event["item"], "op": event["op"], "rescued_from": event["ev"]}
