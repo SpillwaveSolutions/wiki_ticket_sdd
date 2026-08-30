@@ -37,6 +37,10 @@ command -v gh >/dev/null 2>&1 || {
 }
 
 state=$(gh pr view "$PR" --json state -q .state)
+if [ "$state" = "MERGED" ]; then
+  echo "merge-when-green: PR #$PR is already MERGED" >&2
+  exit 0
+fi
 if [ "$state" != "OPEN" ]; then
   echo "merge-when-green: PR #$PR is $state — nothing to merge" >&2
   exit 3

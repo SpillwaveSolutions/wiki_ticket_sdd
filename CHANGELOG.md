@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **Bot compact PRs don't wait for a maintainer click.** GITHUB_TOKEN `pull_request` runs sat `action_required` on #403 (github-actions[bot] treated as a first-time contributor). compact.yml and post-merge.yml now `gh workflow run worklog-invariants --ref $branch` after opening the PR — `workflow_dispatch` is the event GitHub does fire for GITHUB_TOKEN (#361). `actions: write` added.
+
+- **`merge-when-green` on an already-merged PR exits 0**, not 3. CLOSED still exits 3.
+
+- **MIGRATE_MS matches MIGRATE_TS.** Was 1752883200000 (2025-07-19) while the timestamp said 2026-07-19. Now 1784419200000. Already-migrated ledger events keep their 2025 ULIDs; migrate is one-shot.
+
 - **Retention.** Compaction archives closed items older than epic 730d / story 180d / task 90d (then FIFO cap 1000) into `.work/archive.jsonl`. Never deletes. Verify is `fold(todo+done+archive)`. `worklog show` still finds archived items; the roadmap does not. Plan: `docs/plans/2026-08-30-retention.md`.
 
 - **post-merge.yml parses again.** The python heredoc that wrote the sync comment started at column 0, which YAML forbids inside `run: |`. GitHub rejected the file at L57 on 0295c50, so the PR-closed job never ran. The comment is now an indented `echo`/`cat` write still posted via `--body-file`.

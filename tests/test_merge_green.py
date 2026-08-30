@@ -95,8 +95,15 @@ class TestMergeWhenGreen(unittest.TestCase):
         self.assertEqual(r.returncode, 1)
         self.assertFalse(sb.merged())
 
-    def test_closed_pr_is_not_merged(self):
+    def test_already_merged_pr_is_success(self):
         sb = Sandbox(self, ["pass"], prstate="MERGED")
+        r = sb.run()
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertFalse(sb.merged())
+        self.assertIn("already MERGED", r.stderr)
+
+    def test_closed_pr_is_not_merged(self):
+        sb = Sandbox(self, ["pass"], prstate="CLOSED")
         r = sb.run()
         self.assertEqual(r.returncode, 3)
         self.assertFalse(sb.merged())
@@ -178,6 +185,8 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertIn("concurrency:", text)
         self.assertIn("--merge-check", text)
         self.assertIn("gh pr merge --auto --merge", text)
+        self.assertIn("gh workflow run worklog-invariants", text)
+        self.assertIn("actions: write", text)
         self.assertNotIn("--squash", text)
         self.assertNotIn("\\\\n", text)
         # GITHUB_TOKEN cannot push main (GH013 on compact run 33299168867).
@@ -216,6 +225,8 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertIn("name: worklog-compact", text)
         self.assertIn("gh pr create", text)
         self.assertIn("gh pr merge --auto --merge", text)
+        self.assertIn("gh workflow run worklog-invariants", text)
+        self.assertIn("actions: write", text)
         self.assertIn("pull-requests: write", text)
         self.assertNotIn("--squash", text)
         self.assertNotRegex(text, r"(?m)^\s+git push\s*$",

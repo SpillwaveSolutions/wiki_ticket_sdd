@@ -7142,7 +7142,7 @@
   },
   "item/01M19XRRWXHM72JBY29FQRRMEJ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "MIGRATE_MS is a year off (decodes to 2025-07-19)"
   },
   "item/01M19XRRZ2894K7XE59RX1EAY1": {
@@ -7157,7 +7157,7 @@
   },
   "item/01M1A0SNQQYZHGR7P8R35YFR71": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Bot-created compact PRs wait for workflow approval"
   },
   "plan/2026-07-17_worklog-core_plan": {
