@@ -1,7 +1,9 @@
 name: worklog-post-merge
-# After a PR lands on main, regenerate derived docs so the next branch does
-# not fight a stale roadmap/index. compact.yml already does this nightly;
-# this job does it at merge time. sync --report is advisory (spec §12).
+# After a PR lands on main, honor triggers.pr-merge (default: regenerate
+# derived docs + advisory sync --report). compact.yml already does the
+# regenerate nightly; this job does it at merge time. sync --report is
+# advisory (spec §12). The action list is `.work/config.yml` →
+# `worklog triggers pr-merge`, not this file.
 #
 # A push made with the default GITHUB_TOKEN does not trigger sibling
 # `push` workflows. worklog-invariants listens on workflow_run of this
@@ -25,8 +27,12 @@ jobs:
           fetch-depth: 0
           ref: main
 
+      - name: resolve triggers.pr-merge
+        run: python3 bin/worklog triggers pr-merge | tee /tmp/pr-merge-triggers.json
+
       - name: regenerate derived docs
         run: |
+          python3 -c 'import json,sys; a=json.load(open("/tmp/pr-merge-triggers.json"))["actions"]; sys.exit(0 if "roadmap-render" in a else 1)' || exit 0
           bin/worklog roadmap-render
           bin/worklog ia-inventory
           bin/worklog ia-manifest
@@ -36,6 +42,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          python3 -c 'import json,sys; a=json.load(open("/tmp/pr-merge-triggers.json"))["actions"]; sys.exit(0 if any(x=="ticket-sync" or x.startswith("ticket-sync:") for x in a) else 1)' || exit 0
           bin/worklog sync --report | tee /tmp/sync-report.txt
           body=$(python3 -c 'import pathlib; t=pathlib.Path("/tmp/sync-report.txt").read_text(); print("## post-merge sync --report\\n\\n```\\n"+t+"\\n```")')
           gh pr comment "${{ github.event.pull_request.number }}" --body "$body" || true

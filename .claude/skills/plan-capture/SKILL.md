@@ -36,13 +36,14 @@ description: 'Capture an approved plan as tracked work items. Use when exiting p
    manifest so the new plan is navigable), then commit `docs/plans/`,
    `docs/roadmap.md`, `docs/.index/`, and `.work/todo.jsonl` together.
 
-4. Publish in the background: spawn ONE background subagent (Agent tool with
-   `run_in_background`) whose prompt is: run the ticket-sync skill flow for
-   the newly created items, then the wiki-publish flow for the new plan doc
-   (its key is `plan/<slug>`), and report counts. Continue implementing
+4. Publish in the background — but only what `bin/worklog triggers plan-capture`
+   lists. Spawn ONE background subagent (Agent tool with `run_in_background`)
+   whose prompt is: run those actions (ticket-sync skill flow for the newly
+   created items; wiki-publish for the new plan doc, key `plan/<slug>`), and
+   report counts. An empty list means skip publishing. Continue implementing
    immediately — do NOT wait for the subagent; fold its result in when the
    notification arrives. If background agents are unavailable in the harness,
-   run the two publishes inline after the first implementation commit
+   run the listed publishes inline after the first implementation commit
    instead — visibility may lag but never blocks. Whichever way it runs, the
    publishing step ends by re-running `bin/worklog ia-index` and committing
    `docs/.index/`: publishing writes each page's live wiki location back into

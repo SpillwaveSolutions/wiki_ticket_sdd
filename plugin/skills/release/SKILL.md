@@ -73,23 +73,25 @@ only closes an item or restamps `merged_in`.
 ## 5. Doc sync — background agents
 
 The moment the tag exists, spawn background subagents — the release NEVER
-waits on prose. Read `release.sync_docs` in `.work/config.yml`; each listed
-target gets regenerated and republished. Doc commits land on the default
-branch AFTER the tag: docs describe the release, the tag does not wait for
-them.
+waits on prose. Run `bin/worklog triggers release`; each listed target
+gets regenerated and republished. Doc commits land via a PR AFTER the tag:
+docs describe the release, the tag does not wait for them. (Main is
+pull-only — §3. Do not commit these onto the default branch directly.)
 
-- **Agent A — design-docs skill, release mode**: regenerates
+- **Agent A — design-docs skill, release mode**: if `design-doc` and/or
+  `code-walkthrough` are listed, regenerates
   `docs/designs/current_design_doc.md` + `current_code_walkthrough.md`
   against the tagged commit, freezes the dated pair
-  (`<DATE>_<vX.Y.Z-release>_*.md`), publishes all four via wiki-publish.
-- **Agent B — user-docs refresh**: diffs `vPREV..vX.Y.Z`, updates
-  `docs/user_guide/*.md` and `README.md` wherever that diff made them stale
-  (only targets named in `release.sync_docs`), then republishes changed wiki
-  pages through the ledger.
+  (`<DATE>_<vX.Y.Z-release>_*.md`), publishes all four via wiki-publish
+  when `wiki-publish` is also listed.
+- **Agent B — user-docs refresh**: if `user-guide` and/or `readme` are
+  listed, diffs `vPREV..vX.Y.Z`, updates `docs/user_guide/*.md` and
+  `README.md` wherever that diff made them stale, then republishes
+  changed wiki pages through the ledger when `wiki-publish` is listed.
 
 Agents report when done; their commits reference the release work item.
-Removing an entry from `release.sync_docs` opts that doc out — the list is
-the contract, not this prose.
+The list is the contract, not this prose. `release.sync_docs` is the
+legacy fallback — `worklog triggers` already folds it in.
 
 ## 6. Publish and sync
 

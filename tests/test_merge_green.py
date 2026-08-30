@@ -169,6 +169,7 @@ class TestPostMergeWorkflow(unittest.TestCase):
             text = fh.read()
         self.assertIn("name: worklog-post-merge", text)
         self.assertIn("types: [closed]", text)
+        self.assertIn("triggers pr-merge", text)
         self.assertIn("bin/worklog roadmap-render", text)
         self.assertIn("bin/worklog ia-inventory", text)
         self.assertIn("bin/worklog ia-manifest", text)

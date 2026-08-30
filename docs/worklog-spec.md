@@ -178,19 +178,28 @@ status:
   default_kind: daily
   week_starts: monday
   timecard:
-    include_hours: false       # see §17 open question 4
+    include_hours: false       # spec §17 Q4 closed: narrative only; this knob is dead
     actor: rick                # whose work the timecard covers
-  publish: true                # push status reports to the wiki on generation
 
 sync:
   active_window_days: 14       # scope of `sync --scope active`
   conflict_policy: report      # the only policy; auto-resolve descoped
-  push_on_capture: true
+
+# Per-event artifact routing. `worklog triggers <event>` is the reader.
+# An event key that is present (even as []) is the authority.
+triggers:
+  plan-capture: [ticket-sync, wiki-publish:plans]
+  pr-open: [pr-description]
+  pr-merge: [roadmap-render, ticket-sync:close]
+  release: [design-doc, code-walkthrough, user-guide, readme, wiki-publish, ticket-sync]
+  status-report: [wiki-publish:status]
 ```
 
 **Not configurable, deliberately:** the body-size cap (§8.3) is derived from `PIPE_BUF`, not chosen. It lives in the code as a constant with a comment. Exposing it as `max_body_kb` invites someone setting it to 64 and silently losing atomic appends — a knob whose only valid value is the default is a trap, not a feature.
 
-**Resolution rule:** there is no executable to resolve. The skills read `ticketing.system` and `wiki.system`; the core never branches on either beyond checking for `none` (§9.1). If the tooling a skill needs is missing, everything degrades to local-only with a warning — it never fails a command.
+**Resolution rule:** there is no executable to resolve. The skills read `ticketing.system`, `wiki.system`, and `worklog triggers <event>`; the core never branches on the wiki/ticket system beyond checking for `none` (§9.1). If the tooling a skill needs is missing, everything degrades to local-only with a warning — it never fails a command.
+
+`sync.push_on_capture` and `status.publish` remain as legacy fallbacks when the matching `triggers:` event key is absent. `release.sync_docs` is the same for the release row. New installs use `triggers:` only.
 
 ---
 
@@ -875,7 +884,7 @@ Violating any of these is a bug, not a tradeoff:
 3. **Do epics sync as remote epics, or only as labels?** Jira epics are a real type; GitHub Issues has no epic. `capabilities.types` covers it, but the roadmap grouping degrades on GitHub. Milestones as a fallback?
 4. ~~**Does the timecard need hours?**~~ **Closed in 1.4.** Narrative only — a sentence or two per day; no hours, no activity model. `include_hours` stays false and is now dead config. The original question, for the record: Spec'd `include_hours: false` — narrative only. If a timecard is ever going to back an invoice, hours are the whole point, and the log has no duration data: `in_progress` → `done` elapsed time counts overnight and weekends. Getting real hours means either a `worklog start/stop` (an activity model this spec doesn't have) or reading git commit timestamps as a proxy (rough, but free, and it's what actually happened). **Decide before building `timecard`** — it's the difference between a narrative feature and a time-tracking subsystem.
 5. **Multi-repo.** One roadmap across three repos is a real need and this spec has no answer. Probably a separate aggregator reading N logs. Note the timecard has the same problem, and worse: a consultant's week spans repos, so a per-repo timecard is the wrong unit.
-6. **Should `plan-capture` push immediately** (`push_on_capture: true`) or batch until the plan completes? Immediate = visible sooner (fishbowl), more churn in Jira.
+6. ~~**Should `plan-capture` push immediately** (`push_on_capture: true`) or batch until the plan completes?~~ **Closed.** `triggers.plan-capture` is the list. Default includes `ticket-sync` (immediate, fishbowl). Set the event to `[]` or drop `ticket-sync` to batch. The legacy `sync.push_on_capture: false` still drops `ticket-sync` when the event key is absent.
 7. **Does a superseded plan get unpublished from the wiki?** Leaning no — leave it with a banner linking to its successor. Deleting the record of a rejected approach defeats the purpose of keeping plans.
 
 ---

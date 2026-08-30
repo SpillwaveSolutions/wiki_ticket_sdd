@@ -282,6 +282,23 @@ bin/worklog wiki-plan
 
 `--manifest PATH` overrides the default.
 
+### triggers
+
+Per-event artifact routing from `.work/config.yml`. Prints JSON
+`{event, actions}` for one event, or every event as a dict. Skills and
+post-merge CI read this instead of hardcoding when to ticket-sync /
+wiki-publish / regenerate docs.
+
+Events: `plan-capture`, `pr-open`, `pr-merge`, `release`, `status-report`.
+An event key that is present (even as `[]`) is the authority. Missing keys
+fall back to defaults, then to the legacy knobs (`release.sync_docs`,
+`sync.push_on_capture`, `status.publish`).
+
+```bash
+bin/worklog triggers pr-merge
+bin/worklog triggers
+```
+
 ### wiki-get
 
 Fold the published.jsonl ledger. One key, or every page as a JSON dict.

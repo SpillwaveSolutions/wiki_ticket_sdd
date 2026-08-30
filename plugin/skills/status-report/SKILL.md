@@ -37,9 +37,12 @@ description: 'Generate a status report. Use when asked for a status report, a st
    `docs/status/<until>-timecard.md`). Commit the report file, together with
    the log/roadmap if they were touched.
 
-5. Publish via the wiki-publish skill flow, key `status/<date>-<kind>`
-   (timecard: `status/<until-date>-timecard`). Status reports are frozen —
-   publish once, never re-publish.
+5. Run `bin/worklog triggers status-report`. Publish via the wiki-publish
+   skill flow (key `status/<date>-<kind>`; timecard:
+   `status/<until-date>-timecard`) only if `wiki-publish` or
+   `wiki-publish:status` is listed. An empty list means write the file and
+   stop — do not publish. Status reports are frozen — publish once, never
+   re-publish.
 
 Never regenerate an existing report (invariant 15.9). If a report was wrong,
 the correction goes in the next report, not into the old one.
