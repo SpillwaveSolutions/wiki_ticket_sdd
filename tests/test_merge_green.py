@@ -25,7 +25,16 @@ case "$1" in
         n=$(cat "$D/call" 2>/dev/null || echo 0); echo $((n+1)) > "$D/call"
         sed -n "$((n+1))p" "$D/buckets" | tr -d '\\n'
         ;;
-      merge) echo "$@" >> "$D/merged"; exit 0 ;;
+      merge)
+        for a in "$@"; do
+          if [ "$a" = "--auto" ]; then
+            echo "$@" >> "$D/armed"
+            exit 0
+          fi
+        done
+        echo "$@" >> "$D/merged"
+        exit 0
+        ;;
     esac ;;
 esac
 """
@@ -60,6 +69,9 @@ class Sandbox:
 
     def merged(self):
         return os.path.exists(os.path.join(self.dir, "merged"))
+
+    def armed(self):
+        return os.path.exists(os.path.join(self.dir, "armed"))
 
 
 class TestMergeWhenGreen(unittest.TestCase):
@@ -122,6 +134,25 @@ class TestMergeWhenGreen(unittest.TestCase):
         sb = Sandbox(self, ["", "", ""])
         r = sb.run(max_attempts=2)
         self.assertEqual(r.returncode, 4)   # no gates reporting != gates passing
+        self.assertFalse(sb.merged())
+
+    def test_auto_merge_is_armed_before_checks_complete(self):
+        sb = Sandbox(self, ["pending,pass", "pass,pass"])
+        r = sb.run()
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertTrue(sb.armed(), r.stderr)
+        self.assertTrue(sb.merged())
+        with open(os.path.join(sb.dir, "armed")) as fh:
+            armed = fh.read()
+        self.assertIn("--auto", armed)
+        self.assertIn("--merge", armed)
+
+    def test_advisory_does_not_arm_auto_merge(self):
+        sb = Sandbox(self, ["pass,pass"],
+                     config="features:\n  auto_merge_on_green: false\n")
+        r = sb.run()
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertFalse(sb.armed())
         self.assertFalse(sb.merged())
 
 

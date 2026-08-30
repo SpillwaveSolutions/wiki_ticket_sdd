@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- **Compaction preserves open sync conflicts.** Snapshots are built from public fields, which stripped `_conflicts`; the nightly compact then verified the stripped form and silently dropped every open conflict. Compact now re-emits `conflict` events above each snapshot and verifies the private map too.
+- **Write envelope, flock, monotonic ULIDs.** `worklog` byte-caps the whole encoded event (PIPE_BUF 4096), checks `os.write`, and holds `.work/.lock` across append so a concurrent compact cannot replace the inode mid-write. `ulid.new()` increments entropy inside the same millisecond so create-then-update cannot fold out of order.
+- **Merge bootstrap self-heals.** SessionStart doctor writes `merge.ours.driver` and `core.hooksPath` (absolute in linked worktrees). `doctor --fix-wiring` does the same on demand; `init.sh` is worktree-aware.
+- **Sync correctness.** Pull holds the since-cursor when ingest/conflict writes fail; `--keys` is forwarded to the adapter as a point query; `WORKLOG_TICKET_PROJECT` is exported from `ticketing.project` when unset. GitHub `to_line` emits a readable body (so remote body edits conflict instead of being clobbered) and warns at the 1000-issue listing cap.
+- **Faster merge.** `merge-when-green` arms `gh pr merge --auto --merge` up front and polls at 60s as fallback. Never squash (ADR-0008).
+- **Cursor port.** `cursor-hooks.json` paths resolve against the plugin root (`./hooks/scripts/...`). Host-parity test is a real unittest in CI. `.grok-plugin/marketplace.json` locksteps to 0.24.9.
+
 ## 0.24.9 — 2026-08-27
 
 - **Push-only sync absorbs tracker-only tickets and closed-on-remote drift (#385).** `worklog sync` (including `--push-only`) lists remote tickets with no worklog marker as a first-class drift class and prints the `worklog adopt --system … --key …` repair. A linked ticket that is closed remotely while the log item is still open is closed locally (`worklog close`) instead of pushing the open state back over it. `worklog adopt` creates the log item, links it, and stamps the ULID marker so the next push updates. Docs: never `gh issue create` / `gh issue edit` on a worklog-managed tracker — child worktrees add via `worklog` or they do not file tracker issues.

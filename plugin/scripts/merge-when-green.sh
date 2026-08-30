@@ -2,6 +2,10 @@
 # Merge a PR only when every check is green. Polls until then. Never bypasses
 # a gate: a failing check is a stop, not an obstacle. GitHub via gh; other
 # platforms use their CLI equivalent per the merge-green skill.
+#
+# Auto-merge is armed up front (`gh pr merge --auto --merge`) so GitHub
+# merges server-side the moment checks go green. The poll loop is the
+# fallback reporter, not the merge mechanism. Never squash (ADR-0008).
 set -euo pipefail
 
 # Optional first arg forces auto-merge on/off for this run only.
@@ -12,8 +16,8 @@ case "${1:-}" in
 esac
 
 PR="${1:?usage: merge-when-green.sh [--advisory|--auto] <pr-number> [interval-seconds] [max-attempts]}"
-INTERVAL="${2:-300}"   # 5 minutes
-MAX="${3:-24}"         # 24 × 5 min = 2 h, then give up loudly
+INTERVAL="${2:-60}"    # 1 minute; --auto makes the long poll a fallback
+MAX="${3:-120}"        # 120 × 60s = 2 h, then give up loudly
 
 # Resolve auto-merge: --advisory/--auto > WORKLOG_AUTO_MERGE=0|1 > config > true.
 # ponytail: naive block scan, same style as _config_system in bin/worklog
@@ -32,9 +36,27 @@ command -v gh >/dev/null 2>&1 || {
   exit 2
 }
 
+state=$(gh pr view "$PR" --json state -q .state)
+if [ "$state" != "OPEN" ]; then
+  echo "merge-when-green: PR #$PR is $state — nothing to merge" >&2
+  exit 3
+fi
+
+if [ "$AUTO_MERGE" = true ]; then
+  # Arm GitHub auto-merge now so the platform merges when checks go green
+  # instead of waiting for our next poll. Non-fatal: we still merge
+  # ourselves once green if --auto is unsupported or already pending.
+  echo "merge-when-green: arming auto-merge on PR #$PR" >&2
+  gh pr merge "$PR" --auto --merge || true
+fi
+
 for ((i = 1; i <= MAX; i++)); do
   state=$(gh pr view "$PR" --json state -q .state)
   if [ "$state" != "OPEN" ]; then
+    if [ "$state" = "MERGED" ]; then
+      echo "merge-when-green: PR #$PR is MERGED"
+      exit 0
+    fi
     echo "merge-when-green: PR #$PR is $state — nothing to merge" >&2
     exit 3
   fi

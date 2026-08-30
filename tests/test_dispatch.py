@@ -72,6 +72,19 @@ class Sandbox(unittest.TestCase):
     def show(self, item):
         return json.loads(self.wl("show", item))
 
+    def cursor(self, system="fake"):
+        path = os.path.join(self.dir, ".work", "sync-state.json")
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh).get("cursors", {}).get(system)
+
+    def set_cursor(self, value, system="fake"):
+        path = os.path.join(self.dir, ".work", "sync-state.json")
+        with open(path, encoding="utf-8") as fh:
+            st = json.load(fh)
+        st.setdefault("cursors", {})[system] = value
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump(st, fh)
+
 
 class TestIdempotency(Sandbox):
     def test_push_twice_same_ulid_is_one_ticket(self):
@@ -169,6 +182,60 @@ class TestPull(Sandbox):
         evs = {e["ev"] for e in self.ingest_events()}
         self.assertEqual(len(evs), 1, self.ingest_events())
         self.assertEqual(self.show(item)["title"], "Remote title")
+
+    def test_failed_ingest_does_not_advance_cursor(self):
+        """A remote edit whose ingest fails must be retried next poll, not
+        skipped until the ticket changes again."""
+        item = self.wl("add", "Cursor hold", "--priority", "P1").strip()
+        self.sync("--push-only")
+        self.sync("--pull-only")
+        before = self.cursor()
+        self.assertIsNotNone(before)
+        self.edit_remote(lambda t: t["item"].__setitem__("body", "x" * 3000))
+        p = self.run_wl("sync", "--retry-base-delay", "0", "--pull-only")
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertEqual(self.cursor(), before, p.stdout + p.stderr)
+        self.assertIn("held", (p.stdout + p.stderr).lower())
+        # Repair the remote and the same rev-or-later edit is picked up.
+        self.edit_remote(lambda t: t["item"].__setitem__("body", "ok"))
+        self.sync("--pull-only")
+        self.assertEqual(self.show(item).get("body"), "ok")
+
+    def test_keys_pulls_even_when_since_cursor_is_ahead(self):
+        item = self.wl("add", "Keyed", "--priority", "P1").strip()
+        self.sync("--push-only")
+        self.set_cursor(FUTURE_REV)
+        self.edit_remote(lambda t: t["item"].__setitem__("title", "From keys"))
+        self.sync("--pull-only", "--keys", "FAKE#1")
+        self.assertEqual(self.show(item)["title"], "From keys")
+        # Point query must not rewind or advance the since cursor.
+        self.assertEqual(self.cursor(), FUTURE_REV)
+
+
+class TestTicketEnv(Sandbox):
+    def test_dispatcher_exports_project_from_config(self):
+        with open(os.path.join(self.dir, ".work", "config.yml"), "w",
+                  encoding="utf-8") as fh:
+            fh.write("ticketing:\n  system: github\n  project: acme/proj\n")
+        probe = os.path.join(self.dir, "probe-adapter")
+        with open(probe, "w", encoding="utf-8") as fh:
+            fh.write(
+                "#!/bin/sh\n"
+                'if [ "$1" = capabilities ]; then\n'
+                '  printf \'{"system":"github","supports":["pull"],'
+                '"types":{"task":"Issue"},'
+                '"marker":{"style":"html","template":"x{ulid}"},'
+                '"fields":{},"max_title":1}\\n\'\n'
+                "  exit 0\n"
+                "fi\n"
+                'echo "PROJECT=$WORKLOG_TICKET_PROJECT" >&2\n'
+                "exit 0\n")
+        os.chmod(probe, 0o755)
+        env = {k: v for k, v in self.env.items()
+               if k not in ("WORKLOG_TICKET_PROJECT", "WORKLOG_TICKET_SYSTEM")}
+        env["WORKLOG_TICKET_ADAPTER"] = probe
+        p = self.run_wl("sync", "--retry-base-delay", "0", "--pull-only", env=env)
+        self.assertIn("PROJECT=acme/proj", p.stderr)
 
 
 class TestCloseSyncsFields(Sandbox):

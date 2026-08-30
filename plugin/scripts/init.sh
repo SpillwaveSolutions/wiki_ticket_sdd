@@ -103,7 +103,14 @@ if [ -f "$PLUGIN_ROOT/hooks/scripts/session-end.sh" ]; then
   chmod +x "hooks/session-end.sh"
   wrote+=("hooks/session-end.sh")
 fi
-git config core.hooksPath hooks
+git_dir=$(cd "$(git rev-parse --git-dir)" && pwd -P)
+common=$(cd "$(git rev-parse --git-common-dir)" && pwd -P)
+if [ "$git_dir" != "$common" ]; then
+  # Linked worktree: relative hooksPath resolves against the wrong CWD.
+  git config core.hooksPath "$(pwd -P)/hooks"
+else
+  git config core.hooksPath hooks
+fi
 # Built-in `union` needs no config. `ours` is a named driver, not a built-in:
 # `driver = true` is a no-op that succeeds and leaves the file as ours, which
 # is what pre-merge-commit then regenerates (#381).

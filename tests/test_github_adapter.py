@@ -257,6 +257,35 @@ class TestPullEmitsUnmarked(unittest.TestCase):
         self.assertNotIn("worklog:", line.get("body") or "")
         self.assertNotIn("worklog id", line.get("body") or "")
 
+    def test_pull_emits_readable_body(self):
+        issue = dict(MARKED)
+        issue["body"] = (MARKED["body"] + "\n\nThe actual description.")
+        with open(self.responses, "w", encoding="utf-8") as fh:
+            json.dump({
+                "issue list search": {"out": json.dumps([issue])},
+                "issue list open": {"out": json.dumps([issue])},
+            }, fh)
+        p = subprocess.run(
+            [sys.executable, ADAPTER, "pull", "--since", "1970-01-01T00:00:00Z"],
+            capture_output=True, text=True, env=self.env)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        lines = [json.loads(l) for l in p.stdout.splitlines() if l.strip()]
+        self.assertEqual(lines[0]["body"], "The actual description.")
+        self.assertNotIn("worklog:", lines[0]["body"])
+
+    def test_listing_cap_warns_at_1000(self):
+        issues = [dict(MARKED, number=i) for i in range(1000)]
+        with open(self.responses, "w", encoding="utf-8") as fh:
+            json.dump({
+                "issue list search": {"out": json.dumps(issues)},
+                "issue list open": {"out": "[]"},
+            }, fh)
+        p = subprocess.run(
+            [sys.executable, ADAPTER, "pull", "--since", "1970-01-01T00:00:00Z"],
+            capture_output=True, text=True, env=self.env)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertIn("capped at 1000", p.stderr)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

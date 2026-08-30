@@ -214,6 +214,9 @@ def to_line(issue):
         "id": ids[0] if ids else None,
         "title": issue.get("title"),
     }
+    readable = readable_body(body)
+    if readable:
+        line["body"] = readable
     if issue.get("url"):
         line["external"]["url"] = issue["url"]
     if (issue.get("state") or "").upper() == "CLOSED":
@@ -314,7 +317,10 @@ def cmd_pull(argv):
               "--limit", "1000",
               "--json", ISSUE_JSON,
               "-S", f"worklog: in:body updated:>{since}"])
-    for issue in json.loads(out):
+    issues = json.loads(out)
+    if len(issues) >= 1000:
+        log("listing capped at 1000 issues; some tickets may be missing from pull")
+    for issue in issues:
         print(json.dumps(to_line(issue)))
         seen.add(issue["number"])
     # Open issues with no worklog marker are tracker-only orphans (#385),
@@ -332,11 +338,7 @@ def cmd_pull(argv):
 
 def cmd_get(key):
     issue = fetch_issue(target_repo(), key)
-    line = to_line(issue)
-    body = readable_body(issue.get("body") or "")
-    if body:
-        line["body"] = body
-    print(json.dumps(line))
+    print(json.dumps(to_line(issue)))
 
 
 def cmd_close(key, resolution):

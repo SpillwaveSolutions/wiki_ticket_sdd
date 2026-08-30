@@ -57,6 +57,9 @@ jobs:
         run: |
           python3 tests/test_fold.py
           python3 tests/test_ulid.py
+          python3 tests/test_compact.py
+          python3 tests/test_github_adapter.py
+          python3 tests/test_merge_green.py
           python3 tests/test_render_roadmap.py
           python3 tests/test_plan_capture.py
           python3 tests/test_ia.py
@@ -77,6 +80,7 @@ jobs:
           python3 tests/test_bug_381.py
           python3 tests/test_bug_382.py
           python3 tests/test_bug_383.py
+          python3 plugin/tests/test_three_host_hooks.py
 
   coverage:
     if: github.event_name != 'workflow_run'

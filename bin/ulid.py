@@ -107,6 +107,10 @@ def git_commit_full() -> str:
     return _rev_parse(short=False)
 
 
+_last_ms = -1
+_last_entropy = None
+
+
 def new(timestamp_ms: int = None) -> str:
     """A fresh ULID for a locally-originated event.
 
@@ -118,9 +122,25 @@ def new(timestamp_ms: int = None) -> str:
     event's `git` field instead -- which also traces better, since an item's
     id is minted once and could only ever name the branch the ITEM was
     created on, while a field on every event names the origin of each one.
+
+    Same-millisecond calls are monotonic: the 80-bit entropy increments so
+    create-then-update in one tick cannot fold out of order (merge-rescue
+    already worked around this; the mint path does it too).
     """
+    global _last_ms, _last_entropy
     ms = int(time.time() * 1000) if timestamp_ms is None else timestamp_ms
-    return encode(ms, os.urandom(10))
+    if ms == _last_ms and _last_entropy is not None:
+        n = int.from_bytes(_last_entropy, "big") + 1
+        if n >= (1 << 80):
+            ms += 1
+            entropy = os.urandom(10)
+        else:
+            entropy = n.to_bytes(10, "big")
+    else:
+        entropy = os.urandom(10)
+    _last_ms = ms
+    _last_entropy = entropy
+    return encode(ms, entropy)
 
 
 def deterministic(system: str, key: str, rev: str, rev_timestamp_ms: int) -> str:
