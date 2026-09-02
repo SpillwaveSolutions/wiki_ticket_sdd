@@ -4,6 +4,10 @@
 
 published.py MIGRATE_MS = 1752883200000 is 2025-07-19; MIGRATE_TS says 2026-07-19.
 
+## Linked PRs
+
+- [[PR-406]]
+
 ## Release
 
 - [[Release-v0.24.10]]

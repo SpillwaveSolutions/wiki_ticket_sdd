@@ -1,7 +1,7 @@
 ---
 name: design-docs
 metadata:
-  version: "0.24.9"
+  version: "0.24.10"
 description: Generate or sync the design document or code walkthrough. Live current pair regenerated from the actual code; a release freeze is a short tag+hash+delta note, not a full dated copy. Uses document-specialist v3.2.2, design-doc-mermaid v1.1.1, plantuml v1.2.2. Use when asked for a design doc, architecture doc, code walkthrough, or requirements doc, and automatically (background agents) at every release.
 ---
 

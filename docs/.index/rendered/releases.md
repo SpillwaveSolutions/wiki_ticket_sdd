@@ -2,6 +2,30 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
+## v0.24.10 — 2026-09-02
+
+- Roadmap snapshot: [[Roadmap-2026-09-02_v0.24.10-release]]
+- Shipped: Faster merge: auto-merge + post-merge CI
+- Shipped: Enable auto-merge and required checks on main
+- Shipped: Post-merge CI regenerates roadmap/index and reports sync drift
+- Shipped: Batch ceremony PRs; ADR-0010 native auto-merge
+- Shipped: Document ruleset bypass as github-actions[bot] user
+- Shipped: Remove OKF write path and worklog-session skill from the plugin
+- Shipped: Replace persona ONBOARDING.md with a real WikiTicket onboarding
+- Shipped: worklog wiki-plan: frozen-guard and render-hash skip in code
+- Shipped: triggers: config block for PR vs release generation
+- Shipped: Truth hygiene: spec fold/watermark, adapters exit-3, HOSTS/PORTS, plan-vs-ADR, freeze cap
+- Shipped: README positioning vs beads, spec-kit, GitHub Projects; demote graph-engineering essay
+- Shipped: Implement worklog sync --report; land compact/post-merge via PR
+- Shipped: Close published.jsonl item; triage five stale in_progress
+- Shipped: MIGRATE_MS is a year off (decodes to 2025-07-19)
+- Shipped: Retention: compact evicts old done.jsonl into an archive
+- Shipped: post-merge.yml YAML invalid: python heredoc dedents to column 0
+- Shipped: Bot-created compact PRs wait for workflow approval
+- Shipped: compact.yml git add archive.jsonl is fatal when the file does not exist
+- Shipped: Bot PR dispatch check-runs do not satisfy required checks
+- Shipped: Release v0.24.10: merge pipeline, retention, bot PR landing
+
 ## v0.24.9 — 2026-08-27
 
 - Roadmap snapshot: [[Roadmap-2026-08-27_v0.24.9-release]]

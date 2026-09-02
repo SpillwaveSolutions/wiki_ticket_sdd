@@ -2,40 +2,52 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Release v0.24.10: merge pipeline, retention, bot PR landing
+`01M1FX9JR00XVYMRC6ZB3RDT7W` · status: done
+- targets: release/v0.24.10
+
 ### Bot PR dispatch check-runs do not satisfy required checks
 `01M1FT2SP2GVMC45FDM0J6129V` · status: done
+- lands-in: pr/409
 - targets: release/v0.24.10
 
 ### compact.yml git add archive.jsonl is fatal when the file does not exist
 `01M1FRNE2M52PEG41E26BNW61B` · status: done
 - belongs-to: Retention: compact evicts old done.jsonl into an archive
+- lands-in: pr/407
 - targets: release/v0.24.10
 
 ### Bot-created compact PRs wait for workflow approval
 `01M1A0SNQQYZHGR7P8R35YFR71` · status: done
+- lands-in: pr/406
 - targets: release/v0.24.10
 
 ### post-merge.yml YAML invalid: python heredoc dedents to column 0
 `01M19YV9VCDNTVPXAHW3D2NSA5` · status: done
 - belongs-to: Implement worklog sync --report; land compact/post-merge via PR
+- lands-in: pr/402
 - targets: release/v0.24.10
 
 ### Retention: compact evicts old done.jsonl into an archive
 `01M19XRRZ2894K7XE59RX1EAY1` · status: done
+- lands-in: pr/405
 - targets: release/v0.24.10
 - contains: compact.yml git add archive.jsonl is fatal when the file does not exist
 - produced-by: [[Plan-retention]]
 
 ### MIGRATE_MS is a year off (decodes to 2025-07-19)
 `01M19XRRWXHM72JBY29FQRRMEJ` · status: done
+- lands-in: pr/406
 - targets: release/v0.24.10
 
 ### Close published.jsonl item; triage five stale in_progress
 `01M19XRRTTWDBN0SRGDZ1VN35G` · status: done
+- lands-in: pr/404
 - targets: release/v0.24.10
 
 ### Implement worklog sync --report; land compact/post-merge via PR
 `01M19XR46836RE9JSHJHM2DSGC` · status: done
+- lands-in: pr/401
 - targets: release/v0.24.10
 - contains: post-merge.yml YAML invalid: python heredoc dedents to column 0
 
@@ -49,10 +61,12 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### triggers: config block for PR vs release generation
 `01M19RPMRNDZ74HD43MXJ6BPNA` · status: done
+- lands-in: pr/398
 - targets: release/v0.24.10
 
 ### worklog wiki-plan: frozen-guard and render-hash skip in code
 `01M18TDMWFXHTKD7PF3KT5Q95S` · status: done
+- lands-in: pr/397
 - targets: release/v0.24.10
 
 ### Replace persona ONBOARDING.md with a real WikiTicket onboarding
@@ -76,15 +90,18 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Post-merge CI regenerates roadmap/index and reports sync drift
 `01M18REA7YDR9FHA1PWJ5DPHX4` · status: done
 - belongs-to: Faster merge: auto-merge + post-merge CI
+- lands-in: pr/394
 - targets: release/v0.24.10
 
 ### Enable auto-merge and required checks on main
 `01M18REA5STM4FX1G3FA5TMX38` · status: done
 - belongs-to: Faster merge: auto-merge + post-merge CI
+- lands-in: pr/394
 - targets: release/v0.24.10
 
 ### Faster merge: auto-merge + post-merge CI
 `01M18RE2Y7BR0ZAK2EHBSD65AM` · status: done
+- lands-in: pr/394
 - targets: release/v0.24.10
 - contains: Enable auto-merge and required checks on main
 - contains: Post-merge CI regenerates roadmap/index and reports sync drift

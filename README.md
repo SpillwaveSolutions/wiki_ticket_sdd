@@ -306,7 +306,7 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | `docs/user_guide/` | User guide, CLI reference, plugin guide |
 | `docs/integrations/` | Living per-system setup guides (11 SDD tools + ticket/wiki systems), published to the wiki and used as the `integration-guide` skill's offline fallback |
 | `hooks/` | `pre-commit`, `pre-merge-commit`, `commit-msg`, `exit-plan-capture.sh`, `prompt-reminder.sh`, `session-doctor.sh`, `session-end.sh`, `stop-worklog-check.sh` |
-| `plugin/` | Claude Code, Codex, and Grok Build manifests, commands, skills, hooks, and canonical scripts — **v0.24.9** |
+| `plugin/` | Claude Code, Codex, and Grok Build manifests, commands, skills, hooks, and canonical scripts — **v0.24.10** |
 | `tests/` | Unit and integration tests |
 
 ## Testing

@@ -3252,6 +3252,11 @@
   },
   {
    "from": "item/01M18RE2Y7BR0ZAK2EHBSD65AM",
+   "to": "pr/394",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M18RE2Y7BR0ZAK2EHBSD65AM",
    "to": "release/v0.24.10",
    "type": "targets"
   },
@@ -3259,6 +3264,11 @@
    "from": "item/01M18REA5STM4FX1G3FA5TMX38",
    "to": "item/01M18RE2Y7BR0ZAK2EHBSD65AM",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M18REA5STM4FX1G3FA5TMX38",
+   "to": "pr/394",
+   "type": "lands-in"
   },
   {
    "from": "item/01M18REA5STM4FX1G3FA5TMX38",
@@ -3269,6 +3279,11 @@
    "from": "item/01M18REA7YDR9FHA1PWJ5DPHX4",
    "to": "item/01M18RE2Y7BR0ZAK2EHBSD65AM",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M18REA7YDR9FHA1PWJ5DPHX4",
+   "to": "pr/394",
+   "type": "lands-in"
   },
   {
    "from": "item/01M18REA7YDR9FHA1PWJ5DPHX4",
@@ -3307,8 +3322,18 @@
   },
   {
    "from": "item/01M18TDMWFXHTKD7PF3KT5Q95S",
+   "to": "pr/397",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M18TDMWFXHTKD7PF3KT5Q95S",
    "to": "release/v0.24.10",
    "type": "targets"
+  },
+  {
+   "from": "item/01M19RPMRNDZ74HD43MXJ6BPNA",
+   "to": "pr/398",
+   "type": "lands-in"
   },
   {
    "from": "item/01M19RPMRNDZ74HD43MXJ6BPNA",
@@ -3327,8 +3352,18 @@
   },
   {
    "from": "item/01M19XR46836RE9JSHJHM2DSGC",
+   "to": "pr/401",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M19XR46836RE9JSHJHM2DSGC",
    "to": "release/v0.24.10",
    "type": "targets"
+  },
+  {
+   "from": "item/01M19XRRTTWDBN0SRGDZ1VN35G",
+   "to": "pr/404",
+   "type": "lands-in"
   },
   {
    "from": "item/01M19XRRTTWDBN0SRGDZ1VN35G",
@@ -3337,8 +3372,18 @@
   },
   {
    "from": "item/01M19XRRWXHM72JBY29FQRRMEJ",
+   "to": "pr/406",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M19XRRWXHM72JBY29FQRRMEJ",
    "to": "release/v0.24.10",
    "type": "targets"
+  },
+  {
+   "from": "item/01M19XRRZ2894K7XE59RX1EAY1",
+   "to": "pr/405",
+   "type": "lands-in"
   },
   {
    "from": "item/01M19XRRZ2894K7XE59RX1EAY1",
@@ -3352,8 +3397,18 @@
   },
   {
    "from": "item/01M19YV9VCDNTVPXAHW3D2NSA5",
+   "to": "pr/402",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M19YV9VCDNTVPXAHW3D2NSA5",
    "to": "release/v0.24.10",
    "type": "targets"
+  },
+  {
+   "from": "item/01M1A0SNQQYZHGR7P8R35YFR71",
+   "to": "pr/406",
+   "type": "lands-in"
   },
   {
    "from": "item/01M1A0SNQQYZHGR7P8R35YFR71",
@@ -3367,11 +3422,26 @@
   },
   {
    "from": "item/01M1FRNE2M52PEG41E26BNW61B",
+   "to": "pr/407",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M1FRNE2M52PEG41E26BNW61B",
    "to": "release/v0.24.10",
    "type": "targets"
   },
   {
    "from": "item/01M1FT2SP2GVMC45FDM0J6129V",
+   "to": "pr/409",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M1FT2SP2GVMC45FDM0J6129V",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
+   "from": "item/01M1FX9JR00XVYMRC6ZB3RDT7W",
    "to": "release/v0.24.10",
    "type": "targets"
   },
@@ -4873,6 +4943,21 @@
   {
    "from": "roadmap-snapshot/2026-08-27_v0.24.9-release",
    "to": "release/v0.24.9",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-09-02_v0.24.10-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-09-02_v0.24.10-release",
+   "to": "roadmap-snapshot/2026-08-27_v0.24.9-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-09-02_v0.24.10-release",
+   "to": "release/v0.24.10",
    "type": "targets"
   },
   {
@@ -7185,6 +7270,11 @@
    "status": "done",
    "title": "Bot PR dispatch check-runs do not satisfy required checks"
   },
+  "item/01M1FX9JR00XVYMRC6ZB3RDT7W": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Release v0.24.10: merge pipeline, retention, bot PR landing"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -7438,6 +7528,36 @@
    "doc_type": "pr"
   },
   "pr/388": {
+   "doc_type": "pr"
+  },
+  "pr/394": {
+   "doc_type": "pr"
+  },
+  "pr/397": {
+   "doc_type": "pr"
+  },
+  "pr/398": {
+   "doc_type": "pr"
+  },
+  "pr/401": {
+   "doc_type": "pr"
+  },
+  "pr/402": {
+   "doc_type": "pr"
+  },
+  "pr/404": {
+   "doc_type": "pr"
+  },
+  "pr/405": {
+   "doc_type": "pr"
+  },
+  "pr/406": {
+   "doc_type": "pr"
+  },
+  "pr/407": {
+   "doc_type": "pr"
+  },
+  "pr/409": {
    "doc_type": "pr"
   },
   "release/v0.10.0": {
@@ -7701,6 +7821,12 @@
   "roadmap-snapshot/2026-08-27_v0.24.9-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-08-27_v0.24.9-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-09-02_v0.24.10-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-09-02_v0.24.10-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

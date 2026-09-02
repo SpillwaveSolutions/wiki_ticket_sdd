@@ -37,7 +37,7 @@ PATHS = (".work/todo.jsonl", ".work/done.jsonl", ".work/archive.jsonl")
 MAX_BODY = 2048  # body UTF-8 bytes; derived from PIPE_BUF (section 8.3). Not a setting.
 MAX_LINE = 4096  # POSIX PIPE_BUF; the whole encoded event must fit for atomicity.
 LOCK = ".work/.lock"
-VERSION = "0.24.9"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+VERSION = "0.24.10"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
 _warned_concurrent = False

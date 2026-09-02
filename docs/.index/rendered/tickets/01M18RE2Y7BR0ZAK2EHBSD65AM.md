@@ -13,6 +13,10 @@ ADR-0003 rejected GitHub auto-merge because main had no required checks.
 
 Progress: 4/4 done
 
+## Linked PRs
+
+- [[PR-394]]
+
 ## Release
 
 - [[Release-v0.24.10]]

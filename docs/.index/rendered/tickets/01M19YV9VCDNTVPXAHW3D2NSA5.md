@@ -8,6 +8,10 @@ GitHub rejected post-merge.yml at L57 on merge commit 0295c50: the python heredo
 
 - story: [[Ticket-01M19XR46836RE9JSHJHM2DSGC]] Implement worklog sync --report; land compact/post-merge via PR — Two live holes in the merge pipeline #394 installed.
 
+## Linked PRs
+
+- [[PR-402]]
+
 ## Release
 
 - [[Release-v0.24.10]]

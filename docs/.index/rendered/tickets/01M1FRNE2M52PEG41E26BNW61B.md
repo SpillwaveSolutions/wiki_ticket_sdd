@@ -8,6 +8,10 @@ Nightly compact 33369108436 (Aug 31) and 33482394234 (Sep 1) failed at commit vi
 
 - story: [[Ticket-01M19XRRZ2894K7XE59RX1EAY1]] Retention: compact evicts old done.jsonl into an archive — done.jsonl grows forever.
 
+## Linked PRs
+
+- [[PR-407]]
+
 ## Release
 
 - [[Release-v0.24.10]]
