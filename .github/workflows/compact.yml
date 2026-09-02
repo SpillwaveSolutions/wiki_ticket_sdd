@@ -60,7 +60,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           branch="chore/compact-${GITHUB_RUN_ID}"
           git checkout -b "$branch"
-          git add .work/todo.jsonl .work/done.jsonl .work/archive.jsonl docs
+          git add .work/todo.jsonl .work/done.jsonl docs
+          # archive.jsonl exists only after the first eviction. Unguarded
+          # `git add` of a missing path is fatal (Sep 1 run 33482394234).
+          [ -f .work/archive.jsonl ] && git add .work/archive.jsonl
           WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
           git commit -m "chore(worklog): compact through $wm"
           git push -u origin HEAD

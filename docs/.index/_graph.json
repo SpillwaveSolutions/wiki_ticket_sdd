@@ -3361,6 +3361,16 @@
    "type": "targets"
   },
   {
+   "from": "item/01M1FRNE2M52PEG41E26BNW61B",
+   "to": "item/01M19XRRZ2894K7XE59RX1EAY1",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01M1FRNE2M52PEG41E26BNW61B",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7159,6 +7169,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "Bot-created compact PRs wait for workflow approval"
+  },
+  "item/01M1FRNE2M52PEG41E26BNW61B": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "compact.yml git add archive.jsonl is fatal when the file does not exist"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
