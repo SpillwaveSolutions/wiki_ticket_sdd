@@ -4,6 +4,10 @@
 
 workflow_dispatch of worklog-invariants on a bot branch does run (run 33576637311 SUCCESS on #408).
 
+## Linked PRs
+
+- [[PR-409]]
+
 ## Release
 
 - [[Release-v0.24.10]]

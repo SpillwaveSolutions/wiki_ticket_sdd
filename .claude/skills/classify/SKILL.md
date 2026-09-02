@@ -1,7 +1,7 @@
 ---
 name: classify
 metadata:
-  version: "0.24.9"
+  version: "0.24.10"
 description: "Propose work items from recent conversation (flag-gated classifier). Use when the Stop hook requests classification or when asked to sweep a conversation for untracked work. Propose-only: writes .work/suggestions.jsonl, never the event log."
 ---
 

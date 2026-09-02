@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.24.10 — 2026-09-02
 
 - **Bot compact PRs land without a maintainer click.** GITHUB_TOKEN `pull_request` runs sit `action_required` (#403, #408). `workflow_dispatch` of worklog-invariants does run and produces check-runs on the SHA, but those check-runs do not appear on the PR (`statusCheckRollup` empty, BLOCKED on #408). Commit statuses named `invariants` and `coverage` do satisfy the merge-when-green ruleset (#408 merged that way, MERGE, 2 parents). compact.yml and post-merge.yml now dispatch, wait, then post those statuses via `plugin/scripts/associate-pr-checks.sh`. `statuses: write` added. Never squash (ADR-0008).
 
@@ -36,6 +36,9 @@
 - **Sync correctness.** Pull holds the since-cursor when ingest/conflict writes fail; `--keys` is forwarded to the adapter as a point query; `WORKLOG_TICKET_PROJECT` is exported from `ticketing.project` when unset. GitHub `to_line` emits a readable body (so remote body edits conflict instead of being clobbered) and warns at the 1000-issue listing cap.
 - **Faster merge.** `merge-when-green` arms `gh pr merge --auto --merge` up front and polls at 60s as fallback. Never squash (ADR-0008).
 - **Cursor port.** `cursor-hooks.json` paths resolve against the plugin root (`./hooks/scripts/...`). Host-parity test is a real unittest in CI. `.grok-plugin/marketplace.json` locksteps to 0.24.9.
+- **Version lockstep 0.24.10.** Plugin manifests, `bin/worklog`, both skill trees, and the README marker all read 0.24.10.
+
+Released with `trace-check --strict` gaps on historical work, plus this-wave items that are unplanned (no plan) and local-only (no external ticket). This-wave PR/commit links were recorded before the stamp. Reported and accepted rather than skipped silently. `doc-verify --strict` findings on frozen documents do not gate (ADR-0009). Live design docs regenerate after the tag.
 
 ## 0.24.9 — 2026-08-27
 
