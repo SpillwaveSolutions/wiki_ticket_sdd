@@ -14,6 +14,7 @@ permissions:
   contents: write
   pull-requests: write
   actions: write
+  statuses: write
 
 jobs:
   compact:
@@ -70,10 +71,14 @@ jobs:
           gh pr create --head "$branch" --base main \
             --title "chore(worklog): compact through $wm" \
             --body "Nightly compaction. Auto-merge when green (ADR-0010). Never squash (ADR-0008)."
-          # GITHUB_TOKEN pull_request runs may sit action_required
-          # (github-actions[bot] treated as a first-time contributor; #403).
+          # GITHUB_TOKEN pull_request runs sit action_required
+          # (github-actions[bot] treated as a first-time contributor; #403, #408).
           # workflow_dispatch is the event GitHub does fire for GITHUB_TOKEN
-          # (#361). Dispatch invariants on this branch so required checks
-          # land without a maintainer click.
+          # (#361), but those check-runs do not appear on the PR
+          # (statusCheckRollup empty, BLOCKED on #408). Commit statuses
+          # named invariants and coverage do satisfy the ruleset
+          # (#408 merged that way). associate-pr-checks.sh waits for
+          # dispatch, then posts those statuses.
           gh workflow run worklog-invariants --ref "$branch"
+          plugin/scripts/associate-pr-checks.sh "$(git rev-parse HEAD)"
           gh pr merge --auto --merge

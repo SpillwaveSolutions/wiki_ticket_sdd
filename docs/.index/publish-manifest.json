@@ -1,5 +1,5 @@
 {
- "git_hash": "1229dca",
+ "git_hash": "fc69d86",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "03fd6ef101b8",
+   "render_hash": "fb3ba6463ccd",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -585,7 +585,7 @@
    "frozen": false,
    "page_name": "Release-v0.24.10",
    "render": "as-is",
-   "render_hash": "0c6ea54372cc",
+   "render_hash": "ec3cc39ec936",
    "source": "docs/.index/rendered/releases/v0.24.10.md",
    "title": "Release v0.24.10",
    "truth_state": "shipped",
@@ -4542,6 +4542,16 @@
    "wiki_key": "item/01M1FRNE2M52PEG41E26BNW61B"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M1FT2SP2GVMC45FDM0J6129V",
+   "render": "as-is",
+   "render_hash": "d208c6fa20ae",
+   "source": "docs/.index/rendered/tickets/01M1FT2SP2GVMC45FDM0J6129V.md",
+   "title": "Bot PR dispatch check-runs do not satisfy required checks",
+   "truth_state": "done",
+   "wiki_key": "item/01M1FT2SP2GVMC45FDM0J6129V"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -5382,11 +5392,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-02T00:43:26Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-02T01:02:42Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "126820e2a4f0",
+   "render_hash": "630114c098f3",
    "source": "docs/roadmap.md",
    "source_hash": "65538697716e",
    "title": "Roadmap",

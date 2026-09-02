@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Bot PR dispatch check-runs do not satisfy required checks
+`01M1FT2SP2GVMC45FDM0J6129V` · status: done
+- targets: release/v0.24.10
+
 ### compact.yml git add archive.jsonl is fatal when the file does not exist
 `01M1FRNE2M52PEG41E26BNW61B` · status: done
 - belongs-to: Retention: compact evicts old done.jsonl into an archive

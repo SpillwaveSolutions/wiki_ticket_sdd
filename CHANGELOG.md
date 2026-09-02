@@ -2,9 +2,9 @@
 
 ## Unreleased
 
-- **Nightly compact survives a missing archive.jsonl.** `git add .work/archive.jsonl` is fatal when retention has never evicted (runs 33369108436, 33482394234). The add is now guarded; missing archive is the designed default.
+- **Bot compact PRs land without a maintainer click.** GITHUB_TOKEN `pull_request` runs sit `action_required` (#403, #408). `workflow_dispatch` of worklog-invariants does run and produces check-runs on the SHA, but those check-runs do not appear on the PR (`statusCheckRollup` empty, BLOCKED on #408). Commit statuses named `invariants` and `coverage` do satisfy the merge-when-green ruleset (#408 merged that way, MERGE, 2 parents). compact.yml and post-merge.yml now dispatch, wait, then post those statuses via `plugin/scripts/associate-pr-checks.sh`. `statuses: write` added. Never squash (ADR-0008).
 
-- **Bot compact PRs don't wait for a maintainer click.** GITHUB_TOKEN `pull_request` runs sat `action_required` on #403 (github-actions[bot] treated as a first-time contributor). compact.yml and post-merge.yml now `gh workflow run worklog-invariants --ref $branch` after opening the PR — `workflow_dispatch` is the event GitHub does fire for GITHUB_TOKEN (#361). `actions: write` added.
+- **Nightly compact survives a missing archive.jsonl.** `git add .work/archive.jsonl` is fatal when retention has never evicted (runs 33369108436, 33482394234). The add is now guarded; missing archive is the designed default.
 
 - **`merge-when-green` on an already-merged PR exits 0**, not 3. CLOSED still exits 3.
 

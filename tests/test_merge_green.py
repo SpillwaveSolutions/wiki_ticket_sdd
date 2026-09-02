@@ -6,6 +6,7 @@ must merge only on green, refuse on red, and never bypass. Interval 0 keeps
 the polls instant.
 """
 import os
+import json
 import stat
 import subprocess
 import tempfile
@@ -187,6 +188,8 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertIn("gh pr merge --auto --merge", text)
         self.assertIn("gh workflow run worklog-invariants", text)
         self.assertIn("actions: write", text)
+        self.assertIn("statuses: write", text)
+        self.assertIn("associate-pr-checks.sh", text)
         self.assertNotIn("--squash", text)
         self.assertNotIn("\\\\n", text)
         # GITHUB_TOKEN cannot push main (GH013 on compact run 33299168867).
@@ -228,6 +231,8 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertIn("gh workflow run worklog-invariants", text)
         self.assertIn("actions: write", text)
         self.assertIn("pull-requests: write", text)
+        self.assertIn("statuses: write", text)
+        self.assertIn("associate-pr-checks.sh", text)
         self.assertIn("[ -f .work/archive.jsonl ]", text)
         self.assertNotIn(
             "git add .work/todo.jsonl .work/done.jsonl .work/archive.jsonl docs",
@@ -240,7 +245,6 @@ class TestPostMergeWorkflow(unittest.TestCase):
                             "bare git push would target main")
 
     def test_ruleset_is_merge_commit_only(self):
-        import json
         path = os.path.join(ROOT, ".github", "merge-when-green-ruleset.json")
         with open(path, encoding="utf-8") as fh:
             data = json.load(fh)
@@ -258,6 +262,123 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertEqual(sorted(contexts), ["coverage", "invariants"])
         actors = {(a["actor_id"], a["actor_type"]) for a in data["bypass_actors"]}
         self.assertIn((41898282, "User"), actors)
+
+
+ASSOCIATE = os.path.join(ROOT, "plugin", "scripts", "associate-pr-checks.sh")
+
+FAKE_GH_ASSOCIATE = """#!/usr/bin/env bash
+D="$FAKE_DIR"
+case "$1" in
+  run)
+    case "$2" in
+      list) cat "$D/runs.json" ;;
+      watch) echo "$@" >> "$D/watched"; exit 0 ;;
+      view) cat "$D/jobs.json" ;;
+    esac ;;
+  api)
+    echo "$@" >> "$D/api.log"
+    exit 0
+    ;;
+esac
+"""
+
+
+class AssociateSandbox:
+    def __init__(self, tc, sha, runs, jobs):
+        self.sha = sha
+        self.dir = tempfile.mkdtemp(prefix="apc-")
+        tc.addCleanup(lambda: subprocess.run(["rm", "-rf", self.dir]))
+        gh = os.path.join(self.dir, "gh")
+        with open(gh, "w") as fh:
+            fh.write(FAKE_GH_ASSOCIATE)
+        os.chmod(gh, os.stat(gh).st_mode | stat.S_IEXEC)
+        with open(os.path.join(self.dir, "runs.json"), "w") as fh:
+            json.dump(runs, fh)
+        with open(os.path.join(self.dir, "jobs.json"), "w") as fh:
+            json.dump({"jobs": jobs}, fh)
+
+    def run(self):
+        env = dict(
+            os.environ,
+            PATH=f"{self.dir}:{os.environ['PATH']}",
+            FAKE_DIR=self.dir,
+            GITHUB_REPOSITORY="SpillwaveSolutions/wiki_ticket_sdd",
+            ASSOCIATE_WAIT="3",
+            ASSOCIATE_POLL="0",
+        )
+        return subprocess.run(
+            ["bash", ASSOCIATE, self.sha],
+            capture_output=True, text=True, env=env, cwd=self.dir)
+
+    def api_log(self):
+        path = os.path.join(self.dir, "api.log")
+        if not os.path.exists(path):
+            return ""
+        with open(path) as fh:
+            return fh.read()
+
+
+class TestAssociatePrChecks(unittest.TestCase):
+    """Dispatch check-runs do not satisfy the PR gate; commit statuses do (#408)."""
+
+    SHA = "9e19fb76b72e1b118257b5392ba55401745e2cf4"
+
+    def test_script_never_bypasses(self):
+        with open(ASSOCIATE, encoding="utf-8") as fh:
+            text = fh.read()
+        self.assertNotRegex(text, r"(?m)^\s*gh\s.*--squash")
+        self.assertNotRegex(text, r"(?m)^\s*gh\s.*--admin")
+        self.assertIn("/statuses/", text)
+        self.assertIn("invariants", text)
+        self.assertIn("coverage", text)
+
+    def test_success_posts_both_contexts(self):
+        sb = AssociateSandbox(
+            self, self.SHA,
+            runs=[{"databaseId": 33576637311, "headSha": self.SHA}],
+            jobs=[{"name": "invariants", "conclusion": "success"},
+                  {"name": "coverage", "conclusion": "success"}],
+        )
+        r = sb.run()
+        self.assertEqual(r.returncode, 0, r.stderr)
+        log = sb.api_log()
+        self.assertIn("state=success", log)
+        self.assertIn("context=invariants", log)
+        self.assertIn("context=coverage", log)
+        self.assertIn(f"statuses/{self.SHA}", log)
+        self.assertNotIn("state=failure", log)
+
+    def test_failed_job_posts_failure_and_exits_1(self):
+        sb = AssociateSandbox(
+            self, self.SHA,
+            runs=[{"databaseId": 1, "headSha": self.SHA}],
+            jobs=[{"name": "invariants", "conclusion": "success"},
+                  {"name": "coverage", "conclusion": "failure"}],
+        )
+        r = sb.run()
+        self.assertEqual(r.returncode, 1, r.stderr)
+        log = sb.api_log()
+        self.assertIn("context=invariants", log)
+        self.assertIn("context=coverage", log)
+        self.assertIn("state=failure", log)
+
+    def test_missing_dispatch_run_exits_2(self):
+        sb = AssociateSandbox(self, self.SHA, runs=[], jobs=[])
+        r = sb.run()
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("no workflow_dispatch run", r.stderr)
+        self.assertEqual(sb.api_log(), "")
+
+    def test_missing_job_is_failure(self):
+        sb = AssociateSandbox(
+            self, self.SHA,
+            runs=[{"databaseId": 1, "headSha": self.SHA}],
+            jobs=[{"name": "invariants", "conclusion": "success"}],
+        )
+        r = sb.run()
+        self.assertEqual(r.returncode, 1, r.stderr)
+        self.assertIn("context=coverage", sb.api_log())
+        self.assertIn("state=failure", sb.api_log())
 
 
 if __name__ == "__main__":
