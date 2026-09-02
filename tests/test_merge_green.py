@@ -228,6 +228,13 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertIn("gh workflow run worklog-invariants", text)
         self.assertIn("actions: write", text)
         self.assertIn("pull-requests: write", text)
+        self.assertIn("[ -f .work/archive.jsonl ]", text)
+        self.assertNotIn(
+            "git add .work/todo.jsonl .work/done.jsonl .work/archive.jsonl docs",
+            text,
+            "unguarded git add of missing archive.jsonl is fatal "
+            "(compact runs 33369108436, 33482394234)",
+        )
         self.assertNotIn("--squash", text)
         self.assertNotRegex(text, r"(?m)^\s+git push\s*$",
                             "bare git push would target main")
