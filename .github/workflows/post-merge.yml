@@ -26,6 +26,7 @@ permissions:
   contents: write
   pull-requests: write
   actions: write
+  statuses: write
 
 jobs:
   post-merge:
@@ -84,4 +85,5 @@ jobs:
             --title "chore(worklog): post-merge regenerate derived docs (#${{ github.event.pull_request.number }})" \
             --body "Post-merge derived-doc regenerate for #${{ github.event.pull_request.number }}. Auto-merge when green (ADR-0010). Never squash (ADR-0008)."
           gh workflow run worklog-invariants --ref "$branch"
+          plugin/scripts/associate-pr-checks.sh "$(git rev-parse HEAD)"
           gh pr merge --auto --merge

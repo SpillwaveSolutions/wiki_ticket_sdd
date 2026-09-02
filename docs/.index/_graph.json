@@ -3371,6 +3371,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01M1FT2SP2GVMC45FDM0J6129V",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7174,6 +7179,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "compact.yml git add archive.jsonl is fatal when the file does not exist"
+  },
+  "item/01M1FT2SP2GVMC45FDM0J6129V": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Bot PR dispatch check-runs do not satisfy required checks"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
