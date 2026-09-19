@@ -311,13 +311,23 @@
    "type": "targets"
   },
   {
+   "from": "design/2026-09-19_v0.24.11-release",
+   "to": "design/current-code-walkthrough",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-09-19_v0.24.11-release",
+   "to": "release/v0.24.11",
+   "type": "targets"
+  },
+  {
    "from": "design/current-code-walkthrough",
-   "to": "release/v0.24.10",
+   "to": "release/v0.24.11",
    "type": "targets"
   },
   {
    "from": "design/current-design-doc",
-   "to": "release/v0.24.10",
+   "to": "release/v0.24.11",
    "type": "targets"
   },
   {
@@ -5747,6 +5757,12 @@
    "doc_type": "design",
    "source": "docs/designs/2026-09-19_v0.24.10-release.md",
    "title": "Design freeze: v0.24.10",
+   "truth_state": "snapshot"
+  },
+  "design/2026-09-19_v0.24.11-release": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-09-19_v0.24.11-release.md",
+   "title": "Design freeze: v0.24.11",
    "truth_state": "snapshot"
   },
   "design/current-code-walkthrough": {
