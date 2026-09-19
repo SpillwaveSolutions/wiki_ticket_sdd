@@ -1,5 +1,5 @@
 {
- "git_hash": "7715566",
+ "git_hash": "2ec4560",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "6cc0eabffd3d",
+   "render_hash": "0dbce0fcf66a",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4665,7 +4665,7 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMV0QYM4ZRBWN1V1327B",
    "render": "as-is",
-   "render_hash": "bf379ffc6094",
+   "render_hash": "f1d3fa1c5a3d",
    "source": "docs/.index/rendered/tickets/01M2XCWMV0QYM4ZRBWN1V1327B.md",
    "title": "Fix the v0.24.10 review findings and close #412 and #413",
    "truth_state": "open",
@@ -4795,30 +4795,30 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XF",
    "render": "as-is",
-   "render_hash": "8ecea1f6ea57",
+   "render_hash": "9bd65f4b1b80",
    "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XF.md",
    "title": "Bot PRs use the WORKLOG_BOT_PAT identity",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XF"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XH",
    "render": "as-is",
-   "render_hash": "603c2cdc2cdf",
+   "render_hash": "492c9e7ff931",
    "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XH.md",
    "title": "Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XH"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XK",
    "render": "as-is",
-   "render_hash": "c144e66d6223",
+   "render_hash": "b7b5eb7bfb74",
    "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XK.md",
    "title": "sync --report drift is never masked and the local-only comment is suppressed",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XK"
   },
   {
@@ -5736,13 +5736,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T18:18:38Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T18:25:18Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "d1d812c5bc40",
+   "render_hash": "3d128262919f",
    "source": "docs/roadmap.md",
-   "source_hash": "c016465a3ba4",
+   "source_hash": "12ebb8f71e3f",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

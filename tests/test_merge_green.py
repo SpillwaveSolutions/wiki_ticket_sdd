@@ -165,12 +165,15 @@ class TestMergeWhenGreen(unittest.TestCase):
 
 
 class TestPostMergeWorkflow(unittest.TestCase):
-    """ADR-0010: invariants must listen on the post-merge job name."""
+    """ADR-0011: bot PRs land through the gate with a PAT; the invariants
+    workflow is read-only and no longer listens on workflow_run."""
 
-    def test_invariants_listens_on_post_merge_and_compact(self):
+    def test_invariants_is_read_only_and_event_native(self):
         with open(os.path.join(ROOT, ".github", "workflows", "worklog.yml"), encoding="utf-8") as fh:
             text = fh.read()
-        self.assertIn('workflows: ["worklog-compact", "worklog-post-merge"]', text)
+        self.assertIn("permissions:\n  contents: read", text)
+        self.assertNotIn("workflow_run", text.split("jobs:", 1)[1])
+        self.assertNotIn("workflows: [", text)
 
     def test_post_merge_workflow_contract(self):
         with open(os.path.join(ROOT, ".github", "workflows", "post-merge.yml"), encoding="utf-8") as fh:
@@ -185,11 +188,20 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertIn("--body-file", text)
         self.assertIn("concurrency:", text)
         self.assertIn("--merge-check", text)
-        self.assertIn("gh pr merge --auto --merge", text)
-        self.assertIn("gh workflow run worklog-invariants", text)
-        self.assertIn("actions: write", text)
-        self.assertIn("statuses: write", text)
-        self.assertIn("associate-pr-checks.sh", text)
+        self.assertIn("gh pr merge --auto --merge --delete-branch", text)
+        # ADR-0011: PAT identity, supersede-not-rebase, explicit loop guard,
+        # no status bridge, no write permission for the workflow itself.
+        self.assertIn("secrets.WORKLOG_BOT_PAT", text)
+        self.assertIn("require WORKLOG_BOT_PAT", text)
+        self.assertIn("close superseded bot PRs", text)
+        self.assertIn("startsWith(github.event.pull_request.head.ref, 'chore/compact-')", text)
+        self.assertIn("startsWith(github.event.pull_request.head.ref, 'chore/post-merge-')", text)
+        self.assertIn("permissions:\n  contents: read", text)
+        self.assertNotIn("gh workflow run", text)
+        self.assertNotIn("actions: write", text)
+        self.assertNotIn("statuses: write", text)
+        self.assertNotIn("associate-pr-checks", text)
+        self.assertNotIn("continue-on-error", text)
         self.assertNotIn("--squash", text)
         self.assertNotIn("\\\\n", text)
         # GITHUB_TOKEN cannot push main (GH013 on compact run 33299168867).
@@ -227,13 +239,17 @@ class TestPostMergeWorkflow(unittest.TestCase):
             text = fh.read()
         self.assertIn("name: worklog-compact", text)
         self.assertIn("gh pr create", text)
-        self.assertIn("gh pr merge --auto --merge", text)
-        self.assertIn("gh workflow run worklog-invariants", text)
-        self.assertIn("actions: write", text)
-        self.assertIn("pull-requests: write", text)
-        self.assertIn("statuses: write", text)
-        self.assertIn("associate-pr-checks.sh", text)
-        self.assertIn("[ -f .work/archive.jsonl ]", text)
+        self.assertIn("gh pr merge --auto --merge --delete-branch", text)
+        self.assertIn("secrets.WORKLOG_BOT_PAT", text)
+        self.assertIn("require WORKLOG_BOT_PAT", text)
+        self.assertIn("close superseded bot PRs", text)
+        self.assertIn("permissions:\n  contents: read", text)
+        self.assertIn("compact: evict to archive", text)
+        self.assertNotIn("gh workflow run", text)
+        self.assertNotIn("actions: write", text)
+        self.assertNotIn("statuses: write", text)
+        self.assertNotIn("associate-pr-checks", text)
+        self.assertIn("if [ -f .work/archive.jsonl ]; then", text)
         self.assertNotIn(
             "git add .work/todo.jsonl .work/done.jsonl .work/archive.jsonl docs",
             text,
@@ -267,120 +283,6 @@ class TestPostMergeWorkflow(unittest.TestCase):
 
 
 ASSOCIATE = os.path.join(ROOT, "plugin", "scripts", "associate-pr-checks.sh")
-
-FAKE_GH_ASSOCIATE = """#!/usr/bin/env bash
-D="$FAKE_DIR"
-case "$1" in
-  run)
-    case "$2" in
-      list) cat "$D/runs.json" ;;
-      watch) echo "$@" >> "$D/watched"; exit 0 ;;
-      view) cat "$D/jobs.json" ;;
-    esac ;;
-  api)
-    echo "$@" >> "$D/api.log"
-    exit 0
-    ;;
-esac
-"""
-
-
-class AssociateSandbox:
-    def __init__(self, tc, sha, runs, jobs):
-        self.sha = sha
-        self.dir = tempfile.mkdtemp(prefix="apc-")
-        tc.addCleanup(lambda: subprocess.run(["rm", "-rf", self.dir]))
-        gh = os.path.join(self.dir, "gh")
-        with open(gh, "w") as fh:
-            fh.write(FAKE_GH_ASSOCIATE)
-        os.chmod(gh, os.stat(gh).st_mode | stat.S_IEXEC)
-        with open(os.path.join(self.dir, "runs.json"), "w") as fh:
-            json.dump(runs, fh)
-        with open(os.path.join(self.dir, "jobs.json"), "w") as fh:
-            json.dump({"jobs": jobs}, fh)
-
-    def run(self):
-        env = dict(
-            os.environ,
-            PATH=f"{self.dir}:{os.environ['PATH']}",
-            FAKE_DIR=self.dir,
-            GITHUB_REPOSITORY="SpillwaveSolutions/wiki_ticket_sdd",
-            ASSOCIATE_WAIT="3",
-            ASSOCIATE_POLL="0",
-        )
-        return subprocess.run(
-            ["bash", ASSOCIATE, self.sha],
-            capture_output=True, text=True, env=env, cwd=self.dir)
-
-    def api_log(self):
-        path = os.path.join(self.dir, "api.log")
-        if not os.path.exists(path):
-            return ""
-        with open(path) as fh:
-            return fh.read()
-
-
-class TestAssociatePrChecks(unittest.TestCase):
-    """Dispatch check-runs do not satisfy the PR gate; commit statuses do (#408)."""
-
-    SHA = "9e19fb76b72e1b118257b5392ba55401745e2cf4"
-
-    def test_script_never_bypasses(self):
-        with open(ASSOCIATE, encoding="utf-8") as fh:
-            text = fh.read()
-        self.assertNotRegex(text, r"(?m)^\s*gh\s.*--squash")
-        self.assertNotRegex(text, r"(?m)^\s*gh\s.*--admin")
-        self.assertIn("/statuses/", text)
-        self.assertIn("invariants", text)
-        self.assertIn("coverage", text)
-
-    def test_success_posts_both_contexts(self):
-        sb = AssociateSandbox(
-            self, self.SHA,
-            runs=[{"databaseId": 33576637311, "headSha": self.SHA}],
-            jobs=[{"name": "invariants", "conclusion": "success"},
-                  {"name": "coverage", "conclusion": "success"}],
-        )
-        r = sb.run()
-        self.assertEqual(r.returncode, 0, r.stderr)
-        log = sb.api_log()
-        self.assertIn("state=success", log)
-        self.assertIn("context=invariants", log)
-        self.assertIn("context=coverage", log)
-        self.assertIn(f"statuses/{self.SHA}", log)
-        self.assertNotIn("state=failure", log)
-
-    def test_failed_job_posts_failure_and_exits_1(self):
-        sb = AssociateSandbox(
-            self, self.SHA,
-            runs=[{"databaseId": 1, "headSha": self.SHA}],
-            jobs=[{"name": "invariants", "conclusion": "success"},
-                  {"name": "coverage", "conclusion": "failure"}],
-        )
-        r = sb.run()
-        self.assertEqual(r.returncode, 1, r.stderr)
-        log = sb.api_log()
-        self.assertIn("context=invariants", log)
-        self.assertIn("context=coverage", log)
-        self.assertIn("state=failure", log)
-
-    def test_missing_dispatch_run_exits_2(self):
-        sb = AssociateSandbox(self, self.SHA, runs=[], jobs=[])
-        r = sb.run()
-        self.assertEqual(r.returncode, 2, r.stderr)
-        self.assertIn("no workflow_dispatch run", r.stderr)
-        self.assertEqual(sb.api_log(), "")
-
-    def test_missing_job_is_failure(self):
-        sb = AssociateSandbox(
-            self, self.SHA,
-            runs=[{"databaseId": 1, "headSha": self.SHA}],
-            jobs=[{"name": "invariants", "conclusion": "success"}],
-        )
-        r = sb.run()
-        self.assertEqual(r.returncode, 1, r.stderr)
-        self.assertIn("context=coverage", sb.api_log())
-        self.assertIn("state=failure", sb.api_log())
 
 
 if __name__ == "__main__":

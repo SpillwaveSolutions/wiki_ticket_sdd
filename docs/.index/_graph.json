@@ -7653,17 +7653,17 @@
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XF": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Bot PRs use the WORKLOG_BOT_PAT identity"
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XH": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard"
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XK": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "sync --report drift is never masked and the local-only comment is suppressed"
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XN": {
