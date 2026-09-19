@@ -3746,6 +3746,11 @@
    "type": "references"
   },
   {
+   "from": "item/01M2XN9A0XXNKTDJ6H1BDJW0SD",
+   "to": "item/01M2XCWMV0QYM4ZRBWN1V1327B",
+   "type": "belongs-to"
+  },
+  {
    "from": "plan/2026-07-18-claude-plugin",
    "to": "item/01KXSFEWNCJMXPZDNT7RNYTG8X",
    "type": "produces"
@@ -7827,6 +7832,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "Wiki page name for a design freeze note collides with the live Code-Walkthrough page"
+  },
+  "item/01M2XN9A0XXNKTDJ6H1BDJW0SD": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Restore six bug ticket titles that ticket-sync overwrote"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
