@@ -301,13 +301,23 @@
    "type": "targets"
   },
   {
+   "from": "design/2026-09-19_v0.24.10-release",
+   "to": "design/current-code-walkthrough",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "design/2026-09-19_v0.24.10-release",
+   "to": "release/v0.24.10",
+   "type": "targets"
+  },
+  {
    "from": "design/current-code-walkthrough",
-   "to": "release/v0.24.3",
+   "to": "release/v0.24.10",
    "type": "targets"
   },
   {
    "from": "design/current-design-doc",
-   "to": "release/v0.24.3",
+   "to": "release/v0.24.10",
    "type": "targets"
   },
   {
@@ -3456,9 +3466,19 @@
    "type": "belongs-to"
   },
   {
+   "from": "item/01M2XCWMVD7KJ01FCNEV1X822S",
+   "to": "pr/434",
+   "type": "lands-in"
+  },
+  {
    "from": "item/01M2XCWMVD7KJ01FCNEV1X822V",
    "to": "item/01M2XCWMV0QYM4ZRBWN1V1327B",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M2XCWMVD7KJ01FCNEV1X822V",
+   "to": "pr/434",
+   "type": "lands-in"
   },
   {
    "from": "item/01M2XCWMVD7KJ01FCNEV1X822V",
@@ -3472,6 +3492,11 @@
   },
   {
    "from": "item/01M2XCWMVD7KJ01FCNEV1X822X",
+   "to": "pr/434",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M2XCWMVD7KJ01FCNEV1X822X",
    "to": "ticket/github#416",
    "type": "references"
   },
@@ -3479,6 +3504,11 @@
    "from": "item/01M2XCWMVD7KJ01FCNEV1X822Z",
    "to": "item/01M2XCWMVD7KJ01FCNEV1X822V",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M2XCWMVD7KJ01FCNEV1X822Z",
+   "to": "pr/434",
+   "type": "lands-in"
   },
   {
    "from": "item/01M2XCWMVD7KJ01FCNEV1X822Z",
@@ -3492,6 +3522,11 @@
   },
   {
    "from": "item/01M2XCWMVD7KJ01FCNEV1X8231",
+   "to": "pr/434",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M2XCWMVD7KJ01FCNEV1X8231",
    "to": "ticket/github#418",
    "type": "references"
   },
@@ -3499,6 +3534,11 @@
    "from": "item/01M2XCWMVD7KJ01FCNEV1X8233",
    "to": "item/01M2XCWMVD7KJ01FCNEV1X822V",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M2XCWMVD7KJ01FCNEV1X8233",
+   "to": "pr/434",
+   "type": "lands-in"
   },
   {
    "from": "item/01M2XCWMVD7KJ01FCNEV1X8233",
@@ -3512,6 +3552,11 @@
   },
   {
    "from": "item/01M2XCWMVD7KJ01FCNEV1X8235",
+   "to": "pr/434",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M2XCWMVD7KJ01FCNEV1X8235",
    "to": "ticket/github#420",
    "type": "references"
   },
@@ -3519,6 +3564,11 @@
    "from": "item/01M2XCWMVD7KJ01FCNEV1X8237",
    "to": "item/01M2XCWMV0QYM4ZRBWN1V1327B",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M2XCWMVD7KJ01FCNEV1X8237",
+   "to": "pr/435",
+   "type": "lands-in"
   },
   {
    "from": "item/01M2XCWMVD7KJ01FCNEV1X8237",
@@ -3532,6 +3582,11 @@
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6X7",
+   "to": "pr/435",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6X7",
    "to": "ticket/github#422",
    "type": "references"
   },
@@ -3539,6 +3594,11 @@
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6X9",
    "to": "item/01M2XCWMVD7KJ01FCNEV1X8237",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6X9",
+   "to": "pr/435",
+   "type": "lands-in"
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6X9",
@@ -3552,6 +3612,11 @@
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XB",
+   "to": "pr/435",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XB",
    "to": "ticket/github#424",
    "type": "references"
   },
@@ -3559,6 +3624,11 @@
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XD",
    "to": "item/01M2XCWMV0QYM4ZRBWN1V1327B",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XD",
+   "to": "pr/436",
+   "type": "lands-in"
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XD",
@@ -3612,6 +3682,11 @@
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XQ",
+   "to": "pr/440",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XQ",
    "to": "ticket/github#430",
    "type": "references"
   },
@@ -3619,6 +3694,11 @@
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XS",
    "to": "item/01M2XCWMVEH3XFP2VPS9JBD6XQ",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XS",
+   "to": "pr/440",
+   "type": "lands-in"
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XS",
@@ -3632,6 +3712,11 @@
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XV",
+   "to": "pr/439",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XV",
    "to": "ticket/github#432",
    "type": "references"
   },
@@ -3639,6 +3724,11 @@
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XX",
    "to": "item/01M2XCWMVEH3XFP2VPS9JBD6XV",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XX",
+   "to": "pr/439",
+   "type": "lands-in"
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XX",
@@ -5266,6 +5356,21 @@
    "type": "targets"
   },
   {
+   "from": "roadmap-snapshot/2026-09-19_v0.24.11-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-09-19_v0.24.11-release",
+   "to": "roadmap-snapshot/2026-09-02_v0.24.10-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-09-19_v0.24.11-release",
+   "to": "release/v0.24.11",
+   "type": "targets"
+  },
+  {
    "from": "roadmap/2026-07-18_v0.2-roadmap",
    "to": "roadmap",
    "type": "snapshot-of"
@@ -5636,6 +5741,12 @@
    "doc_type": "design",
    "source": "docs/designs/2026-08-18_v0.24.3-release_design_doc.md",
    "title": "Worklog \u2014 Software Design Document",
+   "truth_state": "snapshot"
+  },
+  "design/2026-09-19_v0.24.10-release": {
+   "doc_type": "design",
+   "source": "docs/designs/2026-09-19_v0.24.10-release.md",
+   "title": "Design freeze: v0.24.10",
    "truth_state": "snapshot"
   },
   "design/current-code-walkthrough": {
@@ -7673,12 +7784,12 @@
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XQ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Release gate for design-doc freshness in doc-verify --strict"
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XS": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Regenerate the live design docs for v0.24.10"
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XV": {
@@ -7690,6 +7801,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "CI wiring docs and the GitHub Actions to Azure Pipelines mapping table"
+  },
+  "item/01M2XJARKTEH7VG74N3M0ZG66S": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Release v0.24.11"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
@@ -7982,6 +8098,21 @@
   "pr/409": {
    "doc_type": "pr"
   },
+  "pr/434": {
+   "doc_type": "pr"
+  },
+  "pr/435": {
+   "doc_type": "pr"
+  },
+  "pr/436": {
+   "doc_type": "pr"
+  },
+  "pr/439": {
+   "doc_type": "pr"
+  },
+  "pr/440": {
+   "doc_type": "pr"
+  },
   "release/v0.10.0": {
    "doc_type": "release"
   },
@@ -8049,6 +8180,9 @@
    "doc_type": "release"
   },
   "release/v0.24.10": {
+   "doc_type": "release"
+  },
+  "release/v0.24.11": {
    "doc_type": "release"
   },
   "release/v0.24.3": {
@@ -8249,6 +8383,12 @@
   "roadmap-snapshot/2026-09-02_v0.24.10-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-09-02_v0.24.10-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-09-19_v0.24.11-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-09-19_v0.24.11-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

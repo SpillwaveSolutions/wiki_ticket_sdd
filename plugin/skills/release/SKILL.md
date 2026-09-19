@@ -1,7 +1,7 @@
 ---
 name: release
 metadata:
-  version: "0.24.10"
+  version: "0.24.12"
 description: Cut a versioned release — stamp the changelog, snapshot the roadmap, tag, create the platform release, publish, and sync. Use when asked to "cut a release", "ship vX.Y.Z", "tag a version", or when an unreleased changelog section is ready to go out.
 ---
 
@@ -47,7 +47,11 @@ skill; use the platform's own release tooling.
   does not block; drift on `current_design_doc` / `current_code_walkthrough`
   does, because those claim to describe HEAD. `unresolvable` means the
   stamped commit is not in this clone (see ADR-0008) — report it, never
-  re-check against HEAD.
+  re-check against HEAD. The same run checks **freshness**: each live
+  doc's `git_hash` must descend from the previous tag, and that tag must
+  have a freeze record in `docs/designs/`. `STALE` fails the gate: the
+  previous release's §5 never landed, and this one does not proceed until
+  it does (v0.24.4 through v0.24.12 shipped seven releases that way).
 
 ## 3. Land it
 
@@ -77,6 +81,15 @@ waits on prose. Run `bin/worklog triggers release`; each listed target
 gets regenerated and republished. Doc commits land via a PR AFTER the tag:
 docs describe the release, the tag does not wait for them. (Main is
 pull-only — §3. Do not commit these onto the default branch directly.)
+
+Spawn means an actual `Agent` tool call with `run_in_background: true`,
+one per agent below, with the tag and commit in the prompt. Prose that
+says "spawn" is not a spawn. **The release is not done until Agent A
+reports and its PR is open**: check that `docs/designs/<DATE>_vX.Y.Z-release.md`
+exists on that branch and that `bin/worklog doc-verify --strict` passes
+there. The next release's §2 gate fails on a missing freeze record, so an
+un-run Agent A blocks the release after this one, not silently the one
+after that.
 
 - **Agent A — design-docs skill, release mode**: if `design-doc` and/or
   `code-walkthrough` are listed, regenerates

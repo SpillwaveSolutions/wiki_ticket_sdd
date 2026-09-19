@@ -1,6 +1,6 @@
 # Release gate for design-doc freshness in doc-verify --strict
 
-`01M2XCWMVEH3XFP2VPS9JBD6XQ` · task/bug · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6XQ` · task/bug · **done**
 
 A release fails when a live doc's git_hash does not descend from the previous tag or the freeze record for that tag is missing.
 
@@ -10,9 +10,13 @@ A release fails when a live doc's git_hash does not descend from the previous ta
 
 ## Subtasks
 
-- [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XS]] Regenerate the live design docs for v0.24.10 — The wiki still describes published.json. (open)
+- [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XS]] Regenerate the live design docs for v0.24.10 — The wiki still describes published.json. (done)
 
-Progress: 0/1 done
+Progress: 1/1 done
+
+## Linked PRs
+
+- [[PR-440]]
 
 ## Related tickets
 
