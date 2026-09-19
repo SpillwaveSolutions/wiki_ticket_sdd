@@ -364,15 +364,25 @@ Compaction is the only operation that rewrites a file, and therefore the only on
    compactor *does* owe: **prune from `done.jsonl` any item that is currently open**,
    or stale snapshots accumulate there forever. They're harmless — a later snapshot
    always outsorts them — but the file grows without bound.
-7. Verify: fold(todo+done+archive) after == before, for all items. Abort and leave every file untouched
+7. Evict closed snapshots from `done.jsonl` into `archive.jsonl`. Never delete.
+   Only items with lines in `done.jsonl` are candidates; an item already in the
+   archive is neither aged nor counted. Age is the last snapshot `ts` on that item
+   (the close clock that survives compact). Defaults: epic 730d / story 180d /
+   task 90d / subtask 90d, then FIFO cap 1000 on the closed items that remain in
+   `done.jsonl`. Unparseable `ts` is not evicted and takes no cap slot. A parent is
+   not evicted while a child is still in `done.jsonl` or open; an archived child
+   does not hold its parent back. The "already snapshotted" check in step 5 folds
+   `done.jsonl + archive.jsonl`, so an archived item is not re-snapshotted into
+   `done.jsonl`. The archive is pruned of currently-open items, of items refreshed
+   into `done.jsonl` this run, and of older duplicate snapshots (newest `ev` wins).
+   A line in `archive.jsonl` that does not parse is dropped with a warning, the
+   same as `done.jsonl`. `.work/config.yml` `retention:` may override the numbers;
+   a missing block uses the defaults, and an ignored value (negative, non-integer,
+   unknown key) prints a warning. `cap: 0` archives every closed item that has a
+   parseable `ts` and no live child.
+8. Verify: fold(todo+done+archive) after == before, for all items. Abort and leave every file untouched
    if not. Compaction that loses state is the worst failure mode in this system.
-8. Verify trailing newline. Verify every line parses.
-9. Evict closed snapshots from `done.jsonl` into `archive.jsonl`. Never delete.
-   Age is the last snapshot `ts` on that item (the close clock that survives compact).
-   Defaults: epic 730d / story 180d / task 90d / subtask 90d, then FIFO cap 1000 on
-   remaining `done.jsonl` closed items. Unparseable `ts` is not evicted. Currently-open
-   items are pruned from `archive.jsonl` the same way step 6 prunes `done.jsonl`.
-   `.work/config.yml` `retention:` may override the numbers; missing block uses the defaults.
+9. Verify trailing newline. Verify every line parses.
 ```
 
 **Closing an item does not move a file at runtime.** `close` is just an event. The compactor is what physically relocates state into `done.jsonl`. This is deliberate: it means no runtime command ever writes two files, which removes the write-conflict from the parallel-subagent phase (§11).
@@ -558,7 +568,7 @@ worklog sync --scope all           # everything open; slow; manual only
 worklog sync --keys PROJ-412,...   # ADDS these to the scope; never narrows it
 worklog sync --report              # print drift, change NOTHING
 worklog sync --apply               # apply LWW, emit conflicts
-worklog sync --dry-run             # print the events that WOULD be appended
+worklog sync --dry-run             # alias of --report: one code path, nothing written
 ```
 
 `--keys` is additive, not a filter. The push scope is *open* ∪ *hash-dirty* ∪ `--keys`, so naming one key does not stop the rest of a dirty log from syncing. There is deliberately no flag that narrows a run: a sync that skipped dirty items would leave the tracker further from the log, which is the drift `sync` exists to close. When you want to know what a run will touch, `--dry-run` prints it before anything is written.
@@ -858,7 +868,7 @@ state this rule to their authors.
 | `fold()` succeeds with zero orphans | PR | warn |
 | `roadmap.md` matches regenerated output | PR | hard fail |
 | Compaction | nightly, main | hard fail, no partial write |
-| `sync --report` drift summary | nightly | post as a comment; never fail |
+| `sync --report` drift summary | after each merge to main (`worklog-post-merge`) | post as a PR comment; never fail |
 | PR-simulation integration suite (`tests/test_integration.py`) | PR | hard fail |
 
 ---

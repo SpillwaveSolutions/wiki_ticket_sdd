@@ -6,17 +6,17 @@ The only code allowed to REWRITE .work/*.jsonl (everything else appends).
 Runs in CI on main (nightly); `worklog compact --yes` exists for tests and
 emergencies.
 
-Spec 7 algorithm, all eight steps:
-  1. fold todo+done together (full history -- a reopen needs its done context)
-  2. watermark = max ev over every raw input line of both files
+Spec 7 algorithm, all nine steps:
+  1. fold todo+done+archive together (full history -- a reopen needs its done context)
+  2. watermark = max ev over every raw input line of all three files
   3. partition open vs closed; orphans count as open -- never drop data
   4. rewrite todo.jsonl: one snapshot per open item + a compact watermark line
   5. append to done.jsonl: snapshot per newly-closed item + a watermark line
   6. prune from done.jsonl anything for a currently-open item (stale reopens)
-  7. verify fold(todo+done+archive) == fold(old); on any mismatch leave originals untouched
-  8. verify trailing newline and that every written line parses
-  9. evict old closed snapshots from done.jsonl into archive.jsonl
-     (per-level ages, FIFO cap, never delete)
+  7. evict old closed snapshots from done.jsonl into archive.jsonl
+     (per-level ages, FIFO cap, parent veto, never delete)
+  8. verify fold(todo+done+archive) == fold(old); on any mismatch leave originals untouched
+  9. verify trailing newline and that every written line parses
 
 All writes go to temp copies; the real files are only touched by os.replace
 after verification passes. Compaction that loses state is the worst failure
@@ -146,29 +146,46 @@ def _retention_config(config_path):
     except OSError:
         return ages, cap
     inside = False
+    child_indent = None
     for raw in text.splitlines():
         line = raw.split("#", 1)[0].rstrip()
         if not line.strip():
             continue
         if not line[0].isspace():
             inside = line.strip().startswith("retention:")
+            child_indent = None
             continue
         if not inside:
+            continue
+        # Only retention's own keys count: the first child's indent sets the
+        # level, anything deeper is some other mapping.
+        indent = len(line) - len(line.lstrip())
+        if child_indent is None:
+            child_indent = indent
+        if indent != child_indent:
             continue
         m = re.match(r"\s+([A-Za-z_][\w]*)\s*:\s*(\S+)", line)
         if not m:
             continue
         key, raw_v = m.group(1), m.group(2).strip("\"'")
+
+        def warn(why):
+            print(f"compact: retention.{key}: {why}; keeping the default",
+                  file=sys.stderr)
         try:
             n = int(raw_v)
         except ValueError:
+            warn(f"{raw_v!r} is not an integer")
             continue
-        if key == "cap" and n >= 0:
+        if n < 0:
+            warn("negative")
+            continue
+        if key == "cap":
             cap = n
-        elif key.endswith("_days"):
-            level = key[:-5]
-            if level in ages and n >= 0:
-                ages[level] = n
+        elif key.endswith("_days") and key[:-5] in ages:
+            ages[key[:-5]] = n
+        else:
+            warn("unknown key")
     return ages, cap
 
 
@@ -189,14 +206,18 @@ def _parse_ts(ts):
 def _evict_done(done_text, folded_items, ages, cap, now):
     """Split done.jsonl text into (kept, newly_archived). Never deletes.
 
-    Age is last snapshot ts on a closed item. Unparseable ts is not evicted.
-    FIFO cap applies after age eviction, oldest parseable ts first; items
-    with unparseable ts sort last (kept in preference to dropping them).
+    Only items with lines in done_text are candidates: an item that already
+    lives in the archive is neither aged nor counted against the cap. Age is
+    last snapshot ts on a closed item. Unparseable ts is never evicted and
+    takes no cap slot. FIFO cap applies after age eviction, oldest ts first.
+    A parent is never evicted while a child is still live (in done_text or
+    open); an already archived child does not hold its parent back.
     """
     events = []
     for line in done_text.splitlines():
         if line.strip():
             events.append(json.loads(line))
+    done_ids = {e.get("item") for e in events}
     latest_ts = {}
     for e in events:
         iid, op = e.get("item"), e.get("op")
@@ -207,20 +228,32 @@ def _evict_done(done_text, folded_items, ages, cap, now):
     evict = set()
     remaining = []
     for iid, item in folded_items.items():
-        if item.get("status") not in CLOSED_STATUSES:
+        if item.get("status") not in CLOSED_STATUSES or iid not in done_ids:
             continue
         level = item.get("level") or "task"
         limit = ages.get(level, ages["task"])
         epoch = _parse_ts(latest_ts.get(iid))
-        if epoch is not None and (now - epoch) / 86400.0 > limit:
+        if epoch is None:
+            continue  # fail closed: kept, and never counted against the cap
+        if (now - epoch) / 86400.0 > limit:
             evict.add(iid)
             continue
-        remaining.append((epoch is not None, epoch or 0, iid))
-    remaining.sort(key=lambda t: (not t[0], t[1], t[2]))
+        remaining.append((epoch, iid))
+    remaining.sort()
     overflow = len(remaining) - cap
     if overflow > 0:
-        for _, _, iid in remaining[:overflow]:
+        for _, iid in remaining[:overflow]:
             evict.add(iid)
+    # Parent veto: a child still in done or todo pins its parent. Loop
+    # because un-evicting a parent can pin the grandparent.
+    live = {iid for iid, item in folded_items.items()
+            if iid in done_ids or item.get("status") not in CLOSED_STATUSES}
+    while True:
+        pinned = {folded_items[i].get("parent") for i in live if i not in evict}
+        pinned.discard(None)
+        if not (evict & pinned):
+            break
+        evict -= pinned
     if not evict:
         return done_text, ""
     kept, archived = [], []
@@ -232,15 +265,32 @@ def _evict_done(done_text, folded_items, ages, cap, now):
     return _dump(kept), _dump(archived)
 
 
-def _prune_open_from_text(text, open_ids):
-    if not text or not open_ids:
-        return text
-    kept = []
+def _prune_archive_text(text, drop_ids, path):
+    """Archive lines minus `drop_ids`, minus anything that does not parse
+    (fold ignores it and step 9 forbids writing it back), minus older
+    duplicate snapshots of one item (newest ev wins). Never drops state that
+    the fold still needs: step 8 verifies the result."""
+    parsed = []
     for line in text.splitlines():
         if not line.strip():
             continue
-        e = json.loads(line)
-        if e.get("item") in open_ids:
+        try:
+            e = json.loads(line)
+        except json.JSONDecodeError:
+            print(f"compact: dropping unparseable line from {path}: {line!r}",
+                  file=sys.stderr)
+            continue
+        if e.get("item") in drop_ids:
+            continue
+        parsed.append((line, e))
+    newest = {}
+    for _line, e in parsed:
+        if e.get("op") == "snapshot" and e.get("item"):
+            if e.get("ev", "") > newest.get(e["item"], ""):
+                newest[e["item"]] = e["ev"]
+    kept = []
+    for line, e in parsed:
+        if e.get("op") == "snapshot" and newest.get(e.get("item")) != e.get("ev"):
             continue
         kept.append(line + "\n")
     return "".join(kept)
@@ -273,12 +323,13 @@ def _git_refuses(paths):
     if probe.returncode != 0:
         return False
     for p in paths:
-        # ponytail: rc 1 = dirty, refuse; rc 128 (no HEAD yet) = can't diff,
-        # let it through -- CI always has a HEAD.
-        rc = subprocess.run(
-            ["git", "diff", "--quiet", "HEAD", "--", os.path.abspath(p)],
-            cwd=cwd, capture_output=True).returncode
-        if rc == 1:
+        # `git status --porcelain`, not `git diff HEAD`: diff ignores an
+        # untracked file, and the first eviction creates archive.jsonl
+        # untracked. A missing file prints nothing and is not dirty.
+        out = subprocess.run(
+            ["git", "status", "--porcelain", "--", os.path.abspath(p)],
+            cwd=cwd, capture_output=True, text=True).stdout
+        if out.strip():
             return True
     return False
 
@@ -379,7 +430,14 @@ def _compact_locked(todo_path, done_path, archive_path):
 
     # steps 5+6: new done = old lines minus open items, plus snapshots for
     # newly-closed items not already there with identical state, plus watermark.
-    done_state = {iid: _public(i) for iid, i in fold([done_path]).items.items()}
+    # done+archive: an archived item with identical state is not "fresh", or
+    # every archived item would come back into done.jsonl each active night.
+    done_state = {iid: _public(i)
+                  for iid, i in fold([done_path, archive_path]).items.items()}
+    original_done = ""
+    if os.path.exists(done_path):
+        with open(done_path, encoding="utf-8") as fh:
+            original_done = fh.read()
     kept = []
     for line, parsed in _raw_lines(done_path):
         if parsed is None:
@@ -395,28 +453,34 @@ def _compact_locked(todo_path, done_path, archive_path):
         for i in closed_items:
             if done_state.get(i["id"]) != _public(i) or i.get("_conflicts"):
                 fresh.extend(_item_events(i, per_item.get(i["id"])))
+    fresh_ids = {e.get("item") for e in fresh}
     done_text = "".join(kept) + _dump(fresh + ([_compact_line(watermark)]
                                                if not todo_idle else []))
 
-    # step 9: evict old closed snapshots into archive.jsonl
+    # step 7: evict old closed snapshots into archive.jsonl
     ages, cap = _retention_config(_config_path(todo_path))
     now = calendar.timegm(time.gmtime())
-    closed_map = {i["id"]: i for i in closed_items}
-    done_text, newly_archived = _evict_done(done_text, closed_map, ages, cap, now)
+    done_text, newly_archived = _evict_done(done_text, before.items, ages, cap, now)
     existing_archive = ""
     if os.path.exists(archive_path):
         with open(archive_path, encoding="utf-8") as fh:
             existing_archive = fh.read()
     original_archive = existing_archive
-    existing_archive = _prune_open_from_text(existing_archive, open_ids)
+    # Drop from the archive: reopened items, items refreshed into done this
+    # run, and items being archived again now (newest snapshot wins).
+    new_ids = {json.loads(l).get("item") for l in newly_archived.splitlines()
+               if l.strip()}
+    existing_archive = _prune_archive_text(existing_archive,
+                                           open_ids | fresh_ids | new_ids,
+                                           archive_path)
     archive_text = existing_archive + newly_archived
 
-    if todo_idle and not newly_archived and existing_archive == original_archive:
+    if (todo_text is None and done_text == original_done
+            and archive_text == original_archive):
         return watermark  # nothing new; don't churn files
 
     tmp_todo = todo_path + ".compact" if todo_text is not None else None
     tmp_done, tmp_archive = done_path + ".compact", archive_path + ".compact"
-    archive_changed = archive_text != original_archive
     try:
         if tmp_todo is not None:
             with open(tmp_todo, "w", encoding="utf-8") as fh:
@@ -504,14 +568,17 @@ def check_resurrection(todo_path, done_path):
     return problems
 
 
-def check_duplicate_ownership(todo_path, done_path):
+def check_duplicate_ownership(todo_path, done_path, archive_path=None):
     """Bug #237: `worklog link` already refuses a ticket another item owns
     (fold.external_owners), but a merge of two branches that each claimed the
     same ticket bypasses that check -- sync catches it later, but a merge is
     the earliest point, and it happens on every machine.
 
     Returns a list of problem strings; empty means clean."""
-    r = fold([todo_path, done_path])
+    paths = [todo_path, done_path]
+    if archive_path and os.path.exists(archive_path):
+        paths.append(archive_path)  # an archived owner still owns its ticket
+    r = fold(paths)
     problems = []
     for (system, key), owners in external_owners(r.items.values()).items():
         if len(owners) > 1:
@@ -732,7 +799,8 @@ def merge_check(todo_path=".work/todo.jsonl", done_path=".work/done.jsonl"):
     False on any problem; never raises -- the merge-commit hook decides
     whether that means blocking the commit."""
     problems = (check_resurrection(todo_path, done_path)
-                + check_duplicate_ownership(todo_path, done_path))
+                + check_duplicate_ownership(todo_path, done_path,
+                                            _archive_path(todo_path)))
     if not problems:
         return True
     print("compact: merge integrity check failed", file=sys.stderr)
