@@ -1,6 +1,6 @@
 # Regenerate the live design docs for v0.24.10
 
-`01M2XCWMVEH3XFP2VPS9JBD6XS` · subtask/feature · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6XS` · subtask/feature · **done**
 
 The wiki still describes published.json.
 
