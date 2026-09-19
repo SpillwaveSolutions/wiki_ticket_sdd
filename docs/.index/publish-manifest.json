@@ -1,5 +1,5 @@
 {
- "git_hash": "2ebf46a",
+ "git_hash": "663ea10",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "1fecf79914b2",
+   "render_hash": "6d16e956d894",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4725,7 +4725,7 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMV0QYM4ZRBWN1V1327B",
    "render": "as-is",
-   "render_hash": "c26da319e29c",
+   "render_hash": "69f8e4f9819b",
    "source": "docs/.index/rendered/tickets/01M2XCWMV0QYM4ZRBWN1V1327B.md",
    "title": "Fix the v0.24.10 review findings and close #412 and #413",
    "truth_state": "open",
@@ -4950,6 +4950,16 @@
    "title": "Wiki page name for a design freeze note collides with the live Code-Walkthrough page",
    "truth_state": "done",
    "wiki_key": "item/01M2XK6N6JBZ6KKVHCF0C2TRWP"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XN9A0XXNKTDJ6H1BDJW0SD",
+   "render": "as-is",
+   "render_hash": "8233b015f820",
+   "source": "docs/.index/rendered/tickets/01M2XN9A0XXNKTDJ6H1BDJW0SD.md",
+   "title": "Restore six bug ticket titles that ticket-sync overwrote",
+   "truth_state": "done",
+   "wiki_key": "item/01M2XN9A0XXNKTDJ6H1BDJW0SD"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -5840,13 +5850,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T19:50:42Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T20:21:59Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "cfccc39f0fa3",
+   "render_hash": "b711887d322b",
    "source": "docs/roadmap.md",
-   "source_hash": "7621b183f82a",
+   "source_hash": "a059675d5b03",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
