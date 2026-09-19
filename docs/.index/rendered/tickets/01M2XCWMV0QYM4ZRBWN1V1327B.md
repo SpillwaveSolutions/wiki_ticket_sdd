@@ -1,6 +1,6 @@
 # Fix the v0.24.10 review findings and close #412 and #413
 
-`01M2XCWMV0QYM4ZRBWN1V1327B` · epic/feature · **open**
+`01M2XCWMV0QYM4ZRBWN1V1327B` · epic/feature · **done**
 
 The v0.24.10 change review found a P0 in retention (archived items ping-pong back into done.jsonl), a merge gate that trusts commit statuses from any actor, and seven releases without regenerated design docs.
 

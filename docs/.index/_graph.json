@@ -3652,6 +3652,11 @@
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XF",
+   "to": "pr/437",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XF",
    "to": "ticket/github#426",
    "type": "references"
   },
@@ -3659,6 +3664,11 @@
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XH",
    "to": "item/01M2XCWMVEH3XFP2VPS9JBD6XF",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XH",
+   "to": "pr/437",
+   "type": "lands-in"
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XH",
@@ -3672,6 +3682,11 @@
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XK",
+   "to": "pr/437",
+   "type": "lands-in"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XK",
    "to": "ticket/github#428",
    "type": "references"
   },
@@ -3679,6 +3694,11 @@
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XN",
    "to": "item/01M2XCWMV0QYM4ZRBWN1V1327B",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XN",
+   "to": "pr/438",
+   "type": "lands-in"
   },
   {
    "from": "item/01M2XCWMVEH3XFP2VPS9JBD6XN",
@@ -3749,6 +3769,11 @@
    "from": "item/01M2XN9A0XXNKTDJ6H1BDJW0SD",
    "to": "item/01M2XCWMV0QYM4ZRBWN1V1327B",
    "type": "belongs-to"
+  },
+  {
+   "from": "item/01M2XN9A0XXNKTDJ6H1BDJW0SD",
+   "to": "pr/446",
+   "type": "lands-in"
   },
   {
    "from": "plan/2026-07-18-claude-plugin",
@@ -5383,6 +5408,21 @@
   {
    "from": "roadmap-snapshot/2026-09-19_v0.24.11-release",
    "to": "release/v0.24.11",
+   "type": "targets"
+  },
+  {
+   "from": "roadmap-snapshot/2026-09-19_v0.24.12-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-09-19_v0.24.12-release",
+   "to": "roadmap-snapshot/2026-09-19_v0.24.11-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-09-19_v0.24.12-release",
+   "to": "release/v0.24.12",
    "type": "targets"
   },
   {
@@ -7720,7 +7760,7 @@
   },
   "item/01M2XCWMV0QYM4ZRBWN1V1327B": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Fix the v0.24.10 review findings and close #412 and #413"
   },
   "item/01M2XCWMVD7KJ01FCNEV1X822S": {
@@ -7837,6 +7877,11 @@
    "doc_type": "item",
    "status": "done",
    "title": "Restore six bug ticket titles that ticket-sync overwrote"
+  },
+  "item/01M2XT2DGDWA6MYZZXCABSEMXW": {
+   "doc_type": "item",
+   "status": "in_progress",
+   "title": "Release v0.24.12"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
@@ -8138,10 +8183,19 @@
   "pr/436": {
    "doc_type": "pr"
   },
+  "pr/437": {
+   "doc_type": "pr"
+  },
+  "pr/438": {
+   "doc_type": "pr"
+  },
   "pr/439": {
    "doc_type": "pr"
   },
   "pr/440": {
+   "doc_type": "pr"
+  },
+  "pr/446": {
    "doc_type": "pr"
   },
   "release/v0.10.0": {
@@ -8214,6 +8268,9 @@
    "doc_type": "release"
   },
   "release/v0.24.11": {
+   "doc_type": "release"
+  },
+  "release/v0.24.12": {
    "doc_type": "release"
   },
   "release/v0.24.3": {
@@ -8420,6 +8477,12 @@
   "roadmap-snapshot/2026-09-19_v0.24.11-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-09-19_v0.24.11-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-09-19_v0.24.12-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-09-19_v0.24.12-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

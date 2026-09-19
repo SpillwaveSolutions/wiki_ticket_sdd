@@ -15,6 +15,10 @@ Open and merge compact and post-merge PRs with a maintainer's fine-grained PAT s
 
 Progress: 2/2 done
 
+## Linked PRs
+
+- [[PR-437]]
+
 ## Related tickets
 
 - [github #426](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/426)

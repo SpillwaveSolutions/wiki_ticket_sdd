@@ -1,6 +1,6 @@
 ---
 generated_at: 2026-09-19T19:52:25Z
-git_hash: "2ebf46afd72dacf9eb74ff87528e6dd74eed99e3"
+git_hash: "1b208123a6e789482e1c1078f634e2496ade6b50"
 branch: docs/design-sync-v0-24-11
 tag: v0.24.11
 roadmap: docs/roadmap.md
@@ -415,7 +415,7 @@ mini JSON Schema validator, plus one check the schema subset cannot express —
 
 **Observe first (v0.24.9, #385; extended for #412).** Before any push,
 `sync()` calls `observe_remote()` (`bin/sync_dispatch.py — observe_remote(),
-lines 1205–1257`), even on `--push-only`. One listing gives three things
+lines 1225–1277`), even on `--push-only`. One listing gives three things
 push-only could not see: tracker-only tickets with no marker (reported with an
 `adopt` command each), linked tickets already closed on the remote (closed
 locally instead of being rewritten from stale open state), and the marker map
@@ -1167,7 +1167,7 @@ the same bug through with the two commands reordered. And it is
 after a create), so `cur["id"]` is filtered out of `others`.
 
 **Enforcement 2 — push time** (`bin/sync_dispatch.py — push_items(), lines
-621–819`):
+633–831`):
 
 ```python
         self.collisions = {k: v for k, v in external_owners(items).items()
@@ -1229,7 +1229,7 @@ the damaged ticket would have stayed wrong. Hence:
         now = str(ext["key"]) if ext.get("key") else None
         return prev is not None and prev != now
 ```
-— `bin/sync_dispatch.py — is_dirty(), lines 307–322`
+— `bin/sync_dispatch.py — is_dirty(), lines 319–334`
 
 The `prev is not None` guard is what keeps an upgrade from re-pushing every item
 in every existing clone at once, since no clone has ever written
@@ -1678,7 +1678,7 @@ def _plan_state(rec):
     first = (rec.get("status") or "").split()[:1]
     return PLAN_STATE.get(first[0].lower()) if first else None
 ```
-— `bin/ia_render.py — _plan_state(), lines 124–139` (`PLAN_STATE` at lines
+— `bin/ia_render.py — _plan_state(), lines 129–144` (`PLAN_STATE` at lines
 119–121; docstring elided)
 
 The load-bearing part is the `None`. Unknown prose says nothing about state and
@@ -1690,7 +1690,7 @@ the caller falls back to output byte-identical to before:
                     "once written, a changed design gets a new plan."
                     % (_plan_state(rec) or "the current plan"))
 ```
-— `bin/ia_render.py — _banner_text(), lines 142–190`
+— `bin/ia_render.py — _banner_text(), lines 147–195`
 
 Inventing a label for prose it cannot read is exactly how this banner came to
 announce plans as *status reports* in the first place (#137, fixed in v0.19.0).
@@ -1775,7 +1775,7 @@ the file and the next one, failing every commit thereafter — and on a
 `refs/pull/N/merge` commit that exists in no local clone, so no stored value
 could ever match. The manifest solves the same problem the same way, and records
 **one** build-level `git_hash` rather than stamping all 366 rendered pages with
-one identical fact (`bin/ia_render.py — build_manifest(), lines 664–740`).
+one identical fact (`bin/ia_render.py — build_manifest(), lines 669–745`).
 
 **Backfill.** A document cannot know the merge that will land it, so that value
 arrives later:
@@ -1901,7 +1901,7 @@ def _body_hash(path):
     with open(path, encoding="utf-8") as fh:
         return _hash_bytes(ia.parse_front_matter(fh.read())[1].encode())
 ```
-— `bin/ia_render.py — _body_hash(), lines 651–661` (docstring elided)
+— `bin/ia_render.py — _body_hash(), lines 656–666` (docstring elided)
 
 `source_hash` is the input to the publisher's frozen-source guard, which stops
 when a frozen document's prose changes. Without this, the backfill would have
@@ -2150,7 +2150,7 @@ through:
             return str(probed)
         return None
 ```
-— `bin/sync_dispatch.py — remembered_key(), lines 270–305` (docstring elided;
+— `bin/sync_dispatch.py — remembered_key(), lines 282–317` (docstring elided;
 read it, it names what the probe does not fix)
 
 Three sources, and each exists because the one above it has a documented way
@@ -2175,7 +2175,7 @@ clone or CI has none (#412 added source 3). The marker map is filled by
             if key:
                 owned[str(key)] = item
 ```
-— `bin/sync_dispatch.py — observe_remote(), lines 1205–1257` (pass one and
+— `bin/sync_dispatch.py — observe_remote(), lines 1225–1277` (pass one and
 the start of pass two)
 
 **The order of those two passes is the fix's correctness condition.** `owned`
@@ -2417,7 +2417,7 @@ config and not the file. This repository's own config carries the block, and
 | 39 | A `__main__` guard is the **last** thing in a `tests/test_*.py` file | **enforced since v0.22.2** — `tests/test_plugin.py — test_no_test_class_is_defined_below_the_runner_block(), lines 370–387` sweeps every suite and names the orphans; zero suites violate it at this commit | every class below it is never registered, so CI runs a silently truncated suite while `pytest` runs the whole one |
 | 40 | A session's `base` commit is written once and never moves (v0.24.3) | `prev.get("base") or …` in `bin/session.py — touch(), lines 82–101` | the marker advances past the session's own commit, the Stop hook's evidence vanishes again, and the bug it was added to fix returns one layer down |
 | 41 | A missing or unresolvable `base` falls back to `HEAD`, never to "assume recorded" (v0.24.3) | the `[ -z "$base" ] \|\| ! git rev-parse --verify` guard, `hooks/stop-worklog-check.sh:54-57` | a stale registry silently disarms the Stop gate — an enforcement hook that stops enforcing without saying so |
-| 42 | The nightly compaction job runs the gates itself before it opens its PR (v0.24.3, re-homed in v0.24.10) | the `verify working tree` step, `.github/workflows/compact.yml`; `tests/test_bug_361.py — test_compact_still_self_checks_before_push(), lines 38–45` | a red compaction is only caught by the PR's own checks, which for a bot PR are the bridge's (§2.25) |
+| 42 | The nightly compaction job runs the gates itself before it opens its PR (v0.24.3, re-homed in v0.24.10) | the `verify working tree` step, `.github/workflows/compact.yml`; `tests/test_bug_361.py — test_compact_still_self_checks_before_push(), lines 44–49` | a red compaction is only caught by the PR's own checks, which for a bot PR are the bridge's (§2.25) |
 | 43 | The wiki ledger has one writer and is folded, never loaded as a dict (v0.24.10) | `published.append()` behind `worklog wiki-add` / `wiki-record`; `hooks/pre-commit` lines 101–125; `.gitattributes` `merge=union` | a three-way conflict in a file policy says must never be hand-edited, and page identity lost on the losing side (#392) |
 | 44 | Retention archives and never deletes; verify folds all three files (v0.24.10) | `compact._evict_done()`, `_verify()` over `todo + done + archive`; `tests/test_retention.py — TestNeverDeletes, lines 151–163` | closed history vanishes, and with it `worklog show` for anything older than the rule |
 | 45 | An archived item is never re-snapshotted into `done.jsonl`, and the archive holds one snapshot per item (post-tag) | the `done_state` fold over `[done_path, archive_path]` and `_prune_archive_text()` in `compact._compact_locked()`; `tests/test_retention.py — TestArchiveStability, lines 174–195` | the files grow every active night while verify stays green (§2.23) |

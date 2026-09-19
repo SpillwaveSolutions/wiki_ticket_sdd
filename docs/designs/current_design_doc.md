@@ -1,6 +1,6 @@
 ---
 generated_at: 2026-09-19T19:52:25Z
-git_hash: "2ebf46afd72dacf9eb74ff87528e6dd74eed99e3"
+git_hash: "1b208123a6e789482e1c1078f634e2496ade6b50"
 branch: docs/design-sync-v0-24-11
 tag: v0.24.11
 roadmap: docs/roadmap.md
@@ -81,7 +81,7 @@ setup guides plus an index, new in v0.16.0), and the companion
 | Skill | Prose instructions the harness model executes; the non-deterministic edge of the system. |
 | LWW | Last-writer-wins, per field, ordered by `ev`. |
 | `archive.jsonl` | The third log file (v0.24.10): closed snapshots evicted from `done.jsonl` by age or cap. Union-merged, folded by `worklog show`/`list --all` and by compaction's verify, never by the roadmap. Nothing is ever deleted (spec §7 step 7). |
-| `remembered_key` | The dispatcher's answer to "which remote ticket does this item update?": the folded `external.key`, else the per-clone `last_pushed_key`, else the remote marker map (`bin/sync_dispatch.py — remembered_key(), lines 270–305`). |
+| `remembered_key` | The dispatcher's answer to "which remote ticket does this item update?": the folded `external.key`, else the per-clone `last_pushed_key`, else the remote marker map (`bin/sync_dispatch.py — remembered_key(), lines 282–317`). |
 | Marker probe | The third source above (#412): `observe_remote()` lists every remote ticket anyway, so a ticket already carrying `worklog:<ULID>` is an update, not a create, even on a clone with no log memory and no state file. |
 | Freeze note | The dated record a release writes instead of copying the live pair: tag, sha, pointers, delta (`docs/designs/<date>_vX.Y.Z-release.md`, v0.24.10). Existing full dated copies stay frozen. |
 | `triggers` | The per-event artifact routing block in `.work/config.yml`, read through `worklog triggers <event>` (`bin/triggers.py`, v0.24.10). |
@@ -213,7 +213,7 @@ Main workflows:
   expected (v0.22.0)**: the close path returned early and printed only
   `would close #123`, even when the item was dirty and the real run would push
   its final shape first. The dry run now predicts exactly what the real run does
-  (`bin/sync_dispatch.py — push_items(), lines 621–819`).
+  (`bin/sync_dispatch.py — push_items(), lines 633–831`).
 - **Seven dispatcher tests were never running (v0.22.0)**:
   `tests/test_dispatch.py` carried its run-as-a-script block mid-file, so every
   class below it was defined but never registered — and CI runs these files as
@@ -363,9 +363,9 @@ Functional requirements (Confirmed, from spec §2 and the implementation):
 | R24 | A hook this project declares actually reaches the harness that loads it, on every supported host, and a skill that fails to parse is caught rather than loaded empty (v0.22.1) | `plugin/hooks/hooks.json` and `plugin/hooks/codex-hooks.json` (both wrapped under a top-level `hooks` key); `tests/test_plugin.py — TestCodexHookParity, lines 166–264` and `TestSkillFrontmatterLoads, lines 267–304` |
 | R25 | The same skills and enforcement hooks install on a second host without forking the scripts (v0.22.0) | `plugin/.codex-plugin/plugin.json`, `plugin/hooks/codex-hooks.json`, `plugin/PORTS.md`; `tests/test_plugin.py — test_both_hosts_run_the_same_scripts(), lines 243–254` |
 | R26 | A merge rescue never returns an item to a state it had already left, and refuses rather than reordering (v0.22.0) | `bin/compact.py — merge_rescue(), lines 638–782`; `tests/test_bug_merge.py — TestRescueKeepsPerItemOrder, lines 327–409` |
-| R27 | A dry run predicts every field write the real run would make, on the close path as well as the update path (v0.22.0) | `bin/sync_dispatch.py — push_items(), lines 621–819`, `note_overwrite(), lines 605–619`; `tests/test_dispatch.py — test_dry_run_reports_overwrites_on_the_CLOSE_path_too(), lines 477–494` |
+| R27 | A dry run predicts every field write the real run would make, on the close path as well as the update path (v0.22.0) | `bin/sync_dispatch.py — push_items(), lines 633–831`, `note_overwrite(), lines 605–619`; `tests/test_dispatch.py — test_dry_run_reports_overwrites_on_the_CLOSE_path_too(), lines 477–494` |
 | R28 | Closed history is archived by age and cap, never deleted, and an archived item is never re-snapshotted into `done.jsonl` (v0.24.10, corrected after the tag) | `bin/compact.py — _evict_done(), lines 206–265`, `_prune_archive_text(), lines 268–296`, `_compact_locked(), lines 391–508`; `.work/config.yml — retention`; plan `docs/plans/2026-08-30-retention.md`; `tests/test_retention.py — TestArchiveStability, lines 174–195` |
-| R29 | Create-vs-update consults the log, the per-clone state, and the remote marker map, in that order, and a deliberate unlink is never undone (v0.24.8, v0.24.9, #412) | `bin/sync_dispatch.py — remembered_key(), lines 270–305`, `observe_remote(), lines 1205–1257`, `explain(), lines 1422–1445`, `adopt(), lines 1289–1394`, `dedupe(), lines 1153–1201`; `tests/test_bug_382.py`, `tests/test_bug_385.py`, `tests/test_bug_412.py` |
+| R29 | Create-vs-update consults the log, the per-clone state, and the remote marker map, in that order, and a deliberate unlink is never undone (v0.24.8, v0.24.9, #412) | `bin/sync_dispatch.py — remembered_key(), lines 282–317`, `observe_remote(), lines 1205–1257`, `explain(), lines 1422–1445`, `adopt(), lines 1289–1394`, `dedupe(), lines 1153–1201`; `tests/test_bug_382.py`, `tests/test_bug_385.py`, `tests/test_bug_412.py` |
 | R30 | The wiki ledger is an append-only, union-merged event log with one writer (v0.24.10, #392) | `bin/published.py — append(), lines 191–228`, `fold(), lines 113–131`, `plan(), lines 273–341`; `.gitattributes`; `tests/test_published.py` |
 | R31 | When generation happens is configuration, read through one command (v0.24.10) | `bin/triggers.py — resolve(), lines 186–210`; `worklog triggers`; `.work/config.yml — triggers`; `tests/test_triggers.py` |
 | R32 | Every write to the log fits one atomic envelope and cannot race a compaction (v0.24.10) | `bin/worklog — append(), lines 66–106` (`MAX_LINE`, `.work/.lock`); `bin/compact.py — _lock_logs(), lines 80–86`; `bin/ulid.py — new(), lines 114–143`; `tests/test_ulid.py — test_same_millisecond_ids_are_monotonic(), lines 62–67` |
@@ -788,10 +788,10 @@ Decisions not (yet) in ADRs, recorded in plans/spec:
 | `git_hash` means *the tree the document was written against*, not the commit it lands in (v0.21.0) | A commit cannot know its own sha, so at stamping time HEAD is the parent of the commit the document arrives in. That is the honest value and the one a reader diffing stale prose wants — the tree whose bytes the author actually read | `bin/ulid.py — git_commit_full(), lines 88–107`; plan `docs/plans/2026-08-03-doc-provenance-and-verification.md` |
 | The sha is **full 40-hex and quoted**, both (v0.21.0) | `ia._scalar()` coerces an all-digit value to `int` *before* it considers quotes, so a 7-char short sha reads back corrupted roughly one time in 27 — and one with a leading zero reads back still sha-shaped, which is worse. Quoting is the direct fix; full length makes an all-digit value vanishingly unlikely rather than routine. Belt and braces, because this value is the anchor everything else in the story hangs from | `bin/ulid.py — git_commit_full(), lines 88–107`; `bin/ia.py — _scalar(), lines 101–118`; `plan_capture.front_matter(), lines 69–89`; `adr.scaffold(), lines 171–196` |
 | The roadmap takes its `git_hash` from the newest **event**, never `git rev-parse` (v0.21.0) | `hooks/pre-commit` regenerates `docs/roadmap.md` and diffs it, so a HEAD-derived value is the parent commit on the run that writes the file and the current one on the next run — failing every commit thereafter. On a `pull_request` CI checkout it is worse: the sha is a synthetic `refs/pull/N/merge` commit that exists in no local clone, so no stored value could ever match | `bin/render_roadmap.py — top_event(), lines 28–52` and `render(), lines 133–281` |
-| Provenance is stamped on documents, not on the 366 rendered pages (v0.21.0) | Each page under `docs/.index/rendered/` is a projection of the whole log by one build, so "the commit" is a property of the *build*, not of any page. Stamping all of them would be one fact copied 366 times, would move every `render_hash` at once, and would be invisible to every reader anyway — publish strips front matter | `bin/ia_render.py — build_manifest(), lines 664–740` |
+| Provenance is stamped on documents, not on the 366 rendered pages (v0.21.0) | Each page under `docs/.index/rendered/` is a projection of the whole log by one build, so "the commit" is a property of the *build*, not of any page. Stamping all of them would be one fact copied 366 times, would move every `render_hash` at once, and would be invisible to every reader anyway — publish strips front matter | `bin/ia_render.py — build_manifest(), lines 669–745` |
 | `merged_in` is backfilled onto **frozen** documents only (v0.21.0) | A frozen document is written once, so "the commit that landed it" is exact and stays true forever. A live document — the roadmap, a guide, an ADR whose status flips, the `current_*` design pair — has been edited many times since, so stamping it with the merge that *first* carried it would be a true fact that reads as a lie: it names a version of the file that no longer exists | `bin/provenance.py — backfill(), lines 98–136`; `bin/ia.py — is_frozen(), lines 517–524` |
 | Backfill runs from the release skill, not a git hook (v0.21.0) | `post-merge` fires on the default branch, where `hooks/pre-commit`'s branch guard forbids committing. The one place a merge has just happened and a commit is legitimate is the post-release step | `plugin/skills/release/SKILL.md`; `bin/worklog — cmd_provenance_backfill(), lines 903–912` |
-| The publish manifest hashes a document's **body**, not the whole file (v0.21.0) | Publishing strips front matter for Gollum-style wikis, so two files differing only there produce byte-identical pages. The old whole-file hash moved anyway, tripping the frozen-source guard on every metadata stamp the normalizer, `adr.mark_superseded()` or the provenance backfill writes. Hashing the body makes that guard mean *the prose changed*, which is the invariant it was always meant to protect | `bin/ia_render.py — _body_hash(), lines 651–661`; module docstring |
+| The publish manifest hashes a document's **body**, not the whole file (v0.21.0) | Publishing strips front matter for Gollum-style wikis, so two files differing only there produce byte-identical pages. The old whole-file hash moved anyway, tripping the frozen-source guard on every metadata stamp the normalizer, `adr.mark_superseded()` or the provenance backfill writes. Hashing the body makes that guard mean *the prose changed*, which is the invariant it was always meant to protect | `bin/ia_render.py — _body_hash(), lines 656–666`; module docstring |
 | `doc-verify` never falls back to HEAD (v0.21.0, ADR-0008) | The fallback is bug #294 with extra steps: it is precisely the assumption that produced the bad citations. An unstamped or unresolvable document is *reported and skipped*, never re-checked against a tree its author never saw | `bin/doc_verify.py` module docstring and `verify(), lines 275–358` |
 | Branch guard + commit-msg hard-fail immediately, no warn period (v0.15.0) | A real incident (13 commits authored straight onto `main`, diverging from `origin/main` for hours) — "hooks enforce invariants, not hope"; `MERGE_HEAD` exempts reconciliation merges, `WORKLOG_SKIP_BRANCH_GUARD` exempts the three non-commit callers (doctor, CI backstop, integration-test assertions) | `hooks/pre-commit` branch-guard block; `hooks/commit-msg`; plan `docs/plans/2026-07-25-branch-discipline-hooks.md` |
 | The shared `plugin/` tree is canonical; a host gets a *manifest*, not a fork (v0.22.0) | Codex needed no ported scripts at all: it sets `CLAUDE_PLUGIN_ROOT` for plugin-sourced hooks and reads the same `hookSpecificOutput`/`additionalContext` shape the scripts already emit. Duplicating the scripts per host would create the same class of drift `HOOK_CANON` exists to prevent, one directory further out. What differs between hosts is exactly one file each | `plugin/.codex-plugin/plugin.json`; `plugin/hooks/codex-hooks.json`; `plugin/PORTS.md`; `tests/test_plugin.py — test_both_hosts_run_the_same_scripts(), lines 243–254` |
@@ -803,8 +803,8 @@ Decisions not (yet) in ADRs, recorded in plans/spec:
 | Retention archives, never deletes, and ages by snapshot `ts` (v0.24.10) | `done.jsonl` grew forever. Create time would archive an epic closed yesterday if it was filed two years ago; after compaction the close events are gone, and the snapshot `ts` is the first compaction after close, which is the close clock that survives. Unparseable `ts` fails closed: kept, and never counted against the cap | `bin/compact.py — _evict_done(), lines 206–265`; plan `docs/plans/2026-08-30-retention.md` |
 | The "already snapshotted" check folds the archive too, and the archive is pruned by item (post-tag fix) | Folding `done.jsonl` alone made every archived item look changed on any active night, so it was re-snapshotted into `done.jsonl` and re-archived a period later beside its old line. `_snapshot()` mints a fresh `ev` every time, so dedupe by `ev` was dead code; dedupe is by item, newest `ev` wins | `bin/compact.py — _compact_locked(), lines 391–508` (the `done_state` fold), `_prune_archive_text(), lines 268–296`; `tests/test_retention.py — TestArchiveStability, lines 174–195` |
 | A parent is never archived while a live child remains (post-tag fix) | The roadmap and status reports keep the epic column. Live means "in `done.jsonl` or open"; an already archived child does not hold its parent back, or nothing would ever leave. The veto loops because un-evicting a parent can pin the grandparent | `bin/compact.py — _evict_done(), lines 206–265` (the `while True` veto); `tests/test_retention.py — TestParentVeto, lines 229–257` |
-| The remote marker map is the third key source, after the log and the per-clone state (#412) | A clone with no link event and no `sync-state.json` had nothing to answer with, so a retried create filed a second ticket. `observe_remote()` already lists every remote ticket; keeping the marker-to-key map costs no extra call, and the existing relink path records the missing link event. Colliding markers resolve to the `dedupe` survivor so a later `dedupe --collapse-agreed` agrees with the probe | `bin/sync_dispatch.py — remembered_key(), lines 270–305`, `observe_remote(), lines 1205–1257`; plan `docs/plans/2026-09-19-review-v0-24-10-and-open-tickets.md` |
-| A deliberate `unlink` is never undone by the probe (#412) | `unlink` writes `external: {}` (present, empty) where a never-linked item has no `external` at all. The probe skips those ids, and `cmd_unlink` also forgets `last_pushed_*`, or the next sync would re-attach the ticket the operator just retracted | `bin/sync_dispatch.py — observe_remote(), lines 1205–1257` (`unlinked_ids`); `bin/worklog — cmd_unlink(), lines 349–390`; `tests/test_bug_412.py — TestDeliberateUnlink, lines 120–128` |
+| The remote marker map is the third key source, after the log and the per-clone state (#412) | A clone with no link event and no `sync-state.json` had nothing to answer with, so a retried create filed a second ticket. `observe_remote()` already lists every remote ticket; keeping the marker-to-key map costs no extra call, and the existing relink path records the missing link event. Colliding markers resolve to the `dedupe` survivor so a later `dedupe --collapse-agreed` agrees with the probe | `bin/sync_dispatch.py — remembered_key(), lines 282–317`, `observe_remote(), lines 1205–1257`; plan `docs/plans/2026-09-19-review-v0-24-10-and-open-tickets.md` |
+| A deliberate `unlink` is never undone by the probe (#412) | `unlink` writes `external: {}` (present, empty) where a never-linked item has no `external` at all. The probe skips those ids, and `cmd_unlink` also forgets `last_pushed_*`, or the next sync would re-attach the ticket the operator just retracted | `bin/sync_dispatch.py — observe_remote(), lines 1225–1277` (`unlinked_ids`); `bin/worklog — cmd_unlink(), lines 349–390`; `tests/test_bug_412.py — TestDeliberateUnlink, lines 120–128` |
 | The wiki ledger is JSONL, folded like the work log (v0.24.10, #392) | A 308 KB JSON dict with no merge strategy produced a three-way conflict in a file policy said must never be hand-edited. Append-only events, last-write-wins per key, `merge=union`, one writer. A leftover `published.json` migrates on first write with deterministic ULIDs so a retried migration dedupes | `bin/published.py` module docstring, `append(), lines 191–228`, `migrate_json(), lines 148–188` |
 | `wiki-plan` owns the frozen guard and the skip (v0.24.10) | The wiki-publish skill used to hash files itself. The manifest already carries `source_hash` (body) and `render_hash` (page bytes); `plan()` compares both against the folded ledger and exits 1 on frozen body drift, so a skill cannot publish past a frozen edit by mistake | `bin/published.py — plan(), lines 273–341`; `bin/worklog — cmd_wiki_plan(), lines 512–528` |
 | When generation happens is a config block, not skill prose (v0.24.10) | Exactly one binding was configuration (`release.sync_docs`); the rest lived in four skills' prose. An event key that is present, even as `[]`, is the authority; a missing key falls back to defaults and the legacy knobs | `bin/triggers.py — resolve(), lines 186–210`; `.work/config.yml — triggers` |
@@ -813,7 +813,7 @@ Decisions not (yet) in ADRs, recorded in plans/spec:
 | A release freezes a note, not a copy (v0.24.10) | Each dated pair was 250 KB and byte-identical to the live pair at the tag. A note carrying the tag, the sha, pointers at the live pair, and the delta from the previous freeze is the record a reader needs; existing full copies stay frozen | `.claude/skills/design-docs/SKILL.md`; `tests/test_hygiene.py — TestFreezeCap, lines 73–84` |
 | Freshness is a gate, not a step (v0.24.11) | The release skill said "regenerate the live pair" for seven releases and nobody did; a step that is prose is a step that can be skipped. Two facts are checkable: the live doc's `git_hash` descends from the latest tag, and the tag has a freeze record whose front matter names it. `freshness()` never resolves against HEAD, runs only on repo-wide `doc-verify` (a `--staged` hook would fail every commit between a tag and its doc PR), and its findings are `live`, so they gate `--strict` | `bin/doc_verify.py — freshness(), lines 101–146`; `verify(), lines 275–358` (the `only is None` guard); `tests/test_doc_freshness.py — TestFreshness, lines 25–99` |
 | Forge detection from the origin remote, no config key (v0.24.11, #413) | A `ci_forge:` setting would be one more value to keep in step with a remote that already says where the repo lives. `dev.azure.com` and `*.visualstudio.com` select the Azure template; every other host, and no origin at all, gets GitHub Actions. The tracker adapter stays a separate axis: an ADO-hosted repo can track tickets on GitHub. An existing file is never overwritten, and `uninstall` removes only a file carrying the `worklog-invariants` marker | `plugin/scripts/init.sh:236`; `plugin/scripts/uninstall.sh:82`; `tests/test_plugin.py — TestAzurePipelinesTemplate, lines 506–563` |
-| The dry run must predict the *close* path's field writes too (v0.22.0) | A close is not always only a close: a dirty item pushes its final shape first, and that push can rewrite a ticket somebody else filed. Reporting overwrites only on the update path left the one path silent where an operator reading "would close" is least expecting a field write. Same call, same condition, so the prediction now matches the action | `bin/sync_dispatch.py — push_items(), lines 621–819`; `note_overwrite(), lines 605–619` |
+| The dry run must predict the *close* path's field writes too (v0.22.0) | A close is not always only a close: a dirty item pushes its final shape first, and that push can rewrite a ticket somebody else filed. Reporting overwrites only on the update path left the one path silent where an operator reading "would close" is least expecting a field write. Same call, same condition, so the prediction now matches the action | `bin/sync_dispatch.py — push_items(), lines 633–831`; `note_overwrite(), lines 605–619` |
 
 Conditions to revisit: a Lamport counter if clock-skew LWW ever bites (spec §16);
 `external` as an array if multi-tracker is needed; a second `wiki_flavor`
@@ -1002,7 +1002,7 @@ Close path (v0.12.1): a closing item whose canonical hash is dirty pushes an
 (`push_items()`). Regression test: `tests/test_dispatch.py — TestCloseSyncsFields`.
 
 **The dry run now predicts that push too (v0.22.0, `bin/sync_dispatch.py —
-push_items(), lines 621–819`).** Overwrite reporting was added in v0.19.0 on the
+push_items(), lines 633–831`).** Overwrite reporting was added in v0.19.0 on the
 *update* path only; the close path returned early after printing
 `would close #123`. But a close is not always only a close — the branch above is
 exactly the case where a dirty item pushes its final shape first, and that push
@@ -1021,7 +1021,7 @@ epic/plan/milestone + graph edges (`ia_graph.ticket_body()`), used by the
 issue-description skill before push.
 
 **Collision gate (v0.18.0, Confirmed, `bin/sync_dispatch.py — push_items(),
-lines 621–628` and `report_collisions(), lines 500–523`).** Before the per-item loop,
+lines 633–831` and `report_collisions(), lines 500–523`).** Before the per-item loop,
 `external_owners(items)` is filtered to keys with more than one claimant. Every
 id in a contested set is skipped — *before* the `closed` branch is computed, so
 the dirty-update-then-close path is covered too — and `sync()` returns 1
@@ -1032,15 +1032,15 @@ two-command repair, deliberately *not* as a `drift:` line, since drift is what
 operators skim. It fires under `--dry-run` too, because "zero creates on a dry
 run" is the documented migration acceptance gate.
 
-**Scope now includes key-dirty (v0.18.0, `bin/sync_dispatch.py — is_dirty(), lines 307–322`).**
+**Scope now includes key-dirty (v0.18.0, `bin/sync_dispatch.py — is_dirty(), lines 319–334`).**
 `external` is not in `HASH_FIELDS`, so the content hash alone can never notice an
 unlink or a re-link — which made `worklog unlink` a silent no-op at sync time and
 left the damaged ticket unrepaired. The dispatcher records `last_pushed_key`
-alongside `last_pushed_hash` (`bin/sync_dispatch.py — record_push(), lines 324–326`) and treats a change
+alongside `last_pushed_hash` (`bin/sync_dispatch.py — record_push(), lines 336–338`) and treats a change
 there as dirty. Guarded on `prev is not None` so clones whose state file predates
 the field do not see every item go dirty at once.
 
-**Auto-link can no longer abort a run (v0.18.0, `bin/sync_dispatch.py — record_link(), lines 350–370`).**
+**Auto-link can no longer abort a run (v0.18.0, `bin/sync_dispatch.py — record_link(), lines 362–382`).**
 The ticket already exists remotely when the link is recorded, and create-vs-update
 is decided purely by `external.key` presence — so exiting there leaves a live
 ticket with no local link and the *next* run files a second one. The call now
@@ -1050,7 +1050,7 @@ never a dead run. Regression: `tests/test_dispatch.py —
 TestOneOwnerPerKey.test_auto_link_after_create_is_never_blocked`.
 
 **Where the key comes from (v0.24.8, v0.24.9, #412; Confirmed,
-`bin/sync_dispatch.py — remembered_key(), lines 270–305`).** Create-vs-update
+`bin/sync_dispatch.py — remembered_key(), lines 282–317`).** Create-vs-update
 used to be decided by one fact, the folded `external.key`. A checkout that
 throws away an uncommitted `link` event (`git checkout -f` of an older log)
 therefore filed a second ticket on the next run (#382), and a fresh clone with
@@ -1319,7 +1319,7 @@ written empty, because an empty value opens a block list in
 | Status report | `bin/worklog — cmd_status(), lines 1211–1249` | `ulid.git_commit_full()` |
 | Roadmap snapshot | `bin/worklog — cmd_roadmap_snapshot(), lines 578–616` | inherited from the rendered roadmap |
 | `docs/roadmap.md` | `bin/render_roadmap.py — render(), lines 133–281` | the newest event's `git` field, via `top_event(), lines 28–52` |
-| Publish manifest | `bin/ia_render.py — build_manifest(), lines 664–740` | the newest event's `git` field — one build-level key, not 366 page-level ones |
+| Publish manifest | `bin/ia_render.py — build_manifest(), lines 669–745` | the newest event's `git` field — one build-level key, not 366 page-level ones |
 | Design pair | the design-docs skill, from `git rev-parse HEAD` | full sha, quoted |
 
 Note the two different sources, and that the difference is forced rather than
@@ -2187,7 +2187,7 @@ flowchart TD
 ```
 
 *How to read it:* each diamond is one function's question. `remembered_key()`
-(`bin/sync_dispatch.py — remembered_key(), lines 270–305`) answers the first
+(`bin/sync_dispatch.py — remembered_key(), lines 282–317`) answers the first
 three in order and returns a key string or `None`. `observe_remote()`
 (`lines 1205–1257`) fills the marker map in a first pass over the listing,
 **before** it builds the `owned` map, because `owned` goes through
@@ -2592,7 +2592,7 @@ hash-dirty ∪ `--keys`). See §34.
 
 **`--keys` is additive, and v0.24.3 says so where the reader looks.** The flag
 `ADD`s to that union; it can only widen a run and can never narrow one
-(`bin/sync_dispatch.py — build_parser(), lines 1487–1509`, and spec §10.5). A bug was filed against it on
+(`bin/sync_dispatch.py — build_parser(), lines 1507–1531`, and spec §10.5). A bug was filed against it on
 the assumption that naming one key would scope the run to that key, and was
 closed as misfiled — the behavior is correct and the documentation was the
 defect. There is deliberately **no** narrowing flag: a sync that skipped
