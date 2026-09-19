@@ -64,6 +64,14 @@ land in `.work/config.yml`'s `ticketing:`/`wiki:` blocks and go into the
 same commit. Upgrade re-runs on an already-configured repo skip detection
 entirely.
 
+The CI file follows the origin remote, not the ticket adapter: a
+`dev.azure.com` or `*.visualstudio.com` origin gets `azure-pipelines.yml`,
+every other host gets `.github/workflows/worklog.yml`. Both run the same
+hook steps, and an existing file is never overwritten. The tracker and the
+CI host are separate axes, so an Azure DevOps repo can still track tickets
+on GitHub. The user guide's "CI wiring" section has the template mapping
+for any other forge.
+
 Init also offers the **work-taxonomy block** for `CLAUDE.md` — with
 consent, never silently. It shows the block (the four axes, the six rules,
 the inline-proposal policy), asks yes/no, and on yes writes it between
@@ -90,8 +98,8 @@ show mode `120000`.
 
 Remove exactly what init added — the tooling, not the data. It asks for
 confirmation first, then removes `bin/` scripts, `hooks/`, the
-`.gitattributes` union-merge lines, the CI workflow, and the CLAUDE.md
-policy block. **Preserved, always:** `.work/` (the event logs are the work
+`.gitattributes` union-merge lines, the CI file it wrote (either
+template), and the CLAUDE.md policy block. **Preserved, always:** `.work/` (the event logs are the work
 record), `docs/plans/` (the permanent design record), `docs/status/`, and
 `docs/roadmap.md`. Data outlives tooling.
 
