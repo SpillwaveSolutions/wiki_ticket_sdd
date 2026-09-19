@@ -85,9 +85,14 @@ def page_name(rec):
     if t == "roadmap":
         return "Roadmap"
     if t == "design":
-        base = ("Design-Doc" if "design_doc" in stem else "Code-Walkthrough")
-        m = re.match(r"(\d{4}-\d{2}-\d{2}_.+?)_(?:design_doc|code_walkthrough)$", stem)
-        return base + ("-" + m.group(1) if m else "")
+        m = re.match(r"(\d{4}-\d{2}-\d{2}_.+?)_(design_doc|code_walkthrough)$", stem)
+        if m:
+            return ("Design-Doc" if m.group(2) == "design_doc"
+                    else "Code-Walkthrough") + "-" + m.group(1)
+        if re.match(r"\d{4}-\d{2}-\d{2}_", stem):
+            # a dated freeze note (v0.24.10 rule): its own page, never the live one
+            return "Design-Freeze-" + stem
+        return "Design-Doc" if "design_doc" in stem else "Code-Walkthrough"
     return FLAVOR.sanitize(rec.get("title", stem))
 
 

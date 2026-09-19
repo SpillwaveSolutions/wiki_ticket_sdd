@@ -226,6 +226,7 @@
    ],
    "title": "Bot PRs land through the merge gate with a PAT identity",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0011-bot-prs-land-through-the-merge-gate-with",
    "wiki_key": "adr/0011-bot-prs-land-through-the-merge-gate-with"
   },
   {
@@ -789,6 +790,7 @@
    "git_hash": "ea73b2d7bdc99a5f0ab77295e04559e8e9dd1e4b",
    "live_design": "docs/designs/current_design_doc.md",
    "live_walkthrough": "docs/designs/current_code_walkthrough.md",
+   "merged_in": "ff021fc5a1bb20d2950c01220611c31c0fec7f4d",
    "name": "v0.24.10-release",
    "release": "v0.24.10",
    "roadmap_snapshot": "docs/roadmap/2026-09-02_v0.24.10-release.md",
@@ -797,6 +799,7 @@
    "tag": "v0.24.10",
    "title": "Design freeze: v0.24.10",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Freeze-2026-09-19_v0.24.10-release",
    "wiki_key": "design/2026-09-19_v0.24.10-release"
   },
   {
@@ -1261,6 +1264,7 @@
    "items": [
     "01M19XRRZ2894K7XE59RX1EAY1"
    ],
+   "merged_in": "7898f15f2278a883246d21204f6ab964402b9d85",
    "slug": "retention",
    "source": "docs/plans/2026-08-30-retention.md",
    "status": "accepted",
@@ -1297,6 +1301,7 @@
     "01M2XCWMVEH3XFP2VPS9JBD6XV",
     "01M2XCWMVEH3XFP2VPS9JBD6XX"
    ],
+   "merged_in": "7715566a600fa1530fad07660fbf80a43fe8e0ca",
    "slug": "review-v0-24-10-and-open-tickets",
    "source": "docs/plans/2026-09-19-review-v0-24-10-and-open-tickets.md",
    "status": "active",
@@ -1513,11 +1518,11 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-09-19T19:29:44Z",
-   "git_hash": "ff021fc",
+   "generated_at": "2026-09-19T19:50:42Z",
+   "git_hash": "2ebf46a",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "982e93c7",
+   "source_hash": "ecd0dd82",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
@@ -2002,6 +2007,7 @@
    "doc_type": "roadmap-snapshot",
    "generated_at": "2026-09-02T01:56:16Z",
    "git_hash": "20dc8c6",
+   "merged_in": "ea73b2d7bdc99a5f0ab77295e04559e8e9dd1e4b",
    "name": "v0.24.10-release",
    "release": "v0.24.10",
    "slug": "2026-09-02_v0.24.10-release",
@@ -2020,6 +2026,7 @@
    "doc_type": "roadmap-snapshot",
    "generated_at": "2026-09-19T19:29:44Z",
    "git_hash": "ff021fc",
+   "merged_in": "2ebf46afd72dacf9eb74ff87528e6dd74eed99e3",
    "name": "v0.24.11-release",
    "release": "v0.24.11",
    "slug": "2026-09-19_v0.24.11-release",
@@ -2028,6 +2035,7 @@
    "supersedes": "roadmap-snapshot/2026-09-02_v0.24.10-release",
    "title": "Roadmap",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-09-19_v0.24.11-release",
    "wiki_key": "roadmap-snapshot/2026-09-19_v0.24.11-release"
   },
   {

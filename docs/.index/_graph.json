@@ -7820,8 +7820,13 @@
   },
   "item/01M2XJARKTEH7VG74N3M0ZG66S": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "Release v0.24.11"
+  },
+  "item/01M2XK6N6JBZ6KKVHCF0C2TRWP": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Wiki page name for a design freeze note collides with the live Code-Walkthrough page"
   },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
