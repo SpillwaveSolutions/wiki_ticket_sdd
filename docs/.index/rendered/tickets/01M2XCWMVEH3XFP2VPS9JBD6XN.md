@@ -1,6 +1,6 @@
 # #413: CI as the authoritative syncer behind ticketing.sync_owner: ci
 
-`01M2XCWMVEH3XFP2VPS9JBD6XN` · task/feature · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6XN` · task/feature · **done**
 
 post-merge sets the adapter env, runs a push-only sync with the bot token before rendering, stages the log with the docs, and caches sync-state.
 

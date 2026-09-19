@@ -701,6 +701,23 @@ epic/plan context, milestone, and traceability edges. Enrich items with
 `worklog update --body "…"` and `worklog link-pr` rather than editing only
 the remote description.
 
+### Let CI own ticket sync
+
+Two checkouts that both sync by hand can both observe a ticket's absence
+and both create it (#412). The marker probe closes the common case; the
+structural answer is one syncer. Set `ticketing.sync_owner: ci` in
+`.work/config.yml` and the `worklog-post-merge` job becomes that syncer:
+after every merge to `main` it runs `worklog sync --push-only --force` with
+the `WORKLOG_BOT_PAT` secret, records the link events, and lands them
+through the same bot PR as the regenerated roadmap. A manual
+`worklog sync` that would push is refused unless you pass `--force`
+(`--report`, `--explain`, and `--pull-only` still work), and
+`session-doctor` reminds you at session start. Add
+`ticketing.ci_dedupe_check: true` and every PR also runs
+`worklog dedupe --dry-run --check`, which fails on an agreed duplicate
+group. This repository keeps the default, `sync_owner: human`; a deployment
+with several agent checkouts is the case that opts in.
+
 ## The classifier (off by default)
 
 The default path for keeping work tracked is inline: when trackable work

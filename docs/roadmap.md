@@ -2,7 +2,7 @@
 wiki_key: roadmap
 doc_type: roadmap
 truth_state: current
-source_hash: 17f815d9
+source_hash: 3030fbec
 generated_at: 2026-09-19T20:21:59Z
 git_hash: "663ea10"
 ---
@@ -14,7 +14,7 @@ git_hash: "663ea10"
 
 # Roadmap
 
-_1 epic(s) in flight, 1 open item(s), 0 blocked, 0 unclassified._
+_0 epic(s) in flight, 0 open item(s), 0 blocked, 0 unclassified._
 
 ## Now
 
@@ -22,16 +22,15 @@ _Nothing here._
 
 ## Next
 
-### Fix the v0.24.10 review findings and close #412 and #413  ·  P1  ·  20 of 21 done  ·  feature 8 / bug 13
-The v0.24.10 change review found a P0 in retention (archived items ping-pong back into done.jsonl), a merge gate that trusts commit statuses from any actor, and seven releases without regenerated design docs. Issues #412 and #413 add duplicate ticket creation on fresh clones and a request for CI-owned sync with Azure Pipelines support. This epic fixes all of it in one PR per workstream: retention, marker probe, gate hardening, PAT identity for bot PRs, CI sync, release gate, and an Azure template.
-
-| # | Item | Type | Priority | Status | Blocked by |
-|---|---|---|---|---|---|
-| [429](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/429) | #413: CI as the authoritative syncer behind ticketing.sync_owner: ci | task | P2 | todo | — |
+_Nothing here._
 
 ## Later
 
 _Nothing here._
+
+## Needs attention
+
+- **[414](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/414)** Fix the v0.24.10 review findings and close #412 and #413 — no open children left; close the epic.
 
 ## Visual roadmap
 
@@ -40,10 +39,8 @@ _Nothing here._
 ```mermaid
 graph TD
     01M2XCWMV0QYM4ZRBWN1V1327B["📦 Fix the v0.24.10 review findin"]
-    01M2XCWMVEH3XFP2VPS9JBD6XN["📦 413 CI as the authoritative sy"]
-    01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVEH3XFP2VPS9JBD6XN
     classDef todo fill:#f4f4f4,stroke:#999999
-    class 01M2XCWMV0QYM4ZRBWN1V1327B,01M2XCWMVEH3XFP2VPS9JBD6XN todo
+    class 01M2XCWMV0QYM4ZRBWN1V1327B todo
 ```
 
 ### Hierarchy
@@ -51,6 +48,4 @@ graph TD
 ```mermaid
 graph TD
     01M2XCWMV0QYM4ZRBWN1V1327B["📦 Fix the v0.24.10 review findin"]
-    01M2XCWMVEH3XFP2VPS9JBD6XN["📦 413 CI as the authoritative sy"]
-    01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVEH3XFP2VPS9JBD6XN
 ```

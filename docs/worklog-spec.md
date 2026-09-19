@@ -557,6 +557,15 @@ Canonical JSON = sorted keys, no whitespace, arrays sorted for set-valued fields
 | `plan`, `unplanned`, `discovered_during` | as a comment/label | no | Local-only concepts |
 | `id` (ULID) | as idempotency key | never | |
 
+**Sync ownership** *(1.10, #413)*. `ticketing.sync_owner` is `human`
+(default) or `ci`. Under `ci`, the post-merge job is the only writer that
+pushes: it runs `sync --push-only --force` with the bot identity after each
+merge to the default branch and lands the link events through the bot PR.
+A manual push sync exits 1 without `--force`; read-only runs (`--report`,
+`--explain`, `--pull-only`) are never refused. `ticketing.ci_dedupe_check`
+adds `dedupe --dry-run --check` as a PR gate that fails on an agreed
+duplicate group. Both are opt-in; the marker probe (§9.2) is always on.
+
 ### 10.5 Scopes
 
 ```

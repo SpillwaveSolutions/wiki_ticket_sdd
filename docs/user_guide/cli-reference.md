@@ -460,6 +460,29 @@ bin/worklog sync --report    # alias of --dry-run
 | `--push-only` / `--pull-only` | One direction only (mutually exclusive) |
 | `--retry-base-delay <s>` | Base backoff for transient adapter failures |
 | `--explain <ULID>` | Print which key source answers for one item, then stop. Pushes, pulls, and writes nothing. |
+| `--force` | Push even when `ticketing.sync_owner` is `ci` (see below) |
+
+*(0.24.11, #413)* **CI can own sync.** Two keys in the `ticketing:` block of
+`.work/config.yml`:
+
+```yaml
+ticketing:
+  system: github
+  project: owner/repo
+  sync_owner: ci           # human (default) | ci
+  ci_dedupe_check: true    # default false
+```
+
+With `sync_owner: ci`, the `worklog-post-merge` job runs
+`worklog sync --push-only --force` after every merge to `main` with the
+bot token, before it renders the roadmap, and the link events ride the
+same derived-docs PR. A manual `worklog sync` that would push is refused
+with exit 1 unless you pass `--force`; `--report`, `--explain`, and
+`--pull-only` stay open, and `session-doctor` says the repo is CI-owned at
+session start. With `ci_dedupe_check: true`, `worklog-invariants` runs
+`worklog dedupe --dry-run --check` on every PR and fails on any agreed
+duplicate group (skipped, not failed, when the token is absent). Both need
+the `WORKLOG_BOT_PAT` secret with issues read and write.
 
 *(0.24.11, #412)* **Create-vs-update consults the remote.** `remembered_key`
 has three sources, in order: the log's `external.key`, the per-clone
@@ -564,7 +587,9 @@ never changed, so it stays out of scope until `--keys` forces it in.
 ### dedupe
 
 Find remote tickets that share a worklog marker — the inverse of github#226
-(one item, many keys). Default is a dry-run report. Agreed groups (all open
+(one item, many keys). Default is a dry-run report. `--check` exits 1 when
+any agreed group exists and collapses nothing; it is the opt-in CI gate
+behind `ticketing.ci_dedupe_check` (#413). Agreed groups (all open
 or all closed) can be collapsed; mixed Done/To-Do groups are reported as
 conflicts and never auto-collapsed. Same title without a shared marker is
 low-confidence and never auto-collapsed (#383).
