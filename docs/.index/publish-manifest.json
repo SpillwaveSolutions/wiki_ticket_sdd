@@ -1,5 +1,5 @@
 {
- "git_hash": "7715566",
+ "git_hash": "21b3ac6",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "191c52218183",
+   "render_hash": "162c407c5bdb",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4665,7 +4665,7 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMV0QYM4ZRBWN1V1327B",
    "render": "as-is",
-   "render_hash": "f7c408528307",
+   "render_hash": "2c780f87e238",
    "source": "docs/.index/rendered/tickets/01M2XCWMV0QYM4ZRBWN1V1327B.md",
    "title": "Fix the v0.24.10 review findings and close #412 and #413",
    "truth_state": "open",
@@ -4855,20 +4855,20 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XV",
    "render": "as-is",
-   "render_hash": "c28479cbde52",
+   "render_hash": "b1ff91067a5c",
    "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XV.md",
    "title": "#413: Azure Pipelines template from init.sh",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XV"
   },
   {
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XX",
    "render": "as-is",
-   "render_hash": "45817e2ff9da",
+   "render_hash": "dc552b71920f",
    "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XX.md",
    "title": "CI wiring docs and the GitHub Actions to Azure Pipelines mapping table",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XX"
   },
   {
@@ -5736,13 +5736,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T18:18:38Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T18:52:16Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "42519d97d797",
+   "render_hash": "70792d849db3",
    "source": "docs/roadmap.md",
-   "source_hash": "aaa39a12c4aa",
+   "source_hash": "8064d69754f0",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -6220,9 +6220,9 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "8b49afebd90c",
+   "render_hash": "b53f83602611",
    "source": "docs/user_guide/user-guide.md",
-   "source_hash": "f624b4472947",
+   "source_hash": "e02743fce23b",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",
    "wiki_key": "user-guide"
