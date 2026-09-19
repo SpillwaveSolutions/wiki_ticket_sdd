@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Restore six bug ticket titles that ticket-sync overwrote
+`01M2XN9A0XXNKTDJ6H1BDJW0SD` · status: done
+- belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+
 ### Wiki page name for a design freeze note collides with the live Code-Walkthrough page
 `01M2XK6N6JBZ6KKVHCF0C2TRWP` · status: done
 
@@ -166,6 +170,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - contains: #413: CI as the authoritative syncer behind ticketing.sync_owner: ci
 - contains: Release gate for design-doc freshness in doc-verify --strict
 - contains: #413: Azure Pipelines template from init.sh
+- contains: Restore six bug ticket titles that ticket-sync overwrote
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Release v0.24.10: merge pipeline, retention, bot PR landing

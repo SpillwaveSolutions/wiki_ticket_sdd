@@ -14,8 +14,9 @@ The v0.24.10 change review found a P0 in retention (archived items ping-pong bac
 - [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XN]] #413: CI as the authoritative syncer behind ticketing.sync_owner: ci — post-merge sets the adapter env, runs a push-only sync with the bot token before rendering, stages the log with the docs, and caches sync-state. (done)
 - [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XQ]] Release gate for design-doc freshness in doc-verify --strict — A release fails when a live doc's git_hash does not descend from the previous tag or the freeze record for that tag is missing. (done)
 - [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XV]] #413: Azure Pipelines template from init.sh — init.sh writes azure-pipelines.yml with the same hook-only steps as the installed GitHub workflow when the origin remote is Azure DevOps. (done)
+- [[Ticket-01M2XN9A0XXNKTDJ6H1BDJW0SD]] Restore six bug ticket titles that ticket-sync overwrote — During the plan publish, ticket-sync's close path pushed the linked follow-up items' titles and bodies onto the bug tickets they reference (#377 #344 #382 #383 #381 #385). (done)
 
-Progress: 8/8 done
+Progress: 9/9 done
 
 ## Related tickets
 
