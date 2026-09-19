@@ -1,6 +1,6 @@
 # Probe guard when the listing fails and the clone has no push memory
 
-`01M2XCWMVEH3XFP2VPS9JBD6X7` · subtask/bug · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6X7` · subtask/bug · **done**
 
 A transient listing failure on a fresh clone is the #412 scenario.
 

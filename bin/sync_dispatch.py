@@ -202,7 +202,7 @@ def forward_ticket_env(config_path=".work/config.yml"):
 
 class Dispatcher:
     COUNT_KEYS = ("created", "updated", "closed", "skipped", "pulled",
-                  "conflicts", "deferred")
+                  "conflicts", "deferred", "relinked")
     # How many not-founds, with nothing succeeding, before we stop believing
     # the tickets and start suspecting the project. Three rather than one so a
     # genuinely-deleted first ticket does not abort a healthy run; low enough
@@ -235,6 +235,14 @@ class Dispatcher:
         self.unmarked = []          # (key, title, system)
         self.remote_closed = []     # (iid, key, title)
         self.skip_push_ids = set()  # do not push; would rewrite a closed remote
+        # #412: marker probe. What the remote already holds for each ULID,
+        # filled by observe_remote before any push decision is made.
+        self.remote_keys = {}       # iid -> key (survivor by _key_sort)
+        self.remote_closed_keys = {}  # iid -> bool
+        self.probe_failed = False   # pull supported but the listing failed
+        self.probe_hits = set()     # iids whose key came only from the probe
+        self.unlinked_ids = set()   # deliberate unlink: the probe must not undo it
+        self.probe_guard_said = False
 
     # --- state (.work/sync-state.json, per-clone) ---
 
@@ -260,19 +268,41 @@ class Dispatcher:
         return self.state.get("items", {}).get(iid, {}).get("last_pushed_hash")
 
     def remembered_key(self, iid, ext=None):
-        """The remote key this item should update against.
+        """The remote key this item should update against. Three sources:
 
-        Folded `external.key` wins. When a checkout has thrown the link
-        event away (#382), fall back to last_pushed_key in the gitignored
-        state file so the next run updates the ticket that already exists
-        instead of minting a second one.
+        1. Folded `external.key` (the log) wins.
+        2. `last_pushed_key` in the gitignored per-clone state file, for a
+           checkout that threw the link event away (#382).
+        3. The marker probe (#412): `observe_remote` lists every remote
+           ticket anyway, so a ticket that already carries this item's
+           marker is an update, not a create, even on a clone with no log
+           memory and no state file. The relink path then records the
+           missing link event. When two tickets carry the same marker the
+           survivor is the earliest by `_key_sort`, the rule `dedupe` uses.
+
+        The probe removes the common cause, not every cause: it sees what
+        the adapter's pull returns (GitHub: `--state all`, capped at 1000,
+        through search that lags a create by seconds), so a failed or
+        capped listing or two syncers that both observe absence can still
+        mint a duplicate. A sibling-worktree scan and a doctor check were
+        considered for #412 and not built: cross-checkout file scanning
+        breaks on plain clones, and once the probe exists they detect a
+        condition it already handles. Existing duplicates stay until
+        `worklog dedupe --collapse-agreed`. A deliberate `worklog unlink`
+        (`external: {}` in the fold) is never undone by the probe.
         """
         if ext is None:
             ext = {}
         if ext.get("key"):
             return str(ext["key"])
         prev = self.state.get("items", {}).get(iid, {}).get("last_pushed_key")
-        return str(prev) if prev else None
+        if prev:
+            return str(prev)
+        probed = self.remote_keys.get(iid)
+        if probed and iid not in self.unlinked_ids:
+            self.probe_hits.add(iid)
+            return str(probed)
+        return None
 
     def is_dirty(self, iid, h, ext):
         """Content changed, OR the ticket this item points at changed.
@@ -741,6 +771,14 @@ class Dispatcher:
                 continue
 
             op = "update" if key else "create"
+            if op == "create" and self.probe_failed and not self.state.get("items"):
+                # #412: the listing failed AND this clone has no push memory.
+                # A create here is exactly how the duplicates were minted.
+                if not self.probe_guard_said:
+                    self.note("marker probe failed and this clone has no push "
+                              "memory; not creating tickets this run")
+                    self.probe_guard_said = True
+                continue
             payload = {"op": op, "key": key,
                        "marker": caps["marker"]["template"].replace("{ulid}", iid),
                        "item": payload_item}
@@ -773,6 +811,8 @@ class Dispatcher:
                 self.note_overwrite(iid, pushed_key, payload_item)
                 if relink:
                     self.record_link(iid, caps["system"], pushed_key, resp)
+                    if iid in self.probe_hits:
+                        self.counts["relinked"] += 1
             self.record_push(iid, h, pushed_key)
         # The push loop is over, so the abort can no longer fire: whatever is
         # still buffered is what this run really means to record.
@@ -1171,8 +1211,28 @@ class Dispatcher:
         This is not full pull-sync — title/body are not ingested.
         """
         tickets = self.fetch_remote_tickets(caps, fatal=False)
+        if tickets is None:
+            self.probe_failed = "pull" in caps.get("supports", [])
+            return
         if not tickets:
             return
+        # A deliberate `worklog unlink` leaves `external: {}` (present, empty)
+        # where a never-linked item has no `external` at all. The probe must
+        # not relink what the operator just retracted, the same reason
+        # cmd_unlink clears last_pushed_key (#382).
+        self.unlinked_ids = {i["id"] for i in items
+                             if "external" in i and not i.get("external")}
+        # Pass one (#412): the marker map. Must exist before `owned` is built
+        # below, because `owned` goes through remembered_key, and a probe hit
+        # that is closed on the remote has to reach remote_closed too.
+        for t in tickets:
+            key, iid = self._ticket_key(t), t.get("id")
+            if key is None or not iid:
+                continue
+            prev = self.remote_keys.get(iid)
+            if prev is None or self._key_sort(key) < self._key_sort(prev):
+                self.remote_keys[iid] = key
+                self.remote_closed_keys[iid] = self._ticket_closed(t)
         owned = {}
         for item in items:
             key = self.remembered_key(item["id"], item.get("external") or {})
@@ -1359,9 +1419,40 @@ class Dispatcher:
         # still did everything that was safe to do.
         return 1 if self.collisions else 0
 
+    def explain(self, prefix):
+        """`sync --explain <ULID>`: which key source answers for one item,
+        and what each returned. Observes the remote, pushes and pulls
+        nothing, saves no state (#412)."""
+        caps = self.capabilities()
+        items = self.fold_items()
+        hits = [i for i in items if i["id"].startswith(prefix)]
+        if len(hits) != 1:
+            print("sync --explain: %s matches %d items" % (prefix, len(hits)),
+                  file=sys.stderr)
+            return 1
+        item = hits[0]
+        iid, ext = item["id"], item.get("external") or {}
+        self.observe_remote(caps, items)
+        state_key = self.state.get("items", {}).get(iid, {}).get("last_pushed_key")
+        print("explain %s  %s" % (iid, item.get("title", "")))
+        print("  1. external.key (log):       %s" % (ext.get("key") or "-"))
+        print("  2. last_pushed_key (state):  %s" % (state_key or "-"))
+        print("  3. marker probe (remote):    %s%s"
+              % (self.remote_keys.get(iid) or "-",
+                 " (listing failed)" if self.probe_failed else ""))
+        answer = self.remembered_key(iid, ext)
+        print("  -> remembered_key: %s" % (answer or "none; a push would create"))
+        return 0
+
     def report(self):
         print("sync report: " + " ".join("%s=%d" % (k, self.counts[k])
                                          for k in self.COUNT_KEYS))
+        if self.counts["relinked"]:
+            print("%d item(s) already had tickets (marker probe); link events "
+                  "recorded" % self.counts["relinked"])
+        if self.counts["created"]:
+            print("hint: %d ticket(s) created; if any might already exist, "
+                  "run `worklog dedupe --dry-run`" % self.counts["created"])
         # Before drift: "updated 2" is not the line that catches damage --
         # naming the field that changed on a live ticket is (#238).
         if self.overwrites:
@@ -1412,6 +1503,9 @@ def build_parser():
     g.add_argument("--pull-only", action="store_true")
     ap.add_argument("--retry-base-delay", type=float, default=0.5,
                     metavar="SECONDS", help="first backoff delay for exit-4 retries")
+    ap.add_argument("--explain", metavar="ULID",
+                    help="print which key source answers for one item and "
+                         "stop; pushes and pulls nothing (#412)")
     return ap
 
 
@@ -1421,8 +1515,11 @@ def main(argv=None):
     if not adapter or not os.path.exists(adapter):
         print(LOCAL_ONLY)
         return 0
-    d = Dispatcher(adapter, retry_base_delay=a.retry_base_delay, dry_run=a.dry_run)
+    d = Dispatcher(adapter, retry_base_delay=a.retry_base_delay,
+                   dry_run=a.dry_run or bool(a.explain))
     try:
+        if a.explain:
+            return d.explain(a.explain)
         return d.sync(keys=[k for k in (a.keys or "").split(",") if k] or None,
                       push=not a.pull_only, pull=not a.push_only)
     except ContractError as e:

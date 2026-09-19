@@ -1,6 +1,6 @@
 # sync --explain and report hints
 
-`01M2XCWMVEH3XFP2VPS9JBD6X9` · subtask/bug · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6X9` · subtask/bug · **done**
 
 Print which key source answered for one item without mutating anything, forward the flag through cmd_sync, report probe hits in a new relinked count, and suggest dedupe --dry-run when the sync created tickets.
 
