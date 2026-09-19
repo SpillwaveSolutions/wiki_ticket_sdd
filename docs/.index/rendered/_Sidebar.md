@@ -2,7 +2,6 @@
 
 - [[Roadmap]]
 - [[Design-Doc]] · [[Code-Walkthrough]]
-- Plan: [[Plan-review-v0-24-10-and-open-tickets]]
 - Plan: [[Plan-ticket-sync-and-init-detection]]
 - [[ADR-0001-event-log-fold-union-merge]]
 - [[ADR-0002-skill-based-edges-typed-contract]]
