@@ -1,5 +1,5 @@
 {
- "git_hash": "2ec4560",
+ "git_hash": "51b8580",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "fab2c7387ccc",
+   "render_hash": "44205008d5b4",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4665,7 +4665,7 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMV0QYM4ZRBWN1V1327B",
    "render": "as-is",
-   "render_hash": "23361b2adc7c",
+   "render_hash": "4be1892c4fda",
    "source": "docs/.index/rendered/tickets/01M2XCWMV0QYM4ZRBWN1V1327B.md",
    "title": "Fix the v0.24.10 review findings and close #412 and #413",
    "truth_state": "open",
@@ -4825,10 +4825,10 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XN",
    "render": "as-is",
-   "render_hash": "3ba41a4ca36f",
+   "render_hash": "5f9fb0abd9f7",
    "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XN.md",
    "title": "#413: CI as the authoritative syncer behind ticketing.sync_owner: ci",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XN"
   },
   {
@@ -5008,9 +5008,9 @@
    "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "2546bd315dd6",
+   "render_hash": "96c72ca4a8dc",
    "source": "docs/user_guide/cli-reference.md",
-   "source_hash": "7dd918211385",
+   "source_hash": "893d292997a2",
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current",
    "wiki_key": "cli-reference"
@@ -5736,13 +5736,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T18:25:18Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T18:42:30Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "8f9b4761b853",
+   "render_hash": "9b4e917725d5",
    "source": "docs/roadmap.md",
-   "source_hash": "405d76d4f45f",
+   "source_hash": "b82a145f72e3",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -6160,9 +6160,9 @@
    "frozen": false,
    "page_name": "Worklog-Spec",
    "render": "doc+banner",
-   "render_hash": "de7f0de3a357",
+   "render_hash": "c886406b0e38",
    "source": "docs/worklog-spec.md",
-   "source_hash": "ce41791699e5",
+   "source_hash": "c2d299566247",
    "title": "Worklog: Visible-WIP Work Tracking Spec",
    "truth_state": "current",
    "wiki_key": "spec"
@@ -6220,9 +6220,9 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "8b49afebd90c",
+   "render_hash": "17e60bdfcfc0",
    "source": "docs/user_guide/user-guide.md",
-   "source_hash": "f624b4472947",
+   "source_hash": "a7d0a1619845",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",
    "wiki_key": "user-guide"

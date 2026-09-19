@@ -162,22 +162,16 @@ def resolve_adapter():
         return None
 
 
-def forward_ticket_env(config_path=".work/config.yml"):
-    """Copy ticketing.project / ticketing.system into the adapter env.
-
-    The contract (typed-adapter-contract §3) says connection details arrive
-    via WORKLOG_TICKET_PROJECT; nothing was producing that variable. GitHub
-    papers over the gap with `gh repo view`; a Jira adapter cannot.
-    """
-    if (os.environ.get("WORKLOG_TICKET_PROJECT")
-            and os.environ.get("WORKLOG_TICKET_SYSTEM")):
-        return
+def ticketing_config(config_path=".work/config.yml"):
+    """The `ticketing:` block of .work/config.yml as {key: str}. Scalar
+    children only; a missing file or block is {}. Keys this module reads:
+    system, project, sync_owner (human | ci, #413), ci_dedupe_check."""
     try:
         with open(config_path, encoding="utf-8") as fh:
             text = fh.read()
     except OSError:
-        return
-    project = system = None
+        return {}
+    out = {}
     inside = False
     for raw in text.splitlines():
         line = raw.split("#", 1)[0].rstrip()
@@ -190,10 +184,28 @@ def forward_ticket_env(config_path=".work/config.yml"):
             continue
         key, val = line.split(":", 1)
         key, val = key.strip(), val.strip().strip("\"'")
-        if key == "project" and val:
-            project = val
-        elif key == "system" and val:
-            system = val
+        if val:
+            out[key] = val
+    return out
+
+
+CI_OWNED_REFUSAL = ("sync: this repo is CI-owned (ticketing.sync_owner: ci); a "
+                    "manual push can race the post-merge job. Pass --force to "
+                    "push anyway. --report, --explain, and --pull-only stay open.")
+
+
+def forward_ticket_env(config_path=".work/config.yml"):
+    """Copy ticketing.project / ticketing.system into the adapter env.
+
+    The contract (typed-adapter-contract §3) says connection details arrive
+    via WORKLOG_TICKET_PROJECT; nothing was producing that variable. GitHub
+    papers over the gap with `gh repo view`; a Jira adapter cannot.
+    """
+    if (os.environ.get("WORKLOG_TICKET_PROJECT")
+            and os.environ.get("WORKLOG_TICKET_SYSTEM")):
+        return
+    cfg = ticketing_config(config_path)
+    project, system = cfg.get("project"), cfg.get("system")
     if project and not os.environ.get("WORKLOG_TICKET_PROJECT"):
         os.environ["WORKLOG_TICKET_PROJECT"] = project
     if system and system != "none" and not os.environ.get("WORKLOG_TICKET_SYSTEM"):
@@ -1150,7 +1162,10 @@ class Dispatcher:
         h = self.last_pushed(iid)
         self.record_push(iid, h, survivor)
 
-    def dedupe(self, collapse_agreed=False, show_conflicts=False, dry_run=True):
+    def dedupe(self, collapse_agreed=False, show_conflicts=False, dry_run=True,
+               check=False):
+        """`check=True` (CI gate, #413): exit 1 when any agreed duplicate
+        group exists, after the report. Nothing is collapsed."""
         caps = self.capabilities()
         tickets = self.fetch_remote_tickets(caps)
         items = {i["id"]: i for i in self.fold_items()}
@@ -1198,6 +1213,11 @@ class Dispatcher:
                 survivor, losers = self.pick_survivor(iid, group, items)
                 print("would collapse %s keep %s close %s"
                       % (iid, survivor, " ".join(losers)))
+        if check and agreed:
+            print("dedupe --check: %d agreed duplicate group(s); run "
+                  "`worklog dedupe --collapse-agreed`" % len(agreed),
+                  file=sys.stderr)
+            return 1
         return 0
 
     # --- observe (#385): unmarked remotes + closed-on-remote, even push-only ---
@@ -1506,6 +1526,8 @@ def build_parser():
     ap.add_argument("--explain", metavar="ULID",
                     help="print which key source answers for one item and "
                          "stop; pushes and pulls nothing (#412)")
+    ap.add_argument("--force", action="store_true",
+                    help="push even when ticketing.sync_owner is ci (#413)")
     return ap
 
 
@@ -1515,6 +1537,13 @@ def main(argv=None):
     if not adapter or not os.path.exists(adapter):
         print(LOCAL_ONLY)
         return 0
+    # #413: in a CI-owned repo the post-merge job is the syncer. A second
+    # checkout pushing by hand is the race that mints duplicates; refuse
+    # unless told otherwise. Read-only runs are always fine.
+    if (ticketing_config().get("sync_owner") == "ci" and not a.pull_only
+            and not a.dry_run and not a.explain and not a.force):
+        print(CI_OWNED_REFUSAL, file=sys.stderr)
+        return 1
     d = Dispatcher(adapter, retry_base_delay=a.retry_base_delay,
                    dry_run=a.dry_run or bool(a.explain))
     try:

@@ -63,6 +63,15 @@ if [ -n "$installed" ] && [ -f "$manifest" ]; then
   fi
 fi
 
+# #413: a CI-owned repo syncs tickets from the post-merge job. Say so once
+# per session, so nobody reaches for a manual `worklog sync` and races it.
+if [ -f .work/config.yml ] && awk '
+  /^ticketing:/ {f=1; next} /^[^ \t]/ {f=0}
+  f && /^[ \t]+sync_owner:[ \t]*ci([ \t#]|$)/ {found=1}
+  END {exit !found}' .work/config.yml; then
+  fails+=("note: ticketing.sync_owner is ci — the post-merge job pushes ticket sync; a manual 'worklog sync' needs --force")
+fi
+
 [ "${#fails[@]}" -eq 0 ] && exit 0
 
 # JSON-encode via python so failure text never breaks the payload.

@@ -56,6 +56,28 @@ jobs:
       - name: resolve triggers.pr-merge
         run: python3 bin/worklog triggers pr-merge | tee /tmp/pr-merge-triggers.json
 
+      # ticketing.sync_owner: ci (#413): CI is the authoritative syncer.
+      # resolve_adapter() reads only WORKLOG_TICKET_ADAPTER or the gitignored
+      # sync-state.json, neither of which a runner has, so the adapter is
+      # named here. --push-only because bare sync also pulls the whole board
+      # from EPOCH. sync-state.json is cached so is_dirty does not re-push
+      # every open item on every merge. Runs before the render so new ticket
+      # keys land on the roadmap; the link events ride the derived-docs PR.
+      - name: restore sync state
+        uses: actions/cache@v4
+        with:
+          path: .work/sync-state.json
+          key: sync-state-${{ github.run_id }}
+          restore-keys: sync-state-
+
+      - name: ci-owned ticket sync
+        env:
+          WORKLOG_TICKET_ADAPTER: adapters/github/adapter
+        run: |
+          owner=$(python3 -c 'import sys; sys.path.insert(0, "bin"); import sync_dispatch as s; print(s.ticketing_config().get("sync_owner", "human"))')
+          [ "$owner" = "ci" ] || { echo "ticketing.sync_owner is $owner; sync stays advisory"; exit 0; }
+          bin/worklog sync --push-only --force --retry-base-delay 1
+
       - name: regenerate derived docs
         run: |
           python3 -c 'import json,sys; a=json.load(open("/tmp/pr-merge-triggers.json"))["actions"]; sys.exit(0 if "roadmap-render" in a else 1)' || exit 0
@@ -86,7 +108,7 @@ jobs:
 
       - name: commit via PR
         run: |
-          if [ -z "$(git status --porcelain docs)" ]; then
+          if [ -z "$(git status --porcelain docs .work/todo.jsonl)" ]; then
             echo "no derived-doc changes"
             exit 0
           fi
@@ -94,7 +116,7 @@ jobs:
           git config user.email "worklog-bot@users.noreply.github.com"
           branch="chore/post-merge-${{ github.event.pull_request.number }}-${GITHUB_RUN_ID}"
           git checkout -b "$branch"
-          git add docs
+          git add docs .work/todo.jsonl
           WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
           python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
           git commit -m "chore(worklog): post-merge regenerate derived docs (#${{ github.event.pull_request.number }})"

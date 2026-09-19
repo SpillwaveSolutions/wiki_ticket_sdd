@@ -7668,7 +7668,7 @@
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XN": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "#413: CI as the authoritative syncer behind ticketing.sync_owner: ci"
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XQ": {

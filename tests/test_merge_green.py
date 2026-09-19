@@ -174,6 +174,9 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertIn("permissions:\n  contents: read", text)
         self.assertNotIn("workflow_run", text.split("jobs:", 1)[1])
         self.assertNotIn("workflows: [", text)
+        # #413 opt-in dedupe gate: present, skipped without config or token.
+        self.assertIn("dedupe --dry-run --check", text)
+        self.assertIn("skipped: no token", text)
 
     def test_post_merge_workflow_contract(self):
         with open(os.path.join(ROOT, ".github", "workflows", "post-merge.yml"), encoding="utf-8") as fh:
@@ -203,6 +206,15 @@ class TestPostMergeWorkflow(unittest.TestCase):
         self.assertNotIn("associate-pr-checks", text)
         self.assertNotIn("continue-on-error", text)
         self.assertNotIn("--squash", text)
+        # #413: CI-owned sync runs before the render, with the adapter named
+        # (a runner cannot discover it), push-only, state cached, log staged.
+        self.assertIn("WORKLOG_TICKET_ADAPTER: adapters/github/adapter", text)
+        self.assertIn("sync --push-only --force", text)
+        self.assertIn("actions/cache@v4", text)
+        self.assertIn("git add docs .work/todo.jsonl", text)
+        self.assertIn('git status --porcelain docs .work/todo.jsonl', text)
+        self.assertLess(text.index("ci-owned ticket sync"),
+                        text.index("name: regenerate derived docs"))
         self.assertNotIn("\\\\n", text)
         # GITHUB_TOKEN cannot push main (GH013 on compact run 33299168867).
         self.assertNotRegex(text, r"(?m)^\s+git push\s*$",

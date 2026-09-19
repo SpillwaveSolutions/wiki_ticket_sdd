@@ -37,6 +37,18 @@ jobs:
       # this sees exactly what the hook would have seen locally.
       - name: merge integrity (resurrection + duplicate ownership)
         run: python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
+      # Opt-in remote dedupe gate (#413, ticketing.ci_dedupe_check). Needs the
+      # bot token; skipped, never failed, when it is absent (a fork PR never
+      # sees secrets).
+      - name: remote dedupe check
+        env:
+          GH_TOKEN: ${{ secrets.WORKLOG_BOT_PAT }}
+          WORKLOG_TICKET_ADAPTER: adapters/github/adapter
+        run: |
+          on=$(python3 -c 'import sys; sys.path.insert(0, "bin"); import sync_dispatch as s; print(s.ticketing_config().get("ci_dedupe_check", "false"))')
+          [ "$on" = "true" ] || { echo "skipped: ticketing.ci_dedupe_check is off"; exit 0; }
+          [ -n "$GH_TOKEN" ] || { echo "skipped: no token"; exit 0; }
+          bin/worklog dedupe --dry-run --check
       # commit-msg's own MERGE_HEAD check doesn't exist post-hoc in a CI
       # checkout, so re-derive "was this a merge" via --no-merges instead.
       - name: commit messages reference a worklog item or ticket

@@ -29,7 +29,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### #413: CI as the authoritative syncer behind ticketing.sync_owner: ci
-`01M2XCWMVEH3XFP2VPS9JBD6XN` · status: todo
+`01M2XCWMVEH3XFP2VPS9JBD6XN` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
 - references: [github#429](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/429)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
