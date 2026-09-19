@@ -16,6 +16,10 @@ observe_remote already fetches every remote ticket.
 
 Progress: 3/3 done
 
+## Linked PRs
+
+- [[PR-435]]
+
 ## Related tickets
 
 - [github #421](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/421)

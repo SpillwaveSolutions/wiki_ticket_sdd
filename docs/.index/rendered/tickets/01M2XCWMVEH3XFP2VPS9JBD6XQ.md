@@ -14,6 +14,10 @@ A release fails when a live doc's git_hash does not descend from the previous ta
 
 Progress: 1/1 done
 
+## Linked PRs
+
+- [[PR-440]]
+
 ## Related tickets
 
 - [github #430](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/430)

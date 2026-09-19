@@ -2,6 +2,10 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
+## v0.24.11 — 2026-09-19
+
+- Roadmap snapshot: [[Roadmap-2026-09-19_v0.24.11-release]]
+
 ## v0.24.10 — 2026-09-19
 
 - Design: [[Code-Walkthrough]]

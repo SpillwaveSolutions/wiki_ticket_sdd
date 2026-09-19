@@ -2,15 +2,20 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Release v0.24.11
+`01M2XJARKTEH7VG74N3M0ZG66S` · status: in_progress
+
 ### CI wiring docs and the GitHub Actions to Azure Pipelines mapping table
 `01M2XCWMVEH3XFP2VPS9JBD6XX` · status: done
 - belongs-to: #413: Azure Pipelines template from init.sh
+- lands-in: pr/439
 - references: [github#433](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/433)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### #413: Azure Pipelines template from init.sh
 `01M2XCWMVEH3XFP2VPS9JBD6XV` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- lands-in: pr/439
 - references: [github#432](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/432)
 - contains: CI wiring docs and the GitHub Actions to Azure Pipelines mapping table
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
@@ -18,12 +23,14 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Regenerate the live design docs for v0.24.10
 `01M2XCWMVEH3XFP2VPS9JBD6XS` · status: done
 - belongs-to: Release gate for design-doc freshness in doc-verify --strict
+- lands-in: pr/440
 - references: [github#431](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/431)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Release gate for design-doc freshness in doc-verify --strict
 `01M2XCWMVEH3XFP2VPS9JBD6XQ` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- lands-in: pr/440
 - references: [github#430](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/430)
 - contains: Regenerate the live design docs for v0.24.10
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
@@ -57,30 +64,35 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Interim merge-gate hardening and ADR-0011
 `01M2XCWMVEH3XFP2VPS9JBD6XD` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- lands-in: pr/436
 - references: [github#425](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/425)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### adapter check says when the clone has no push memory
 `01M2XCWMVEH3XFP2VPS9JBD6XB` · status: done
 - belongs-to: #412: consult the remote marker map before creating a ticket
+- lands-in: pr/435
 - references: [github#424](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/424)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### sync --explain and report hints
 `01M2XCWMVEH3XFP2VPS9JBD6X9` · status: done
 - belongs-to: #412: consult the remote marker map before creating a ticket
+- lands-in: pr/435
 - references: [github#423](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/423)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Probe guard when the listing fails and the clone has no push memory
 `01M2XCWMVEH3XFP2VPS9JBD6X7` · status: done
 - belongs-to: #412: consult the remote marker map before creating a ticket
+- lands-in: pr/435
 - references: [github#422](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/422)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### #412: consult the remote marker map before creating a ticket
 `01M2XCWMVD7KJ01FCNEV1X8237` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- lands-in: pr/435
 - references: [github#421](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/421)
 - contains: Probe guard when the listing fails and the clone has no push memory
 - contains: sync --explain and report hints
@@ -90,36 +102,42 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Retention tests and doc renumbering
 `01M2XCWMVD7KJ01FCNEV1X8235` · status: done
 - belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- lands-in: pr/434
 - references: [github#420](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/420)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Archive-aware duplicate ownership check and untracked-archive guard
 `01M2XCWMVD7KJ01FCNEV1X8233` · status: done
 - belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- lands-in: pr/434
 - references: [github#419](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/419)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Tolerate a corrupt archive line and warn on ignored retention config values
 `01M2XCWMVD7KJ01FCNEV1X8231` · status: done
 - belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- lands-in: pr/434
 - references: [github#418](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/418)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Parent veto in eviction, live children only
 `01M2XCWMVD7KJ01FCNEV1X822Z` · status: done
 - belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- lands-in: pr/434
 - references: [github#417](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/417)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Cap counts only items present in done.jsonl and unparseable ts never occupies a cap slot
 `01M2XCWMVD7KJ01FCNEV1X822X` · status: done
 - belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- lands-in: pr/434
 - references: [github#416](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/416)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Retention: stop re-snapshotting archived items into done.jsonl
 `01M2XCWMVD7KJ01FCNEV1X822V` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- lands-in: pr/434
 - references: [github#415](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/415)
 - contains: Cap counts only items present in done.jsonl and unparseable ts never occupies a cap slot
 - contains: Parent veto in eviction, live children only
@@ -131,6 +149,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Council review, single edit pass, and plan capture
 `01M2XCWMVD7KJ01FCNEV1X822S` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- lands-in: pr/434
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Fix the v0.24.10 review findings and close #412 and #413
