@@ -53,6 +53,10 @@ CITE_SYMBOL = re.compile(
     r"(?P<start>\d+)\s*%s\s*(?P<end>\d+)" % _DASH)
 
 LIVE_DOCS = ("current_design_doc.md", "current_code_walkthrough.md")
+DESIGNS_DIR = "docs/designs"
+# A release leaves one of these behind for its tag: the skill's single
+# freeze note, or the historical dated pair (v0.21.0 to v0.24.3).
+FREEZE_FORMS = ("_{tag}-release.md", "_{tag}-release_design_doc.md")
 
 
 def _git(*args):
@@ -71,6 +75,75 @@ def resolvable(sha):
     """Is this commit actually in the clone? Squash-merges and shallow
     checkouts both produce a stamp naming a commit nobody has."""
     return _git("cat-file", "-e", "%s^{commit}" % sha) is not None
+
+
+def latest_tag():
+    """Highest version tag in this clone, or None when there is none."""
+    for t in (_git("tag", "--sort=-v:refname") or "").splitlines():
+        if t.strip():
+            return t.strip()
+    return None
+
+
+def freeze_record(tag, designs_dir=DESIGNS_DIR):
+    """Path of the freeze record for `tag` in either form, or None."""
+    try:
+        names = sorted(os.listdir(designs_dir))
+    except OSError:
+        return None
+    for n in names:
+        for form in FREEZE_FORMS:
+            if n.endswith(form.format(tag=tag)):
+                return os.path.join(designs_dir, n)
+    return None
+
+
+def freshness(records, tag=None, designs_dir=DESIGNS_DIR):
+    """Live-doc freshness: the release gate the v0.24.10 review asked for.
+
+    Seven releases shipped with the live pair still stamped at v0.24.3
+    because the regeneration step was prose nobody checked. Two facts make
+    it checkable: each live doc's `git_hash` must descend from (or be) the
+    latest tag, and that tag must have a freeze record in docs/designs/
+    whose front matter names it. Findings are `stale`, live, and gate
+    --strict. No tag in the clone means nothing to compare: []. Never
+    resolves against HEAD (same rule as the rest of this module).
+    """
+    tag = tag or latest_tag()
+    if not tag:
+        return []
+    findings = []
+    live = {k: r for k, r in records.items()
+            if (r.get("source") or "").endswith(LIVE_DOCS)}
+    for key in sorted(live):
+        rec, src = live[key], live[key]["source"]
+        sha = rec.get("git_hash")
+        if not sha or not resolvable(sha):
+            findings.append({"doc": key, "source": src, "verdict": "stale",
+                             "live": True,
+                             "detail": "git_hash %s is missing or not in this "
+                                       "clone" % ((sha or "(unstamped)")[:9])})
+            continue
+        if _git("merge-base", "--is-ancestor", tag, sha) is None:
+            findings.append({"doc": key, "source": src, "verdict": "stale",
+                             "live": True,
+                             "detail": "git_hash %s predates tag %s; regenerate "
+                                       "with the design-docs skill in release "
+                                       "mode" % (sha[:9], tag)})
+    path = freeze_record(tag, designs_dir)
+    if path is None:
+        findings.append({"doc": "design-freeze", "source": designs_dir,
+                         "verdict": "stale", "live": True,
+                         "detail": "no freeze record for %s in %s "
+                                   "(<date>_%s-release.md)" % (tag, designs_dir, tag)})
+    else:
+        with open(path, encoding="utf-8") as fh:
+            head = fh.read(4000)
+        if tag not in head:
+            findings.append({"doc": "design-freeze", "source": path,
+                             "verdict": "stale", "live": True,
+                             "detail": "freeze record does not name %s" % tag})
+    return findings
 
 
 def _at(sha, path, _cache={}):
@@ -224,7 +297,8 @@ def verify(records=None, strict=False, only=None):
     # differently depending on where the process is standing.
     head = (_git("rev-parse", "HEAD") or "HEAD").strip()
     findings, summary = [], {"ok": 0, "fabricated": 0, "drift": 0,
-                             "unstamped": 0, "unresolvable": 0, "docs": 0}
+                             "unstamped": 0, "unresolvable": 0, "docs": 0,
+                             "stale": 0}
     for key in sorted(records):
         rec = records[key]
         src = rec.get("source")
@@ -275,6 +349,12 @@ def verify(records=None, strict=False, only=None):
                 "cite": "%s%s lines %d-%d" % (
                     c["path"], " %s()" % c["symbol"] if c["symbol"] else "",
                     c["start"], c["end"])})
+    # Repo-wide runs only: a --staged commit hook must not fail every commit
+    # between a tag and the doc PR that follows it.
+    if only is None:
+        fresh = freshness(records)
+        summary["stale"] += len(fresh)
+        findings.extend(fresh)
     return findings, summary
 
 
@@ -298,7 +378,8 @@ def failing(findings):
     """
     return [f for f in findings
             if (f["verdict"] == "fabricated" and f.get("editable"))
-            or (f["verdict"] == "drift" and f.get("live"))]
+            or (f["verdict"] == "drift" and f.get("live"))
+            or f["verdict"] == "stale"]
 
 
 def report(findings, summary):
@@ -308,7 +389,7 @@ def report(findings, summary):
     for doc in sorted(by_doc):
         print(doc)
         for f in by_doc[doc]:
-            if f["verdict"] in ("unstamped", "unresolvable"):
+            if f["verdict"] in ("unstamped", "unresolvable", "stale"):
                 print("  %-12s %s" % (f["verdict"].upper(), f["detail"]))
             else:
                 # Say which findings the gate will act on. Without this the
@@ -321,9 +402,10 @@ def report(findings, summary):
                          " [frozen record — reported, not gated]"
                          if frozen else ""))
     print("doc-verify: %d citation(s) ok, %d fabricated, %d drifted "
-          "across %d document(s); %d unstamped, %d unresolvable"
+          "across %d document(s); %d unstamped, %d unresolvable, %d stale"
           % (summary["ok"], summary["fabricated"], summary["drift"],
-             summary["docs"], summary["unstamped"], summary["unresolvable"]))
+             summary["docs"], summary["unstamped"], summary["unresolvable"],
+             summary.get("stale", 0)))
     stuck = len([f for f in findings if f["verdict"] == "fabricated"
                  and not f.get("editable")])
     if stuck:

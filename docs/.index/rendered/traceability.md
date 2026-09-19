@@ -22,7 +22,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Release gate for design-doc freshness in doc-verify --strict
-`01M2XCWMVEH3XFP2VPS9JBD6XQ` · status: todo
+`01M2XCWMVEH3XFP2VPS9JBD6XQ` · status: in_progress
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
 - references: [github#430](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/430)
 - contains: Regenerate the live design docs for v0.24.10

@@ -1,6 +1,6 @@
 # Release gate for design-doc freshness in doc-verify --strict
 
-`01M2XCWMVEH3XFP2VPS9JBD6XQ` · task/bug · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6XQ` · task/bug · **in-progress**
 
 A release fails when a live doc's git_hash does not descend from the previous tag or the freeze record for that tag is missing.
 

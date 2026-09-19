@@ -7673,7 +7673,7 @@
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XQ": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "in_progress",
    "title": "Release gate for design-doc freshness in doc-verify --strict"
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XS": {
