@@ -74,6 +74,11 @@
 {"actor":"richardhightower","ev":"01M2XE1XBC87DMNXWY9KB37ZDM","git":"5afedb0","item":"01M2XCWMVD7KJ01FCNEV1X8237","op":"close","set":{"status":"done"},"ts":"2026-09-19T18:15:00Z"}
 {"actor":"richardhightower","ev":"01M2XENX8BK8CVPTYXAKA9GXXE","git":"ccdd7ba","item":"01M2XCWMVEH3XFP2VPS9JBD6XN","op":"update","set":{"status":"in_progress"},"ts":"2026-09-19T18:25:55Z"}
 {"actor":"richardhightower","ev":"01M2XFM8V6ADPNS7SR8RZC15ZR","git":"51b8580","item":"01M2XCWMVEH3XFP2VPS9JBD6XN","op":"close","set":{"status":"done"},"ts":"2026-09-19T18:42:30Z"}
+{"actor":"richardhightower","ev":"01M2XFN22DT11457NPNM7VXP53","git":"21b3ac6","item":"01M2XCWMVEH3XFP2VPS9JBD6XQ","op":"update","set":{"status":"in_progress"},"ts":"2026-09-19T18:42:56Z"}
+{"actor":"richardhightower","ev":"01M2XHQH4P7149W18R52K8ZH2R","git":"e2c4bf9","item":"01M2XCWMVEH3XFP2VPS9JBD6XS","op":"close","set":{"status":"done"},"ts":"2026-09-19T19:19:14Z"}
+{"actor":"richardhightower","ev":"01M2XHQH7JNS5GS7JD9XHG8A9Y","git":"e2c4bf9","item":"01M2XCWMVEH3XFP2VPS9JBD6XQ","op":"close","set":{"status":"done"},"ts":"2026-09-19T19:19:14Z"}
 {"actor":"richardhightower","ev":"01M2XFW40ARHNX6TDEMJRFX2T7","git":"21b3ac6","item":"01M2XCWMVEH3XFP2VPS9JBD6XV","op":"update","set":{"status":"in_progress"},"ts":"2026-09-19T18:46:47Z"}
 {"actor":"richardhightower","ev":"01M2XG64V8N151C1H3JCB0A247","git":"21b3ac6","item":"01M2XCWMVEH3XFP2VPS9JBD6XX","op":"close","set":{"status":"done"},"ts":"2026-09-19T18:52:16Z"}
 {"actor":"richardhightower","ev":"01M2XG64XQY9K725KY7NYTYMP5","git":"21b3ac6","item":"01M2XCWMVEH3XFP2VPS9JBD6XV","op":"close","set":{"status":"done"},"ts":"2026-09-19T18:52:16Z"}
+{"actor":"richardhightower","ev":"01M2XJARKTEH7VG74N3M0ZG66T","git":"ff021fc","item":"01M2XJARKTEH7VG74N3M0ZG66S","op":"create","set":{"body":"Cut v0.24.11: retention archive stability (P0), the #412 marker probe, merge-gate hardening with ADR-0011, the Azure Pipelines template, and the design-doc freshness gate with the regenerated live pair.","kind":"ops","level":"task","priority":"P1","status":"todo","title":"Release v0.24.11"},"ts":"2026-09-19T19:29:44Z"}
+{"actor":"richardhightower","ev":"01M2XJARPEAEAW7FRETQZGQECE","git":"ff021fc","item":"01M2XJARKTEH7VG74N3M0ZG66S","op":"update","set":{"status":"in_progress"},"ts":"2026-09-19T19:29:44Z"}
