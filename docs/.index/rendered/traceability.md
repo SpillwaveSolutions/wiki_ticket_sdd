@@ -2,9 +2,13 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Release v0.24.12
+`01M2XT2DGDWA6MYZZXCABSEMXW` · status: in_progress
+
 ### Restore six bug ticket titles that ticket-sync overwrote
 `01M2XN9A0XXNKTDJ6H1BDJW0SD` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- lands-in: pr/446
 
 ### Wiki page name for a design freeze note collides with the live Code-Walkthrough page
 `01M2XK6N6JBZ6KKVHCF0C2TRWP` · status: done
@@ -45,24 +49,28 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### #413: CI as the authoritative syncer behind ticketing.sync_owner: ci
 `01M2XCWMVEH3XFP2VPS9JBD6XN` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- lands-in: pr/438
 - references: [github#429](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/429)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### sync --report drift is never masked and the local-only comment is suppressed
 `01M2XCWMVEH3XFP2VPS9JBD6XK` · status: done
 - belongs-to: Bot PRs use the WORKLOG_BOT_PAT identity
+- lands-in: pr/437
 - references: [github#428](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/428)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard
 `01M2XCWMVEH3XFP2VPS9JBD6XH` · status: done
 - belongs-to: Bot PRs use the WORKLOG_BOT_PAT identity
+- lands-in: pr/437
 - references: [github#427](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/427)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Bot PRs use the WORKLOG_BOT_PAT identity
 `01M2XCWMVEH3XFP2VPS9JBD6XF` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- lands-in: pr/437
 - references: [github#426](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/426)
 - contains: Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard
 - contains: sync --report drift is never masked and the local-only comment is suppressed
@@ -160,7 +168,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Fix the v0.24.10 review findings and close #412 and #413
-`01M2XCWMV0QYM4ZRBWN1V1327B` · status: todo
+`01M2XCWMV0QYM4ZRBWN1V1327B` · status: done
 - references: [github#414](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/414)
 - contains: Council review, single edit pass, and plan capture
 - contains: Retention: stop re-snapshotting archived items into done.jsonl

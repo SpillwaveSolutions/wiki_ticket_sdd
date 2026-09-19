@@ -8,6 +8,10 @@ post-merge sets the adapter env, runs a push-only sync with the bot token before
 
 - epic: [[Ticket-01M2XCWMV0QYM4ZRBWN1V1327B]] Fix the v0.24.10 review findings and close #412 and #413 — The v0.24.10 change review found a P0 in retention (archived items ping-pong back into done.jsonl), a merge gate that trusts commit statuses from any actor, and seven releases without regenerated design docs.
 
+## Linked PRs
+
+- [[PR-438]]
+
 ## Related tickets
 
 - [github #429](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/429)

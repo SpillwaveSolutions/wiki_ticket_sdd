@@ -1,5 +1,5 @@
 {
- "git_hash": "663ea10",
+ "git_hash": "1b20812",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "438534276b87",
+   "render_hash": "2a227be6bc00",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "748a3de87bb9",
+   "render_hash": "102915d86b85",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -493,6 +493,26 @@
   },
   {
    "frozen": false,
+   "page_name": "PR-437",
+   "render": "as-is",
+   "render_hash": "1248bc31e5bc",
+   "source": "docs/.index/rendered/prs/437.md",
+   "title": "PR #437",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/437"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-438",
+   "render": "as-is",
+   "render_hash": "ed5157a03081",
+   "source": "docs/.index/rendered/prs/438.md",
+   "title": "PR #438",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/438"
+  },
+  {
+   "frozen": false,
    "page_name": "PR-439",
    "render": "as-is",
    "render_hash": "a67b98873037",
@@ -510,6 +530,16 @@
    "title": "PR #440",
    "truth_state": "not tracked",
    "wiki_key": "pr/440"
+  },
+  {
+   "frozen": false,
+   "page_name": "PR-446",
+   "render": "as-is",
+   "render_hash": "7da8516c9c1e",
+   "source": "docs/.index/rendered/prs/446.md",
+   "title": "PR #446",
+   "truth_state": "not tracked",
+   "wiki_key": "pr/446"
   },
   {
    "frozen": false,
@@ -750,6 +780,16 @@
    "title": "Release v0.24.11",
    "truth_state": "shipped",
    "wiki_key": "release/v0.24.11"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.24.12",
+   "render": "as-is",
+   "render_hash": "389920fff8fe",
+   "source": "docs/.index/rendered/releases/v0.24.12.md",
+   "title": "Release v0.24.12",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.24.12"
   },
   {
    "frozen": false,
@@ -4725,10 +4765,10 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMV0QYM4ZRBWN1V1327B",
    "render": "as-is",
-   "render_hash": "fff3d5fce7fb",
+   "render_hash": "a27a947888eb",
    "source": "docs/.index/rendered/tickets/01M2XCWMV0QYM4ZRBWN1V1327B.md",
    "title": "Fix the v0.24.10 review findings and close #412 and #413",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M2XCWMV0QYM4ZRBWN1V1327B"
   },
   {
@@ -4855,7 +4895,7 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XF",
    "render": "as-is",
-   "render_hash": "9bd65f4b1b80",
+   "render_hash": "b66b4095b406",
    "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XF.md",
    "title": "Bot PRs use the WORKLOG_BOT_PAT identity",
    "truth_state": "done",
@@ -4865,7 +4905,7 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XH",
    "render": "as-is",
-   "render_hash": "492c9e7ff931",
+   "render_hash": "36196e4b1c15",
    "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XH.md",
    "title": "Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard",
    "truth_state": "done",
@@ -4875,7 +4915,7 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XK",
    "render": "as-is",
-   "render_hash": "b7b5eb7bfb74",
+   "render_hash": "e74b5a09273c",
    "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XK.md",
    "title": "sync --report drift is never masked and the local-only comment is suppressed",
    "truth_state": "done",
@@ -4885,7 +4925,7 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XN",
    "render": "as-is",
-   "render_hash": "5f9fb0abd9f7",
+   "render_hash": "a81ee7cae5cb",
    "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XN.md",
    "title": "#413: CI as the authoritative syncer behind ticketing.sync_owner: ci",
    "truth_state": "done",
@@ -4955,11 +4995,21 @@
    "frozen": false,
    "page_name": "Ticket-01M2XN9A0XXNKTDJ6H1BDJW0SD",
    "render": "as-is",
-   "render_hash": "8233b015f820",
+   "render_hash": "d2eb139bbf8d",
    "source": "docs/.index/rendered/tickets/01M2XN9A0XXNKTDJ6H1BDJW0SD.md",
    "title": "Restore six bug ticket titles that ticket-sync overwrote",
    "truth_state": "done",
    "wiki_key": "item/01M2XN9A0XXNKTDJ6H1BDJW0SD"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XT2DGDWA6MYZZXCABSEMXW",
+   "render": "as-is",
+   "render_hash": "0874e98bac66",
+   "source": "docs/.index/rendered/tickets/01M2XT2DGDWA6MYZZXCABSEMXW.md",
+   "title": "Release v0.24.12",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M2XT2DGDWA6MYZZXCABSEMXW"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -5494,9 +5544,9 @@
    "frozen": false,
    "page_name": "Code-Walkthrough",
    "render": "doc+banner",
-   "render_hash": "95aaf829033a",
+   "render_hash": "572092ed543f",
    "source": "docs/designs/current_code_walkthrough.md",
-   "source_hash": "8786acc318f1",
+   "source_hash": "547368debfc5",
    "title": "Worklog \u2014 Code Walkthrough",
    "truth_state": "current",
    "wiki_key": "design/current-code-walkthrough"
@@ -5506,9 +5556,9 @@
    "frozen": false,
    "page_name": "Design-Doc",
    "render": "doc+banner",
-   "render_hash": "053ddf265e76",
+   "render_hash": "cf0c086f9cdf",
    "source": "docs/designs/current_design_doc.md",
-   "source_hash": "57636d1108d2",
+   "source_hash": "1248c2176c76",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "current",
    "wiki_key": "design/current-design-doc"
@@ -5850,13 +5900,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T20:21:59Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T21:45:00Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "c9cdab9620c6",
+   "render_hash": "281a081ebb94",
    "source": "docs/roadmap.md",
-   "source_hash": "610092394122",
+   "source_hash": "45a18273e835",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -6198,6 +6248,18 @@
    "wiki_key": "roadmap-snapshot/2026-09-19_v0.24.11-release"
   },
   {
+   "banner": "> **Snapshot** of release v0.24.12 (2026-09-19) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-09-19_v0.24.12-release",
+   "render": "doc+banner",
+   "render_hash": "0d92a9cb01e0",
+   "source": "docs/roadmap/2026-09-19_v0.24.12-release.md",
+   "source_hash": "45a18273e835",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-09-19_v0.24.12-release"
+  },
+  {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
    "frozen": true,
    "page_name": "Roadmap-2026-07-18_v0.2-roadmap",
@@ -6355,7 +6417,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "ddec6bde6f61",
+  "render_hash": "f674f70a5f08",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1
