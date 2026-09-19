@@ -16,13 +16,13 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Regenerate the live design docs for v0.24.10
-`01M2XCWMVEH3XFP2VPS9JBD6XS` · status: todo
+`01M2XCWMVEH3XFP2VPS9JBD6XS` · status: done
 - belongs-to: Release gate for design-doc freshness in doc-verify --strict
 - references: [github#431](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/431)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Release gate for design-doc freshness in doc-verify --strict
-`01M2XCWMVEH3XFP2VPS9JBD6XQ` · status: todo
+`01M2XCWMVEH3XFP2VPS9JBD6XQ` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
 - references: [github#430](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/430)
 - contains: Regenerate the live design docs for v0.24.10
