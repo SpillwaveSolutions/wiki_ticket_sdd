@@ -5392,9 +5392,9 @@
    "frozen": false,
    "page_name": "Code-Walkthrough",
    "render": "doc+banner",
-   "render_hash": "9ef9127ff20b",
+   "render_hash": "fcbf4e257f39",
    "source": "docs/designs/current_code_walkthrough.md",
-   "source_hash": "09e3d8c91580",
+   "source_hash": "fdb09b22cd14",
    "title": "Worklog \u2014 Code Walkthrough",
    "truth_state": "current",
    "wiki_key": "design/current-code-walkthrough"
@@ -5404,9 +5404,9 @@
    "frozen": false,
    "page_name": "Design-Doc",
    "render": "doc+banner",
-   "render_hash": "888094e50c17",
+   "render_hash": "3116dbe269ba",
    "source": "docs/designs/current_design_doc.md",
-   "source_hash": "1a8804405656",
+   "source_hash": "3d5de7f8446d",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "current",
    "wiki_key": "design/current-design-doc"

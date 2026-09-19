@@ -1,6 +1,6 @@
 ---
 generated_at: 2026-09-19T19:10:55Z
-git_hash: "21b3ac625ec567ba4b041766e4ee3d2e4746e0f5"
+git_hash: "2daac3743f9582a3d073c62433a35362c9c59833"
 branch: docs/design-sync-v0-24-10
 tag: v0.24.10
 roadmap: docs/roadmap.md
@@ -1811,7 +1811,7 @@ def _check_one(cite, sha, head):
     # Correct when written. Has it moved since?
     head_body = _at(head, cite["path"])
 ```
-— `bin/doc_verify.py — _check_one(), lines 132–186` (elided)
+— `bin/doc_verify.py — _check_one(), lines 205–259` (elided)
 
 The shape of that function *is* the design. Everything above the comment is
 resolved at the **document's own commit**; only after all of it passes is HEAD
@@ -3028,7 +3028,7 @@ noted):**
    definition, and `compact()` cited at 165–173 when it began at 143 read as
    fine for three releases. `_check_one()` now also parses the file and compares
    the symbol's *definition line* to the citation's start
-   (`bin/doc_verify.py — _check_one(), lines 132–186`). Only the **start** is
+   (`bin/doc_verify.py — _check_one(), lines 205–259`). Only the **start** is
    judged — where an author stops quoting is a legitimate choice, and nine of
    the ranges measured overshot by exactly one line, the blank after the body.
    `_defined_at()` returns `None`, meaning "do not judge", when the file will

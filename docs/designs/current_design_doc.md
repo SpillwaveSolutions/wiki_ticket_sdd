@@ -1,6 +1,6 @@
 ---
 generated_at: 2026-09-19T19:09:43Z
-git_hash: "21b3ac625ec567ba4b041766e4ee3d2e4746e0f5"
+git_hash: "2daac3743f9582a3d073c62433a35362c9c59833"
 branch: docs/design-sync-v0-24-10
 tag: v0.24.10
 roadmap: docs/roadmap.md
@@ -683,7 +683,7 @@ document that can still be fixed. The predicate is editability, not freeze
 state: `doc-verify --staged` scopes a run to the documents a commit touches, so
 the commit that writes a frozen document is still gated, and afterwards the
 same document's findings print forever tagged as a frozen record
-(`bin/doc_verify.py — failing(), lines 281–301`, `verify(), lines 202–278`). The
+(`bin/doc_verify.py — failing(), lines 361–382`, `verify(), lines 202–278`). The
 48 inherited fabrications stay, counted in every summary. `hooks/pre-commit`
 running `--staged --strict` is the load-bearing half of the decision.
 
@@ -1834,7 +1834,7 @@ looked identical:
 | `unresolvable` | The stamped commit is not in this clone (squash, shallow, fork) | reported, never checked (ADR-0008) |
 
 **How a verdict is reached** (Confirmed, `bin/doc_verify.py — _check_one(),
-lines 132–186`). The file is fetched at the document's own commit with
+lines 205–259`). The file is fetched at the document's own commit with
 `git show <sha>:<path>`. A path that did not exist there is `fabricated`. A
 range whose end is past the end of that file is `fabricated`, with the detail
 naming both numbers. When the citation names a symbol, the symbol must appear
