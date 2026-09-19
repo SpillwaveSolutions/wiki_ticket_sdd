@@ -1,6 +1,6 @@
 # CI wiring docs and the GitHub Actions to Azure Pipelines mapping table
 
-`01M2XCWMVEH3XFP2VPS9JBD6XX` · subtask/feature · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6XX` · subtask/feature · **done**
 
 A user guide section that explains the template, the mapping, and how to wire another forge by hand.
 
