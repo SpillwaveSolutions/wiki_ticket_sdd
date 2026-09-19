@@ -61,25 +61,25 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### adapter check says when the clone has no push memory
-`01M2XCWMVEH3XFP2VPS9JBD6XB` · status: todo
+`01M2XCWMVEH3XFP2VPS9JBD6XB` · status: done
 - belongs-to: #412: consult the remote marker map before creating a ticket
 - references: [github#424](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/424)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### sync --explain and report hints
-`01M2XCWMVEH3XFP2VPS9JBD6X9` · status: todo
+`01M2XCWMVEH3XFP2VPS9JBD6X9` · status: done
 - belongs-to: #412: consult the remote marker map before creating a ticket
 - references: [github#423](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/423)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Probe guard when the listing fails and the clone has no push memory
-`01M2XCWMVEH3XFP2VPS9JBD6X7` · status: todo
+`01M2XCWMVEH3XFP2VPS9JBD6X7` · status: done
 - belongs-to: #412: consult the remote marker map before creating a ticket
 - references: [github#422](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/422)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### #412: consult the remote marker map before creating a ticket
-`01M2XCWMVD7KJ01FCNEV1X8237` · status: todo
+`01M2XCWMVD7KJ01FCNEV1X8237` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
 - references: [github#421](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/421)
 - contains: Probe guard when the listing fails and the clone has no push memory

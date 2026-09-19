@@ -459,6 +459,22 @@ bin/worklog sync --report    # alias of --dry-run
 | `--keys k1,k2` | **Adds** these external keys to the run's scope; never narrows it |
 | `--push-only` / `--pull-only` | One direction only (mutually exclusive) |
 | `--retry-base-delay <s>` | Base backoff for transient adapter failures |
+| `--explain <ULID>` | Print which key source answers for one item, then stop. Pushes, pulls, and writes nothing. |
+
+*(0.24.11, #412)* **Create-vs-update consults the remote.** `remembered_key`
+has three sources, in order: the log's `external.key`, the per-clone
+`last_pushed_key` in `.work/sync-state.json`, and the **marker probe**: the
+listing that `observe_remote` already makes on every run, kept as a
+marker-to-key map. A clone with no link event and no state file therefore
+updates the ticket that carries the item's marker and records the missing
+link event, instead of filing a second ticket. Colliding markers resolve to
+the `dedupe` survivor. A probe hit that is closed on the remote closes the
+item locally. When the listing fails and the clone has no push memory,
+creates are skipped for that run and the report says so. A deliberate
+`worklog unlink` is never undone by the probe. The probe sees what the
+adapter's pull returns (GitHub: `--state all`, capped at 1000, through
+search that can lag a create by seconds), so a capped or lagging listing can
+still let a duplicate through; `dedupe --dry-run` finds those.
 
 *(0.24.3)* `--keys` is additive, not a filter: the scope is *open* ∪
 *hash-dirty* ∪ `--keys`, so naming one key does not stop the rest of a dirty
@@ -473,7 +489,9 @@ overwrote on live tickets, then first-class remote drift (#385), then a
 fields on the platform, deferred items, degraded mappings):
 
 ```
-sync report: created=1 updated=2 closed=1 skipped=14 pulled=1 conflicts=0 deferred=0
+sync report: created=1 updated=2 closed=1 skipped=14 pulled=1 conflicts=0 deferred=0 relinked=1
+1 item(s) already had tickets (marker probe); link events recorded
+hint: 1 ticket(s) created; if any might already exist, run `worklog dedupe --dry-run`
 overwrote live ticket fields:
   - owner/repo#412 (01KYA99T): title: 'Old title' -> 'New title'; status: 'todo' -> 'in_progress'
   (read 2 tickets in 0.31s to report the above)

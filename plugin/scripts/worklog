@@ -1261,6 +1261,8 @@ def cmd_sync(a):
         argv.append("--push-only")
     if a.pull_only:
         argv.append("--pull-only")
+    if a.explain:
+        argv += ["--explain", a.explain]
     argv += ["--retry-base-delay", str(a.retry_base_delay)]
     sys.exit(sync_dispatch.main(argv))
 
@@ -1406,6 +1408,9 @@ def cmd_adapter(a):
         json.dump(state, fh, indent=2, sort_keys=True)
         fh.write("\n")
     print(f"adapter ok: {caps['system']} ({path})")
+    if not state.get("items"):
+        print("no push memory in this clone yet; the first sync relies on "
+              "the log and the marker probe (#412)")
     print(f"export WORKLOG_TICKET_ADAPTER={path}")
 
 
@@ -1648,6 +1653,8 @@ syg.add_argument("--push-only", dest="push_only", action="store_true")
 syg.add_argument("--pull-only", dest="pull_only", action="store_true")
 sy.add_argument("--retry-base-delay", dest="retry_base_delay", type=float,
                 default=0.5, metavar="SECONDS")
+sy.add_argument("--explain", metavar="ULID",
+                help="which key source answers for one item; changes nothing")
 
 adp = sub.add_parser(
     "adopt",
