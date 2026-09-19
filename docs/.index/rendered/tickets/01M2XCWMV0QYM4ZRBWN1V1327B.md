@@ -13,9 +13,9 @@ The v0.24.10 change review found a P0 in retention (archived items ping-pong bac
 - [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XF]] Bot PRs use the WORKLOG_BOT_PAT identity — Open and merge compact and post-merge PRs with a maintainer's fine-grained PAT so pull_request CI runs natively, then delete the status bridge, actions: write, statuses: write, and the workflow_run trigger. (done)
 - [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XN]] #413: CI as the authoritative syncer behind ticketing.sync_owner: ci — post-merge sets the adapter env, runs a push-only sync with the bot token before rendering, stages the log with the docs, and caches sync-state. (done)
 - [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XQ]] Release gate for design-doc freshness in doc-verify --strict — A release fails when a live doc's git_hash does not descend from the previous tag or the freeze record for that tag is missing. (open)
-- [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XV]] #413: Azure Pipelines template from init.sh — init.sh writes azure-pipelines.yml with the same hook-only steps as the installed GitHub workflow when the origin remote is Azure DevOps. (open)
+- [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XV]] #413: Azure Pipelines template from init.sh — init.sh writes azure-pipelines.yml with the same hook-only steps as the installed GitHub workflow when the origin remote is Azure DevOps. (done)
 
-Progress: 6/8 done
+Progress: 7/8 done
 
 ## Related tickets
 

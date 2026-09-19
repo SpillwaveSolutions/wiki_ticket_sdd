@@ -3,13 +3,13 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### CI wiring docs and the GitHub Actions to Azure Pipelines mapping table
-`01M2XCWMVEH3XFP2VPS9JBD6XX` · status: todo
+`01M2XCWMVEH3XFP2VPS9JBD6XX` · status: done
 - belongs-to: #413: Azure Pipelines template from init.sh
 - references: [github#433](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/433)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### #413: Azure Pipelines template from init.sh
-`01M2XCWMVEH3XFP2VPS9JBD6XV` · status: todo
+`01M2XCWMVEH3XFP2VPS9JBD6XV` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
 - references: [github#432](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/432)
 - contains: CI wiring docs and the GitHub Actions to Azure Pipelines mapping table
