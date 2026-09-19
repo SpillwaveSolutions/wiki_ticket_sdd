@@ -7699,12 +7699,12 @@
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XV": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "#413: Azure Pipelines template from init.sh"
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XX": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "CI wiring docs and the GitHub Actions to Azure Pipelines mapping table"
   },
   "plan/2026-07-17_worklog-core_plan": {

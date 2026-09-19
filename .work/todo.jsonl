@@ -71,3 +71,6 @@
 {"actor":"richardhightower","ev":"01M2XFN22DT11457NPNM7VXP53","git":"21b3ac6","item":"01M2XCWMVEH3XFP2VPS9JBD6XQ","op":"update","set":{"status":"in_progress"},"ts":"2026-09-19T18:42:56Z"}
 {"actor":"richardhightower","ev":"01M2XHQH4P7149W18R52K8ZH2R","git":"e2c4bf9","item":"01M2XCWMVEH3XFP2VPS9JBD6XS","op":"close","set":{"status":"done"},"ts":"2026-09-19T19:19:14Z"}
 {"actor":"richardhightower","ev":"01M2XHQH7JNS5GS7JD9XHG8A9Y","git":"e2c4bf9","item":"01M2XCWMVEH3XFP2VPS9JBD6XQ","op":"close","set":{"status":"done"},"ts":"2026-09-19T19:19:14Z"}
+{"actor":"richardhightower","ev":"01M2XFW40ARHNX6TDEMJRFX2T7","git":"21b3ac6","item":"01M2XCWMVEH3XFP2VPS9JBD6XV","op":"update","set":{"status":"in_progress"},"ts":"2026-09-19T18:46:47Z"}
+{"actor":"richardhightower","ev":"01M2XG64V8N151C1H3JCB0A247","git":"21b3ac6","item":"01M2XCWMVEH3XFP2VPS9JBD6XX","op":"close","set":{"status":"done"},"ts":"2026-09-19T18:52:16Z"}
+{"actor":"richardhightower","ev":"01M2XG64XQY9K725KY7NYTYMP5","git":"21b3ac6","item":"01M2XCWMVEH3XFP2VPS9JBD6XV","op":"close","set":{"status":"done"},"ts":"2026-09-19T18:52:16Z"}

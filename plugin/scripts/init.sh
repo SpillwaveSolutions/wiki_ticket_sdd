@@ -226,6 +226,61 @@ for d in docs/plans docs/status; do
 done
 
 # --- CI workflow: hook checks only (target repos have no tests/) ---
+# Forge is read from the origin remote (#413). Azure DevOps gets
+# azure-pipelines.yml with the same steps; every other host gets the GitHub
+# Actions file. Adapter (ticketing.system) and CI host are separate axes: an
+# ADO-hosted repo can track tickets anywhere. Another forge copies the
+# closest template by hand (user guide, "CI wiring").
+origin_url="$(git remote get-url origin 2>/dev/null || true)"
+case "$origin_url" in
+  *dev.azure.com*|*visualstudio.com*) ci_forge=azure ;;
+  *) ci_forge=github ;;
+esac
+
+if [ "$ci_forge" = "azure" ]; then
+if [ -f azure-pipelines.yml ]; then
+  skipped+=("azure-pipelines.yml")
+else
+  cat > azure-pipelines.yml <<'EOF'
+# worklog-invariants: the same hook checks the GitHub workflow runs.
+# Rendered by worklog init for an Azure DevOps origin (#413).
+trigger:
+  branches:
+    include: ['*']
+pr:
+  branches:
+    include: ['*']
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+    fetchDepth: 0
+  # Same script as the local hook: trailing newline, event schema,
+  # roadmap freshness. A dev can --no-verify past the local hook; not
+  # this. WORKLOG_SKIP_BRANCH_GUARD: this step runs on whatever ref was
+  # checked out with no commit in flight -- the branch guard only makes
+  # sense for an actual `git commit`.
+  - script: WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
+    displayName: log invariants
+  # commit-msg's own MERGE_HEAD check doesn't exist post-hoc in a CI
+  # checkout, so re-derive "was this a merge" via --no-merges instead.
+  # System.PullRequest.TargetBranch is refs/heads/<name>; the PR build
+  # checks out the merge commit, so its first parent is the target.
+  - script: |
+      base="origin/${SYSTEM_PULLREQUEST_TARGETBRANCH#refs/heads/}"
+      for sha in $(git rev-list --no-merges "$base..HEAD"); do
+        git log -1 --format=%B "$sha" > /tmp/msg
+        hooks/commit-msg /tmp/msg || { echo "commit $sha:"; cat /tmp/msg; exit 1; }
+      done
+    displayName: commit messages reference a worklog item or ticket
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+EOF
+  wrote+=("azure-pipelines.yml")
+fi
+else
+# --- CI workflow: hook checks only (target repos have no tests/) ---
 if [ -f .github/workflows/worklog.yml ]; then
   skipped+=(".github/workflows/worklog.yml")
 else
@@ -260,6 +315,7 @@ jobs:
           done
 EOF
   wrote+=(".github/workflows/worklog.yml")
+fi
 fi
 
 # --- CLAUDE.md policy block ---
