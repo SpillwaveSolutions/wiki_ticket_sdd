@@ -613,6 +613,44 @@ shape is identical everywhere — only how each system fills
 `url`/`rev`/`page_id` differs. Missing tooling degrades to local-only; it
 never fails a command.
 
+## CI wiring
+
+`worklog init` writes one CI file for the host it detects from the origin
+remote (#413). The steps are the same everywhere: the pre-commit hook with
+`WORKLOG_SKIP_BRANCH_GUARD=1` (trailing newline, event schema, roadmap
+freshness), the commit-message hook over the PR's non-merge commits, and
+nothing else, because an installed project has no Worklog test suite. The
+tracker adapter (`ticketing.system`) and the CI host are separate axes: an
+Azure DevOps repo can track tickets on GitHub, and the reverse.
+
+| Origin host | File written |
+|---|---|
+| `github.com` (and any host not listed) | `.github/workflows/worklog.yml` |
+| `dev.azure.com`, `*.visualstudio.com` | `azure-pipelines.yml` |
+
+An existing file is never overwritten. `worklog uninstall` removes the one
+it wrote. Another forge (GitLab, Bitbucket, CodeCommit, Cloud Source
+Repositories) copies the closest template by hand; the table below is the
+translation.
+
+| Concept | GitHub Actions (`worklog.yml`) | Azure Pipelines (`azure-pipelines.yml`) |
+|---|---|---|
+| Trigger | `on: [push, pull_request]` | `trigger:` + `pr:` with `branches: include: ['*']` |
+| Runner | `runs-on: ubuntu-latest` | `pool: vmImage: ubuntu-latest` |
+| Full history | `actions/checkout@v4` with `fetch-depth: 0` | `checkout: self` with `fetchDepth: 0` |
+| Shell step | `run:` | `script:` (`displayName:` is the step name) |
+| PR-only step | `if: github.event_name == 'pull_request'` | `condition: eq(variables['Build.Reason'], 'PullRequest')` |
+| PR base ref | `${{ github.event.pull_request.base.sha }}` | `origin/${SYSTEM_PULLREQUEST_TARGETBRANCH#refs/heads/}` |
+| Secret in env | `env: X: ${{ secrets.X }}` | `env: X: $(X)` from a variable group or pipeline secret |
+| Failure propagation | non-zero exit fails the step | same; `set -e` is on by default in `script:` |
+
+The Azure template is verified live in a consuming Azure DevOps project,
+not in this repository's CI (this repository ships no ADO adapter). The
+post-merge bot job (`worklog-post-merge`) is GitHub-only today; an ADO
+deployment that wants merge-time roadmap regeneration runs
+`worklog roadmap-render`, `ia-inventory`, and `ia-manifest` from a pipeline
+on the default branch and lands the result through a PR.
+
 ## Sync in depth
 
 Ticket sync (`bin/worklog sync`) runs through a typed adapter contract. The

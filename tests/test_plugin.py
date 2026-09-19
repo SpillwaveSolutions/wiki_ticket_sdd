@@ -503,6 +503,66 @@ class TestDoctor(unittest.TestCase):
         self.assertEqual(driver, "true")
 
 
+class TestAzurePipelinesTemplate(unittest.TestCase):
+    """#413: an Azure DevOps origin gets azure-pipelines.yml with the same
+    hook-only steps as the GitHub workflow; any other origin is unchanged."""
+
+    ADO = "https://dev.azure.com/org/proj/_git/repo"
+
+    def test_ado_origin_writes_the_azure_template_and_no_github_workflow(self):
+        d = make_repo(self)
+        sh(d, "git", "remote", "add", "origin", self.ADO)
+        sh(d, "bash", os.path.join(PLUGIN, "scripts", "init.sh"))
+        self.assertTrue(os.path.exists(os.path.join(d, "azure-pipelines.yml")))
+        self.assertFalse(
+            os.path.exists(os.path.join(d, ".github/workflows/worklog.yml")))
+        azure = read(d, "azure-pipelines.yml")
+        # Same steps as the GitHub heredoc: the contract is the commands.
+        with open(os.path.join(PLUGIN, "scripts", "init.sh"), encoding="utf-8") as fh:
+            init = fh.read()
+        github = init.split("cat > .github/workflows/worklog.yml <<'EOF'", 1)[1].split("\nEOF\n", 1)[0]
+        for cmd in ("WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit",
+                    "git rev-list --no-merges",
+                    'hooks/commit-msg /tmp/msg || { echo "commit $sha:"; cat /tmp/msg; exit 1; }'):
+            self.assertIn(cmd, azure, cmd)
+            self.assertIn(cmd, github, cmd)
+        self.assertIn("worklog-invariants", azure)
+        self.assertIn("condition: eq(variables['Build.Reason'], 'PullRequest')", azure)
+        try:
+            import yaml
+        except ImportError:
+            yaml = None
+        if yaml is not None:
+            doc = yaml.safe_load(azure)
+            self.assertEqual([s.get("displayName") for s in doc["steps"] if "script" in s],
+                             ["log invariants",
+                              "commit messages reference a worklog item or ticket"])
+        # Idempotent: a second run skips it.
+        p = sh(d, "bash", os.path.join(PLUGIN, "scripts", "init.sh"))
+        self.assertIn("azure-pipelines.yml", p.stdout)
+        # Uninstall removes it like the GitHub file.
+        sh(d, "bash", os.path.join(PLUGIN, "scripts", "uninstall.sh"))
+        self.assertFalse(os.path.exists(os.path.join(d, "azure-pipelines.yml")))
+
+    def test_visualstudio_origin_is_azure_too(self):
+        d = make_repo(self)
+        sh(d, "git", "remote", "add", "origin", "https://org.visualstudio.com/proj/_git/repo")
+        sh(d, "bash", os.path.join(PLUGIN, "scripts", "init.sh"))
+        self.assertTrue(os.path.exists(os.path.join(d, "azure-pipelines.yml")))
+
+    def test_github_and_no_origin_keep_the_github_workflow(self):
+        d = make_repo(self)
+        sh(d, "bash", os.path.join(PLUGIN, "scripts", "init.sh"))
+        self.assertTrue(
+            os.path.exists(os.path.join(d, ".github/workflows/worklog.yml")))
+        self.assertFalse(os.path.exists(os.path.join(d, "azure-pipelines.yml")))
+        d2 = make_repo(self)
+        sh(d2, "git", "remote", "add", "origin", "git@github.com:org/repo.git")
+        sh(d2, "bash", os.path.join(PLUGIN, "scripts", "init.sh"))
+        self.assertTrue(
+            os.path.exists(os.path.join(d2, ".github/workflows/worklog.yml")))
+
+
 class TestUninstall(unittest.TestCase):
     def test_preserves_data(self):
         d = init_repo(self)
