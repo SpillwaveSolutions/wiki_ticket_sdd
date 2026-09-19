@@ -1,5 +1,5 @@
 {
- "git_hash": "c55bf89",
+ "git_hash": "efef99b",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "e69a0291fe4c",
+   "render_hash": "0ba10028c77d",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4665,7 +4665,7 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMV0QYM4ZRBWN1V1327B",
    "render": "as-is",
-   "render_hash": "b7fee31ab548",
+   "render_hash": "772e3f3777a0",
    "source": "docs/.index/rendered/tickets/01M2XCWMV0QYM4ZRBWN1V1327B.md",
    "title": "Fix the v0.24.10 review findings and close #412 and #413",
    "truth_state": "open",
@@ -4685,10 +4685,10 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVD7KJ01FCNEV1X822V",
    "render": "as-is",
-   "render_hash": "4f494ed5ce44",
+   "render_hash": "846559bf4a77",
    "source": "docs/.index/rendered/tickets/01M2XCWMVD7KJ01FCNEV1X822V.md",
    "title": "Retention: stop re-snapshotting archived items into done.jsonl",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M2XCWMVD7KJ01FCNEV1X822V"
   },
   {
@@ -4735,10 +4735,10 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVD7KJ01FCNEV1X8235",
    "render": "as-is",
-   "render_hash": "d2f547ecd0dc",
+   "render_hash": "ede39a8951aa",
    "source": "docs/.index/rendered/tickets/01M2XCWMVD7KJ01FCNEV1X8235.md",
    "title": "Retention tests and doc renumbering",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M2XCWMVD7KJ01FCNEV1X8235"
   },
   {
@@ -5724,13 +5724,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T18:00:45Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T18:04:49Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "fe3be8539fc2",
+   "render_hash": "bf68272d01f6",
    "source": "docs/roadmap.md",
-   "source_hash": "a37e9d05e32b",
+   "source_hash": "6f87b415afe3",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

@@ -88,7 +88,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Retention tests and doc renumbering
-`01M2XCWMVD7KJ01FCNEV1X8235` · status: in_progress
+`01M2XCWMVD7KJ01FCNEV1X8235` · status: done
 - belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
 - references: [github#420](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/420)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
@@ -118,7 +118,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Retention: stop re-snapshotting archived items into done.jsonl
-`01M2XCWMVD7KJ01FCNEV1X822V` · status: in_progress
+`01M2XCWMVD7KJ01FCNEV1X822V` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
 - references: [github#415](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/415)
 - contains: Cap counts only items present in done.jsonl and unparseable ts never occupies a cap slot

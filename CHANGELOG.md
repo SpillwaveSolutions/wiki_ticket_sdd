@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.24.11 — unreleased
+
+- **Retention no longer ping-pongs archived items.** The "already snapshotted" check folded `done.jsonl` alone, so every archived item looked changed on any active night, got a fresh snapshot back in `done.jsonl`, and was re-archived a period later next to its old line (v0.24.10 review P0; first evictions were due 2026-10-17). The check now folds `done.jsonl + archive.jsonl`; the archive is pruned of reopened items, items refreshed into `done.jsonl`, and older duplicate snapshots (newest `ev` wins). The FIFO cap counts only items with lines in `done.jsonl`, an unparseable `ts` takes no cap slot, a parent is not archived while a child is still in `done.jsonl` or open, a garbage line in `archive.jsonl` is dropped with a warning instead of crashing the nightly job, and ignored `retention:` values warn. `merge-check` folds the archive so an archived owner still blocks a duplicate link; an untracked `archive.jsonl` now counts as dirty. Spec §7 renumbered: evict is step 7, verify steps 8 and 9.
+
 ## 0.24.10 — 2026-09-02
 
 - **Bot compact PRs land without a maintainer click.** GITHUB_TOKEN `pull_request` runs sit `action_required` (#403, #408). `workflow_dispatch` of worklog-invariants does run and produces check-runs on the SHA, but those check-runs do not appear on the PR (`statusCheckRollup` empty, BLOCKED on #408). Commit statuses named `invariants` and `coverage` do satisfy the merge-when-green ruleset (#408 merged that way, MERGE, 2 parents). compact.yml and post-merge.yml now dispatch, wait, then post those statuses via `plugin/scripts/associate-pr-checks.sh`. `statuses: write` added. Never squash (ADR-0008).

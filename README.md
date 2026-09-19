@@ -293,7 +293,7 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 
 | Path | What |
 |---|---|
-| `.work/` | Append-only event log (`todo.jsonl`, `done.jsonl`), `config.yml`, publish ledger |
+| `.work/` | Append-only event log (`todo.jsonl`, `done.jsonl`, `archive.jsonl`), `config.yml`, publish ledger |
 | `adapters/` | Ticket-sync adapters: shipped `fake` (CI double) and `github` (worked example), plus authoring rules |
 | `schema/` | JSON Schemas: adapter contract, ADR, document IA (`doc.schema.json`), entity/item |
 | `bin/` | `worklog` CLI plus its Python modules (fold, sync, roadmap, plan capture, IA, …) |

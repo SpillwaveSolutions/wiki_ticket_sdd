@@ -632,6 +632,29 @@ Compaction replaces an item's events with a **snapshot** plus a watermark
 below its own item's watermark. That watermark is per item, not global
 (ADR-0007): an event for an item that was never snapshotted is never dropped.
 
+Compaction also **archives** old closed items. After the rewrite, closed
+snapshots in `done.jsonl` older than their level's age move to
+`.work/archive.jsonl` (`merge=union`), then a FIFO cap trims the closed items
+that remain in `done.jsonl`, oldest first. Nothing is deleted: `worklog show`
+and `list --all` fold all three files, and a reopened item leaves the archive
+on the next compaction. An item already in the archive is never aged, counted
+against the cap, or copied back into `done.jsonl`. A parent stays while a
+child is still in `done.jsonl` or open. Unparseable `ts` is kept and takes no
+cap slot. Closed items with no `level` age as tasks.
+
+```yaml
+# .work/config.yml (defaults shown; omit the block to use them)
+retention:
+  epic_days: 730
+  story_days: 180
+  task_days: 90
+  subtask_days: 90
+  cap: 1000      # 0 archives every closed item with a parseable ts and no live child
+```
+
+A negative, non-integer, or unknown value prints a warning and keeps the
+default.
+
 ### merge-rescue
 
 Resolve a merge the **resurrection guard** blocked, without losing events.

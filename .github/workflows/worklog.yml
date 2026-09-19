@@ -59,6 +59,8 @@ jobs:
           python3 tests/test_fold.py
           python3 tests/test_ulid.py
           python3 tests/test_compact.py
+          python3 tests/test_retention.py
+          python3 tests/test_watermark.py
           python3 tests/test_github_adapter.py
           python3 tests/test_merge_green.py
           python3 tests/test_published.py

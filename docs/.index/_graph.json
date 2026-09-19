@@ -7592,7 +7592,7 @@
   },
   "item/01M2XCWMVD7KJ01FCNEV1X822V": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "Retention: stop re-snapshotting archived items into done.jsonl"
   },
   "item/01M2XCWMVD7KJ01FCNEV1X822X": {
@@ -7617,7 +7617,7 @@
   },
   "item/01M2XCWMVD7KJ01FCNEV1X8235": {
    "doc_type": "item",
-   "status": "in_progress",
+   "status": "done",
    "title": "Retention tests and doc renumbering"
   },
   "item/01M2XCWMVD7KJ01FCNEV1X8237": {

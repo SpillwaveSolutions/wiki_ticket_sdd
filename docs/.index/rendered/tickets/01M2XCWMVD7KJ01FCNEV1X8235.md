@@ -1,6 +1,6 @@
 # Retention tests and doc renumbering
 
-`01M2XCWMVD7KJ01FCNEV1X8235` · subtask/bug · **in-progress**
+`01M2XCWMVD7KJ01FCNEV1X8235` · subtask/bug · **done**
 
 Add the eight test classes listed in the plan, add test_retention and test_watermark to the explicit CI list, and fix the step order in the compact.py header, the spec, the CLI reference, and the README.
 
