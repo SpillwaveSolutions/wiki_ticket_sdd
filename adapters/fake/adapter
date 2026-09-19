@@ -10,6 +10,7 @@ Test-only subcommands (underscore-prefixed, not part of the contract):
   _count             print number of stored tickets
   _counters          print the counters object
   _fail_next <code>  make the next push exit with <code>
+  _fail_next_pull <code>  make the next pull exit with <code>
 """
 import datetime
 import json
@@ -119,6 +120,12 @@ def cmd_pull(argv):
         elif a == "--keys":
             keys = (next(args, "") or "").split(",")
     state = load_state()
+    if state.get("fail_next_pull"):
+        code = int(state["fail_next_pull"])
+        state["fail_next_pull"] = None
+        save_state(state)
+        print("fake: injected pull failure %d" % code, file=sys.stderr)
+        return code
     state["counters"]["pulls"] += 1
     save_state(state)
     for key in sorted(state["tickets"]):
@@ -180,6 +187,11 @@ def main(argv):
     if verb == "_fail_next" and rest:
         state = load_state()
         state["fail_next"] = int(rest[0])
+        save_state(state)
+        return 0
+    if verb == "_fail_next_pull" and rest:
+        state = load_state()
+        state["fail_next_pull"] = int(rest[0])
         save_state(state)
         return 0
     print("fake: unknown or incomplete verb: %r" % (argv,), file=sys.stderr)

@@ -1,6 +1,6 @@
 # adapter check says when the clone has no push memory
 
-`01M2XCWMVEH3XFP2VPS9JBD6XB` · subtask/bug · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6XB` · subtask/bug · **done**
 
 A fresh clone must not see output that claims it has push memory.
 
