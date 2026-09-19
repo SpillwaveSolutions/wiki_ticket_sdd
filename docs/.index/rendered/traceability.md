@@ -2,8 +2,11 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Wiki page name for a design freeze note collides with the live Code-Walkthrough page
+`01M2XK6N6JBZ6KKVHCF0C2TRWP` · status: done
+
 ### Release v0.24.11
-`01M2XJARKTEH7VG74N3M0ZG66S` · status: in_progress
+`01M2XJARKTEH7VG74N3M0ZG66S` · status: done
 
 ### CI wiring docs and the GitHub Actions to Azure Pipelines mapping table
 `01M2XCWMVEH3XFP2VPS9JBD6XX` · status: done

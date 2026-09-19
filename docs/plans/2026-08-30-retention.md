@@ -4,6 +4,7 @@ slug: retention
 title: Compaction archives old closed items; never deletes
 items: [01M19XRRZ2894K7XE59RX1EAY1]
 status: accepted
+merged_in: 7898f15f2278a883246d21204f6ab964402b9d85
 ---
 
 # Compaction archives old closed items; never deletes
