@@ -59,11 +59,17 @@ decision. Neither is a living spec.
   *at that commit*, telling a fabricated citation (wrong even then — a
   defect) apart from drift (right then, the code moved since). It never falls
   back to HEAD. `worklog provenance-backfill` adds `merged_in` once the
-  document lands.
+  document lands. At release, `doc-verify --strict` also reports `STALE`
+  when a live design doc's `git_hash` predates the latest tag or the tag has
+  no freeze record in `docs/designs/`, so a release cannot ship with the
+  live pair left unregenerated.
 - **Append-only, git-native work log.** Epics, stories, tasks, subtasks, and
   bugs live in `.work/todo.jsonl` — an event log that multiple people (and
   agents) can work against concurrently. Union merge, event fold: branches
-  merge cleanly, state is derived by folding events.
+  merge cleanly, state is derived by folding events. Nightly compaction
+  snapshots closed items into `done.jsonl` and ages them into
+  `archive.jsonl` per level; nothing is deleted, and `show` and `list --all`
+  fold all three files.
 - **A four-axis work taxonomy.** Every item sits on `level`
   (epic/story/task/subtask), `kind` (feature/bug/ops/triage), `milestone`
   (what ships together), and planned-vs-discovered. The unclassified default
@@ -93,7 +99,10 @@ decision. Neither is a living spec.
   `docs/.index/publish-manifest.json`, which also carries a generated page
   per ticket, PR, and release (`worklog ia-ticket <ULID>` to preview one).
 - **Syncs to the team's OWN systems** — wiki *and* tickets. Your work log
-  publishes to whatever your team already uses.
+  publishes to whatever your team already uses. Create-vs-update consults
+  the remote: a clone with no link memory finds the item's ticket by its
+  marker and updates it instead of filing a second one, and
+  `worklog sync --explain <ULID>` says which source answered.
 - **Living integration guides**, one per SDD tool and ticket/wiki system
   (Superpowers, GSD, SpecKit, OpenSpec, Jira, Confluence, GitHub, GitLab,
   Azure DevOps, AWS CodeCatalyst, Google Cloud DevOps), fetched from the
@@ -169,7 +178,8 @@ Policy that holds because tooling holds it, not because people remember:
 
 - **PRs merge only when every gate is green.** `/worklog:merge` arms
   `gh pr merge --auto --merge` so GitHub merges when required checks pass
-  (ADR-0010); the poll loop is fallback. Never `--admin`, never squash
+  (ADR-0011, which supersedes ADR-0010: bot PRs land through the same gate
+  under a PAT identity, never a bypass actor); the poll loop is fallback. Never `--admin`, never squash
   (ADR-0008), never bypass. Teams that want a human on the trigger set
   `features.auto_merge_on_green: false` in `.work/config.yml` (advisory
   mode: report green, human merges).
@@ -257,8 +267,9 @@ Two install levels, deliberately distinct:
   already installed, working for the first time.
 - **Repo install** — inside a target repo, run `/worklog:init`. It scaffolds
   `bin/`, the git hooks, an empty `.work/` with `config.yml`, and the CI
-  check. The copies are committed, so hooks and CI work for teammates who
-  don't have the plugin.
+  check (`.github/workflows/worklog.yml`, or `azure-pipelines.yml` when the
+  origin remote is Azure DevOps). The copies are committed, so hooks and CI
+  work for teammates who don't have the plugin.
 
 Also: `/worklog:uninstall` removes the tooling but never touches `.work/`
 data, `docs/plans/`, `docs/status/`, or `docs/roadmap.md` — the data

@@ -474,6 +474,9 @@ in the tree stay frozen forever (same rule as roadmap snapshots); do not
 delete them and do not write new ones. The design-docs skill generates the
 live pair from the actual code; at tag time the release skill spawns
 background agents to regenerate them and refresh the user guide and README.
+Since 0.24.11 `doc-verify --strict` reports `STALE` when the live pair's
+`git_hash` predates the latest tag or the tag has no freeze note, so the
+next release blocks until that regeneration PR lands.
 `worklog triggers release` is the opt-in/out: what's
 listed gets synced at release, what isn't doesn't. `release.sync_docs` is
 the legacy fallback.
@@ -678,6 +681,11 @@ cannot see (#385):
 - **Closed on remote, still open in the log.** Sync closes the log item
   and does not push the open state back. `--dry-run` names
   `worklog close <id>` instead of writing.
+- **Ticket exists, clone has no link memory** (#412). The same listing is
+  kept as a marker-to-key map, so a fresh clone updates the ticket that
+  carries the item's marker and records the missing link event instead of
+  filing a duplicate. `worklog sync --explain <ULID>` prints which source
+  answered and changes nothing.
 
 One thing does not go in the drift report: a ticket claimed by more than one
 item. Sync refuses to push *those* items (corruption needs both of them

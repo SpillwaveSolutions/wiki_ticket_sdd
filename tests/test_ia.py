@@ -139,6 +139,29 @@ class TestKeys(unittest.TestCase):
         self.assertEqual(aliases, [])
 
 
+class TestDesignPageName(unittest.TestCase):
+    """A dated freeze note has no _design_doc/_code_walkthrough suffix; it
+    must get its own page, never the live Code-Walkthrough page."""
+
+    @staticmethod
+    def rec(stem):
+        return {"doc_type": "design", "source": "docs/designs/%s.md" % stem}
+
+    def test_freeze_note_gets_its_own_page(self):
+        self.assertEqual(
+            ia_render.page_name(self.rec("2026-09-19_v0.24.10-release")),
+            "Design-Freeze-2026-09-19_v0.24.10-release")
+
+    def test_live_pair_and_legacy_dated_pair_unchanged(self):
+        self.assertEqual(ia_render.page_name(self.rec("current_code_walkthrough")),
+                         "Code-Walkthrough")
+        self.assertEqual(ia_render.page_name(self.rec("current_design_doc")),
+                         "Design-Doc")
+        self.assertEqual(
+            ia_render.page_name(self.rec("2026-08-18_v0.24.3-release_design_doc")),
+            "Design-Doc-2026-08-18_v0.24.3-release")
+
+
 class TestBanner(unittest.TestCase):
     """#292. Deliberately NOT a TestInventory subclass: banner() is a pure
     function of one record, so these need no temp repo -- and TestRender is

@@ -947,7 +947,7 @@ bin/worklog doc-verify
 bin/worklog doc-verify --strict
 ```
 
-Five verdicts, and the whole point is the first two:
+Six verdicts, and the whole point is the first two:
 
 | Verdict | Meaning |
 |---|---|
@@ -956,11 +956,20 @@ Five verdicts, and the whole point is the first two:
 | `drift` | right when written, the code has moved since — **not** a defect in a frozen document |
 | `unstamped` | no `git_hash` (anything written before 0.21.0) — unverifiable, skipped |
 | `unresolvable` | the stamped commit is not in this clone (squash-merge, shallow checkout) — skipped |
+| `stale` | *(0.24.11)* a live design doc's `git_hash` predates the latest tag, or that tag has no freeze record in `docs/designs/`; reported as `STALE`, repo-wide runs only |
 
 `--strict` fails on **any** fabrication, and on drift only in
 `current_design_doc.md` / `current_code_walkthrough.md` — the only two
 documents that claim to describe the tree as it is now. A frozen document is
 allowed to age; failing on that would make the gate un-passable by design.
+
+`--strict` also fails on any `STALE` finding: the freshness gate checks that
+each live doc's `git_hash` descends from the latest tag and that the tag has
+a freeze record (`<date>_<tag>-release.md`, or the historical dated pair).
+It runs only on repo-wide invocations, never under `--staged`, so the
+pre-commit hook does not fail every commit between a tag and the doc PR
+that follows it. The fix is the design-docs skill in release mode, not a
+hand edit of the stamp.
 
 **It never falls back to HEAD.** An unstamped or unresolvable document is
 reported and skipped, never re-checked against the current tree — that

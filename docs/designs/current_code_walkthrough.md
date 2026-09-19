@@ -1,8 +1,8 @@
 ---
-generated_at: 2026-09-19T19:10:55Z
-git_hash: "2daac3743f9582a3d073c62433a35362c9c59833"
-branch: docs/design-sync-v0-24-10
-tag: v0.24.10
+generated_at: 2026-09-19T19:52:25Z
+git_hash: "2ebf46afd72dacf9eb74ff87528e6dd74eed99e3"
+branch: docs/design-sync-v0-24-11
+tag: v0.24.11
 roadmap: docs/roadmap.md
 wiki_key: design/current-code-walkthrough
 truth_state: current
@@ -27,10 +27,12 @@ See §2.21 for how that works and §9.11 of the design doc for why it had to.
 
 Three sentences: **Worklog tracks work as an append-only JSONL event log inside
 the git repo; item state is a fold over the events, and git's union merge makes
-concurrent writes compose instead of conflict.** This edition describes HEAD of
-the v0.24.10 line: the tag plus three fixes merged after it (the retention
-archive no longer ping-pongs, the #412 marker probe, ADR-0011). Where a stop
-below says "post-tag", that is what it means. Everything human-readable — the
+concurrent writes compose instead of conflict.** This edition describes tag
+v0.24.11, which folds the three fixes that followed v0.24.10 (the retention
+archive no longer ping-pongs, the #412 marker probe, ADR-0011) plus the
+freshness gate that now checks this file (§2.21) and the Azure Pipelines
+template (#413, §2.11). Where a stop below says "post-tag", it means after
+v0.24.10 and inside v0.24.11. Everything human-readable — the
 roadmap, status reports, Mermaid diagrams, and (since v0.13.0) the IA reader
 plane under `docs/.index/` — is generated from the log and committed docs, and
 everything remote — tickets, wiki pages — is a mirror driven through a typed
@@ -56,7 +58,7 @@ Directory map:
 | `bin/ia_graph.py` | Traceability graph, link-pr, ticket-body, trace-check, `build_adjacency()`/`item_links()` (v0.14.0), (v0.19.0) `pr_sync()` + the `find` search surface, and (v0.20.0) `in_trace_scope()` — the evidence gate's scope, finally enforced (548 lines). |
 | `bin/session.py` | (v0.19.0) Advisory registry of harness sessions sharing this checkout. 173 lines, blocks nothing. Since v0.24.3 it also holds the one non-advisory fact in the file: `base`, the commit a session started at, which the Stop hook diffs the log against (§2.8). |
 | `bin/provenance.py` | (v0.21.0) `merged_in` — the merge commit that landed a **frozen** document, backfilled after the fact. 154 lines, the only module that walks git history for document metadata. |
-| `bin/doc_verify.py` | (v0.21.0) Resolves this file's own citations at the commit it was stamped with. 339 lines; never falls back to HEAD; judges a symbol's definition line (v0.22.2); `--staged` scoping and the editability predicate (ADR-0009). |
+| `bin/doc_verify.py` | (v0.21.0) Resolves this file's own citations at the commit it was stamped with. 421 lines; never falls back to HEAD; judges a symbol's definition line (v0.22.2); `--staged` scoping and the editability predicate (ADR-0009); since v0.24.11 also `freshness()`, the gate that refuses a release while this file predates the latest tag (§2.21). |
 | `bin/changelog.py` | (v0.19.0) `worklog changelog-draft` — the starting point for release notes, never the notes. |
 | `bin/item_fields.py` | (v0.19.0) CORE vs CATALOG: which item fields exist, and which this repo switched on. |
 | `bin/wiki_flavor.py` | (v0.19.0) The renderer's one platform seam: `link()` + `sanitize()`, nothing more. |
@@ -67,8 +69,8 @@ Directory map:
 | `plugin/` | Host packaging, **three manifests over one shared tree**: `.claude-plugin/plugin.json` (Claude Code, Grok Build), `.codex-plugin/plugin.json` (Codex, v0.22.0) and `.cursor-plugin/plugin.json` (Cursor, v0.24.4). `plugin/scripts/` mirrors `bin/` + `hooks/` and is sync-checked; `plugin/hooks/hooks.json` + `codex-hooks.json` + `cursor-hooks.json` are the event maps, and all must wrap their events under a top-level `hooks` key — §2.22 is why. `plugin/scripts/associate-pr-checks.sh` is the interim status bridge for bot PRs (§2.25). |
 | `.github/` | Three workflows (`worklog.yml`, `compact.yml`, `post-merge.yml`) and `merge-when-green-ruleset.json`, the mirror of the branch ruleset on `main` (§2.25). |
 | `schema/` | `capabilities`, `adapter-io`, `adr`, `doc`, `entity` JSON schemas. |
-| `tests/` | 52 stdlib-unittest suites, 756 test functions; the executable spec. Merge safety alone accounts for `test_watermark.py` and `test_bug_merge.py`; `test_provenance.py` (739 lines) is the largest file; `test_retention.py` and `test_bug_412.py` are the newest and pin the two post-tag fixes (§4). |
-| `docs/` | Generated roadmap, frozen plans/status/designs, ADRs 0001–0011, the spec. 52 documents under `docs/` carry `git_hash` and 92 carry `merged_in` at this commit. Since v0.24.10 a release freezes one dated note (`docs/designs/<date>_vX.Y.Z-release.md`) instead of copying this pair. |
+| `tests/` | 53 stdlib-unittest suites, 768 test functions; the executable spec. Merge safety alone accounts for `test_watermark.py` and `test_bug_merge.py`; `test_provenance.py` (739 lines) is the largest file; `test_doc_freshness.py` is the newest and pins the release gate that checks this file (§4). |
+| `docs/` | Generated roadmap, frozen plans/status/designs, ADRs 0001–0011, the spec. 53 documents under `docs/` carry `git_hash` and 92 carry `merged_in` at this commit. Since v0.24.10 a release freezes one dated note (`docs/designs/<date>_vX.Y.Z-release.md`) instead of copying this pair. |
 | `docs/integrations/` | Eleven per-system setup guides + index (v0.16.0), prose only, no code. |
 
 The one diagram (derived from actual imports and subprocess calls):
@@ -220,7 +222,7 @@ the rest of the event was small. `n != len(raw)` turns a short write into a
 loud exit instead of a fused line. And `.work/.lock` (line 39) is held across
 the append: `compact.py` takes the same lock (`bin/compact.py — _lock_logs(),
 lines 80–86`) around its `os.replace`, so a write can no longer land on an
-inode compaction has just swapped out. `VERSION = "0.24.10"` (line 40) is
+inode compaction has just swapped out. `VERSION = "0.24.11"` (line 40) is
 lockstepped with every host manifest, both skill trees and the README marker by
 `tests/test_plugin.py — TestVersionSync, lines 307–350`. Read that lockstep as
 a live constraint, not trivia: v0.24.2 bumped two of the eight sources that
@@ -922,6 +924,23 @@ invocation with `WORKLOG_SKIP_BRANCH_GUARD=1`; `tests/test_plugin.py`'s
 hooks hard-fail immediately — no warn-only rollout period. The IA gates took
 the slower route and were promoted to hard failures in v0.19.0 (§2.8), so the
 two philosophies have converged.
+
+**Which CI file (v0.24.11, #413).** `init.sh` reads the origin remote before it
+writes the CI template (`plugin/scripts/init.sh:236`): `dev.azure.com` or
+`*.visualstudio.com` selects `azure-pipelines.yml`; anything else, including no
+origin, selects `.github/workflows/worklog.yml`. The two heredocs run the same
+two commands, `WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit` and the
+`git rev-list --no-merges` walk through `hooks/commit-msg`; only the YAML
+around them differs (trigger, pool, `condition:` instead of `if:`, and
+`origin/${SYSTEM_PULLREQUEST_TARGETBRANCH#refs/heads/}` as the PR base). An
+existing file is never overwritten, and `uninstall.sh` removes the Azure file
+only when it carries the `worklog-invariants` marker
+(`plugin/scripts/uninstall.sh:82`).
+`tests/test_plugin.py — TestAzurePipelinesTemplate, lines 506–563` asserts the
+shared commands appear in both heredocs, so a step added to one template fails
+the build until it is added to the other. The tracker adapter is a separate
+axis: this repository ships no ADO adapter, and an ADO-hosted repo can still
+track tickets on GitHub.
 
 **Release skill.** `plugin/skills/release/SKILL.md` §3's "direct-commit
 repos: commit on the default branch" mode is removed — dead once the branch
@@ -1822,20 +1841,53 @@ state that let 26 suspect citations sit unexamined in the first place.
 
 Three details worth stealing:
 
-- **`_at(), lines 76–88` keys its cache on `os.getcwd()`** as well as the sha and
+- **`_at(), lines 149–161` keys its cache on `os.getcwd()`** as well as the sha and
   path. Symbolic refs are not unique across repositories, so caching `"HEAD"`
   globally would hand one repo's file to another's — the exact wrong-tree answer
   this module exists to prevent, reintroduced inside the prevention.
-  `verify(), lines 202–278` additionally resolves HEAD to a real sha first, so
+  `verify(), lines 275–358` additionally resolves HEAD to a real sha first, so
   the symbolic ref never reaches the cache.
-- **`citations(), lines 91–109` matches an en-dash**, and the source says why in
+- **`citations(), lines 164–182` matches an en-dash**, and the source says why in
   a comment: a regex written for `-` matches nothing here, and a citation checker
   that finds nothing reports a clean bill of health. `TestCitationParsing.
   test_an_en_dash_range_is_not_missed` exists for exactly that silent failure.
-- **`failing(), lines 281–301` is where frozen and live diverge.** `--strict`
+- **`failing(), lines 361–382` is where frozen and live diverge.** `--strict`
   fails on fabrication anywhere, and on drift only in the two `current_*` design
   files. Any other rule makes the gate un-passable by design, because a
   repository accumulates frozen documents and frozen documents accumulate drift.
+
+**The fourth check, added in v0.24.11: is this file older than the tag?**
+Seven releases shipped with this walkthrough stamped at v0.24.3, and nothing
+noticed, because the regeneration step lived in skill prose. `freshness()`
+turns the two facts a reviewer would check by hand into findings:
+
+```python
+if _git("merge-base", "--is-ancestor", tag, sha) is None:
+    findings.append({"doc": key, "source": src, "verdict": "stale",
+                     "live": True,
+                     "detail": "git_hash %s predates tag %s; regenerate "
+                               "with the design-docs skill in release "
+                               "mode" % (sha[:9], tag)})
+```
+— `bin/doc_verify.py — freshness(), lines 101–146` (elided)
+
+What it receives: the inventory records, an optional tag (default
+`latest_tag(), lines 80–85`, the highest version tag by `--sort=-v:refname`),
+and the designs directory. What it returns: a list of `stale` findings, each
+with `live: True`, so `failing()` gates it under `--strict` exactly as it gates
+drift on this file. A missing or unresolvable `git_hash` is `stale` too, never
+re-checked against HEAD. The second half looks for the tag's freeze record in
+either form (`freeze_record(), lines 88–98`; the v0.24.10 note or the
+historical dated pair) and reads its first 4000 bytes for the tag name. Two
+things the placement decides: `verify()` calls it only when `only is None`,
+so the `--staged` pre-commit hook never runs it, or every commit between a
+tag and the doc PR that follows it would fail; and a clone with no tag returns
+`[]`, because there is nothing to compare.
+`tests/test_doc_freshness.py — TestFreshness, lines 25–99` builds a
+repository with a tag and a commit past it and proves all seven cases, the
+staged-scope skip included. This is the edition that made the gate pass: at
+v0.24.11 the previous pair's hash predated the tag, which is the finding the
+release skill's §5 now refuses to ship past.
 
 **And the fix that had to ship alongside it.** Stamping metadata onto 73
 documents is a front-matter-only edit, and publishing strips front matter — so
@@ -2375,6 +2427,8 @@ config and not the file. This repository's own config carries the block, and
 | 49 | Generated files carry `merge=ours` and the merge commit regenerates them (v0.24.8, #381) | `.gitattributes`; `hooks/pre-merge-commit`; `tests/test_bug_381.py` | every pair of concurrent branches conflicts on `docs/roadmap.md`, a file nobody edited by hand |
 | 50 | Nothing lands on `main` except a PR that passed the two required checks, and the invariants workflow can post nothing (ADR-0010, ADR-0011) | `.github/merge-when-green-ruleset.json` (`bypass_actors: []`, merge only); `worklog.yml` `permissions: contents: read` | a direct push, or a workflow with `statuses: write` satisfying the gate for a PR it never checked (§2.25) |
 | 51 | A release freezes ONE dated note, never a copy of this pair (v0.24.10) | `.claude/skills/design-docs/SKILL.md`; `tests/test_hygiene.py — TestFreezeCap, lines 73–84` | 250 KB of byte-identical prose per release, and a frozen record that is really a cache |
+| 52 | A live design doc's `git_hash` descends from the latest tag, and that tag has a freeze record naming it (v0.24.11) | `doc_verify.freshness()`, run by `verify()` on repo-wide runs only; `tests/test_doc_freshness.py — TestFreshness, lines 25–99` | this file describes a tree several releases old while claiming to describe HEAD, and nobody is told (v0.24.4 to v0.24.10) |
+| 53 | The GitHub and Azure CI templates run the same commands (v0.24.11, #413) | `tests/test_plugin.py — TestAzurePipelinesTemplate, lines 506–563` asserts each shared command appears in both heredocs | a hook check enforced on one forge and silently absent on the other |
 
 ## 4. Tests as executable specification
 
@@ -2677,8 +2731,22 @@ makes generated files stop conflicting.
 
 **`tests/test_hygiene.py — TestFreezeCap`.** Locks the design-docs skill to
 "ONE freeze note", "Not a copy of the live pair", and byte-identical between
-the `.claude` and `plugin` copies. This edition is the first to be produced
-under that rule.
+the `.claude` and `plugin` copies. The v0.24.10 edition was the first produced
+under that rule; this one is the second.
+
+**`tests/test_doc_freshness.py — TestFreshness.test_stale_hash_and_missing_freeze_record_both_fail()`
+(v0.24.11).** Stamps a live record at the commit before the tag, with no
+freeze note, and asserts two `stale` findings. Rule proved: a live doc older
+than the tag and a tag with no record are each a gate failure on their own.
+Its sibling `test_staged_scope_skips_freshness` proves the hook never sees
+them (§2.21).
+
+**`tests/test_plugin.py — TestAzurePipelinesTemplate.test_ado_origin_writes_the_azure_template_and_no_github_workflow()`
+(v0.24.11).** Runs `init.sh` against a `dev.azure.com` origin and asserts the
+Azure file exists, the GitHub file does not, the three commands the two
+heredocs share appear in both, a second run skips the file, and `uninstall`
+removes it. Rule proved: the forge selects the file, and the file never
+changes the checks (§2.11).
 
 ## 5. Junior engineer orientation
 
@@ -2749,6 +2817,12 @@ under that rule.
    could have posted the same two contexts. When a gate goes green through an
    indirection, name the party the platform is trusting and check that it is
    the platform (§2.25).
+14. (v0.24.11) **A step that is prose is a step nobody ran.** The release skill
+   told an agent to regenerate this file at every release; seven releases
+   later it was still stamped at v0.24.3, and every reader who trusted the
+   front matter was reading the wrong tree. The fix was not better prose. It
+   was two facts a program can check, a verdict with a name, and a gate that
+   refuses the next release until they hold (§2.21).
 
 **Where to start debugging:** `python3 bin/fold.py` prints derived state with
 warnings for corrupt lines and orphans. `worklog sync --dry-run` prints
@@ -2818,7 +2892,11 @@ that moves closed history, and the set it consults is the bug surface, §2.23);
 skill must never hash or hand-edit around it); the two bot workflows and
 `associate-pr-checks.sh` (the merge gate's interim trust anchor, to be deleted,
 not extended); and `bin/triggers.py` (a parser other skills read; an event key
-that is present is the authority even when empty).
+that is present is the authority even when empty). New in v0.24.11:
+`bin/doc_verify.py — freshness()` (the gate that decides whether this file may
+ship; scoping it into the `--staged` hook would fail every commit between a
+tag and its doc PR) and the two CI heredocs in `plugin/scripts/init.sh` (the
+commands are a shared contract; `TestAzurePipelinesTemplate` diffs them).
 
 **Never break:** invariants table in §3 — especially trailing newline,
 `ev`-ordering, deterministic ingest, marker idempotency, fold-equality in
@@ -2828,8 +2906,8 @@ compaction, and frozen-doc immutability (use sidecars).
 
 Confirmed facts unless labeled otherwise.
 
-**Merged after the v0.24.10 tag and described by this edition** (HEAD is the
-commit in the front matter; `git log v0.24.10..HEAD`):
+**Shipped in v0.24.11 and described by this edition** (HEAD is the tag
+commit in the front matter; `git log v0.24.10..v0.24.11`):
 
 - **Retention no longer ping-pongs archived items** (P0, §2.23). The
   already-snapshotted check folds the archive; the archive is pruned by item;
@@ -2846,6 +2924,14 @@ commit in the front matter; `git log v0.24.10..HEAD`):
   read-only, the dead bypass actor is gone from the ruleset mirror and the live
   rule, and the ADR supersedes ADR-0010 with the PAT decision and the bridge's
   deletion in a follow-up PR.
+- **The live pair's freshness is a release gate** (§2.21): `doc-verify
+  --strict` reports `STALE` on a live doc whose `git_hash` predates the latest
+  tag or on a tag with no freeze record; the release skill spells out the
+  `Agent` call and does not finish until the doc PR is open.
+- **`worklog init` writes `azure-pipelines.yml` for an Azure DevOps origin**
+  (#413, §2.11): the same two hook-only steps, existing file kept, `uninstall`
+  symmetric, a contract test over the shared commands, and a "CI wiring"
+  section in the user guide with the Actions-to-Pipelines mapping.
 
 **Shipped between the v0.24.3 edition of this document and v0.24.10:**
 
@@ -2875,20 +2961,21 @@ unless noted):**
    exists** (§2.25). Interim hardening shipped; the PAT cut-over (Workstream
    C2) deletes `associate-pr-checks.sh`, the dispatch step, `actions: write`,
    `statuses: write` and the `workflow_run` listener, and adds the supersede
-   step and the branch-prefix loop guard. Blocked on a secret, not on code.
+   step and the branch-prefix loop guard. Blocked on a secret, not on code:
+   the PRs (#437 bot-PR identity, #438 CI-owned sync) are written and wait
+   for it.
 2. **Duplicate tickets have residual causes** (§2.24): a capped or lagging
    listing, or two syncers that both observe absence. `dedupe
    --collapse-agreed` is the backstop; CI-owned sync (Workstream D, #413) is
    the structural answer for the two-syncer case.
-3. **`doc-verify --strict` does not yet check the live pair's freshness.**
-   Workstream F adds two checks: the live pair's `git_hash` must descend from
-   the previous tag, and a freeze record for that tag must exist. This edition
-   and its freeze note are the regeneration that PR carries.
+3. ~~**`doc-verify --strict` does not yet check the live pair's freshness.**~~
+   Shipped in v0.24.11 (§2.21); this edition is the first generated with the
+   gate in force.
 4. **`--strict` for `trace-check` is still not a CI job**, and the count is
    53 gaps at this commit, most on historical work; every release since v0.24.5
    shipped with them reported and accepted. Same sequencing argument as before.
-5. **An Azure Pipelines template from `init.sh`** (Workstream E, #413) and the
-   CI-wiring mapping table are planned, not built.
+5. ~~**An Azure Pipelines template from `init.sh`** (Workstream E, #413)~~
+   Shipped in v0.24.11 with the CI-wiring mapping table (§2.11).
 
 **Shipped between the v0.22.1 edition of this document and v0.24.3:**
 
@@ -3347,17 +3434,18 @@ doctor` still healthy on `main`) was walked without surfacing new drift.
     — see the "New in v0.19.0" list above). Branch protection would close it.
 
 Final check against the code: every flow above was walked at commit
-`21b3ac625ec567ba4b041766e4ee3d2e4746e0f5` (HEAD of the v0.24.10 line, three merges past
-tag `v0.24.10` at `ea73b2d7bdc99a5f0ab77295e04559e8e9dd1e4b`), and every
+`2ebf46afd72dacf9eb74ff87528e6dd74eed99e3`, which is tag `v0.24.11`, and every
 `lines N–M` in this document was derived from the `ast` bounds of the named
-symbol in *that* tree rather than carried forward from the v0.24.3 edition,
-which is the specific defect #294 was filed for. Forty-six citations moved
-between the two editions (`bin/worklog` grew by 281 lines, `sync_dispatch.py` by
-664, `compact.py` by 293); each was re-derived, not shifted. Do not take that
-on trust: run `bin/worklog doc-verify` and this file should report zero
-fabrications and zero drift. Since v0.22.2 `doc_verify._check_one()` judges the
+symbol in *that* tree rather than carried forward from the v0.24.10 edition,
+which is the specific defect #294 was filed for. Between the two editions the
+only `bin/` files that changed were `doc_verify.py` (339 to 421 lines, the
+freshness gate) and the `VERSION` line of `bin/worklog`; the citations into
+`doc_verify.py` that the gate pushed down the file were re-derived, not
+shifted. Do not take that on trust: run `bin/worklog doc-verify --strict` and
+this file should report zero fabrications, zero drift and, since v0.24.11,
+zero `STALE` findings. Since v0.22.2 `doc_verify._check_one()` judges the
 symbol's definition line rather than containment, so a range that merely
 overlaps the function no longer passes. The freeze record for this release is
-the note `docs/designs/2026-09-19_v0.24.10-release.md`, which pins the tag's
-sha and this HEAD; no dated copy of this file was written, per the v0.24.10
-freeze cap.
+the note `docs/designs/2026-09-19_v0.24.11-release.md`, which pins the tag's
+sha, the same sha this file is stamped with; no dated copy of this file was
+written, per the v0.24.10 freeze cap.

@@ -4,11 +4,12 @@ _What shipped, with the frozen evidence for each release. Generated; do not edit
 
 ## v0.24.11 — 2026-09-19
 
+- Design: [[Design-Freeze-2026-09-19_v0.24.11-release]]
 - Roadmap snapshot: [[Roadmap-2026-09-19_v0.24.11-release]]
 
 ## v0.24.10 — 2026-09-19
 
-- Design: [[Code-Walkthrough]]
+- Design: [[Design-Freeze-2026-09-19_v0.24.10-release]]
 - Roadmap snapshot: [[Roadmap-2026-09-02_v0.24.10-release]]
 - Shipped: Faster merge: auto-merge + post-merge CI
 - Shipped: Enable auto-merge and required checks on main
