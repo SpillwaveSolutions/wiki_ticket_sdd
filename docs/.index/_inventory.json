@@ -202,6 +202,7 @@
    ],
    "title": "Native auto-merge once required checks exist",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0010-native-auto-merge-once-required-checks-e",
    "wiki_key": "adr/0010-native-auto-merge-once-required-checks-e"
   },
   {
@@ -1206,6 +1207,7 @@
    "status": "accepted",
    "title": "Compaction archives old closed items; never deletes",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-retention",
    "wiki_key": "plan/2026-08-30-retention"
   },
   {
@@ -1241,6 +1243,7 @@
    "status": "active",
    "title": "Fix the v0.24.10 review findings and close #412 and #413",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Plan-review-v0-24-10-and-open-tickets",
    "wiki_key": "plan/2026-09-19-review-v0-24-10-and-open-tickets"
   },
   {
@@ -1451,11 +1454,11 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-09-19T17:55:17Z",
-   "git_hash": "0c94b21",
+   "generated_at": "2026-09-19T18:00:45Z",
+   "git_hash": "c55bf89",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "db57f0df",
+   "source_hash": "e3db98ea",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
@@ -1948,6 +1951,7 @@
    "supersedes": "roadmap-snapshot/2026-08-27_v0.24.9-release",
    "title": "Roadmap",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-09-02_v0.24.10-release",
    "wiki_key": "roadmap-snapshot/2026-09-02_v0.24.10-release"
   },
   {

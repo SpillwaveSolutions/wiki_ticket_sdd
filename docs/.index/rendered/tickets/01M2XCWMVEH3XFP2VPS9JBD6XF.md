@@ -14,3 +14,7 @@ Open and merge compact and post-merge PRs with a maintainer's fine-grained PAT s
 - [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XK]] sync --report drift is never masked and the local-only comment is suppressed — A real drift finding must reach the PR comment. (open)
 
 Progress: 0/2 done
+
+## Related tickets
+
+- [github #426](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/426)

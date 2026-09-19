@@ -13,3 +13,7 @@ A release fails when a live doc's git_hash does not descend from the previous ta
 - [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XS]] Regenerate the live design docs for v0.24.10 — The wiki still describes published.json. (open)
 
 Progress: 0/1 done
+
+## Related tickets
+
+- [github #430](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/430)

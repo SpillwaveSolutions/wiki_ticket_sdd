@@ -16,3 +16,7 @@ The v0.24.10 change review found a P0 in retention (archived items ping-pong bac
 - [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XV]] #413: Azure Pipelines template from init.sh — init.sh writes azure-pipelines.yml with the same hook-only steps as the installed GitHub workflow when the origin remote is Azure DevOps. (open)
 
 Progress: 1/8 done
+
+## Related tickets
+
+- [github #414](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/414)

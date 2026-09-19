@@ -5,43 +5,51 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### CI wiring docs and the GitHub Actions to Azure Pipelines mapping table
 `01M2XCWMVEH3XFP2VPS9JBD6XX` · status: todo
 - belongs-to: #413: Azure Pipelines template from init.sh
+- references: [github#433](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/433)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### #413: Azure Pipelines template from init.sh
 `01M2XCWMVEH3XFP2VPS9JBD6XV` · status: todo
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- references: [github#432](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/432)
 - contains: CI wiring docs and the GitHub Actions to Azure Pipelines mapping table
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Regenerate the live design docs for v0.24.10
 `01M2XCWMVEH3XFP2VPS9JBD6XS` · status: todo
 - belongs-to: Release gate for design-doc freshness in doc-verify --strict
+- references: [github#431](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/431)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Release gate for design-doc freshness in doc-verify --strict
 `01M2XCWMVEH3XFP2VPS9JBD6XQ` · status: todo
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- references: [github#430](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/430)
 - contains: Regenerate the live design docs for v0.24.10
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### #413: CI as the authoritative syncer behind ticketing.sync_owner: ci
 `01M2XCWMVEH3XFP2VPS9JBD6XN` · status: todo
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- references: [github#429](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/429)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### sync --report drift is never masked and the local-only comment is suppressed
 `01M2XCWMVEH3XFP2VPS9JBD6XK` · status: todo
 - belongs-to: Bot PRs use the WORKLOG_BOT_PAT identity
+- references: [github#428](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/428)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard
 `01M2XCWMVEH3XFP2VPS9JBD6XH` · status: todo
 - belongs-to: Bot PRs use the WORKLOG_BOT_PAT identity
+- references: [github#427](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/427)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Bot PRs use the WORKLOG_BOT_PAT identity
 `01M2XCWMVEH3XFP2VPS9JBD6XF` · status: todo
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- references: [github#426](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/426)
 - contains: Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard
 - contains: sync --report drift is never masked and the local-only comment is suppressed
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
@@ -49,59 +57,70 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 ### Interim merge-gate hardening and ADR-0011
 `01M2XCWMVEH3XFP2VPS9JBD6XD` · status: todo
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- references: [github#425](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/425)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### adapter check says when the clone has no push memory
 `01M2XCWMVEH3XFP2VPS9JBD6XB` · status: todo
 - belongs-to: #412: consult the remote marker map before creating a ticket
+- references: [github#424](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/424)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### sync --explain and report hints
 `01M2XCWMVEH3XFP2VPS9JBD6X9` · status: todo
 - belongs-to: #412: consult the remote marker map before creating a ticket
+- references: [github#423](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/423)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Probe guard when the listing fails and the clone has no push memory
 `01M2XCWMVEH3XFP2VPS9JBD6X7` · status: todo
 - belongs-to: #412: consult the remote marker map before creating a ticket
+- references: [github#422](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/422)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### #412: consult the remote marker map before creating a ticket
 `01M2XCWMVD7KJ01FCNEV1X8237` · status: todo
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- references: [github#421](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/421)
 - contains: Probe guard when the listing fails and the clone has no push memory
 - contains: sync --explain and report hints
 - contains: adapter check says when the clone has no push memory
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Retention tests and doc renumbering
-`01M2XCWMVD7KJ01FCNEV1X8235` · status: todo
+`01M2XCWMVD7KJ01FCNEV1X8235` · status: in_progress
 - belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- references: [github#420](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/420)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Archive-aware duplicate ownership check and untracked-archive guard
-`01M2XCWMVD7KJ01FCNEV1X8233` · status: todo
+`01M2XCWMVD7KJ01FCNEV1X8233` · status: done
 - belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- references: [github#419](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/419)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Tolerate a corrupt archive line and warn on ignored retention config values
-`01M2XCWMVD7KJ01FCNEV1X8231` · status: todo
+`01M2XCWMVD7KJ01FCNEV1X8231` · status: done
 - belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- references: [github#418](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/418)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Parent veto in eviction, live children only
-`01M2XCWMVD7KJ01FCNEV1X822Z` · status: todo
+`01M2XCWMVD7KJ01FCNEV1X822Z` · status: done
 - belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- references: [github#417](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/417)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Cap counts only items present in done.jsonl and unparseable ts never occupies a cap slot
-`01M2XCWMVD7KJ01FCNEV1X822X` · status: todo
+`01M2XCWMVD7KJ01FCNEV1X822X` · status: done
 - belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- references: [github#416](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/416)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Retention: stop re-snapshotting archived items into done.jsonl
 `01M2XCWMVD7KJ01FCNEV1X822V` · status: in_progress
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- references: [github#415](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/415)
 - contains: Cap counts only items present in done.jsonl and unparseable ts never occupies a cap slot
 - contains: Parent veto in eviction, live children only
 - contains: Tolerate a corrupt archive line and warn on ignored retention config values
@@ -116,6 +135,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 
 ### Fix the v0.24.10 review findings and close #412 and #413
 `01M2XCWMV0QYM4ZRBWN1V1327B` · status: todo
+- references: [github#414](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/414)
 - contains: Council review, single edit pass, and plan capture
 - contains: Retention: stop re-snapshotting archived items into done.jsonl
 - contains: #412: consult the remote marker map before creating a ticket

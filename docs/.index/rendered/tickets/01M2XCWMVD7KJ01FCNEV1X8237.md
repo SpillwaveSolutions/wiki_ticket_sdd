@@ -15,3 +15,7 @@ observe_remote already fetches every remote ticket.
 - [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XB]] adapter check says when the clone has no push memory — A fresh clone must not see output that claims it has push memory. (open)
 
 Progress: 0/3 done
+
+## Related tickets
+
+- [github #421](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/421)

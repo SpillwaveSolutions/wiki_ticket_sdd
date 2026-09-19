@@ -13,3 +13,7 @@ init.sh writes azure-pipelines.yml with the same hook-only steps as the installe
 - [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XX]] CI wiring docs and the GitHub Actions to Azure Pipelines mapping table — A user guide section that explains the template, the mapping, and how to wire another forge by hand. (open)
 
 Progress: 0/1 done
+
+## Related tickets
+
+- [github #432](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/432)
