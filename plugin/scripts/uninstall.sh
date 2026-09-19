@@ -79,6 +79,10 @@ PY
   fi
 fi
 
+if [ -f azure-pipelines.yml ] && grep -q "worklog-invariants" azure-pipelines.yml; then
+  rm azure-pipelines.yml
+  removed+=("azure-pipelines.yml")
+fi
 if [ -f .github/workflows/worklog.yml ]; then
   rm .github/workflows/worklog.yml
   removed+=(".github/workflows/worklog.yml")

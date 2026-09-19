@@ -1,6 +1,6 @@
 # #413: Azure Pipelines template from init.sh
 
-`01M2XCWMVEH3XFP2VPS9JBD6XV` · task/feature · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6XV` · task/feature · **done**
 
 init.sh writes azure-pipelines.yml with the same hook-only steps as the installed GitHub workflow when the origin remote is Azure DevOps.
 
@@ -10,9 +10,9 @@ init.sh writes azure-pipelines.yml with the same hook-only steps as the installe
 
 ## Subtasks
 
-- [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XX]] CI wiring docs and the GitHub Actions to Azure Pipelines mapping table — A user guide section that explains the template, the mapping, and how to wire another forge by hand. (open)
+- [[Ticket-01M2XCWMVEH3XFP2VPS9JBD6XX]] CI wiring docs and the GitHub Actions to Azure Pipelines mapping table — A user guide section that explains the template, the mapping, and how to wire another forge by hand. (done)
 
-Progress: 0/1 done
+Progress: 1/1 done
 
 ## Related tickets
 
