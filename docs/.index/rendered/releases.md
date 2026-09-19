@@ -2,8 +2,9 @@
 
 _What shipped, with the frozen evidence for each release. Generated; do not edit._
 
-## v0.24.10 — 2026-09-02
+## v0.24.10 — 2026-09-19
 
+- Design: [[Code-Walkthrough]]
 - Roadmap snapshot: [[Roadmap-2026-09-02_v0.24.10-release]]
 - Shipped: Faster merge: auto-merge + post-merge CI
 - Shipped: Enable auto-merge and required checks on main
