@@ -195,7 +195,8 @@
    "id": 10,
    "slug": "native-auto-merge-once-required-checks-e",
    "source": "docs/adr/0010-native-auto-merge-once-required-checks-e.md",
-   "status": "accepted",
+   "status": "superseded",
+   "superseded_by": 11,
    "tags": [
     "ci",
     "process"
@@ -204,6 +205,28 @@
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/ADR-0010-native-auto-merge-once-required-checks-e",
    "wiki_key": "adr/0010-native-auto-merge-once-required-checks-e"
+  },
+  {
+   "canonical_key": "adr/0011-bot-prs-land-through-the-merge-gate-with",
+   "date": "2026-09-19",
+   "deciders": [
+    "rick",
+    "claude"
+   ],
+   "doc_type": "adr",
+   "git_hash": "7715566a600fa1530fad07660fbf80a43fe8e0ca",
+   "id": 11,
+   "slug": "bot-prs-land-through-the-merge-gate-with",
+   "source": "docs/adr/0011-bot-prs-land-through-the-merge-gate-with.md",
+   "status": "accepted",
+   "supersedes": 10,
+   "tags": [
+    "ci",
+    "process"
+   ],
+   "title": "Bot PRs land through the merge gate with a PAT identity",
+   "truth_state": "current",
+   "wiki_key": "adr/0011-bot-prs-land-through-the-merge-gate-with"
   },
   {
    "aliases": [
@@ -1454,11 +1477,11 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-09-19T18:04:49Z",
-   "git_hash": "efef99b",
+   "generated_at": "2026-09-19T18:18:38Z",
+   "git_hash": "7715566",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "057ef8e1",
+   "source_hash": "2bb82f1a",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",

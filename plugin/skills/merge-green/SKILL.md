@@ -20,9 +20,10 @@ means wait; failing means fix. There is no third option.
 2. Other platforms: same rule via their CLI; prefer native merge-when-green
    (`glab mr merge --when-pipeline-succeeds`, ADO auto-complete).
 3. After a merge: pull the base branch, delete the merged local branch.
-   Roadmap/index regeneration and `worklog sync --report` run in CI on main
-   (`worklog-post-merge`); do not wait on them locally. Ticket-sync on
-   closed items can still run locally if the post-merge report is not enough.
+   Roadmap/index regeneration and `worklog sync --report` run in
+   `worklog-post-merge`, which lands its output through a bot PR (ADR-0011);
+   do not wait on them locally. Ticket-sync on closed items can still run
+   locally if the post-merge report is not enough.
 4. On red gates: report which checks failed and fix them. Never merge with
    `--admin`, never skip a gate, never retry-until-flaky-passes without
    understanding the failure, never squash (ADR-0008).

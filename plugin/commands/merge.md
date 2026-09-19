@@ -18,7 +18,8 @@ the house rule. Never squash (ADR-0008).
    checks, NOT merged · 2 no gh CLI · 3 PR not open · 4 timed out waiting.
 3. On merge: pull the base branch and delete the local feature branch.
    Roadmap/index regeneration and `worklog sync --report` run in
-   `worklog-post-merge` on main — do not wait on them. Run ticket-sync
+   `worklog-post-merge`, which lands its output through a bot PR
+   (ADR-0011); do not wait on them. Run ticket-sync
    locally only if closed items still need a push the report did not cover.
 4. On failure or timeout: report the failing checks; fixing them is the path
    to merging — never `--admin`, never bypass, never `--squash`.

@@ -260,8 +260,10 @@ class TestPostMergeWorkflow(unittest.TestCase):
                 self.assertTrue(rule["parameters"]["strict_required_status_checks_policy"])
         self.assertEqual(methods, ["merge"])
         self.assertEqual(sorted(contexts), ["coverage", "invariants"])
-        actors = {(a["actor_id"], a["actor_type"]) for a in data["bypass_actors"]}
-        self.assertIn((41898282, "User"), actors)
+        # No bypass actor. User 41898282 (github-actions[bot] as a User) never
+        # exempted the Actions installation token (CHANGELOG 0.24.10), and
+        # ADR-0011 lands bot PRs through the gate instead of around it.
+        self.assertEqual(data["bypass_actors"], [])
 
 
 ASSOCIATE = os.path.join(ROOT, "plugin", "scripts", "associate-pr-checks.sh")

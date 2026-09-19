@@ -3,12 +3,13 @@ id: 10
 slug: native-auto-merge-once-required-checks-e
 title: Native auto-merge once required checks exist
 date: 2026-08-30
-status: accepted
+status: superseded
 git_hash: "d5bff2bb7cb341fcf479f6f4d95c256c127a8d16"
 deciders: [rick, grok]
 tags: [ci, process]
 wiki_key: adr/0010-native-auto-merge-once-required-checks-e
 truth_state: current
+superseded_by: 11
 ---
 
 # ADR-0010: Native auto-merge once required checks exist

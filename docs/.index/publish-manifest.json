@@ -1,5 +1,5 @@
 {
- "git_hash": "efef99b",
+ "git_hash": "7715566",
  "pages": [
   {
    "frozen": false,
@@ -15,7 +15,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "8bbaff37e98e",
+   "render_hash": "afa14d32c5e1",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "0ba10028c77d",
+   "render_hash": "6cc0eabffd3d",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4665,7 +4665,7 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMV0QYM4ZRBWN1V1327B",
    "render": "as-is",
-   "render_hash": "772e3f3777a0",
+   "render_hash": "bf379ffc6094",
    "source": "docs/.index/rendered/tickets/01M2XCWMV0QYM4ZRBWN1V1327B.md",
    "title": "Fix the v0.24.10 review findings and close #412 and #413",
    "truth_state": "open",
@@ -4785,10 +4785,10 @@
    "frozen": false,
    "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XD",
    "render": "as-is",
-   "render_hash": "d8b14f2a8963",
+   "render_hash": "1933cfea85e9",
    "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XD.md",
    "title": "Interim merge-gate hardening and ADR-0011",
-   "truth_state": "open",
+   "truth_state": "done",
    "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XD"
   },
   {
@@ -4990,6 +4990,18 @@
    "title": "Native auto-merge once required checks exist",
    "truth_state": "current",
    "wiki_key": "adr/0010-native-auto-merge-once-required-checks-e"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "ADR-0011-bot-prs-land-through-the-merge-gate-with",
+   "render": "doc+banner",
+   "render_hash": "fc37a2fad10d",
+   "source": "docs/adr/0011-bot-prs-land-through-the-merge-gate-with.md",
+   "source_hash": "580fea0cf55f",
+   "title": "Bot PRs land through the merge gate with a PAT identity",
+   "truth_state": "current",
+   "wiki_key": "adr/0011-bot-prs-land-through-the-merge-gate-with"
   },
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
@@ -5724,13 +5736,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T18:04:49Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T18:18:38Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "bf68272d01f6",
+   "render_hash": "d1d812c5bc40",
    "source": "docs/roadmap.md",
-   "source_hash": "6f87b415afe3",
+   "source_hash": "c016465a3ba4",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -6217,7 +6229,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "879c66654f5e",
+  "render_hash": "dc5f35088f1d",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

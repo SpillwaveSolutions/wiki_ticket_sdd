@@ -1,4 +1,11 @@
 name: worklog-invariants
+# Read-only on purpose: the merge gate's required checks are commit
+# statuses named `invariants` and `coverage`, and a status with that
+# context from any actor with `statuses: write` satisfies the ruleset
+# (`integration_id` pinning is refused, CHANGELOG 0.24.10). Nothing here
+# posts anything, so nothing here may inherit the repo-default write.
+permissions:
+  contents: read
 on:
   push:
   pull_request:

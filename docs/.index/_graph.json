@@ -5422,6 +5422,12 @@
    "title": "Native auto-merge once required checks exist",
    "truth_state": "current"
   },
+  "adr/0011-bot-prs-land-through-the-merge-gate-with": {
+   "doc_type": "adr",
+   "source": "docs/adr/0011-bot-prs-land-through-the-merge-gate-with.md",
+   "title": "Bot PRs land through the merge gate with a PAT identity",
+   "truth_state": "current"
+  },
   "cli-reference": {
    "doc_type": "guide",
    "source": "docs/user_guide/cli-reference.md",
@@ -7642,7 +7648,7 @@
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XD": {
    "doc_type": "item",
-   "status": "todo",
+   "status": "done",
    "title": "Interim merge-gate hardening and ADR-0011"
   },
   "item/01M2XCWMVEH3XFP2VPS9JBD6XF": {

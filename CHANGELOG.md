@@ -2,6 +2,8 @@
 
 ## 0.24.11 — unreleased
 
+- **Merge gate: read-only invariants workflow, no bypass actor, ADR-0011.** `worklog-invariants` now declares `permissions: contents: read`; it inherited repo-default write, and a commit status named `invariants` or `coverage` from any actor with `statuses: write` satisfies the ruleset (`integration_id` pinning is refused). The dead `User 41898282` bypass actor leaves `merge-when-green-ruleset.json` and the live ruleset. ADR-0011 supersedes ADR-0010, which still claimed Actions pushes derived files straight to `main`: bot PRs will use a maintainer PAT so `pull_request` checks run natively, and the status bridge is deleted in the follow-up PR.
+
 - **Retention no longer ping-pongs archived items.** The "already snapshotted" check folded `done.jsonl` alone, so every archived item looked changed on any active night, got a fresh snapshot back in `done.jsonl`, and was re-archived a period later next to its old line (v0.24.10 review P0; first evictions were due 2026-10-17). The check now folds `done.jsonl + archive.jsonl`; the archive is pruned of reopened items, items refreshed into `done.jsonl`, and older duplicate snapshots (newest `ev` wins). The FIFO cap counts only items with lines in `done.jsonl`, an unparseable `ts` takes no cap slot, a parent is not archived while a child is still in `done.jsonl` or open, a garbage line in `archive.jsonl` is dropped with a warning instead of crashing the nightly job, and ignored `retention:` values warn. `merge-check` folds the archive so an archived owner still blocks a duplicate link; an untracked `archive.jsonl` now counts as dirty. Spec §7 renumbered: evict is step 7, verify steps 8 and 9.
 
 ## 0.24.10 — 2026-09-02
