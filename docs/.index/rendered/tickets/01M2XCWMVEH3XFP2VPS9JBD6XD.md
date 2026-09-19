@@ -1,6 +1,6 @@
 # Interim merge-gate hardening and ADR-0011
 
-`01M2XCWMVEH3XFP2VPS9JBD6XD` · task/bug · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6XD` · task/bug · **done**
 
 Read-only permissions in worklog.yml, remove the dead bypass actor from the ruleset and apply the ruleset live with gh api, and write ADR-0011 that supersedes ADR-0010 with the PR-landing path and the PAT decision.
 

@@ -14,6 +14,7 @@
 - [[ADR-0008-document-provenance-depends-on-merge-com]]
 - [[ADR-0009-a-frozen-document-s-fabricated-citations]]
 - [[ADR-0010-native-auto-merge-once-required-checks-e]]
+- [[ADR-0011-bot-prs-land-through-the-merge-gate-with]]
 
 ### History
 

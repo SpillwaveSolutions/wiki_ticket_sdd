@@ -55,7 +55,7 @@ _The evidence chain: plan → item → ticket → code → release, forward and 
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
 
 ### Interim merge-gate hardening and ADR-0011
-`01M2XCWMVEH3XFP2VPS9JBD6XD` · status: todo
+`01M2XCWMVEH3XFP2VPS9JBD6XD` · status: done
 - belongs-to: Fix the v0.24.10 review findings and close #412 and #413
 - references: [github#425](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/425)
 - produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
