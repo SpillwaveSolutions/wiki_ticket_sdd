@@ -2,7 +2,7 @@
 wiki_key: roadmap
 doc_type: roadmap
 truth_state: current
-source_hash: c9a97d1f
+source_hash: 43c4da20
 generated_at: 2026-09-19T18:25:18Z
 git_hash: "2ec4560"
 ---
@@ -14,7 +14,7 @@ git_hash: "2ec4560"
 
 # Roadmap
 
-_1 epic(s) in flight, 9 open item(s), 0 blocked, 0 unclassified._
+_1 epic(s) in flight, 5 open item(s), 0 blocked, 0 unclassified._
 
 ## Now
 
@@ -22,15 +22,11 @@ _Nothing here._
 
 ## Next
 
-### Fix the v0.24.10 review findings and close #412 and #413  ·  P1  ·  11 of 20 done  ·  feature 8 / bug 12
+### Fix the v0.24.10 review findings and close #412 and #413  ·  P1  ·  15 of 20 done  ·  feature 8 / bug 12
 The v0.24.10 change review found a P0 in retention (archived items ping-pong back into done.jsonl), a merge gate that trusts commit statuses from any actor, and seven releases without regenerated design docs. Issues #412 and #413 add duplicate ticket creation on fresh clones and a request for CI-owned sync with Azure Pipelines support. This epic fixes all of it in one PR per workstream: retention, marker probe, gate hardening, PAT identity for bot PRs, CI sync, release gate, and an Azure template.
 
 | # | Item | Type | Priority | Status | Blocked by |
 |---|---|---|---|---|---|
-| [421](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/421) | #412: consult the remote marker map before creating a ticket | task | P1 | todo | — |
-| [422](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/422) | Probe guard when the listing fails and the clone has no push memory | subtask | P2 | todo | — |
-| [423](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/423) | sync --explain and report hints | subtask | P2 | todo | — |
-| [424](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/424) | adapter check says when the clone has no push memory | subtask | P2 | todo | — |
 | [429](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/429) | #413: CI as the authoritative syncer behind ticketing.sync_owner: ci | task | P2 | todo | — |
 | [430](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/430) | Release gate for design-doc freshness in doc-verify --strict | task | P2 | todo | — |
 | [431](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/431) | Regenerate the live design docs for v0.24.10 | subtask | P2 | todo | — |
@@ -48,26 +44,18 @@ _Nothing here._
 ```mermaid
 graph TD
     01M2XCWMV0QYM4ZRBWN1V1327B["📦 Fix the v0.24.10 review findin"]
-    01M2XCWMVD7KJ01FCNEV1X8237["🐛 412 consult the remote marker"]
-    01M2XCWMVEH3XFP2VPS9JBD6X7["🐛 Probe guard when the listing f"]
-    01M2XCWMVEH3XFP2VPS9JBD6X9["🐛 sync --explain and report hint"]
-    01M2XCWMVEH3XFP2VPS9JBD6XB["🐛 adapter check says when the cl"]
     01M2XCWMVEH3XFP2VPS9JBD6XN["📦 413 CI as the authoritative sy"]
     01M2XCWMVEH3XFP2VPS9JBD6XQ["🐛 Release gate for design-doc fr"]
     01M2XCWMVEH3XFP2VPS9JBD6XS["📦 Regenerate the live design doc"]
     01M2XCWMVEH3XFP2VPS9JBD6XV["📦 413 Azure Pipelines template f"]
     01M2XCWMVEH3XFP2VPS9JBD6XX["📦 CI wiring docs and the GitHub"]
-    01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVD7KJ01FCNEV1X8237
-    01M2XCWMVD7KJ01FCNEV1X8237 --> 01M2XCWMVEH3XFP2VPS9JBD6X7
-    01M2XCWMVD7KJ01FCNEV1X8237 --> 01M2XCWMVEH3XFP2VPS9JBD6X9
-    01M2XCWMVD7KJ01FCNEV1X8237 --> 01M2XCWMVEH3XFP2VPS9JBD6XB
     01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVEH3XFP2VPS9JBD6XN
     01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVEH3XFP2VPS9JBD6XQ
     01M2XCWMVEH3XFP2VPS9JBD6XQ --> 01M2XCWMVEH3XFP2VPS9JBD6XS
     01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVEH3XFP2VPS9JBD6XV
     01M2XCWMVEH3XFP2VPS9JBD6XV --> 01M2XCWMVEH3XFP2VPS9JBD6XX
     classDef todo fill:#f4f4f4,stroke:#999999
-    class 01M2XCWMV0QYM4ZRBWN1V1327B,01M2XCWMVD7KJ01FCNEV1X8237,01M2XCWMVEH3XFP2VPS9JBD6X7,01M2XCWMVEH3XFP2VPS9JBD6X9,01M2XCWMVEH3XFP2VPS9JBD6XB,01M2XCWMVEH3XFP2VPS9JBD6XN,01M2XCWMVEH3XFP2VPS9JBD6XQ,01M2XCWMVEH3XFP2VPS9JBD6XS,01M2XCWMVEH3XFP2VPS9JBD6XV,01M2XCWMVEH3XFP2VPS9JBD6XX todo
+    class 01M2XCWMV0QYM4ZRBWN1V1327B,01M2XCWMVEH3XFP2VPS9JBD6XN,01M2XCWMVEH3XFP2VPS9JBD6XQ,01M2XCWMVEH3XFP2VPS9JBD6XS,01M2XCWMVEH3XFP2VPS9JBD6XV,01M2XCWMVEH3XFP2VPS9JBD6XX todo
 ```
 
 ### Hierarchy
@@ -75,19 +63,11 @@ graph TD
 ```mermaid
 graph TD
     01M2XCWMV0QYM4ZRBWN1V1327B["📦 Fix the v0.24.10 review findin"]
-    01M2XCWMVD7KJ01FCNEV1X8237["🐛 412 consult the remote marker"]
-    01M2XCWMVEH3XFP2VPS9JBD6X7["🐛 Probe guard when the listing f"]
-    01M2XCWMVEH3XFP2VPS9JBD6X9["🐛 sync --explain and report hint"]
-    01M2XCWMVEH3XFP2VPS9JBD6XB["🐛 adapter check says when the cl"]
     01M2XCWMVEH3XFP2VPS9JBD6XN["📦 413 CI as the authoritative sy"]
     01M2XCWMVEH3XFP2VPS9JBD6XQ["🐛 Release gate for design-doc fr"]
     01M2XCWMVEH3XFP2VPS9JBD6XS["📦 Regenerate the live design doc"]
     01M2XCWMVEH3XFP2VPS9JBD6XV["📦 413 Azure Pipelines template f"]
     01M2XCWMVEH3XFP2VPS9JBD6XX["📦 CI wiring docs and the GitHub"]
-    01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVD7KJ01FCNEV1X8237
-    01M2XCWMVD7KJ01FCNEV1X8237 --> 01M2XCWMVEH3XFP2VPS9JBD6X7
-    01M2XCWMVD7KJ01FCNEV1X8237 --> 01M2XCWMVEH3XFP2VPS9JBD6X9
-    01M2XCWMVD7KJ01FCNEV1X8237 --> 01M2XCWMVEH3XFP2VPS9JBD6XB
     01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVEH3XFP2VPS9JBD6XN
     01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVEH3XFP2VPS9JBD6XQ
     01M2XCWMVEH3XFP2VPS9JBD6XQ --> 01M2XCWMVEH3XFP2VPS9JBD6XS
