@@ -2,7 +2,7 @@
 wiki_key: roadmap
 doc_type: roadmap
 truth_state: current
-source_hash: 0bf5b60c
+source_hash: 17f815d9
 generated_at: 2026-09-19T20:21:59Z
 git_hash: "663ea10"
 ---
@@ -14,7 +14,7 @@ git_hash: "663ea10"
 
 # Roadmap
 
-_1 epic(s) in flight, 4 open item(s), 0 blocked, 0 unclassified._
+_1 epic(s) in flight, 1 open item(s), 0 blocked, 0 unclassified._
 
 ## Now
 
@@ -22,14 +22,11 @@ _Nothing here._
 
 ## Next
 
-### Fix the v0.24.10 review findings and close #412 and #413  ·  P1  ·  17 of 21 done  ·  feature 8 / bug 13
+### Fix the v0.24.10 review findings and close #412 and #413  ·  P1  ·  20 of 21 done  ·  feature 8 / bug 13
 The v0.24.10 change review found a P0 in retention (archived items ping-pong back into done.jsonl), a merge gate that trusts commit statuses from any actor, and seven releases without regenerated design docs. Issues #412 and #413 add duplicate ticket creation on fresh clones and a request for CI-owned sync with Azure Pipelines support. This epic fixes all of it in one PR per workstream: retention, marker probe, gate hardening, PAT identity for bot PRs, CI sync, release gate, and an Azure template.
 
 | # | Item | Type | Priority | Status | Blocked by |
 |---|---|---|---|---|---|
-| [426](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/426) | Bot PRs use the WORKLOG_BOT_PAT identity | task | P1 | todo | — |
-| [427](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/427) | Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard | subtask | P2 | todo | — |
-| [428](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/428) | sync --report drift is never masked and the local-only comment is suppressed | subtask | P2 | todo | — |
 | [429](https://github.com/SpillwaveSolutions/wiki_ticket_sdd/issues/429) | #413: CI as the authoritative syncer behind ticketing.sync_owner: ci | task | P2 | todo | — |
 
 ## Later
@@ -43,16 +40,10 @@ _Nothing here._
 ```mermaid
 graph TD
     01M2XCWMV0QYM4ZRBWN1V1327B["📦 Fix the v0.24.10 review findin"]
-    01M2XCWMVEH3XFP2VPS9JBD6XF["📦 Bot PRs use the WORKLOG_BOT_PA"]
-    01M2XCWMVEH3XFP2VPS9JBD6XH["📦 Pipeline hygiene supersede ope"]
-    01M2XCWMVEH3XFP2VPS9JBD6XK["📦 sync --report drift is never m"]
     01M2XCWMVEH3XFP2VPS9JBD6XN["📦 413 CI as the authoritative sy"]
-    01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVEH3XFP2VPS9JBD6XF
-    01M2XCWMVEH3XFP2VPS9JBD6XF --> 01M2XCWMVEH3XFP2VPS9JBD6XH
-    01M2XCWMVEH3XFP2VPS9JBD6XF --> 01M2XCWMVEH3XFP2VPS9JBD6XK
     01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVEH3XFP2VPS9JBD6XN
     classDef todo fill:#f4f4f4,stroke:#999999
-    class 01M2XCWMV0QYM4ZRBWN1V1327B,01M2XCWMVEH3XFP2VPS9JBD6XF,01M2XCWMVEH3XFP2VPS9JBD6XH,01M2XCWMVEH3XFP2VPS9JBD6XK,01M2XCWMVEH3XFP2VPS9JBD6XN todo
+    class 01M2XCWMV0QYM4ZRBWN1V1327B,01M2XCWMVEH3XFP2VPS9JBD6XN todo
 ```
 
 ### Hierarchy
@@ -60,12 +51,6 @@ graph TD
 ```mermaid
 graph TD
     01M2XCWMV0QYM4ZRBWN1V1327B["📦 Fix the v0.24.10 review findin"]
-    01M2XCWMVEH3XFP2VPS9JBD6XF["📦 Bot PRs use the WORKLOG_BOT_PA"]
-    01M2XCWMVEH3XFP2VPS9JBD6XH["📦 Pipeline hygiene supersede ope"]
-    01M2XCWMVEH3XFP2VPS9JBD6XK["📦 sync --report drift is never m"]
     01M2XCWMVEH3XFP2VPS9JBD6XN["📦 413 CI as the authoritative sy"]
-    01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVEH3XFP2VPS9JBD6XF
-    01M2XCWMVEH3XFP2VPS9JBD6XF --> 01M2XCWMVEH3XFP2VPS9JBD6XH
-    01M2XCWMVEH3XFP2VPS9JBD6XF --> 01M2XCWMVEH3XFP2VPS9JBD6XK
     01M2XCWMV0QYM4ZRBWN1V1327B --> 01M2XCWMVEH3XFP2VPS9JBD6XN
 ```

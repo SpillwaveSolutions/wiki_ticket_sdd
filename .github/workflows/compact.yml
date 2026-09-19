@@ -1,27 +1,46 @@
 name: worklog-compact
 # WORKLOG-SPEC section 7: compaction runs in CI, on main, in its own commit.
-# That commit cannot be a GITHUB_TOKEN push to main: the merge-when-green
-# ruleset requires a pull request, User 41898282 does not exempt the
-# Actions installation token, and Integration 15368 is 422. So this job
-# opens a PR and arms auto-merge (ADR-0010). Never squash (ADR-0008).
+# Main is pull-only for everyone, bots included (ADR-0011). This job opens
+# a PR with a maintainer PAT so pull_request checks run natively, and arms
+# auto-merge. Never squash (ADR-0008).
 
 on:
   schedule:
     - cron: '17 7 * * *'
   workflow_dispatch:
 
+# Every bot PR regenerates from main and supersedes the last one, so two
+# runs never need to coordinate beyond "close the older PR first".
 permissions:
-  contents: write
-  pull-requests: write
-  actions: write
-  statuses: write
+  contents: read
 
 jobs:
   compact:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.WORKLOG_BOT_PAT }}
     steps:
+      # Fail loudly, never fall back: a missing PAT must not turn into a
+      # GITHUB_TOKEN PR that sits action_required forever (#403).
+      - name: require WORKLOG_BOT_PAT
+        run: test -n "$GH_TOKEN" || { echo "WORKLOG_BOT_PAT secret missing (ADR-0011)"; exit 1; }
+
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.WORKLOG_BOT_PAT }}
+          fetch-depth: 0
+
+      # Supersede, do not rebase. The ruleset requires branches up to date,
+      # GitHub never updates a bot branch, and a bot PR armed for auto-merge
+      # outlives this job. Whatever is still open is stale the moment
+      # anything else merges; this run regenerates from main and replaces it.
+      - name: close superseded bot PRs
+        run: |
+          for n in $(gh pr list --state open --json number,headRefName \
+                     --jq '.[] | select(.headRefName | startswith("chore/compact-") or startswith("chore/post-merge-")) | .number'); do
+            gh pr close "$n" --delete-branch --comment "superseded by worklog-compact run ${GITHUB_RUN_ID}" || true
+          done
 
       - name: compact
         run: python3 bin/compact.py
@@ -41,44 +60,42 @@ jobs:
           bin/worklog ia-manifest
 
       # Fail here before opening a PR that is already red. The PR still
-      # pays invariants + coverage (required checks). worklog-invariants
-      # also listens on workflow_run of this job (#361).
+      # pays invariants + coverage (required checks) on its own
+      # pull_request run.
       - name: verify working tree
         run: |
           python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
           for t in tests/test_*.py; do python3 "$t" >/dev/null || { echo "FAILED: $t"; python3 "$t"; exit 1; }; done
 
       - name: commit via PR
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           if [ -z "$(git status --porcelain .work docs)" ]; then
             echo "nothing to compact"
             exit 0
           fi
-          wm=$(python3 -c "import json; print([e.get('through') for e in map(json.loads, open('.work/todo.jsonl')) if e.get('op') == 'compact'][-1])")
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # An eviction-only night leaves todo.jsonl untouched, so its
+          # compact line (and the watermark) is unchanged: name the run
+          # by what it did instead of repeating last night's watermark.
+          if git diff --quiet -- .work/todo.jsonl; then
+            title="chore(worklog): compact: evict to archive"
+          else
+            wm=$(python3 -c "import json; print([e.get('through') for e in map(json.loads, open('.work/todo.jsonl')) if e.get('op') == 'compact'][-1])")
+            title="chore(worklog): compact through $wm"
+          fi
+          git config user.name "worklog-bot"
+          git config user.email "worklog-bot@users.noreply.github.com"
           branch="chore/compact-${GITHUB_RUN_ID}"
           git checkout -b "$branch"
           git add .work/todo.jsonl .work/done.jsonl docs
           # archive.jsonl exists only after the first eviction. Unguarded
           # `git add` of a missing path is fatal (Sep 1 run 33482394234).
-          [ -f .work/archive.jsonl ] && git add .work/archive.jsonl
+          if [ -f .work/archive.jsonl ]; then
+            git add .work/archive.jsonl
+          fi
           WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
-          git commit -m "chore(worklog): compact through $wm"
+          git commit -m "$title"
           git push -u origin HEAD
           gh pr create --head "$branch" --base main \
-            --title "chore(worklog): compact through $wm" \
-            --body "Nightly compaction. Auto-merge when green (ADR-0010). Never squash (ADR-0008)."
-          # GITHUB_TOKEN pull_request runs sit action_required
-          # (github-actions[bot] treated as a first-time contributor; #403, #408).
-          # workflow_dispatch is the event GitHub does fire for GITHUB_TOKEN
-          # (#361), but those check-runs do not appear on the PR
-          # (statusCheckRollup empty, BLOCKED on #408). Commit statuses
-          # named invariants and coverage do satisfy the ruleset
-          # (#408 merged that way). associate-pr-checks.sh waits for
-          # dispatch, then posts those statuses.
-          gh workflow run worklog-invariants --ref "$branch"
-          plugin/scripts/associate-pr-checks.sh "$(git rev-parse HEAD)"
-          gh pr merge --auto --merge
+            --title "$title" \
+            --body "Nightly compaction. Auto-merge when green (ADR-0011). Never squash (ADR-0008)."
+          gh pr merge --auto --merge --delete-branch

@@ -5,14 +5,9 @@ name: worklog-post-merge
 # advisory (spec §12). The action list is `.work/config.yml` →
 # `worklog triggers pr-merge`, not this file.
 #
-# GITHUB_TOKEN cannot bypass the merge-when-green ruleset (User 41898282
-# does not exempt the Actions installation token; Integration 15368 is
-# 422). So this job never git-pushes main. It opens a PR and arms
-# auto-merge (ADR-0010). Never squash (ADR-0008).
-#
-# A push made with the default GITHUB_TOKEN does not trigger sibling
-# `push` workflows. worklog-invariants listens on workflow_run of this
-# job for the same reason it listens on worklog-compact (#361).
+# Main is pull-only for everyone, bots included (ADR-0011). This job never
+# git-pushes main: it opens a PR with a maintainer PAT so pull_request
+# checks run natively, and arms auto-merge. Never squash (ADR-0008).
 
 on:
   pull_request:
@@ -23,20 +18,40 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write
-  pull-requests: write
-  actions: write
-  statuses: write
+  contents: read
 
 jobs:
   post-merge:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    # Bot PRs are excluded by branch prefix. With a real identity a merged
+    # bot PR fires this event too, so the guard is required, not
+    # accidental. The deeper terminator is that rendering from the log's
+    # `git` field is idempotent: a second run over the same main is a no-op
+    # and opens no PR.
+    if: >-
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'main' &&
+      !startsWith(github.event.pull_request.head.ref, 'chore/compact-') &&
+      !startsWith(github.event.pull_request.head.ref, 'chore/post-merge-')
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.WORKLOG_BOT_PAT }}
     steps:
+      - name: require WORKLOG_BOT_PAT
+        run: test -n "$GH_TOKEN" || { echo "WORKLOG_BOT_PAT secret missing (ADR-0011)"; exit 1; }
+
       - uses: actions/checkout@v4
         with:
+          token: ${{ secrets.WORKLOG_BOT_PAT }}
           fetch-depth: 0
           ref: main
+
+      # Supersede, do not rebase (see compact.yml).
+      - name: close superseded bot PRs
+        run: |
+          for n in $(gh pr list --state open --json number,headRefName \
+                     --jq '.[] | select(.headRefName | startswith("chore/compact-") or startswith("chore/post-merge-")) | .number'); do
+            gh pr close "$n" --delete-branch --comment "superseded by worklog-post-merge run ${GITHUB_RUN_ID}" || true
+          done
 
       - name: resolve triggers.pr-merge
         run: python3 bin/worklog triggers pr-merge | tee /tmp/pr-merge-triggers.json
@@ -48,13 +63,18 @@ jobs:
           bin/worklog ia-inventory
           bin/worklog ia-manifest
 
+      # A real drift finding exits 1; capture it anyway and post it. A repo
+      # with no adapter prints the local-only line, which is a mode, not
+      # news: no comment then.
       - name: sync drift report
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           python3 -c 'import json,sys; a=json.load(open("/tmp/pr-merge-triggers.json"))["actions"]; sys.exit(0 if any(x=="ticket-sync" or x.startswith("ticket-sync:") for x in a) else 1)' || exit 0
-          bin/worklog sync --report | tee /tmp/sync-report.txt
+          bin/worklog sync --report > /tmp/sync-report.txt 2>&1 || true
+          cat /tmp/sync-report.txt
+          if grep -qi "no adapter configured\|LOCAL_ONLY\|local-only" /tmp/sync-report.txt; then
+            echo "no adapter configured; skipping the PR comment"
+            exit 0
+          fi
           {
             echo "## post-merge sync --report"
             echo
@@ -65,15 +85,13 @@ jobs:
           gh pr comment "${{ github.event.pull_request.number }}" --body-file /tmp/sync-comment.md || true
 
       - name: commit via PR
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           if [ -z "$(git status --porcelain docs)" ]; then
             echo "no derived-doc changes"
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "worklog-bot"
+          git config user.email "worklog-bot@users.noreply.github.com"
           branch="chore/post-merge-${{ github.event.pull_request.number }}-${GITHUB_RUN_ID}"
           git checkout -b "$branch"
           git add docs
@@ -83,7 +101,5 @@ jobs:
           git push -u origin HEAD
           gh pr create --head "$branch" --base main \
             --title "chore(worklog): post-merge regenerate derived docs (#${{ github.event.pull_request.number }})" \
-            --body "Post-merge derived-doc regenerate for #${{ github.event.pull_request.number }}. Auto-merge when green (ADR-0010). Never squash (ADR-0008)."
-          gh workflow run worklog-invariants --ref "$branch"
-          plugin/scripts/associate-pr-checks.sh "$(git rev-parse HEAD)"
-          gh pr merge --auto --merge
+            --body "Post-merge derived-doc regenerate for #${{ github.event.pull_request.number }}. Auto-merge when green (ADR-0011). Never squash (ADR-0008)."
+          gh pr merge --auto --merge --delete-branch

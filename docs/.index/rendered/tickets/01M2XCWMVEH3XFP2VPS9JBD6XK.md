@@ -1,6 +1,6 @@
 # sync --report drift is never masked and the local-only comment is suppressed
 
-`01M2XCWMVEH3XFP2VPS9JBD6XK` · subtask/feature · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6XK` · subtask/feature · **done**
 
 A real drift finding must reach the PR comment.
 

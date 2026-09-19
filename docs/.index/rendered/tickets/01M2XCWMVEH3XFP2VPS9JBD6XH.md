@@ -1,6 +1,6 @@
 # Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard
 
-`01M2XCWMVEH3XFP2VPS9JBD6XH` · subtask/feature · **open**
+`01M2XCWMVEH3XFP2VPS9JBD6XH` · subtask/feature · **done**
 
 Each bot job closes the previous open bot PR before regenerating from main, so a stale PR never blocks under the strict checks policy.
 
