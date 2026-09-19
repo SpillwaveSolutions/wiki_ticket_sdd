@@ -1,11 +1,11 @@
 {
- "git_hash": "ea73b2d",
+ "git_hash": "0c94b21",
  "pages": [
   {
    "frozen": false,
    "page_name": "Home",
    "render": "as-is",
-   "render_hash": "9d2728c1302a",
+   "render_hash": "8c2d9dc40865",
    "source": "docs/.index/rendered/home.md",
    "title": "Home",
    "truth_state": "current",
@@ -15,7 +15,7 @@
    "frozen": false,
    "page_name": "Index-Decisions",
    "render": "as-is",
-   "render_hash": "76893e4f4c2b",
+   "render_hash": "8bbaff37e98e",
    "source": "docs/.index/rendered/decisions.md",
    "title": "Decisions Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "b73a0f3c7fdc",
+   "render_hash": "659aa9217f1a",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -4662,6 +4662,216 @@
    "wiki_key": "item/01M1FX9JR00XVYMRC6ZB3RDT7W"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMV0QYM4ZRBWN1V1327B",
+   "render": "as-is",
+   "render_hash": "c752798e88c3",
+   "source": "docs/.index/rendered/tickets/01M2XCWMV0QYM4ZRBWN1V1327B.md",
+   "title": "Fix the v0.24.10 review findings and close #412 and #413",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMV0QYM4ZRBWN1V1327B"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVD7KJ01FCNEV1X822S",
+   "render": "as-is",
+   "render_hash": "ddfef9ebc9f6",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVD7KJ01FCNEV1X822S.md",
+   "title": "Council review, single edit pass, and plan capture",
+   "truth_state": "done",
+   "wiki_key": "item/01M2XCWMVD7KJ01FCNEV1X822S"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVD7KJ01FCNEV1X822V",
+   "render": "as-is",
+   "render_hash": "7b5a6fa55351",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVD7KJ01FCNEV1X822V.md",
+   "title": "Retention: stop re-snapshotting archived items into done.jsonl",
+   "truth_state": "in-progress",
+   "wiki_key": "item/01M2XCWMVD7KJ01FCNEV1X822V"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVD7KJ01FCNEV1X822X",
+   "render": "as-is",
+   "render_hash": "e615c03e344c",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVD7KJ01FCNEV1X822X.md",
+   "title": "Cap counts only items present in done.jsonl and unparseable ts never occupies a cap slot",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVD7KJ01FCNEV1X822X"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVD7KJ01FCNEV1X822Z",
+   "render": "as-is",
+   "render_hash": "1df1228b89ce",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVD7KJ01FCNEV1X822Z.md",
+   "title": "Parent veto in eviction, live children only",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVD7KJ01FCNEV1X822Z"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVD7KJ01FCNEV1X8231",
+   "render": "as-is",
+   "render_hash": "24ba9774c226",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVD7KJ01FCNEV1X8231.md",
+   "title": "Tolerate a corrupt archive line and warn on ignored retention config values",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVD7KJ01FCNEV1X8231"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVD7KJ01FCNEV1X8233",
+   "render": "as-is",
+   "render_hash": "e6d39309204d",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVD7KJ01FCNEV1X8233.md",
+   "title": "Archive-aware duplicate ownership check and untracked-archive guard",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVD7KJ01FCNEV1X8233"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVD7KJ01FCNEV1X8235",
+   "render": "as-is",
+   "render_hash": "54b868248473",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVD7KJ01FCNEV1X8235.md",
+   "title": "Retention tests and doc renumbering",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVD7KJ01FCNEV1X8235"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVD7KJ01FCNEV1X8237",
+   "render": "as-is",
+   "render_hash": "9d02d7483c50",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVD7KJ01FCNEV1X8237.md",
+   "title": "#412: consult the remote marker map before creating a ticket",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVD7KJ01FCNEV1X8237"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6X7",
+   "render": "as-is",
+   "render_hash": "edf054c4a65f",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6X7.md",
+   "title": "Probe guard when the listing fails and the clone has no push memory",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6X7"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6X9",
+   "render": "as-is",
+   "render_hash": "db96d6349ae8",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6X9.md",
+   "title": "sync --explain and report hints",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6X9"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XB",
+   "render": "as-is",
+   "render_hash": "7e2d65020b31",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XB.md",
+   "title": "adapter check says when the clone has no push memory",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XB"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XD",
+   "render": "as-is",
+   "render_hash": "dd01aa6e932b",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XD.md",
+   "title": "Interim merge-gate hardening and ADR-0011",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XD"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XF",
+   "render": "as-is",
+   "render_hash": "8ae83a6d4925",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XF.md",
+   "title": "Bot PRs use the WORKLOG_BOT_PAT identity",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XF"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XH",
+   "render": "as-is",
+   "render_hash": "8014ddb50223",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XH.md",
+   "title": "Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XH"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XK",
+   "render": "as-is",
+   "render_hash": "726dd0dab34c",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XK.md",
+   "title": "sync --report drift is never masked and the local-only comment is suppressed",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XK"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XN",
+   "render": "as-is",
+   "render_hash": "52e59c56f4f6",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XN.md",
+   "title": "#413: CI as the authoritative syncer behind ticketing.sync_owner: ci",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XN"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XQ",
+   "render": "as-is",
+   "render_hash": "11d7af587288",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XQ.md",
+   "title": "Release gate for design-doc freshness in doc-verify --strict",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XQ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XS",
+   "render": "as-is",
+   "render_hash": "b353bf059492",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XS.md",
+   "title": "Regenerate the live design docs for v0.24.10",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XS"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XV",
+   "render": "as-is",
+   "render_hash": "7d6f2ed09d82",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XV.md",
+   "title": "#413: Azure Pipelines template from init.sh",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XV"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01M2XCWMVEH3XFP2VPS9JBD6XX",
+   "render": "as-is",
+   "render_hash": "546cc7f771b9",
+   "source": "docs/.index/rendered/tickets/01M2XCWMVEH3XFP2VPS9JBD6XX.md",
+   "title": "CI wiring docs and the GitHub Actions to Azure Pipelines mapping table",
+   "truth_state": "open",
+   "wiki_key": "item/01M2XCWMVEH3XFP2VPS9JBD6XX"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -5394,6 +5604,18 @@
    "wiki_key": "plan/2026-08-30-retention"
   },
   {
+   "banner": "> **Current** \u2014 plan in flight; plans are frozen once written, a changed design gets a new plan.",
+   "frozen": true,
+   "page_name": "Plan-review-v0-24-10-and-open-tickets",
+   "render": "doc+banner",
+   "render_hash": "0c0c461d7802",
+   "source": "docs/plans/2026-09-19-review-v0-24-10-and-open-tickets.md",
+   "source_hash": "16eaeea4b317",
+   "title": "Fix the v0.24.10 review findings and close #412 and #413",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-09-19-review-v0-24-10-and-open-tickets"
+  },
+  {
    "banner": "> **Current** \u2014 completed plan; plans are frozen once written, a changed design gets a new plan.",
    "frozen": true,
    "page_name": "Plan-design-docs-release-sync",
@@ -5502,13 +5724,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-02T07:30:43Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T17:55:17Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "a645f9face16",
+   "render_hash": "d105a64677d3",
    "source": "docs/roadmap.md",
-   "source_hash": "65538697716e",
+   "source_hash": "1d245287c2bc",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -5995,7 +6217,7 @@
   }
  ],
  "sidebar": {
-  "render_hash": "563bbd417ae7",
+  "render_hash": "879c66654f5e",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

@@ -2,6 +2,130 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### CI wiring docs and the GitHub Actions to Azure Pipelines mapping table
+`01M2XCWMVEH3XFP2VPS9JBD6XX` · status: todo
+- belongs-to: #413: Azure Pipelines template from init.sh
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### #413: Azure Pipelines template from init.sh
+`01M2XCWMVEH3XFP2VPS9JBD6XV` · status: todo
+- belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- contains: CI wiring docs and the GitHub Actions to Azure Pipelines mapping table
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Regenerate the live design docs for v0.24.10
+`01M2XCWMVEH3XFP2VPS9JBD6XS` · status: todo
+- belongs-to: Release gate for design-doc freshness in doc-verify --strict
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Release gate for design-doc freshness in doc-verify --strict
+`01M2XCWMVEH3XFP2VPS9JBD6XQ` · status: todo
+- belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- contains: Regenerate the live design docs for v0.24.10
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### #413: CI as the authoritative syncer behind ticketing.sync_owner: ci
+`01M2XCWMVEH3XFP2VPS9JBD6XN` · status: todo
+- belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### sync --report drift is never masked and the local-only comment is suppressed
+`01M2XCWMVEH3XFP2VPS9JBD6XK` · status: todo
+- belongs-to: Bot PRs use the WORKLOG_BOT_PAT identity
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard
+`01M2XCWMVEH3XFP2VPS9JBD6XH` · status: todo
+- belongs-to: Bot PRs use the WORKLOG_BOT_PAT identity
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Bot PRs use the WORKLOG_BOT_PAT identity
+`01M2XCWMVEH3XFP2VPS9JBD6XF` · status: todo
+- belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- contains: Pipeline hygiene: supersede open bot PRs, delete-branch, explicit loop guard
+- contains: sync --report drift is never masked and the local-only comment is suppressed
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Interim merge-gate hardening and ADR-0011
+`01M2XCWMVEH3XFP2VPS9JBD6XD` · status: todo
+- belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### adapter check says when the clone has no push memory
+`01M2XCWMVEH3XFP2VPS9JBD6XB` · status: todo
+- belongs-to: #412: consult the remote marker map before creating a ticket
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### sync --explain and report hints
+`01M2XCWMVEH3XFP2VPS9JBD6X9` · status: todo
+- belongs-to: #412: consult the remote marker map before creating a ticket
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Probe guard when the listing fails and the clone has no push memory
+`01M2XCWMVEH3XFP2VPS9JBD6X7` · status: todo
+- belongs-to: #412: consult the remote marker map before creating a ticket
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### #412: consult the remote marker map before creating a ticket
+`01M2XCWMVD7KJ01FCNEV1X8237` · status: todo
+- belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- contains: Probe guard when the listing fails and the clone has no push memory
+- contains: sync --explain and report hints
+- contains: adapter check says when the clone has no push memory
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Retention tests and doc renumbering
+`01M2XCWMVD7KJ01FCNEV1X8235` · status: todo
+- belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Archive-aware duplicate ownership check and untracked-archive guard
+`01M2XCWMVD7KJ01FCNEV1X8233` · status: todo
+- belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Tolerate a corrupt archive line and warn on ignored retention config values
+`01M2XCWMVD7KJ01FCNEV1X8231` · status: todo
+- belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Parent veto in eviction, live children only
+`01M2XCWMVD7KJ01FCNEV1X822Z` · status: todo
+- belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Cap counts only items present in done.jsonl and unparseable ts never occupies a cap slot
+`01M2XCWMVD7KJ01FCNEV1X822X` · status: todo
+- belongs-to: Retention: stop re-snapshotting archived items into done.jsonl
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Retention: stop re-snapshotting archived items into done.jsonl
+`01M2XCWMVD7KJ01FCNEV1X822V` · status: in_progress
+- belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- contains: Cap counts only items present in done.jsonl and unparseable ts never occupies a cap slot
+- contains: Parent veto in eviction, live children only
+- contains: Tolerate a corrupt archive line and warn on ignored retention config values
+- contains: Archive-aware duplicate ownership check and untracked-archive guard
+- contains: Retention tests and doc renumbering
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Council review, single edit pass, and plan capture
+`01M2XCWMVD7KJ01FCNEV1X822S` · status: done
+- belongs-to: Fix the v0.24.10 review findings and close #412 and #413
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
+### Fix the v0.24.10 review findings and close #412 and #413
+`01M2XCWMV0QYM4ZRBWN1V1327B` · status: todo
+- contains: Council review, single edit pass, and plan capture
+- contains: Retention: stop re-snapshotting archived items into done.jsonl
+- contains: #412: consult the remote marker map before creating a ticket
+- contains: Interim merge-gate hardening and ADR-0011
+- contains: Bot PRs use the WORKLOG_BOT_PAT identity
+- contains: #413: CI as the authoritative syncer behind ticketing.sync_owner: ci
+- contains: Release gate for design-doc freshness in doc-verify --strict
+- contains: #413: Azure Pipelines template from init.sh
+- produced-by: [[Plan-review-v0-24-10-and-open-tickets]]
+
 ### Release v0.24.10: merge pipeline, retention, bot PR landing
 `01M1FX9JR00XVYMRC6ZB3RDT7W` · status: done
 - targets: release/v0.24.10
