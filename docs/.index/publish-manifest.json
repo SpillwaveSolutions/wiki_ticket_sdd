@@ -1,5 +1,5 @@
 {
- "git_hash": "1b20812",
+ "git_hash": "0be4df0",
  "pages": [
   {
    "frozen": false,
@@ -5900,11 +5900,11 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T22:22:16Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-20T07:27:57Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "ee7927d3890e",
+   "render_hash": "7f45a481ded2",
    "source": "docs/roadmap.md",
    "source_hash": "45a18273e835",
    "title": "Roadmap",
