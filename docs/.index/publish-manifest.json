@@ -1,5 +1,5 @@
 {
- "git_hash": "0be4df0",
+ "git_hash": "2160410",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "2a227be6bc00",
+   "render_hash": "d6926d33e1bf",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "102915d86b85",
+   "render_hash": "fcaddf55737c",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -5005,10 +5005,10 @@
    "frozen": false,
    "page_name": "Ticket-01M2XT2DGDWA6MYZZXCABSEMXW",
    "render": "as-is",
-   "render_hash": "0874e98bac66",
+   "render_hash": "8095ff2f2728",
    "source": "docs/.index/rendered/tickets/01M2XT2DGDWA6MYZZXCABSEMXW.md",
    "title": "Release v0.24.12",
-   "truth_state": "in-progress",
+   "truth_state": "done",
    "wiki_key": "item/01M2XT2DGDWA6MYZZXCABSEMXW"
   },
   {
@@ -5540,25 +5540,37 @@
    "wiki_key": "design/2026-09-19_v0.24.11-release"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T19:52:25Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Snapshot** of release v0.24.12 (2026-09-19) \u2014 frozen record. The current version is [[Code-Walkthrough]].",
+   "frozen": true,
+   "page_name": "Design-Freeze-2026-09-19_v0.24.12-release",
+   "render": "doc+banner",
+   "render_hash": "52f640e2915f",
+   "source": "docs/designs/2026-09-19_v0.24.12-release.md",
+   "source_hash": "ee868767ab73",
+   "title": "Design freeze: v0.24.12",
+   "truth_state": "snapshot",
+   "wiki_key": "design/2026-09-19_v0.24.12-release"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-21T00:00:00Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Code-Walkthrough",
    "render": "doc+banner",
-   "render_hash": "572092ed543f",
+   "render_hash": "9ad01e85dc99",
    "source": "docs/designs/current_code_walkthrough.md",
-   "source_hash": "547368debfc5",
+   "source_hash": "3d743c6b1211",
    "title": "Worklog \u2014 Code Walkthrough",
    "truth_state": "current",
    "wiki_key": "design/current-code-walkthrough"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-19T19:52:25Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-21T00:00:00Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Design-Doc",
    "render": "doc+banner",
-   "render_hash": "cf0c086f9cdf",
+   "render_hash": "0a87a7000cb8",
    "source": "docs/designs/current_design_doc.md",
-   "source_hash": "1248c2176c76",
+   "source_hash": "9c1ebfa70a15",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "current",
    "wiki_key": "design/current-design-doc"
@@ -5900,13 +5912,13 @@
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-20T07:27:57Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-21T17:15:29Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "7f45a481ded2",
+   "render_hash": "a1d42aa52cad",
    "source": "docs/roadmap.md",
-   "source_hash": "45a18273e835",
+   "source_hash": "65538697716e",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

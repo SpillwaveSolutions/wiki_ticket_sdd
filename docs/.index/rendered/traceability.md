@@ -3,7 +3,7 @@
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
 ### Release v0.24.12
-`01M2XT2DGDWA6MYZZXCABSEMXW` · status: in_progress
+`01M2XT2DGDWA6MYZZXCABSEMXW` · status: done
 
 ### Restore six bug ticket titles that ticket-sync overwrote
 `01M2XN9A0XXNKTDJ6H1BDJW0SD` · status: done

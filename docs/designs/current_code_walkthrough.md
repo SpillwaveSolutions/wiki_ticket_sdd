@@ -1,8 +1,8 @@
 ---
-generated_at: 2026-09-19T19:52:25Z
-git_hash: "1b208123a6e789482e1c1078f634e2496ade6b50"
-branch: docs/design-sync-v0-24-11
-tag: v0.24.11
+generated_at: 2026-09-21T00:00:00Z
+git_hash: "2160410a147a5330f15734fa5a1af69ccd6cca5a"
+branch: chore/post-release-v0-24-12
+tag: v0.24.12
 roadmap: docs/roadmap.md
 wiki_key: design/current-code-walkthrough
 truth_state: current
@@ -28,11 +28,11 @@ See §2.21 for how that works and §9.11 of the design doc for why it had to.
 Three sentences: **Worklog tracks work as an append-only JSONL event log inside
 the git repo; item state is a fold over the events, and git's union merge makes
 concurrent writes compose instead of conflict.** This edition describes tag
-v0.24.11, which folds the three fixes that followed v0.24.10 (the retention
-archive no longer ping-pongs, the #412 marker probe, ADR-0011) plus the
-freshness gate that now checks this file (§2.21) and the Azure Pipelines
-template (#413, §2.11). Where a stop below says "post-tag", it means after
-v0.24.10 and inside v0.24.11. Everything human-readable — the
+v0.24.12, which closes the whole review plan: the retention archive no longer
+ping-pongs, the #412 marker probe, ADR-0011, the freshness gate that checks
+this file (§2.21), the Azure Pipelines template (#413, §2.11), and in v0.24.12
+itself the two pieces that were blocked on a secret, the bot PAT identity that
+deletes the status bridge (§2.25) and CI-owned ticket sync (§2.24). Everything human-readable — the
 roadmap, status reports, Mermaid diagrams, and (since v0.13.0) the IA reader
 plane under `docs/.index/` — is generated from the log and committed docs, and
 everything remote — tickets, wiki pages — is a mirror driven through a typed
@@ -66,7 +66,7 @@ Directory map:
 | `docs/.index/` | Generated IA plane (committed, regenerate-and-diff, **hard-gated** since v0.19.0). |
 | `adapters/` | `github` (worked example), `fake` (CI double), authoring rules. |
 | `hooks/` | git pre-commit/pre-merge-commit/commit-msg (v0.15.0) + five harness hooks (`session-end.sh` new in v0.19.0). `pre-merge-commit` regenerates the roadmap and index from the union-merged log before it validates (v0.24.8, #381); `session-doctor.sh` writes the two per-clone git config lines a fresh clone needs (v0.24.10). |
-| `plugin/` | Host packaging, **three manifests over one shared tree**: `.claude-plugin/plugin.json` (Claude Code, Grok Build), `.codex-plugin/plugin.json` (Codex, v0.22.0) and `.cursor-plugin/plugin.json` (Cursor, v0.24.4). `plugin/scripts/` mirrors `bin/` + `hooks/` and is sync-checked; `plugin/hooks/hooks.json` + `codex-hooks.json` + `cursor-hooks.json` are the event maps, and all must wrap their events under a top-level `hooks` key — §2.22 is why. `plugin/scripts/associate-pr-checks.sh` is the interim status bridge for bot PRs (§2.25). |
+| `plugin/` | Host packaging, **three manifests over one shared tree**: `.claude-plugin/plugin.json` (Claude Code, Grok Build), `.codex-plugin/plugin.json` (Codex, v0.22.0) and `.cursor-plugin/plugin.json` (Cursor, v0.24.4). `plugin/scripts/` mirrors `bin/` + `hooks/` and is sync-checked; `plugin/hooks/hooks.json` + `codex-hooks.json` + `cursor-hooks.json` are the event maps, and all must wrap their events under a top-level `hooks` key — §2.22 is why. `plugin/scripts/associate-pr-checks.sh`, the interim status bridge for bot PRs, was deleted in v0.24.12 (§2.25). |
 | `.github/` | Three workflows (`worklog.yml`, `compact.yml`, `post-merge.yml`) and `merge-when-green-ruleset.json`, the mirror of the branch ruleset on `main` (§2.25). |
 | `schema/` | `capabilities`, `adapter-io`, `adr`, `doc`, `entity` JSON schemas. |
 | `tests/` | 53 stdlib-unittest suites, 768 test functions; the executable spec. Merge safety alone accounts for `test_watermark.py` and `test_bug_merge.py`; `test_provenance.py` (739 lines) is the largest file; `test_doc_freshness.py` is the newest and pins the release gate that checks this file (§4). |
@@ -222,7 +222,7 @@ the rest of the event was small. `n != len(raw)` turns a short write into a
 loud exit instead of a fused line. And `.work/.lock` (line 39) is held across
 the append: `compact.py` takes the same lock (`bin/compact.py — _lock_logs(),
 lines 80–86`) around its `os.replace`, so a write can no longer land on an
-inode compaction has just swapped out. `VERSION = "0.24.11"` (line 40) is
+inode compaction has just swapped out. `VERSION = "0.24.12"` (line 40) is
 lockstepped with every host manifest, both skill trees and the README marker by
 `tests/test_plugin.py — TestVersionSync, lines 307–350`. Read that lockstep as
 a live constraint, not trivia: v0.24.2 bumped two of the eight sources that
@@ -2221,7 +2221,7 @@ says when the clone has no push memory yet. The #412 tests run a **real** sync
 against the fake adapter rather than a dry run, because the dry-run path
 prints `would update` and `continue`s before `updated` increments.
 
-### 2.25 How a bot PR turns green (v0.24.10, ADR-0010 → ADR-0011)
+### 2.25 How a bot PR turns green (v0.24.10 → v0.24.12, ADR-0010 → ADR-0011)
 
 This stop is two workflow files and one shell script, and it is the place the
 v0.24.10 review found the sharpest problem.
@@ -2247,8 +2247,8 @@ required context names do satisfy the ruleset; #408 merged that way. Hence:
   plugin/scripts/associate-pr-checks.sh "$(git rev-parse HEAD)"
   gh pr merge --auto --merge
 ```
-— `.github/workflows/compact.yml`, the tail of the `commit via PR` step
-(`post-merge.yml` ends the same way)
+— `.github/workflows/compact.yml` as v0.24.10 shipped it. v0.24.12 deleted the
+first two lines; what remains is `gh pr merge --auto --merge --delete-branch`.
 
 `associate-pr-checks.sh` polls `gh run list` for the dispatch run on that sha,
 `gh run watch`es it, then posts one commit status per required context
@@ -2266,10 +2266,23 @@ PR merge ref, and it skips the `pull_request`-only commit-message step; nothing
 short of a native `pull_request` run fixes that. And bot merge commits on
 `main` got no `push` run at all; the `workflow_run` listener (#361) covers it
 in the meantime. The dead bypass actor is gone from the ruleset mirror and the
-live rule (`bypass_actors: []`). ADR-0011 records the real fix: a maintainer's
-fine-grained PAT as `WORKLOG_BOT_PAT`, so `pull_request` and `push` run
-natively and the bridge, the dispatch step, `actions: write` and
-`statuses: write` are deleted. The PR waits on the secret.
+live rule (`bypass_actors: []`). ADR-0011 records the real fix, and v0.24.12
+shipped it: bot jobs check out and call `gh` with a maintainer's fine-grained
+PAT in `WORKLOG_BOT_PAT`, so `pull_request` and `push` run natively. The
+bridge script, the dispatch step, `actions: write`, `statuses: write`, and the
+`workflow_run` trigger with its conditionals and second checkout are all gone;
+both bot workflows now declare `permissions: contents: read` and fail at their
+first step when the secret is missing, with no fallback to the bridge.
+
+**What the live cut-over proved.** Two `worklog-compact` dispatches ran once
+the secret existed. Both reached `commit via PR`; the bot PR carried native
+`worklog-invariants` runs for **both** `pull_request` and `push`, merged itself
+by auto-merge, and deleted its branch. The nightly run after that landed
+unattended. One detail the token scope decides: a fine-grained PAT whose
+resource owner defaults to the maintainer's personal account authenticates but
+cannot push to an organization repository (`403 ... denied to <user>`, even for
+an org admin). The owner must be the organization, or the token must be a
+classic one with the `repo` scope.
 
 **Supersede, never rebase.** Under the strict up-to-date policy a second bot
 PR goes stale the moment the first merges, and nothing updates a bot branch.
@@ -2889,9 +2902,8 @@ plus `plugin/tests/test_three_host_hooks.py` (§2.22). New in v0.24.10:
 that moves closed history, and the set it consults is the bug surface, §2.23);
 `bin/sync_dispatch.py — remembered_key()` and the pass order in
 `observe_remote()` (§2.24); `bin/published.py` (the ledger's sole writer; the
-skill must never hash or hand-edit around it); the two bot workflows and
-`associate-pr-checks.sh` (the merge gate's interim trust anchor, to be deleted,
-not extended); and `bin/triggers.py` (a parser other skills read; an event key
+skill must never hash or hand-edit around it); the two bot workflows (whose trust anchor is now
+GitHub's own check rollup, not a script the job can write to); and `bin/triggers.py` (a parser other skills read; an event key
 that is present is the authority even when empty). New in v0.24.11:
 `bin/doc_verify.py — freshness()` (the gate that decides whether this file may
 ship; scoping it into the `--staged` hook would fail every commit between a
@@ -2957,17 +2969,16 @@ commit in the front matter; `git log v0.24.10..v0.24.11`):
 **Open at this edition (filed in `docs/plans/2026-09-19-review-v0-24-10-and-open-tickets.md`
 unless noted):**
 
-1. **The merge gate's trust anchor is a shell script until `WORKLOG_BOT_PAT`
-   exists** (§2.25). Interim hardening shipped; the PAT cut-over (Workstream
-   C2) deletes `associate-pr-checks.sh`, the dispatch step, `actions: write`,
-   `statuses: write` and the `workflow_run` listener, and adds the supersede
-   step and the branch-prefix loop guard. Blocked on a secret, not on code:
-   the PRs (#437 bot-PR identity, #438 CI-owned sync) are written and wait
-   for it.
+1. ~~**The merge gate's trust anchor is a shell script until `WORKLOG_BOT_PAT`
+   exists.**~~ Closed in v0.24.12 (§2.25): the secret exists, the bridge and
+   both write permissions are deleted, and a bot PR's required checks are its
+   own `pull_request` run. Verified live, twice.
 2. **Duplicate tickets have residual causes** (§2.24): a capped or lagging
    listing, or two syncers that both observe absence. `dedupe
-   --collapse-agreed` is the backstop; CI-owned sync (Workstream D, #413) is
-   the structural answer for the two-syncer case.
+   --collapse-agreed` is the backstop, and `ticketing.ci_dedupe_check: true`
+   makes `dedupe --dry-run --check` a PR gate. The two-syncer case now has a
+   structural answer that shipped in v0.24.12: `ticketing.sync_owner: ci`
+   (§2.24). It is opt-in, and this repository stays `human`.
 3. ~~**`doc-verify --strict` does not yet check the live pair's freshness.**~~
    Shipped in v0.24.11 (§2.21); this edition is the first generated with the
    gate in force.
@@ -3434,14 +3445,14 @@ doctor` still healthy on `main`) was walked without surfacing new drift.
     — see the "New in v0.19.0" list above). Branch protection would close it.
 
 Final check against the code: every flow above was walked at commit
-`2ebf46afd72dacf9eb74ff87528e6dd74eed99e3`, which is tag `v0.24.11`, and every
+`2160410a147a5330f15734fa5a1af69ccd6cca5a`, which carries tag `v0.24.12`, and every
 `lines N–M` in this document was derived from the `ast` bounds of the named
-symbol in *that* tree rather than carried forward from the v0.24.10 edition,
-which is the specific defect #294 was filed for. Between the two editions the
-only `bin/` files that changed were `doc_verify.py` (339 to 421 lines, the
-freshness gate) and the `VERSION` line of `bin/worklog`; the citations into
-`doc_verify.py` that the gate pushed down the file were re-derived, not
-shifted. Do not take that on trust: run `bin/worklog doc-verify --strict` and
+symbol in *that* tree rather than carried forward from an earlier edition,
+which is the specific defect #294 was filed for. Between the v0.24.11 and
+v0.24.12 editions the `bin/` files that changed were `sync_dispatch.py` and
+`worklog` (CI-owned sync, `--force`, `dedupe --check`) plus the `VERSION`
+line; the citations those edits pushed down `sync_dispatch.py` were
+re-derived, not shifted. Do not take that on trust: run `bin/worklog doc-verify --strict` and
 this file should report zero fabrications, zero drift and, since v0.24.11,
 zero `STALE` findings. Since v0.22.2 `doc_verify._check_one()` judges the
 symbol's definition line rather than containment, so a range that merely
