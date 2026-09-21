@@ -1,8 +1,8 @@
 ---
-generated_at: 2026-09-19T19:52:25Z
-git_hash: "1b208123a6e789482e1c1078f634e2496ade6b50"
-branch: docs/design-sync-v0-24-11
-tag: v0.24.11
+generated_at: 2026-09-21T00:00:00Z
+git_hash: "2160410a147a5330f15734fa5a1af69ccd6cca5a"
+branch: chore/post-release-v0-24-12
+tag: v0.24.12
 roadmap: docs/roadmap.md
 wiki_key: design/current-design-doc
 truth_state: current
@@ -15,13 +15,15 @@ doc_type: design
 
 **Purpose.** Describe the design of *worklog*, a local-first, git-native work-tracking
 layer for agentic coding, as actually implemented in this repository at tag
-v0.24.11 (commit `2ebf46afd72dacf9eb74ff87528e6dd74eed99e3`). That tag folds the
-three fixes that followed v0.24.10 (retention archive stability, the #412 marker
-probe, ADR-0011) plus two additions: the design-doc freshness gate in
+v0.24.12 (commit `0be4df0adc4068db225d84d247e19e9d820e61bf`). Two releases on one day
+close the v0.24.10 review plan: v0.24.11 carried retention archive stability, the
+#412 marker probe, ADR-0011's interim hardening, the design-doc freshness gate in
 `doc-verify --strict` (§8.11) and the Azure Pipelines template from `worklog init`
-(#413). The live pair describes the tree it was generated against; this edition
-was generated at the tag itself, and the freeze note for this release
-(`docs/designs/2026-09-19_v0.24.11-release.md`) records that sha.
+(#413); v0.24.12 carried the two changes that had been blocked on a repository
+secret, the bot PAT identity that deletes the status bridge (§8.9) and CI-owned
+ticket sync behind `ticketing.sync_owner` (§8.3). The live pair describes the tree
+it was generated against, and the freeze note for this release
+(`docs/designs/2026-09-19_v0.24.12-release.md`) records the tag's sha.
 
 **Audience.** Junior developers who need implementation-level guidance; project
 managers who need scope, dependencies, risks, and behavior.
@@ -731,10 +733,13 @@ status bridge, the `workflow_dispatch` wait, `actions: write` and
 `statuses: write` are deleted once the secret exists; no bypass actor; a bot
 job closes every open `chore/compact-*` and `chore/post-merge-*` PR before it
 regenerates, because under the strict checks policy a second bot PR goes stale
-the moment the first merges. The interim half shipped after the tag:
+the moment the first merges. The interim half shipped in v0.24.11:
 `worklog-invariants` declares `permissions: contents: read` and the bypass
-actor left `.github/merge-when-green-ruleset.json` (`bypass_actors: []`). The
-PAT cut-over is its own PR (§32). Alternatives rejected: a GitHub App token
+actor left `.github/merge-when-green-ruleset.json` and the live rule
+(`bypass_actors: []`). The PAT cut-over shipped in v0.24.12 and is verified
+live: both bot workflows authenticate with `WORKLOG_BOT_PAT`, the bridge and
+both write permissions are deleted, and a dispatched compact run produced a
+bot PR whose required checks were its own `pull_request` run. Alternatives rejected: a GitHub App token
 (two secrets and an action for one repository), keeping the bridge and pinning
 `integration_id` (GitHub refuses), and a rebase loop before arming auto-merge
 (can destroy a valid bot PR).
@@ -856,11 +861,11 @@ platform render adapters, the remaining unshipped half of #98.
 | `plugin/hooks/hooks.json` (55 lines) | Hook manifest | Claude Code event map: `PostToolUse`/`ExitPlanMode`, `UserPromptSubmit`, `Stop`, `SessionStart`, and since v0.24.7 `SessionEnd` — **wrapped under a top-level `hooks` key since v0.22.1**; before that the loader found no events at all | — | — | `plugin/hooks/scripts/*.sh` | **every plugin hook silently inert** (§9.12) |
 | `plugin/hooks/codex-hooks.json` (45 lines, v0.22.0) | Hook manifest | Codex event map: the same enforcement hooks plus `SessionEnd` pointing at the same scripts; no plan-capture entry, deliberately | — | — | `plugin/hooks/scripts/*.sh` | Codex sessions lose the prompt reminder, stop gate and session doctor |
 | `plugin/hooks/cursor-hooks.json` (26 lines, v0.24.4) | Hook manifest | Cursor event map (`beforeSubmitPrompt`, `stop`, `sessionStart`, `sessionEnd`), paths resolved against the plugin root; pinned by `plugin/tests/test_three_host_hooks.py` in CI | — | — | `plugin/hooks/scripts/*.sh` | Cursor sessions lose enforcement |
-| `.github/workflows/worklog.yml` | CI | Invariants + tests + coverage ≥80%; the two required checks the ruleset names; **`permissions: contents: read`** since ADR-0011, so nothing in it can post a status | push/PR/workflow_dispatch/workflow_run | pass/fail | python3, coverage | merge gate |
-| `.github/workflows/compact.yml` | CI | Nightly compaction, self-verified, landed as a `chore/compact-*` PR with auto-merge armed (ADR-0010); interim status bridge until the PAT lands (ADR-0011) | schedule, `workflow_dispatch` | one PR | `compact.py`, `gh`, `associate-pr-checks.sh` | log growth only; a stale bot PR blocks until superseded |
+| `.github/workflows/worklog.yml` | CI | Invariants + tests + coverage ≥80%; the two required checks the ruleset names; **`permissions: contents: read`** since ADR-0011, so nothing in it can post a status | push/PR/workflow_dispatch (the `workflow_run` listener went with the PAT, v0.24.12) | pass/fail | python3, coverage | merge gate |
+| `.github/workflows/compact.yml` | CI | Nightly compaction, self-verified, landed as a `chore/compact-*` PR with auto-merge armed (ADR-0010); authenticates with `WORKLOG_BOT_PAT` and supersedes any open bot PR first (ADR-0011, v0.24.12) | schedule, `workflow_dispatch` | one PR | `compact.py`, `gh` | log growth only; a stale bot PR blocks until superseded |
 | `.github/workflows/post-merge.yml` (v0.24.10) | CI | After a merge to `main`: `worklog triggers pr-merge`, regenerate roadmap + inventory + manifest, post `sync --report` on the PR, land as a `chore/post-merge-*` PR | `pull_request: closed` (merged, base `main`) | one PR + one comment | `triggers.py`, `gh` | derived docs lag until the nightly compaction regenerates them |
 | `.github/merge-when-green-ruleset.json` | Mirror of the live ruleset | `pull_request` rule (merge method: merge only), required checks `invariants` + `coverage` with strict up-to-date policy, **`bypass_actors: []`** | applied with `gh api` | — | GitHub rulesets | a direct push to `main` is refused (GH013), which is the point |
-| `plugin/scripts/associate-pr-checks.sh` (v0.24.10, to be deleted per ADR-0011) | Script | Wait for the `workflow_dispatch` run on a bot PR's sha, then post `invariants`/`coverage` commit statuses mirroring the job conclusions; never `--admin`, never squash | sha | two statuses | `gh` | the interim trust anchor (§9.16); its removal is the PAT cut-over |
+| `plugin/scripts/associate-pr-checks.sh` (v0.24.10, **deleted in v0.24.12**) | Script | Waited for the `workflow_dispatch` run on a bot PR's sha, then posted `invariants`/`coverage` commit statuses mirroring the job conclusions | sha | two statuses | `gh` | gone with the PAT cut-over; kept in this table because ADR-0011 and §9.16 explain why it existed |
 | `plugin/skills/integration-guide/SKILL.md` (v0.16.0) | Skill (prose only) | Resolve a named SDD tool or ticket/wiki system to its wiki page or local fallback | request naming one of 11 systems | wiki page fetch, or local file read + spoken caveat | `.work/config.yml` (`wiki.root_url`), `WebFetch` | wrong/stale integration guidance surfaced to the user |
 | `docs/integrations/*` (v0.16.0) | Content (11 fallback files + README index) | Offline-safe copy of each system's setup guide | hand-authored | `wiki-add` ledger entries, published wiki pages | none (static docs) | fallback path shows a stale guide until re-published |
 
@@ -1130,9 +1135,10 @@ untouched, which is strictly better than a red check after the fact. It does
 `GITHUB_TOKEN` can do that, and that residual gap stays tracked on its item
 rather than being papered over here.
 
-**v0.24.7 and v0.24.10: the job stopped pushing to `main` at all.** v0.24.7
+**v0.24.7 through v0.24.12: the job stopped pushing to `main` at all.** v0.24.7
 made `worklog-invariants` listen on `workflow_run` of the compact job (#361), so
-a bad compaction became a red check on `main` rather than a silent one. Then
+a bad compaction became a red check on `main` rather than a silent one; v0.24.12
+deleted that listener, because a PAT push fires `push` natively. Then
 the merge-when-green ruleset landed (ADR-0010) and refused the push outright:
 `github-actions[bot]` as a bypass actor does not exempt the Actions installation
 token. The job now checks itself, commits on `chore/compact-<run id>`, opens a
@@ -1354,36 +1360,37 @@ PR opened by `github-actions[bot]` satisfies the two required checks.
 
 ```mermaid
 sequenceDiagram
-    participant J as compact.yml / post-merge.yml (GITHUB_TOKEN)
+    participant J as compact.yml / post-merge.yml (WORKLOG_BOT_PAT)
     participant G as GitHub ruleset (invariants + coverage required, merge commits only)
     participant I as worklog-invariants (read-only permissions)
-    participant B as associate-pr-checks.sh (interim bridge)
+    J->>J: require WORKLOG_BOT_PAT, else fail at step one
+    J->>G: close every open chore/compact-* and chore/post-merge-* PR
     J->>J: regenerate + self-verify (pre-commit, --merge-check, full suite)
     J->>G: push chore/compact-* or chore/post-merge-*, gh pr create
-    Note over G: a GITHUB_TOKEN pull_request run sits action_required (#403, #408)
-    J->>G: gh workflow run worklog-invariants --ref BRANCH
-    G->>I: workflow_dispatch on the branch tip (not the PR merge ref)
-    J->>B: associate-pr-checks.sh SHA
-    B->>G: poll gh run list for the dispatch run on SHA, then gh run watch
-    B->>G: POST /statuses/SHA with context=invariants and context=coverage
-    Note over G: a status with the required context from ANY actor with statuses: write satisfies the ruleset
-    J->>G: gh pr merge --auto --merge
-    G-->>G: merge commit when both contexts are success
-    Note over G,I: after ADR-0011 the PAT makes pull_request and push run natively, and B and the dispatch are deleted
+    G->>I: pull_request run on the PR merge ref (native, no click)
+    I-->>G: invariants + coverage check runs on the PR
+    J->>G: gh pr merge --auto --merge --delete-branch
+    G-->>G: merge commit when both checks are success
+    G->>I: push run on main, so the merge commit has its own check history
+    Note over J,G: v0.24.10 needed a dispatch plus associate-pr-checks.sh here; the PAT deleted both
 ```
 
-*How to read it:* the dotted line in the middle is the problem. Everything
-above it is the same self-check §8.4 describes; everything below it exists
-because GitHub will not run a `pull_request` workflow for a bot-opened PR
-without a maintainer click, and will not accept a `workflow_dispatch` run as
-that PR's check (its check-runs never appear in `statusCheckRollup`). Commit
-statuses do satisfy the ruleset, so the bridge posts them. It works, and it
-is also why ADR-0011 exists: the gate now trusts a shell script holding
-`statuses: write`, the mirrored run was a branch-tip run rather than the merge
-ref and skipped the `pull_request`-only commit-message step, and bot merge
-commits on `main` got no `push` run at all (§9.16). The interim hardening that
-shipped after the tag is on the diagram: `worklog-invariants` can post nothing,
-and the ruleset has no bypass actor. The PAT cut-over deletes the bridge.
+*How to read it:* every arrow is now either the job's own self-check (§8.4) or
+GitHub's native machinery. That is the whole point of ADR-0011. Under
+`GITHUB_TOKEN` this diagram had four more steps, because GitHub will not run a
+`pull_request` workflow for a bot-opened PR without a maintainer click and will
+not accept a `workflow_dispatch` run as that PR's check (its check-runs never
+appear in `statusCheckRollup`); commit statuses did satisfy the ruleset, so a
+script posted them. The review's objection was not that the script lied, it was
+that the gate's answer came from something any actor with `statuses: write`
+could write, from a branch-tip run rather than the merge ref, skipping the
+`pull_request`-only commit-message step (§9.16). A real identity removes the
+question instead of hardening it. Operational notes that survive the change:
+the PAT must be owned by the organization, not by the maintainer's personal
+account, or the push fails 403 even for an org admin; and two bot jobs
+dispatched seconds apart can each open a PR before either can supersede the
+other, so the supersede step only resolves the sequential case, which is the
+nightly one.
 
 Failure flows (Confirmed, `plugin/scripts/associate-pr-checks.sh`): no
 dispatch run appears within `ASSOCIATE_WAIT` polls → exit 2 and the PR stays
