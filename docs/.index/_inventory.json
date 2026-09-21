@@ -838,6 +838,7 @@
    "tag": "v0.24.12",
    "title": "Design freeze: v0.24.12",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Design-Freeze-2026-09-19_v0.24.12-release",
    "wiki_key": "design/2026-09-19_v0.24.12-release"
   },
   {
@@ -2074,6 +2075,7 @@
    "supersedes": "roadmap-snapshot/2026-09-19_v0.24.11-release",
    "title": "Roadmap",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-09-19_v0.24.12-release",
    "wiki_key": "roadmap-snapshot/2026-09-19_v0.24.12-release"
   },
   {
