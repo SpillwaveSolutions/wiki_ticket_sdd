@@ -1539,8 +1539,8 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-09-21T17:15:29Z",
-   "git_hash": "2160410",
+   "generated_at": "2026-09-22T07:31:18Z",
+   "git_hash": "e7db380",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
    "source_hash": "0b60b292",
