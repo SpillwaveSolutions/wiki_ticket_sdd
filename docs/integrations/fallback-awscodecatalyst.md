@@ -25,7 +25,7 @@ published docs.
 
 ## Recommended workflow
 
-1. `bin/worklog adapter check` — reports "no adapter" for `codecatalyst`;
+1. `bin/wiki-ticket/worklog adapter check` — reports "no adapter" for `codecatalyst`;
    expected, not an error.
 2. Use the `aws codecatalyst` CLI to create/update issues in the relevant
    project, keying off the worklog item's ULID as an idempotency marker in

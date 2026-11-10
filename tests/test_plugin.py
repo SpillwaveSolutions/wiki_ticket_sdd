@@ -22,14 +22,14 @@ import unittest
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PLUGIN = os.path.join(ROOT, "plugin")
 
-CANON = ["bin/worklog", "bin/fold.py", "bin/ulid.py", "bin/render_roadmap.py",
-         "bin/viz_mermaid.py",
-         "bin/plan_capture.py", "bin/compact.py", "bin/adr.py",
-         "bin/sync_dispatch.py", "bin/canonical.py", "bin/ia.py",
-         "bin/ia_render.py", "bin/ia_graph.py", "bin/item_fields.py",
-         "bin/wiki_flavor.py", "bin/session.py", "bin/changelog.py",
-         "bin/doc_verify.py", "bin/provenance.py",
-         "bin/published.py", "bin/triggers.py",
+CANON = ["bin/wiki-ticket/worklog", "bin/wiki-ticket/fold.py", "bin/wiki-ticket/ulid.py", "bin/wiki-ticket/render_roadmap.py",
+         "bin/wiki-ticket/viz_mermaid.py",
+         "bin/wiki-ticket/plan_capture.py", "bin/wiki-ticket/compact.py", "bin/wiki-ticket/adr.py",
+         "bin/wiki-ticket/sync_dispatch.py", "bin/wiki-ticket/canonical.py", "bin/wiki-ticket/ia.py",
+         "bin/wiki-ticket/ia_render.py", "bin/wiki-ticket/ia_graph.py", "bin/wiki-ticket/item_fields.py",
+         "bin/wiki-ticket/wiki_flavor.py", "bin/wiki-ticket/session.py", "bin/wiki-ticket/changelog.py",
+         "bin/wiki-ticket/doc_verify.py", "bin/wiki-ticket/provenance.py",
+         "bin/wiki-ticket/published.py", "bin/wiki-ticket/triggers.py",
          "hooks/pre-commit", "hooks/pre-merge-commit", "hooks/commit-msg"]
 
 # Hooks the harness runs (not git hooks) live in a second directory and are
@@ -74,7 +74,7 @@ def init_repo(tc):
 
 
 def worklog(d, *args):
-    return sh(d, sys.executable, "bin/worklog", "--actor", "pt", *args)
+    return sh(d, sys.executable, "bin/wiki-ticket/worklog", "--actor", "pt", *args)
 
 
 def read(d, rel):
@@ -130,7 +130,7 @@ class TestCanonSync(unittest.TestCase):
                 os.path.exists(os.path.join(ROOT, rel)),
                 f"{rel} still ships; eviction of the OKF write path is incomplete")
         self.assertNotIn("bin/okf_write.py", CANON)
-        self.assertTrue(os.path.isfile(os.path.join(ROOT, "bin/session.py")))
+        self.assertTrue(os.path.isfile(os.path.join(ROOT, "bin/wiki-ticket/session.py")))
 
     def test_repo_hooks_match_plugin_hooks(self):
         for name in HOOK_CANON:
@@ -308,7 +308,7 @@ class TestVersionSync(unittest.TestCase):
     def test_cli_manifest_and_skills_agree(self):
         v = plugin_version()
         self.assertEqual(codex_plugin_version(), v)
-        out = sh(ROOT, sys.executable, "bin/worklog", "--version").stdout
+        out = sh(ROOT, sys.executable, "bin/wiki-ticket/worklog", "--version").stdout
         self.assertEqual(out.strip(), f"worklog {v}")
         skills = sorted(glob.glob(os.path.join(PLUGIN, "skills", "*", "SKILL.md")))
         self.assertGreaterEqual(len(skills), 3)  # every skill dir must carry SKILL.md
@@ -432,7 +432,7 @@ class TestInit(unittest.TestCase):
         citation guard is a file-existence test, so a missing module
         looked like a pass."""
         d = init_repo(self)
-        for rel in ("bin/doc_verify.py", "bin/provenance.py",
+        for rel in ("bin/wiki-ticket/doc_verify.py", "bin/wiki-ticket/provenance.py",
                     "hooks/session-end.sh"):
             path = os.path.join(d, rel)
             self.assertTrue(os.path.isfile(path), rel)
@@ -456,6 +456,22 @@ class TestInit(unittest.TestCase):
         agents = os.path.join(d, "AGENTS.md")
         self.assertTrue(os.path.islink(agents))  # still the one symlink
         self.assertEqual(os.readlink(agents), "CLAUDE.md")
+
+    def test_reinit_retires_stock_bin_scripts_and_keeps_foreign_ones(self):
+        """bin/ used to be the install directory. Upgrade removes a leftover
+        only when it is still the stock script, and never a repo's own file."""
+        d = init_repo(self)
+        os.makedirs(os.path.join(d, "bin"), exist_ok=True)
+        shutil.copy(os.path.join(d, "bin/wiki-ticket/fold.py"),
+                    os.path.join(d, "bin/fold.py"))
+        with open(os.path.join(d, "bin/deploy"), "w", encoding="utf-8") as fh:
+            fh.write("#!/bin/sh\necho mine\n")
+        sh(d, "bash", os.path.join(PLUGIN, "scripts", "init.sh"))
+        self.assertFalse(os.path.exists(os.path.join(d, "bin/fold.py")))
+        self.assertTrue(os.path.exists(os.path.join(d, "bin/deploy")))
+        self.assertTrue(os.path.isfile(os.path.join(d, "bin/wiki-ticket/fold.py")))
+        with open(os.path.join(d, "bin/deploy"), encoding="utf-8") as fh:
+            self.assertIn("echo mine", fh.read())
 
 
 class TestDoctor(unittest.TestCase):

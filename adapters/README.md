@@ -1,7 +1,7 @@
 # Adapters
 
 An adapter is a single executable that maps a canonical worklog item to one
-ticketing platform and back. The dispatcher (`bin/sync_dispatch.py`) owns every
+ticketing platform and back. The dispatcher (`bin/wiki-ticket/sync_dispatch.py`) owns every
 sync invariant — hashing, idempotency, marker search, scope, echo suppression,
 conflict detection. The adapter is a dumb translator. If invariant logic leaks
 in here, the design has failed (and `tests/test_adapter_contract.py` will say

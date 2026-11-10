@@ -40,7 +40,7 @@ The tooling installs at two distinct levels, and the distinction matters:
    `.gitattributes` lines, `.work/` (config + empty logs), the docs
    directories, a CI workflow, and a CLAUDE.md policy block — and you commit
    all of it. That's deliberate: **teammates and CI need no plugin.** Anyone
-   who clones the repo gets working hooks, a working `bin/worklog`, and CI
+   who clones the repo gets working hooks, a working `bin/wiki-ticket/worklog`, and CI
    that enforces the invariants, whether or not they've ever heard of the
    plugin.
 
@@ -125,7 +125,7 @@ every PR, plus a >=80% line coverage floor on `bin/*.py` (target 95).
 ## The skills
 
 Skills are the judgment layer: the model decides *when*, the deterministic
-`bin/worklog` scripts decide *what*. A skill whose YAML frontmatter fails to
+`bin/wiki-ticket/worklog` scripts decide *what*. A skill whose YAML frontmatter fails to
 parse is **not rejected** — it loads with empty metadata, so its `name` and
 `description` vanish and the model can never match it. Installed and
 invisible; 0.22.1 added a check that every shipped skill declares both.
@@ -159,7 +159,7 @@ ships hooks for the invariants:
 | `SessionStart` | session opens | Doctor-lite: checks the CLAUDE.md policy block, hook wiring, and version skew; points at `/worklog:init` or `/worklog:doctor` if something's off. Also stamps the commit this session begins at into `.work/.sessions`, which is the fixed point the `Stop` check diffs against |
 | `SessionEnd` | session closes | Drops this session from `.work/.sessions`, so a finished session stops warning the next one that opens the directory |
 
-All hooks are silent outside worklog repos (no `bin/worklog`, no output), so
+All hooks are silent outside worklog repos (no `bin/wiki-ticket/worklog`, no output), so
 the plugin doesn't nag in repos that don't use it.
 
 **Upgrade to 0.22.1 if you installed the plugin before it.** Until 0.22.1 the
@@ -181,7 +181,7 @@ the same `hookSpecificOutput` / `additionalContext` output, so only the
 wrapper differs. Plan capture is the exception: it matches the `ExitPlanMode`
 **tool** on `PostToolUse`, and Codex has the event but not that tool — so on
 Codex plan capture is what `AGENTS.md` says it is, and you run
-`bin/worklog plan-capture ...` before implementing. The two hooks the policy
+`bin/wiki-ticket/worklog plan-capture ...` before implementing. The two hooks the policy
 names as the enforcement mechanism for work tracking are exactly the two that
 port.
 
@@ -197,6 +197,6 @@ policy file serves every harness that reads either name. **Codex has a native
 plugin as of 0.22.0** — the same skills, plus every hook except plan capture
 (see above). **OpenCode still needs no port**: because `/worklog:init` commits
 everything a repo needs, teammates on any harness — or none — can still run
-`bin/worklog` and get the git hooks; a plugin only adds the skills-and-hooks
+`bin/wiki-ticket/worklog` and get the git hooks; a plugin only adds the skills-and-hooks
 convenience layer on top. The support matrix and porting guide live in
 [plugin/PORTS.md](../../plugin/PORTS.md).

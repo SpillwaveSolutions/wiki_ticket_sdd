@@ -9,7 +9,7 @@ import time
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-WORKLOG = os.path.join(ROOT, "bin", "worklog")
+WORKLOG = os.path.join(ROOT, "bin", "wiki-ticket", "worklog")
 
 
 def run(cwd, *args):

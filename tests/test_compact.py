@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Tests for bin/compact.py -- WORKLOG-SPEC section 7.
+Tests for bin/wiki-ticket/compact.py -- WORKLOG-SPEC section 7.
 
 Every test runs against a throwaway .work/ in a tempdir (never the repo's
 real log) and calls compact() as a module import with explicit paths.
@@ -15,7 +15,7 @@ import tempfile
 import time
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin", "wiki-ticket"))
 import ulid  # noqa: E402
 from compact import compact  # noqa: E402
 from fold import fold, OPEN_STATUSES  # noqa: E402

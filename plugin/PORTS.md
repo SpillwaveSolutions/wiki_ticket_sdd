@@ -28,7 +28,7 @@ and record the result here.
 The core is harness-independent by design: ALL real settings live in
 `.work/config.yml`, ALL policy lives in `CLAUDE.md`, and `AGENTS.md` is a
 symlink to it — so any harness that reads `AGENTS.md` gets the full worklog
-policy, and `bin/worklog` works identically everywhere.
+policy, and `bin/wiki-ticket/worklog` works identically everywhere.
 
 Codex installs from this repository's existing marketplace. Run
 `codex plugin marketplace add SpillwaveSolutions/wiki_ticket_sdd`, open
@@ -47,7 +47,7 @@ It fires on `PostToolUse` with a matcher for the `ExitPlanMode` **tool**;
 Codex has the event but no such tool, so the matcher could never fire.
 Shipping it would be dead configuration that reads like coverage. On Codex,
 plan capture is enforced by `AGENTS.md` and the model runs
-`bin/worklog plan-capture` before implementing.
+`bin/wiki-ticket/worklog plan-capture` before implementing.
 
 This distinction matters more than it looks. `UserPromptSubmit` and `Stop` are
 the two hooks the policy file names as the enforcement mechanism for work

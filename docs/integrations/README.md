@@ -46,7 +46,7 @@ and how these files serve as its offline fallback.
 3. Add a line to this index.
 4. Register and publish:
 
-       bin/worklog wiki-add docs/integrations/fallback-<key>.md --key integrations/<key> --title "Integration-<Name>"
+       bin/wiki-ticket/worklog wiki-add docs/integrations/fallback-<key>.md --key integrations/<key> --title "Integration-<Name>"
 
    then run the `wiki-publish` skill as usual.
 

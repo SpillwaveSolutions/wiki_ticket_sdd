@@ -13,7 +13,7 @@ import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "bin"))
+sys.path.insert(0, os.path.join(ROOT, "bin", "wiki-ticket"))
 import sync_dispatch  # noqa: E402
 
 
@@ -52,7 +52,7 @@ class Sandbox(unittest.TestCase):
 
     def run_wl(self, *args):
         return subprocess.run(
-            [sys.executable, os.path.join(self.dir, "bin", "worklog"), *args],
+            [sys.executable, os.path.join(self.dir, "bin", "wiki-ticket", "worklog"), *args],
             cwd=self.dir, capture_output=True, text=True, env=self.env)
 
     def wl(self, *args):

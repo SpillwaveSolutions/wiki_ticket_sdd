@@ -138,21 +138,21 @@ git config core.hooksPath hooks
 Track work with the CLI:
 
 ```sh
-bin/worklog add "Extract auth middleware" --level task --kind feature \
+bin/wiki-ticket/worklog add "Extract auth middleware" --level task --kind feature \
     --milestone v0.7.0 --priority P0
-bin/worklog add "Fix flaky retry" --kind bug --unplanned --discovered-during <id>
-bin/worklog update <id> --status in_progress
-bin/worklog close <id>
-bin/worklog list
-bin/worklog fields          # which item fields this repo has switched on
-bin/worklog find <text>     # search the generated inventory and graph
+bin/wiki-ticket/worklog add "Fix flaky retry" --kind bug --unplanned --discovered-during <id>
+bin/wiki-ticket/worklog update <id> --status in_progress
+bin/wiki-ticket/worklog close <id>
+bin/wiki-ticket/worklog list
+bin/wiki-ticket/worklog fields          # which item fields this repo has switched on
+bin/wiki-ticket/worklog find <text>     # search the generated inventory and graph
 ```
 
 Capture a plan and regenerate the roadmap:
 
 ```sh
-bin/worklog plan-capture --slug my-plan --title "My plan" --file draft.md
-bin/worklog roadmap-render
+bin/wiki-ticket/worklog plan-capture --slug my-plan --title "My plan" --file draft.md
+bin/wiki-ticket/worklog roadmap-render
 ```
 
 The pre-commit and pre-merge-commit hooks enforce the invariants: trailing
@@ -167,7 +167,7 @@ commits exempt.
 Nightly compaction runs in CI on `main`. When one lands mid-session and blocks
 your merge — union merge resurrects events a compaction already folded, and
 would silently drop the ones your branch wrote below the watermark —
-`bin/worklog merge-rescue`, run from inside the blocked merge, keeps the
+`bin/wiki-ticket/worklog merge-rescue`, run from inside the blocked merge, keeps the
 compacted log and replays your branch's own events above the watermark.
 Recompacting is *not* the fix: it would verify green while making the loss
 permanent.
@@ -252,7 +252,7 @@ under a `hooks` key).
 Plan capture is the exception. That hook fires on `PostToolUse` matching the
 `ExitPlanMode` tool, and Codex has the event but no such tool — so on Codex
 plan capture is what `AGENTS.md` says it is, and you run
-`bin/worklog plan-capture ...` before implementing. Claude Code and Grok Build
+`bin/wiki-ticket/worklog plan-capture ...` before implementing. Claude Code and Grok Build
 are unchanged.
 
 Two install levels, deliberately distinct:
@@ -280,7 +280,7 @@ contract before anything activates.
 
 ### Other harnesses (OpenCode and Grok Build)
 
-The repo scaffold is harness-independent: `bin/worklog`, the git hooks, and
+The repo scaffold is harness-independent: `bin/wiki-ticket/worklog`, the git hooks, and
 CI are committed and work from any shell. The `AGENTS.md` symlink (created
 by `/worklog:init`, pointing at `CLAUDE.md`) carries the full worklog policy
 to any harness that reads `AGENTS.md` — but init only *creates* those two
@@ -317,7 +317,7 @@ is in [docs/worklog-spec.md](docs/worklog-spec.md). Task-oriented guides
 | `docs/user_guide/` | User guide, CLI reference, plugin guide |
 | `docs/integrations/` | Living per-system setup guides (11 SDD tools + ticket/wiki systems), published to the wiki and used as the `integration-guide` skill's offline fallback |
 | `hooks/` | `pre-commit`, `pre-merge-commit`, `commit-msg`, `exit-plan-capture.sh`, `prompt-reminder.sh`, `session-doctor.sh`, `session-end.sh`, `stop-worklog-check.sh` |
-| `plugin/` | Claude Code, Codex, and Grok Build manifests, commands, skills, hooks, and canonical scripts — **v0.24.12** |
+| `plugin/` | Claude Code, Codex, and Grok Build manifests, commands, skills, hooks, and canonical scripts — **v0.24.13** |
 | `tests/` | Unit and integration tests |
 
 ## Testing

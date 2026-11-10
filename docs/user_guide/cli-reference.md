@@ -7,7 +7,7 @@ wiki_key: cli-reference
 ---
 # WikiTicket SDD — CLI Reference
 
-Complete reference for `bin/worklog`. For concepts and workflows, start with
+Complete reference for `bin/wiki-ticket/worklog`. For concepts and workflows, start with
 the [User Guide](user-guide.md); for the Claude Code plugin, see the
 [Plugin Guide](plugin-guide.md).
 
@@ -15,7 +15,7 @@ the [User Guide](user-guide.md); for the Claude Code plugin, see the
 
 | Flag | Meaning |
 |---|---|
-| `--actor <name>` | Who caused the event (defaults to `$USER`). Recorded on every event; goes **before** the subcommand: `bin/worklog --actor alice update …` |
+| `--actor <name>` | Who caused the event (defaults to `$USER`). Recorded on every event; goes **before** the subcommand: `bin/wiki-ticket/worklog --actor alice update …` |
 | `--version` | Print the CLI version and exit |
 
 ## Item ids
@@ -38,7 +38,7 @@ ULID — the sync dispatcher passes ids it already resolved.
 Create a work item. Prints the new item's ULID.
 
 ```bash
-bin/worklog add "Extract auth middleware" --level task --kind feature \
+bin/wiki-ticket/worklog add "Extract auth middleware" --level task --kind feature \
     --milestone v0.7.0 --priority P1 --parent 01J8WZZ100 --labels backend,auth
 ```
 
@@ -97,8 +97,8 @@ Change status, priority, title, kind, milestone, body, estimate, labels, or
 dependencies on an open item.
 
 ```bash
-bin/worklog update 01J8X0M2QQ --status in_progress --kind bug --add-label urgent
-bin/worklog update 01J8X0M2QQ --body "What and why a junior dev/PM can read"
+bin/wiki-ticket/worklog update 01J8X0M2QQ --status in_progress --kind bug --add-label urgent
+bin/wiki-ticket/worklog update 01J8X0M2QQ --body "What and why a junior dev/PM can read"
 ```
 
 | Flag | Values |
@@ -133,7 +133,7 @@ source that `ticket-body` and ticket-sync push to the remote tracker.
 Close an item as done or cancelled.
 
 ```bash
-bin/worklog close 01J8X0M2QQ --status done --resolution "merged in PR #7"
+bin/wiki-ticket/worklog close 01J8X0M2QQ --status done --resolution "merged in PR #7"
 ```
 
 `--status` is `done` (default) or `cancelled`; `--resolution` is optional
@@ -146,7 +146,7 @@ Reopen a closed item: moves it back to `todo` and drops the stale
 closed.
 
 ```bash
-bin/worklog reopen 01J8X0M2QQ
+bin/wiki-ticket/worklog reopen 01J8X0M2QQ
 ```
 
 ### link
@@ -155,7 +155,7 @@ Attach an external identity (ticket key, URL) to an item as a link event.
 Sync calls this for you; it's here for manual wiring.
 
 ```bash
-bin/worklog link 01J8X0M2QQ --system github --key "owner/repo#412" --url <url>
+bin/wiki-ticket/worklog link 01J8X0M2QQ --system github --key "owner/repo#412" --url <url>
 ```
 
 `--system` and `--key` are required; `--url`, `--rev`, `--hash` optional.
@@ -184,7 +184,7 @@ Retract a link. Use it when an item was pointed at the wrong ticket — this is
 the supported undo for `link`.
 
 ```bash
-bin/worklog unlink 01J8X0M2QQ
+bin/wiki-ticket/worklog unlink 01J8X0M2QQ
 ```
 
 The item stops owning the ticket, which frees the key for another item. What
@@ -199,7 +199,7 @@ Repairing the log does not repair the tracker. Two things to do by hand:
 
 - the ticket may still carry the `worklog:<ulid>` marker (trackers that merge
   tags rather than overwrite keep both), so remove it there;
-- run `bin/worklog sync --keys <key>` to push the surviving owner back over the
+- run `bin/wiki-ticket/worklog sync --keys <key>` to push the surviving owner back over the
   damage. Nothing else will: an item's change detection is content-based, and
   the surviving owner's content never changed.
 
@@ -210,8 +210,8 @@ worklog marker, link it, and stamp the ULID marker so the next sync
 updates that ticket instead of ignoring it (#385).
 
 ```bash
-bin/worklog adopt --system github --key 93
-bin/worklog adopt --system github --key 93 --dry-run
+bin/wiki-ticket/worklog adopt --system github --key 93
+bin/wiki-ticket/worklog adopt --system github --key 93 --dry-run
 ```
 
 | Flag | Meaning |
@@ -236,7 +236,7 @@ status, priority, title, …) in `--set FIELD=VALUE`. Normally the sync
 dispatcher runs this, not you.
 
 ```bash
-bin/worklog ingest 01J8X0M2QQ --system github --key "owner/repo#412" \
+bin/wiki-ticket/worklog ingest 01J8X0M2QQ --system github --key "owner/repo#412" \
     --rev 2026-07-18T16:02:11Z --rev-ts-ms 1789142531000 --set status=in_progress
 ```
 
@@ -252,7 +252,7 @@ later write clears it. Flags: `--field`, `--local`, `--remote`,
 Resolve the last open conflict on a field:
 
 ```bash
-bin/worklog resolve 01J8X0M2QQ --field status --take local
+bin/wiki-ticket/worklog resolve 01J8X0M2QQ --field status --take local
 ```
 
 `--take local` re-asserts the local value; `--take remote` accepts the
@@ -265,7 +265,7 @@ conflict, so the fold clears it. Open conflicts surface in `worklog list`
 Register a document in the wiki publish set used by the wiki-publish skill.
 
 ```bash
-bin/worklog wiki-add docs/plans/2026-07-18-work-taxonomy.md \
+bin/wiki-ticket/worklog wiki-add docs/plans/2026-07-18-work-taxonomy.md \
     --key work-taxonomy --title "Work taxonomy plan"
 ```
 
@@ -277,7 +277,7 @@ Publish dispatcher: frozen-guard + render-hash skip. Reads
 drift — do not publish. wiki-publish runs this instead of hashing files.
 
 ```bash
-bin/worklog wiki-plan
+bin/wiki-ticket/worklog wiki-plan
 ```
 
 `--manifest PATH` overrides the default.
@@ -295,8 +295,8 @@ fall back to defaults, then to the legacy knobs (`release.sync_docs`,
 `sync.push_on_capture`, `status.publish`).
 
 ```bash
-bin/worklog triggers pr-merge
-bin/worklog triggers
+bin/wiki-ticket/worklog triggers pr-merge
+bin/wiki-ticket/worklog triggers
 ```
 
 ### wiki-get
@@ -304,7 +304,7 @@ bin/worklog triggers
 Fold the published.jsonl ledger. One key, or every page as a JSON dict.
 
 ```bash
-bin/worklog wiki-get plan/x
+bin/wiki-ticket/worklog wiki-get plan/x
 ```
 
 ### list
@@ -312,7 +312,7 @@ bin/worklog wiki-get plan/x
 List open items, sorted by priority. `--all` includes closed ones.
 
 ```bash
-bin/worklog list --all
+bin/wiki-ticket/worklog list --all
 ```
 
 Output: short id, priority, status, external key (or `-`), title. Prints a
@@ -323,7 +323,7 @@ warning to stderr if any items carry unresolved sync conflicts.
 Print one item's full folded state as JSON.
 
 ```bash
-bin/worklog show 01J8X0M2
+bin/wiki-ticket/worklog show 01J8X0M2
 ```
 
 ### fold
@@ -332,7 +332,7 @@ Print the full folded state of every item (open and closed) as JSON. The
 read-only building block other tooling (like the plan-next skill) consumes.
 
 ```bash
-bin/worklog fold
+bin/wiki-ticket/worklog fold
 ```
 
 ### fields
@@ -343,7 +343,7 @@ haven't used — the descriptions ship with the tool so two people don't fill
 the same field with two different meanings.
 
 ```bash
-bin/worklog fields
+bin/wiki-ticket/worklog fields
 ```
 
 The **core** is not configurable, ever: `id`, `title`, `status`, `level`,
@@ -388,7 +388,7 @@ re-proposed. The proposed `level`/`kind`/`milestone` are honored as
 proposed (including `triage`) and pass the same taxonomy checks as `add`.
 
 ```bash
-bin/worklog promote <suggestion-id>
+bin/wiki-ticket/worklog promote <suggestion-id>
 ```
 
 See [the classifier](user-guide.md#the-classifier-off-by-default) — the
@@ -403,7 +403,7 @@ become subtasks; a `(P0)`–`(P3)` token sets priority). Writes
 `docs/plans/<YYYY-MM-DD>-<slug>.md` and prints the path and the epic ULID.
 
 ```bash
-bin/worklog plan-capture --slug auth-refactor --title "Auth refactor" --file plan.md
+bin/wiki-ticket/worklog plan-capture --slug auth-refactor --title "Auth refactor" --file plan.md
 ```
 
 | Flag | Meaning |
@@ -422,7 +422,7 @@ Regenerate `docs/roadmap.md` from the log. Run it after any item change and
 commit the roadmap together with the log.
 
 ```bash
-bin/worklog roadmap-render
+bin/wiki-ticket/worklog roadmap-render
 ```
 
 ### roadmap-snapshot
@@ -431,7 +431,7 @@ Freeze the current roadmap as a dated snapshot:
 copies `docs/roadmap.md` to `docs/roadmap/<YYYY-MM-DD>_<name>.md`.
 
 ```bash
-bin/worklog roadmap-snapshot --name v0.2-roadmap
+bin/wiki-ticket/worklog roadmap-snapshot --name v0.2-roadmap
 ```
 
 Snapshots are frozen — the command refuses to overwrite an existing snapshot
@@ -441,15 +441,15 @@ file. `docs/roadmap.md` stays the live, regenerated view; snapshots are the
 ### sync
 
 Run ticket sync through the typed adapter contract. The dispatcher
-(`bin/sync_dispatch.py`) owns every invariant — scope, canonical hash-skip,
+(`bin/wiki-ticket/sync_dispatch.py`) owns every invariant — scope, canonical hash-skip,
 create-vs-update, idempotency markers, echo suppression on pull, conflict
 detection; the per-system adapter is a dumb translator (see `adapter`
 below). No adapter configured → the run is local-only, which is a mode,
 not an error.
 
 ```bash
-bin/worklog sync --dry-run
-bin/worklog sync --report    # alias of --dry-run
+bin/wiki-ticket/worklog sync --dry-run
+bin/wiki-ticket/worklog sync --report    # alias of --dry-run
 ```
 
 | Flag | Meaning |
@@ -595,9 +595,9 @@ conflicts and never auto-collapsed. Same title without a shared marker is
 low-confidence and never auto-collapsed (#383).
 
 ```bash
-bin/worklog dedupe
-bin/worklog dedupe --show-conflicts
-bin/worklog dedupe --collapse-agreed
+bin/wiki-ticket/worklog dedupe
+bin/wiki-ticket/worklog dedupe --show-conflicts
+bin/wiki-ticket/worklog dedupe --collapse-agreed
 ```
 
 | Flag | Meaning |
@@ -610,11 +610,11 @@ Collapse never deletes. The survivor is the folded key, else `last_pushed_key`, 
 
 ### adapter
 
-`bin/worklog adapter init` prints the authoring path for a new adapter:
+`bin/wiki-ticket/worklog adapter init` prints the authoring path for a new adapter:
 adapters are *adapted* from the shipped worked example
 (`adapters/github/adapter`), never written from scratch — read
 `adapters/README.md`, have the model generate one for your
-`ticketing.system`, then validate it. `bin/worklog adapter check [path]`
+`ticketing.system`, then validate it. `bin/wiki-ticket/worklog adapter check [path]`
 validates an adapter against the contract (`schema/*.schema.json`) in a
 throwaway sandbox; nothing activates until `adapter check` is green. With
 no path it checks the adapter for the configured system, falling back to
@@ -626,10 +626,10 @@ Architecture Decision Records in `docs/adr/NNNN-slug.md`, schema-validated
 front matter (`schema/adr.schema.json`).
 
 ```bash
-bin/worklog adr new "Green-gates merge policy" --status proposed \
+bin/wiki-ticket/worklog adr new "Green-gates merge policy" --status proposed \
   --deciders rick,claude --tags ci,process --supersedes 2
-bin/worklog adr list
-bin/worklog adr check
+bin/wiki-ticket/worklog adr list
+bin/wiki-ticket/worklog adr check
 ```
 
 `adr new <title>` picks the next 4-digit number, scaffolds the file
@@ -648,7 +648,7 @@ nonzero naming each problem; the pre-commit hook runs it whenever
 Generate a status report from the log.
 
 ```bash
-bin/worklog status --kind weekly --write
+bin/wiki-ticket/worklog status --kind weekly --write
 ```
 
 `--kind` is `daily`, `weekly`, or `timecard`. By default it prints;
@@ -703,7 +703,7 @@ default.
 Resolve a merge the **resurrection guard** blocked, without losing events.
 
 ```bash
-bin/worklog merge-rescue
+bin/wiki-ticket/worklog merge-rescue
 ```
 
 Reach for this in exactly one situation: the nightly compaction landed on
@@ -741,11 +741,11 @@ is in progress, or if neither side has ever been compacted. It prints what it
 did, then:
 
 ```bash
-bin/worklog roadmap-render
+bin/wiki-ticket/worklog roadmap-render
 git add -A && git commit          # undo with: git merge --abort
 ```
 
-The same guard runs a second time in CI (`bin/compact.py --merge-check`),
+The same guard runs a second time in CI (`bin/wiki-ticket/compact.py --merge-check`),
 standalone, because the hook's copy only fires with a merge in flight and a CI
 checkout has none.
 
@@ -756,8 +756,8 @@ grouped by commit type, with log/index-only commits excluded. Markdown on
 stdout, the exclusion list on stderr.
 
 ```bash
-bin/worklog changelog-draft --version 0.20.0 >> /tmp/draft.md
-bin/worklog changelog-draft --since v0.18.0
+bin/wiki-ticket/worklog changelog-draft --version 0.20.0 >> /tmp/draft.md
+bin/wiki-ticket/worklog changelog-draft --since v0.18.0
 ```
 
 | Flag | Meaning |
@@ -785,7 +785,7 @@ Print the stable `wiki_key` for a document path (legacy keys are seeded
 from the publish ledger; new docs use the §5.5 derivation rules).
 
 ```bash
-bin/worklog wiki-key docs/plans/2026-07-22-ia-content-model.md
+bin/wiki-ticket/worklog wiki-key docs/plans/2026-07-22-ia-content-model.md
 ```
 
 `-v` / `--verbose` adds derivation detail.
@@ -798,8 +798,8 @@ sanctioned-live docs, and self-description on the publish ledger.
 Idempotent.
 
 ```bash
-bin/worklog ia-normalize
-bin/worklog ia-normalize --check   # report pending normalizations only
+bin/wiki-ticket/worklog ia-normalize
+bin/wiki-ticket/worklog ia-normalize --check   # report pending normalizations only
 ```
 
 ### ia-inventory
@@ -808,8 +808,8 @@ Generate `docs/.index/_inventory.json` — one metadata record per doc
 (`wiki_key`, `doc_type`, `truth_state`, relationships).
 
 ```bash
-bin/worklog ia-inventory
-bin/worklog ia-inventory --check   # validate + freshness only
+bin/wiki-ticket/worklog ia-inventory
+bin/wiki-ticket/worklog ia-inventory --check   # validate + freshness only
 ```
 
 ### ia-render / ia-manifest
@@ -820,8 +820,8 @@ Decisions / Releases / Status / Traceability indexes) plus
 `ia-manifest` is an alias of `ia-render`.
 
 ```bash
-bin/worklog ia-render
-bin/worklog ia-render --check      # report stale files instead of writing
+bin/wiki-ticket/worklog ia-render
+bin/wiki-ticket/worklog ia-render --check      # report stale files instead of writing
 ```
 
 The wiki-publish skill consumes `publish-manifest.json`: each page has a
@@ -837,7 +837,7 @@ after plan-capture, release, or any doc set change that should refresh
 navigation.
 
 ```bash
-bin/worklog ia-index
+bin/wiki-ticket/worklog ia-index
 ```
 
 ### ia-graph
@@ -846,8 +846,8 @@ Build `docs/.index/_graph.json` — the typed-edge traceability graph
 (plan → item → ticket → PR/commit → release, plus ADR/design edges).
 
 ```bash
-bin/worklog ia-graph
-bin/worklog ia-graph --seed   # propose decides/implements edges into
+bin/wiki-ticket/worklog ia-graph
+bin/wiki-ticket/worklog ia-graph --seed   # propose decides/implements edges into
                              # .work/suggestions.jsonl (propose-only)
 ```
 
@@ -858,8 +858,8 @@ event log still owns item state). Prefer this over hand-editing richness
 only on the remote ticket.
 
 ```bash
-bin/worklog link-pr 01J8X0M2QQ --pr 104
-bin/worklog link-pr 01J8X0M2QQ --commit abcdef1
+bin/wiki-ticket/worklog link-pr 01J8X0M2QQ --pr 104
+bin/wiki-ticket/worklog link-pr 01J8X0M2QQ --commit abcdef1
 ```
 
 ### pr-sync
@@ -875,8 +875,8 @@ renderer that called GitHub would flap against whatever the remote said that
 minute. Fetch writes a committed file; render reads it.
 
 ```bash
-bin/worklog pr-sync 104
-bin/worklog ia-render          # the page now carries real state
+bin/wiki-ticket/worklog pr-sync 104
+bin/wiki-ticket/worklog ia-render          # the page now carries real state
 ```
 
 Re-running overwrites the sidecar, so sync again after a PR merges to
@@ -891,7 +891,7 @@ to push. Enrich the **source** (`update --body`, `link-pr`, relationships)
 and let sync carry it out.
 
 ```bash
-bin/worklog ticket-body 01J8X0M2QQ
+bin/wiki-ticket/worklog ticket-body 01J8X0M2QQ
 ```
 
 ### ia-ticket
@@ -905,7 +905,7 @@ matching generated pages (`releases/<tag>.md`, `prs/<num>.md`) — there's no
 separate preview subcommand for those, only for tickets.
 
 ```bash
-bin/worklog ia-ticket 01J8X0M2QQ
+bin/wiki-ticket/worklog ia-ticket 01J8X0M2QQ
 ```
 
 ### trace-check
@@ -914,8 +914,8 @@ Unlinked-evidence report: closed items missing plan / ticket / PR links.
 Warns by default; `--strict` exits 1 (use pre-release).
 
 ```bash
-bin/worklog trace-check
-bin/worklog trace-check --strict
+bin/wiki-ticket/worklog trace-check
+bin/wiki-ticket/worklog trace-check --strict
 ```
 
 **Scope** — the check covers items that are evidence for a release, and only
@@ -943,8 +943,8 @@ read from its `git_hash` front matter. Warns by default; `--strict` exits 1
 (used pre-release and inside the design-docs skill).
 
 ```bash
-bin/worklog doc-verify
-bin/worklog doc-verify --strict
+bin/wiki-ticket/worklog doc-verify
+bin/wiki-ticket/worklog doc-verify --strict
 ```
 
 Six verdicts, and the whole point is the first two:
@@ -995,8 +995,8 @@ skill's post-release step. `--check` reports what would be stamped and exits
 1, writing nothing.
 
 ```bash
-bin/worklog provenance-backfill
-bin/worklog provenance-backfill --check
+bin/wiki-ticket/worklog provenance-backfill
+bin/wiki-ticket/worklog provenance-backfill --check
 ```
 
 Frozen documents only, and that is the whole judgement: a live document
@@ -1017,11 +1017,11 @@ Read-only, no network — it reads `docs/.index/_inventory.json` and
 `_graph.json`, so run `ia-index` / `ia-graph` first if they're stale.
 
 ```bash
-bin/worklog find compaction                 # substring, case-insensitive
-bin/worklog find --type plan watermark      # narrow by doc_type
-bin/worklog find --links item/01KYZ5CY9P    # edges in and out of one node
-bin/worklog find --edge supersedes          # every edge of one type
-bin/worklog find --type adr --json          # machine-readable
+bin/wiki-ticket/worklog find compaction                 # substring, case-insensitive
+bin/wiki-ticket/worklog find --type plan watermark      # narrow by doc_type
+bin/wiki-ticket/worklog find --links item/01KYZ5CY9P    # edges in and out of one node
+bin/wiki-ticket/worklog find --edge supersedes          # every edge of one type
+bin/wiki-ticket/worklog find --type adr --json          # machine-readable
 ```
 
 | Flag | Meaning |
@@ -1091,8 +1091,8 @@ worktree's own root. The session doctor accepts either form.
   guard is exempted. Git does *not* run `pre-commit` for merge auto-commits,
   so without this a merge could silently land a stale roadmap, a smuggled
   corrupt line, or an unresolved conflict marker. If it blocks your merge on
-  the roadmap: `bin/worklog roadmap-render && git add -A && git commit
-  --no-edit`. If it blocks on resurrected events: `bin/worklog merge-rescue`.
+  the roadmap: `bin/wiki-ticket/worklog roadmap-render && git add -A && git commit
+  --no-edit`. If it blocks on resurrected events: `bin/wiki-ticket/worklog merge-rescue`.
 
 CI runs the same checks — including a PR-scoped step that validates every
 commit message in the PR range — on every push and PR, so bypassing a local

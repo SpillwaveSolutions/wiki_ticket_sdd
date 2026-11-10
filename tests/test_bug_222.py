@@ -9,7 +9,7 @@ import os
 import sys
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin", "wiki-ticket"))
 sys.path.insert(0, os.path.dirname(__file__))
 from render_roadmap import render  # noqa: E402
 from test_fold import write_log  # noqa: E402

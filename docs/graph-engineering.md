@@ -11,7 +11,7 @@ not "inspired by" — it already has the four things that name describes:
 explicit nodes with stable identity, typed edges between them, state that
 persists as an append-only log instead of a mutable table, and an index/router
 that turns the graph into pages a human or agent can read. "Graph engineering"
-just gave a name, in mid-2026, to what `bin/ia_graph.py`, the event log, and
+just gave a name, in mid-2026, to what `bin/wiki-ticket/ia_graph.py`, the event log, and
 the work taxonomy were already doing since this repo's first commits.
 
 That's not a coincidence. This project's whole premise is **visible WIP** —
@@ -24,12 +24,12 @@ the work visible*, but *is the shape of the work visible*.
 
 | Primitive | What it is here | Evidence |
 |---|---|---|
-| **Nodes** | Every work item gets a 128-bit ULID (48-bit timestamp + 80-bit entropy, Crockford base32) — lexicographic sort equals time sort. A deterministic variant exists specifically so two machines ingesting the same remote change produce the *same* node, not two. Level/kind taxonomy (epic → story → task → subtask; feature/bug/ops/triage) is normalized on fold, not just a label; `parent` (the hierarchy edge itself) flows through the same generic per-field fold as every other field. | `bin/ulid.py:35-58` (`new()`, `deterministic()`); `CLAUDE.md` "Work taxonomy"; `bin/fold.py:39-72` (taxonomy normalization), `:176-202` (`_apply_mutations`, the generic per-field fold that carries `parent`) |
-| **Typed edges** | Ten real edge types — `produces`, `belongs-to`, `targets`, `references`, `lands-in`, `supersedes`, `snapshot-of`, `implements`, `decides`, `verified-by` — each with a derived reverse. `build_graph()` walks every doc and item and actually emits them; nothing here is illustrative. | `bin/ia_graph.py:27-31` (the `REVERSE` map), `:42-106` (`build_graph`) → `docs/.index/_graph.json` |
-| **Persistent state** | State is never stored — it's *folded*. `.work/todo.jsonl` is an append-only, git-union-merged sequence of immutable events; current state is a pure function of that log (dedupe by event ID, sort by ULID, per-field last-writer-wins). This exists specifically so concurrent branches and concurrent agents don't clobber each other on merge. | `bin/fold.py`; `docs/adr/0001-event-log-fold-union-merge.md` |
-| **Index / router** | Real, but modest — call it what it is: an inventory plus a publish manifest, not a routing engine. `ia.py` builds a flat `wiki_key`/`doc_type` lookup; `ia_render.py` tracks a `render_hash`/`source_hash` per page so only what changed gets republished. `build_adjacency()` turns the edge list into forward/backward maps once per render pass, and every ticket/PR/release page is a thin projection over that adjacency. | `bin/ia.py` (inventory); `bin/ia_render.py:555-660` (manifest); `bin/ia_graph.py:118-141` (`build_adjacency`, `item_links`) |
+| **Nodes** | Every work item gets a 128-bit ULID (48-bit timestamp + 80-bit entropy, Crockford base32) — lexicographic sort equals time sort. A deterministic variant exists specifically so two machines ingesting the same remote change produce the *same* node, not two. Level/kind taxonomy (epic → story → task → subtask; feature/bug/ops/triage) is normalized on fold, not just a label; `parent` (the hierarchy edge itself) flows through the same generic per-field fold as every other field. | `bin/wiki-ticket/ulid.py:35-58` (`new()`, `deterministic()`); `CLAUDE.md` "Work taxonomy"; `bin/wiki-ticket/fold.py:39-72` (taxonomy normalization), `:176-202` (`_apply_mutations`, the generic per-field fold that carries `parent`) |
+| **Typed edges** | Ten real edge types — `produces`, `belongs-to`, `targets`, `references`, `lands-in`, `supersedes`, `snapshot-of`, `implements`, `decides`, `verified-by` — each with a derived reverse. `build_graph()` walks every doc and item and actually emits them; nothing here is illustrative. | `bin/wiki-ticket/ia_graph.py:27-31` (the `REVERSE` map), `:42-106` (`build_graph`) → `docs/.index/_graph.json` |
+| **Persistent state** | State is never stored — it's *folded*. `.work/todo.jsonl` is an append-only, git-union-merged sequence of immutable events; current state is a pure function of that log (dedupe by event ID, sort by ULID, per-field last-writer-wins). This exists specifically so concurrent branches and concurrent agents don't clobber each other on merge. | `bin/wiki-ticket/fold.py`; `docs/adr/0001-event-log-fold-union-merge.md` |
+| **Index / router** | Real, but modest — call it what it is: an inventory plus a publish manifest, not a routing engine. `ia.py` builds a flat `wiki_key`/`doc_type` lookup; `ia_render.py` tracks a `render_hash`/`source_hash` per page so only what changed gets republished. `build_adjacency()` turns the edge list into forward/backward maps once per render pass, and every ticket/PR/release page is a thin projection over that adjacency. | `bin/wiki-ticket/ia.py` (inventory); `bin/wiki-ticket/ia_render.py:555-660` (manifest); `bin/wiki-ticket/ia_graph.py:118-141` (`build_adjacency`, `item_links`) |
 
-`trace_check()` (`bin/ia_graph.py:163-189`) is the sharpest proof this is a real
+`trace_check()` (`bin/wiki-ticket/ia_graph.py:163-189`) is the sharpest proof this is a real
 graph and not decoration: it walks the actual edge set to find items with no
 `produces`/`references`/`lands-in` edge — i.e. work with no plan, no ticket, or
 no PR — and reports the gap. You can't run that check against a metaphor.
@@ -39,19 +39,19 @@ no PR — and reports the gap. You can't run that check against a metaphor.
 ```mermaid
 graph LR
     subgraph Nodes
-        ULID["bin/ulid.py<br/>stable ULID identity"]
+        ULID["bin/wiki-ticket/ulid.py<br/>stable ULID identity"]
         TAX["Work taxonomy<br/>epic / story / task / subtask"]
     end
     subgraph "Persistent State"
         LOG[(".work/todo.jsonl<br/>append-only events")]
-        FOLD["bin/fold.py<br/>fold -&gt; current state"]
+        FOLD["bin/wiki-ticket/fold.py<br/>fold -&gt; current state"]
     end
     subgraph "Typed Edges"
-        BG["bin/ia_graph.py<br/>build_graph()"]
+        BG["bin/wiki-ticket/ia_graph.py<br/>build_graph()"]
         GJSON[("docs/.index/_graph.json")]
     end
     subgraph "Index / Router"
-        INV["bin/ia.py<br/>inventory"]
+        INV["bin/wiki-ticket/ia.py<br/>inventory"]
         MANIFEST[("publish-manifest.json")]
     end
     ULID --> LOG
@@ -69,13 +69,13 @@ graph LR
 
 ```mermaid
 flowchart TD
-    A["worklog add"] -->|"new ULID (bin/ulid.py)"| B["create event appended<br/>.work/todo.jsonl"]
-    B --> C["bin/fold.py folds events<br/>-&gt; current item state"]
+    A["worklog add"] -->|"new ULID (bin/wiki-ticket/ulid.py)"| B["create event appended<br/>.work/todo.jsonl"]
+    B --> C["bin/wiki-ticket/fold.py folds events<br/>-&gt; current item state"]
     C --> D["build_graph() emits typed edges:<br/>belongs-to, produces, targets,<br/>references, lands-in"]
     D --> E[("docs/.index/_graph.json")]
     E --> F{"trace_check()"}
     F -->|"gap found"| G["worklog link / link-pr<br/>adds the missing edge"]
-    F -->|"fully linked"| H["bin/ia_render.py<br/>renders ticket / PR / release page"]
+    F -->|"fully linked"| H["bin/wiki-ticket/ia_render.py<br/>renders ticket / PR / release page"]
     G --> D
     H --> I[("publish-manifest.json")]
     I --> J["wiki-publish / ticket-sync<br/>pushed to wiki + tracker"]

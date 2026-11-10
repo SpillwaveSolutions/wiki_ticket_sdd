@@ -11,7 +11,7 @@ Regenerate the visual roadmap without blocking the current work:
    - From the repo root, run:
 
      ```
-     bin/worklog roadmap-render --viz=all
+     bin/wiki-ticket/worklog roadmap-render --viz=all
      ```
 
    - If `docs/roadmap.md` (or the `.work/*.jsonl` log alongside it) changed,

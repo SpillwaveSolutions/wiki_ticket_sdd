@@ -1,5 +1,5 @@
 {
- "git_hash": "e7db380",
+ "git_hash": "e291370",
  "pages": [
   {
    "frozen": false,
@@ -25,7 +25,7 @@
    "frozen": false,
    "page_name": "Index-Releases",
    "render": "as-is",
-   "render_hash": "d6926d33e1bf",
+   "render_hash": "671fe9ed1d51",
    "source": "docs/.index/rendered/releases.md",
    "title": "Releases Index",
    "truth_state": "current",
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "fcaddf55737c",
+   "render_hash": "f8902cb5c1ab",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -790,6 +790,16 @@
    "title": "Release v0.24.12",
    "truth_state": "shipped",
    "wiki_key": "release/v0.24.12"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.24.13",
+   "render": "as-is",
+   "render_hash": "8c7c1df20314",
+   "source": "docs/.index/rendered/releases/v0.24.13.md",
+   "title": "Release v0.24.13",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.24.13"
   },
   {
    "frozen": false,
@@ -5012,6 +5022,16 @@
    "wiki_key": "item/01M2XT2DGDWA6MYZZXCABSEMXW"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M73MV8GGW2N7Z8J71NGMQXDJ",
+   "render": "as-is",
+   "render_hash": "7fa995e2d1c9",
+   "source": "docs/.index/rendered/tickets/01M73MV8GGW2N7Z8J71NGMQXDJ.md",
+   "title": "Install the CLI under bin/wiki-ticket",
+   "truth_state": "open",
+   "wiki_key": "item/01M73MV8GGW2N7Z8J71NGMQXDJ"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "ADR-0001-event-log-fold-union-merge",
@@ -5148,9 +5168,9 @@
    "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "7aa9e0c04e54",
+   "render_hash": "e074af658c70",
    "source": "docs/user_guide/cli-reference.md",
-   "source_hash": "d83fd7ea3406",
+   "source_hash": "19278d154775",
    "title": "WikiTicket SDD \u2014 CLI Reference",
    "truth_state": "current",
    "wiki_key": "cli-reference"
@@ -5556,9 +5576,9 @@
    "frozen": false,
    "page_name": "Code-Walkthrough",
    "render": "doc+banner",
-   "render_hash": "9ad01e85dc99",
+   "render_hash": "0eb7061d62d9",
    "source": "docs/designs/current_code_walkthrough.md",
-   "source_hash": "3d743c6b1211",
+   "source_hash": "4a90449fc8e8",
    "title": "Worklog \u2014 Code Walkthrough",
    "truth_state": "current",
    "wiki_key": "design/current-code-walkthrough"
@@ -5568,9 +5588,9 @@
    "frozen": false,
    "page_name": "Design-Doc",
    "render": "doc+banner",
-   "render_hash": "0a87a7000cb8",
+   "render_hash": "e23d87a8c504",
    "source": "docs/designs/current_design_doc.md",
-   "source_hash": "9c1ebfa70a15",
+   "source_hash": "c4b573575a94",
    "title": "Worklog \u2014 Software Design Document",
    "truth_state": "current",
    "wiki_key": "design/current-design-doc"
@@ -5904,21 +5924,21 @@
    "frozen": false,
    "page_name": "Plugin-Guide",
    "render": "doc+banner",
-   "render_hash": "a180b7a7e6a8",
+   "render_hash": "e5a8cd2049b4",
    "source": "docs/user_guide/plugin-guide.md",
-   "source_hash": "6c798c6477fd",
+   "source_hash": "4803649ad3e1",
    "title": "WikiTicket SDD \u2014 Plugin Guide",
    "truth_state": "current",
    "wiki_key": "plugin-guide"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-09-22T07:31:18Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-11-10T21:11:56Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "511a40741b66",
+   "render_hash": "480057bbf4c2",
    "source": "docs/roadmap.md",
-   "source_hash": "65538697716e",
+   "source_hash": "e2a679ad96fb",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
@@ -6272,6 +6292,18 @@
    "wiki_key": "roadmap-snapshot/2026-09-19_v0.24.12-release"
   },
   {
+   "banner": "> **Snapshot** of release v0.24.13 (2026-11-10) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-11-10_v0.24.13-release",
+   "render": "doc+banner",
+   "render_hash": "4e774389e900",
+   "source": "docs/roadmap/2026-11-10_v0.24.13-release.md",
+   "source_hash": "e2a679ad96fb",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-11-10_v0.24.13-release"
+  },
+  {
    "banner": "> **Snapshot** (2026-07-18) \u2014 frozen record. The current version is [[Roadmap]].",
    "frozen": true,
    "page_name": "Roadmap-2026-07-18_v0.2-roadmap",
@@ -6360,9 +6392,9 @@
    "frozen": false,
    "page_name": "Worklog-Spec",
    "render": "doc+banner",
-   "render_hash": "c886406b0e38",
+   "render_hash": "89530f646ea5",
    "source": "docs/worklog-spec.md",
-   "source_hash": "c2d299566247",
+   "source_hash": "fed21a1dbfdc",
    "title": "Worklog: Visible-WIP Work Tracking Spec",
    "truth_state": "current",
    "wiki_key": "spec"
@@ -6420,16 +6452,16 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "78aa233d73c7",
+   "render_hash": "e8aa7e19c3f1",
    "source": "docs/user_guide/user-guide.md",
-   "source_hash": "26793da5a34d",
+   "source_hash": "4582ddb0a485",
    "title": "WikiTicket SDD \u2014 User Guide",
    "truth_state": "current",
    "wiki_key": "user-guide"
   }
  ],
  "sidebar": {
-  "render_hash": "f674f70a5f08",
+  "render_hash": "784fa8a4fdbd",
   "source": "docs/.index/rendered/_Sidebar.md"
  },
  "version": 1

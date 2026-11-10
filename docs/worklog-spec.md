@@ -12,7 +12,7 @@ wiki_key: spec
 
 **Changes since 1.8:** New §13.4 — ticket bodies must be readable by a junior dev or a PM (what + why, no ULIDs in the reading path); the `body` field is authored via `worklog add/update --body` and plain description lines under task checkboxes in `## Tasks`, and a marker-only ticket body is a policy violation. The field always existed in the canonical hash (§10.3) and sync path; 1.9 makes authoring it mandatory for skill-created items.
 
-**Changes since 1.7:** §4.2's `ticketing.system` / `wiki.system` enums widened to name what the skill path already reached — `github | gitlab | jira | ado | linear | codecatalyst | other | none` and `github-wiki | gitlab-wiki | ado-wiki | confluence | other | none`. The enum is explicitly **advisory**: `bin/worklog` branches only on `none` (invariant §15.6); every other value is a name the edge skills resolve to available tooling, and `other` is the sanctioned value for unlisted systems (real system named in `options:`). Known caveats ride with the names in the skills: AWS CodeCatalyst is closed to new customers since 2025-11-07 (existing spaces work); Linear has no git remote to detect (CLI/MCP evidence only); GCP has no native tracker, so no `gcp` value exists.
+**Changes since 1.7:** §4.2's `ticketing.system` / `wiki.system` enums widened to name what the skill path already reached — `github | gitlab | jira | ado | linear | codecatalyst | other | none` and `github-wiki | gitlab-wiki | ado-wiki | confluence | other | none`. The enum is explicitly **advisory**: `bin/wiki-ticket/worklog` branches only on `none` (invariant §15.6); every other value is a name the edge skills resolve to available tooling, and `other` is the sanctioned value for unlisted systems (real system named in `options:`). Known caveats ride with the names in the skills: AWS CodeCatalyst is closed to new customers since 2025-11-07 (existing spaces work); Linear has no git remote to detect (CLI/MCP evidence only); GCP has no native tracker, so no `gcp` value exists.
 
 **Changes since 1.6:** the work-taxonomy fields land (docs/plans/2026-07-18-work-taxonomy.md). §5.4 splits `type` into two orthogonal axes — `level` (epic|story|task|subtask) and `kind` (feature|bug|ops|triage) — and adds `milestone` (the release axis); `type` survives as a deprecated alias the fold normalizes on load (`epic→epic/feature`, `story→story/feature`, `task→task/feature`, `subtask→subtask/feature`, `bug→task/bug`) and the next compaction migrates physically. §10.3's canonical-hash field list becomes `{title, body, level, kind, milestone, status, priority, parent, labels, assignee}` — a one-time hash churn: the first sync after upgrading re-pushes every in-scope item once (idempotent by marker, so no duplicates). §12 gains the flag-gated, propose-only `classify` skill row and taxonomy pointers. §18 gains step 12. Migration note: `docs/migrations/0001-type-split.md`.
 
@@ -108,7 +108,7 @@ docs/
 
 ### 4.1 The agent file — policy only
 
-Prose the model reads. **Contains no values the scripts need**, which is what closes the Claude Code / Grok Build parity question: every real setting is in `.work/config.yml`, so the agent file is a thin policy document and `AGENTS.md` is a symlink to `CLAUDE.md`. One file, one policy, no fork. Skills are discovered per-harness (`.claude/skills/`, `.grok/skills/`); the `bin/worklog` CLI is identical under both.
+Prose the model reads. **Contains no values the scripts need**, which is what closes the Claude Code / Grok Build parity question: every real setting is in `.work/config.yml`, so the agent file is a thin policy document and `AGENTS.md` is a symlink to `CLAUDE.md`. One file, one policy, no fork. Skills are discovered per-harness (`.claude/skills/`, `.grok/skills/`); the `bin/wiki-ticket/worklog` CLI is identical under both.
 
 Do not write harness-specific notes into the policy. "Grok reads this file too" is a fact about Grok that only Claude will ever read.
 
@@ -444,7 +444,7 @@ What survives from 1.2 is the shape of the boundary, not the mechanism:
 
 ### 9.1 Config names systems; the core never branches on them
 
-`.work/config.yml`'s `ticketing.system` and `wiki.system` name the edge (`github`, `jira`, `github-wiki`, `confluence`, …). The skills read those names; `bin/worklog` never branches on them beyond checking for `none` (invariant §15.6). Swapping trackers is a config edit, not a code change.
+`.work/config.yml`'s `ticketing.system` and `wiki.system` name the edge (`github`, `jira`, `github-wiki`, `confluence`, …). The skills read those names; `bin/wiki-ticket/worklog` never branches on them beyond checking for `none` (invariant §15.6). Swapping trackers is a config edit, not a code change.
 
 ### 9.2 The `ticket-sync` skill — push side
 
@@ -667,7 +667,7 @@ The shipped set:
 | Skill | Trigger | Behavior |
 |---|---|---|
 | `plan-capture` | Plan mode exits; user says "capture this plan" | Writes `docs/plans/<date>-<slug>.md`, parses the `## Tasks` checkboxes → items with `plan` set, appends `create` events, regenerates the roadmap. |
-| `work-track` | Any request that produces work; "mark that in progress"; mid-flight discovery | add / update / close via `bin/worklog`. Discoveries get `--unplanned --discovered-during <id>`. (Replaces 1.3's `work-add` / `work-update` / `work-close` trio — one skill, three subcommands.) |
+| `work-track` | Any request that produces work; "mark that in progress"; mid-flight discovery | add / update / close via `bin/wiki-ticket/worklog`. Discoveries get `--unplanned --discovered-during <id>`. (Replaces 1.3's `work-add` / `work-update` / `work-close` trio — one skill, three subcommands.) |
 | `plan-next` | "what should we do next?" | Folds log. Filters open, unblocked (`depends_on` all closed), sorts by priority then epic order. Presents top N with rationale. **Read-only.** |
 | `ticket-sync` | "sync tickets"; a plan closes out | Push per §9.2 and pull per §10 — model work over the tracker's CLI/MCP; ingests via `worklog ingest`/`worklog conflict`. |
 | `wiki-publish` | "publish to the wiki"; after a roadmap snapshot | Publish per §9.3 — ledger-driven, frozen rules enforced. |
@@ -833,7 +833,7 @@ Worth being precise, because this is the one place the pipeline isn't determinis
 
 So the split is:
 
-1. `bin/worklog status --kind timecard --emit-facts` folds the log and emits per-day structured facts (items closed, items opened, unplanned items and what they interrupted, commits touched if available) to stdout. Deterministic.
+1. `bin/wiki-ticket/worklog status --kind timecard --emit-facts` folds the log and emits per-day structured facts (items closed, items opened, unplanned items and what they interrupted, commits touched if available) to stdout. Deterministic.
 2. The `status-report` **skill** reads those facts and writes the prose.
 3. `worklog status --write` takes the prose on stdin, adds front matter with `through`, writes the file, commits, publishes.
 
@@ -916,7 +916,7 @@ Violating any of these is a bug, not a tradeoff:
 ## 17. Open questions
 
 1. **Does `plan-next` write anything?** Spec'd read-only. If it should mark the chosen items `in_progress`, that's a different skill (`plan-start`) — keep them separate.
-2. ~~**Grok build parity.**~~ **Closed in 1.1.** All settings live in `.work/config.yml`, so the agent file is policy-only and `AGENTS.md` is a symlink to `CLAUDE.md`. Skills are discovered per-harness; `bin/worklog` is identical under both.
+2. ~~**Grok build parity.**~~ **Closed in 1.1.** All settings live in `.work/config.yml`, so the agent file is policy-only and `AGENTS.md` is a symlink to `CLAUDE.md`. Skills are discovered per-harness; `bin/wiki-ticket/worklog` is identical under both.
 3. **Do epics sync as remote epics, or only as labels?** Jira epics are a real type; GitHub Issues has no epic. `capabilities.types` covers it, but the roadmap grouping degrades on GitHub. Milestones as a fallback?
 4. ~~**Does the timecard need hours?**~~ **Closed in 1.4.** Narrative only — a sentence or two per day; no hours, no activity model. `include_hours` stays false and is now dead config. The original question, for the record: Spec'd `include_hours: false` — narrative only. If a timecard is ever going to back an invoice, hours are the whole point, and the log has no duration data: `in_progress` → `done` elapsed time counts overnight and weekends. Getting real hours means either a `worklog start/stop` (an activity model this spec doesn't have) or reading git commit timestamps as a proxy (rough, but free, and it's what actually happened). **Decide before building `timecard`** — it's the difference between a narrative feature and a time-tracking subsystem.
 5. **Multi-repo.** One roadmap across three repos is a real need and this spec has no answer. Probably a separate aggregator reading N logs. Note the timecard has the same problem, and worse: a consultant's week spans repos, so a per-repo timecard is the wrong unit.
@@ -929,7 +929,7 @@ Violating any of these is a bug, not a tradeoff:
 
 ## Appendix A — Reference implementation
 
-`bin/fold.py`, `bin/ulid.py`, `bin/worklog`, and the test suite ship alongside this spec and are **executable, not illustrative**. 32 tests pass. The end-to-end union-merge scenario in §8.1 has been run against a real git repo: two branches editing the same item merged with no conflict, and both label additions plus both scalar edits survived.
+`bin/wiki-ticket/fold.py`, `bin/wiki-ticket/ulid.py`, `bin/wiki-ticket/worklog`, and the test suite ship alongside this spec and are **executable, not illustrative**. 32 tests pass. The end-to-end union-merge scenario in §8.1 has been run against a real git repo: two branches editing the same item merged with no conflict, and both label additions plus both scalar edits survived.
 
 Where prose and code disagree, the tests are the tiebreak — they encode §6 step by step.
 
@@ -997,7 +997,7 @@ docs/plans/  docs/status/  .claude/skills/
 
 ### The one non-obvious bit
 
-`bin/worklog`'s `append()` is **the only writer in the repo** (invariant §15.4). Single `os.write()` under `O_APPEND`, always newline-terminated, body capped at `MAX_BODY = 2048` — a module constant with a comment pointing at `PIPE_BUF`, deliberately not a config key.
+`bin/wiki-ticket/worklog`'s `append()` is **the only writer in the repo** (invariant §15.4). Single `os.write()` under `O_APPEND`, always newline-terminated, body capped at `MAX_BODY = 2048` — a module constant with a comment pointing at `PIPE_BUF`, deliberately not a config key.
 
 ### Verified end to end
 

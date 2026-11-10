@@ -1,5 +1,5 @@
 {
-  "$comment": "Unified doc frontmatter/sidecar schema (plan ia-content-model §5) for documents — things people read (plan, roadmap, roadmap-snapshot, status, design, adr, guide). Graph/execution entities (today: item; release and code-change join later) live in schema/entity.schema.json instead. Mirrored in bin/ia.py DOC_SCHEMA — same deliberate duplication as adr.schema.json / bin/adr.py. Per-type required subsets live in x-required-by-type (§5.4); the mini validator applies them to the merged record (frontmatter ∪ sidecar).",
+  "$comment": "Unified doc frontmatter/sidecar schema (plan ia-content-model §5) for documents — things people read (plan, roadmap, roadmap-snapshot, status, design, adr, guide). Graph/execution entities (today: item; release and code-change join later) live in schema/entity.schema.json instead. Mirrored in bin/wiki-ticket/ia.py DOC_SCHEMA — same deliberate duplication as adr.schema.json / bin/wiki-ticket/adr.py. Per-type required subsets live in x-required-by-type (§5.4); the mini validator applies them to the merged record (frontmatter ∪ sidecar).",
   "type": "object",
   "required": ["wiki_key", "doc_type", "truth_state"],
   "properties": {

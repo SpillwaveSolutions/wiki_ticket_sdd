@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.24.13 — 2026-11-10
+
+- **Installed scripts live in `bin/wiki-ticket/`, not `bin/`.** `worklog init` copies the CLI there, so a repo that already uses `bin/` for its own tools no longer picks up `fold.py`, `ulid.py`, `ia.py`, and the rest as siblings or as `PATH` commands. The command is `bin/wiki-ticket/worklog`. Re-run `/worklog:init` to upgrade: it re-copies the scripts and removes a `bin/<name>` left from 0.24.12 only when that file is still the stock script. A `bin/` file the repo owns is left alone, and `bin/` is removed only when nothing else is in it. `worklog uninstall` removes `bin/wiki-ticket/` and those same stock leftovers.
+
+
 ## 0.24.12 — 2026-09-19
 
 - **CI can own ticket sync (#413).** `ticketing.sync_owner: ci` makes `worklog-post-merge` the syncer: it names the adapter (`WORKLOG_TICKET_ADAPTER`, since a runner cannot discover it), caches `.work/sync-state.json`, runs `worklog sync --push-only --force` with the bot token before rendering, and stages `.work/todo.jsonl` with the docs so the link events ride the derived-docs PR. A manual push sync in a CI-owned repo exits 1 without `--force`; `--report`, `--explain`, and `--pull-only` stay open; `session-doctor` notes the ownership. `ticketing.ci_dedupe_check: true` adds `worklog dedupe --dry-run --check` to every PR run (new `--check`: exit 1 on an agreed duplicate group), skipped when the token is absent. New helper `sync_dispatch.ticketing_config()`. This repository stays `sync_owner: human`.

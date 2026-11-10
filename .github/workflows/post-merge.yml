@@ -54,7 +54,7 @@ jobs:
           done
 
       - name: resolve triggers.pr-merge
-        run: python3 bin/worklog triggers pr-merge | tee /tmp/pr-merge-triggers.json
+        run: python3 bin/wiki-ticket/worklog triggers pr-merge | tee /tmp/pr-merge-triggers.json
 
       # ticketing.sync_owner: ci (#413): CI is the authoritative syncer.
       # resolve_adapter() reads only WORKLOG_TICKET_ADAPTER or the gitignored
@@ -74,16 +74,16 @@ jobs:
         env:
           WORKLOG_TICKET_ADAPTER: adapters/github/adapter
         run: |
-          owner=$(python3 -c 'import sys; sys.path.insert(0, "bin"); import sync_dispatch as s; print(s.ticketing_config().get("sync_owner", "human"))')
+          owner=$(python3 -c 'import sys; sys.path.insert(0, "bin/wiki-ticket"); import sync_dispatch as s; print(s.ticketing_config().get("sync_owner", "human"))')
           [ "$owner" = "ci" ] || { echo "ticketing.sync_owner is $owner; sync stays advisory"; exit 0; }
-          bin/worklog sync --push-only --force --retry-base-delay 1
+          bin/wiki-ticket/worklog sync --push-only --force --retry-base-delay 1
 
       - name: regenerate derived docs
         run: |
           python3 -c 'import json,sys; a=json.load(open("/tmp/pr-merge-triggers.json"))["actions"]; sys.exit(0 if "roadmap-render" in a else 1)' || exit 0
-          bin/worklog roadmap-render
-          bin/worklog ia-inventory
-          bin/worklog ia-manifest
+          bin/wiki-ticket/worklog roadmap-render
+          bin/wiki-ticket/worklog ia-inventory
+          bin/wiki-ticket/worklog ia-manifest
 
       # A real drift finding exits 1; capture it anyway and post it. A repo
       # with no adapter prints the local-only line, which is a mode, not
@@ -91,7 +91,7 @@ jobs:
       - name: sync drift report
         run: |
           python3 -c 'import json,sys; a=json.load(open("/tmp/pr-merge-triggers.json"))["actions"]; sys.exit(0 if any(x=="ticket-sync" or x.startswith("ticket-sync:") for x in a) else 1)' || exit 0
-          bin/worklog sync --report > /tmp/sync-report.txt 2>&1 || true
+          bin/wiki-ticket/worklog sync --report > /tmp/sync-report.txt 2>&1 || true
           cat /tmp/sync-report.txt
           if grep -qi "no adapter configured\|LOCAL_ONLY\|local-only" /tmp/sync-report.txt; then
             echo "no adapter configured; skipping the PR comment"
@@ -118,7 +118,7 @@ jobs:
           git checkout -b "$branch"
           git add docs .work/todo.jsonl
           WORKLOG_SKIP_BRANCH_GUARD=1 hooks/pre-commit
-          python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
+          python3 bin/wiki-ticket/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
           git commit -m "chore(worklog): post-merge regenerate derived docs (#${{ github.event.pull_request.number }})"
           git push -u origin HEAD
           gh pr create --head "$branch" --base main \

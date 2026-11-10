@@ -39,14 +39,14 @@ loads skills without a rewrite.
 ## Cloud Cursor (the Grok Bot hole)
 
 A Grok Bot coding session usually opens **a product checkout**, not this
-plugin repo. The cloud agent sees `AGENTS.md` / `CLAUDE.md` and `bin/worklog`
+plugin repo. The cloud agent sees `AGENTS.md` / `CLAUDE.md` and `bin/wiki-ticket/worklog`
 if they are vendored there. It does **not** see your local Claude or Grok
 plugin cache.
 
 Do this:
 
 1. Claim identity (`--actor` / `SECOND_BRAIN_IDENTITY`).
-2. File the work in the log before doing it (`bin/worklog add`).
+2. File the work in the log before doing it (`bin/wiki-ticket/worklog add`).
 3. One session per worktree. See [ISOLATION.md](ISOLATION.md).
 4. Merge when green. Never squash (ADR-0008).
 5. Never invent a private remote.

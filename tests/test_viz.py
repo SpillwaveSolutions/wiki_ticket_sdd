@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for bin/viz_mermaid.py -- Mermaid roadmap diagrams.
+"""Tests for bin/wiki-ticket/viz_mermaid.py -- Mermaid roadmap diagrams.
 
 Plan: docs/plans/2026-07-19-grok-compat-and-mermaid-viz.md. Everything here
 must be byte-deterministic (the pre-commit freshness gate diffs regenerated
@@ -12,7 +12,7 @@ import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin", "wiki-ticket"))
 sys.path.insert(0, os.path.dirname(__file__))
 import ulid  # noqa: E402
 import viz_mermaid  # noqa: E402
@@ -160,7 +160,7 @@ class TestCli(unittest.TestCase):
             open(os.path.join(self.dir, ".work", f), "w").close()
 
     def wl(self, *args):
-        p = subprocess.run([sys.executable, "bin/worklog", *args],
+        p = subprocess.run([sys.executable, "bin/wiki-ticket/worklog", *args],
                            cwd=self.dir, capture_output=True, text=True)
         self.assertEqual(p.returncode, 0, p.stderr)
         return p.stdout.strip()

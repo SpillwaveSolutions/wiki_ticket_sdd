@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Plugin hooks fire in every session; silence outside worklog repos.
-[ -x bin/worklog ] || exit 0
+[ -x bin/wiki-ticket/worklog ] || exit 0
 
 # Fires on every prompt — keep it to one short line.
 #
@@ -11,9 +11,9 @@
 python3 - <<'PY'
 import json, os, sys
 
-sys.path.insert(0, os.path.join(os.getcwd(), "bin"))
+sys.path.insert(0, os.path.join(os.getcwd(), "bin", "wiki-ticket"))
 note = ("worklog policy: if this request produces work, record it first "
-        "(bin/worklog add / work-track skill), move items in_progress/done "
+        "(bin/wiki-ticket/worklog add / work-track skill), move items in_progress/done "
         "as you go, and roadmap-render before committing.")
 try:
     payload = json.load(sys.stdin)

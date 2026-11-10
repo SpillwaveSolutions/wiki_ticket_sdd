@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for two bug tickets in bin/worklog.
+"""Tests for two bug tickets in bin/wiki-ticket/worklog.
 
 #221 -- `roadmap-snapshot` used to copy docs/roadmap.md as-is, so a snapshot
 could freeze a picture that predated the last log write.
@@ -9,7 +9,7 @@ structured link, not a string) and `id` (identity, not data), so a later
 sync crashed reading the corrupted value.
 
 Sandbox subprocess style (see tests/test_snapshot.py, tests/test_resolve.py):
-every test runs `bin/worklog` against a scratch tempdir, never the real log.
+every test runs `bin/wiki-ticket/worklog` against a scratch tempdir, never the real log.
 """
 import os
 import shutil
@@ -20,7 +20,7 @@ import time
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-WORKLOG = os.path.join(ROOT, "bin", "worklog")
+WORKLOG = os.path.join(ROOT, "bin", "wiki-ticket", "worklog")
 
 
 def run(cwd, *args):

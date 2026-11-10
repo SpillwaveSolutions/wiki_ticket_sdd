@@ -45,7 +45,7 @@ class TestCompactCannotSkipInvariants(unittest.TestCase):
         self.assertIn("verify working tree", self.compact)
         self.assertIn("hooks/pre-commit", self.compact)
         compact_body = self.compact.split("name: commit via PR")[0]
-        self.assertIn("python3 bin/compact.py --merge-check", compact_body)
+        self.assertIn("python3 bin/wiki-ticket/compact.py --merge-check", compact_body)
         self.assertIn("gh pr merge --auto --merge", self.compact)
 
 

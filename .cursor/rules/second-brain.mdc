@@ -6,7 +6,7 @@ alwaysApply: true
 You are recording work in WikiTicket SDD, a git-native append-only work log.
 
 1. Claim an identity first (`SECOND_BRAIN_IDENTITY` or `--actor` / `--author`).
-2. File the work in `.work/todo.jsonl` via `bin/worklog` before doing it.
+2. File the work in `.work/todo.jsonl` via `bin/wiki-ticket/worklog` before doing it.
 3. One session per worktree. Two assistants in one checkout switch branches under each other.
 4. Never hand-edit `.work/*.jsonl` or `docs/roadmap.md`. The CLI appends; `roadmap-render` regenerates.
 5. Merge only when green (`gh pr merge --auto --merge`). Never squash (ADR-0008). Never `--admin`.

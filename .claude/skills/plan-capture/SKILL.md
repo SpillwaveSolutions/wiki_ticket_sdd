@@ -1,8 +1,8 @@
 ---
 name: plan-capture
 metadata:
-  version: "0.24.12"
-description: 'Capture an approved plan as tracked work items. Use when exiting plan mode, when the user approves a plan, or says "capture this plan". Writes docs/plans/<date>-<slug>.md and appends the plan''s tasks to .work/todo.jsonl via bin/worklog.'
+  version: "0.24.13"
+description: 'Capture an approved plan as tracked work items. Use when exiting plan mode, when the user approves a plan, or says "capture this plan". Writes docs/plans/<date>-<slug>.md and appends the plan''s tasks to .work/todo.jsonl via bin/wiki-ticket/worklog.'
 ---
 
 # Plan capture
@@ -24,19 +24,19 @@ description: 'Capture an approved plan as tracked work items. Use when exiting p
 
    Captured items are `kind:feature` by design — a plan's tasks deliver
    planned value. If a captured task is really a defect, retag it after
-   capture: `bin/worklog update <ulid> --kind bug`.
+   capture: `bin/wiki-ticket/worklog update <ulid> --kind bug`.
 
 2. Save it to a temp file and run:
 
-       bin/worklog plan-capture --slug <kebab-slug> --title "<plan title>" \
+       bin/wiki-ticket/worklog plan-capture --slug <kebab-slug> --title "<plan title>" \
            --body "<epic description a junior dev/PM can read>" --file <tempfile>
 
-3. Run `bin/worklog roadmap-render`, then `bin/worklog ia-index` (refreshes
+3. Run `bin/wiki-ticket/worklog roadmap-render`, then `bin/wiki-ticket/worklog ia-index` (refreshes
    sidecars, inventory, rendered Home/Sidebar/indexes, and the publish
    manifest so the new plan is navigable), then commit `docs/plans/`,
    `docs/roadmap.md`, `docs/.index/`, and `.work/todo.jsonl` together.
 
-4. Publish in the background — but only what `bin/worklog triggers plan-capture`
+4. Publish in the background — but only what `bin/wiki-ticket/worklog triggers plan-capture`
    lists. Spawn ONE background subagent (Agent tool with `run_in_background`)
    whose prompt is: run those actions (ticket-sync skill flow for the newly
    created items; wiki-publish for the new plan doc, key `plan/<slug>`), and
@@ -45,7 +45,7 @@ description: 'Capture an approved plan as tracked work items. Use when exiting p
    notification arrives. If background agents are unavailable in the harness,
    run the listed publishes inline after the first implementation commit
    instead — visibility may lag but never blocks. Whichever way it runs, the
-   publishing step ends by re-running `bin/worklog ia-index` and committing
+   publishing step ends by re-running `bin/wiki-ticket/worklog ia-index` and committing
    `docs/.index/`: publishing writes each page's live wiki location back into
    the ledger, which leaves the generated inventory stale, and the IA gates
    are hard — the next commit fails otherwise. One pass converges, because a

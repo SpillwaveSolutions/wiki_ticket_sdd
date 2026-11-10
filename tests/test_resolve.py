@@ -31,7 +31,7 @@ class ResolveTest(unittest.TestCase):
 
     def run_wl(self, *args):
         return subprocess.run(
-            [sys.executable, os.path.join(self.dir, "bin", "worklog"), *args],
+            [sys.executable, os.path.join(self.dir, "bin", "wiki-ticket", "worklog"), *args],
             cwd=self.dir, capture_output=True, text=True)
 
     def wl(self, *args):

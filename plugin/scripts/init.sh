@@ -79,16 +79,60 @@ fi
 wrote=()
 skipped=()
 
-# --- bin/ and hooks/: always re-copied (init on an installed repo IS the upgrade path) ---
-mkdir -p bin hooks
+
+# sha256 of each script as shipped in bin/ at v0.24.12. init removes that
+# exact file on upgrade and will not touch any other bytes.
+legacy_sha() {
+  case "$1" in
+    worklog) echo "6e2722e167ff45df1c633138bda084df3663e4e9d842527ff77a7af5ead483a4" ;;
+    fold.py) echo "8096b7a1dcdd2728bb7530bb1a3c6e7d8461e7152a613bf28b972bdcbe5bd99a" ;;
+    ulid.py) echo "e26fb58e0d063d568eb117d494a04646010a11da66290131f33256d101f0d4e6" ;;
+    render_roadmap.py) echo "c9b89d6d73bfb2d39c91c2578b5ebc1fe29f81663ec257da5de9d59dc6c30dd5" ;;
+    viz_mermaid.py) echo "1e926ef333b392e99d673879fd97617fb5347f7e445536296f6ffa07039593d7" ;;
+    plan_capture.py) echo "b03d8e49c7bc4bd1ea7457c37f832c3120f9a074de507fd0d763fb81c2d68209" ;;
+    compact.py) echo "7ea62cd44c81d985b64446b54f10fc00c9e8f8cef77f2539c14594cd567088c0" ;;
+    adr.py) echo "251a0eef5a2add6ae6fdf8e7d960a549655a66632ff331a77a262019de723f4d" ;;
+    ia.py) echo "a8f360e1499ee517ad625102bf82ffb8626c5f0719b6ac581d8c75a688b6af6f" ;;
+    ia_render.py) echo "2363f89f9fe4d5abe8338e34c11768806750569b92c318bd3ce16a410b36fbe1" ;;
+    ia_graph.py) echo "39e3637d341d81c09327f017b30de25f22ea824a82702e4a33677762b7f73e26" ;;
+    canonical.py) echo "2d05ccf79ff862684312b8a16cfba98e0d9c9b270127c62ad37ae6b4df9aceda" ;;
+    sync_dispatch.py) echo "453fde400f10c8a2e6f51edc51d5feac4d0c1617655bc7181cd8d59c1c9a679d" ;;
+    session.py) echo "6e715bfae7e02a65d78bc93bf657823f1275cc7b02f436dfc85ad3df8c9536d9" ;;
+    item_fields.py) echo "be7796bd8958595aea1a16f0fadb8858fd32b483e5297a8b72e347c5d96929d6" ;;
+    wiki_flavor.py) echo "f7e148ce1b591201fb3909a336c5db5eb349f90543fd1c1197930f6b00e6d82f" ;;
+    changelog.py) echo "fc427bba6c9ae0021f132f8603a32d81ffb4b0e4a5f3bee06318ac88dc312b33" ;;
+    doc_verify.py) echo "e4bb7de6bd5bf6a7777a94f8fbc412ff70b02a6bd7060d4bf1cd6b45555edfb2" ;;
+    provenance.py) echo "3fd95f2e0b4a65900cb1080fd7784619dc5c2a4d12ad6b05d47cafbec5ad6d73" ;;
+    published.py) echo "552db668c3bce34cf54176fb405b6c1b8b5a82e40cd55980e9a51a76e5ae39bf" ;;
+    triggers.py) echo "1e854e4b37bba0b33f309e4aa48d0361286d97acef323ddcbfb2a16f14c16b40" ;;
+    *) echo "" ;;
+  esac
+}
+
+# --- bin/wiki-ticket/ and hooks/: always re-copied (init on an installed repo IS the upgrade path) ---
+# Scripts used to land in bin/ itself. That collided with the repo's own tools
+# and put fold.py, ulid.py, ia.py, ... on PATH. They now live in one directory.
+mkdir -p bin/wiki-ticket hooks
 for f in worklog fold.py ulid.py render_roadmap.py viz_mermaid.py plan_capture.py compact.py adr.py \
          ia.py ia_render.py ia_graph.py canonical.py sync_dispatch.py session.py \
          item_fields.py wiki_flavor.py changelog.py \
          doc_verify.py provenance.py published.py triggers.py; do
-  cp -p "$PLUGIN_ROOT/scripts/$f" "bin/$f"
-  chmod +x "bin/$f"
-  wrote+=("bin/$f")
+  cp -p "$PLUGIN_ROOT/scripts/$f" "bin/wiki-ticket/$f"
+  chmod +x "bin/wiki-ticket/$f"
+  wrote+=("bin/wiki-ticket/$f")
+  # Retire the pre-0.24.13 copy only when it is still the stock script.
+  # A foreign bin/$f (the repo's own tool) is left alone.
+  if [ -f "bin/$f" ]; then
+    legacy=$(legacy_sha "$f")
+    have=$(sha256sum "bin/$f" | awk '{print $1}')
+    if [ "$have" = "$legacy" ] || cmp -s "bin/$f" "bin/wiki-ticket/$f"; then
+      rm "bin/$f"
+      wrote+=("removed legacy bin/$f")
+    fi
+  fi
 done
+rm -rf bin/__pycache__
+rmdir bin 2>/dev/null || true
 for f in pre-commit pre-merge-commit commit-msg; do
   cp -p "$PLUGIN_ROOT/scripts/$f" "hooks/$f"
   chmod +x "hooks/$f"

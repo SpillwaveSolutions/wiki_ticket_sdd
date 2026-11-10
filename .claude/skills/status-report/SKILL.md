@@ -1,7 +1,7 @@
 ---
 name: status-report
 metadata:
-  version: "0.24.12"
+  version: "0.24.13"
 description: 'Generate a status report. Use when asked for a status report, a standup summary, "what changed this week", or "what did we ship". Writes docs/status/<date>-<kind>.md, commits, and publishes — never paste an unrecorded status into chat.'
 ---
 
@@ -11,7 +11,7 @@ description: 'Generate a status report. Use when asked for a status report, a st
    `weekly` (the stakeholder rollup — epic-level), or `timecard` (the billing
    narrative — a sentence or two per day; §17 Q4 is closed: no hours).
 
-2. Run `bin/worklog status --kind <kind> --emit-facts` and read the JSON.
+2. Run `bin/wiki-ticket/worklog status --kind <kind> --emit-facts` and read the JSON.
    For a timecard, add `--since YYYY-MM-DD --until YYYY-MM-DD` when the ask
    names a window (default: the last 7 days). Every claim in the report comes
    from these facts — not from memory of the session.
@@ -32,12 +32,12 @@ description: 'Generate a status report. Use when asked for a status report, a st
    THE UNPLANNED SECTION IS THE POINT — always include it (in a timecard, as
    prose in the day's paragraph, never as a percentage).
 
-4. Pipe the prose to `bin/worklog status --kind <kind> --write` (timecard:
+4. Pipe the prose to `bin/wiki-ticket/worklog status --kind <kind> --write` (timecard:
    repeat the same `--since`/`--until`; the file lands at
    `docs/status/<until>-timecard.md`). Commit the report file, together with
    the log/roadmap if they were touched.
 
-5. Run `bin/worklog triggers status-report`. Publish via the wiki-publish
+5. Run `bin/wiki-ticket/worklog triggers status-report`. Publish via the wiki-publish
    skill flow (key `status/<date>-<kind>`; timecard:
    `status/<until-date>-timecard`) only if `wiki-publish` or
    `wiki-publish:status` is listed. An empty list means write the file and

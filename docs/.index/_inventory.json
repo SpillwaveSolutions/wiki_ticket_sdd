@@ -842,11 +842,11 @@
    "wiki_key": "design/2026-09-19_v0.24.12-release"
   },
   {
-   "branch": "chore/post-release-v0-24-12",
+   "branch": "feat/nest-worklog-bin",
    "canonical_key": "design/current-code-walkthrough",
    "doc_type": "design",
    "generated_at": "2026-09-21T00:00:00Z",
-   "git_hash": "2160410a147a5330f15734fa5a1af69ccd6cca5a",
+   "git_hash": "535fe72629781a75ccdef86e25c47d3a3ab8a42f",
    "release": "v0.24.12",
    "roadmap": "docs/roadmap.md",
    "slug": "current_code_walkthrough",
@@ -858,11 +858,11 @@
    "wiki_key": "design/current-code-walkthrough"
   },
   {
-   "branch": "chore/post-release-v0-24-12",
+   "branch": "feat/nest-worklog-bin",
    "canonical_key": "design/current-design-doc",
    "doc_type": "design",
    "generated_at": "2026-09-21T00:00:00Z",
-   "git_hash": "2160410a147a5330f15734fa5a1af69ccd6cca5a",
+   "git_hash": "535fe72629781a75ccdef86e25c47d3a3ab8a42f",
    "release": "v0.24.12",
    "roadmap": "docs/roadmap.md",
    "slug": "current_design_doc",
@@ -1539,11 +1539,11 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-09-22T07:31:18Z",
-   "git_hash": "e7db380",
+   "generated_at": "2026-11-10T21:11:56Z",
+   "git_hash": "e291370",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "0b60b292",
+   "source_hash": "998f7abb",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap",
@@ -2072,11 +2072,28 @@
    "slug": "2026-09-19_v0.24.12-release",
    "source": "docs/roadmap/2026-09-19_v0.24.12-release.md",
    "source_hash": "0547e33e",
+   "superseded_by": "roadmap-snapshot/2026-11-10_v0.24.13-release",
    "supersedes": "roadmap-snapshot/2026-09-19_v0.24.11-release",
    "title": "Roadmap",
    "truth_state": "snapshot",
    "wiki": "https://github.com/SpillwaveSolutions/wiki_ticket_sdd/wiki/Roadmap-2026-09-19_v0.24.12-release",
    "wiki_key": "roadmap-snapshot/2026-09-19_v0.24.12-release"
+  },
+  {
+   "canonical_key": "roadmap-snapshot/2026-11-10_v0.24.13-release",
+   "date": "2026-11-10",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-11-10T21:11:56Z",
+   "git_hash": "e291370",
+   "name": "v0.24.13-release",
+   "release": "v0.24.13",
+   "slug": "2026-11-10_v0.24.13-release",
+   "source": "docs/roadmap/2026-11-10_v0.24.13-release.md",
+   "source_hash": "998f7abb",
+   "supersedes": "roadmap-snapshot/2026-09-19_v0.24.12-release",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-11-10_v0.24.13-release"
   },
   {
    "aliases": [

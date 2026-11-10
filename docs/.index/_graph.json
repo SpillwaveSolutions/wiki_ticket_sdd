@@ -5436,6 +5436,21 @@
    "type": "targets"
   },
   {
+   "from": "roadmap-snapshot/2026-11-10_v0.24.13-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-11-10_v0.24.13-release",
+   "to": "roadmap-snapshot/2026-09-19_v0.24.12-release",
+   "type": "supersedes"
+  },
+  {
+   "from": "roadmap-snapshot/2026-11-10_v0.24.13-release",
+   "to": "release/v0.24.13",
+   "type": "targets"
+  },
+  {
    "from": "roadmap/2026-07-18_v0.2-roadmap",
    "to": "roadmap",
    "type": "snapshot-of"
@@ -7899,6 +7914,11 @@
    "status": "done",
    "title": "Release v0.24.12"
   },
+  "item/01M73MV8GGW2N7Z8J71NGMQXDJ": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Install the CLI under bin/wiki-ticket"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",
@@ -8289,6 +8309,9 @@
   "release/v0.24.12": {
    "doc_type": "release"
   },
+  "release/v0.24.13": {
+   "doc_type": "release"
+  },
   "release/v0.24.3": {
    "doc_type": "release"
   },
@@ -8499,6 +8522,12 @@
   "roadmap-snapshot/2026-09-19_v0.24.12-release": {
    "doc_type": "roadmap-snapshot",
    "source": "docs/roadmap/2026-09-19_v0.24.12-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "roadmap-snapshot/2026-11-10_v0.24.13-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-11-10_v0.24.13-release.md",
    "title": "Roadmap",
    "truth_state": "snapshot"
   },

@@ -71,14 +71,14 @@ esac
 
 # files: present + executable; bin files byte-identical to canonical copies
 for f in worklog fold.py ulid.py render_roadmap.py plan_capture.py; do
-  if [ ! -f "bin/$f" ]; then
-    bad "bin/$f missing"
-  elif [ ! -x "bin/$f" ]; then
-    bad "bin/$f not executable"
-  elif ! cmp -s "bin/$f" "$PLUGIN_ROOT/scripts/$f"; then
-    bad "bin/$f stale: differs from plugin copy — run /worklog:init to upgrade"
+  if [ ! -f "bin/wiki-ticket/$f" ]; then
+    bad "bin/wiki-ticket/$f missing"
+  elif [ ! -x "bin/wiki-ticket/$f" ]; then
+    bad "bin/wiki-ticket/$f not executable"
+  elif ! cmp -s "bin/wiki-ticket/$f" "$PLUGIN_ROOT/scripts/$f"; then
+    bad "bin/wiki-ticket/$f stale: differs from plugin copy — run /worklog:init to upgrade"
   else
-    ok "bin/$f present, executable, matches plugin"
+    ok "bin/wiki-ticket/$f present, executable, matches plugin"
   fi
 done
 for f in pre-commit pre-merge-commit commit-msg; do

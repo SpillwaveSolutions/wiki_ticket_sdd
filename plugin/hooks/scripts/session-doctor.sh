@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Plugin hooks fire in every session; silence outside worklog repos.
-[ -x bin/worklog ] || exit 0
+[ -x bin/wiki-ticket/worklog ] || exit 0
 
 # Stamp the commit this session starts from, before anything else. The Stop
 # hook diffs .work/todo.jsonl against it, so a session that records its items
@@ -10,7 +10,7 @@
 # HEAD-based fallback.
 printf '%s' "$(cat)" | python3 -c '
 import json, os, sys
-sys.path.insert(0, os.path.join(os.getcwd(), "bin"))
+sys.path.insert(0, os.path.join(os.getcwd(), "bin", "wiki-ticket"))
 try:
     sid = json.load(sys.stdin).get("session_id")
 except Exception:

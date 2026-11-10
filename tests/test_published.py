@@ -15,14 +15,14 @@ import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BIN = os.path.join(ROOT, "bin")
-sys.path.insert(0, BIN)
+sys.path.insert(0, os.path.join(BIN, "wiki-ticket"))
 import published  # noqa: E402
 import ulid  # noqa: E402
 
 
 def run(cwd, *args):
     return subprocess.run(
-        [sys.executable, os.path.join(cwd, "bin", "worklog"), *args],
+        [sys.executable, os.path.join(cwd, "bin", "wiki-ticket", "worklog"), *args],
         cwd=cwd, capture_output=True, text=True)
 
 

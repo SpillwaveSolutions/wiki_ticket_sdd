@@ -58,7 +58,7 @@ field on every event names the origin of each one — and because entropy in an
 id is not currency to spend on metadata. It is omitted outside a git repo, and
 `WORKLOG_NO_GIT_PROVENANCE` turns it off.
 
-You never edit this file by hand. Every change goes through `bin/worklog`,
+You never edit this file by hand. Every change goes through `bin/wiki-ticket/worklog`,
 which appends events. Current state is a **fold** over the events: parse,
 dedupe, sort, apply in order. State is derived, never stored — which is what
 makes the next two properties possible.
@@ -87,10 +87,10 @@ item* concurrently and the merge produces zero conflicts — the fold dedupes
 and sorts, so both changes survive:
 
 ```
-$ git checkout -b alice && bin/worklog update $A --add-label backend --status in_progress
-$ git checkout -b bob   && bin/worklog update $A --add-label urgent --priority P0
+$ git checkout -b alice && bin/wiki-ticket/worklog update $A --add-label backend --status in_progress
+$ git checkout -b bob   && bin/wiki-ticket/worklog update $A --add-label urgent --priority P0
 $ git merge alice && git merge bob     # no conflict
-$ bin/worklog show $A
+$ bin/wiki-ticket/worklog show $A
   status:   in_progress    <- alice's
   priority: P0             <- bob's
   labels:   [backend, urgent]   <- both
@@ -183,7 +183,7 @@ work_item_fields:
 
 A disabled field is **invisible, not rejected**: no flag is built for it, so
 it never shows up in the CLI, in `--help`, or in anything an agent reads to
-decide what to write. Run `bin/worklog fields` to see what this repo has
+decide what to write. Run `bin/wiki-ticket/worklog fields` to see what this repo has
 switched on and what each field means — the descriptions ship with the tool
 so two people don't fill one field with two different meanings.
 
@@ -196,7 +196,7 @@ plan is approved (in Claude Code, exiting plan mode triggers this
 automatically via a hook), capture it:
 
 ```bash
-bin/worklog plan-capture --slug auth-refactor --title "Auth refactor" --file plan.md
+bin/wiki-ticket/worklog plan-capture --slug auth-refactor --title "Auth refactor" --file plan.md
 ```
 
 The plan file needs a `## Tasks` section with checkbox tasks:
@@ -229,20 +229,20 @@ own status and want the state shown, lead with one of those three words.
 ### 2. Start work
 
 ```bash
-bin/worklog list                              # see open items
-bin/worklog update <ulid> --status in_progress
+bin/wiki-ticket/worklog list                              # see open items
+bin/wiki-ticket/worklog update <ulid> --status in_progress
 ```
 
 ### 3. Close when done
 
 ```bash
-bin/worklog close <ulid> --status done --resolution "merged in PR #7"
+bin/wiki-ticket/worklog close <ulid> --status done --resolution "merged in PR #7"
 ```
 
 ### 4. Regenerate the roadmap and commit together
 
 ```bash
-bin/worklog roadmap-render
+bin/wiki-ticket/worklog roadmap-render
 git add .work/todo.jsonl docs/roadmap.md
 git commit -m "auth: middleware extracted"
 ```
@@ -256,7 +256,7 @@ You're mid-task and discover a bug, a missing migration, a "we also need
 to…". Do not silently absorb it. Record it first, then do it:
 
 ```bash
-bin/worklog add "Session table missing index" --kind bug \
+bin/wiki-ticket/worklog add "Session table missing index" --kind bug \
     --unplanned --discovered-during <current-item-ulid>
 ```
 
@@ -308,7 +308,7 @@ If a merge still stops on a generated file (an older clone whose
 this driver landed), recovery is the same two steps it always was:
 
 ```bash
-bin/worklog roadmap-render      # regenerate from the merged log
+bin/wiki-ticket/worklog roadmap-render      # regenerate from the merged log
 git add -A
 git commit --no-edit            # finish the merge commit
 ```
@@ -336,8 +336,8 @@ event **your branch** authored below that watermark underneath the snapshot,
 where the next read silently discards it. That is the part that loses work.
 
 ```bash
-bin/worklog merge-rescue        # from inside the blocked merge
-bin/worklog roadmap-render
+bin/wiki-ticket/worklog merge-rescue        # from inside the blocked merge
+bin/wiki-ticket/worklog roadmap-render
 git add -A && git commit        # undo with: git merge --abort
 ```
 
@@ -389,7 +389,7 @@ conflict in the web UI on `docs/roadmap.md`, `.work/published.jsonl`, or even
 
 1. `git merge main` — on the PR branch; union merge applies locally, so the
    logs merge clean.
-2. `bin/worklog roadmap-render` — regenerate the roadmap from the merged log.
+2. `bin/wiki-ticket/worklog roadmap-render` — regenerate the roadmap from the merged log.
 3. `.work/published.jsonl` is `merge=union` locally — fold it (`worklog wiki-get`) after merging the base branch; GitHub's server-side merge still will not run the driver, so recover locally the same way as the work log.
 4. `git add -A && git commit` — finish the merge commit.
 5. Push the branch.
@@ -436,7 +436,7 @@ wolf at the next one for a full hour).
 | `docs/designs/current_*.md` | Live. Regenerated at each release. |
 | `docs/designs/<DATE>_vX.Y.Z-release.md` | Freeze note: tag + git_hash + a short delta from the previous freeze. Frozen. Not a copy of the live pair. |
 | `docs/designs/<DATE>_*_design_doc.md` and `*_code_walkthrough.md` | Legacy full copies (pre-cap). Frozen forever. Never regenerate, never edit. |
-| `.work/*.jsonl` | Only `bin/worklog` writes them. No editors, no `echo >>` |
+| `.work/*.jsonl` | Only `bin/wiki-ticket/worklog` writes them. No editors, no `echo >>` |
 
 "Frozen" means the **prose** is frozen. Front matter is metadata about the
 document, not the document, so the tooling may still stamp it — `wiki_key`
@@ -548,22 +548,22 @@ move. What is added:
 | Provenance | Documents carry `git_hash` (the tree they were written against) and, once landed, `merged_in` (the merge that carried them, stamped by `worklog provenance-backfill`). `worklog doc-verify` resolves their code citations at that commit — never at HEAD. See [Document provenance](#document-provenance-and-citation-checking). |
 
 Day-to-day: after plan-capture or a release doc set change, run
-`bin/worklog ia-index` (normalize → inventory → render). Wiki publish
+`bin/wiki-ticket/worklog ia-index` (normalize → inventory → render). Wiki publish
 reads the **publish manifest**, not a hand-curated page list: each entry
 has `source`, `page_name`, and either publish-as-is or doc-plus-banner
 (banners are applied at publish time so frozen sources stay frozen). For
 GitHub Wiki, frontmatter is stripped in the wiki copy only.
 
 ```bash
-bin/worklog ia-index                 # refresh inventory + Home/Sidebar/indexes
-bin/worklog ia-graph                 # rebuild traceability graph
-bin/worklog link-pr <ulid> --pr 104  # attach code evidence
-bin/worklog pr-sync 104              # fetch live PR state into the sidecar
-bin/worklog ia-ticket <ulid>         # preview a generated ticket page
-bin/worklog find watermark           # search the inventory and graph
-bin/worklog trace-check              # unlinked-evidence report
-bin/worklog doc-verify               # check citations at each doc's own commit
-bin/worklog provenance-backfill      # stamp merged_in on frozen docs that landed
+bin/wiki-ticket/worklog ia-index                 # refresh inventory + Home/Sidebar/indexes
+bin/wiki-ticket/worklog ia-graph                 # rebuild traceability graph
+bin/wiki-ticket/worklog link-pr <ulid> --pr 104  # attach code evidence
+bin/wiki-ticket/worklog pr-sync 104              # fetch live PR state into the sidecar
+bin/wiki-ticket/worklog ia-ticket <ulid>         # preview a generated ticket page
+bin/wiki-ticket/worklog find watermark           # search the inventory and graph
+bin/wiki-ticket/worklog trace-check              # unlinked-evidence report
+bin/wiki-ticket/worklog doc-verify               # check citations at each doc's own commit
+bin/wiki-ticket/worklog provenance-backfill      # stamp merged_in on frozen docs that landed
 ```
 
 Full command flags: [CLI Reference](cli-reference.md#information-architecture-ia-commands).
@@ -656,8 +656,8 @@ on the default branch and lands the result through a PR.
 
 ## Sync in depth
 
-Ticket sync (`bin/worklog sync`) runs through a typed adapter contract. The
-dispatcher (`bin/sync_dispatch.py`) owns every invariant — scope, change
+Ticket sync (`bin/wiki-ticket/worklog sync`) runs through a typed adapter contract. The
+dispatcher (`bin/wiki-ticket/sync_dispatch.py`) owns every invariant — scope, change
 detection (the canonical hash *and* the ticket the item last pushed to),
 one-owner-per-ticket, create-vs-update, idempotency markers, echo suppression
 on pull, conflict detection — and a per-system adapter is a generated dumb
@@ -668,14 +668,14 @@ dispatcher runs local-only (a mode, not an error). Every run ends with the
 drift report — counts plus anything a human should see (conflicts,
 unsupported fields, deferred items). That report is the sync's voice; read
 it. Conflicts it detects are resolved with
-`bin/worklog resolve <item> --field <f> --take local|remote`.
+`bin/wiki-ticket/worklog resolve <item> --field <f> --take local|remote`.
 
 `--push-only` still does not ingest remote title/body edits, but it does
 observe the tracker for two gaps a log-as-source-of-truth run otherwise
 cannot see (#385):
 
 - **Unmarked remotes** (no worklog marker) print as their own block.
-  Absorb one with `bin/worklog adopt --system github --key N`. Never
+  Absorb one with `bin/wiki-ticket/worklog adopt --system github --key N`. Never
   `gh issue create` or `gh issue edit` on a worklog-managed tracker —
   child worktrees add via `worklog` or they file nothing.
 - **Closed on remote, still open in the log.** Sync closes the log item
@@ -696,7 +696,7 @@ by itself make the surviving owner dirty enough to re-push over the damage.
 See the [CLI Reference](cli-reference.md#unlink).
 
 Remote ticket **bodies** are composed from the local source via
-`bin/worklog ticket-body <ulid>` (issue-description skill): summary,
+`bin/wiki-ticket/worklog ticket-body <ulid>` (issue-description skill): summary,
 epic/plan context, milestone, and traceability edges. Enrich items with
 `worklog update --body "…"` and `worklog link-pr` rather than editing only
 the remote description.
@@ -727,7 +727,7 @@ open question stated when unsure. For teams where work keeps escaping the
 log anyway, a flag-gated classifier (`classifier:` in `.work/config.yml`)
 can sweep conversations: it is propose-only, staging suggestions to
 `.work/suggestions.jsonl` (gitignored, never the event log). A suggestion
-becomes real only when promoted — `bin/worklog promote <suggestion-id>`
+becomes real only when promoted — `bin/wiki-ticket/worklog promote <suggestion-id>`
 creates exactly one item and marks the suggestion consumed.
 
 ## Where to next

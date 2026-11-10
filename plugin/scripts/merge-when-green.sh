@@ -20,7 +20,7 @@ INTERVAL="${2:-60}"    # 1 minute; --auto makes the long poll a fallback
 MAX="${3:-120}"        # 120 × 60s = 2 h, then give up loudly
 
 # Resolve auto-merge: --advisory/--auto > WORKLOG_AUTO_MERGE=0|1 > config > true.
-# ponytail: naive block scan, same style as _config_system in bin/worklog
+# ponytail: naive block scan, same style as _config_system in bin/wiki-ticket/worklog
 AUTO_MERGE=true
 cfg=$(awk '/^features:/{f=1;next} f&&/^[^[:space:]]/{exit} f&&/auto_merge_on_green:/{print $2; exit}' \
       ./.work/config.yml 2>/dev/null || true)

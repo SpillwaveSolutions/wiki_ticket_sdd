@@ -4,7 +4,7 @@
 set -euo pipefail
 
 # A hook must never dirty the worktree: without this, importing a module the
-# staged tree hasn't imported yet writes bin/__pycache__/*.pyc AFTER `git
+# staged tree hasn't imported yet writes bin/wiki-ticket/__pycache__/*.pyc AFTER `git
 # add`, and the next merge aborts on a tracked-vs-untracked collision in any
 # repo that doesn't gitignore __pycache__ (item 01KY5P9V0C).
 export PYTHONDONTWRITEBYTECODE=1
@@ -130,17 +130,17 @@ fi
 # signal the branch guard above uses (WORKLOG_MERGE_COMMIT for a fresh `git
 # merge`, MERGE_HEAD for a resumed one).
 if { [ -n "${WORKLOG_MERGE_COMMIT:-}" ] || [ -f "$(git rev-parse --git-path MERGE_HEAD)" ]; } \
-   && [ -f bin/compact.py ]; then
-  python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl || \
+   && [ -f bin/wiki-ticket/compact.py ]; then
+  python3 bin/wiki-ticket/compact.py --merge-check .work/todo.jsonl .work/done.jsonl || \
     fail "merge integrity check failed (see above) -- resolve manually, then git merge --continue, or git merge --abort"
 fi
 
 # Invariant 15.7: the roadmap is generated. Regenerate and diff.
 # mktemp, not a fixed path: two checkouts running this concurrently must not
 # race on the same scratch file.
-if [ -f bin/render_roadmap.py ] && [ -f docs/roadmap.md ]; then
+if [ -f bin/wiki-ticket/render_roadmap.py ] && [ -f docs/roadmap.md ]; then
   tmp=$(mktemp)
-  python3 bin/render_roadmap.py > "$tmp"
+  python3 bin/wiki-ticket/render_roadmap.py > "$tmp"
   if ! diff -q "$tmp" docs/roadmap.md >/dev/null; then
     rm -f "$tmp"
     fail "docs/roadmap.md is stale or hand-edited. Run: worklog roadmap-render"
@@ -152,27 +152,27 @@ fi
 [ ! -f tests/test_fold.py ] || python3 tests/test_fold.py -q >/dev/null 2>&1 || fail "fold tests failing"
 
 # ADRs: schema + cross-file invariants. Guarded like the fold tests.
-[ ! -d docs/adr ] || [ ! -x bin/worklog ] || python3 bin/worklog adr check >/dev/null || fail "ADR validation failed — run: worklog adr check"
+[ ! -d docs/adr ] || [ ! -x bin/wiki-ticket/worklog ] || python3 bin/wiki-ticket/worklog adr check >/dev/null || fail "ADR validation failed — run: worklog adr check"
 
 # IA gates (plan ia-content-model, migration 0002): wiki_key present/unique,
 # schema-valid frontmatter, fresh inventory. The warn-only release cycle is
 # over — these are hard now (#98).
 #
 # The extra `-d docs/.index` guard is what makes promotion safe: it asks "has
-# this repo opted INTO the IA?", where the bin/ia.py guard only asks "does it
+# this repo opted INTO the IA?", where the bin/wiki-ticket/ia.py guard only asks "does it
 # have the code?". A scaffolded repo gets bin/ from the plugin but has never
 # generated an index, and must not be blocked from its first commit. A repo
 # that HAS an index stays fully enforced — deleting any single generated file
 # inside it still fails, because the directory is still there.
-if [ -f bin/ia.py ] && [ -x bin/worklog ] && [ -d docs/.index ]; then
-  python3 bin/worklog ia-normalize --check >/dev/null 2>&1 || \
+if [ -f bin/wiki-ticket/ia.py ] && [ -x bin/wiki-ticket/worklog ] && [ -d docs/.index ]; then
+  python3 bin/wiki-ticket/worklog ia-normalize --check >/dev/null 2>&1 || \
     fail "doc metadata drift; run: worklog ia-normalize"
-  python3 bin/worklog ia-inventory --check >/dev/null 2>&1 || \
+  python3 bin/wiki-ticket/worklog ia-inventory --check >/dev/null 2>&1 || \
     fail "inventory stale/invalid; run: worklog ia-inventory"
-  [ ! -f bin/ia_render.py ] || python3 bin/worklog ia-render --check >/dev/null 2>&1 || \
+  [ ! -f bin/wiki-ticket/ia_render.py ] || python3 bin/wiki-ticket/worklog ia-render --check >/dev/null 2>&1 || \
     fail "rendered pages/manifest stale; run: worklog ia-render"
   # trace-check stays warn-level here forever; --strict runs at release time
-  [ ! -f bin/ia_graph.py ] || python3 bin/worklog trace-check >/dev/null 2>&1 || \
+  [ ! -f bin/wiki-ticket/ia_graph.py ] || python3 bin/wiki-ticket/worklog trace-check >/dev/null 2>&1 || \
     echo "worklog: WARNING — unlinked evidence; run: worklog trace-check" >&2
   # doc-verify, scoped to the documents THIS commit touches (--staged).
   # Repo-wide is right for the release gate and wrong here: every finding in
@@ -184,6 +184,6 @@ if [ -f bin/ia.py ] && [ -x bin/worklog ] && [ -d docs/.index ]; then
   # release time, unscoped. Skipped outright on a shallow clone, where
   # `git show <sha>:path` cannot resolve and every answer is
   # "unresolvable" (#294).
-  [ ! -f bin/doc_verify.py ] || python3 bin/worklog doc-verify --staged --strict >/dev/null 2>&1 || \
+  [ ! -f bin/wiki-ticket/doc_verify.py ] || python3 bin/wiki-ticket/worklog doc-verify --staged --strict >/dev/null 2>&1 || \
     echo "worklog: WARNING — a document THIS commit touches cites code that does not match the commit it was written against; run: worklog doc-verify --staged" >&2
 fi
