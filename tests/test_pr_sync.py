@@ -14,7 +14,7 @@ import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "bin"))
+sys.path.insert(0, os.path.join(ROOT, "bin", "wiki-ticket"))
 import ia                                                       # noqa: E402
 import ia_graph                                                 # noqa: E402
 import ia_render                                                # noqa: E402
@@ -25,8 +25,8 @@ RAW = {
     "state": "MERGED",
     "mergedAt": "2026-07-31T03:01:02Z",
     "reviewDecision": "APPROVED",
-    "files": [{"path": "bin/worklog", "additions": 9},
-              {"path": "bin/ia_graph.py", "additions": 70}],
+    "files": [{"path": "bin/wiki-ticket/worklog", "additions": 9},
+              {"path": "bin/wiki-ticket/ia_graph.py", "additions": 70}],
     "statusCheckRollup": [{"conclusion": "SUCCESS", "status": "COMPLETED"},
                           {"conclusion": "SUCCESS", "status": "COMPLETED"}],
 }
@@ -105,12 +105,12 @@ class TestPrSyncSidecar(_Chdir):
         self.assertEqual(read["checks"], "passing")
         self.assertEqual(read["number"], 267)
         self.assertEqual(read["merged_at"], "2026-07-31T03:01:02Z")
-        self.assertEqual(read["files"], ["bin/ia_graph.py", "bin/worklog"])
+        self.assertEqual(read["files"], ["bin/wiki-ticket/ia_graph.py", "bin/wiki-ticket/worklog"])
         self.assertEqual(read["files"], written["files"])
 
     def test_files_are_paths_and_sorted(self):
         meta = self._sync()
-        self.assertEqual(meta["files"], ["bin/ia_graph.py", "bin/worklog"])
+        self.assertEqual(meta["files"], ["bin/wiki-ticket/ia_graph.py", "bin/wiki-ticket/worklog"])
 
     def test_sidecar_lands_at_the_pr_key(self):
         self._sync()
@@ -157,7 +157,7 @@ class TestRenderReadsTheSidecar(_Chdir):
         self.assertIn("Review: approved", page)
         self.assertIn("Checks: passing", page)
         self.assertIn("plan: close both P1 epics", page)
-        self.assertIn("`bin/worklog`", page)
+        self.assertIn("`bin/wiki-ticket/worklog`", page)
         self.assertNotIn("not tracked", page)
 
     def test_render_is_deterministic(self):

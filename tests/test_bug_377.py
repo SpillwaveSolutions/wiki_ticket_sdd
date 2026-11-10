@@ -20,7 +20,7 @@ import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "bin"))
+sys.path.insert(0, os.path.join(ROOT, "bin", "wiki-ticket"))
 import ia  # noqa: E402
 
 
@@ -152,13 +152,13 @@ class TestSessionEndReadsThePayload(unittest.TestCase):
     def setUp(self):
         self.d = tempfile.mkdtemp(prefix="worklog-377-end-")
         self.addCleanup(shutil.rmtree, self.d, True)
-        os.makedirs(os.path.join(self.d, "bin"))
+        os.makedirs(os.path.join(self.d, "bin", "wiki-ticket"))
         os.makedirs(os.path.join(self.d, ".work"))
-        shutil.copy2(os.path.join(ROOT, "bin", "session.py"),
-                     os.path.join(self.d, "bin", "session.py"))
-        shutil.copy2(os.path.join(ROOT, "bin", "worklog"),
-                     os.path.join(self.d, "bin", "worklog"))
-        os.chmod(os.path.join(self.d, "bin", "worklog"), 0o755)
+        shutil.copy2(os.path.join(ROOT, "bin", "wiki-ticket", "session.py"),
+                     os.path.join(self.d, "bin", "wiki-ticket", "session.py"))
+        shutil.copy2(os.path.join(ROOT, "bin", "wiki-ticket", "worklog"),
+                     os.path.join(self.d, "bin", "wiki-ticket", "worklog"))
+        os.chmod(os.path.join(self.d, "bin", "wiki-ticket", "worklog"), 0o755)
         open(os.path.join(self.d, ".work", "todo.jsonl"), "w").close()
         self.hook = os.path.join(ROOT, "hooks", "session-end.sh")
 

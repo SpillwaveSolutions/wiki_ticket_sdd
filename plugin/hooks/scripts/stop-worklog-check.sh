@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Plugin hooks fire in every session; silence outside worklog repos.
-[ -x bin/worklog ] || exit 0
+[ -x bin/wiki-ticket/worklog ] || exit 0
 
 # Read the payload once: both stop_hook_active and session_id come from it,
 # and stdin is not rewindable.
@@ -40,7 +40,7 @@ git -C "$PWD" rev-parse --verify HEAD >/dev/null 2>&1 || exit 0
 # hook has always had.
 base=$(printf '%s' "$payload" | python3 -c '
 import json, os, sys
-sys.path.insert(0, os.path.join(os.getcwd(), "bin"))
+sys.path.insert(0, os.path.join(os.getcwd(), "bin", "wiki-ticket"))
 try:
     sid = json.load(sys.stdin).get("session_id")
 except Exception:
@@ -89,7 +89,7 @@ if git -C "$PWD" diff --quiet "$base" -- .work/todo.jsonl 2>/dev/null; then
 EOF
   else
     cat <<'EOF'
-{"decision":"block","reason":"worklog: the working tree changed but no work items were recorded this session. Record them (bin/worklog add/update/close + roadmap-render) or state why no item applies, then finish."}
+{"decision":"block","reason":"worklog: the working tree changed but no work items were recorded this session. Record them (bin/wiki-ticket/worklog add/update/close + roadmap-render) or state why no item applies, then finish."}
 EOF
   fi
 fi

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for bin/render_roadmap.py -- WORKLOG-SPEC section 13.1.
+"""Tests for bin/wiki-ticket/render_roadmap.py -- WORKLOG-SPEC section 13.1.
 
 The renderer must be byte-deterministic: the pre-commit freshness check
 regenerates and diffs, so any nondeterminism (wall-clock timestamps, dict
@@ -9,7 +9,7 @@ import os
 import sys
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin", "wiki-ticket"))
 sys.path.insert(0, os.path.dirname(__file__))
 from render_roadmap import render  # noqa: E402
 from test_fold import write_log  # noqa: E402

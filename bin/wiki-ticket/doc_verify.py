@@ -39,7 +39,7 @@ _PATH = r"(?:bin|tests|hooks|plugin|schema|docs|adapters)/[\w./-]+"
 _DASH = r"[–—-]"
 
 CITE_RANGE = re.compile(
-    r"(?P<path>%s)`?"                      # bin/fold.py
+    r"(?P<path>%s)`?"                      # bin/wiki-ticket/fold.py
     r"(?:\s*%s\s*(?P<symbol>[\w.]+)\(\))?" # — apply_watermark()
     r"[`,\s]*lines?\s+"
     r"(?P<start>\d+)\s*%s\s*(?P<end>\d+)" % (_PATH, _DASH, _DASH))

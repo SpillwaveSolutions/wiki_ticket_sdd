@@ -64,7 +64,7 @@ class Sandbox:
         return sh(self.dir, "git", *args, **kw)
 
     def worklog(self, *args, actor="it", **kw):
-        return sh(self.dir, sys.executable, "bin/worklog", "--actor", actor,
+        return sh(self.dir, sys.executable, "bin/wiki-ticket/worklog", "--actor", actor,
                   *args, **kw)
 
     def add(self, title, *args, actor="it"):
@@ -349,7 +349,7 @@ class TestNewlineCorruption(unittest.TestCase):
         # force-land it anyway (what CI would then flag) -- damage must be
         # contained to the fused line's own events
         sb.git("commit", "-q", "--no-edit", "--no-verify")
-        r = sh(sb.dir, sys.executable, "bin/fold.py",
+        r = sh(sb.dir, sys.executable, "bin/wiki-ticket/fold.py",
                ".work/todo.jsonl", ".work/done.jsonl")
         self.assertIn("unparseable", r.stderr)
         items = {i["id"]: i for i in json.loads(r.stdout)}

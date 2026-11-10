@@ -26,11 +26,11 @@ task and follow the rules below.
 
 The append-only work log (`.work/todo.jsonl`), generated roadmap / plans /
 status, wiki publish, and ticket sync. Union merge, event fold, hook-enforced
-policy. `bin/worklog` is the only writer of the log.
+policy. `bin/wiki-ticket/worklog` is the only writer of the log.
 
 ```bash
 export SECOND_BRAIN_IDENTITY="grok-bot/wiki-ticket-sdd"
-bin/worklog --actor "$SECOND_BRAIN_IDENTITY" add --level story --kind feature "…"
+bin/wiki-ticket/worklog --actor "$SECOND_BRAIN_IDENTITY" add --level story --kind feature "…"
 ```
 
 Worklog appends do not require a knowledge worktree.

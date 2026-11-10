@@ -8,7 +8,7 @@ repo itself uses, and the only one with a real, shipped adapter today.
 
 ## One-command setup
 
-    bin/worklog adapter check
+    bin/wiki-ticket/worklog adapter check
 
 with `.work/config.yml` set to `ticketing.system: github` and
 `wiki.system: github-wiki`. No further install step — `gh` (the GitHub
@@ -28,9 +28,9 @@ configure beyond that.
 
 This is the fully-wired path — no runtime research needed:
 
-1. `bin/worklog adapter check` — validates the adapter against the
+1. `bin/wiki-ticket/worklog adapter check` — validates the adapter against the
    contract.
-2. `bin/worklog sync` — the dispatcher handles scope, hash-skip,
+2. `bin/wiki-ticket/worklog sync` — the dispatcher handles scope, hash-skip,
    create-vs-update, echo suppression, and conflict detection; `gh` does
    the actual API calls.
 3. For the wiki: `wiki.system: github-wiki` — `wiki-publish` clones
@@ -40,7 +40,7 @@ This is the fully-wired path — no runtime research needed:
 
 ## Mapping events
 
-Fully dispatcher-enforced (`bin/sync_dispatch.py`) — canonical hash decides
+Fully dispatcher-enforced (`bin/wiki-ticket/sync_dispatch.py`) — canonical hash decides
 what's pushed, the item ULID travels as an idempotency marker in the issue
 body, and closing an item (`done`/`cancelled`) closes the GitHub issue
 with a resolution comment. See `ticket-sync/SKILL.md` §4 for the
@@ -50,13 +50,13 @@ invariants; nothing here overrides them.
 
 Remote edits enter via `worklog ingest` with deterministic event IDs,
 echo-suppressed so a push doesn't re-trigger itself, and conflict-checked
-against local edits — fully automatic as part of `bin/worklog sync`.
+against local edits — fully automatic as part of `bin/wiki-ticket/worklog sync`.
 
 ## Rendering support
 
 Ticket pages (`docs/.index/rendered/tickets/<ULID>.md`), release pages,
 and PR pages (`docs/.index/rendered/prs/<num>.md`) all render from this
-repo's own event log via `bin/ia_render.py`, independent of GitHub — the
+repo's own event log via `bin/wiki-ticket/ia_render.py`, independent of GitHub — the
 GitHub-specific step is only the wiki push and the issue sync described
 above.
 

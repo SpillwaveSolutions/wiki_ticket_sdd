@@ -223,7 +223,7 @@ def has(event: str, action: str, path: str = CONFIG) -> bool:
 
 
 def main(argv: Optional[List[str]] = None) -> int:
-    """stdlib entry so `python3 bin/triggers.py plan-capture` works in tests."""
+    """stdlib entry so `python3 bin/wiki-ticket/triggers.py plan-capture` works in tests."""
     args = list(sys.argv[1:] if argv is None else argv)
     path = CONFIG
     if "--config" in args:

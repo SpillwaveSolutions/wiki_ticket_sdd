@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "bin"))
+sys.path.insert(0, os.path.join(ROOT, "bin", "wiki-ticket"))
 import ia_graph
 
 

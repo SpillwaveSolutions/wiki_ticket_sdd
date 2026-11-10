@@ -20,7 +20,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BIN = os.path.join(ROOT, "bin")
 HOOKS = os.path.join(ROOT, "hooks")
 
-sys.path.insert(0, BIN)
+sys.path.insert(0, os.path.join(BIN, "wiki-ticket"))
 from compact import (compact, check_resurrection, check_duplicate_ownership,  # noqa: E402
                      merge_check, merge_rescue)
 from fold import fold  # noqa: E402
@@ -77,9 +77,10 @@ class GitRepo(unittest.TestCase):
             # bin/, so the OTHER guarded checks in pre-commit (roadmap, ADR,
             # IA) stay inert (their trigger files don't exist here) instead
             # of failing on an unrelated, un-configured fixture repo.
-            os.makedirs(os.path.join(self.d, "bin"))
+            os.makedirs(os.path.join(self.d, "bin", "wiki-ticket"))
             for name in ("compact.py", "fold.py", "ulid.py", "render_roadmap.py"):
-                shutil.copy(os.path.join(BIN, name), os.path.join(self.d, "bin", name))
+                shutil.copy(os.path.join(BIN, "wiki-ticket", name),
+                            os.path.join(self.d, "bin", "wiki-ticket", name))
             os.makedirs(os.path.join(self.d, "hooks"))
             for name in ("pre-commit", "pre-merge-commit"):
                 shutil.copy(os.path.join(HOOKS, name), os.path.join(self.d, "hooks", name))

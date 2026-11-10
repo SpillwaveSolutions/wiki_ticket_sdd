@@ -22,7 +22,7 @@ drive `glab` (or GitLab's REST API) directly.
 
 ## Recommended workflow
 
-1. `bin/worklog adapter check` — reports "no adapter" for `gitlab`;
+1. `bin/wiki-ticket/worklog adapter check` — reports "no adapter" for `gitlab`;
    expected (local-only mode), not an error.
 2. Issues: use `glab issue create`/`glab issue update`, keying off the
    worklog item's ULID as a marker in the issue description (GitLab

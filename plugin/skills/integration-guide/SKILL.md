@@ -1,7 +1,7 @@
 ---
 name: integration-guide
 metadata:
-  version: "0.24.12"
+  version: "0.24.13"
 description: Look up how wiki_ticket_sdd integrates with a specific SDD tool or ticket/wiki system — Superpowers, GSD, SpecKit, OpenSpec, Jira, Confluence, GitHub, GitLab, Azure DevOps (ADO), AWS CodeCatalyst, or Google Cloud DevOps (GCP). Use when asked how to set up, configure, or use one of these, or when ticket-sync/wiki-publish need runtime guidance for a system with no shipped adapter.
 ---
 
@@ -86,7 +86,7 @@ After editing a file under `docs/integrations/`, register it (or refresh
 its ledger entry) and let the existing publish pipeline carry it, exactly
 like any other opted-in doc:
 
-    bin/worklog wiki-add docs/integrations/fallback-<key>.md --key integrations/<key> --title "Integration-<Name>"
+    bin/wiki-ticket/worklog wiki-add docs/integrations/fallback-<key>.md --key integrations/<key> --title "Integration-<Name>"
 
 Then run the `wiki-publish` skill as usual — its hash-compare skip logic
 picks up the change on the next run. There is no separate publish path for

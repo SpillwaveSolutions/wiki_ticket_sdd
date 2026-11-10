@@ -13,14 +13,14 @@ import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BIN = os.path.join(ROOT, "bin")
+BIN = os.path.join(ROOT, "bin", "wiki-ticket")
 sys.path.insert(0, BIN)
 import changelog  # noqa: E402
 
 
 class TestClassify(unittest.TestCase):
     def test_feat_becomes_new(self):
-        self.assertEqual(changelog.classify("feat(ia): add a thing", ["bin/ia.py"]),
+        self.assertEqual(changelog.classify("feat(ia): add a thing", ["bin/wiki-ticket/ia.py"]),
                          ("New", "add a thing"))
 
     def test_fix_keeps_ticket_refs(self):
@@ -57,7 +57,7 @@ class TestClassify(unittest.TestCase):
         """The trap: most real commits also touch .work/. Only commits that
         touch NOTHING else are housekeeping."""
         label, text = changelog.classify(
-            "fix: real fix", [".work/todo.jsonl", "bin/fold.py"])
+            "fix: real fix", [".work/todo.jsonl", "bin/wiki-ticket/fold.py"])
         self.assertEqual((label, text), ("Fix", "real fix"))
 
     def test_process_commits_are_excluded(self):

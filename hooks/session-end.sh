@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Plugin hooks fire in every session; silence outside worklog repos.
-[ -x bin/worklog ] || exit 0
+[ -x bin/wiki-ticket/worklog ] || exit 0
 
 # Drop this session from the concurrent-session registry (#236). Without it a
 # finished session keeps looking alive for a full window and warns the next
@@ -13,7 +13,7 @@
 payload=$(cat)
 printf '%s' "$payload" | python3 -c '
 import json, os, sys
-sys.path.insert(0, os.path.join(os.getcwd(), "bin"))
+sys.path.insert(0, os.path.join(os.getcwd(), "bin", "wiki-ticket"))
 try:
     sid = json.load(sys.stdin).get("session_id")
 except Exception:

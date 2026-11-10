@@ -1,7 +1,7 @@
 ---
 name: issue-description
 metadata:
-  version: "0.24.12"
+  version: "0.24.13"
 description: Write rich, durable issue/ticket descriptions. Use when creating or updating tickets by hand, when composing bodies for ticket-sync, or when a work item needs a description a future reader (human or agent) can act on without archaeology.
 ---
 
@@ -15,7 +15,7 @@ let a zero-context reader understand what, why, where it sits, and what
 ## The mechanical path (worklog-synced tickets)
 
 For items in the event log, do not hand-write bodies:
-`bin/worklog ticket-body <ulid>` renders the item's graph node — summary
+`bin/wiki-ticket/worklog ticket-body <ulid>` renders the item's graph node — summary
 (from `--body`), context (epic, generating plan with its frozen wiki page,
 milestone, unplanned provenance), and traceability (decides/implements
 edges, delivered-by PRs). ticket-sync pushes that. To make a ticket richer,

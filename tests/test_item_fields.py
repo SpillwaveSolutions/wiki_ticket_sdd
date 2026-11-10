@@ -17,7 +17,7 @@ import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "bin"))
+sys.path.insert(0, os.path.join(ROOT, "bin", "wiki-ticket"))
 from fold import FoldResult, dedupe_and_sort                    # noqa: E402
 
 ULID_A = "01KYWJX3T9CQM15HQNYVHBZE4H"
@@ -35,7 +35,7 @@ class _Repo(unittest.TestCase):
 
     def w(self, *args, check=True):
         p = subprocess.run(
-            [sys.executable, os.path.join(ROOT, "bin", "worklog"),
+            [sys.executable, os.path.join(ROOT, "bin", "wiki-ticket", "worklog"),
              "--actor", "t", *args],
             cwd=self.dir, capture_output=True, text=True)
         if check:

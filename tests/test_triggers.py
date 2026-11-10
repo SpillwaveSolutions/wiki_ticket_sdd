@@ -10,7 +10,7 @@ import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BIN = os.path.join(ROOT, "bin")
-sys.path.insert(0, BIN)
+sys.path.insert(0, os.path.join(BIN, "wiki-ticket"))
 import triggers  # noqa: E402
 
 
@@ -144,7 +144,7 @@ triggers:
 
     def run_wl(self, *args):
         return subprocess.run(
-            [sys.executable, os.path.join(self.d, "bin", "worklog"), *args],
+            [sys.executable, os.path.join(self.d, "bin", "wiki-ticket", "worklog"), *args],
             cwd=self.d, capture_output=True, text=True)
 
     def test_one_event(self):

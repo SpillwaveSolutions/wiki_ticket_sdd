@@ -7,11 +7,11 @@ Implemented: add, update, close, reopen, link, show, list, fold, plan-capture,
              triggers, compact,
              status (daily|weekly|timecard),
              ingest, conflict, resolve (pull side, sections 10.2 and 10.6),
-             sync (dispatcher: bin/sync_dispatch.py), adapter init|check,
+             sync (dispatcher: bin/wiki-ticket/sync_dispatch.py), adapter init|check,
              adopt (absorb a remote ticket that has no worklog marker),
              dedupe (marker copies on the tracker; default dry-run),
              promote (classifier suggestion -> create event, taxonomy §6.4),
-             adr new|list|check (docs/adr, bin/adr.py, schema/adr.schema.json).
+             adr new|list|check (docs/adr, bin/wiki-ticket/adr.py, schema/adr.schema.json).
 No stubs remain.
 
 Taxonomy (docs/plans/2026-07-18-work-taxonomy.md): items carry `level`
@@ -37,7 +37,7 @@ PATHS = (".work/todo.jsonl", ".work/done.jsonl", ".work/archive.jsonl")
 MAX_BODY = 2048  # body UTF-8 bytes; derived from PIPE_BUF (section 8.3). Not a setting.
 MAX_LINE = 4096  # POSIX PIPE_BUF; the whole encoded event must fit for atomicity.
 LOCK = ".work/.lock"
-VERSION = "0.24.12"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
+VERSION = "0.24.13"  # kept in step with plugin/.claude-plugin/plugin.json by tests/test_plugin.py
 
 
 _warned_concurrent = False
@@ -1370,7 +1370,7 @@ written from a blank file.
   2. Adapt adapters/github/adapter to your tracker's CLI — this is the
      model's job: ask it to generate an adapter for ticketing.system,
      starting from the github example.
-  3. Validate it: bin/worklog adapter check adapters/<system>/adapter
+  3. Validate it: bin/wiki-ticket/worklog adapter check adapters/<system>/adapter
 Nothing activates until `adapter check` is green."""
 
 

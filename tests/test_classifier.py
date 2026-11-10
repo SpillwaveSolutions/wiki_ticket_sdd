@@ -39,15 +39,15 @@ CLASSIFIER_OFF = CLASSIFIER_ON.replace("enabled: true", "enabled: false")
 
 
 def make_repo(tc):
-    """Sandbox git repo: committed base, bin/worklog present, dirty file."""
+    """Sandbox git repo: committed base, bin/wiki-ticket/worklog present, dirty file."""
     d = tempfile.mkdtemp(prefix="clsf-")
     tc.addCleanup(shutil.rmtree, d)
     subprocess.run(["git", "init", "-q", d], check=True)
     subprocess.run(["git", "-C", d, "config", "user.email", "t@t"], check=True)
     subprocess.run(["git", "-C", d, "config", "user.name", "t"], check=True)
     os.makedirs(os.path.join(d, ".work"))
-    os.makedirs(os.path.join(d, "bin"))
-    shutil.copy2(os.path.join(ROOT, "bin", "worklog"), os.path.join(d, "bin", "worklog"))
+    os.makedirs(os.path.join(d, "bin", "wiki-ticket"))
+    shutil.copy2(os.path.join(ROOT, "bin", "wiki-ticket", "worklog"), os.path.join(d, "bin", "wiki-ticket", "worklog"))
     open(os.path.join(d, ".work", "todo.jsonl"), "w").close()
     open(os.path.join(d, "base.txt"), "w").write("base\n")
     subprocess.run(["git", "-C", d, "add", "-A"], check=True)
@@ -254,11 +254,11 @@ class TestStopHookSeesACommittedLog(unittest.TestCase):
     """
 
     def repo_with_session(self):
-        """make_repo plus bin/session.py, which the hook imports to resolve the
+        """make_repo plus bin/wiki-ticket/session.py, which the hook imports to resolve the
         marker. Its absence is what keeps every older test on the HEAD path."""
         d = make_repo(self)
-        shutil.copy2(os.path.join(ROOT, "bin", "session.py"),
-                     os.path.join(d, "bin", "session.py"))
+        shutil.copy2(os.path.join(ROOT, "bin", "wiki-ticket", "session.py"),
+                     os.path.join(d, "bin", "wiki-ticket", "session.py"))
         return d
 
     def stamp(self, d, sid="sess-1", sha=None):
@@ -325,7 +325,7 @@ class TestStopHookSeesACommittedLog(unittest.TestCase):
     def test_the_marker_survives_later_heartbeats(self):
         """UserPromptSubmit touches every turn. If any of those moved the base,
         the fix would evaporate mid-session."""
-        sys.path.insert(0, os.path.join(ROOT, "bin"))
+        sys.path.insert(0, os.path.join(ROOT, "bin", "wiki-ticket"))
         import session
         p = os.path.join(tempfile.mkdtemp(prefix="clsf-reg-"), "reg.json")
         self.addCleanup(shutil.rmtree, os.path.dirname(p), True)

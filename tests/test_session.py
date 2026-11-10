@@ -13,7 +13,7 @@ import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BIN = os.path.join(ROOT, "bin")
+BIN = os.path.join(ROOT, "bin", "wiki-ticket")
 sys.path.insert(0, BIN)
 import session  # noqa: E402
 

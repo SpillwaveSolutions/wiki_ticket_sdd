@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for bin/ulid.py -- WORKLOG-SPEC sections 5.2 and 10.2."""
+"""Tests for bin/wiki-ticket/ulid.py -- WORKLOG-SPEC sections 5.2 and 10.2."""
 
 import os
 import sys
@@ -9,7 +9,7 @@ import subprocess
 import tempfile
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin", "wiki-ticket"))
 import ulid  # noqa: E402
 from fold import fold  # noqa: E402
 from test_fold import write_log  # noqa: E402
@@ -156,7 +156,7 @@ class TestEventProvenance(unittest.TestCase):
         self.d = tempfile.mkdtemp(prefix="worklog-prov-")
         self.addCleanup(shutil.rmtree, self.d, True)
         BIN = os.path.join(os.path.dirname(os.path.dirname(
-            os.path.abspath(__file__))), "bin")
+            os.path.abspath(__file__))), "bin", "wiki-ticket")
         for f in os.listdir(BIN):
             src = os.path.join(BIN, f)
             if os.path.isfile(src):

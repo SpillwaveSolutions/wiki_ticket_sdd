@@ -43,7 +43,7 @@ jobs:
           done
 
       - name: compact
-        run: python3 bin/compact.py
+        run: python3 bin/wiki-ticket/compact.py
 
       # Compaction restamps the top of the log with the current HEAD sha, and
       # the roadmap and IA manifest both record that sha as build provenance.
@@ -55,16 +55,16 @@ jobs:
       # stale body hash instead of fixing one.
       - name: regenerate derived docs
         run: |
-          bin/worklog roadmap-render
-          bin/worklog ia-inventory
-          bin/worklog ia-manifest
+          bin/wiki-ticket/worklog roadmap-render
+          bin/wiki-ticket/worklog ia-inventory
+          bin/wiki-ticket/worklog ia-manifest
 
       # Fail here before opening a PR that is already red. The PR still
       # pays invariants + coverage (required checks) on its own
       # pull_request run.
       - name: verify working tree
         run: |
-          python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
+          python3 bin/wiki-ticket/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
           for t in tests/test_*.py; do python3 "$t" >/dev/null || { echo "FAILED: $t"; python3 "$t"; exit 1; }; done
 
       - name: commit via PR

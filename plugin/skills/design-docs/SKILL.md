@@ -1,7 +1,7 @@
 ---
 name: design-docs
 metadata:
-  version: "0.24.12"
+  version: "0.24.13"
 description: Generate or sync the design document or code walkthrough. Live current pair regenerated from the actual code; a release freeze is a short tag+hash+delta note, not a full dated copy. Uses document-specialist v3.2.2, design-doc-mermaid v1.1.1, plantuml v1.2.2. Use when asked for a design doc, architecture doc, code walkthrough, or requirements doc, and automatically (background agents) at every release.
 ---
 
@@ -72,7 +72,7 @@ IA gates (plan ia-content-model §5.4). Regenerating without it trips
 
 ## 1. Read the config
 
-Run `bin/worklog triggers release`. This skill owns `design-doc` and
+Run `bin/wiki-ticket/worklog triggers release`. This skill owns `design-doc` and
 `code-walkthrough`. The release skill routes `user-guide` / `readme` to
 the user-docs refresh agent. `release.sync_docs` is the legacy fallback.
 Absent list = defaults all on.
@@ -92,7 +92,7 @@ docs/plans/, docs/adr/, `.work/config.yml`, the test suites.
 
 ## 2b. Verify before you report done. Not optional
 
-Run `bin/worklog doc-verify` and fix every **FABRICATED** finding in the
+Run `bin/wiki-ticket/worklog doc-verify` and fix every **FABRICATED** finding in the
 files you just wrote, then re-run until they are gone. Do this before
 publishing and before reporting completion.
 

@@ -24,7 +24,7 @@ class TestStatus(unittest.TestCase):
         self.addCleanup(shutil.rmtree, self.dir, ignore_errors=True)
         shutil.copytree(os.path.join(ROOT, "bin"), os.path.join(self.dir, "bin"))
         os.makedirs(os.path.join(self.dir, ".work"))
-        self.worklog = os.path.join(self.dir, "bin", "worklog")
+        self.worklog = os.path.join(self.dir, "bin", "wiki-ticket", "worklog")
 
     def run_wl(self, *args, stdin=None):
         return subprocess.run(
@@ -48,7 +48,7 @@ class TestStatus(unittest.TestCase):
         """A ULID timestamped `days` in the past, via the sandbox's bin/ulid."""
         p = subprocess.run(
             [sys.executable, "-c",
-             "import sys; sys.path.insert(0, 'bin'); import time, ulid; "
+             "import sys; sys.path.insert(0, 'bin/wiki-ticket'); import time, ulid; "
              f"print(ulid.new(int((time.time() - {days} * 86400) * 1000)))"],
             cwd=self.dir, capture_output=True, text=True)
         self.assertEqual(p.returncode, 0, p.stderr)

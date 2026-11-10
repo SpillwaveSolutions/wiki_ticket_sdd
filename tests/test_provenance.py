@@ -16,7 +16,7 @@ import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "bin"))
+sys.path.insert(0, os.path.join(ROOT, "bin", "wiki-ticket"))
 import ia          # noqa: E402
 import ia_render   # noqa: E402
 import render_roadmap  # noqa: E402

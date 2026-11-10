@@ -59,10 +59,10 @@ session. Give each session its own `git worktree`. See [ISOLATION.md](ISOLATION.
 
 ```bash
 export SECOND_BRAIN_IDENTITY="deep-agents/wiki-ticket-sdd"
-bin/worklog --actor "$SECOND_BRAIN_IDENTITY" add --level story --kind feature "…"
+bin/wiki-ticket/worklog --actor "$SECOND_BRAIN_IDENTITY" add --level story --kind feature "…"
 ```
 
-Wrap `bin/worklog` as a tool or shell. The model proposes. The CLI appends.
+Wrap `bin/wiki-ticket/worklog` as a tool or shell. The model proposes. The CLI appends.
 
 ## Progressive disclosure
 

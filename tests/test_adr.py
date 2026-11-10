@@ -14,7 +14,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def run(cwd, *args):
     # sandbox convention: run the sandbox's own bin/ copy so subprocess
     # coverage (relative source=bin) attributes lines correctly
-    return subprocess.run([sys.executable, os.path.join(cwd, "bin", "worklog"), *args],
+    return subprocess.run([sys.executable, os.path.join(cwd, "bin", "wiki-ticket", "worklog"), *args],
                           cwd=cwd, capture_output=True, text=True)
 
 

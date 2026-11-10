@@ -13,7 +13,7 @@ They do not anymore. That product lives in
 
 The append-only work log (`.work/todo.jsonl`), generated roadmap / plans /
 status, wiki publish, and ticket sync. Union merge, event fold, hook-enforced
-policy. `bin/worklog` is the only writer of the log.
+policy. `bin/wiki-ticket/worklog` is the only writer of the log.
 
 ## Install
 
@@ -30,7 +30,7 @@ Then in a repo you want tracked:
 /worklog:init
 ```
 
-That copies `bin/worklog`, git hooks, and `.work/config.yml`. `worklog doctor`
+That copies `bin/wiki-ticket/worklog`, git hooks, and `.work/config.yml`. `worklog doctor`
 is the health check; `worklog doctor --fix-wiring` repairs `core.hooksPath`
 and `merge.ours.driver` on a fresh clone.
 
@@ -39,13 +39,13 @@ as `AGENTS.md`). Do not infer settings from the policy file.
 
 ## First hour
 
-1. **File the work before doing it.** `bin/worklog add --level story --kind feature --priority P1 "…"`.
+1. **File the work before doing it.** `bin/wiki-ticket/worklog add --level story --kind feature --priority P1 "…"`.
    Unrecorded work is invisible work. The Stop hook will block a dirty tree
    with no items recorded this session.
 2. **Plans are the spec.** Exiting plan mode runs `worklog plan-capture`. The
    plan is written once under `docs/plans/` and never regenerated. A changed
    design gets a new plan with `supersedes: <slug>`.
-3. **Never hand-edit the log or the roadmap.** `bin/worklog` appends events.
+3. **Never hand-edit the log or the roadmap.** `bin/wiki-ticket/worklog` appends events.
    `worklog roadmap-render` regenerates `docs/roadmap.md`.
 4. **Merge only when green.** `/worklog:merge <pr>` arms
    `gh pr merge --auto --merge` (never squash — ADR-0008). Pending means

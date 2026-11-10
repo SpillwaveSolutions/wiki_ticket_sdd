@@ -21,7 +21,7 @@ driving ADO by hand until then.
 
 ## Recommended workflow
 
-1. `bin/worklog adapter check` — reports "no adapter" for `ado`; expected,
+1. `bin/wiki-ticket/worklog adapter check` — reports "no adapter" for `ado`; expected,
    not an error.
 2. Work items: `az boards work-item create/update`. **Migrating existing
    tickets**: create-vs-update is decided purely by whether the local item

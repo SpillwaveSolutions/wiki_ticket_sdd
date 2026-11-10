@@ -38,7 +38,7 @@ def validate(instance, schema, path="$"):
     {type, required, properties, enum, items, additionalProperties}.
     Raises AssertionError naming the offending field.
 
-    NOTE: bin/sync_dispatch.py ships its own copy of this — deliberately no
+    NOTE: bin/wiki-ticket/sync_dispatch.py ships its own copy of this — deliberately no
     import coupling between the test suite and the dispatcher.
     """
     if "enum" in schema:

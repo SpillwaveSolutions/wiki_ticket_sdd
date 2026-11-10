@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Tests for bin/plan_capture.py -- WORKLOG-SPEC sections 12 and 13.2."""
+"""Tests for bin/wiki-ticket/plan_capture.py -- WORKLOG-SPEC sections 12 and 13.2."""
 import os
 import sys
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin", "wiki-ticket"))
 from plan_capture import parse_tasks, front_matter  # noqa: E402
 
 DRAFT = """# Auth refactor plan

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Tests for bin/fold.py -- WORKLOG-SPEC section 6.
+Tests for bin/wiki-ticket/fold.py -- WORKLOG-SPEC section 6.
 
 The first four cases are regressions against real bugs found in a proposed
 implementation. Each one produced plausible-looking output and silently
@@ -13,7 +13,7 @@ import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "bin", "wiki-ticket"))
 from fold import fold, external_owners  # noqa: E402
 
 

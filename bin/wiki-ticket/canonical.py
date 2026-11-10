@@ -2,7 +2,7 @@
 """Canonical JSON + canonical hash for ticket sync (worklog spec section 10.3).
 
 This is THE implementation of the canonical hash. The ticket-sync skill and
-bin/sync_dispatch.py both call THIS function; nothing else may reimplement it.
+bin/wiki-ticket/sync_dispatch.py both call THIS function; nothing else may reimplement it.
 Changing the serialization or the field set changes every item's hash, which
 breaks echo suppression (last_pushed_hash comparison) for every existing
 clone. Don't.

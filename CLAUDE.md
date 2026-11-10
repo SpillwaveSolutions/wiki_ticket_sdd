@@ -8,7 +8,7 @@ file; do not infer settings from this document.** This file is policy only, whic
 notes here.
 
 - **Every request that produces work is broken into worklog items FIRST.** Run
-  `bin/worklog add` (see the work-track skill) before starting, and move items
+  `bin/wiki-ticket/worklog add` (see the work-track skill) before starting, and move items
   `in_progress` → `done` as the work happens — the UserPromptSubmit and Stop hooks
   enforce this. Unrecorded work is invisible work.
 

@@ -11,18 +11,18 @@ import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "bin"))
+sys.path.insert(0, os.path.join(ROOT, "bin", "wiki-ticket"))
 import ia
 import ia_render
 
 
 def run(cwd, *args):
-    return subprocess.run([sys.executable, os.path.join(cwd, "bin", "worklog"), *args],
+    return subprocess.run([sys.executable, os.path.join(cwd, "bin", "wiki-ticket", "worklog"), *args],
                           cwd=cwd, capture_output=True, text=True)
 
 
 class TestSchemaSync(unittest.TestCase):
-    """schema/doc.schema.json + schema/entity.schema.json and bin/ia.py are
+    """schema/doc.schema.json + schema/entity.schema.json and bin/wiki-ticket/ia.py are
     deliberate duplicates (dependency-free bin/); this pins them equivalent
     so they cannot silently diverge before the Phase 5 hard-fail promotion."""
 

@@ -1,7 +1,7 @@
 ---
 name: wiki-publish
 metadata:
-  version: "0.24.12"
+  version: "0.24.13"
 description: Publish docs (roadmap, plans, user guide, status) to the team's configured wiki. Use when asked to publish/sync docs to the wiki, after cutting a roadmap snapshot, or when a plan/status report should be visible outside the repo.
 ---
 
@@ -16,7 +16,7 @@ re-implement the rules.
 
 1. If `docs/.index/publish-manifest.json` is missing or stale, run
    `worklog ia-index` (`worklog ia-render --check` tells you).
-2. `bin/worklog wiki-plan` — reads the manifest and the folded ledger.
+2. `bin/wiki-ticket/worklog wiki-plan` — reads the manifest and the folded ledger.
    Prints JSON `{publish, skip, frozen_violations}`.
 3. If the command exits 1, `frozen_violations` is a frozen-doc **source**
    edit (body hash drifted). Stop and report. Do not publish.

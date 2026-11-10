@@ -1,14 +1,14 @@
 ---
 name: ticket-sync
 metadata:
-  version: "0.24.12"
+  version: "0.24.13"
 description: Push work items to the team's configured ticketing system (GitHub Issues, Jira, Azure DevOps, GitLab, Linear...). Use when asked to sync tickets, after closing out a plan, or when items should be visible in the tracker. Push and pull.
 ---
 
 # Ticket sync
 
 Sync runs through a typed adapter contract: the dispatcher
-(`bin/sync_dispatch.py`) owns every invariant; a per-system adapter is a
+(`bin/wiki-ticket/sync_dispatch.py`) owns every invariant; a per-system adapter is a
 dumb translator. This skill's job is to run it and read the report — not
 to re-implement the rules. Contract:
 `docs/plans/2026-07-18-typed-adapter-contract.md`.
@@ -20,7 +20,7 @@ tracker: `github`, `gitlab`, `jira`, `ado`, `linear`, `codecatalyst`,
 `other`, or `none`. If it is `none` or absent, say so and stop — there is
 nothing to push to.
 
-The enum is advisory, not a capability list. `bin/worklog` only ever
+The enum is advisory, not a capability list. `bin/wiki-ticket/worklog` only ever
 branches on `none`; every other value is a name this skill resolves to
 whatever tooling exists (CLI, MCP server, REST). Named values carry known
 caveats; `other` is any tracker not listed — set it, note the real system
@@ -42,10 +42,10 @@ dispatcher computes this, see the contract doc).
 
 ## 3. Flow
 
-1. `bin/worklog adapter check` — activates and validates the adapter for
+1. `bin/wiki-ticket/worklog adapter check` — activates and validates the adapter for
    the configured system against the contract. Missing adapter → the
    dispatcher runs local-only; that is a mode, not an error.
-2. `bin/worklog sync` — the dispatcher handles scope, hash-skip,
+2. `bin/wiki-ticket/worklog sync` — the dispatcher handles scope, hash-skip,
    create-vs-update, echo suppression, conflict detection, and
    `worklog ingest` of pulled changes.
 3. Read the drift report and surface anything that needs a human
@@ -69,7 +69,7 @@ The log is the source of truth. On a worklog-managed tracker:
 
 When a ticket already exists remotely with no marker:
 
-    bin/worklog adopt --system github --key N
+    bin/wiki-ticket/worklog adopt --system github --key N
 
 That creates the log item, links it, and stamps `<!-- worklog:{ulid} -->`
 so the next push updates. `--dry-run` first.
@@ -80,7 +80,7 @@ already closed the log item (or, on `--dry-run`, named `worklog close
 
 ## 4. Invariants — dispatcher-enforced, context only
 
-Each of these is code in `bin/sync_dispatch.py` now, not procedure for you
+Each of these is code in `bin/wiki-ticket/sync_dispatch.py` now, not procedure for you
 to follow — see `docs/plans/2026-07-18-typed-adapter-contract.md`:
 
 - **Canonical hash / skip-unchanged** (spec §10.3): an item is pushed only
@@ -96,7 +96,7 @@ to follow — see `docs/plans/2026-07-18-typed-adapter-contract.md`:
 ## 4b. Rich ticket bodies
 
 When creating or updating a ticket, compose its body with
-`bin/worklog ticket-body <ulid>` (issue-description skill): summary,
+`bin/wiki-ticket/worklog ticket-body <ulid>` (issue-description skill): summary,
 epic/plan context with the frozen plan's wiki page, milestone, and
 traceability edges, rendered from the log + graph. Never hand-edit richness
 into the remote ticket only — enrich the source (`worklog update --body`,
@@ -122,7 +122,7 @@ and anything deferred or needing human action.
 Conflicts surface in `worklog list` (stderr), `worklog show`, and the
 status report's Needs-attention section. Resolve with:
 
-    bin/worklog resolve <item> --field <f> --take local|remote
+    bin/wiki-ticket/worklog resolve <item> --field <f> --take local|remote
 
 ## Azure DevOps: field-tested caveats (no adapter ships yet — hints for building/driving one)
 

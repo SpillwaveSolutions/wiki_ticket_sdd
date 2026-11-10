@@ -132,7 +132,7 @@ VIZ_ALL = ("deps", "hierarchy", "gantt")
 
 def render(paths=PATHS, viz="deps,hierarchy"):
     # Default MUST match cmd_roadmap_render's --viz default: the pre-commit
-    # freshness gate diffs bare `python3 bin/render_roadmap.py` output against
+    # freshness gate diffs bare `python3 bin/wiki-ticket/render_roadmap.py` output against
     # the file worklog wrote.
     r = fold(paths)
     items = r.items

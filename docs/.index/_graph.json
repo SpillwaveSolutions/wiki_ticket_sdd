@@ -7899,6 +7899,11 @@
    "status": "done",
    "title": "Release v0.24.12"
   },
+  "item/01M73MV8GGW2N7Z8J71NGMQXDJ": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Install the CLI under bin/wiki-ticket"
+  },
   "plan/2026-07-17_worklog-core_plan": {
    "doc_type": "plan",
    "source": "docs/plans/2026-07-17_worklog-core_plan.md",

@@ -1,7 +1,7 @@
 ---
 name: work-track
 metadata:
-  version: "0.24.12"
+  version: "0.24.13"
 description: Track work items — use when creating, updating, closing, or listing work items, or when discovering unplanned work mid-flight ("we also need to…", a bug found while doing something else).
 ---
 
@@ -11,13 +11,13 @@ Every request that produces work gets worklog items FIRST — add them before
 starting, move them `in_progress` → `done` as the work happens (the
 UserPromptSubmit and Stop hooks enforce this). Unrecorded work is invisible work.
 
-All state changes go through `bin/worklog`. Never edit `.work/*.jsonl` by
+All state changes go through `bin/wiki-ticket/worklog`. Never edit `.work/*.jsonl` by
 hand or with shell redirects (invariant 15.4) — the CLI's `append()` is the
 only writer.
 
 ## Add an item
 
-    bin/worklog add "<title>" --body "<readable description>" \
+    bin/wiki-ticket/worklog add "<title>" --body "<readable description>" \
         [--level epic|story|task|subtask] \
         [--kind feature|bug|ops|triage] [--milestone v0.6.0] \
         [--priority P0-P3] [--parent <ulid>] [--labels a,b]
@@ -40,29 +40,29 @@ deliberately, don't guess. `--type` is a deprecated alias (`bug` →
 Work discovered mid-flight ("we also need to…", a bug found while doing
 something else) MUST be recorded BEFORE doing the work:
 
-    bin/worklog add "<title>" --unplanned --discovered-during <current-item-ulid>
+    bin/wiki-ticket/worklog add "<title>" --unplanned --discovered-during <current-item-ulid>
 
 `--unplanned` requires `--discovered-during` (spec 5.4).
 
 ## Update / close
 
-    bin/worklog update <ulid> [--status todo|in_progress|blocked] \
+    bin/wiki-ticket/worklog update <ulid> [--status todo|in_progress|blocked] \
         [--kind feature|bug|ops|triage] [--milestone v0.6.0] \
         [--priority P0-P3] [--add-label a] [--del-label b]
-    bin/worklog close <ulid> --status done|cancelled [--resolution "..."]
+    bin/wiki-ticket/worklog close <ulid> --status done|cancelled [--resolution "..."]
 
 After closing items, run the ticket-sync skill so linked tickets close
 remotely too.
 
 ## Inspect
 
-    bin/worklog list          # open items
-    bin/worklog list --all    # includes closed
-    bin/worklog show <id-prefix>
+    bin/wiki-ticket/worklog list          # open items
+    bin/wiki-ticket/worklog list --all    # includes closed
+    bin/wiki-ticket/worklog show <id-prefix>
 
 ## After any change
 
-Run `bin/worklog roadmap-render` and commit the log and roadmap together
+Run `bin/wiki-ticket/worklog roadmap-render` and commit the log and roadmap together
 (`.work/todo.jsonl` + `docs/roadmap.md`) — the pre-commit hook rejects a
 stale roadmap.
 
@@ -70,5 +70,5 @@ stale roadmap.
 
 The logs union-merge without conflict, but `docs/roadmap.md` may conflict or
 go stale (both sides regenerated it). Recovery is always the same: run
-`bin/worklog roadmap-render`, `git add -A`, and finish the merge commit. The
+`bin/wiki-ticket/worklog roadmap-render`, `git add -A`, and finish the merge commit. The
 pre-merge-commit hook blocks any merge that would land a stale roadmap.

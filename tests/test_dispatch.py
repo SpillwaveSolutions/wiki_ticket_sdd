@@ -31,7 +31,7 @@ class Sandbox(unittest.TestCase):
 
     def run_wl(self, *args, env=None):
         return subprocess.run(
-            [sys.executable, os.path.join(self.dir, "bin", "worklog"), *args],
+            [sys.executable, os.path.join(self.dir, "bin", "wiki-ticket", "worklog"), *args],
             cwd=self.dir, capture_output=True, text=True, env=env or self.env)
 
     def wl(self, *args):
@@ -258,12 +258,12 @@ class TestCloseSyncsFields(Sandbox):
 
 class TestSchemaMirror(unittest.TestCase):
     def test_embedded_capabilities_schema_matches_file(self):
-        sys.path.insert(0, os.path.join(ROOT, "bin"))
+        sys.path.insert(0, os.path.join(ROOT, "bin", "wiki-ticket"))
         import sync_dispatch
         with open(os.path.join(ROOT, "schema", "capabilities.schema.json"),
                   encoding="utf-8") as fh:
             self.assertEqual(sync_dispatch.CAPABILITIES_SCHEMA, json.load(fh),
-                             "bin/sync_dispatch.py CAPABILITIES_SCHEMA must "
+                             "bin/wiki-ticket/sync_dispatch.py CAPABILITIES_SCHEMA must "
                              "mirror schema/capabilities.schema.json")
 
 

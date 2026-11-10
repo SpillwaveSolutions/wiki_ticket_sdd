@@ -2,6 +2,9 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Install the CLI under bin/wiki-ticket
+`01M73MV8GGW2N7Z8J71NGMQXDJ` · status: todo
+
 ### Release v0.24.12
 `01M2XT2DGDWA6MYZZXCABSEMXW` · status: done
 

@@ -1,11 +1,12 @@
-# Subprocess-aware coverage: suites exercise bin/ via `python3 bin/worklog ...`
-# in sandbox copies. COVERAGE_PROCESS_START + a site .pth start coverage in
-# every subprocess; [paths] maps sandbox copies back onto bin/ at combine time.
+# Subprocess-aware coverage: suites exercise the CLI via
+# `python3 bin/wiki-ticket/worklog ...` in sandbox copies.
+# COVERAGE_PROCESS_START + a site .pth start coverage in every subprocess;
+# [paths] maps sandbox copies back onto bin/wiki-ticket at combine time.
 [run]
 parallel = True
-source = bin
+source = bin/wiki-ticket
 
 [paths]
-bin =
-    bin
-    */bin
+bin/wiki-ticket =
+    bin/wiki-ticket
+    */bin/wiki-ticket

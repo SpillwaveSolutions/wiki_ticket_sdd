@@ -36,7 +36,7 @@ jobs:
       # files, and for a pull_request GitHub checks out the merge result, so
       # this sees exactly what the hook would have seen locally.
       - name: merge integrity (resurrection + duplicate ownership)
-        run: python3 bin/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
+        run: python3 bin/wiki-ticket/compact.py --merge-check .work/todo.jsonl .work/done.jsonl
       # Opt-in remote dedupe gate (#413, ticketing.ci_dedupe_check). Needs the
       # bot token; skipped, never failed, when it is absent (a fork PR never
       # sees secrets).
@@ -45,10 +45,10 @@ jobs:
           GH_TOKEN: ${{ secrets.WORKLOG_BOT_PAT }}
           WORKLOG_TICKET_ADAPTER: adapters/github/adapter
         run: |
-          on=$(python3 -c 'import sys; sys.path.insert(0, "bin"); import sync_dispatch as s; print(s.ticketing_config().get("ci_dedupe_check", "false"))')
+          on=$(python3 -c 'import sys; sys.path.insert(0, "bin/wiki-ticket"); import sync_dispatch as s; print(s.ticketing_config().get("ci_dedupe_check", "false"))')
           [ "$on" = "true" ] || { echo "skipped: ticketing.ci_dedupe_check is off"; exit 0; }
           [ -n "$GH_TOKEN" ] || { echo "skipped: no token"; exit 0; }
-          bin/worklog dedupe --dry-run --check
+          bin/wiki-ticket/worklog dedupe --dry-run --check
       # commit-msg's own MERGE_HEAD check doesn't exist post-hoc in a CI
       # checkout, so re-derive "was this a merge" via --no-merges instead.
       - name: commit messages reference a worklog item or ticket
@@ -98,9 +98,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # Subprocess-aware: a site .pth starts coverage in every python child
-      # (the suites exercise bin/ via sandboxed `python3 bin/worklog ...`);
+      # (the suites exercise the CLI via sandboxed `python3 bin/wiki-ticket/worklog ...`);
       # COVERAGE_FILE keeps data files out of sandbox dirs the tests delete;
-      # .coveragerc's [paths] maps sandbox copies back onto bin/ at combine.
+      # .coveragerc's [paths] maps sandbox copies back onto bin/wiki-ticket at combine.
       - name: install coverage + subprocess hook
         run: |
           pip install coverage
@@ -111,4 +111,4 @@ jobs:
           for t in tests/test_*.py; do python3 -m coverage run "$t"; done
           unset COVERAGE_PROCESS_START
           python3 -m coverage combine -q
-          python3 -m coverage report --include='*/bin/*.py' --fail-under=80 -m
+          python3 -m coverage report --include='*/bin/wiki-ticket/*.py' --fail-under=80 -m

@@ -17,7 +17,7 @@ import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "bin"))
+sys.path.insert(0, os.path.join(ROOT, "bin", "wiki-ticket"))
 import plan_capture                                             # noqa: E402
 
 
@@ -68,7 +68,7 @@ class TestWarningIsAdvisory(unittest.TestCase):
 
     def add(self, title):
         return subprocess.run(
-            [sys.executable, os.path.join(ROOT, "bin", "worklog"),
+            [sys.executable, os.path.join(ROOT, "bin", "wiki-ticket", "worklog"),
              "--actor", "t", "add", title, "--level", "task",
              "--kind", "ops", "--priority", "P3"],
             cwd=self.dir, capture_output=True, text=True)
@@ -110,7 +110,7 @@ class TestPlanCaptureWarns(unittest.TestCase):
         with open(path, "w", encoding="utf-8") as fh:
             fh.write(draft)
         return subprocess.run(
-            [sys.executable, os.path.join(ROOT, "bin", "worklog"),
+            [sys.executable, os.path.join(ROOT, "bin", "wiki-ticket", "worklog"),
              "--actor", "t", "plan-capture", "--slug", "s",
              "--title", "T", "--file", path],
             cwd=self.dir, capture_output=True, text=True)

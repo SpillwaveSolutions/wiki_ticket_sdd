@@ -15,7 +15,7 @@ about **sessions sharing a checkout**, not knowledge-tree writes.
 
 Two assistants in one checkout switch branches under each other and
 independently "fix" the same problem in different ways. Give each session
-its own `git worktree`. `bin/session.py` is an advisory registry of harness
+its own `git worktree`. `bin/wiki-ticket/session.py` is an advisory registry of harness
 sessions in this checkout; it never blocks a write.
 
 ```bash
@@ -32,7 +32,7 @@ git worktree add ../wiki-ticket-other feat/other-work
 Worklog appends do **not** require a knowledge worktree.
 
 ```bash
-bin/worklog --actor grok-bot/wiki-ticket-sdd add "Example" --unplanned
+bin/wiki-ticket/worklog --actor grok-bot/wiki-ticket-sdd add "Example" --unplanned
 ```
 
 ## Related

@@ -1,7 +1,7 @@
 ---
 name: plan-next
 metadata:
-  version: "0.24.12"
+  version: "0.24.13"
 description: Decide what to work on next — use when asked "what should we do next", "what's most important", or when planning a new work session.
 ---
 
@@ -9,7 +9,7 @@ description: Decide what to work on next — use when asked "what should we do n
 
 READ-ONLY skill: it never changes state (spec 17, open question 1).
 
-1. Run `bin/worklog fold` to get the full item state as JSON.
+1. Run `bin/wiki-ticket/worklog fold` to get the full item state as JSON.
 2. Filter to open items (status `todo`, `in_progress`, or `blocked`) whose
    `depends_on` items are all closed.
 3. Rank: priority first (P0 before P1 before P2 before P3), then group by

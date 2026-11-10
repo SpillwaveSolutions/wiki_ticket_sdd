@@ -1,7 +1,7 @@
 ---
 name: classify
 metadata:
-  version: "0.24.12"
+  version: "0.24.13"
 description: "Propose work items from recent conversation (flag-gated classifier). Use when the Stop hook requests classification or when asked to sweep a conversation for untracked work. Propose-only: writes .work/suggestions.jsonl, never the event log."
 ---
 
@@ -26,8 +26,8 @@ Spawn a single background subagent (never more than one) with this prompt:
 >      "open_questions": [], "dedupe_against": ["<item ULIDs checked>"]}
 >
 > - Mint each `suggestion_id` fresh:
->   `python3 -c "import sys; sys.path.insert(0,'bin'); import ulid; print(ulid.new())"`
-> - Dedupe FIRST: check the current `bin/worklog fold` titles AND prior
+>   `python3 -c "import sys; sys.path.insert(0,'bin/wiki-ticket'); import ulid; print(ulid.new())"`
+> - Dedupe FIRST: check the current `bin/wiki-ticket/worklog fold` titles AND prior
 >   unconsumed suggestions already in `.work/suggestions.jsonl`. Never
 >   re-propose an item that exists or was already suggested; record what you
 >   checked in `dedupe_against`.
@@ -45,7 +45,7 @@ Next turn, read `.work/suggestions.jsonl`, skipping records already marked
 consumed:
 
 - High-confidence suggestions: offer them for promotion —
-  `bin/worklog promote <suggestion-id>` creates the real item.
+  `bin/wiki-ticket/worklog promote <suggestion-id>` creates the real item.
 - Low-confidence (`kind:triage`) suggestions: surface their `open_questions`
   to the user as questions, not items.
 - Rejected suggestions: mark consumed by appending

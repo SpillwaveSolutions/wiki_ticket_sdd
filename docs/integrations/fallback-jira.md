@@ -16,7 +16,7 @@ under `options:`; the `ticket-sync` skill resolves the actual tooling
 ## Adapter configuration
 
 `ticketing.system: jira` is an advisory enum value, not a capability
-switch — `bin/worklog` only ever branches on `none`. There is no
+switch — `bin/wiki-ticket/worklog` only ever branches on `none`. There is no
 `adapters/jira/adapter` (only `adapters/github/` is real code today; see
 `adapters/README.md` for the contract a future Jira adapter would need to
 satisfy). Until one exists, this page — not a shipped binary — is the
@@ -34,7 +34,7 @@ job in the Jira case is narrower than for GitHub: read work items from
 server) to create/update the corresponding issue, rather than
 implementing REST calls directly.
 
-1. `bin/worklog adapter check` — will report "no adapter" for `jira`; that
+1. `bin/wiki-ticket/worklog adapter check` — will report "no adapter" for `jira`; that
    is an expected mode (local-only), not an error.
 2. Use the `jira` skill to create or update the issue, keying off the
    worklog item's ULID as an idempotency marker (store it in a Jira
@@ -65,7 +65,7 @@ side that needs reconciling.
 ## Rendering support
 
 Ticket/PR/release pages render the same regardless of ticketing system —
-`bin/ia_render.py` doesn't know or care what `ticketing.system` is set to.
+`bin/wiki-ticket/ia_render.py` doesn't know or care what `ticketing.system` is set to.
 What's Jira-specific is only the push step above.
 
 ## Example links

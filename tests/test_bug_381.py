@@ -76,17 +76,17 @@ class TestConcurrentBranchesDoNotConflictOnRoadmap(unittest.TestCase):
         # Named driver, not built-in: without this, merge=ours is a missing
         # driver and git falls back to a text merge that conflicts (#381).
         sh(self.dir, "git", "config", "merge.ours.driver", "true")
-        sh(self.dir, sys.executable, "bin/worklog", "roadmap-render")
+        sh(self.dir, sys.executable, "bin/wiki-ticket/worklog", "roadmap-render")
         sh(self.dir, "git", "add", "-A")
         sh(self.dir, "git", "commit", "-q", "--no-verify", "-m", "init")
 
     def add_on_branch(self, branch, title):
         sh(self.dir, "git", "checkout", "-q", "main")
         sh(self.dir, "git", "checkout", "-q", "-b", branch)
-        p = sh(self.dir, sys.executable, "bin/worklog", "--actor", "it",
+        p = sh(self.dir, sys.executable, "bin/wiki-ticket/worklog", "--actor", "it",
                "add", title, "--priority", "P1")
         iid = p.stdout.strip()
-        sh(self.dir, sys.executable, "bin/worklog", "roadmap-render")
+        sh(self.dir, sys.executable, "bin/wiki-ticket/worklog", "roadmap-render")
         sh(self.dir, "git", "add", "-A")
         sh(self.dir, "git", "commit", "-q", "-m", f"feat: {iid}")
         return iid
