@@ -1,7 +1,7 @@
 ---
 generated_at: 2026-09-21T00:00:00Z
-git_hash: "2160410a147a5330f15734fa5a1af69ccd6cca5a"
-branch: chore/post-release-v0-24-12
+git_hash: "535fe72629781a75ccdef86e25c47d3a3ab8a42f"
+branch: feat/nest-worklog-bin
 tag: v0.24.12
 roadmap: docs/roadmap.md
 wiki_key: design/current-code-walkthrough
@@ -20,7 +20,7 @@ Since v0.21.0 the front matter above is not decoration. `git_hash` names the
 tree every citation below was resolved against, and `worklog doc-verify` reads
 it back: each `path — symbol(), lines N–M` in this file is checked with
 `git show <that commit>:<that path>`, never against HEAD. Run it yourself —
-`bin/worklog doc-verify` — and this document should report zero fabrications.
+`bin/wiki-ticket/worklog doc-verify` — and this document should report zero fabrications.
 See §2.21 for how that works and §9.11 of the design doc for why it had to.
 
 ## 1. Orientation
@@ -43,25 +43,25 @@ Directory map:
 
 | Path | What lives there and why |
 |---|---|
-| `bin/worklog` | The CLI and the **only** writer of `.work/todo.jsonl` (1843 lines). Since v0.24.10 it folds three files (`PATHS`, line 36), holds `.work/.lock` while it writes, and caps the whole encoded event at `MAX_LINE` (§2.1). |
-| `bin/fold.py` | The only code allowed to decide what the log *means* (371 lines). Holds `external_owners()` (v0.18.0) and, since v0.19.0, `position()` plus the per-item `apply_watermark()` — the two halves of the #284 fix. |
-| `bin/ulid.py` | IDs (170 lines; monotonic within a millisecond since v0.24.10). The deterministic form that makes ingest idempotent across clones, (v0.19.1) `git_commit()` — provenance for the event, deliberately *not* for the id — and (v0.21.0) `git_commit_full()`, the 40-hex stamp a *document* carries. |
-| `bin/canonical.py` | THE canonical hash (sync change detection). 34 lines, high blast radius. |
-| `bin/sync_dispatch.py` | Every ticket-sync invariant, in one place (1531 lines). Since v0.24.8 also the memory of where a ticket went, three sources deep (`remembered_key()`, §2.24), and the `adopt` / `dedupe` / `explain` companions. |
-| `bin/compact.py` | The only file rewriter (827 lines). CI-only for compaction; since v0.24.10 also retention (`_evict_done()`, `_prune_archive_text()`, §2.23) and conflict preservation; also the two merge guards and, since v0.19.0, `merge_rescue()` — the repair an operator runs by hand. |
-| `bin/published.py` | (v0.24.10) The wiki ledger as an event log: `append()` is the only writer of `.work/published.jsonl`, `fold()` the only reader, `plan()` the publish dispatcher (§2.26). 341 lines. |
-| `bin/triggers.py` | (v0.24.10) `worklog triggers <event>`: the `triggers:` block of `.work/config.yml` decides when generation happens; skills and the post-merge workflow run what comes back (§2.27). 252 lines, imports nothing from `bin/`. |
-| `bin/render_roadmap.py`, `bin/viz_mermaid.py` | Byte-deterministic roadmap + diagrams. |
-| `bin/plan_capture.py`, `bin/adr.py` | Pure helpers: plan parsing (+ `ticket_refs()`, v0.19.0), ADR tooling. |
-| `bin/ia.py` | wiki_key, truth_state, inventory, normalize, sidecars (IA foundation, 665 lines). Since v0.24.7 classifies `docs/design/` and `docs/designs/` alike (#377) and reads the ledger through `published.load()`. Also `ensure_front_matter_fields()`, the additive line-scoped front-matter writer every provenance stamp goes through. |
-| `bin/ia_render.py` | Reader plane (807 lines): Home, Sidebar, indexes, publish-manifest, aliases, artifact pages (v0.14.0), (v0.19.0) the wiki-flavor seam + per-`doc_type` banners + live PR pages, and (v0.20.0) `PLAN_STATE`/`_plan_state()` — a plan's banner names its own state, and (v0.21.0) `_body_hash()` — the manifest hashes a document *below* its front matter (808 lines). |
-| `bin/ia_graph.py` | Traceability graph, link-pr, ticket-body, trace-check, `build_adjacency()`/`item_links()` (v0.14.0), (v0.19.0) `pr_sync()` + the `find` search surface, and (v0.20.0) `in_trace_scope()` — the evidence gate's scope, finally enforced (548 lines). |
-| `bin/session.py` | (v0.19.0) Advisory registry of harness sessions sharing this checkout. 173 lines, blocks nothing. Since v0.24.3 it also holds the one non-advisory fact in the file: `base`, the commit a session started at, which the Stop hook diffs the log against (§2.8). |
-| `bin/provenance.py` | (v0.21.0) `merged_in` — the merge commit that landed a **frozen** document, backfilled after the fact. 154 lines, the only module that walks git history for document metadata. |
-| `bin/doc_verify.py` | (v0.21.0) Resolves this file's own citations at the commit it was stamped with. 421 lines; never falls back to HEAD; judges a symbol's definition line (v0.22.2); `--staged` scoping and the editability predicate (ADR-0009); since v0.24.11 also `freshness()`, the gate that refuses a release while this file predates the latest tag (§2.21). |
-| `bin/changelog.py` | (v0.19.0) `worklog changelog-draft` — the starting point for release notes, never the notes. |
-| `bin/item_fields.py` | (v0.19.0) CORE vs CATALOG: which item fields exist, and which this repo switched on. |
-| `bin/wiki_flavor.py` | (v0.19.0) The renderer's one platform seam: `link()` + `sanitize()`, nothing more. |
+| `bin/wiki-ticket/worklog` | The CLI and the **only** writer of `.work/todo.jsonl` (1843 lines). Since v0.24.10 it folds three files (`PATHS`, line 36), holds `.work/.lock` while it writes, and caps the whole encoded event at `MAX_LINE` (§2.1). |
+| `bin/wiki-ticket/fold.py` | The only code allowed to decide what the log *means* (371 lines). Holds `external_owners()` (v0.18.0) and, since v0.19.0, `position()` plus the per-item `apply_watermark()` — the two halves of the #284 fix. |
+| `bin/wiki-ticket/ulid.py` | IDs (170 lines; monotonic within a millisecond since v0.24.10). The deterministic form that makes ingest idempotent across clones, (v0.19.1) `git_commit()` — provenance for the event, deliberately *not* for the id — and (v0.21.0) `git_commit_full()`, the 40-hex stamp a *document* carries. |
+| `bin/wiki-ticket/canonical.py` | THE canonical hash (sync change detection). 34 lines, high blast radius. |
+| `bin/wiki-ticket/sync_dispatch.py` | Every ticket-sync invariant, in one place (1531 lines). Since v0.24.8 also the memory of where a ticket went, three sources deep (`remembered_key()`, §2.24), and the `adopt` / `dedupe` / `explain` companions. |
+| `bin/wiki-ticket/compact.py` | The only file rewriter (827 lines). CI-only for compaction; since v0.24.10 also retention (`_evict_done()`, `_prune_archive_text()`, §2.23) and conflict preservation; also the two merge guards and, since v0.19.0, `merge_rescue()` — the repair an operator runs by hand. |
+| `bin/wiki-ticket/published.py` | (v0.24.10) The wiki ledger as an event log: `append()` is the only writer of `.work/published.jsonl`, `fold()` the only reader, `plan()` the publish dispatcher (§2.26). 341 lines. |
+| `bin/wiki-ticket/triggers.py` | (v0.24.10) `worklog triggers <event>`: the `triggers:` block of `.work/config.yml` decides when generation happens; skills and the post-merge workflow run what comes back (§2.27). 252 lines, imports nothing from `bin/`. |
+| `bin/wiki-ticket/render_roadmap.py`, `bin/wiki-ticket/viz_mermaid.py` | Byte-deterministic roadmap + diagrams. |
+| `bin/wiki-ticket/plan_capture.py`, `bin/wiki-ticket/adr.py` | Pure helpers: plan parsing (+ `ticket_refs()`, v0.19.0), ADR tooling. |
+| `bin/wiki-ticket/ia.py` | wiki_key, truth_state, inventory, normalize, sidecars (IA foundation, 665 lines). Since v0.24.7 classifies `docs/design/` and `docs/designs/` alike (#377) and reads the ledger through `published.load()`. Also `ensure_front_matter_fields()`, the additive line-scoped front-matter writer every provenance stamp goes through. |
+| `bin/wiki-ticket/ia_render.py` | Reader plane (807 lines): Home, Sidebar, indexes, publish-manifest, aliases, artifact pages (v0.14.0), (v0.19.0) the wiki-flavor seam + per-`doc_type` banners + live PR pages, and (v0.20.0) `PLAN_STATE`/`_plan_state()` — a plan's banner names its own state, and (v0.21.0) `_body_hash()` — the manifest hashes a document *below* its front matter (808 lines). |
+| `bin/wiki-ticket/ia_graph.py` | Traceability graph, link-pr, ticket-body, trace-check, `build_adjacency()`/`item_links()` (v0.14.0), (v0.19.0) `pr_sync()` + the `find` search surface, and (v0.20.0) `in_trace_scope()` — the evidence gate's scope, finally enforced (548 lines). |
+| `bin/wiki-ticket/session.py` | (v0.19.0) Advisory registry of harness sessions sharing this checkout. 173 lines, blocks nothing. Since v0.24.3 it also holds the one non-advisory fact in the file: `base`, the commit a session started at, which the Stop hook diffs the log against (§2.8). |
+| `bin/wiki-ticket/provenance.py` | (v0.21.0) `merged_in` — the merge commit that landed a **frozen** document, backfilled after the fact. 154 lines, the only module that walks git history for document metadata. |
+| `bin/wiki-ticket/doc_verify.py` | (v0.21.0) Resolves this file's own citations at the commit it was stamped with. 421 lines; never falls back to HEAD; judges a symbol's definition line (v0.22.2); `--staged` scoping and the editability predicate (ADR-0009); since v0.24.11 also `freshness()`, the gate that refuses a release while this file predates the latest tag (§2.21). |
+| `bin/wiki-ticket/changelog.py` | (v0.19.0) `worklog changelog-draft` — the starting point for release notes, never the notes. |
+| `bin/wiki-ticket/item_fields.py` | (v0.19.0) CORE vs CATALOG: which item fields exist, and which this repo switched on. |
+| `bin/wiki-ticket/wiki_flavor.py` | (v0.19.0) The renderer's one platform seam: `link()` + `sanitize()`, nothing more. |
 | `.work/` | The logs (`todo.jsonl`, `done.jsonl`, and since v0.24.10 `archive.jsonl` for evicted closed snapshots and `published.jsonl` for wiki page identity), `config.yml`, and (gitignored) `.sessions`, `sync-state.json`, `.lock`. |
 | `docs/.index/` | Generated IA plane (committed, regenerate-and-diff, **hard-gated** since v0.19.0). |
 | `adapters/` | `github` (worked example), `fake` (CI double), authoring rules. |
@@ -77,7 +77,7 @@ The one diagram (derived from actual imports and subprocess calls):
 
 ```mermaid
 flowchart TD
-    U["dev / agent / skill"] --> WL["bin/worklog"]
+    U["dev / agent / skill"] --> WL["bin/wiki-ticket/worklog"]
     WL -->|"append() — sole writer"| LOG[(".work/todo.jsonl<br/>.work/done.jsonl")]
     LOG --> FOLD["fold.py"]
     FOLD --> WL
@@ -109,7 +109,7 @@ flowchart TD
 
 ### 2.1 The write path: `worklog add` → one line in the log
 
-Entry: argparse dispatches to `cmd_add` (`bin/worklog — cmd_add(), lines
+Entry: argparse dispatches to `cmd_add` (`bin/wiki-ticket/worklog — cmd_add(), lines
 186–218`, from the `build_parser` tail). Validation happens **before** any write —
 `--unplanned` requires `--discovered-during`, and taxonomy rules are hard here
 even though the fold is lenient:
@@ -125,7 +125,7 @@ def check_taxonomy(level, kind, milestone):
             sys.exit("worklog: milestone lives on leaves; epic milestones are "
                      "derived (taxonomy §2.5)")
 ```
-— `bin/worklog — check_taxonomy(), lines 131–139`
+— `bin/wiki-ticket/worklog — check_taxonomy(), lines 131–139`
 
 Note the `cmd_add` comment: kind is only written when given — an omitted kind
 folds to triage (§2.3), never silently to feature. Unclassified must look
@@ -143,7 +143,7 @@ def base(item, op, actor):
         ev["git"] = sha
     return ev
 ```
-— `bin/worklog — base(), lines 109–124`
+— `bin/wiki-ticket/worklog — base(), lines 109–124`
 
 Read the docstring above it and the one on `ulid.new()` together; they are one
 argument. v0.19.0 put the short git hash *inside the id*, spending five of its
@@ -162,7 +162,7 @@ the only writer would carry a subprocess in its hot path. `WORKLOG_NO_GIT_PROVEN
 skips it, and an `OSError` degrades to `""`; provenance is never a reason a write
 fails.
 
-`ulid.new()` gained one more property in v0.24.10 (`bin/ulid.py — new(),
+`ulid.new()` gained one more property in v0.24.10 (`bin/wiki-ticket/ulid.py — new(),
 lines 114–143`): same-millisecond calls increment the 80-bit entropy instead of
 drawing fresh random bytes, so a create-then-update minted in one tick cannot
 fold out of order. `merge_rescue()` had already worked around this by handing
@@ -206,7 +206,7 @@ def append(event):
         os.close(lock_fd)
     return event
 ```
-— `bin/worklog — append(), lines 66–106` (docstring elided)
+— `bin/wiki-ticket/worklog — append(), lines 66–106` (docstring elided)
 
 What it receives: a finished event dict. What it returns: the event. What can
 fail: an oversized body or an oversized encoded event exits before the write; a
@@ -220,7 +220,7 @@ now rather than characters; `MAX_LINE = 4096` (line 38) caps the **whole**
 encoded line at `PIPE_BUF`, because the body cap protected atomicity only if
 the rest of the event was small. `n != len(raw)` turns a short write into a
 loud exit instead of a fused line. And `.work/.lock` (line 39) is held across
-the append: `compact.py` takes the same lock (`bin/compact.py — _lock_logs(),
+the append: `compact.py` takes the same lock (`bin/wiki-ticket/compact.py — _lock_logs(),
 lines 80–86`) around its `os.replace`, so a write can no longer land on an
 inode compaction has just swapped out. `VERSION = "0.24.12"` (line 40) is
 lockstepped with every host manifest, both skill trees and the README marker by
@@ -235,7 +235,7 @@ sits in `append()` rather than in each command, and the docstring says why:
 add/update/close/link/ingest and anything added later, and no caller can forget
 it." It fires once per process, on stderr, never blocking — the whole body is
 wrapped so that "an advisory must never break a write", and
-`WORKLOG_NO_SESSION_WARN` silences it. `bin/session.py` is equally defensive in
+`WORKLOG_NO_SESSION_WARN` silences it. `bin/wiki-ticket/session.py` is equally defensive in
 the other direction: a missing or corrupt `.work/.sessions` reads as `{}`, and
 writes are best-effort. A bad advisory file must never be the reason someone
 cannot record work.
@@ -261,12 +261,12 @@ prompt an agent reads, invisible is the only honest meaning of "disabled".
 
 Every read command (`list`, `show`, `fold`, roadmap, status, sync scope, IA plan
 lifecycle) calls `fold(...)`. Since v0.24.10 the CLI folds `PATHS`, all three
-files including `archive.jsonl` (`bin/worklog` line 36), while the roadmap
+files including `archive.jsonl` (`bin/wiki-ticket/worklog` line 36), while the roadmap
 renderer folds `todo + done` only: the working set is what the roadmap shows,
 and an archived item is history you can still `show`. Four stages, each
 load-bearing:
 
-**Parse tolerantly** — `read_lines()` (`bin/fold.py`): a bad line is reported
+**Parse tolerantly** — `read_lines()` (`bin/wiki-ticket/fold.py`): a bad line is reported
 into `result.errors` and skipped. The docstring explains why this is not
 politeness: union merge plus a missing newline "can fuse two valid lines into
 one invalid one, and that must cost two events, not the entire history."
@@ -283,7 +283,7 @@ one invalid one, and that must cost two events, not the entire history."
         seen[key] = ev
     return sorted(seen.values(), key=position)
 ```
-— `bin/fold.py — dedupe_and_sort(), lines 163–182`
+— `bin/wiki-ticket/fold.py — dedupe_and_sort(), lines 163–182`
 
 ULIDs sort lexicographically by time, so ordering is a string sort. **There is
 no tiebreak, and its removal is instructive** (v0.19.0, worklog#259). This used
@@ -302,7 +302,7 @@ def position(ev):
         return (ev["through"], 0)
     return (ev["ev"], 1)
 ```
-— `bin/fold.py — position(), lines 185–207`
+— `bin/wiki-ticket/fold.py — position(), lines 185–207`
 
 Identity is still `ev`; this is *only* ordering, and separating the two is the
 whole trick. A snapshot's own `ev` is minted at compaction time, so it sorts
@@ -335,7 +335,7 @@ conflict while an *earlier* one does not, because events apply in `ev` order
 Orphans: an event for an item with no create/snapshot creates
 `{"id": iid, "_orphan": True}` — "Report it; never crash, never silently invent
 an item." Legitimate mid-rebase. Compaction counts orphans as open so it never
-drops them (`bin/compact.py` partition comment).
+drops them (`bin/wiki-ticket/compact.py` partition comment).
 
 One more subtlety worth knowing before you touch `_normalize_taxonomy()`: the
 `kind:triage` default applies on `create` and **not** on `snapshot`
@@ -349,16 +349,16 @@ and v0.19.1's `git` safe to add with no migration in either direction.
 
 ### 2.3 Plan capture: one command, one epic, N tasks, one frozen doc
 
-`bin/worklog — cmd_plan_capture(), lines 619–683`. It parses the draft with
+`bin/wiki-ticket/worklog — cmd_plan_capture(), lines 619–683`. It parses the draft with
 `plan_capture.parse_tasks()` — checkboxes under a `## Tasks` heading only, with
-the regex `TASK_RE` (`bin/plan_capture.py`) where a leading indent means
+the regex `TASK_RE` (`bin/wiki-ticket/plan_capture.py`) where a leading indent means
 "subtask of the task above". It refuses to recapture a slug that already has a
 plan (invariant 15.8), appends the epic create, then each task/subtask create,
 and finally writes the plan doc with front matter linking every item ID.
 Captured items get explicit `kind:feature`.
 
 **The guard is slug-scoped, not filename-scoped (v0.17.0, PR #198 + a
-same-day follow-up; `bin/worklog — cmd_plan_capture()`, lines ~344–367).**
+same-day follow-up; `bin/wiki-ticket/worklog — cmd_plan_capture()`, lines ~344–367).**
 The original code checked only `os.path.exists(f"docs/plans/{date}-{slug}.md")`
 with `date` from `time.gmtime()` (UTC) — so it enforced "plans are never
 rewritten" only when the UTC date happened to match the plan's actual filename.
@@ -414,7 +414,7 @@ mini JSON Schema validator, plus one check the schema subset cannot express —
 (`sync_dispatch.py — capabilities()`).
 
 **Observe first (v0.24.9, #385; extended for #412).** Before any push,
-`sync()` calls `observe_remote()` (`bin/sync_dispatch.py — observe_remote(),
+`sync()` calls `observe_remote()` (`bin/wiki-ticket/sync_dispatch.py — observe_remote(),
 lines 1225–1277`), even on `--push-only`. One listing gives three things
 push-only could not see: tracker-only tickets with no marker (reported with an
 `adopt` command each), linked tickets already closed on the remote (closed
@@ -451,11 +451,11 @@ source.
 
 **Rich bodies (v0.13.0):** `worklog ticket-body <ulid>` prints a projection with
 summary, epic/plan/milestone context, and graph edges
-(`ia_graph.ticket_body()`, lines 307–357) for the issue-description skill to push.
+(`bin/wiki-ticket/ia_graph.py — ticket_body(), lines 307–357`) for the issue-description skill to push.
 
 ### 2.6 Compaction: the one rewrite, quadruple-checked
 
-`compact.compact()` (`bin/compact.py — compact(), lines 373–388`), nightly on
+`compact.compact()` (`bin/wiki-ticket/compact.py — compact(), lines 373–388`), nightly on
 main via `.github/workflows/compact.yml`. Since v0.24.10 `compact()` is a thin
 shell: refuse on uncommitted changes to any of the three logs, an untracked
 `archive.jsonl` included (`_git_refuses(), lines 317–334`); take `.work/.lock`;
@@ -474,14 +474,14 @@ fails verify by diverging from fold (item 01KY5HW7KS / #101).
 v0.24.10: open conflicts survive. `_public()` strips `_conflicts` from the
 snapshot payload, which used to mean the nightly compaction verified the
 stripped form and silently dropped every open conflict. `_item_events()`
-(`bin/compact.py — _item_events(), lines 72–77`) now emits the snapshot followed
+(`bin/wiki-ticket/compact.py — _item_events(), lines 72–77`) now emits the snapshot followed
 by one `conflict` event per open conflict, and `_verify()` compares
 `_conflicts_map()` too. Regression: `tests/test_compact.py —
 TestConflictPreservation, lines 221–266`.
 
 v0.24.3 — the *job* around the function, not the function. Read
 `.github/workflows/compact.yml` top to bottom and note that two steps sit
-between `python3 bin/compact.py` and the commit, and that since v0.24.10 the
+between `python3 bin/wiki-ticket/compact.py` and the commit, and that since v0.24.10 the
 commit does not go to `main` at all: the job commits on `chore/compact-<run id>`,
 opens a PR, and arms auto-merge. §2.25 is how that PR turns green. The first regenerates the
 derived docs in the order that matters — `roadmap-render`, `ia-inventory`,
@@ -511,7 +511,7 @@ lines of both files a second time to build `per_item = {id: highest ev}`, and
             if iid and ev and ev > per_item.get(iid, ""):
                 per_item[iid] = ev
 ```
-— `bin/compact.py — _compact_locked(), lines 391–508`
+— `bin/wiki-ticket/compact.py — _compact_locked(), lines 391–508`
 
 Raw rather than folded, deliberately: the mark must describe what was **read**,
 not what survived. And `through` goes top-level on the event, never inside
@@ -558,7 +558,7 @@ tree. If the tree settled clean, or the branch moved underneath, allow the stop
 Now the part that changed in v0.24.3. The proof that this session recorded
 something used to be an *uncommitted* change to `.work/todo.jsonl` — and that
 proof disappears the instant the session commits its own items, which is exactly
-what the policy tells it to do. So the hook now asks `bin/session.py` where this
+what the policy tells it to do. So the hook now asks `bin/wiki-ticket/session.py` where this
 session *started*:
 
 ```sh
@@ -594,11 +594,11 @@ check stays at `$PWD`, which is the only question `$PWD` can answer — did work
 happen *here*. The block itself is last, and is reached only when no checkout in
 the repo recorded anything (`hooks/stop-worklog-check.sh:79-95`).
 
-The marker on the other side is one line in `bin/session.py — touch(), lines
+The marker on the other side is one line in `bin/wiki-ticket/session.py — touch(), lines
 82–101`: `rec["base"] = prev.get("base") or (base_sha if base_sha is not None
 else head())`. The `prev.get("base") or …` is load-bearing — re-stamping on
 every heartbeat would advance the marker past the session's own commit and
-re-create the bug one layer down. `bin/session.py — base(), lines 104–121` reads
+re-create the bug one layer down. `bin/wiki-ticket/session.py — base(), lines 104–121` reads
 it back and returns `None` rather than a guess for an unknown session. The
 docstring there also states the trade-off plainly: a session that *pulls*
 someone else's log changes now reads as having recorded something. That is a
@@ -641,18 +641,18 @@ Pre-commit runs **IA gates as hard failures** since v0.19.0 (#98) — the
 warn-only rollout described in earlier walkthroughs is over:
 
 ```sh
-if [ -f bin/ia.py ] && [ -x bin/worklog ] && [ -d docs/.index ]; then
-  python3 bin/worklog ia-normalize --check >/dev/null 2>&1 || \
+if [ -f bin/wiki-ticket/ia.py ] && [ -x bin/wiki-ticket/worklog ] && [ -d docs/.index ]; then
+  python3 bin/wiki-ticket/worklog ia-normalize --check >/dev/null 2>&1 || \
     fail "doc metadata drift; run: worklog ia-normalize"
-  python3 bin/worklog ia-inventory --check >/dev/null 2>&1 || \
+  python3 bin/wiki-ticket/worklog ia-inventory --check >/dev/null 2>&1 || \
     fail "inventory stale/invalid; run: worklog ia-inventory"
-  [ ! -f bin/ia_render.py ] || python3 bin/worklog ia-render --check >/dev/null 2>&1 || \
+  [ ! -f bin/wiki-ticket/ia_render.py ] || python3 bin/wiki-ticket/worklog ia-render --check >/dev/null 2>&1 || \
     fail "rendered pages/manifest stale; run: worklog ia-render"
   # trace-check stays warn-level here forever; --strict runs at release time
-  [ ! -f bin/ia_graph.py ] || python3 bin/worklog trace-check >/dev/null 2>&1 || \
+  [ ! -f bin/wiki-ticket/ia_graph.py ] || python3 bin/wiki-ticket/worklog trace-check >/dev/null 2>&1 || \
     echo "worklog: WARNING — unlinked evidence; run: worklog trace-check" >&2
   # doc-verify, scoped to the documents THIS commit touches (--staged). ...
-  [ ! -f bin/doc_verify.py ] || python3 bin/worklog doc-verify --staged --strict >/dev/null 2>&1 || \
+  [ ! -f bin/wiki-ticket/doc_verify.py ] || python3 bin/wiki-ticket/worklog doc-verify --staged --strict >/dev/null 2>&1 || \
     echo "worklog: WARNING — a document THIS commit touches cites code that does not match the commit it was written against; run: worklog doc-verify --staged" >&2
 fi
 ```
@@ -660,7 +660,7 @@ fi
 
 The `-d docs/.index` guard is what makes the promotion safe, and the comment
 above it spells out the distinction: that test asks "has this repo opted **into**
-the IA?", where the `bin/ia.py` test only asks "does it have the code?" A
+the IA?", where the `bin/wiki-ticket/ia.py` test only asks "does it have the code?" A
 scaffolded repo gets `bin/` from the plugin but has never generated an index and
 must not be blocked from its first commit. A repo that *has* an index stays
 fully enforced — deleting any single generated file inside it still fails,
@@ -692,7 +692,7 @@ keeps prose *about* conflict markers from tripping it
 with `__pycache__` (item 01KY5P9V0C).
 
 **CI runs the merge guards directly (v0.19.0).** `worklog.yml` gained a
-`python3 bin/compact.py --merge-check` step, because inside the hook those
+`python3 bin/wiki-ticket/compact.py --merge-check` step, because inside the hook those
 guards are gated on `WORKLOG_MERGE_COMMIT` or an on-disk `MERGE_HEAD` and
 neither exists in a CI checkout — while for a `pull_request` GitHub checks out
 the *merge result*, so CI sees precisely what the local hook would have seen
@@ -707,7 +707,7 @@ the guards never fire on a hosted merge.
 new docs derive keys by rule (`ia.derive_canonical_key()`,
 `ia.resolve_key()`). CLI: `worklog wiki-key <path>`.
 
-**Normalize** (`ia.normalize()`, driven by `bin/worklog — cmd_ia_normalize(),
+**Normalize** (`ia.normalize()`, driven by `bin/wiki-ticket/worklog — cmd_ia_normalize(),
 lines 810–820`):
 
 ```python
@@ -720,13 +720,13 @@ def cmd_ia_normalize(a):
         sys.exit(1)
     ...
 ```
-— `bin/worklog — cmd_ia_normalize(), lines 810–820`
+— `bin/wiki-ticket/worklog — cmd_ia_normalize(), lines 810–820`
 
 Frozen docs get additive sidecars under `docs/.index/<wiki_key>.yml`;
 sanctioned-live docs get in-place identity fields only. `truth_state` is
 recomputed every run (`DYNAMIC_FIELDS`), never pinned from a stale sidecar.
 Since v0.24.7 a frozen design that recorded no `git_hash` gets the commit that
-last touched it stamped into its sidecar (`bin/ia.py — last_touch_sha(), lines
+last touched it stamped into its sidecar (`bin/wiki-ticket/ia.py — last_touch_sha(), lines
 275–292`), the least-wrong value the normalizer can write, so
 `ia-inventory --check` stops blocking on `missing git_hash` (#377). The ledger's
 self-description is now appended as `publish` events through `published.record()`
@@ -767,7 +767,7 @@ def cmd_ia_index(a):
     for path in ia_render.write_all():
         print("wrote: " + path)
 ```
-— `bin/worklog — cmd_ia_index(), lines 834–841`
+— `bin/wiki-ticket/worklog — cmd_ia_index(), lines 834–841`
 
 **Graph** (`ia_graph.build_graph()` / `write_graph()`): typed edges from
 frontmatter, plan items, ADR references, and item sidecars. `link-pr` is an
@@ -777,7 +777,7 @@ frontmatter, plan items, ADR references, and item sidecars. `link-pr` is an
 def link_pr(ulid_, pr=None, commit=None):
     ...
 ```
-— `bin/ia_graph.py — link_pr(), lines 153–169`
+— `bin/wiki-ticket/ia_graph.py — link_pr(), lines 153–169`
 
 `trace_check(strict=False)` lists items **in a released milestone** missing
 plan/ticket/PR links; `--strict` exits 1 at release. Which items those are is
@@ -815,7 +815,7 @@ def item_links(iid, fwd, back):
     return {"parent": parent, "children": children, "prs": prs,
             "release": release}
 ```
-— `bin/ia_graph.py — item_links(), build_adjacency()`
+— `bin/wiki-ticket/ia_graph.py — item_links(), build_adjacency()`
 
 Every one of the three new renderers calls this — "not four near-duplicates"
 was a design decision in the plan (`render_item_page()` branches by level
@@ -827,7 +827,7 @@ sentence (`one_line_summary()` — never cached, keeping the module's
 byte-determinism), an upward `## Hierarchy` walk to the root
 (`_upward_chain()`, cycle-safe via a `seen` set), a downward `## Subtasks` /
 `## Children` list with a `done/total` progress rollup, `## Linked PRs`, and
-`## Release`. `worklog ia-ticket <ULID>` (`cmd_ia_ticket`, `bin/worklog`)
+`## Release`. `worklog ia-ticket <ULID>` (`cmd_ia_ticket`, `bin/wiki-ticket/worklog`)
 previews one page without a full render pass — builds the graph, calls
 `build_adjacency()`, and writes `render_item_page()`'s output to stdout.
 
@@ -910,7 +910,7 @@ PY
 ```
 — `hooks/commit-msg`
 
-The ULID pattern matches `bin/ulid.py`'s Crockford base32 alphabet exactly.
+The ULID pattern matches `bin/wiki-ticket/ulid.py`'s Crockford base32 alphabet exactly.
 No exemption beyond merge commits (via `MERGE_HEAD`, same signal as the
 branch guard). Orthogonal check — applies on any branch, including feature
 branches.
@@ -1014,7 +1014,7 @@ those two files only), and the Confluence diagram-to-image conversion note
 (§Rendering support, `fallback-confluence.md` only — Confluence storage
 format doesn't render Mermaid/PlantUML fences directly).
 
-Publishing: `bin/worklog wiki-add docs/integrations/fallback-<key>.md --key
+Publishing: `bin/wiki-ticket/worklog wiki-add docs/integrations/fallback-<key>.md --key
 integrations/<key> --title "Integration-<Name>"` registers the file in
 `.work/published.jsonl` (a `register` event since v0.24.10); the ordinary `wiki-publish` skill's existing
 hash-compare skip logic carries it from there — no new publish path was
@@ -1047,7 +1047,7 @@ def _resolve(item):
         sys.exit(f"worklog: {item} is ambiguous — matches {ids}")
     return match[0]
 ```
-— `bin/worklog — _resolve(), lines 238–257`
+— `bin/wiki-ticket/worklog — _resolve(), lines 238–257`
 
 What it receives: a full ULID or any prefix of one. What it returns: the folded
 item dict (so callers get `item["id"]`, `item["status"]`, `item["_conflicts"]`
@@ -1066,13 +1066,13 @@ be reclassified `kind:bug`, which taxonomy §2.2 forbids) and the
 `cur.get("status") in CLOSED_STATUSES` guard never fired (so `update --status`
 silently bypassed the "use `reopen`" refusal). `cmd_link()`'s failure mode was
 the loudest downstream: a `link` event under a prefix minted an orphan item
-*carrying a real external key*, which `bin/sync_dispatch.py` would then push to
+*carrying a real external key*, which `bin/wiki-ticket/sync_dispatch.py` would then push to
 the tracker.
 
 This is the shape the lazy fix takes: `reopen` already had the prefix match, so
 the fix was to lift those six lines into a shared helper and delete three
 copies, not to add a guard to each caller. `git diff --numstat v0.17.0..v0.17.1
--- bin/worklog` is +30/−27 lines, one add and one delete of which is the
+-- bin/wiki-ticket/worklog` is +30/−27 lines, one add and one delete of which is the
 `VERSION` bump.
 
 The regression suite is `tests/test_resolve.py` (new in v0.17.1, 143 lines,
@@ -1124,7 +1124,7 @@ def external_owners(items):
             owners.setdefault((ext.get("system"), str(ext["key"])), []).append(i["id"])
     return {k: sorted(v) for k, v in owners.items()}
 ```
-— `bin/fold.py — external_owners(), lines 97–123` (docstring elided)
+— `bin/wiki-ticket/fold.py — external_owners(), lines 97–123` (docstring elided)
 
 Three details in six lines, each of which is a bug if you get it wrong.
 `i.get("external") or {}` rather than `.get("external", {})`: a merge or a hand
@@ -1136,7 +1136,7 @@ legitimately holds both. It returns *every* owner rather than only the duplicate
 because `link` needs "who else owns this" and `sync` needs "which keys have more
 than one" — one filter each, not two traversals.
 
-**Enforcement 1 — write time** (`bin/worklog — cmd_link(), lines 315–346`). The
+**Enforcement 1 — write time** (`bin/wiki-ticket/worklog — cmd_link(), lines 315–346`). The
 command folds once and hands the fold down:
 
 ```python
@@ -1148,7 +1148,7 @@ command folds once and hands the fold down:
                   .get((a.system, str(a.key)), []) if i != cur["id"]]
 ```
 
-`_resolve()` grew an optional pre-computed fold this release (`bin/worklog —
+`_resolve()` grew an optional pre-computed fold this release (`bin/wiki-ticket/worklog —
 _resolve(), lines 238–257`, whose second parameter is that fold) for exactly
 this caller: the documented
 bulk-migration workflow links hundreds of items in a loop, and folding the whole
@@ -1166,7 +1166,7 @@ the same bug through with the two commands reordered. And it is
 (refreshing `--url`/`--rev`, re-running a partial migration, sync's own auto-link
 after a create), so `cur["id"]` is filtered out of `others`.
 
-**Enforcement 2 — push time** (`bin/sync_dispatch.py — push_items(), lines
+**Enforcement 2 — push time** (`bin/wiki-ticket/sync_dispatch.py — push_items(), lines
 633–831`):
 
 ```python
@@ -1195,7 +1195,7 @@ corruption needs *both* claimants pushed. Everything else in the run still syncs
 `drift:` line — drift is what operators skim, and burying a live-corruption
 warning there would reproduce the original silent-failure mode in a new costume.
 
-**Enforcement 3 — the repair** (`bin/worklog — cmd_unlink(), lines 349–390`).
+**Enforcement 3 — the repair** (`bin/wiki-ticket/worklog — cmd_unlink(), lines 349–390`).
 There was no `worklog unlink`, which is a sharp edge in a log whose whole premise
 is that mistakes are corrected by appending. It needs no new fold op:
 
@@ -1210,13 +1210,13 @@ clone running an older `fold.py` applies it correctly too. `{}` and never `null`
 for the same reason `external_owners()` uses `or {}`: `cmd_list`'s reader was
 `i.get("external", {}).get("key", "-")`, and a null would have raised
 `AttributeError` on every `worklog list` in the repo. That reader was hardened in
-the same commit (`bin/worklog — cmd_list(), lines 544–555`). The command also warns on stderr
+the same commit (`bin/wiki-ticket/worklog — cmd_list(), lines 544–555`). The command also warns on stderr
 that trackers which merge rather than overwrite (ADO tags) may still carry the
 `worklog:<ULID>` marker, so a later *pull* could still attribute a remote change
 to this item — the log is only half the state.
 
 **The part that is easy to miss.** `external` is not in `HASH_FIELDS`
-(`bin/canonical.py:17`), so unlinking or re-pointing an item never made it
+(`bin/wiki-ticket/canonical.py:17`), so unlinking or re-pointing an item never made it
 content-dirty — `worklog unlink` would have been a silent no-op at sync time and
 the damaged ticket would have stayed wrong. Hence:
 
@@ -1229,7 +1229,7 @@ the damaged ticket would have stayed wrong. Hence:
         now = str(ext["key"]) if ext.get("key") else None
         return prev is not None and prev != now
 ```
-— `bin/sync_dispatch.py — is_dirty(), lines 319–334`
+— `bin/wiki-ticket/sync_dispatch.py — is_dirty(), lines 319–334`
 
 The `prev is not None` guard is what keeps an upgrade from re-pushing every item
 in every existing clone at once, since no clone has ever written
@@ -1311,7 +1311,7 @@ because the guard blocked and a human re-applied them by hand.
         if limit is None or e["ev"] > limit:
             kept.append(e)
 ```
-— `bin/fold.py — apply_watermark(), lines 210–266`
+— `bin/wiki-ticket/fold.py — apply_watermark(), lines 210–266`
 
 Three things to notice. `covered` takes the **max** across snapshots for one
 item, because a union merge can legitimately leave two and the later
@@ -1333,7 +1333,7 @@ naturally — because `ev` is identity and dedupe is keyed on it, so the snapsho
 would collide with the very event it replaced. Ordering had to be separated from
 identity instead.
 
-**`worklog merge-rescue`** (`bin/compact.py — merge_rescue(), lines 638–782`) is
+**`worklog merge-rescue`** (`bin/wiki-ticket/compact.py — merge_rescue(), lines 638–782`) is
 the operator half. The guard used to print "recompact" as the remedy; ADR-0006
 establishes that this could not be run from the state the guard creates and
 would not have been safe if it could, because compaction verifies
@@ -1359,7 +1359,7 @@ where the watermark comparison was merely a heuristic:
             rescued.append((e["ev"], fresh["ev"], e["item"], e["op"]))
             lines.append(json.dumps(fresh, separators=(",", ":"), sort_keys=True))
 ```
-— `bin/compact.py`, the replay loop inside `merge_rescue()`, lines 429–439
+— `bin/wiki-ticket/compact.py`, the replay loop inside `merge_rescue()`, lines 429–439
 
 Compaction ran on a descendant of the base, so everything in the base was folded
 and is safe to drop; anything on the other side but absent from the base was
@@ -1386,7 +1386,7 @@ The unit of re-stamping is the *item*, never the event. The contagion is
 deliberately not global — an item nobody rescued keeps its original ids, pinned
 by `tests/test_bug_merge.py —
 test_untouched_items_keep_their_original_ids(),
-lines 398–409`. Without that boundary the rescue would re-stamp the whole log,
+lines 399–410`. Without that boundary the rescue would re-stamp the whole log,
 and the guard below would have nothing left to prove.
 
 **Then the guard that checks the outcome rather than the fix:**
@@ -1407,7 +1407,7 @@ and the guard below would have nothing left to prove.
                       file=sys.stderr)
                 raise SystemExit(1)
 ```
-— `bin/compact.py`, the order guard inside `merge_rescue()`, lines 468–481
+— `bin/wiki-ticket/compact.py`, the order guard inside `merge_rescue()`, lines 468–481
 
 Read what it actually asserts. It re-reads the files it is about to install,
 pairs each event's **new** id with its **original** one (`rescued_from` when
@@ -1455,7 +1455,7 @@ blocking the merge commit, because blocking is what routes people to
 Each is small, stdlib-only, and imports no sibling — which is deliberate, since
 none of them may become a second source of truth for anything the fold owns.
 
-**`bin/item_fields.py` (#108).** `CORE` is a tuple of names that are *not*
+**`bin/wiki-ticket/item_fields.py` (#108).** `CORE` is a tuple of names that are *not*
 configurable, ever — the fold keys on them, the roadmap reads them, sync maps
 them, the graph walks them. The module docstring puts it plainly: "a config that
 could switch `priority` off would be a config that can break the roadmap, so the
@@ -1468,7 +1468,7 @@ what a field *means* before writing it. Default-off is conservative on purpose:
 malformed reads as "nothing configured" and falls back to defaults rather than
 failing every command.
 
-**`bin/session.py` (#236).** Covered in §2.1. The line to remember is that the
+**`bin/wiki-ticket/session.py` (#236).** Covered in §2.1. The line to remember is that the
 CLI deliberately never learns which session it is. Since v0.24.3 the module has
 a second job that is *not* advisory: `base()` and the `base` field `touch()`
 writes are the Stop hook's fixed point (§2.8, invariants 40–41). The file is
@@ -1476,7 +1476,7 @@ still defensive everywhere else — a missing or corrupt `.work/.sessions` reads
 as `{}` — and the Stop hook treats a missing base the same way, by falling back
 to `HEAD`.
 
-**`bin/changelog.py` (#136).** Two refusals stated in the docstring: it never
+**`bin/wiki-ticket/changelog.py` (#136).** Two refusals stated in the docstring: it never
 guesses the version (which digit moves is a semver judgement, so the heading
 stays literal `X.Y.Z` until `--version`), and it never silently drops a commit
 (every exclusion goes to stderr with a reason, so stdout stays pipeable
@@ -1496,7 +1496,7 @@ about; matching on the subject would misclassify a real fix that happened to say
 "chore". One `git log --name-only` call supplies the file lists, because asking
 git per commit turns a release-sized range into hundreds of subprocesses.
 
-**`bin/wiki_flavor.py` (#271).** The design point that keeps it small is that
+**`bin/wiki-ticket/wiki_flavor.py` (#271).** The design point that keeps it small is that
 `[[Page]]` is treated as the **renderer's canonical notation**, not as Gollum
 output. Every prose string in `ia_render.py` still writes `[[Index-Releases]]` —
 readable, greppable, unchanged — and `render_links()` translates the whole page
@@ -1537,7 +1537,7 @@ into the *update* branch. The close branch returned early:
                         continue
                     if dirty:
 ```
-— `bin/sync_dispatch.py`, the close branch inside `push_items()`, lines 627–641 (the eight-line explanatory comment at 630–637 elided)
+— `bin/wiki-ticket/sync_dispatch.py`, the close branch inside `push_items()`, lines 627–641 (the eight-line explanatory comment at 630–637 elided)
 
 The `if dirty: self.note_overwrite(...)` is the whole v0.22.0 change, and the
 reason it matters is the branch immediately below it: a *dirty* closing item
@@ -1600,7 +1600,7 @@ def in_trace_scope(item):
         return False
     return bool(item.get("milestone")) and item.get("kind") != "ops"
 ```
-— `bin/ia_graph.py — in_trace_scope(), lines 250–271` (docstring elided)
+— `bin/wiki-ticket/ia_graph.py — in_trace_scope(), lines 250–271` (docstring elided)
 
 Three things to notice.
 
@@ -1618,7 +1618,7 @@ already in hand. So `kind:ops` is exempt outright.
                 and not it.get("unplanned")):
             gaps.append("%s: no plan link" % iid)
 ```
-— `bin/ia_graph.py — trace_check(), lines 274–304`
+— `bin/wiki-ticket/ia_graph.py — trace_check(), lines 274–304`
 
 The taxonomy defines unplanned work as arriving without a plan; demanding a plan
 link from it is a contradiction. It still owes a ticket and a PR — being
@@ -1678,7 +1678,7 @@ def _plan_state(rec):
     first = (rec.get("status") or "").split()[:1]
     return PLAN_STATE.get(first[0].lower()) if first else None
 ```
-— `bin/ia_render.py — _plan_state(), lines 129–144` (`PLAN_STATE` at lines
+— `bin/wiki-ticket/ia_render.py — _plan_state(), lines 129–144` (`PLAN_STATE` at lines
 119–121; docstring elided)
 
 The load-bearing part is the `None`. Unknown prose says nothing about state and
@@ -1690,7 +1690,7 @@ the caller falls back to output byte-identical to before:
                     "once written, a changed design gets a new plan."
                     % (_plan_state(rec) or "the current plan"))
 ```
-— `bin/ia_render.py — _banner_text(), lines 147–195`
+— `bin/wiki-ticket/ia_render.py — _banner_text(), lines 147–195`
 
 Inventing a label for prose it cannot read is exactly how this banner came to
 announce plans as *status reports* in the first place (#137, fixed in v0.19.0).
@@ -1735,7 +1735,7 @@ def git_commit_full() -> str:
     """
     return _rev_parse(short=False)
 ```
-— `bin/ulid.py — git_commit_full(), lines 88–107` (docstring elided)
+— `bin/wiki-ticket/ulid.py — git_commit_full(), lines 88–107` (docstring elided)
 
 What it receives: nothing. What it returns: a 40-hex sha, or `""` outside a git
 repo, before the first commit, or under `WORKLOG_NO_GIT_PROVENANCE`. What can
@@ -1765,7 +1765,7 @@ manifest do **not** call that function:
     # the next run -- failing every commit thereafter. ...
     commit = (top or {}).get("git")
 ```
-— `bin/render_roadmap.py — render(), lines 133–281`, reading
+— `bin/wiki-ticket/render_roadmap.py — render(), lines 133–281`, reading
 `top_event(), lines 28–52`
 
 Both files are on the regenerate-and-diff path: `hooks/pre-commit` rebuilds them
@@ -1775,7 +1775,7 @@ the file and the next one, failing every commit thereafter — and on a
 `refs/pull/N/merge` commit that exists in no local clone, so no stored value
 could ever match. The manifest solves the same problem the same way, and records
 **one** build-level `git_hash` rather than stamping all 366 rendered pages with
-one identical fact (`bin/ia_render.py — build_manifest(), lines 669–745`).
+one identical fact (`bin/wiki-ticket/ia_render.py — build_manifest(), lines 669–745`).
 
 **Backfill.** A document cannot know the merge that will land it, so that value
 arrives later:
@@ -1788,7 +1788,7 @@ def merged_in(path, branch=None, chain=None):
     the file's add-commit as an ancestor. ...
     """
 ```
-— `bin/provenance.py — merged_in(), lines 59–95` (docstring elided)
+— `bin/wiki-ticket/provenance.py — merged_in(), lines 59–95` (docstring elided)
 
 Read that docstring in full before touching it: it names **both** obvious
 one-liners and why each is wrong. `rev-list --ancestry-path --merges A..main |
@@ -1807,7 +1807,7 @@ reading — has been edited many times since, so stamping it with the merge that
 free: `ia.ensure_front_matter_fields(), lines 566–594` returns `[]` when the
 value already matches.
 
-Note where this runs from: `bin/worklog — cmd_provenance_backfill(), lines
+Note where this runs from: `bin/wiki-ticket/worklog — cmd_provenance_backfill(), lines
 903–912`, called by the release skill's post-release step. Not a git hook — the
 natural choice, `post-merge`, fires on the default branch, where
 `hooks/pre-commit`'s branch guard forbids committing.
@@ -1830,7 +1830,7 @@ def _check_one(cite, sha, head):
     # Correct when written. Has it moved since?
     head_body = _at(head, cite["path"])
 ```
-— `bin/doc_verify.py — _check_one(), lines 205–259` (elided)
+— `bin/wiki-ticket/doc_verify.py — _check_one(), lines 205–259` (elided)
 
 The shape of that function *is* the design. Everything above the comment is
 resolved at the **document's own commit**; only after all of it passes is HEAD
@@ -1869,7 +1869,7 @@ if _git("merge-base", "--is-ancestor", tag, sha) is None:
                                "with the design-docs skill in release "
                                "mode" % (sha[:9], tag)})
 ```
-— `bin/doc_verify.py — freshness(), lines 101–146` (elided)
+— `bin/wiki-ticket/doc_verify.py — freshness(), lines 101–146` (elided)
 
 What it receives: the inventory records, an optional tag (default
 `latest_tag(), lines 80–85`, the highest version tag by `--sort=-v:refname`),
@@ -1901,12 +1901,12 @@ def _body_hash(path):
     with open(path, encoding="utf-8") as fh:
         return _hash_bytes(ia.parse_front_matter(fh.read())[1].encode())
 ```
-— `bin/ia_render.py — _body_hash(), lines 656–666` (docstring elided)
+— `bin/wiki-ticket/ia_render.py — _body_hash(), lines 656–666` (docstring elided)
 
 `source_hash` is the input to the publisher's frozen-source guard, which stops
 when a frozen document's prose changes. Without this, the backfill would have
 tripped that guard on all 73 documents, and so would every future run of the
-normalizer or `bin/adr.py — mark_superseded(), lines 199–216`. Hashing below the
+normalizer or `bin/wiki-ticket/adr.py — mark_superseded(), lines 199–216`. Hashing below the
 front matter makes the guard mean *the prose changed* — the invariant it was
 always protecting. Measured effect: the release's own publish moved two pages
 instead of 89.
@@ -2048,7 +2048,7 @@ decides which closed items need a fresh snapshot in `done.jsonl`:
             if done_state.get(i["id"]) != _public(i) or i.get("_conflicts"):
                 fresh.extend(_item_events(i, per_item.get(i["id"])))
 ```
-— `bin/compact.py — _compact_locked(), lines 391–508` (the `done_state` fold
+— `bin/wiki-ticket/compact.py — _compact_locked(), lines 391–508` (the `done_state` fold
 and the `fresh` loop)
 
 As tagged, that fold read `[done_path]` alone. An archived item is, by
@@ -2058,7 +2058,7 @@ and was evicted again a period later beside its old archive line. Verify
 passed every time, because fold equality held; only the files grew. This is
 the whole P0, and it is one list literal.
 
-**Step 7, eviction.** `_evict_done()` (`bin/compact.py — _evict_done(), lines
+**Step 7, eviction.** `_evict_done()` (`bin/wiki-ticket/compact.py — _evict_done(), lines
 206–265`) splits the new done text into kept and archived:
 
 ```python
@@ -2105,7 +2105,7 @@ the archive does not pin its parent, or nothing would ever leave, and it loops
 because un-evicting a parent can pin the grandparent.
 
 **Then the archive is pruned, by item.** `_prune_archive_text()`
-(`bin/compact.py — _prune_archive_text(), lines 268–296`) drops from the
+(`bin/wiki-ticket/compact.py — _prune_archive_text(), lines 268–296`) drops from the
 existing archive every line for a reopened item, every line for an item
 refreshed into `done.jsonl` this run, every line for an item being archived
 again now, every older duplicate snapshot of one item (newest `ev` wins), and
@@ -2150,7 +2150,7 @@ through:
             return str(probed)
         return None
 ```
-— `bin/sync_dispatch.py — remembered_key(), lines 282–317` (docstring elided;
+— `bin/wiki-ticket/sync_dispatch.py — remembered_key(), lines 282–317` (docstring elided;
 read it, it names what the probe does not fix)
 
 Three sources, and each exists because the one above it has a documented way
@@ -2175,7 +2175,7 @@ clone or CI has none (#412 added source 3). The marker map is filled by
             if key:
                 owned[str(key)] = item
 ```
-— `bin/sync_dispatch.py — observe_remote(), lines 1225–1277` (pass one and
+— `bin/wiki-ticket/sync_dispatch.py — observe_remote(), lines 1225–1277` (pass one and
 the start of pass two)
 
 **The order of those two passes is the fix's correctness condition.** `owned`
@@ -2191,7 +2191,7 @@ hit today and a `dedupe --collapse-agreed` tomorrow agree.
 an `external` key that is present and empty, which is what `worklog unlink`
 writes, where a never-linked item has no `external` at all; the probe skips
 them. `cmd_unlink` also clears `last_pushed_key`, `last_pushed_hash` and
-`gone_key` in the state file (`bin/worklog — cmd_unlink(), lines 349–390`),
+`gone_key` in the state file (`bin/wiki-ticket/worklog — cmd_unlink(), lines 349–390`),
 or source 2 would re-attach the ticket the operator just retracted. Pinned by
 `tests/test_bug_412.py — test_probe_does_not_undo_an_unlink(), lines 121–128`
 and `tests/test_bug_382.py — TestUnlinkStillMintsAFreshTicket, lines 134–154`.
@@ -2300,7 +2300,7 @@ TestMergeWhenGreen, lines 78–164`). Never `--admin`, never squash (ADR-0008).
 
 `.work/published.json` was a 308 KB JSON dict with no merge strategy; two
 branches that each published produced a three-way conflict in a file policy
-said must never be hand-edited. `bin/published.py` is the work log's discipline
+said must never be hand-edited. `bin/wiki-ticket/published.py` is the work log's discipline
 applied to page identity:
 
 ```python
@@ -2324,7 +2324,7 @@ def fold(paths: Iterable[str] = (JSONL,)) -> FoldResult:
         page.setdefault("wiki_key", key)
     return result
 ```
-— `bin/published.py — fold(), lines 113–131`
+— `bin/wiki-ticket/published.py — fold(), lines 113–131`
 
 Three ops: `register` is `worklog wiki-add` (source and title; the publish
 fields are preserved on re-register so a second `wiki-add` never wipes a url,
@@ -2347,14 +2347,14 @@ page whose `render_hash` matches is skipped; a frozen page whose banner moved
 (new `render_hash`, same `source_hash`) publishes, which is the mechanism §2.21
 built the body hash for. The wiki-publish skill runs the command instead of
 hashing files, and records each push with `worklog wiki-record`
-(`bin/worklog — cmd_wiki_record(), lines 481–498`). `hooks/pre-commit` validates
+(`bin/wiki-ticket/worklog — cmd_wiki_record(), lines 481–498`). `hooks/pre-commit` validates
 the ledger's schema separately from the work log's (lines 101–125), and
 `.gitattributes` gives it `merge=union` like the other three.
 
 ### 2.27 `worklog triggers`: when generation happens is configuration
 
 Exactly one binding used to be configuration (`release.sync_docs`); the rest
-lived in four skills' prose. `bin/triggers.py — resolve(), lines 186–210`
+lived in four skills' prose. `bin/wiki-ticket/triggers.py — resolve(), lines 186–210`
 answers "what runs on this event?" from the `triggers:` block of
 `.work/config.yml` for five events (`plan-capture`, `pr-open`, `pr-merge`,
 `release`, `status-report`):
@@ -2428,7 +2428,7 @@ config and not the file. This repository's own config carries the block, and
 | 37 | Every skill declares `name` and `description`, with no unquoted `": "` in frontmatter (v0.22.1) | `tests/test_plugin.py — TestSkillFrontmatterLoads, lines 267–304` | the skill loads with empty metadata instead of being rejected, and can never be matched — installed and invisible |
 | 38 | Re-issuing during a merge rescue is contagious forward **within an item**, and per-item order is verified on the result (v0.22.0) | the `moved` set and the order guard in `compact.merge_rescue()` | an item folds back to a pre-close state with no event lost and every other guard green (§2.16) |
 | 39 | A `__main__` guard is the **last** thing in a `tests/test_*.py` file | **enforced since v0.22.2** — `tests/test_plugin.py — test_no_test_class_is_defined_below_the_runner_block(), lines 370–387` sweeps every suite and names the orphans; zero suites violate it at this commit | every class below it is never registered, so CI runs a silently truncated suite while `pytest` runs the whole one |
-| 40 | A session's `base` commit is written once and never moves (v0.24.3) | `prev.get("base") or …` in `bin/session.py — touch(), lines 82–101` | the marker advances past the session's own commit, the Stop hook's evidence vanishes again, and the bug it was added to fix returns one layer down |
+| 40 | A session's `base` commit is written once and never moves (v0.24.3) | `prev.get("base") or …` in `bin/wiki-ticket/session.py — touch(), lines 82–101` | the marker advances past the session's own commit, the Stop hook's evidence vanishes again, and the bug it was added to fix returns one layer down |
 | 41 | A missing or unresolvable `base` falls back to `HEAD`, never to "assume recorded" (v0.24.3) | the `[ -z "$base" ] \|\| ! git rev-parse --verify` guard, `hooks/stop-worklog-check.sh:54-57` | a stale registry silently disarms the Stop gate — an enforcement hook that stops enforcing without saying so |
 | 42 | The nightly compaction job runs the gates itself before it opens its PR (v0.24.3, re-homed in v0.24.10) | the `verify working tree` step, `.github/workflows/compact.yml`; `tests/test_bug_361.py — test_compact_still_self_checks_before_push(), lines 44–49` | a red compaction is only caught by the PR's own checks, which for a bot PR are the bridge's (§2.25) |
 | 43 | The wiki ledger has one writer and is folded, never loaded as a dict (v0.24.10) | `published.append()` behind `worklog wiki-add` / `wiki-record`; `hooks/pre-commit` lines 101–125; `.gitattributes` `merge=union` | a three-way conflict in a file policy says must never be hand-edited, and page identity lost on the losing side (#392) |
@@ -2436,7 +2436,7 @@ config and not the file. This repository's own config carries the block, and
 | 45 | An archived item is never re-snapshotted into `done.jsonl`, and the archive holds one snapshot per item (post-tag) | the `done_state` fold over `[done_path, archive_path]` and `_prune_archive_text()` in `compact._compact_locked()`; `tests/test_retention.py — TestArchiveStability, lines 174–195` | the files grow every active night while verify stays green (§2.23) |
 | 46 | Create-vs-update consults the log, then the per-clone state, then the remote marker map; a deliberate unlink is never undone (v0.24.8 → #412) | `sync_dispatch.remembered_key()`; `unlinked_ids` in `observe_remote()`; `cmd_unlink` clearing `last_pushed_*` | a duplicate ticket per retried create on any clone that lost the link, or a retracted link re-attached by the next sync |
 | 47 | The marker map is built before `owned` (#412) | pass one precedes pass two in `sync_dispatch.observe_remote()` | a closed probe hit is pushed as an update from open local state, the #385 regression |
-| 48 | The whole encoded event fits `PIPE_BUF`, the write count is checked, and append holds `.work/.lock` (v0.24.10) | `bin/worklog — append(), lines 66–106`; `compact._lock_logs()`; `published.append()` | a fused line from a partial write, or an append onto an inode compaction has already replaced |
+| 48 | The whole encoded event fits `PIPE_BUF`, the write count is checked, and append holds `.work/.lock` (v0.24.10) | `bin/wiki-ticket/worklog — append(), lines 66–106`; `compact._lock_logs()`; `published.append()` | a fused line from a partial write, or an append onto an inode compaction has already replaced |
 | 49 | Generated files carry `merge=ours` and the merge commit regenerates them (v0.24.8, #381) | `.gitattributes`; `hooks/pre-merge-commit`; `tests/test_bug_381.py` | every pair of concurrent branches conflicts on `docs/roadmap.md`, a file nobody edited by hand |
 | 50 | Nothing lands on `main` except a PR that passed the two required checks, and the invariants workflow can post nothing (ADR-0010, ADR-0011) | `.github/merge-when-green-ruleset.json` (`bypass_actors: []`, merge only); `worklog.yml` `permissions: contents: read` | a direct push, or a workflow with `statuses: write` satisfying the gate for a PR it never checked (§2.25) |
 | 51 | A release freezes ONE dated note, never a copy of this pair (v0.24.10) | `.claude/skills/design-docs/SKILL.md`; `tests/test_hygiene.py — TestFreezeCap, lines 73–84` | 250 KB of byte-identical prose per release, and a frozen record that is really a cache |
@@ -2837,7 +2837,7 @@ changes the checks (§2.11).
    was two facts a program can check, a verdict with a name, and a gate that
    refuses the next release until they hold (§2.21).
 
-**Where to start debugging:** `python3 bin/fold.py` prints derived state with
+**Where to start debugging:** `python3 bin/wiki-ticket/fold.py` prints derived state with
 warnings for corrupt lines and orphans. `worklog sync --dry-run` prints
 decisions without side effects (and, since v0.19.0, the fields a push would
 overwrite). `worklog adapter check` validates a contract. `bash hooks/pre-commit`
@@ -2858,7 +2858,7 @@ event runs; `worklog adapter check` says whether this clone has push memory;
 and a `chore/compact-*` PR sitting blocked is read from its job log, not from
 the PR page (§2.25).
 
-**Where common changes go:** new CLI behavior → `bin/worklog` (subcommand + a
+**Where common changes go:** new CLI behavior → `bin/wiki-ticket/worklog` (subcommand + a
 test suite); roadmap presentation → `render_roadmap.py`/`viz_mermaid.py` (keep
 byte-determinism — no wall clocks); a new tracker → copy
 `adapters/github/adapter`, keep it dumb, then `worklog adapter check`; policy →
@@ -2877,20 +2877,20 @@ platform** (v0.19.0 pattern) → one class in `wiki_flavor.FLAVORS` implementing
 `link()` and `sanitize()`, and if you find yourself wanting a third method, stop
 and re-read that module's closing paragraph.
 
-**Risky files:** `bin/canonical.py` (any change churns every clone's hashes —
+**Risky files:** `bin/wiki-ticket/canonical.py` (any change churns every clone's hashes —
 the file says "Don't." — and note that `external` is deliberately *not* in
 `HASH_FIELDS`, which is why `sync_dispatch.is_dirty()` has to track
-`last_pushed_key` separately); `bin/fold.py` (every command's notion of truth —
+`last_pushed_key` separately); `bin/wiki-ticket/fold.py` (every command's notion of truth —
 and since v0.19.0 `position()` and `apply_watermark()` are the two functions
 where a plausible-looking simplification loses data; read ADR-0007 first);
-`bin/compact.py` (the only code that can lose state, now with a second writer in
-`merge_rescue()`); `bin/ulid.py` (`new()`'s entropy is not available for reuse —
-the docstring is the ADR); `append()` in `bin/worklog` (the atomicity/newline
+`bin/wiki-ticket/compact.py` (the only code that can lose state, now with a second writer in
+`merge_rescue()`); `bin/wiki-ticket/ulid.py` (`new()`'s entropy is not available for reuse —
+the docstring is the ADR); `append()` in `bin/wiki-ticket/worklog` (the atomicity/newline
 dance, plus the session advisory that must never raise);
 `sync_dispatch.CAPABILITIES_SCHEMA` and `ia.REQUIRED_*` / `DOC_TYPES` (must stay
 identical to `schema/*` — tests diff them); and, new in v0.21.0,
-`bin/ia_render.py` / `bin/render_roadmap.py` (adding a `subprocess` call to
-either breaks invariant 32 and every subsequent commit) and `bin/doc_verify.py`
+`bin/wiki-ticket/ia_render.py` / `bin/wiki-ticket/render_roadmap.py` (adding a `subprocess` call to
+either breaks invariant 32 and every subsequent commit) and `bin/wiki-ticket/doc_verify.py`
 (the HEAD fallback it refuses to make is the thing it exists to prevent — read
 ADR-0008 before "fixing" an `unresolvable`). New in v0.22.1:
 `plugin/hooks/hooks.json`, `plugin/hooks/codex-hooks.json` and
@@ -2898,14 +2898,14 @@ ADR-0008 before "fixing" an `unresolvable`). New in v0.22.1:
 runtime, so the only thing standing between a plausible edit and another seven
 silent releases is `tests/test_plugin.py — TestCodexHookParity, lines 166–264`
 plus `plugin/tests/test_three_host_hooks.py` (§2.22). New in v0.24.10:
-`bin/compact.py — _evict_done()` and `_prune_archive_text()` (the only code
+`bin/wiki-ticket/compact.py — _evict_done()` and `_prune_archive_text()` (the only code
 that moves closed history, and the set it consults is the bug surface, §2.23);
-`bin/sync_dispatch.py — remembered_key()` and the pass order in
-`observe_remote()` (§2.24); `bin/published.py` (the ledger's sole writer; the
+`bin/wiki-ticket/sync_dispatch.py — remembered_key()` and the pass order in
+`observe_remote()` (§2.24); `bin/wiki-ticket/published.py` (the ledger's sole writer; the
 skill must never hash or hand-edit around it); the two bot workflows (whose trust anchor is now
-GitHub's own check rollup, not a script the job can write to); and `bin/triggers.py` (a parser other skills read; an event key
+GitHub's own check rollup, not a script the job can write to); and `bin/wiki-ticket/triggers.py` (a parser other skills read; an event key
 that is present is the authority even when empty). New in v0.24.11:
-`bin/doc_verify.py — freshness()` (the gate that decides whether this file may
+`bin/wiki-ticket/doc_verify.py — freshness()` (the gate that decides whether this file may
 ship; scoping it into the `--staged` hook would fail every commit between a
 tag and its doc PR) and the two CI heredocs in `plugin/scripts/init.sh` (the
 commands are a shared contract; `TestAzurePipelinesTemplate` diffs them).
@@ -3011,7 +3011,7 @@ unless noted):**
 - **Knowledge-tree writes fail closed on identity** (v0.24.1, `bin/okf_write.py`).
   No `--author` and no `SECOND_BRAIN_IDENTITY`, no write, and every accepted
   write emits a `WriteEvent`. Worklog appends are untouched: they stay on
-  `bin/worklog --actor` and union merge.
+  `bin/wiki-ticket/worklog --actor` and union merge.
 - **The mid-file `__main__` guard class is closed and now tested** (v0.22.2) —
   see the entry below that reported it open.
 
@@ -3126,7 +3126,7 @@ noted):**
    definition, and `compact()` cited at 165–173 when it began at 143 read as
    fine for three releases. `_check_one()` now also parses the file and compares
    the symbol's *definition line* to the citation's start
-   (`bin/doc_verify.py — _check_one(), lines 205–259`). Only the **start** is
+   (`bin/wiki-ticket/doc_verify.py — _check_one(), lines 205–259`). Only the **start** is
    judged — where an author stops quoting is a legitimate choice, and nine of
    the ranges measured overshot by exactly one line, the blank after the body.
    `_defined_at()` returns `None`, meaning "do not judge", when the file will
@@ -3160,7 +3160,7 @@ noted):**
    for a stale merge tiebreak, a three-release-old version constant, and an
    import `fold.py` does not have). The v0.20.0 pass found the same class again
    in the *corrected* v0.19.1 pair: roughly a dozen `lines N–M` citations into
-   `bin/worklog` and `bin/sync_dispatch.py` still pointed at offsets from
+   `bin/wiki-ticket/worklog` and `bin/wiki-ticket/sync_dispatch.py` still pointed at offsets from
    several releases earlier (`_resolve()` cited at 115–130, actually 204–224;
    `cmd_plan_capture()` at 339+, actually 528–595; `is_dirty()` at 171–186,
    actually 219–234). Fixed in this pair; the frozen 2026-08-02 v0.19.1 pair
@@ -3250,7 +3250,7 @@ found and filed this release.
 - **`worklog list` is null-safe on `external`** — a merge or hand edit can
   already produce a literal null there.
 - **README repo-layout drift closed**: the `plugin/` row now reads **v0.18.0**,
-  matching `VERSION` in `bin/worklog`. This is the first release since v0.13.0
+  matching `VERSION` in `bin/wiki-ticket/worklog`. This is the first release since v0.13.0
   where that row is not stale.
 
 **New in v0.18.0 (found while fixing #226 — all eight closed in v0.19.0; kept
@@ -3299,7 +3299,7 @@ splitting `banner()` into `_banner_text()`, which branches on `doc_type`.
 
 **Shipped in v0.17.0 (were open at v0.16.1):**
 
-- `bin/worklog plan-capture` invariant-15.8 guard fixed twice in the same
+- `bin/wiki-ticket/worklog plan-capture` invariant-15.8 guard fixed twice in the same
   release cycle (PR #198 + same-day follow-up): first from filename-scoped
   (missed a UTC/local date-boundary duplicate) to slug-scoped via a bare
   `*-{slug}.md` glob, then from that glob (a suffix match, not a field-boundary
@@ -3317,7 +3317,7 @@ and fixed within the same PR cycle before merge (see §2.3), not left open.
 
 **Shipped in v0.16.1 (were open at v0.16.0):**
 
-- `bin/sync_dispatch.py` closed-item sync path fixed: forcing a
+- `bin/wiki-ticket/sync_dispatch.py` closed-item sync path fixed: forcing a
   never-pushed closed item into scope via `--keys` raised `KeyError: 'key'`;
   it now creates-then-links-then-closes, mirroring the open-item branch.
 
@@ -3335,7 +3335,7 @@ filed):** none found this release — the feature is content plus one
 prose-only skill with no code path to regress.
 
 **README repo-layout drift: still closed (Confirmed).** `README.md:309` reads
-"**v0.22.1**" and matches `VERSION = "0.22.1"` in `bin/worklog` at this commit —
+"**v0.22.1**" and matches `VERSION = "0.22.1"` in `bin/wiki-ticket/worklog` at this commit —
 the recurring cosmetic gap reported at v0.14.0 through v0.17.1 has now stayed
 closed for six releases, and the row was rewritten in v0.22.0 to name all three
 hosts. The underlying cause remains unautomated: `tests/test_plugin.py` locks
@@ -3384,7 +3384,7 @@ doctor` still healthy on `main`) was walked without surfacing new drift.
    published plan pages. **Confirmed** as filed drift, not fixed in this
    release.
 3. **README.md repo-layout table says "v0.13.0"** on the `plugin/` row —
-   one release stale (`bin/worklog VERSION` is `"0.14.0"`, locked to
+   one release stale (`bin/wiki-ticket/worklog VERSION` is `"0.14.0"`, locked to
    `plugin/.claude-plugin/plugin.json` by `tests/test_plugin.py`, but README
    prose isn't part of that lockstep test). Cosmetic; not filed as a ticket,
    noted here as doc drift.
@@ -3392,7 +3392,7 @@ doctor` still healthy on `main`) was walked without surfacing new drift.
    commands" section documents `wiki-key`, `ia-normalize`, `ia-inventory`,
    `ia-render`/`ia-manifest`, `ia-index`, `ia-graph`, `link-pr`,
    `ticket-body`, `trace-check` — but not the new `ia-ticket` subcommand.**
-   Confirmed by grep; the CLI reference has not caught up with `bin/worklog`
+   Confirmed by grep; the CLI reference has not caught up with `bin/wiki-ticket/worklog`
    for this one command.
 5. **`worklog sync --pull` cannot bootstrap a cursor-less pull** (item
    01KYAGZ8, filed but not yet worked): the adapter's `pull` verb requires
@@ -3431,7 +3431,7 @@ doctor` still healthy on `main`) was walked without surfacing new drift.
    gate asks about the released-milestone set only (§2.19); `--strict` is still
    not a CI job, on purpose.
 9. **Platform render adapters and the glossary** (the remaining half of #98) not
-   shipped; `worklog find` shipped in v0.19.0 (#272), and `bin/wiki_flavor.py` is
+   shipped; `worklog find` shipped in v0.19.0 (#272), and `bin/wiki-ticket/wiki_flavor.py` is
    the scaffolding for the render half — deliberately not grown until a second
    platform has a real user.
 10. **UI work** was moved to `wiki_ticket_sdd_ui` and cancelled here — do not
@@ -3452,7 +3452,7 @@ which is the specific defect #294 was filed for. Between the v0.24.11 and
 v0.24.12 editions the `bin/` files that changed were `sync_dispatch.py` and
 `worklog` (CI-owned sync, `--force`, `dedupe --check`) plus the `VERSION`
 line; the citations those edits pushed down `sync_dispatch.py` were
-re-derived, not shifted. Do not take that on trust: run `bin/worklog doc-verify --strict` and
+re-derived, not shifted. Do not take that on trust: run `bin/wiki-ticket/worklog doc-verify --strict` and
 this file should report zero fabrications, zero drift and, since v0.24.11,
 zero `STALE` findings. Since v0.22.2 `doc_verify._check_one()` judges the
 symbol's definition line rather than containment, so a range that merely

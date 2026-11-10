@@ -842,11 +842,11 @@
    "wiki_key": "design/2026-09-19_v0.24.12-release"
   },
   {
-   "branch": "chore/post-release-v0-24-12",
+   "branch": "feat/nest-worklog-bin",
    "canonical_key": "design/current-code-walkthrough",
    "doc_type": "design",
    "generated_at": "2026-09-21T00:00:00Z",
-   "git_hash": "2160410a147a5330f15734fa5a1af69ccd6cca5a",
+   "git_hash": "535fe72629781a75ccdef86e25c47d3a3ab8a42f",
    "release": "v0.24.12",
    "roadmap": "docs/roadmap.md",
    "slug": "current_code_walkthrough",
@@ -858,11 +858,11 @@
    "wiki_key": "design/current-code-walkthrough"
   },
   {
-   "branch": "chore/post-release-v0-24-12",
+   "branch": "feat/nest-worklog-bin",
    "canonical_key": "design/current-design-doc",
    "doc_type": "design",
    "generated_at": "2026-09-21T00:00:00Z",
-   "git_hash": "2160410a147a5330f15734fa5a1af69ccd6cca5a",
+   "git_hash": "535fe72629781a75ccdef86e25c47d3a3ab8a42f",
    "release": "v0.24.12",
    "roadmap": "docs/roadmap.md",
    "slug": "current_design_doc",
